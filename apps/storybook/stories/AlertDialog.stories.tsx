@@ -146,7 +146,7 @@ export const Destructive: Story = {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel variant="outline">Cancel</AlertDialogCancel>
-          <AlertDialogAction variant="destructive">Delete</AlertDialogAction>
+          <AlertDialogAction variant="destructive"><Trash2Icon />Delete</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
