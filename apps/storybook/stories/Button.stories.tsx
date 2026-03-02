@@ -10,46 +10,50 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const Brand: Story = { args: { variant: "brand", children: "Button" } };
-export const Secondary: Story = { args: { variant: "secondary", children: "Secondary" } };
-export const Destructive: Story = { args: { variant: "destructive", children: "Destructive" } };
-export const Outline: Story = { args: { variant: "outline", children: "Outline" } };
-export const Ghost: Story = { args: { variant: "ghost", children: "Ghost" } };
-export const Link: Story = { args: { variant: "link", children: "Link" } };
-
-export const WithIconDefault: Story = {
+export const Variants: Story = {
   render: () => (
-    <Button variant="outline" size="default-icon-left">
-      <SiSquareDashed /> Login with Email
-    </Button>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+      <Button variant="brand">Brand</Button>
+      <Button variant="accent">Accent</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="subtle">Subtle</Button>
+      <Button variant="danger">Danger</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="link">Link</Button>
+      <Button disabled>Disabeld</Button>
+    </div>
   ),
 };
 
-export const Small: Story = { args: { variant: "outline", size: "sm", children: "Small" } };
-export const WithIconSmall: Story = {
+export const Size: Story = {
   render: () => (
-    <Button variant="outline" size="sm-icon-left">
-      <SiSquareDashed /> Login with Email
-    </Button>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+      <Button size="xs">Button</Button>
+      <Button size="sm">Button</Button>
+      <Button size="md">Button</Button>
+      <Button size="lg">Button</Button>
+    </div>
   ),
 };
 
-export const ExtraSmall: Story = { args: { variant: "outline", size: "xs", children: "XSmall" } };
-export const WithIconExtraSmall: Story = {
+export const WithIcon: Story = {
   render: () => (
-    <Button variant="outline" size="xs-icon-left">
-      <SiSquareDashed /> Login with Email
-    </Button>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+      <Button size="xs-icon-left"><SiSquareDashed />Button</Button>
+      <Button size="sm-icon-left"><SiSquareDashed />Button</Button>
+      <Button size="md-icon-left"><SiSquareDashed />Button</Button>
+      <Button size="lg-icon-left"><SiSquareDashed />Button</Button>
+    </div>
   ),
 };
 
-export const Large: Story = { args: { size: "lg", children: "Large" } };
-export const WithIconLarge: Story = {
+export const Icon: Story = {
   render: () => (
-    <Button variant="outline" size="lg-icon-left">
-      <SiSquareDashed /> Login with Email
-    </Button>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+      <Button size="icon-xs"><SiSquareDashed /></Button>
+      <Button size="icon-sm"><SiSquareDashed /></Button>
+      <Button size="icon"><SiSquareDashed /></Button>
+      <Button size="icon-lg"><SiSquareDashed /></Button>
+    </div>
   ),
 };
-
-export const Disabled: Story = { args: { disabled: true, children: "Disabled" } };
