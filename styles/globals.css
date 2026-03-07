@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+@import './fonts.css';
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -16,6 +16,7 @@
 :root {
     /* shadcn/ui */
     --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'Geist Mono', ui-monospace, 'Cascadia Code', monospace;
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
@@ -224,6 +225,7 @@
 @theme inline {
     /* shadcn/ui */
     --font-sans: var(--font-sans);
+    --font-mono: var(--font-mono);
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
