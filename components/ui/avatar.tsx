@@ -2,23 +2,38 @@
 
 import * as React from "react"
 import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
 function Avatar({
   className,
   size = "default",
+  shape = "circle",
   ...props
 }: AvatarPrimitive.Root.Props & {
   size?: "default" | "sm" | "lg"
+  shape?: "circle" | "square"
 }) {
   return (
     <AvatarPrimitive.Root
       data-slot="avatar"
       data-size={size}
+      data-shape={shape}
       className={cn(
-        "group/avatar relative flex size-8 shrink-0 rounded-full select-none after:absolute after:inset-0 after:rounded-full after:border after:border-border after:mix-blend-darken data-[size=lg]:size-10 data-[size=sm]:size-6 dark:after:mix-blend-lighten",
-        className
+        // Base
+        "flex rounded-full after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten",
+        // Position
+        "relative after:absolute after:inset-0",
+        // Sizing
+        "size-8 shrink-0",
+        // Variants
+        "data-[size=lg]:size-10 data-[size=sm]:size-6",
+        // Shape
+        "data-[shape=square]:rounded-md data-[shape=square]:after:rounded-lg",
+        // Other
+        "group/avatar select-none after:rounded-full",
+        className,
       )}
       {...props}
     />
@@ -30,8 +45,15 @@ function AvatarImage({ className, ...props }: AvatarPrimitive.Image.Props) {
     <AvatarPrimitive.Image
       data-slot="avatar-image"
       className={cn(
-        "aspect-square size-full rounded-full object-cover",
-        className
+        // Base
+        "rounded-full",
+        // Sizing
+        "aspect-square size-full",
+        // Shape
+        "group-data-[shape=square]/avatar:rounded-lg",
+        // Other
+        "object-cover",
+        className,
       )}
       {...props}
     />
@@ -46,25 +68,86 @@ function AvatarFallback({
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"
       className={cn(
-        "flex size-full items-center justify-center rounded-full bg-muted text-sm text-muted-foreground group-data-[size=sm]/avatar:text-xs",
-        className
+        // Base
+        "flex rounded-full bg-bg-surface-inverse arc-text-body-sm-strong text-text-oninverse",
+        // Sizing
+        "size-full",
+        // Variants
+        "group-data-[size=sm]/avatar:text-xs",
+        // Shape
+        "group-data-[shape=square]/avatar:rounded-md",
+        // Other
+        "items-center justify-center",
+        className,
       )}
       {...props}
     />
   )
 }
 
-function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
+function AvatarIconFallback({
+  className,
+  ...props
+}: AvatarPrimitive.Fallback.Props) {
+  return (
+    <AvatarPrimitive.Fallback
+      data-slot="avatar-icon-fallback"
+      className={cn(
+        // Base
+        "flex items-center justify-center rounded-full bg-bg-surface-inverse text-text-oninverse",
+        // Sizing
+        "size-full",
+        // Icon sizing
+        "[&>svg]:size-5 group-data-[size=sm]/avatar:[&>svg]:size-4 group-data-[size=lg]/avatar:[&>svg]:size-6",
+        // Shape
+        "group-data-[shape=square]/avatar:rounded-md",
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+const avatarBadgeVariants = cva(
+  [
+    // Base
+    "inline-flex rounded-full bg-blend-color ring-2 ring-bg-surface",
+    // Position
+    "absolute right-0 bottom-0",
+    // Dot sizing (overridden by icon variant)
+    "group-data-[size=sm]/avatar:size-2.5 group-data-[size=sm]/avatar:[&>svg]:size-2",
+    "group-data-[size=default]/avatar:size-3 group-data-[size=default]/avatar:[&>svg]:size-2",
+    "group-data-[size=lg]/avatar:size-3 group-data-[size=lg]/avatar:[&>svg]:size-2",
+    // Other
+    "z-10 items-center justify-center select-none",
+  ],
+  {
+    variants: {
+      variant: {
+        subtle: "bg-bg-surface-tertiary-hover text-text",
+        danger: "bg-bg-danger text-text-ondanger",
+        success: "bg-bg-success text-text-onsuccess",
+        warning: "bg-bg-warning text-text-onwarning",
+        icon: [
+          "bg-bg-surface-inverse text-text-oninverse",
+        ],
+      },
+    },
+    defaultVariants: {
+      variant: "subtle",
+    },
+  }
+)
+
+function AvatarBadge({
+  className,
+  variant,
+  ...props
+}: React.ComponentProps<"span"> & VariantProps<typeof avatarBadgeVariants>) {
   return (
     <span
       data-slot="avatar-badge"
-      className={cn(
-        "absolute right-0 bottom-0 z-10 inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground bg-blend-color ring-2 ring-background select-none",
-        "group-data-[size=sm]/avatar:size-2 group-data-[size=sm]/avatar:[&>svg]:hidden",
-        "group-data-[size=default]/avatar:size-2.5 group-data-[size=default]/avatar:[&>svg]:size-2",
-        "group-data-[size=lg]/avatar:size-3 group-data-[size=lg]/avatar:[&>svg]:size-2",
-        className
-      )}
+      className={cn(avatarBadgeVariants({ variant }), className)}
       {...props}
     />
   )
@@ -75,8 +158,13 @@ function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="avatar-group"
       className={cn(
-        "group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background",
-        className
+        // Base
+        "flex *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-bg-surface",
+        // Sizing
+        "-space-x-2",
+        // Other
+        "group/avatar-group",
+        className,
       )}
       {...props}
     />
@@ -91,8 +179,17 @@ function AvatarGroupCount({
     <div
       data-slot="avatar-group-count"
       className={cn(
-        "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-sm text-muted-foreground ring-2 ring-background group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 [&>svg]:size-4 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",
-        className
+        // Base
+        "relative flex bg-bg-surface-tertiary arc-text-body-sm-strong text-text-secondary rounded-full ring-2 ring-bg-surface",
+        // Sizing
+        "size-8 shrink-0",
+        // Variants
+        "group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",
+        // Shape
+        "group-has-data-[shape=square]/avatar-group:rounded-md",
+        // Other
+        "items-center justify-center [&>svg]:size-4",
+        className,
       )}
       {...props}
     />
@@ -103,6 +200,7 @@ export {
   Avatar,
   AvatarImage,
   AvatarFallback,
+  AvatarIconFallback,
   AvatarGroup,
   AvatarGroupCount,
   AvatarBadge,
