@@ -15,6 +15,9 @@
 /build
 /storybook-static
 
+# ide
+.vscode/
+
 # misc
 .DS_Store
 Thumbs.db
