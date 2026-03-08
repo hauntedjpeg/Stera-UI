@@ -16,6 +16,7 @@
 /storybook-static
 
 # ide
+.claude/
 .vscode/
 
 # misc
