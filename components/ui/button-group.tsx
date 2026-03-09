@@ -6,12 +6,21 @@ import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
 
 const buttonGroupVariants = cva(
-  "flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-md [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1",
+  [
+    // Base
+    "flex items-stretch has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-md",
+    // Position
+    "*:focus-visible:relative",
+    // Sizing
+    "w-fit has-[>[data-slot=button-group]]:gap-2 [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1",
+    // Other
+    "*:focus-visible:z-10",
+  ],
   {
     variants: {
       orientation: {
         horizontal:
-          "*:data-slot:rounded-r-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-md! [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0",
+          "[&>[data-slot]:has(~[data-slot])]:rounded-r-none [&>[data-slot]+[data-slot]]:rounded-l-none [&>[data-slot]+[data-slot]]:border-l-0",
         vertical:
           "flex-col *:data-slot:rounded-b-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-md! [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0",
       },
@@ -71,7 +80,15 @@ function ButtonGroupSeparator({
       data-slot="button-group-separator"
       orientation={orientation}
       className={cn(
-        "relative self-stretch bg-input data-horizontal:mx-px data-horizontal:w-auto data-vertical:my-px data-vertical:h-auto",
+        "relative self-stretch bg-input data-[orientation=horizontal]:mx-px data-[orientation=horizontal]:w-auto data-[orientation=vertical]:h-auto",
+         // Brand
+         "[[data-variant=brand]+&]:bg-border-onbrand",
+         // Subtle
+         "[[data-variant=subtle]+&]:bg-border-secondary",
+         // Danger
+         "[[data-variant=danger]+&]:bg-border-danger",
+         // Ghost
+         "[[data-variant=ghost]+&]:bg-border-secondary [[data-variant=ghost]+&]:data-[orientation=vertical]:my-2",
         className
       )}
       {...props}

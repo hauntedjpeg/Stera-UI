@@ -10,7 +10,7 @@ const buttonVariants = cva(
     // Group
     "group/button",
     // Base
-    "inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent bg-clip-padding transition-all outline-none select-none",
+    "inline-flex shrink-0 items-center justify-center rounded-xl bg-clip-padding transition-all outline-none select-none",
     // Text
     "whitespace-nowrap",
     // Focus
@@ -30,30 +30,30 @@ const buttonVariants = cva(
         accent:
           "bg-bg-accent text-text-onaccent hover:bg-bg-accent-hover",
         outline:
-          "border-border bg-bg-surface hover:bg-bg-surface-hover aria-expanded:bg-bg-surface-hover aria-expanded:text-text",
+          "border border-border bg-bg-surface hover:bg-bg-surface-hover aria-expanded:bg-bg-surface-hover aria-expanded:text-text",
         subtle:
           "bg-bg-surface-secondary text-text hover:bg-bg-surface-secondary-hover aria-expanded:bg-bg-surface-tertiary-hover aria-expanded:text-text",
         ghost:
           "hover:bg-bg-surface-hover hover:text-text aria-expanded:bg-bg-surface-hover aria-expanded:text-text dark:hover:bg-bg-surface-hover",
-        destructive:
+        danger:
           "bg-bg-danger-tertiary text-text-danger hover:bg-bg-danger-tertiary-hover focus-visible:border-border-danger-secondary focus-visible:ring-ring-danger",
         link: "text-text underline-offset-4 hover:underline",
       },
       size: {
         xs:
-          "h-6 gap-1.5 rounded-lg px-2 arc-text-body-sm-strong in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
+          "h-6 gap-1.5 rounded-lg px-2 arc-text-body-sm-strong in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm:
-          "h-8 gap-2 px-3 arc-text-body-sm-strong in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "h-8 gap-2 px-3 arc-text-body-sm-strong has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         md:
-          "h-10 gap-2 px-4 arc-text-body-md-strong in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
+          "h-10 gap-2 px-4 arc-text-body-md-strong has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
         lg:
           "h-12 gap-3 px-5 arc-text-body-lg-strong has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4",
         icon:
-          "size-10 rounded-xl [&_svg:not([class*='size-'])]:size-5",
+          "size-10 [&_svg:not([class*='size-'])]:size-5",
         "icon-xs":
           "size-6 rounded-lg in-data-[slot=button-group]:rounded-md [&_svg:not([class*='size-'])]:size-3",
         "icon-sm":
-          "size-8 in-data-[slot=button-group]:rounded-md",
+          "size-8",
         "icon-lg":
           "size-12 [&_svg:not([class*='size-'])]:size-6",
       },
@@ -74,6 +74,7 @@ function Button({
   return (
     <ButtonPrimitive
       data-slot="button"
+      data-variant={variant}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
