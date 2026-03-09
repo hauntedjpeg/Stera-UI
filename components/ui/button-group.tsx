@@ -86,7 +86,9 @@ function ButtonGroupSeparator({
          // Subtle
          "[[data-variant=subtle]+&]:bg-border-secondary",
          // Danger
-         "[[data-variant=danger]+&]:bg-border-danger",
+         "[[data-variant=danger]+&]:bg-border-ondanger-secondary",
+         // Accent
+         "[[data-variant=accent]+&]:bg-border-onaccent",
          // Ghost
          "[[data-variant=ghost]+&]:bg-border-secondary [[data-variant=ghost]+&]:data-[orientation=vertical]:my-2",
         className
