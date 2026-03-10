@@ -99,7 +99,7 @@ function Calendar({
         ),
         month_caption: cn(
           // Base
-          "flex items-center justify-center px-(--cell-size)",
+          "flex items-center arc-text-body-sm-strong justify-center px-(--cell-size)",
           // Sizing
           "h-(--cell-size) w-full",
           defaultClassNames.month_caption,
@@ -114,7 +114,7 @@ function Calendar({
         dropdown_root: cn(
           buttonVariants({ variant: "outline", size: "sm" }),
           // Position
-          "relative px-2",
+          "relative pr-2",
           defaultClassNames.dropdown_root,
         ),
         dropdown: cn(
@@ -130,8 +130,8 @@ function Calendar({
           // Base
           "select-none",
           captionLayout === "label"
-            ? "arc-text-body-md-compact"
-            : "flex items-center gap-1 arc-text-body-md-compact pointer-events-none [&>svg]:size-3.5 [&>svg]:text-text-secondary",
+            ? ""
+            : "flex items-center gap-1.5 pointer-events-none [&>svg]:size-4",
           defaultClassNames.caption_label
         ),
         table: "w-full border-collapse",
@@ -142,11 +142,11 @@ function Calendar({
         ),
         weekday: cn(
           // Base
-          "rounded-(--cell-radius) font-normal",
+          "rounded-(--cell-radius)",
           // Sizing
           "flex-1",
           // Other
-          "arc-text-body-md-compact text-text-secondary select-none",
+          "arc-text-body-md-strong text-text-secondary select-none",
           defaultClassNames.weekday,
         ),
         week: cn(
@@ -216,7 +216,7 @@ function Calendar({
         ),
         outside: cn(
           // Other
-          "text-text-secondary aria-selected:text-text-secondary",
+          "text-text-tertiary aria-selected:text-text-tertiary",
           defaultClassNames.outside,
         ),
         disabled: cn(
