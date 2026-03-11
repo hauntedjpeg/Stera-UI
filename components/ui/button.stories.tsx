@@ -75,7 +75,7 @@ export const Ghost: Story = {
 export const Destructive: Story = {
   args: {
     children: "Button",
-    variant: "destructive",
+    variant: "danger",
     size: "md",
   },
 }
@@ -127,7 +127,7 @@ export const AllVariants: Story = {
       <Button variant="outline">Outline</Button>
       <Button variant="subtle">Secondary</Button>
       <Button variant="ghost">Ghost</Button>
-      <Button variant="destructive">Destructive</Button>
+      <Button variant="danger">Danger</Button>
       <Button variant="link">Link</Button>
     </div>
   ),
