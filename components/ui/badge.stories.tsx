@@ -11,9 +11,9 @@ const meta: Meta<typeof Badge> = {
     variant: {
       control: "select",
       options: [
-        "subtle",
-        "subtle-outline",
-        "subtle-solid",
+        "default",
+        "outline",
+        "solid",
         "brand",
         "brand-outline",
         "brand-solid",
@@ -47,7 +47,7 @@ type Story = StoryObj<typeof Badge>
 export const Default: Story = {
   args: {
     children: "Badge",
-    variant: "subtle",
+    variant: "default",
     size: "sm",
   },
 }
@@ -55,7 +55,7 @@ export const Default: Story = {
 export const SubtleOutline: Story = {
   args: {
     children: "Badge",
-    variant: "subtle-outline",
+    variant: "outline",
     size: "sm",
   },
 }
@@ -63,7 +63,7 @@ export const SubtleOutline: Story = {
 export const SubtleSolid: Story = {
   args: {
     children: "Badge",
-    variant: "subtle-solid",
+    variant: "solid",
     size: "sm",
   },
 }
@@ -191,9 +191,9 @@ export const WarningSolid: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-wrap items-center gap-2">
-      <Badge variant="subtle">Subtle</Badge>
-      <Badge variant="subtle-outline">Subtle Outline</Badge>
-      <Badge variant="subtle-solid">Subtle Solid</Badge>
+      <Badge variant="default">Subtle</Badge>
+      <Badge variant="outline">Subtle Outline</Badge>
+      <Badge variant="solid">Subtle Solid</Badge>
       <Badge variant="brand">Brand</Badge>
       <Badge variant="brand-outline">Brand Outline</Badge>
       <Badge variant="brand-solid">Brand Solid</Badge>

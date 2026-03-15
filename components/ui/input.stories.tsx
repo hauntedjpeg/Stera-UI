@@ -73,7 +73,7 @@ export const WithFieldGroup: Story = {
       </Field>
       <div className="flex justify-end gap-2">
         <Button variant="outline" type="reset">Reset</Button>
-        <Button type="submit">Submit</Button>
+        <Button variant="brand" type="submit">Submit</Button>
       </div>
     </FieldGroup>
   ),
@@ -155,7 +155,7 @@ export const WithBadge: Story = {
     <Field className="w-sm">
       <FieldLabel htmlFor="webhook-url" className="flex items-center gap-2">
         Webhook URL
-        <Badge variant="subtle" className="ml-auto">Beta</Badge>
+        <Badge variant="default" className="ml-auto">Beta</Badge>
       </FieldLabel>
       <Input id="webhook-url" placeholder="https://example.com/webhook" />
     </Field>
@@ -219,7 +219,7 @@ export const Form: Story = {
       </Field>
       <div className="flex justify-end gap-2">
         <Button variant="outline" type="reset">Cancel</Button>
-        <Button type="submit">Save</Button>
+        <Button variant="brand" type="submit">Save</Button>
       </div>
     </FieldGroup>
   ),

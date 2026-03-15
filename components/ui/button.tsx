@@ -8,7 +8,7 @@ const buttonVariants = cva(
     // Group
     "group/button",
     // Base
-    "inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent bg-clip-padding transition-all outline-none select-none",
+    "inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent transition-all outline-none select-none",
     // Text
     "whitespace-nowrap",
     // Focus
@@ -24,9 +24,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         brand:
-          "bg-bg-brand text-text-onbrand border-border-brand hover:bg-bg-brand-hover hover:border-border-brand-hover focus-visible:border-border-brand-secondary focus-visible:ring-ring-brand",
+          "bg-bg-brand text-text-onbrand border-bg-brand hover:bg-bg-brand-hover hover:border-border-brand-hover focus-visible:border-border-brand-secondary focus-visible:ring-ring-brand",
         accent:
-          "bg-bg-accent text-text-onaccent border-border-accent hover:bg-bg-accent-hover hover:border-border-accent-hover",
+          "bg-bg-accent text-text-onaccent border-bg-accent hover:bg-bg-accent-hover hover:border-border-accent-hover",
         outline:
           "border border-border bg-bg-surface hover:bg-bg-surface-hover aria-expanded:bg-bg-surface-hover aria-expanded:text-text",
         subtle:

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 const inputVariants = cva(
   [
     // Base
-    "rounded-xl border border-border bg-bg-surface px-2.5 py-1 shadow-xs file:border-0 file:bg-transparent aria-invalid:border-border-danger-secondary",
+    "rounded-xl border border-border bg-bg-surface px-3 py-1 shadow-xs file:border-0 file:bg-transparent aria-invalid:border-border-danger-secondary",
     // Sizing
     "w-full min-w-0",
     // Focus
@@ -22,10 +22,10 @@ const inputVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-8",
-        md: "h-9",
-        lg: "h-10",
-        xl: "h-12",
+        sm: "h-8 px-2.5 arc-text-body-md-compact",
+        md: "h-9 arc-text-body-md-compact",
+        lg: "h-10 arc-text-body-md-compact",
+        xl: "h-12 px-4 arc-text-body-lg",
       },
     },
     defaultVariants: {

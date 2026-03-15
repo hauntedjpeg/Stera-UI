@@ -329,7 +329,7 @@ function CalendarDayButton({
       data-range-middle={modifiers.range_middle}
       className={cn(
         // Base
-        "flex flex-col border-0 arc-text-body-md-compact rounded-md",
+        "flex flex-col border-0 arc-text-body-md-compact rounded-xl",
         // Position
         "relative",
         // Sizing

@@ -20,11 +20,11 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        subtle:
+        default:
           "bg-bg-surface-tertiary text-text",
-        "subtle-outline":
+        "outline":
           "bg-bg-surface text-text border-border",
-        "subtle-solid":
+        "solid":
           "bg-bg-surface-inverse text-text-oninverse",
         brand:
           "bg-bg-brand-tertiary text-text-brand-secondary",
@@ -67,7 +67,7 @@ const badgeVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "subtle",
+      variant: "default",
       size: "sm",
     },
   }
@@ -75,7 +75,7 @@ const badgeVariants = cva(
 
 function Badge({
   className,
-  variant = "subtle",
+  variant = "default",
   size = "sm",
   render,
   ...props
