@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 const inputVariants = cva(
   [
     // Base
-    "rounded-xl border border-border bg-bg-surface px-3 py-1 shadow-xs file:border-0 file:bg-transparent aria-invalid:border-border-danger-secondary",
+    "rounded-xl border border-border bg-bg-surface px-3 py-1 file:border-0 file:bg-transparent aria-invalid:border-border-danger-secondary",
     // Sizing
     "w-full min-w-0",
     // Focus
