@@ -2,7 +2,7 @@ import * as React from "react"
 import { Menu as MenuPrimitive } from "@base-ui/react/menu"
 
 import { cn } from "@/lib/utils"
-import { ChevronRightIcon, CheckIcon } from "lucide-react"
+import { SiChevronRight, SiCheck } from "stera-icons"
 
 function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
   return <MenuPrimitive.Root data-slot="dropdown-menu" {...props} />
@@ -41,7 +41,7 @@ function DropdownMenuContent({
           data-slot="dropdown-menu-content"
           className={cn(
             // Base
-            "rounded-md bg-bg-surface p-1 text-text shadow-md ring-1 ring-foreground/10 outline-none overflow-x-hidden overflow-y-auto duration-100",
+            "rounded-xl bg-bg-surface p-2 text-text shadow-md ring-1 ring-border outline-none overflow-x-hidden overflow-y-auto duration-100",
             // Position
             "origin-(--transform-origin)",
             // Sizing
@@ -148,7 +148,7 @@ function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon className="ml-auto" />
+      <SiChevronRight className="ml-auto" />
     </MenuPrimitive.SubmenuTrigger>
   )
 }
@@ -214,7 +214,7 @@ function DropdownMenuCheckboxItem({
         data-slot="dropdown-menu-checkbox-item-indicator"
       >
         <MenuPrimitive.CheckboxItemIndicator>
-          <CheckIcon
+          <SiCheck
           />
         </MenuPrimitive.CheckboxItemIndicator>
       </span>
@@ -262,7 +262,7 @@ function DropdownMenuRadioItem({
         data-slot="dropdown-menu-radio-item-indicator"
       >
         <MenuPrimitive.RadioItemIndicator>
-          <CheckIcon
+          <SiCheck
           />
         </MenuPrimitive.RadioItemIndicator>
       </span>

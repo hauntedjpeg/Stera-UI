@@ -157,7 +157,7 @@ function SelectItem({
       data-slot="select-item"
       className={cn(
         // Base
-        "relative flex rounded-lg py-1.5 pr-8 pl-2 outline-hidden select-none",
+        "relative flex rounded-lg py-2 pr-8 pl-2 outline-hidden select-none",
         // Sizing
         "w-full gap-2",
         // Animation
