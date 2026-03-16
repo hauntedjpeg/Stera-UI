@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
+import { ChevronDownIcon } from "lucide-react"
 import {
   SiCopy,
   SiEye,
@@ -7,13 +8,14 @@ import {
   SiSearch,
 } from "stera-icons"
 
-import { Button } from "./button"
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./dropdown-menu"
+import { Field, FieldDescription, FieldLabel } from "./field"
 import {
   InputGroup,
   InputGroupAddon,
@@ -36,6 +38,38 @@ const meta: Meta<typeof InputGroup> = {
 
 export default meta
 type Story = StoryObj<typeof InputGroup>
+
+export const Sizes: Story = {
+  parameters: { layout: "padded" },
+  render: () => (
+    <div className="flex w-sm flex-col gap-4">
+      <InputGroup>
+        <InputGroupAddon align="inline-start">
+          <SiSearch />
+        </InputGroupAddon>
+        <InputGroupInput size="sm" placeholder="Small" />
+      </InputGroup>
+      <InputGroup>
+        <InputGroupAddon align="inline-start">
+          <SiSearch />
+        </InputGroupAddon>
+        <InputGroupInput size="md" placeholder="Medium (default)" />
+      </InputGroup>
+      <InputGroup>
+        <InputGroupAddon align="inline-start">
+          <SiSearch />
+        </InputGroupAddon>
+        <InputGroupInput size="lg" placeholder="Large" />
+      </InputGroup>
+      <InputGroup>
+        <InputGroupAddon align="inline-start">
+          <SiSearch />
+        </InputGroupAddon>
+        <InputGroupInput size="xl" placeholder="Extra large" />
+      </InputGroup>
+    </div>
+  ),
+}
 
 export const Icon: Story = {
   parameters: { layout: "padded" },
@@ -155,22 +189,25 @@ export const WithKbd: Story = {
 export const WithDropdown: Story = {
   render: () => (
     <InputGroup className="w-sm">
-      <InputGroupAddon align="inline-start">
+      <InputGroupInput placeholder="Enter search query" />
+      <InputGroupAddon align="inline-end">
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <InputGroupButton>
-              Search In...
-            </InputGroupButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>All</DropdownMenuItem>
-            <DropdownMenuItem>Posts</DropdownMenuItem>
-            <DropdownMenuItem>Comments</DropdownMenuItem>
-            <DropdownMenuItem>Users</DropdownMenuItem>
+          <DropdownMenuTrigger
+            render={
+              <InputGroupButton variant="ghost" className="pr-1.5! text-xs">
+                Search In... <ChevronDownIcon className="size-3" />
+              </InputGroupButton>
+            }
+          />
+          <DropdownMenuContent align="end" sideOffset={8} alignOffset={-4}>
+            <DropdownMenuGroup>
+              <DropdownMenuItem>Documentation</DropdownMenuItem>
+              <DropdownMenuItem>Blog Posts</DropdownMenuItem>
+              <DropdownMenuItem>Changelog</DropdownMenuItem>
+            </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
       </InputGroupAddon>
-      <InputGroupInput placeholder="Search..." />
     </InputGroup>
   ),
 }
@@ -180,7 +217,7 @@ export const WithSpinner: Story = {
   render: () => (
     <div className="flex w-sm flex-col gap-4">
       <InputGroup>
-        <InputGroupInput defaultValue="Saving..." disabled />
+        <InputGroupInput defaultValue="Saving..." />
         <InputGroupAddon align="inline-end">
           <Spinner />
         </InputGroupAddon>
@@ -189,7 +226,7 @@ export const WithSpinner: Story = {
         <InputGroupAddon align="inline-start">
           <Spinner />
         </InputGroupAddon>
-        <InputGroupInput placeholder="Please wait..." disabled />
+        <InputGroupInput placeholder="Please wait..." />
       </InputGroup>
     </div>
   ),
@@ -221,17 +258,45 @@ export const Textarea: Story = {
   ),
 }
 
+export const WithLabel: Story = {
+  parameters: { layout: "padded" },
+  render: () => (
+    <div className="flex w-sm flex-col gap-4">
+      <Field>
+        <FieldLabel htmlFor="email">Email address</FieldLabel>
+        <InputGroup>
+          <InputGroupAddon align="inline-start">
+            <SiMail />
+          </InputGroupAddon>
+          <InputGroupInput id="email" placeholder="you@example.com" />
+        </InputGroup>
+      </Field>
+      <Field>
+        <FieldLabel htmlFor="website">Website</FieldLabel>
+        <InputGroup>
+          <InputGroupAddon align="inline-start">
+            <InputGroupText>https://</InputGroupText>
+          </InputGroupAddon>
+          <InputGroupInput id="website" placeholder="example.com" />
+        </InputGroup>
+        <FieldDescription>Your public-facing URL.</FieldDescription>
+      </Field>
+    </div>
+  ),
+}
+
 export const CustomInput: Story = {
   render: () => (
     <InputGroup className="w-sm">
       <textarea
         data-slot="input-group-control"
-        className="flex-1 resize-none rounded-none border-0 bg-transparent py-2 px-3 text-sm shadow-none ring-0 outline-none placeholder:text-muted-foreground focus-visible:ring-0"
-        placeholder="Custom resizable textarea..."
-        rows={3}
+        className="field-sizing-content min-h-16 w-full resize-none rounded-md bg-transparent px-3 py-2.5 text-base transition-[color,box-shadow] outline-none md:text-sm"
+        placeholder="Autoresize textarea..."
       />
       <InputGroupAddon align="block-end">
-        <InputGroupText>Custom element</InputGroupText>
+        <InputGroupButton className="ml-auto" size="sm" variant="brand">
+          Submit
+        </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
   ),
