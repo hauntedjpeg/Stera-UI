@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { SiDownload, SiPlus } from "stera-icons"
 import { Button } from "./button"
+import { Kbd } from "./kbd"
 
 const meta: Meta<typeof Button> = {
   title: "UI/Button",
@@ -41,82 +42,61 @@ export default meta
 type Story = StoryObj<typeof Button>
 
 export const Brand: Story = {
-  args: {
-    children: "Button",
-    variant: "brand",
-    size: "md",
-  },
+  render: () => <Button variant="brand">Button</Button>,
 }
 
 export const Outline: Story = {
-  args: {
-    children: "Button",
-    variant: "outline",
-    size: "md",
-  },
+  render: () => <Button variant="outline">Button</Button>,
 }
 
 export const Secondary: Story = {
-  args: {
-    children: "Button",
-    variant: "subtle",
-    size: "md",
-  },
+  render: () => <Button variant="subtle">Button</Button>,
 }
 
 export const Ghost: Story = {
-  args: {
-    children: "Button",
-    variant: "ghost",
-    size: "md",
-  },
+  render: () => <Button variant="ghost">Button</Button>,
 }
 
 export const Destructive: Story = {
-  args: {
-    children: "Button",
-    variant: "danger",
-    size: "md",
-  },
+  render: () => <Button variant="danger">Button</Button>,
 }
 
 export const Link: Story = {
-  args: {
-    children: "Button",
-    variant: "link",
-    size: "md",
-  },
+  render: () => <Button variant="link">Button</Button>,
 }
 
 export const WithIcon: Story = {
-  args: {
-    children: (
-      <>
-        <SiPlus data-icon="inline-start" />
-        New item
-      </>
-    ),
-    variant: "outline",
-    size: "md",
-  },
+  render: () => (
+    <Button variant="outline">
+      <SiPlus data-icon="inline-start" />
+      New item
+    </Button>
+  ),
 }
 
 export const IconOnly: Story = {
-  args: {
-    children: <SiDownload />,
-    variant: "outline",
-    size: "icon",
-    "aria-label": "Download",
-  },
+  render: () => (
+    <Button variant="outline" size="icon" aria-label="Download">
+      <SiDownload />
+    </Button>
+  ),
+}
+
+export const WithKbd: Story = {
+  render: () => (
+    <Button variant="outline">
+      Open command menu
+      <Kbd data-kbd="inline-end">⌘K</Kbd>
+    </Button>
+  ),
 }
 
 export const Disabled: Story = {
-  args: {
-    children: "Button",
-    variant: "outline",
-    size: "md",
-    disabled: true,
-  },
+  render: () => (
+    <Button variant="outline" disabled>
+      Button
+    </Button>
+  ),
 }
 
 export const AllVariants: Story = {
