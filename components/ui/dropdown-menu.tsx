@@ -45,7 +45,7 @@ function DropdownMenuContent({
             // Position
             "origin-(--transform-origin)",
             // Sizing
-            "max-h-(--available-height) w-(--anchor-width) min-w-32",
+            "max-h-(--available-height) min-w-40 max-w-56",
             // Animation
             "data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95",
             // Other
@@ -90,10 +90,13 @@ function DropdownMenuItem({
   className,
   inset,
   variant = "default",
+  shortcut,
+  children,
   ...props
 }: MenuPrimitive.Item.Props & {
   inset?: boolean
   variant?: "default" | "destructive"
+  shortcut?: React.ReactNode
 }) {
   return (
     <MenuPrimitive.Item
@@ -103,16 +106,19 @@ function DropdownMenuItem({
       className={cn(
         // Base
         "flex rounded-xl px-2 py-1.5 text-sm outline-hidden select-none",
-        // Sizing
-        "gap-2",
         // Variants
         "data-inset:pl-8 data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 not-data-[variant=destructive]:focus:**:text-accent-foreground data-[variant=destructive]:*:[svg]:text-destructive",
         // Other
-        "group/dropdown-menu-item relative cursor-default items-center focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "group/dropdown-menu-item relative cursor-default items-center overflow-hidden focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
-    />
+    >
+      <span className="flex-1 min-w-0 truncate [&_svg]:inline [&_svg]:align-text-bottom [&_svg]:mr-2">
+        {children}
+      </span>
+      {shortcut && <DropdownMenuShortcut>{shortcut}</DropdownMenuShortcut>}
+    </MenuPrimitive.Item>
   )
 }
 
@@ -168,7 +174,7 @@ function DropdownMenuSubContent({
         // Base
         "rounded-md bg-bg-surface p-1 text-popover-foreground shadow-lg ring-1 ring-foreground/10 duration-100",
         // Sizing
-        "w-auto min-w-[96px]",
+        "min-w-24 max-w-56",
         // Animation
         "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
         className
