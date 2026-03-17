@@ -146,7 +146,7 @@ function ComboboxList({ className, ...props }: ComboboxPrimitive.List.Props) {
       data-slot="combobox-list"
       className={cn(
         // Base
-        "overflow-y-auto overscroll-contain p-2",
+        "overflow-y-auto overscroll-contain p-1",
         // Sizing
         "max-h-[min(calc(--spacing(72)---spacing(9)),calc(var(--available-height)---spacing(9)))] scroll-py-1",
         // Animation
@@ -212,7 +212,7 @@ function ComboboxLabel({
       data-slot="combobox-label"
       className={cn(
       // Base
-      "px-2 py-1.5",
+      "p-2",
       // Other
       "arc-text-body-sm text-text-tertiary",
       className,
@@ -257,7 +257,7 @@ function ComboboxSeparator({
       // Base
       "my-2 h-px bg-border",
       // Other
-      "-mx-2",
+      "-mx-1",
       className,
     )}
       {...props}
@@ -304,7 +304,7 @@ function ComboboxChip({
         // Sizing
         "h-[calc(--spacing(5.5))] w-fit gap-1",
         // Animation
-        "has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50 has-data-[slot=combobox-chip-remove]:pr-0",
+        "has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:bg-disabled has-data-[slot=combobox-chip-remove]:pr-0",
         className,
       )}
       {...props}

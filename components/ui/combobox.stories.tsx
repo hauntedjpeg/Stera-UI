@@ -1,12 +1,12 @@
 import * as React from "react"
 import type { Meta, StoryObj } from "@storybook/react"
 import {
-  CircleIcon,
-  CircleDotIcon,
-  CheckCircle2Icon,
-  XCircleIcon,
-  SearchIcon,
-} from "lucide-react"
+  SiCircle,
+  SiCircleDash,
+  SiCheckCircle,
+  SiXCircle,
+  SiSearch,
+} from "stera-icons"
 
 import { Button } from "./button"
 import {
@@ -57,25 +57,25 @@ const statuses: Status[] = [
   {
     value: "backlog",
     label: "Backlog",
-    icon: CircleIcon,
+    icon: SiCircle,
     description: "Not yet started",
   },
   {
     value: "in-progress",
     label: "In Progress",
-    icon: CircleDotIcon,
+    icon: SiCircleDash,
     description: "Currently being worked on",
   },
   {
     value: "done",
     label: "Done",
-    icon: CheckCircle2Icon,
+    icon: SiCheckCircle,
     description: "Completed",
   },
   {
     value: "cancelled",
     label: "Cancelled",
-    icon: XCircleIcon,
+    icon: SiXCircle,
     description: "Will not be completed",
   },
 ]
@@ -316,7 +316,7 @@ export const AutoHighlight: Story = {
       <Combobox
         items={frameworks}
         itemToStringLabel={(fw: Framework) => fw.label}
-        autoHighlight="always"
+        autoHighlight={"always" as unknown as boolean}
       >
         <ComboboxInput placeholder="Select framework..." />
         <ComboboxContent>
@@ -371,16 +371,20 @@ export const Popup: Story = {
   render: () => <PopupDemo />,
 }
 
-export const WithInputGroup: Story = {
-  render: () => (
+function InputGroupDemo() {
+  const anchor = useComboboxAnchor()
+
+  return (
     <div className="w-64">
       <Combobox items={frameworks} itemToStringLabel={(fw: Framework) => fw.label}>
-        <ComboboxInput placeholder="Search framework...">
-          <InputGroupAddon align="inline-start">
-            <SearchIcon />
-          </InputGroupAddon>
-        </ComboboxInput>
-        <ComboboxContent>
+        <div ref={anchor}>
+          <ComboboxInput placeholder="Search framework...">
+            <InputGroupAddon align="inline-start">
+              <SiSearch />
+            </InputGroupAddon>
+          </ComboboxInput>
+        </div>
+        <ComboboxContent anchor={anchor}>
           <ComboboxEmpty>No framework found.</ComboboxEmpty>
           <ComboboxList>
             {(fw: Framework) => (
@@ -392,5 +396,9 @@ export const WithInputGroup: Story = {
         </ComboboxContent>
       </Combobox>
     </div>
-  ),
+  )
+}
+
+export const WithInputGroup: Story = {
+  render: () => <InputGroupDemo />,
 }

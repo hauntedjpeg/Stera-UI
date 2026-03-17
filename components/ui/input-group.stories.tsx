@@ -47,7 +47,7 @@ export const Sizes: Story = {
         <InputGroupAddon align="inline-start">
           <SiSearch />
         </InputGroupAddon>
-        <InputGroupInput size="sm" placeholder="Small" />
+        <InputGroupInput disabled size="sm" placeholder="Small" />
       </InputGroup>
       <InputGroup>
         <InputGroupAddon align="inline-start">
