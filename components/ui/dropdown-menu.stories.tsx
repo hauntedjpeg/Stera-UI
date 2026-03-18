@@ -41,6 +41,10 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuItemContent,
+  DropdownMenuItemDescription,
+  DropdownMenuItemShortcut,
+  DropdownMenuItemTitle,
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuRadioGroup,
@@ -104,7 +108,10 @@ export const Submenu: Story = {
               <DropdownMenuItem>More...</DropdownMenuItem>
             </DropdownMenuSubContent>
           </DropdownMenuSub>
-          <DropdownMenuItem shortcut="⌘+T">New Team</DropdownMenuItem>
+          <DropdownMenuItem>
+            New Team
+            <DropdownMenuItemShortcut>⌘+T</DropdownMenuItemShortcut>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -120,13 +127,28 @@ export const Shortcuts: Story = {
       <DropdownMenuContent>
         <DropdownMenuGroup>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuItem shortcut="⇧⌘P">Profile</DropdownMenuItem>
-          <DropdownMenuItem shortcut="⌘B">Billing</DropdownMenuItem>
-          <DropdownMenuItem shortcut="⌘S">Settings</DropdownMenuItem>
-          <DropdownMenuItem shortcut="⌘K">Keyboard shortcuts</DropdownMenuItem>
+          <DropdownMenuItem>
+            Profile
+            <DropdownMenuItemShortcut>⇧⌘P</DropdownMenuItemShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            Billing
+            <DropdownMenuItemShortcut>⌘B</DropdownMenuItemShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            Settings
+            <DropdownMenuItemShortcut>⌘S</DropdownMenuItemShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            Keyboard shortcuts
+            <DropdownMenuItemShortcut>⌘K</DropdownMenuItemShortcut>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem shortcut="⇧⌘Q">Log out</DropdownMenuItem>
+        <DropdownMenuItem>
+          Log out
+          <DropdownMenuItemShortcut>⇧⌘Q</DropdownMenuItemShortcut>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   ),
@@ -152,7 +174,7 @@ export const Icons: Story = {
           Settings
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive">
+        <DropdownMenuItem variant="danger">
           <SiSignOut />
           Log out
         </DropdownMenuItem>
@@ -336,7 +358,7 @@ export const Destructive: Story = {
           <SiArchive />
           Archive
         </DropdownMenuItem>
-        <DropdownMenuItem variant="destructive">
+        <DropdownMenuItem variant="danger">
           <SiTrash />
           Delete
         </DropdownMenuItem>
@@ -430,13 +452,15 @@ function ComplexDemo() {
       <DropdownMenuContent>
         <DropdownMenuGroup>
           <DropdownMenuLabel>File</DropdownMenuLabel>
-          <DropdownMenuItem shortcut="⌘N">
+          <DropdownMenuItem>
             <SiFolder />
             New File
+            <DropdownMenuItemShortcut>⌘N</DropdownMenuItemShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem shortcut="⇧⌘N">
+          <DropdownMenuItem>
             <SiFolder />
             New Folder
+            <DropdownMenuItemShortcut>⇧⌘N</DropdownMenuItemShortcut>
           </DropdownMenuItem>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
@@ -463,13 +487,15 @@ function ComplexDemo() {
             </DropdownMenuSubContent>
           </DropdownMenuSub>
           <DropdownMenuSeparator />
-          <DropdownMenuItem shortcut="⌘S">
+          <DropdownMenuItem>
             <SiSave />
             Save
+            <DropdownMenuItemShortcut>⌘S</DropdownMenuItemShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem shortcut="⇧⌘E">
+          <DropdownMenuItem>
             <SiDownload />
             Export
+            <DropdownMenuItemShortcut>⇧⌘E</DropdownMenuItemShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
@@ -517,4 +543,48 @@ function ComplexDemo() {
 
 export const Complex: Story = {
   render: () => <ComplexDemo />,
+}
+
+export const TitleDescription: Story = {
+  render: () => (
+    <DropdownMenu>
+      <DropdownMenuTrigger render={<Button variant="outline" className="w-fit" />}>
+        Open
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="min-w-56">
+        <DropdownMenuItem>
+          <SiUser />
+          <DropdownMenuItemContent>
+            <DropdownMenuItemTitle>Profile</DropdownMenuItemTitle>
+            <DropdownMenuItemDescription>View and edit your profile</DropdownMenuItemDescription>
+          </DropdownMenuItemContent>
+          <DropdownMenuItemShortcut>⇧⌘P</DropdownMenuItemShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <SiCreditCard />
+          <DropdownMenuItemContent>
+            <DropdownMenuItemTitle>Billing</DropdownMenuItemTitle>
+            <DropdownMenuItemDescription>Manage your subscription</DropdownMenuItemDescription>
+          </DropdownMenuItemContent>
+          <DropdownMenuItemShortcut>⌘B</DropdownMenuItemShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <SiSettings />
+          <DropdownMenuItemContent>
+            <DropdownMenuItemTitle>Settings</DropdownMenuItemTitle>
+            <DropdownMenuItemDescription>Configure preferences</DropdownMenuItemDescription>
+          </DropdownMenuItemContent>
+          <DropdownMenuItemShortcut>⌘S</DropdownMenuItemShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem variant="danger">
+          <SiSignOut />
+          <DropdownMenuItemContent>
+            <DropdownMenuItemTitle>Log out</DropdownMenuItemTitle>
+            <DropdownMenuItemDescription>Sign out of your account</DropdownMenuItemDescription>
+          </DropdownMenuItemContent>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  ),
 }

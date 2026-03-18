@@ -12,7 +12,7 @@ import {
   DropdownMenuPortal,
   DropdownMenuRadioGroup,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
+  DropdownMenuItemShortcut,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
@@ -206,9 +206,9 @@ function MenubarSeparator({
 function MenubarShortcut({
   className,
   ...props
-}: React.ComponentProps<typeof DropdownMenuShortcut>) {
+}: React.ComponentProps<typeof DropdownMenuItemShortcut>) {
   return (
-    <DropdownMenuShortcut
+    <DropdownMenuItemShortcut
       data-slot="menubar-shortcut"
       className={cn(
         "ml-auto text-xs tracking-widest text-muted-foreground group-focus/menubar-item:text-accent-foreground",
