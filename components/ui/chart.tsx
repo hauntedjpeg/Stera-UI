@@ -55,8 +55,13 @@ function ChartContainer({
         data-slot="chart"
         data-chart={chartId}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
-          className
+          // Base
+          "flex arc-text-body-sm",
+          // Sizing
+          "aspect-video",
+          // Other
+          "justify-center [&_.recharts-cartesian-axis-tick_text]:fill-bg-surface-secondary [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
+          className,
         )}
         {...props}
       >
@@ -143,7 +148,13 @@ function ChartTooltipContent({
 
     if (labelFormatter) {
       return (
-        <div className={cn("font-medium", labelClassName)}>
+        <div
+          className={cn(
+            // Other
+            "font-medium",
+            labelClassName,
+          )}
+        >
           {labelFormatter(value, payload)}
         </div>
       )
@@ -153,7 +164,17 @@ function ChartTooltipContent({
       return null
     }
 
-    return <div className={cn("font-medium", labelClassName)}>{value}</div>
+    return (
+      <div
+        className={cn(
+          // Other
+          "font-medium",
+          labelClassName,
+        )}
+      >
+        {value}
+      </div>
+    )
   }, [
     label,
     labelFormatter,
@@ -173,8 +194,13 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        "grid min-w-32 items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
-        className
+        // Base
+        "grid rounded-lg border border-border/50 bg-bg-surface px-2.5 py-1.5 shadow-xl",
+        // Sizing
+        "min-w-32 gap-1.5",
+        // Other
+        "items-start text-xs",
+        className,
       )}
     >
       {!nestLabel ? tooltipLabel : null}
@@ -190,8 +216,13 @@ function ChartTooltipContent({
               <div
                 key={item.dataKey}
                 className={cn(
-                  "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
-                  indicator === "dot" && "items-center"
+                  // Base
+                  "flex",
+                  // Sizing
+                  "w-full gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
+                  // Other
+                  "flex-wrap items-stretch [&>svg]:text-muted-foreground",
+                  indicator === "dot" && "items-center",
                 )}
               >
                 {formatter && item?.value !== undefined && item.name ? (
@@ -204,14 +235,17 @@ function ChartTooltipContent({
                       !hideIndicator && (
                         <div
                           className={cn(
-                            "shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
+                            // Base
+                            "rounded-[2px] border-(--color-border) bg-(--color-bg)",
+                            // Other
+                            "shrink-0",
                             {
                               "h-2.5 w-2.5": indicator === "dot",
                               "w-1": indicator === "line",
                               "w-0 border-[1.5px] border-dashed bg-transparent":
                                 indicator === "dashed",
                               "my-0.5": nestLabel && indicator === "dashed",
-                            }
+                            },
                           )}
                           style={
                             {
@@ -224,8 +258,13 @@ function ChartTooltipContent({
                     )}
                     <div
                       className={cn(
-                        "flex flex-1 justify-between leading-none",
-                        nestLabel ? "items-end" : "items-center"
+                        // Base
+                        "flex",
+                        // Sizing
+                        "flex-1",
+                        // Other
+                        "justify-between leading-none",
+                        nestLabel ? "items-end" : "items-center",
                       )}
                     >
                       <div className="grid gap-1.5">
@@ -272,9 +311,14 @@ function ChartLegendContent({
   return (
     <div
       className={cn(
-        "flex items-center justify-center gap-4",
+        // Base
+        "flex",
+        // Sizing
+        "gap-4",
+        // Other
+        "items-center justify-center",
         verticalAlign === "top" ? "pb-3" : "pt-3",
-        className
+        className,
       )}
     >
       {payload
@@ -287,7 +331,12 @@ function ChartLegendContent({
             <div
               key={item.value}
               className={cn(
-                "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
+                // Base
+                "flex",
+                // Sizing
+                "gap-1.5 [&>svg]:h-3 [&>svg]:w-3",
+                // Other
+                "items-center [&>svg]:text-muted-foreground",
               )}
             >
               {itemConfig?.icon && !hideIcon ? (
