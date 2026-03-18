@@ -1,5 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite"
-import path from "path"
+import path from "node:path"
 
 const config: StorybookConfig = {
   staticDirs: ["../public"],
