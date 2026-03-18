@@ -15,9 +15,13 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "@/components/ui/*": ["./registry/ui/*"],
+      "@/components/*": ["./registry/components/*"],
+      "@/lib/*": ["./registry/lib/*"],
+      "@/hooks/*": ["./registry/hooks/*"],
       "@/*": ["./*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "storybook-static"]
+  "exclude": ["node_modules", "storybook-static", "dist", "cli", "scripts"]
 }

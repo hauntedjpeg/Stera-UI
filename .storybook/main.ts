@@ -3,7 +3,7 @@ import path from "node:path"
 
 const config: StorybookConfig = {
   staticDirs: ["../public"],
-  stories: ["../components/ui/*.stories.@(ts|tsx)"],
+  stories: ["../registry/**/*.stories.@(ts|tsx)"],
   addons: ["@storybook/addon-essentials", "@storybook/addon-themes"],
   framework: {
     name: "@storybook/react-vite",
@@ -13,6 +13,10 @@ const config: StorybookConfig = {
     config.resolve ??= {}
     config.resolve.alias = {
       ...config.resolve.alias,
+      "@/components/ui": path.resolve(__dirname, "../registry/ui"),
+      "@/components": path.resolve(__dirname, "../registry/components"),
+      "@/lib": path.resolve(__dirname, "../registry/lib"),
+      "@/hooks": path.resolve(__dirname, "../registry/hooks"),
       "@": path.resolve(__dirname, ".."),
     }
 
