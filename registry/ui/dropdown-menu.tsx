@@ -131,7 +131,7 @@ function DropdownMenuItemContent({
         // Base
         "flex flex-col",
         // Sizing
-        "flex-1 gap-2 min-w-0",
+        "flex-1 gap-1 min-w-0",
         className
       )}
       {...props}

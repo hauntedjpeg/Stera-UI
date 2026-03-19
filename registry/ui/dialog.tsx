@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -29,30 +30,60 @@ function DialogOverlay({
     <DialogPrimitive.Backdrop
       data-slot="dialog-overlay"
       className={cn(
-        "fixed inset-0 isolate z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
-        className
+        // Base
+        "bg-black/10",
+        // Position
+        "fixed inset-0",
+        // Animation
+        "data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        // Other
+        "isolate z-50 duration-100 supports-backdrop-filter:backdrop-blur-xs",
+        className,
       )}
       {...props}
     />
   )
 }
 
-function DialogContent({
+const dialogPopupVariants = cva([], {
+  variants: {
+    scroll: {
+      true: "max-h-[80vh] overflow-y-auto scrollbar-hide",
+      content: "max-h-[80vh] flex flex-col overflow-hidden",
+      false: "",
+    },
+  },
+  defaultVariants: {
+    scroll: true,
+  },
+})
+
+function DialogPopup({
   className,
   children,
   showCloseButton = true,
+  scroll = true,
   ...props
 }: DialogPrimitive.Popup.Props & {
   showCloseButton?: boolean
-}) {
+} & VariantProps<typeof dialogPopupVariants>) {
   return (
     <DialogPortal>
       <DialogOverlay />
       <DialogPrimitive.Popup
-        data-slot="dialog-content"
+        data-slot="dialog-popup"
         className={cn(
-          "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-6 rounded-xl bg-background p-6 text-sm ring-1 ring-foreground/10 duration-100 outline-none sm:max-w-md data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
-          className
+          // Base
+          "grid rounded-xl bg-bg-surface p-6 text-sm ring-1 ring-border outline-none",
+          // Position
+          "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+          // Sizing
+          "w-full max-w-[calc(100%-2rem)] gap-6 sm:max-w-md",
+          // Animation
+          "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          // Other
+          "z-50 duration-100",
+          dialogPopupVariants({ scroll, className }),
         )}
         {...props}
       >
@@ -78,11 +109,43 @@ function DialogContent({
   )
 }
 
+const dialogContentVariants = cva([], {
+  variants: {
+    scroll: {
+      true: "overflow-y-auto scrollbar-hide flex-1 min-h-0",
+      false: "",
+    },
+  },
+  defaultVariants: {
+    scroll: false,
+  },
+})
+
+function DialogContent({
+  className,
+  scroll = false,
+  ...props
+}: React.ComponentProps<"div"> & VariantProps<typeof dialogContentVariants>) {
+  return (
+    <div
+      data-slot="dialog-content"
+      className={cn(dialogContentVariants({ scroll, className }))}
+      {...props}
+    />
+  )
+}
+
 function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-header"
-      className={cn("flex flex-col gap-2", className)}
+      className={cn(
+        // Base
+        "flex flex-col",
+        // Sizing
+        "gap-2",
+        className,
+      )}
       {...props}
     />
   )
@@ -100,8 +163,13 @@ function DialogFooter({
     <div
       data-slot="dialog-footer"
       className={cn(
-        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className
+        // Base
+        "flex flex-col-reverse",
+        // Sizing
+        "gap-2",
+        // Other
+        "sm:flex-row sm:justify-end",
+        className,
       )}
       {...props}
     >
@@ -119,7 +187,11 @@ function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cn("leading-none font-medium", className)}
+      className={cn(
+        // Other
+        "leading-none font-medium",
+        className,
+      )}
       {...props}
     />
   )
@@ -133,8 +205,11 @@ function DialogDescription({
     <DialogPrimitive.Description
       data-slot="dialog-description"
       className={cn(
-        "text-sm text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
-        className
+        // Base
+        "text-sm",
+        // Other
+        "text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
+        className,
       )}
       {...props}
     />
@@ -145,10 +220,13 @@ export {
   Dialog,
   DialogClose,
   DialogContent,
+  dialogContentVariants,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogOverlay,
+  DialogPopup,
+  dialogPopupVariants,
   DialogPortal,
   DialogTitle,
   DialogTrigger,

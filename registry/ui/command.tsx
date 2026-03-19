@@ -13,7 +13,12 @@ import {
   InputGroup,
   InputGroupAddon,
 } from "@/components/ui/input-group"
-import { SearchIcon, CheckIcon } from "lucide-react"
+import { SiSearch, SiCheck } from "stera-icons"
+import {
+  DropdownMenuItemContent as CommandItemContent,
+  DropdownMenuItemTitle as CommandItemTitle,
+  DropdownMenuItemDescription as CommandItemDescription,
+} from "@/components/ui/dropdown-menu"
 
 function Command({
   className,
@@ -23,8 +28,11 @@ function Command({
     <CommandPrimitive
       data-slot="command"
       className={cn(
-        "flex size-full flex-col overflow-hidden rounded-xl! bg-popover p-1 text-popover-foreground",
-        className
+        // Base
+        "flex flex-col overflow-hidden rounded-xl! bg-bg-surface p-1 text-text",
+        // Sizing
+        "size-full",
+        className,
       )}
       {...props}
     />
@@ -53,8 +61,11 @@ function CommandDialog({
       </DialogHeader>
       <DialogContent
         className={cn(
-          "top-1/3 translate-y-0 overflow-hidden rounded-xl! p-0",
-          className
+          // Base
+          "overflow-hidden rounded-xl! p-0",
+          // Position
+          "top-1/3 translate-y-0",
+          className,
         )}
         showCloseButton={showCloseButton}
       >
@@ -70,17 +81,22 @@ function CommandInput({
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div data-slot="command-input-wrapper" className="p-1 pb-0">
-      <InputGroup className="h-8! rounded-lg! border-input/30 bg-input/30 shadow-none! *:data-[slot=input-group-addon]:pl-2!">
+      <InputGroup className="h-8! rounded-lg! border-border bg-bg-surface shadow-none! *:data-[slot=input-group-addon]:pl-2!">
         <CommandPrimitive.Input
           data-slot="command-input"
           className={cn(
-            "w-full text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
-            className
+            // Base
+            "arc-text-body-md-compact outline-hidden",
+            // Sizing
+            "w-full",
+            // Other
+            "disabled:cursor-not-allowed disabled:bg-bg-disabled",
+            className,
           )}
           {...props}
         />
         <InputGroupAddon>
-          <SearchIcon className="size-4 shrink-0 opacity-50" />
+          <SiSearch className="size-4 shrink-0 opacity-50" />
         </InputGroupAddon>
       </InputGroup>
     </div>
@@ -95,8 +111,13 @@ function CommandList({
     <CommandPrimitive.List
       data-slot="command-list"
       className={cn(
-        "no-scrollbar max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none",
-        className
+        // Base
+        "overflow-x-hidden overflow-y-auto outline-none",
+        // Sizing
+        "max-h-72 scroll-py-1",
+        // Other
+        "no-scrollbar",
+        className,
       )}
       {...props}
     />
@@ -110,7 +131,11 @@ function CommandEmpty({
   return (
     <CommandPrimitive.Empty
       data-slot="command-empty"
-      className={cn("py-6 text-center text-sm", className)}
+      className={cn(
+        // Base
+        "py-6 text-center arc-text-body-md",
+        className,
+      )}
       {...props}
     />
   )
@@ -124,8 +149,11 @@ function CommandGroup({
     <CommandPrimitive.Group
       data-slot="command-group"
       className={cn(
-        "overflow-hidden p-1 text-foreground **:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-muted-foreground",
-        className
+        // Base
+        "overflow-hidden p-1 text-text",
+        // Other
+        "**:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-text-secondary",
+        className,
       )}
       {...props}
     />
@@ -139,7 +167,13 @@ function CommandSeparator({
   return (
     <CommandPrimitive.Separator
       data-slot="command-separator"
-      className={cn("-mx-1 h-px w-auto bg-border", className)}
+      className={cn(
+        // Base
+        "-mx-1 bg-border",
+        // Sizing
+        "h-px w-auto",
+        className,
+      )}
       {...props}
     />
   )
@@ -154,13 +188,22 @@ function CommandItem({
     <CommandPrimitive.Item
       data-slot="command-item"
       className={cn(
-        "group/command-item relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none in-data-[slot=dialog-content]:rounded-lg! data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:**:[svg]:text-foreground",
-        className
+        // Group
+        "group/command-item",
+        // Base
+        "flex relative cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 arc-text-body-md-compact text-text outline-hidden select-none",
+        // Selected
+        "data-[selected=true]:bg-bg-surface-hover data-[selected=true]:text-text data-[selected=true]:**:text-text",
+        // Disabled
+        "data-[disabled=true]:text-text-tertiary data-[disabled=true]:pointer-events-none",
+        // Other
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className,
       )}
       {...props}
     >
       {children}
-      <CheckIcon className="ml-auto opacity-0 group-has-data-[slot=command-shortcut]/command-item:hidden group-data-[checked=true]/command-item:opacity-100" />
+      <SiCheck className="ml-auto opacity-0 group-has-data-[slot=command-shortcut]/command-item:hidden group-data-[checked=true]/command-item:opacity-100" />
     </CommandPrimitive.Item>
   )
 }
@@ -173,8 +216,11 @@ function CommandShortcut({
     <span
       data-slot="command-shortcut"
       className={cn(
-        "ml-auto text-xs tracking-widest text-muted-foreground group-data-selected/command-item:text-foreground",
-        className
+        // Base
+        "text-xs/4 text-text-tertiary",
+        // Other
+        "ml-auto tracking-wide group-data-[selected=true]/command-item:text-text",
+        className,
       )}
       {...props}
     />
@@ -189,6 +235,9 @@ export {
   CommandEmpty,
   CommandGroup,
   CommandItem,
+  CommandItemContent,
+  CommandItemTitle,
+  CommandItemDescription,
   CommandShortcut,
   CommandSeparator,
 }

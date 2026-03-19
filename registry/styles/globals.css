@@ -575,6 +575,11 @@
   letter-spacing: var(--letter-spacing-tightest);
 }
 
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @layer base {
   * {
     @apply border-border;
