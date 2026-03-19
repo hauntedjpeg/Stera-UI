@@ -4,10 +4,11 @@ import { Command as CommandPrimitive } from "cmdk"
 import { cn } from "@/lib/utils"
 import {
   Dialog,
-  DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogPopup,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog"
 import {
   InputGroup,
@@ -53,24 +54,31 @@ function CommandDialog({
   showCloseButton?: boolean
   children: React.ReactNode
 }) {
+  const childArray = React.Children.toArray(children)
+  const trigger = childArray.find(
+    (child) => React.isValidElement(child) && child.type === DialogTrigger,
+  )
+  const rest = childArray.filter((child) => child !== trigger)
+
   return (
     <Dialog {...props}>
-      <DialogHeader className="sr-only">
-        <DialogTitle>{title}</DialogTitle>
-        <DialogDescription>{description}</DialogDescription>
-      </DialogHeader>
-      <DialogContent
+      {trigger}
+      <DialogPopup
         className={cn(
           // Base
-          "overflow-hidden rounded-xl! p-0",
+          "overflow-hidden p-0",
           // Position
           "top-1/3 translate-y-0",
           className,
         )}
         showCloseButton={showCloseButton}
       >
-        {children}
-      </DialogContent>
+        <DialogHeader className="sr-only">
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </DialogHeader>
+        {rest}
+      </DialogPopup>
     </Dialog>
   )
 }
@@ -169,9 +177,9 @@ function CommandSeparator({
       data-slot="command-separator"
       className={cn(
         // Base
-        "-mx-1 bg-border",
+        "-mx-2 bg-border",
         // Sizing
-        "h-px w-auto",
+        "h-4 w-auto",
         className,
       )}
       {...props}
@@ -230,6 +238,7 @@ function CommandShortcut({
 export {
   Command,
   CommandDialog,
+  DialogTrigger as CommandDialogTrigger,
   CommandInput,
   CommandList,
   CommandEmpty,
