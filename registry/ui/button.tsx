@@ -35,15 +35,15 @@ const buttonVariants = cva(
           "hover:bg-bg-surface-hover hover:text-text aria-expanded:bg-bg-surface-hover aria-expanded:text-text dark:hover:bg-bg-surface-hover",
         danger:
           "bg-bg-danger-tertiary text-text-danger border-bg-danger-tertiary hover:bg-bg-danger-tertiary-hover hover:border-bg-danger-tertiary-hover focus-visible:border-border-danger-secondary focus-visible:ring-ring-danger",
-        link: "text-text underline-offset-4 hover:underline",
+        link: "gap-1 text-text underline-offset-4 hover:underline",
       },
       size: {
         xs:
           "h-6 gap-1.5 rounded-lg px-2 arc-text-body-sm-strong in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 has-data-[kbd=inline-end]:pr-1 has-data-[kbd=inline-start]:pl-1 [&_svg:not([class*='size-'])]:size-3",
         sm:
-          "h-8 gap-2 px-3 arc-text-body-sm-strong has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 has-data-[kbd=inline-end]:pr-1.5 has-data-[kbd=inline-start]:pl-1.5",
+          "h-8 gap-2 px-3 arc-text-body-sm-strong has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 has-data-[kbd=inline-end]:pr-1.5 has-data-[kbd=inline-start]:pl-1.5 data-[variant=link]:gap-1",
         md:
-          "h-9 gap-2 px-3 arc-text-body-md-strong has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 has-data-[kbd=inline-end]:pr-2 has-data-[kbd=inline-start]:pl-2",
+          "h-9 gap-2 px-3 arc-text-body-md-strong has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 has-data-[kbd=inline-end]:pr-2 has-data-[kbd=inline-start]:pl-2 data-[variant=link]:gap-1",
         lg:
           "h-10 gap-3 px-5 arc-text-body-lg-strong has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 has-data-[kbd=inline-end]:pr-3 has-data-[kbd=inline-start]:pl-3",
         icon:
