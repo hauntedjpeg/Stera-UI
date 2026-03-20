@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
+import { SiChevronLeft, SiChevronRight, SiMore } from "stera-icons"
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
@@ -67,16 +67,41 @@ function PaginationPrevious({
   text = "Previous",
   ...props
 }: React.ComponentProps<typeof PaginationLink> & { text?: string }) {
+  const hasLabel = Boolean(text)
+
+  if (!hasLabel) {
+    return (
+      <PaginationLink
+        aria-label="Go to previous page"
+        size="icon"
+        className={className}
+        {...props}
+      >
+        <SiChevronLeft />
+      </PaginationLink>
+    )
+  }
+
   return (
-    <PaginationLink
-      aria-label="Go to previous page"
-      size="default"
-      className={cn("pl-2!", className)}
-      {...props}
-    >
-      <ChevronLeftIcon data-icon="inline-start" />
-      <span className="hidden sm:block">{text}</span>
-    </PaginationLink>
+    <>
+      <PaginationLink
+        aria-label="Go to previous page"
+        size="icon"
+        className={cn("sm:hidden", className)}
+        {...props}
+      >
+        <SiChevronLeft />
+      </PaginationLink>
+      <PaginationLink
+        aria-label="Go to previous page"
+        size="md"
+        className={cn("hidden sm:inline-flex", className)}
+        {...props}
+      >
+        <SiChevronLeft data-icon="inline-start" />
+        {text}
+      </PaginationLink>
+    </>
   )
 }
 
@@ -85,16 +110,41 @@ function PaginationNext({
   text = "Next",
   ...props
 }: React.ComponentProps<typeof PaginationLink> & { text?: string }) {
+  const hasLabel = Boolean(text)
+
+  if (!hasLabel) {
+    return (
+      <PaginationLink
+        aria-label="Go to next page"
+        size="icon"
+        className={className}
+        {...props}
+      >
+        <SiChevronRight />
+      </PaginationLink>
+    )
+  }
+
   return (
-    <PaginationLink
-      aria-label="Go to next page"
-      size="default"
-      className={cn("pr-2!", className)}
-      {...props}
-    >
-      <span className="hidden sm:block">{text}</span>
-      <ChevronRightIcon data-icon="inline-end" />
-    </PaginationLink>
+    <>
+      <PaginationLink
+        aria-label="Go to next page"
+        size="icon"
+        className={cn("sm:hidden", className)}
+        {...props}
+      >
+        <SiChevronRight />
+      </PaginationLink>
+      <PaginationLink
+        aria-label="Go to next page"
+        size="md"
+        className={cn("hidden sm:inline-flex", className)}
+        {...props}
+      >
+        {text}
+        <SiChevronRight data-icon="inline-end" />
+      </PaginationLink>
+    </>
   )
 }
 
@@ -112,7 +162,7 @@ function PaginationEllipsis({
       )}
       {...props}
     >
-      <MoreHorizontalIcon
+      <SiMore
       />
       <span className="sr-only">More pages</span>
     </span>
