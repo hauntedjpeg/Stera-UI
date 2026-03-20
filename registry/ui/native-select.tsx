@@ -1,17 +1,39 @@
 import * as React from "react"
-
-import { cn } from "@/lib/utils"
+import { cva, type VariantProps } from "class-variance-authority"
 import { ChevronDownIcon } from "lucide-react"
 
-type NativeSelectProps = Omit<React.ComponentProps<"select">, "size"> & {
-  size?: "sm" | "default"
-}
+import { cn } from "@/lib/utils"
 
-function NativeSelect({
-  className,
-  size = "default",
-  ...props
-}: NativeSelectProps) {
+const nativeSelectVariants = cva(
+  [
+    // Base
+    "w-full min-w-0 appearance-none rounded-xl border border-border bg-bg-surface transition-[color,box-shadow] outline-none select-none",
+    // Focus
+    "focus-visible:border-border-brand-secondary focus-visible:ring-3 focus-visible:ring-ring-brand",
+    // Disabled
+    "disabled:text-text-tertiary disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:border-border-secondary",
+    // Invalid
+    "aria-invalid:border-border-danger-secondary aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+  ],
+  {
+    variants: {
+      size: {
+        sm: "h-8 pl-2.5 pr-8 arc-text-body-md-compact",
+        md: "h-9 pl-3 pr-8 arc-text-body-md-compact",
+        lg: "h-10 pl-3 pr-8 arc-text-body-md-compact",
+        xl: "h-12 pl-4 pr-10 arc-text-body-lg",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  }
+)
+
+type NativeSelectProps = Omit<React.ComponentProps<"select">, "size"> &
+  VariantProps<typeof nativeSelectVariants>
+
+function NativeSelect({ className, size, ...props }: NativeSelectProps) {
   return (
     <div
       className={cn(
@@ -23,11 +45,14 @@ function NativeSelect({
     >
       <select
         data-slot="native-select"
-        data-size={size}
-        className="h-9 w-full min-w-0 appearance-none rounded-md border border-input bg-transparent py-1 pr-8 pl-2.5 text-sm shadow-xs transition-[color,box-shadow] outline-none select-none selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-[size=sm]:h-8 dark:bg-input/30 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40"
+        className={cn(nativeSelectVariants({ size }))}
         {...props}
       />
-      <ChevronDownIcon className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-muted-foreground select-none" aria-hidden="true" data-slot="native-select-icon" />
+      <ChevronDownIcon
+        className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-text-tertiary select-none"
+        aria-hidden="true"
+        data-slot="native-select-icon"
+      />
     </div>
   )
 }
