@@ -35,8 +35,8 @@ type Story = StoryObj<typeof Avatar>
 export const Default: Story = {
   render: (args) => (
     <Avatar {...args}>
-      <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-      <AvatarFallback>SC</AvatarFallback>
+      <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+      <AvatarFallback>CG</AvatarFallback>
     </Avatar>
   ),
 }
@@ -53,8 +53,8 @@ export const Fallback: Story = {
 export const WithBadge: Story = {
   render: () => (
     <Avatar>
-      <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-      <AvatarFallback>SC</AvatarFallback>
+      <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+      <AvatarFallback>CG</AvatarFallback>
       <AvatarBadge />
     </Avatar>
   ),
@@ -64,16 +64,16 @@ export const AllSizes: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Avatar size="sm">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
       </Avatar>
       <Avatar size="default">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
       </Avatar>
       <Avatar size="lg">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
       </Avatar>
     </div>
   ),
@@ -83,18 +83,18 @@ export const AllSizesWithBadge: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Avatar size="sm">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge />
       </Avatar>
       <Avatar size="default">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge />
       </Avatar>
       <Avatar size="lg">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge />
       </Avatar>
     </div>
@@ -105,23 +105,23 @@ export const BadgeVariants: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Avatar>
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge variant="subtle" />
       </Avatar>
       <Avatar>
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge variant="danger" />
       </Avatar>
       <Avatar>
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge variant="success" />
       </Avatar>
       <Avatar>
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge variant="warning" />
       </Avatar>
     </div>
@@ -133,35 +133,35 @@ export const BadgeVariantSizes: Story = {
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
         <Avatar size="sm">
-          <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-          <AvatarFallback>SC</AvatarFallback>
+          <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+          <AvatarFallback>CG</AvatarFallback>
           <AvatarBadge variant="danger" />
         </Avatar>
         <Avatar size="default">
-          <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-          <AvatarFallback>SC</AvatarFallback>
+          <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+          <AvatarFallback>CG</AvatarFallback>
           <AvatarBadge variant="danger" />
         </Avatar>
         <Avatar size="lg">
-          <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-          <AvatarFallback>SC</AvatarFallback>
+          <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+          <AvatarFallback>CG</AvatarFallback>
           <AvatarBadge variant="danger" />
         </Avatar>
       </div>
       <div className="flex items-center gap-4">
         <Avatar size="sm">
-          <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-          <AvatarFallback>SC</AvatarFallback>
+          <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+          <AvatarFallback>CG</AvatarFallback>
           <AvatarBadge variant="success" />
         </Avatar>
         <Avatar size="default">
-          <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-          <AvatarFallback>SC</AvatarFallback>
+          <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+          <AvatarFallback>CG</AvatarFallback>
           <AvatarBadge variant="success" />
         </Avatar>
         <Avatar size="lg">
-          <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-          <AvatarFallback>SC</AvatarFallback>
+          <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+          <AvatarFallback>CG</AvatarFallback>
           <AvatarBadge variant="success" />
         </Avatar>
       </div>
@@ -173,18 +173,18 @@ export const BadgeIcon: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Avatar size="sm">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge variant="icon"><SiPlusFill /></AvatarBadge>
       </Avatar>
       <Avatar size="default">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge variant="icon"><SiPlusFill /></AvatarBadge>
       </Avatar>
       <Avatar size="lg">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge variant="icon"><SiPlusFill /></AvatarBadge>
       </Avatar>
     </div>
@@ -195,11 +195,11 @@ export const Group: Story = {
   render: () => (
     <AvatarGroup>
       <Avatar>
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
         <AvatarFallback>LR</AvatarFallback>
       </Avatar>
       <Avatar>
@@ -251,11 +251,11 @@ export const IconFallbackWithImage: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Avatar>
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
         <AvatarIconFallback><SiUser /></AvatarIconFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage src="/broken-image.png" alt="Demo user" />
+        <AvatarImage src="/broken-image.png" alt="@hauntedjpeg" />
         <AvatarIconFallback><SiUser /></AvatarIconFallback>
       </Avatar>
     </div>
@@ -265,8 +265,8 @@ export const IconFallbackWithImage: Story = {
 export const SquareShape: Story = {
   render: (args) => (
     <Avatar shape="square" {...args}>
-      <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-      <AvatarFallback>SC</AvatarFallback>
+      <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+      <AvatarFallback>CG</AvatarFallback>
     </Avatar>
   ),
 }
@@ -275,12 +275,12 @@ export const AllShapes: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Avatar shape="circle">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
       </Avatar>
       <Avatar shape="square">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
       </Avatar>
     </div>
   ),
@@ -290,13 +290,13 @@ export const SquareWithBadge: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Avatar shape="square">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge variant="success" />
       </Avatar>
       <Avatar shape="square">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
         <AvatarBadge variant="danger" />
       </Avatar>
     </div>
@@ -307,8 +307,8 @@ export const SquareGroup: Story = {
   render: () => (
     <AvatarGroup>
       <Avatar shape="square">
-        <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-        <AvatarFallback>SC</AvatarFallback>
+        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>CG</AvatarFallback>
       </Avatar>
       <Avatar shape="square">
         <AvatarFallback>LR</AvatarFallback>
@@ -326,8 +326,8 @@ export const GroupSizes: Story = {
     <div className="flex flex-col gap-4">
       <AvatarGroup>
         <Avatar size="sm">
-          <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-          <AvatarFallback>SC</AvatarFallback>
+          <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+          <AvatarFallback>CG</AvatarFallback>
         </Avatar>
         <Avatar size="sm">
           <AvatarFallback>LR</AvatarFallback>
@@ -339,8 +339,8 @@ export const GroupSizes: Story = {
       </AvatarGroup>
       <AvatarGroup>
         <Avatar size="default">
-          <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-          <AvatarFallback>SC</AvatarFallback>
+          <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+          <AvatarFallback>CG</AvatarFallback>
         </Avatar>
         <Avatar size="default">
           <AvatarFallback>LR</AvatarFallback>
@@ -352,8 +352,8 @@ export const GroupSizes: Story = {
       </AvatarGroup>
       <AvatarGroup>
         <Avatar size="lg">
-          <AvatarImage src="/images/demo-image.png" alt="Demo user" />
-          <AvatarFallback>SC</AvatarFallback>
+          <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+          <AvatarFallback>CG</AvatarFallback>
         </Avatar>
         <Avatar size="lg">
           <AvatarFallback>LR</AvatarFallback>

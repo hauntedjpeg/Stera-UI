@@ -83,7 +83,7 @@ export const WithDropdown: Story = {
           <BreadcrumbLink render={<a href="#" />}>Home</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
-        <BreadcrumbItem>
+        <BreadcrumbLink>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1">
               Components
@@ -95,7 +95,7 @@ export const WithDropdown: Story = {
               <DropdownMenuItem>GitHub</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </BreadcrumbItem>
+        </BreadcrumbLink>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbPage>Breadcrumb</BreadcrumbPage>

@@ -134,7 +134,7 @@ function FieldLabel({
       data-slot="field-label"
       className={cn(
         // Base
-        "flex has-data-checked:border-border-brand has-data-checked:bg-bg-brand-tertiary has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-3 has-[>[data-slot=field]]:flex-col",
+        "flex has-[>[data-slot=field]]:has-data-checked:border-border-brand has-[>[data-slot=field]]:has-data-checked:bg-bg-brand-tertiary has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-3 has-[>[data-slot=field]]:flex-col",
         // Sizing
         "w-fit gap-2 has-[>[data-slot=field]]:w-full",
         // Other

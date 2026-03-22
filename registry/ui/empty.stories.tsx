@@ -81,7 +81,7 @@ export const WithAvatar: Story = {
       <EmptyHeader>
         <EmptyMedia>
           <Avatar size="lg">
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarImage src="public/images/demo-image.png" alt="demo" />
             <AvatarFallback>SC</AvatarFallback>
           </Avatar>
         </EmptyMedia>
@@ -101,7 +101,7 @@ export const WithAvatarGroup: Story = {
         <EmptyMedia>
           <AvatarGroup>
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarImage src="/images/demo-image.png" alt="demo" />
               <AvatarFallback>SC</AvatarFallback>
             </Avatar>
             <Avatar>

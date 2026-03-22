@@ -219,21 +219,21 @@ export const Nested: Story = {
 export const WithSeparator: Story = {
   render: () => (
     <ButtonGroup>
-      <Button variant="outline" size="icon" aria-label="Reply">
+      <Button variant="ghost" size="icon" aria-label="Reply">
         <SiReply />
       </Button>
-      <Button variant="outline" size="icon" aria-label="Forward">
+      <Button variant="ghost" size="icon" aria-label="Forward">
         <SiForward />
       </Button>
       <ButtonGroupSeparator />
-      <Button variant="outline" size="icon" aria-label="Copy">
+      <Button variant="ghost" size="icon" aria-label="Copy">
         <SiCopy />
       </Button>
-      <Button variant="outline" size="icon" aria-label="Share">
+      <Button variant="ghost" size="icon" aria-label="Share">
         <SiShare />
       </Button>
       <ButtonGroupSeparator />
-      <Button variant="outline" size="icon" aria-label="Delete">
+      <Button variant="ghost" size="icon" aria-label="Delete">
         <SiDelete />
       </Button>
     </ButtonGroup>
@@ -251,7 +251,7 @@ export const Split: Story = {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button variant="brand" size="icon-sm" aria-label="More options">
+            <Button variant="brand" size="icon" aria-label="More options">
               <SiChevronDown />
             </Button>
           }
@@ -303,7 +303,7 @@ export const WithDropdownMenu: Story = {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button variant="outline" size="icon-sm" aria-label="More actions">
+            <Button variant="outline" size="icon" aria-label="More actions">
               <SiChevronDown />
             </Button>
           }

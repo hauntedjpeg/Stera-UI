@@ -15,11 +15,11 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         // Sizing
         "size-4 shrink-0",
         //Focus
-        "focus-visible:border-border-brand-secondary focus-visible:ring-3 focus-visible:ring-ring",
+        "focus-visible:border-border-brand-secondary focus-visible:ring-3 focus-visible:ring-ring-brand",
         // Disabled
         "disabled:cursor-not-allowed disabled:opacity-50",
         // Invalid
-        "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary",
+        "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:aria-checked:border-primary",
         // Checked
         "data-checked:border-bg-brand data-checked:bg-bg-brand data-checked:text-text-onbrand",
         // Variants

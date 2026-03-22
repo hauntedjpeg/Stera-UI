@@ -59,10 +59,12 @@ function ComboboxInput({
   disabled = false,
   showTrigger = true,
   showClear = false,
+  size = "md",
   ...props
-}: ComboboxPrimitive.Input.Props & {
+}: Omit<ComboboxPrimitive.Input.Props, "size"> & {
   showTrigger?: boolean
   showClear?: boolean
+  size?: "sm" | "md" | "lg" | "xl"
 }) {
   return (
     <InputGroup
@@ -73,7 +75,7 @@ function ComboboxInput({
       )}
     >
       <ComboboxPrimitive.Input
-        render={<InputGroupInput disabled={disabled} />}
+        render={<InputGroupInput disabled={disabled} size={size} />}
         {...props}
       />
       <InputGroupAddon align="inline-end">
@@ -265,19 +267,29 @@ function ComboboxSeparator({
   )
 }
 
+const comboboxChipsSizeMap = {
+  sm: "min-h-8",
+  md: "min-h-9",
+  lg: "min-h-10",
+  xl: "min-h-12",
+} as const
+
 function ComboboxChips({
   className,
+  size = "md",
   ...props
 }: React.ComponentPropsWithRef<typeof ComboboxPrimitive.Chips> &
-  ComboboxPrimitive.Chips.Props) {
+  ComboboxPrimitive.Chips.Props & {
+    size?: "sm" | "md" | "lg" | "xl"
+  }) {
   return (
     <ComboboxPrimitive.Chips
       data-slot="combobox-chips"
       className={cn(
         // Base
-        "flex flex-wrap items-center rounded-md border border-border bg-transparent bg-clip-padding px-2.5 py-1.5 text-sm shadow-xs transition-[color,box-shadow]",
+        "flex flex-wrap items-center rounded-xl border border-border bg-transparent bg-clip-padding px-2.5 py-1.5 text-sm shadow-xs transition-[color,box-shadow]",
         // Sizing
-        "min-h-9 gap-1.5",
+        comboboxChipsSizeMap[size], "gap-1.5",
         // Animation
         "focus-within:border-ring focus-within:ring-3 focus-within:ring-ring has-aria-invalid:border-border-danger has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/20 has-data-[slot=combobox-chip]:px-1.5",
         className,
@@ -300,9 +312,9 @@ function ComboboxChip({
       data-slot="combobox-chip"
       className={cn(
         // Base
-        "flex items-center justify-center rounded-sm bg-muted px-1.5 text-xs font-medium whitespace-nowrap text-foreground",
+        "flex items-center justify-center rounded-full bg-bg-surface-secondary px-1.5 arc-text-body-sm-strong whitespace-nowrap text-text-secondary",
         // Sizing
-        "h-[calc(--spacing(5.5))] w-fit gap-1",
+        "h-6 w-fit gap-1",
         // Animation
         "has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:bg-disabled has-data-[slot=combobox-chip-remove]:pr-0",
         className,
@@ -313,7 +325,7 @@ function ComboboxChip({
       {showRemove && (
         <ComboboxPrimitive.ChipRemove
           render={<Button variant="ghost" size="icon-xs" />}
-          className="-ml-1 opacity-50 hover:opacity-100"
+          className="-ml-1 text-text-tertiary hover:text-text-secondary bg-transparent"
           data-slot="combobox-chip-remove"
         >
           <SiX className="pointer-events-none" />

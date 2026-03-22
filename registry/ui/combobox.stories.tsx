@@ -402,3 +402,30 @@ function InputGroupDemo() {
 export const WithInputGroup: Story = {
   render: () => <InputGroupDemo />,
 }
+
+export const AllSizes: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      {(["sm", "md", "lg", "xl"] as const).map((size) => (
+        <div key={size} className="flex flex-col gap-1">
+          <span className="text-muted-foreground text-xs">{size}</span>
+          <div className="w-64">
+            <Combobox items={frameworks} itemToStringLabel={(fw: Framework) => fw.label}>
+              <ComboboxInput size={size} placeholder={`Size ${size}...`} />
+              <ComboboxContent>
+                <ComboboxEmpty>No framework found.</ComboboxEmpty>
+                <ComboboxList>
+                  {(fw: Framework) => (
+                    <ComboboxItem key={fw.value} value={fw}>
+                      {fw.label}
+                    </ComboboxItem>
+                  )}
+                </ComboboxList>
+              </ComboboxContent>
+            </Combobox>
+          </div>
+        </div>
+      ))}
+    </div>
+  ),
+}

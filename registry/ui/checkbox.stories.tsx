@@ -96,9 +96,9 @@ export const WithLabel: Story = {
 export const WithDescription: Story = {
   render: () => (
     <Field orientation="horizontal">
-      <Checkbox />
+      <Checkbox id="with-description-checkbox" />
       <FieldContent>
-        <FieldTitle>Accept terms and conditions</FieldTitle>
+        <FieldLabel htmlFor="with-description-checkbox">Accept terms and conditions</FieldLabel>
         <FieldDescription>
           By clicking this checkbox, you agree to the terms and conditions.
         </FieldDescription>
