@@ -119,6 +119,13 @@
       "files": [{ "path": "registry/ui/checkbox.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "chip",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["utils"],
+      "files": [{ "path": "registry/ui/chip.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "collapsible",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react"],
