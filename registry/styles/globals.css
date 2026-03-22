@@ -12,6 +12,7 @@
   --color-bg-surface-tertiary: var(--bg-surface-tertiary);
   --color-bg-surface-tertiary-hover: var(--bg-surface-tertiary-hover);
   --color-bg-surface-inverse: var(--bg-surface-inverse);
+  --color-bg-surface-inverse-hover: var(--bg-surface-inverse-hover);
   --color-bg-brand: var(--bg-brand);
   --color-bg-brand-hover: var(--bg-brand-hover);
   --color-bg-brand-secondary: var(--bg-brand-secondary);
@@ -253,6 +254,7 @@
     --bg-surface-tertiary: var(--neutral-100);
     --bg-surface-tertiary-hover: var(--neutral-200);
     --bg-surface-inverse: var(--neutral-975);
+    --bg-surface-inverse-hover: var(--neutral-900);
     --bg-brand: var(--brand-700);
     --bg-brand-hover: var(--brand-800);
     --bg-brand-secondary: var(--brand-900);
@@ -360,6 +362,7 @@
     --bg-surface-tertiary: var(--neutral-800);
     --bg-surface-tertiary-hover: var(--neutral-700);
     --bg-surface-inverse: var(--white-950);
+    --bg-surface-inverse-hover: var(--neutral-50);
     --bg-brand: var(--brand-800);
     --bg-brand-hover: var(--brand-700);
     --bg-brand-secondary-hover: var(--brand-800);
@@ -392,8 +395,8 @@
     --bg-disabled: var(--neutral-700);
     --bg-disabled-secondary: var(--neutral-800);
     --text: var(--white-925);
-    --text-secondary: var(--white-900);
-    --text-tertiary: var(--white-800);
+    --text-secondary: var(--white-800);
+    --text-tertiary: var(--white-700);
     --text-disabled: var(--white-700);
     --text-oninverse: var(--black-950);
     --text-ondisabled: var(--black-950);
@@ -579,7 +582,6 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
 @layer base {
   * {
     @apply border-border;
