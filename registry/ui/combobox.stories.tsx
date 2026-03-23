@@ -335,24 +335,25 @@ export const AutoHighlight: Story = {
 }
 
 function PopupDemo() {
-  const [value, setValue] = React.useState<Framework | null>(null)
-
   return (
     <div className="w-64">
       <Combobox
         items={frameworks}
         itemToStringLabel={(fw: Framework) => fw.label}
-        value={value}
-        onValueChange={setValue}
+        defaultValue={frameworks[0]}
       >
         <ComboboxTrigger
           render={
-            <Button variant="outline" className="w-full justify-between" />
+            <Button
+              variant="outline"
+              className="w-full justify-between font-normal"
+            />
           }
         >
-          <ComboboxValue placeholder="Select framework..." />
+          <ComboboxValue />
         </ComboboxTrigger>
         <ComboboxContent>
+          <ComboboxInput showTrigger={false} placeholder="Search" />
           <ComboboxEmpty>No framework found.</ComboboxEmpty>
           <ComboboxList>
             {(fw: Framework) => (

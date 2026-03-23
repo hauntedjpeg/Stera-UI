@@ -30,7 +30,7 @@ function Command({
       data-slot="command"
       className={cn(
         // Base
-        "flex flex-col overflow-hidden rounded-xl! bg-bg-surface p-1 text-text",
+        "flex flex-col overflow-hidden rounded-xl! bg-bg-surface p-0 text-text",
         // Sizing
         "size-full",
         className,
@@ -88,8 +88,8 @@ function CommandInput({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
-    <div data-slot="command-input-wrapper" className="p-1 pb-0">
-      <InputGroup className="h-8! rounded-lg! border-border bg-bg-surface shadow-none! *:data-[slot=input-group-addon]:pl-2!">
+    <div data-slot="command-input-wrapper" className="p-2 pb-0">
+      <InputGroup className="h-8! rounded-lg! border-border bg-bg-surface-secondary shadow-none! *:data-[slot=input-group-addon]:pl-2!">
         <CommandPrimitive.Input
           data-slot="command-input"
           className={cn(
@@ -158,7 +158,7 @@ function CommandGroup({
       data-slot="command-group"
       className={cn(
         // Base
-        "overflow-hidden p-1 text-text",
+        "overflow-hidden p-2 text-text",
         // Other
         "**:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-text-secondary",
         className,
@@ -179,7 +179,7 @@ function CommandSeparator({
         // Base
         "-mx-2 bg-border",
         // Sizing
-        "h-4 w-auto",
+        "h-px w-auto",
         className,
       )}
       {...props}

@@ -150,6 +150,7 @@
     --accent-950: #2c333a;
     --neutral-50: #f7f7f7;
     --neutral-100: #efefef;
+    --neutral-150: #e8e8e8;
     --neutral-200: #dcdcdc;
     --neutral-300: #bdbdbd;
     --neutral-400: #989898;
@@ -252,7 +253,7 @@
     --bg-surface-secondary: var(--neutral-50);
     --bg-surface-secondary-hover: var(--neutral-100);
     --bg-surface-tertiary: var(--neutral-100);
-    --bg-surface-tertiary-hover: var(--neutral-200);
+    --bg-surface-tertiary-hover: var(--neutral-150);
     --bg-surface-inverse: var(--neutral-975);
     --bg-surface-inverse-hover: var(--neutral-900);
     --bg-brand: var(--brand-700);

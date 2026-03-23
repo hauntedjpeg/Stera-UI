@@ -135,7 +135,7 @@
       "name": "combobox",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "stera-icons"],
-      "registryDependencies": ["utils", "button", "input-group"],
+      "registryDependencies": ["utils", "button", "chip", "input-group"],
       "files": [{ "path": "registry/ui/combobox.tsx", "type": "registry:ui" }]
     },
     {

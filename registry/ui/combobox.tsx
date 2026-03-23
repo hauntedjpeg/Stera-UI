@@ -5,6 +5,7 @@ import { Combobox as ComboboxPrimitive } from "@base-ui/react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { chipVariants } from "@/components/ui/chip"
 import {
   InputGroup,
   InputGroupAddon,
@@ -257,7 +258,7 @@ function ComboboxSeparator({
       data-slot="combobox-separator"
       className={cn(
       // Base
-      "my-2 h-px bg-border",
+      "my-1 h-px bg-border",
       // Other
       "-mx-1",
       className,
@@ -302,35 +303,25 @@ function ComboboxChips({
 function ComboboxChip({
   className,
   children,
-  showRemove = true,
   ...props
-}: ComboboxPrimitive.Chip.Props & {
-  showRemove?: boolean
-}) {
+}: ComboboxPrimitive.Chip.Props) {
   return (
     <ComboboxPrimitive.Chip
       data-slot="combobox-chip"
       className={cn(
-        // Base
-        "flex items-center justify-center rounded-full bg-bg-surface-secondary px-1.5 arc-text-body-sm-strong whitespace-nowrap text-text-secondary",
-        // Sizing
-        "h-6 w-fit gap-1",
-        // Animation
-        "has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:bg-disabled has-data-[slot=combobox-chip-remove]:pr-0",
+        chipVariants({ variant: "subtle", size: "xs" }),
+        "has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:bg-disabled",
         className,
       )}
       {...props}
     >
-      {children}
-      {showRemove && (
-        <ComboboxPrimitive.ChipRemove
-          render={<Button variant="ghost" size="icon-xs" />}
-          className="-ml-1 text-text-tertiary hover:text-text-secondary bg-transparent"
-          data-slot="combobox-chip-remove"
-        >
-          <SiX className="pointer-events-none" />
-        </ComboboxPrimitive.ChipRemove>
-      )}
+      <ComboboxPrimitive.ChipRemove
+        className="inline-flex items-center gap-0.5 cursor-pointer"
+        data-slot="combobox-chip-remove"
+      >
+        {children}
+        <SiX className="pointer-events-none size-3 text-text-tertiary" />
+      </ComboboxPrimitive.ChipRemove>
     </ComboboxPrimitive.Chip>
   )
 }
