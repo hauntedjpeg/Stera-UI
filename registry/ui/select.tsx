@@ -42,11 +42,11 @@ function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
 
 function SelectTrigger({
   className,
-  size = "default",
+  size = "md",
   children,
   ...props
 }: SelectPrimitive.Trigger.Props & {
-  size?: "sm" | "default"
+  size?: "sm" | "md" | "lg" | "xl"
 }) {
   return (
     <SelectPrimitive.Trigger
@@ -60,7 +60,7 @@ function SelectTrigger({
         // Animation
         "transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring-brand disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-border-danger aria-invalid:ring-3 aria-invalid:ring-ring-danger data-placeholder:text-text-tertiary",
         // Variants
-        "data-[size=default]:h-9 data-[size=sm]:h-8",
+        "data-[size=sm]:h-8 data-[size=md]:h-9 data-[size=lg]:h-10 data-[size=xl]:h-12 data-[size=xl]:pl-4 data-[size=xl]:arc-text-body-lg",
         // Other
         "items-center justify-between text-sm whitespace-nowrap *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-input/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className,
@@ -106,7 +106,7 @@ function SelectContent({
           data-align-trigger={alignItemWithTrigger}
           className={cn(
             // Base
-            "relative p-1 rounded-xl bg-bg-surface shadow-md border border-border overflow-x-hidden overflow-y-auto",
+            "relative rounded-xl bg-bg-surface shadow-md border border-border overflow-x-hidden overflow-y-auto",
             // Position
             "origin-(--transform-origin)",
             // Sizing
@@ -137,7 +137,7 @@ function SelectLabel({
       data-slot="select-label"
       className={cn(
         // Base
-        "px-2 py-1.5",
+        "p-2",
         // Other
         "arc-text-body-sm text-text-secondary",
         className,
@@ -161,7 +161,7 @@ function SelectItem({
         // Sizing
         "w-full gap-2",
         // Animation
-        "hover:bg-bg-surface-hover focus:bg-bg-secondary focus:text-text not-data-[variant=danger]:focus:**:text-text-text data-disabled:pointer-events-none data-disabled:opacity-50",
+        "hover:bg-bg-surface-hover focus:bg-bg-hover focus:text-text not-data-[variant=danger]:focus:**:text-text data-disabled:pointer-events-none data-disabled:text-text-disabled",
         // Other
         "items-center cursor-default arc-text-body-md-compact [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
         className,
@@ -212,7 +212,7 @@ function SelectScrollUpButton({
       data-slot="select-scroll-up-button"
       className={cn(
         // Base
-        "flex bg-popover py-1",
+        "flex bg-bg-surface py-1",
         // Position
         "top-0",
         // Sizing
@@ -223,8 +223,7 @@ function SelectScrollUpButton({
       )}
       {...props}
     >
-      <SiChevronUp
-      />
+      <SiChevronUp />
     </SelectPrimitive.ScrollUpArrow>
   )
 }
@@ -238,7 +237,7 @@ function SelectScrollDownButton({
       data-slot="select-scroll-down-button"
       className={cn(
         // Base
-        "flex bg-popover py-1",
+        "flex bg-bg-surface py-1",
         // Position
         "bottom-0",
         // Sizing
@@ -249,8 +248,7 @@ function SelectScrollDownButton({
       )}
       {...props}
     >
-      <ChevronDown
-      />
+      <ChevronDown />
     </SelectPrimitive.ScrollDownArrow>
   )
 }
