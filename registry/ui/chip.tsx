@@ -16,7 +16,7 @@ const chipVariants = cva(
     // Disabled
     "disabled:pointer-events-none disabled:opacity-50",
     // Icons
-    "gap-0.5 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    "gap-1 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
     // Other
     "overflow-hidden",
   ],
@@ -28,17 +28,17 @@ const chipVariants = cva(
         outline:
           "bg-bg-surface text-text border-border hover:bg-bg-surface-hover data-[active]:bg-bg-surface-secondary data-[active]:border-[1.5px] data-[active]:border-border-tertiary",
         solid:
-          "bg-bg-surface-inverse text-text-oninverse data-[active]:border-[1.5px] data-[active]:border-border-secondary",
+          "bg-bg-surface-inverse text-text-oninverse hover:bg-bg-surface-inverse-hover data-[active]:border-[1.5px] data-[active]:border-border-secondary",
       },
       size: {
         xs:
-          "p-1 has-data-[icon=inline-end]:pr-0.5 has-data-[icon=inline-start]:pl-0.5",
+          "px-2 h-6 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1",
         sm:
-          "p-2 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+          "px-3 h-8 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         md:
-          "px-3 py-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "px-3.5 h-9 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
         lg:
-          "p-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
+          "px-4 h-10 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
       },
     },
     defaultVariants: {

@@ -17,7 +17,7 @@ const inputVariants = cva(
     // Invalid
     "aria-invalid:ring-3 aria-invalid:ring-ring-danger",
     // Other
-    "transition-[color,box-shadow] outline-none file:inline-flex file:font-medium file:text-text placeholder:text-text-tertiary d aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+    "transition-[color,box-shadow] outline-none file:inline-flex file:font-medium file:text-text placeholder:text-text-tertiary",
   ],
   {
     variants: {

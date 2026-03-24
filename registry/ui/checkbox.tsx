@@ -17,13 +17,13 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         //Focus
         "focus-visible:border-border-brand-secondary focus-visible:ring-3 focus-visible:ring-ring-brand",
         // Disabled
-        "disabled:cursor-not-allowed disabled:opacity-50",
+        "disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:bg-bg-disabled",
         // Invalid
         "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:aria-checked:border-primary",
         // Checked
         "data-checked:border-bg-brand data-checked:bg-bg-brand data-checked:text-text-onbrand",
         // Variants
-        "group-has-disabled/field:opacity-50",
+        "group-has-disabled/field:text-text-disabled",
         // Other
         "peer",
         className,

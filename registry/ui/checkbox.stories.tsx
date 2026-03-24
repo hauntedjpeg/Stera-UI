@@ -109,10 +109,10 @@ export const WithDescription: Story = {
 
 export const Disabled: Story = {
   render: () => (
-    <FieldLabel>
-      <Checkbox disabled />
-      Enable notifications
-    </FieldLabel>
+    <Field orientation="horizontal" data-disabled="true">
+      <Checkbox id="disabled-checkbox" name="disabled-checkbox" disabled />
+      <FieldLabel htmlFor="disabled-checkbox">Enable notifications</FieldLabel>
+    </Field>
   ),
 }
 
