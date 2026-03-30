@@ -5,6 +5,7 @@ import { Button } from "./button"
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -130,12 +131,14 @@ export const Actions: Story = {
                   <SiMore />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>View invoice</DropdownMenuItem>
-                  <DropdownMenuItem>Copy invoice ID</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Delete</DropdownMenuItem>
+                  <DropdownMenuGroup>
+                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>View invoice</DropdownMenuItem>
+                    <DropdownMenuItem>Copy invoice ID</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Delete</DropdownMenuItem>
+                  </DropdownMenuGroup>
                 </DropdownMenuContent>
               </DropdownMenu>
             </TableCell>
@@ -143,52 +146,5 @@ export const Actions: Story = {
         ))}
       </TableBody>
     </Table>
-  ),
-}
-
-export const RTL: Story = {
-  parameters: {
-    layout: "padded",
-  },
-  render: () => (
-    <div dir="rtl">
-      <Table>
-        <TableCaption>قائمة بفواتيرك الأخيرة.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">الفاتورة</TableHead>
-            <TableHead>الحالة</TableHead>
-            <TableHead>طريقة الدفع</TableHead>
-            <TableHead className="text-left">المبلغ</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">INV001</TableCell>
-            <TableCell>مدفوع</TableCell>
-            <TableCell>بطاقة ائتمان</TableCell>
-            <TableCell className="text-left">$250.00</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className="font-medium">INV002</TableCell>
-            <TableCell>قيد الانتظار</TableCell>
-            <TableCell>باي بال</TableCell>
-            <TableCell className="text-left">$150.00</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className="font-medium">INV003</TableCell>
-            <TableCell>غير مدفوع</TableCell>
-            <TableCell>تحويل بنكي</TableCell>
-            <TableCell className="text-left">$350.00</TableCell>
-          </TableRow>
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>الإجمالي</TableCell>
-            <TableCell className="text-left">$750.00</TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </div>
   ),
 }

@@ -34,7 +34,7 @@ export const Default: Story = {
 
 export const Multiple: Story = {
   render: () => (
-    <Accordion openMultiple className="w-96">
+    <Accordion multiple className="w-96">
       <AccordionItem value="item-1">
         <AccordionTrigger>First item</AccordionTrigger>
         <AccordionContent>This item can be open at the same time as others.</AccordionContent>
