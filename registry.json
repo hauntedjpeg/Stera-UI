@@ -319,10 +319,10 @@
       "files": [{ "path": "registry/ui/slider.tsx", "type": "registry:ui" }]
     },
     {
-      "name": "sonner",
+      "name": "notice",
       "type": "registry:ui",
-      "dependencies": ["sonner", "next-themes", "lucide-react"],
-      "files": [{ "path": "registry/ui/sonner.tsx", "type": "registry:ui" }]
+      "dependencies": ["sonner", "next-themes", "stera-icons"],
+      "files": [{ "path": "registry/ui/notice.tsx", "type": "registry:ui" }]
     },
     {
       "name": "spinner",

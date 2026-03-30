@@ -23,7 +23,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { PanelLeftIcon } from "lucide-react"
+import { SiSidebarLeft } from "stera-icons"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -289,7 +289,7 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      <SiSidebarLeft />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
@@ -310,7 +310,7 @@ function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
         // Base
         "absolute hidden z-20 transition-all ease-linear after:absolute hover:after:bg-sidebar-border sm:flex",
         // Position
-        "inset-y-0 group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:inset-y-0 after:start-1/2 ltr:-translate-x-1/2 rtl:-translate-x-1/2 group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full",
+        "inset-y-0 group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:inset-y-0 after:inset-s-1/2 ltr:-translate-x-1/2 rtl:-translate-x-1/2 group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full",
         // Sizing
         "w-4 after:w-[2px]",
         // Variants
@@ -577,11 +577,11 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 const sidebarMenuButtonVariants = cva(
   [
     // Base
-    "flex items-center overflow-hidden rounded-md p-2 text-left arc-text-md-compact ring-ring outline-hidden transition-[width,height,padding] hover:bg-bg-surface-hover hover:text-text focus-visible:ring-ring active:bg-bg-brand-tertiary active:text-text-brand",
+    "flex items-center overflow-hidden rounded-md p-2 text-left arc-text-md-compact ring-ring outline-hidden transition-[width,height,padding] hover:bg-bg-surface-hover hover:text-text focus-visible:ring-ring active:bg-bg-surface-secondary-hover active:text-text",
     // Sizing
     "w-full gap-2",
     // Variants
-    "group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! data-open:hover:bg-sidebar-accent data-open:hover:text-sidebar-accent-foreground data-active:bg-bg-brand-tertiary data-active:font-medium data-active:text-sidebar-accent-foreground",
+    "group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! data-open:hover:bg-sidebar-accent data-open:hover:text-sidebar-accent-foreground data-active:bg-bg-brand-tertiary data-active:arc-text-body-md-strong data-active:text-text-brand",
     // Other
     "peer/menu-button group/menu-button disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate",
   ],
@@ -826,13 +826,13 @@ function SidebarMenuSubButton({
       {
         className: cn(
           // Base
-          "flex items-center overflow-hidden rounded-md px-2 text-text ring-ring outline-hidden hover:bg-bg-surface-hover hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground",
+          "flex items-center overflow-hidden rounded-md px-2 text-text ring-ring outline-hidden hover:bg-bg-surface-hover hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-bg-surface-secondary-hover active:text-text",
           // Position
           "-translate-x-px",
           // Sizing
           "h-7 min-w-0 gap-2",
           // Variants
-          "group-data-[collapsible=icon]:hidden data-[size=md]:text-sm data-[size=sm]:text-xs data-active:bg-sidebar-accent data-active:text-sidebar-accent-foreground",
+          "group-data-[collapsible=icon]:hidden data-[size=md]:text-sm data-[size=sm]:text-xs data-active:bg-bg-brand-tertiary data-active:text-text-brand",
           // Other
           "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground",
           className
