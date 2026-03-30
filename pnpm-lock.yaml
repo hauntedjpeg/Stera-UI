@@ -94,8 +94,8 @@ importers:
         specifier: ^2.0.7
         version: 2.0.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       stera-icons:
-        specifier: ^8.0.14
-        version: 8.0.14(react@19.2.4)
+        specifier: ^8.0.15
+        version: 8.0.15(react@19.2.4)
       storybook:
         specifier: ^8.6.18
         version: 8.6.18(prettier@3.8.1)
@@ -2264,8 +2264,8 @@ packages:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
 
-  stera-icons@8.0.14:
-    resolution: {integrity: sha512-CIRA+9Naj4XVqLRBdzsOUmCkeKXDfe2KwEcOwR54kAR4qpedCLeN0IASQgeeacyXEwJ1BIhnPnjsIjnqvGwqvA==}
+  stera-icons@8.0.15:
+    resolution: {integrity: sha512-cpE1ZSilQkkQK6gOjoCF/4RT92oogiotmYbmdVuVUadOMrrgHg9jxlbR2AWTLqIq4/wvxTB75T0ZnbVkh3OsSg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: '>=17.0.2'
@@ -4425,7 +4425,7 @@ snapshots:
 
   source-map@0.6.1: {}
 
-  stera-icons@8.0.14(react@19.2.4):
+  stera-icons@8.0.15(react@19.2.4):
     dependencies:
       react: 19.2.4
 
