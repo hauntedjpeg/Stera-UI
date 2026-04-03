@@ -52,7 +52,7 @@ function ProgressIndicator({
 function ProgressLabel({ className, ...props }: ProgressPrimitive.Label.Props) {
   return (
     <ProgressPrimitive.Label
-      className={cn("arc-text-body-md-strong", className)}
+      className={cn("st-body-md-strong", className)}
       data-slot="progress-label"
       {...props}
     />
@@ -63,7 +63,7 @@ function ProgressValue({ className, ...props }: ProgressPrimitive.Value.Props) {
   return (
     <ProgressPrimitive.Value
       className={cn(
-        "ml-auto arc-text-body-md-compact text-text-secondary tabular-nums",
+        "ml-auto st-body-md-compact text-text-secondary tabular-nums",
         className
       )}
       data-slot="progress-value"

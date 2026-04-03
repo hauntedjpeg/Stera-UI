@@ -42,7 +42,7 @@ function AccordionTrigger({
           //Group
           "group/accordion-trigger",
           // Base
-          "relative flex flex-1 items-start justify-between rounded-md border border-transparent py-4 text-left arc-text-body-md-strong outline-none",
+          "relative flex flex-1 items-start justify-between rounded-md border border-transparent py-4 text-left st-body-md-strong outline-none",
           // Focus
           "focus-visible:border-border focus-visible:ring-3 focus-visible:ring-ring focus-visible:after:border-ring",
           // Other
@@ -67,7 +67,7 @@ function AccordionContent({
   return (
     <AccordionPrimitive.Panel
       data-slot="accordion-content"
-      className="overflow-hidden arc-text-md data-open:animate-accordion-down data-closed:animate-accordion-up"
+      className="overflow-hidden st-md data-open:animate-accordion-down data-closed:animate-accordion-up"
       {...props}
     >
       <div

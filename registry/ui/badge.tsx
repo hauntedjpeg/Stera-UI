@@ -59,11 +59,11 @@ const badgeVariants = cva(
       },
       size: {
         sm:
-          "h-4 px-1.5 arc-text-body-sm-strong",
+          "h-4 px-1.5 st-body-sm-strong",
         md:
-          "h-5 px-2 arc-text-body-sm-strong",
+          "h-5 px-2 st-body-sm-strong",
         lg:
-          "h-6 px-2 arc-text-body-md-strong [&_svg:not([class*='size-'])]:size-4",
+          "h-6 px-2 st-body-md-strong [&_svg:not([class*='size-'])]:size-4",
       },
     },
     defaultVariants: {

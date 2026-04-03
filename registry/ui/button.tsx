@@ -39,13 +39,13 @@ const buttonVariants = cva(
       },
       size: {
         xs:
-          "h-6 gap-1.5 rounded-lg px-2 arc-text-body-sm-strong in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 has-data-[kbd=inline-end]:pr-1 has-data-[kbd=inline-start]:pl-1 [&_svg:not([class*='size-'])]:size-3",
+          "h-6 gap-1.5 rounded-lg px-2 st-body-sm-strong in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 has-data-[kbd=inline-end]:pr-1 has-data-[kbd=inline-start]:pl-1 [&_svg:not([class*='size-'])]:size-3",
         sm:
-          "h-8 gap-2 px-3 arc-text-body-sm-strong has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 has-data-[kbd=inline-end]:pr-1.5 has-data-[kbd=inline-start]:pl-1.5 data-[variant=link]:gap-1",
+          "h-8 gap-2 px-3 st-body-sm-strong has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 has-data-[kbd=inline-end]:pr-1.5 has-data-[kbd=inline-start]:pl-1.5 data-[variant=link]:gap-1",
         md:
-          "h-9 gap-2 px-3 arc-text-body-md-strong has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 has-data-[kbd=inline-end]:pr-2 has-data-[kbd=inline-start]:pl-2 data-[variant=link]:gap-1",
+          "h-9 gap-2 px-3 st-body-md-strong has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 has-data-[kbd=inline-end]:pr-2.5 has-data-[kbd=inline-start]:pl-2.5 data-[variant=link]:gap-1",
         lg:
-          "h-10 gap-3 px-5 arc-text-body-lg-strong has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 has-data-[kbd=inline-end]:pr-3 has-data-[kbd=inline-start]:pl-3",
+          "h-10 gap-3 px-5 st-body-lg-strong has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 has-data-[kbd=inline-end]:pr-3 has-data-[kbd=inline-start]:pl-3",
         icon:
           "size-9 [&_svg:not([class*='size-'])]:size-5",
         "icon-xs":

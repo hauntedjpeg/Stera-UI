@@ -36,7 +36,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
 const inputGroupAddonVariants = cva(
   [
     // Base
-    "flex items-center justify-center py-1.5 arc-text-body-md text-text select-none",
+    "flex items-center justify-center py-1.5 st-body-md text-text select-none",
     // Sizing
     "h-auto gap-2",
     // Other
@@ -108,7 +108,7 @@ function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
     <span
       className={cn(
         // Base
-        "flex items-center arc-text-body-md text-text-tertiary",
+        "flex items-center st-body-md text-text-tertiary",
         // Sizing
         "gap-2",
         // Other

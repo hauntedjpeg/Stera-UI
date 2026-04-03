@@ -94,7 +94,7 @@ function CommandInput({
           data-slot="command-input"
           className={cn(
             // Base
-            "arc-text-body-md-compact outline-hidden",
+            "st-body-md-compact outline-hidden",
             // Sizing
             "w-full",
             // Other
@@ -141,7 +141,7 @@ function CommandEmpty({
       data-slot="command-empty"
       className={cn(
         // Base
-        "py-6 text-center arc-text-body-md",
+        "py-6 text-center st-body-md",
         className,
       )}
       {...props}
@@ -199,7 +199,7 @@ function CommandItem({
         // Group
         "group/command-item",
         // Base
-        "flex relative cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 arc-text-body-md-compact text-text outline-hidden select-none",
+        "flex relative cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 st-body-md-compact text-text outline-hidden select-none",
         // Selected
         "data-[selected=true]:bg-bg-surface-hover data-[selected=true]:text-text data-[selected=true]:**:text-text",
         // Disabled

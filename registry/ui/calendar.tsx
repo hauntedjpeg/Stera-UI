@@ -99,14 +99,14 @@ function Calendar({
         ),
         month_caption: cn(
           // Base
-          "flex items-center arc-text-body-sm-strong justify-center px-(--cell-size)",
+          "flex items-center st-body-sm-strong justify-center px-(--cell-size)",
           // Sizing
           "h-(--cell-size) w-full",
           defaultClassNames.month_caption,
         ),
         dropdowns: cn(
           // Base
-          "flex items-center justify-center arc-text-body-md-compact font-medium",
+          "flex items-center justify-center st-body-md-compact font-medium",
           // Sizing
           "h-(--cell-size) w-full gap-1.5",
           defaultClassNames.dropdowns,
@@ -146,7 +146,7 @@ function Calendar({
           // Sizing
           "flex-1",
           // Other
-          "arc-text-body-md-strong text-text-secondary select-none",
+          "st-body-md-strong text-text-secondary select-none",
           defaultClassNames.weekday,
         ),
         week: cn(
@@ -167,7 +167,7 @@ function Calendar({
         ),
         week_number: cn(
           // Other
-          "arc-text-body-md-compact text-text-secondary select-none",
+          "st-body-md-compact text-text-secondary select-none",
           defaultClassNames.week_number,
         ),
         day: cn(
@@ -329,7 +329,7 @@ function CalendarDayButton({
       data-range-middle={modifiers.range_middle}
       className={cn(
         // Base
-        "flex flex-col border-0 arc-text-body-md-compact rounded-lg",
+        "flex flex-col border-0 st-body-md-compact rounded-lg",
         // Position
         "relative",
         // Sizing
@@ -345,7 +345,7 @@ function CalendarDayButton({
         // Selected
         "data-[selected-single=true]:bg-bg-brand data-[selected-single=true]:text-text-onbrand",
         // Other
-        "isolate z-10 dark:hover:text-text [&>span]:arc-text-body-sm [&>span]:text-text-tertiary data-[selected-single=true]:[&>span]:text-text-onbrand-secondary",
+        "isolate z-10 dark:hover:text-text [&>span]:st-body-sm [&>span]:text-text-tertiary data-[selected-single=true]:[&>span]:text-text-onbrand-secondary",
         defaultClassNames.day,
         className,
       )}

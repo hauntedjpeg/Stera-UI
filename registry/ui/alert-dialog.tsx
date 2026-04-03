@@ -153,7 +153,7 @@ function AlertDialogTitle({
       data-slot="alert-dialog-title"
       className={cn(
         // Base
-        "arc-text-body-lg-strong",
+        "st-body-lg-strong",
         // Variants
         "sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2",
         className
@@ -172,7 +172,7 @@ function AlertDialogDescription({
       data-slot="alert-dialog-description"
       className={cn(
         // Base
-        "arc-text-body-md text-text-secondary",
+        "st-body-md text-text-secondary",
         // Other
         "text-balance md:text-pretty *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-text",
         className

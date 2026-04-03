@@ -22,10 +22,10 @@ const inputVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-8 px-2.5 arc-text-body-md-compact",
-        md: "h-9 arc-text-body-md-compact",
-        lg: "h-10 arc-text-body-md-compact",
-        xl: "h-12 px-4 arc-text-body-lg",
+        sm: "h-8 px-2.5 st-body-md-compact",
+        md: "h-9 st-body-md-compact",
+        lg: "h-10 st-body-md-compact",
+        xl: "h-12 px-4 st-body-lg",
       },
     },
     defaultVariants: {

@@ -467,7 +467,7 @@ function SidebarGroupLabel({
       {
         className: cn(
           // Base
-          "flex shrink-0 items-center rounded-md px-2 arc-text-body-sm text-text-secondary ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2",
+          "flex shrink-0 items-center rounded-md px-2 st-body-sm text-text-secondary ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2",
           // Sizing
           "h-8",
           // Variants
@@ -530,7 +530,7 @@ function SidebarGroupContent({
       data-sidebar="group-content"
       className={cn(
         // Base
-        "arc-text-body-md-compact",
+        "st-body-md-compact",
         // Sizing
         "w-full",
         className
@@ -577,11 +577,11 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 const sidebarMenuButtonVariants = cva(
   [
     // Base
-    "flex items-center overflow-hidden rounded-md p-2 text-left arc-text-md-compact ring-ring outline-hidden transition-[width,height,padding] hover:bg-bg-surface-hover hover:text-text focus-visible:ring-ring active:bg-bg-surface-secondary-hover active:text-text",
+    "flex items-center overflow-hidden rounded-md p-2 text-left st-md-compact ring-ring outline-hidden transition-[width,height,padding] hover:bg-bg-surface-hover hover:text-text focus-visible:ring-ring active:bg-bg-surface-secondary-hover active:text-text",
     // Sizing
     "w-full gap-2",
     // Variants
-    "group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! data-open:hover:bg-sidebar-accent data-open:hover:text-sidebar-accent-foreground data-active:bg-bg-brand-tertiary data-active:arc-text-body-md-strong data-active:text-text-brand",
+    "group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! data-open:hover:bg-sidebar-accent data-open:hover:text-sidebar-accent-foreground data-active:bg-bg-brand-tertiary data-active:st-body-md-strong data-active:text-text-brand",
     // Other
     "peer/menu-button group/menu-button disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate",
   ],

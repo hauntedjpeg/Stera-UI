@@ -34,7 +34,7 @@ function FieldLegend({
       data-variant={variant}
       className={cn(
         // Variants
-        "data-[variant=label]:arc-text-body-md-strong data-[variant=legend]:arc-text-body-lg-strong",
+        "data-[variant=label]:st-body-md-strong data-[variant=legend]:st-body-lg-strong",
         // Other
         "mb-3",
         className,
@@ -156,7 +156,7 @@ function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
         // Sizing
         "w-fit gap-2",
         // Other
-        "arc-text-body-md-strong group-data-[disabled=true]/field:opacity-50",
+        "st-body-md-strong group-data-[disabled=true]/field:opacity-50",
         className,
       )}
       {...props}
@@ -172,7 +172,7 @@ function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
         // Position
         "[[data-variant=legend]+&]:-mt-1.5 last:mt-0 nth-last-2:-mt-1",
         // Other
-        "text-left arc-text-body-sm text-text-secondary group-has-data-horizontal/field:text-balance [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-text-brand",
+        "text-left st-body-sm text-text-secondary group-has-data-horizontal/field:text-balance [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-text-brand",
         className,
       )}
       {...props}
@@ -197,7 +197,7 @@ function FieldSeparator({
         // Sizing
         "h-4",
         // Other
-        "-my-2 arc-text-body-sm group-data-[variant=outline]/field-group:-mb-2",
+        "-my-2 st-body-sm group-data-[variant=outline]/field-group:-mb-2",
         className,
       )}
       {...props}
@@ -260,7 +260,7 @@ function FieldError({
       data-slot="field-error"
       className={cn(
         // Other
-        "arc-text-body-sm text-text-danger",
+        "st-body-sm text-text-danger",
         className,
       )}
       {...props}

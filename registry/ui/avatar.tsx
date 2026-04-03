@@ -67,7 +67,7 @@ function AvatarFallback({
       data-slot="avatar-fallback"
       className={cn(
         // Base
-        "flex rounded-full bg-bg-surface-inverse arc-text-body-sm-strong text-text-oninverse",
+        "flex rounded-full bg-bg-surface-inverse st-body-sm-strong text-text-oninverse",
         // Sizing
         "size-full",
         // Variants
@@ -178,7 +178,7 @@ function AvatarGroupCount({
       data-slot="avatar-group-count"
       className={cn(
         // Base
-        "relative flex bg-bg-surface-tertiary arc-text-body-sm-strong text-text-secondary rounded-full ring-2 ring-bg-surface",
+        "relative flex bg-bg-surface-tertiary st-body-sm-strong text-text-secondary rounded-full ring-2 ring-bg-surface",
         // Sizing
         "size-8 shrink-0",
         // Variants

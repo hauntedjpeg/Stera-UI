@@ -65,7 +65,7 @@ function CalloutTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="callout-title"
       className={cn(
-        "arc-text-body-md-strong [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text-brand",
+        "st-body-md-strong [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text-brand",
         className
       )}
       {...props}
@@ -81,7 +81,7 @@ function CalloutDescription({
     <div
       data-slot="callout-description"
       className={cn(
-        "arc-text-body-md text-text-secondary text-balance md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text-brand",
+        "st-body-md text-text-secondary text-balance md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text-brand",
         className
       )}
       {...props}

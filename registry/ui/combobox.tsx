@@ -179,7 +179,7 @@ function ComboboxItem({
         // Animation
         "data-highlighted:bg-bg-surface-secondary data-highlighted:text-accent-foreground not-data-[variant=destructive]:data-highlighted:**:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50",
         // Other
-        "cursor-default items-center select-none arc-text-body-md-compact [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "cursor-default items-center select-none st-body-md-compact [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}
@@ -217,7 +217,7 @@ function ComboboxLabel({
       // Base
       "p-2",
       // Other
-      "arc-text-body-sm text-text-tertiary",
+      "st-body-sm text-text-tertiary",
       className,
     )}
       {...props}

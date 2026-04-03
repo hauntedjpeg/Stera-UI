@@ -3,6 +3,21 @@
   "version": "0.1.0",
   "type": "module",
   "description": "A component registry for React, built on Base UI and Tailwind CSS.",
+  "license": "MIT",
+  "author": "Chaz Giese <chazgiese@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hauntedjpeg/Stera-UI.git"
+  },
+  "homepage": "https://github.com/hauntedjpeg/Stera-UI#readme",
+  "keywords": [
+    "react",
+    "components",
+    "cli",
+    "tailwindcss",
+    "base-ui",
+    "registry"
+  ],
   "bin": {
     "stera-ui": "./dist/cli/index.js"
   },

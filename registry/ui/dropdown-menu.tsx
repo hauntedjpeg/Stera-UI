@@ -76,7 +76,7 @@ function DropdownMenuLabel({
       data-inset={inset}
       className={cn(
         // Base
-        "p-2 arc-text-body-sm text-text-tertiary",
+        "p-2 st-body-sm text-text-tertiary",
         // Variants
         "data-inset:pl-8",
         className
@@ -104,7 +104,7 @@ function DropdownMenuItem({
         // Group
         "group/dropdown-menu-item",
         // Base
-        "flex relative cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 data-inset:pl-8 arc-text-body-md-compact text-text outline-hidden select-none",
+        "flex relative cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 data-inset:pl-8 st-body-md-compact text-text outline-hidden select-none",
         // Focus
         "focus:bg-bg-surface-hover",
         // Danger
@@ -165,7 +165,7 @@ function DropdownMenuItemDescription({
       data-slot="dropdown-menu-item-description"
       className={cn(
         // Base
-        "arc-text-body-sm text-text-secondary truncate",
+        "st-body-sm text-text-secondary truncate",
         className
       )}
       {...props}
@@ -191,7 +191,7 @@ function DropdownMenuSubTrigger({
       data-inset={inset}
       className={cn(
         // Base
-        "flex rounded-lg p-2 arc-text-body-md-compact outline-hidden select-none",
+        "flex rounded-lg p-2 st-body-md-compact outline-hidden select-none",
         // Sizing
         "gap-2",
         // Animation
@@ -254,7 +254,7 @@ function DropdownMenuCheckboxItem({
       data-inset={inset}
       className={cn(
         // Base
-        "relative flex rounded-lg py-2 pr-8 pl-2 arc-text-body-md-compact outline-hidden select-none",
+        "relative flex rounded-lg py-2 pr-8 pl-2 st-body-md-compact outline-hidden select-none",
         // Sizing
         "gap-2",
         // Variants
@@ -302,7 +302,7 @@ function DropdownMenuRadioItem({
       data-inset={inset}
       className={cn(
         // Base
-        "relative flex rounded-lg py-2 pr-8 pl-2 arc-text-body-md-compact outline-hidden select-none",
+        "relative flex rounded-lg py-2 pr-8 pl-2 st-body-md-compact outline-hidden select-none",
         // Sizing
         "gap-2",
         // Variants

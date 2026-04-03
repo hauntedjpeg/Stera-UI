@@ -29,7 +29,7 @@ function Tabs({
 const tabsListVariants = cva(
   [
     // Base
-    "inline-flex rounded-xl p-0.5 items-center justify-center arc-text-body-md-strong text-text-secondary group-data-[orientation=vertical]/tabs:flex-col",
+    "inline-flex rounded-xl p-0.5 items-center justify-center st-body-md-strong text-text-secondary group-data-[orientation=vertical]/tabs:flex-col",
     // Sizing
     "w-fit group-data-[orientation=vertical]/tabs:h-fit",
     // Variants
@@ -46,7 +46,7 @@ const tabsListVariants = cva(
       size: {
         sm: "group-data-[orientation=horizontal]/tabs:h-8",
         md: "group-data-[orientation=horizontal]/tabs:h-9",
-        lg: "group-data-[orientation=horizontal]/tabs:h-10 group-data-[variant=line]/tabs:arc-text-body-lg-strong",
+        lg: "group-data-[orientation=horizontal]/tabs:h-10 group-data-[variant=line]/tabs:st-body-lg-strong",
       },
     },
     defaultVariants: {
@@ -87,7 +87,7 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
         // SM (Default)
         "group-data-[size=sm]/tabs-list:px-2.5 group-data-[size=sm]/tabs-list:py-1.5 group-data-[size=sm]/tabs-list:gap-1.5 rounded-[10px]  group-data-[size=sm]/tabs-list:[&_svg:not([class*='size-'])]:size-4",
         // MD
-        "group-data-[size=md]/tabs-list:px-3 group-data-[size=md]/tabs-list:py-1.5 group-data-[size=md]/tabs-list:gap-2 group-data-[size=md]/tabs-list:arc-text-body-md-strong group-data-[size=md]/tabs-list:[&_svg:not([class*='size-'])]:size-4",
+        "group-data-[size=md]/tabs-list:px-3 group-data-[size=md]/tabs-list:py-1.5 group-data-[size=md]/tabs-list:gap-2 group-data-[size=md]/tabs-list:st-body-md-strong group-data-[size=md]/tabs-list:[&_svg:not([class*='size-'])]:size-4",
         // LG
         "group-data-[size=lg]/tabs-list:px-4 group-data-[size=lg]/tabs-list:py-2 group-data-[size=lg]/tabs-list:gap-2 group-data-[size=lg]/tabs-list:[&_svg:not([class*='size-'])]:size-4",
         // Animation

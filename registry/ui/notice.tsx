@@ -45,10 +45,10 @@ const Notice = ({ ...props }: ToasterProps) => {
       toastOptions={{
         classNames: {
           toast: "cn-toast",
-          title: "!arc-text-body-md-strong",
+          title: "!st-body-md-strong",
           icon: "!ml-0",
-          description: "!arc-text-body-md !text-text-secondary",
-          actionButton: "!arc-text-body-sm-strong !inline-flex !items-center !justify-center !rounded-xl !border !border-border !bg-bg-surface hover:!bg-bg-surface-hover !h-9 !px-3 !text-text arc-text-body-md-strong !whitespace-nowrap !transition-all",
+          description: "!st-body-md !text-text-secondary",
+          actionButton: "!st-body-sm-strong !inline-flex !items-center !justify-center !rounded-xl !border !border-border !bg-bg-surface hover:!bg-bg-surface-hover !h-9 !px-3 !text-text st-body-md-strong !whitespace-nowrap !transition-all",
         },
       }}
       {...props}

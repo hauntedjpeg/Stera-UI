@@ -10,7 +10,7 @@ const chipVariants = cva(
     // Base
     "inline-flex shrink-0 items-center justify-center rounded-full border border-transparent transition-all outline-none select-none",
     // Text
-    "whitespace-nowrap arc-text-body-md-strong",
+    "whitespace-nowrap st-body-md-strong",
     // Focus
     "focus-visible:border-border-tertiary focus-visible:ring-3 focus-visible:ring-ring",
     // Disabled

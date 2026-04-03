@@ -56,7 +56,7 @@ function ChartContainer({
         data-chart={chartId}
         className={cn(
           // Base
-          "flex arc-text-body-sm",
+          "flex st-body-sm",
           // Sizing
           "aspect-video",
           // Other
@@ -193,15 +193,13 @@ function ChartTooltipContent({
 
   return (
     <div
-      className={cn(
-        // Base
-        "grid rounded-lg border border-border/50 bg-bg-surface px-2.5 py-1.5 shadow-xl",
-        // Sizing
-        "min-w-32 gap-1.5",
-        // Other
-        "items-start text-xs",
-        className,
-      )}
+        className={cn(
+          // Base
+          "grid items-start rounded-lg border border-border/50 bg-bg-surface px-2.5 py-1.5 text-xs shadow-xl",
+          // Sizing
+          "min-w-32 gap-1.5",
+          className,
+        )}
     >
       {!nestLabel ? tooltipLabel : null}
       <div className="grid gap-1.5">
@@ -217,11 +215,11 @@ function ChartTooltipContent({
                 key={item.dataKey}
                 className={cn(
                   // Base
-                  "flex",
+                  "flex flex-wrap items-stretch",
                   // Sizing
                   "w-full gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
                   // Other
-                  "flex-wrap items-stretch [&>svg]:text-muted-foreground",
+                  "[&>svg]:text-muted-foreground",
                   indicator === "dot" && "items-center",
                 )}
               >
@@ -259,12 +257,10 @@ function ChartTooltipContent({
                     <div
                       className={cn(
                         // Base
-                        "flex",
+                        "flex justify-between leading-none",
+                        nestLabel ? "items-end" : "items-center",
                         // Sizing
                         "flex-1",
-                        // Other
-                        "justify-between leading-none",
-                        nestLabel ? "items-end" : "items-center",
                       )}
                     >
                       <div className="grid gap-1.5">
@@ -312,12 +308,10 @@ function ChartLegendContent({
     <div
       className={cn(
         // Base
-        "flex",
+        "flex items-center justify-center",
+        verticalAlign === "top" ? "pb-3" : "pt-3",
         // Sizing
         "gap-4",
-        // Other
-        "items-center justify-center",
-        verticalAlign === "top" ? "pb-3" : "pt-3",
         className,
       )}
     >
@@ -332,11 +326,11 @@ function ChartLegendContent({
               key={item.value}
               className={cn(
                 // Base
-                "flex",
+                "flex items-center",
                 // Sizing
                 "gap-1.5 [&>svg]:h-3 [&>svg]:w-3",
                 // Other
-                "items-center [&>svg]:text-muted-foreground",
+                "[&>svg]:text-muted-foreground",
               )}
             >
               {itemConfig?.icon && !hideIcon ? (

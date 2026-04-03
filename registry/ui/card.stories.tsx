@@ -65,7 +65,7 @@ export const LoginForm: Story = {
         <Field>
           <div className="flex items-center justify-between">
             <FieldLabel htmlFor="password">Password</FieldLabel>
-            <a href="#" className="arc-text-body-sm text-text-secondary underline-offset-4 hover:underline">
+            <a href="#" className="st-body-sm text-text-secondary underline-offset-4 hover:underline">
               Forgot your password?
             </a>
           </div>
@@ -135,7 +135,7 @@ export const SmallSize: Story = {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ul className="list-disc pl-4 arc-text-body-sm text-text-secondary flex flex-col gap-1">
+        <ul className="list-disc pl-4 st-body-sm text-text-secondary flex flex-col gap-1">
           <li>Daily, weekly, or monthly schedules</li>
           <li>Send via email, Slack, or webhook</li>
           <li>Include charts, tables, and summaries</li>

@@ -126,28 +126,30 @@
     --letter-spacing-tight: -0.4px;
     --letter-spacing-normal: 0px;
     --letter-spacing-wide: 0.1px;
-    --brand-50: #f4f2ff;
-    --brand-100: #ece8ff;
-    --brand-200: #dbd3ff;
-    --brand-300: #c1b0ff;
-    --brand-400: #a284ff;
-    --brand-500: #8652ff;
-    --brand-600: #782ff8;
-    --brand-700: #6a1de4;
-    --brand-800: #5a18c4;
-    --brand-900: #49159d;
-    --brand-950: #2b0b6a;
-    --accent-50: #f4f7f9;
-    --accent-100: #ebf1f4;
-    --accent-200: #dae5eb;
-    --accent-300: #c3d5de;
-    --accent-400: #aabfcf;
-    --accent-500: #94aac0;
-    --accent-600: #7d91ae;
-    --accent-700: #667893;
-    --accent-800: #58677b;
-    --accent-900: #4b5764;
-    --accent-950: #2c333a;
+    --brand-50: #f5f5f5;
+    --brand-100: #c9c9c9;
+    --brand-200: #9e9e9e;
+    --brand-300: #757575;
+    --brand-400: #4f4f4f;
+    --brand-500: #2c2c2c;
+    --brand-600: #252525;
+    --brand-700: #1e1e1e;
+    --brand-800: #171717;
+    --brand-900: #111111;
+    --brand-950: #050505;
+    --brand-925: #0a0a0a;
+    --accent-50: #f2f7ee;
+    --accent-100: #e3f8d1;
+    --accent-200: #d4f7b2;
+    --accent-300: #c5f791;
+    --accent-400: #b6f66a;
+    --accent-500: #a6f430;
+    --accent-600: #83cd00;
+    --accent-700: #64a700;
+    --accent-800: #478200;
+    --accent-900: #2e5e00;
+    --accent-950: #071c00;
+    --accent-925: #183c00;
     --neutral-50: #f7f7f7;
     --neutral-100: #efefef;
     --neutral-150: #e8e8e8;
@@ -159,8 +161,8 @@
     --neutral-700: #525252;
     --neutral-800: #464646;
     --neutral-900: #3d3d3d;
-    --neutral-950: #292929;
-    --neutral-975: #2c2c2c;
+    --neutral-925: #292929;
+    --neutral-950: #2c2c2c;
     --danger-50: #fef3ee;
     --danger-100: #fee4d6;
     --danger-200: #fbc5ad;
@@ -254,18 +256,18 @@
     --bg-surface-secondary-hover: var(--neutral-100);
     --bg-surface-tertiary: var(--neutral-100);
     --bg-surface-tertiary-hover: var(--neutral-150);
-    --bg-surface-inverse: var(--neutral-975);
+    --bg-surface-inverse: var(--neutral-950);
     --bg-surface-inverse-hover: var(--neutral-900);
-    --bg-brand: var(--brand-700);
-    --bg-brand-hover: var(--brand-800);
-    --bg-brand-secondary: var(--brand-900);
-    --bg-brand-secondary-hover: var(--brand-950);
+    --bg-brand: var(--brand-500);
+    --bg-brand-hover: var(--brand-600);
+    --bg-brand-secondary: var(--brand-600);
+    --bg-brand-secondary-hover: var(--brand-700);
     --bg-brand-tertiary: var(--brand-50);
     --bg-brand-tertiary-hover: var(--brand-100);
-    --bg-accent: var(--accent-700);
-    --bg-accent-hover: var(--accent-800);
-    --bg-accent-secondary: var(--accent-800);
-    --bg-accent-secondary-hover: var(--accent-900);
+    --bg-accent: var(--accent-500);
+    --bg-accent-hover: var(--accent-600);
+    --bg-accent-secondary: var(--accent-600);
+    --bg-accent-secondary-hover: var(--accent-700);
     --bg-accent-tertiary: var(--accent-50);
     --bg-accent-tertiary-hover: var(--accent-100);
     --bg-danger: var(--danger-500);
@@ -294,18 +296,18 @@
     --text-disabled: var(--black-700);
     --text-oninverse: var(--white-950);
     --text-ondisabled: var(--white-950);
-    --text-brand: var(--brand-700);
-    --text-brand-secondary: var(--brand-900);
+    --text-brand: var(--brand-500);
+    --text-brand-secondary: var(--brand-600);
     --text-brand-tertiary: var(--brand-300);
     --text-onbrand: var(--white-950);
     --text-onbrand-secondary: var(--white-900);
     --text-onbrand-tertiary: var(--white-800);
-    --text-accent: var(--accent-700);
-    --text-accent-secondary: var(--accent-900);
+    --text-accent: var(--accent-600);
+    --text-accent-secondary: var(--accent-400);
     --text-accent-tertiary: var(--accent-300);
-    --text-onaccent: var(--white-950);
-    --text-onaccent-secondary: var(--white-900);
-    --text-onaccent-tertiary: var(--white-800);
+    --text-onaccent: var(--black-950);
+    --text-onaccent-secondary: var(--black-900);
+    --text-onaccent-tertiary: var(--black-800);
     --text-danger: var(--danger-500);
     --text-danger-secondary: var(--danger-600);
     --text-danger-tertiary: var(--danger-300);
@@ -347,7 +349,7 @@
     --border-warning-secondary: var(--warning-500);
     --border-onwarning: var(--warning-500);
     --border-onwarning-secondary: var(--warning-600);
-    --ring: var(--black-500);
+    --ring: var(--black-400);
     --ring-brand: var(--brand-200);
     --ring-danger: var(--danger-200);
     --chart-1: var(--brand-400);
@@ -356,7 +358,7 @@
   }
 
   .dark {
-    --bg-surface: var(--neutral-975);
+    --bg-surface: var(--neutral-950);
     --bg-surface-hover: var(--neutral-900);
     --bg-surface-secondary: var(--neutral-900);
     --bg-surface-secondary-hover: var(--neutral-800);
@@ -364,17 +366,18 @@
     --bg-surface-tertiary-hover: var(--neutral-700);
     --bg-surface-inverse: var(--white-950);
     --bg-surface-inverse-hover: var(--neutral-50);
-    --bg-brand: var(--brand-800);
-    --bg-brand-hover: var(--brand-700);
-    --bg-brand-secondary-hover: var(--brand-800);
-    --bg-brand-tertiary: var(--brand-950);
-    --bg-brand-tertiary-hover: var(--brand-900);
-    --bg-accent: var(--accent-800);
-    --bg-accent-hover: var(--accent-700);
-    --bg-accent-secondary: var(--accent-900);
-    --bg-accent-secondary-hover: var(--accent-800);
-    --bg-accent-tertiary: var(--accent-950);
-    --bg-accent-tertiary-hover: var(--accent-900);
+    --bg-brand: var(--brand-50);
+    --bg-brand-hover: var(--brand-100);
+    --bg-brand-secondary: var(--brand-100);
+    --bg-brand-secondary-hover: var(--brand-200);
+    --bg-brand-tertiary: var(--brand-800);
+    --bg-brand-tertiary-hover: var(--brand-700);
+    --bg-accent: var(--accent-600);
+    --bg-accent-hover: var(--accent-500);
+    --bg-accent-secondary: var(--accent-500);
+    --bg-accent-secondary-hover: var(--accent-400);
+    --bg-accent-tertiary: var(--accent-800);
+    --bg-accent-tertiary-hover: var(--accent-700);
     --bg-danger: var(--danger-700);
     --bg-danger-hover: var(--danger-800);
     --bg-danger-secondary: var(--danger-900);
@@ -402,11 +405,12 @@
     --text-oninverse: var(--black-950);
     --text-ondisabled: var(--black-950);
     --text-brand: var(--brand-300);
-    --text-brand-secondary: var(--brand-400);
-    --text-brand-tertiary: var(--brand-800);
+    --text-brand-tertiary: var(--brand-500);
+    --text-onbrand: var(--black-950);
+    --text-onbrand-secondary: var(--black-925);
+    --text-onbrand-tertiary: var(--black-800);
     --text-accent: var(--accent-300);
-    --text-accent-secondary: var(--accent-400);
-    --text-accent-tertiary: var(--accent-800);
+    --text-accent-tertiary: var(--accent-600);
     --text-danger: var(--danger-300);
     --text-danger-secondary: var(--danger-400);
     --text-danger-tertiary: var(--danger-800);
@@ -443,7 +447,7 @@
   }
 }
 
-@utility arc-text-body-sm {
+@utility st-body-sm {
   font-family: var(--font-body);
   font-size: var(--size-body-sm);
   line-height: var(--line-height-snug);
@@ -451,7 +455,7 @@
   letter-spacing: var(--letter-spacing-wide);
 }
 
-@utility arc-text-body-sm-strong {
+@utility st-body-sm-strong {
   font-family: var(--font-body);
   font-size: var(--size-body-sm);
   line-height: var(--line-height-snug);
@@ -459,7 +463,7 @@
   letter-spacing: var(--letter-spacing-wide);
 }
 
-@utility arc-text-body-md {
+@utility st-body-md {
   font-family: var(--font-body);
   font-size: var(--size-body-md);
   line-height: var(--line-height-normal);
@@ -467,7 +471,7 @@
   letter-spacing: var(--letter-spacing-normal);
 }
 
-@utility arc-text-body-md-compact {
+@utility st-body-md-compact {
   font-family: var(--font-body);
   font-size: var(--size-body-md);
   line-height: var(--line-height-snug);
@@ -475,7 +479,7 @@
   letter-spacing: var(--letter-spacing-normal);
 }
 
-@utility arc-text-body-md-strong {
+@utility st-body-md-strong {
   font-family: var(--font-body);
   font-size: var(--size-body-md);
   line-height: var(--line-height-snug);
@@ -483,7 +487,7 @@
   letter-spacing: var(--letter-spacing-normal);
 }
 
-@utility arc-text-body-lg {
+@utility st-body-lg {
   font-family: var(--font-body);
   font-size: var(--size-body-lg);
   line-height: var(--line-height-relaxed);
@@ -491,7 +495,7 @@
   letter-spacing: var(--letter-spacing-normal);
 }
 
-@utility arc-text-body-lg-strong {
+@utility st-body-lg-strong {
   font-family: var(--font-body);
   font-size: var(--size-body-lg);
   line-height: var(--line-height-relaxed);
@@ -499,7 +503,7 @@
   letter-spacing: var(--letter-spacing-normal);
 }
 
-@utility arc-text-heading-sm {
+@utility st-heading-sm {
   font-family: var(--font-body);
   font-size: var(--size-heading-sm);
   line-height: var(--line-height-28);
@@ -507,7 +511,7 @@
   letter-spacing: var(--letter-spacing-tight);
 }
 
-@utility arc-text-heading-md {
+@utility st-heading-md {
   font-family: var(--font-body);
   font-size: var(--size-heading-md);
   line-height: var(--line-height-32);
@@ -515,7 +519,7 @@
   letter-spacing: var(--letter-spacing-tight);
 }
 
-@utility arc-text-heading-lg {
+@utility st-heading-lg {
   font-family: var(--font-body);
   font-size: var(--size-heading-lg);
   line-height: var(--line-height-40);
@@ -523,7 +527,7 @@
   letter-spacing: var(--letter-spacing-tight);
 }
 
-@utility arc-text-display-sm {
+@utility st-display-sm {
   font-family: var(--font-display);
   font-size: var(--size-display-sm);
   line-height: var(--line-height-40);
@@ -531,7 +535,7 @@
   letter-spacing: var(--letter-spacing-tighter);
 }
 
-@utility arc-text-display-md {
+@utility st-display-md {
   font-family: var(--font-display);
   font-size: var(--size-display-md);
   line-height: var(--line-height-48);
@@ -539,7 +543,7 @@
   letter-spacing: var(--letter-spacing-tighter);
 }
 
-@utility arc-text-display-lg {
+@utility st-display-lg {
   font-family: var(--font-display);
   font-size: var(--size-display-lg);
   line-height: var(--line-height-56);
@@ -547,7 +551,7 @@
   letter-spacing: var(--letter-spacing-tighter);
 }
 
-@utility arc-text-hero-sm {
+@utility st-hero-sm {
   font-family: var(--font-display);
   font-size: var(--size-hero-sm);
   line-height: var(--line-height-72);
@@ -555,7 +559,7 @@
   letter-spacing: var(--letter-spacing-tightest);
 }
 
-@utility arc-text-hero-md {
+@utility st-hero-md {
   font-family: var(--font-display);
   font-size: var(--size-hero-md);
   line-height: var(--line-height-80);
@@ -563,7 +567,7 @@
   letter-spacing: var(--letter-spacing-tightest);
 }
 
-@utility arc-text-hero-lg {
+@utility st-hero-lg {
   font-family: var(--font-display);
   font-size: var(--size-hero-lg);
   line-height: var(--line-height-104);
@@ -571,7 +575,7 @@
   letter-spacing: var(--letter-spacing-tightest);
 }
 
-@utility arc-text-hero-xl {
+@utility st-hero-xl {
   font-family: var(--font-display);
   font-size: var(--size-hero-xl);
   line-height: var(--line-height-120);

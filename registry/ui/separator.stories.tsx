@@ -16,9 +16,9 @@ type Story = StoryObj<typeof Separator>
 
 export const Default: Story = {
   render: () => (
-    <div className="flex max-w-sm flex-col gap-4 arc-text-body-md-compact">
+    <div className="flex max-w-sm flex-col gap-4 st-body-md-compact">
       <div className="flex flex-col gap-1.5">
-        <div className="arc-text-body-md-strong">Stera UI</div>
+        <div className="st-body-md-strong">Stera UI</div>
         <div className="text-text-secondary">
           The Foundation for your Design System
         </div>
@@ -34,7 +34,7 @@ export const Default: Story = {
 
 export const Vertical: Story = {
   render: () => (
-    <div className="flex h-5 items-center gap-4 arc-text-body-md">
+    <div className="flex h-5 items-center gap-4 st-body-md">
       <div>Blog</div>
       <Separator orientation="vertical" />
       <div>Docs</div>
