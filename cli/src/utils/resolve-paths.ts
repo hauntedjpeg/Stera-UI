@@ -1,4 +1,5 @@
 import path from "node:path"
+import { loadConfig, createMatchPath } from "tsconfig-paths"
 import type { SteraConfig } from "./resolve-config.js"
 
 // Map registry item types to the config alias that determines their output directory
@@ -10,12 +11,24 @@ const TYPE_TO_ALIAS: Record<string, keyof SteraConfig["aliases"]> = {
 }
 
 /**
- * Resolve the alias string (e.g. "@/components/ui") to a filesystem path
- * relative to the project root.
+ * Resolve a config alias (e.g. "@/components/ui") to a filesystem directory
+ * relative to the project root, using the project's tsconfig.json paths.
+ *
+ * Falls back to stripping "@/" if tsconfig can't be loaded.
  */
-function aliasToDir(alias: string): string {
-  // "@/components/ui" -> "components/ui"
-  // "@/lib" -> "lib"
+function resolveAlias(alias: string, projectRoot: string): string {
+  const tsConfig = loadConfig(projectRoot)
+
+  if (tsConfig.resultType === "success") {
+    const match = createMatchPath(tsConfig.absoluteBaseUrl, tsConfig.paths)
+    const resolved = match(alias, undefined, () => true, [".ts", ".tsx"])
+
+    if (resolved) {
+      return path.relative(projectRoot, resolved)
+    }
+  }
+
+  // Fallback: strip "@/" prefix
   return alias.replace(/^@\//, "")
 }
 
@@ -30,7 +43,7 @@ export function resolveOutputPath(
   const alias = TYPE_TO_ALIAS[file.type]
 
   if (alias) {
-    const dir = aliasToDir(config.aliases[alias])
+    const dir = resolveAlias(config.aliases[alias], projectRoot)
     const filename = path.basename(file.path)
     return path.join(projectRoot, dir, filename)
   }

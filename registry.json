@@ -11,6 +11,7 @@
       "name": "globals",
       "type": "registry:style",
       "dependencies": ["tw-animate-css"],
+      "registryDependencies": ["fonts"],
       "files": [{ "path": "registry/styles/globals.css", "type": "registry:style" }]
     },
     {

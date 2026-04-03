@@ -3,8 +3,16 @@ import { loadConfig, findConfigPath } from "../utils/resolve-config.js"
 import { resolveDependencies, getComponent } from "../registry.js"
 import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
+import { applyTransforms } from "../utils/transform.js"
+import { transformImports } from "../utils/transform-imports.js"
+import { hasGlobalsCss } from "../utils/detect-globals.js"
 
-export function add(components: string[], options: { cwd?: string; yes?: boolean }) {
+const transforms = [transformImports]
+
+export async function add(
+  components: string[],
+  options: { cwd?: string; yes?: boolean; overwrite?: boolean }
+) {
   const cwd = options.cwd ? path.resolve(options.cwd) : process.cwd()
 
   // Validate components exist
@@ -34,8 +42,27 @@ export function add(components: string[], options: { cwd?: string; yes?: boolean
 
   const projectRoot = path.dirname(configPath)
 
+  // Check for globals CSS (warn if missing)
+  const isAddingGlobals = components.includes("globals")
+  if (!isAddingGlobals && !hasGlobalsCss(config, projectRoot)) {
+    console.warn("\n  Warning: Stera design tokens not found in " + config.tailwind.css)
+    console.warn("  Components may not render correctly.")
+    console.warn("  Run \"stera-ui add globals\" to install base styles.\n")
+  }
+
   // Resolve all dependencies
   const resolved = resolveDependencies(components)
+
+  // Apply transforms to file contents
+  for (const item of resolved) {
+    for (const file of item.files) {
+      file.content = applyTransforms(
+        file.content,
+        { config, filename: file.path },
+        transforms
+      )
+    }
+  }
 
   // Show what will be installed
   const requested = new Set(components)
@@ -65,12 +92,26 @@ export function add(components: string[], options: { cwd?: string; yes?: boolean
 
   console.log("")
 
-  // Write files
-  const written = writeComponentFiles(resolved, config, projectRoot)
+  // Write files (with overwrite detection)
+  const { written, skipped } = await writeComponentFiles(
+    resolved,
+    config,
+    projectRoot,
+    { overwrite: options.overwrite }
+  )
 
-  console.log("Files written:")
-  for (const file of written) {
-    console.log(`  ${file}`)
+  if (written.length > 0) {
+    console.log("Files written:")
+    for (const file of written) {
+      console.log(`  ${file}`)
+    }
+  }
+
+  if (skipped.length > 0) {
+    console.log("Files skipped (unchanged):")
+    for (const file of skipped) {
+      console.log(`  ${file}`)
+    }
   }
 
   // Install npm dependencies

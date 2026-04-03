@@ -1,8 +1,11 @@
 import fs from "node:fs"
 import path from "node:path"
-import { findConfigPath } from "../utils/resolve-config.js"
+import { findConfigPath, type SteraConfig } from "../utils/resolve-config.js"
+import { resolveDependencies } from "../registry.js"
+import { writeComponentFiles } from "../utils/write-files.js"
+import { installDependencies } from "../utils/install-deps.js"
 
-const DEFAULT_CONFIG = {
+const DEFAULT_CONFIG: SteraConfig = {
   $schema: "https://ui.shadcn.com/schema.json",
   style: "stera",
   rsc: true,
@@ -24,7 +27,7 @@ const DEFAULT_CONFIG = {
   },
 }
 
-export function init(options: { cwd?: string; yes?: boolean }) {
+export async function init(options: { cwd?: string; yes?: boolean }) {
   const cwd = options.cwd ? path.resolve(options.cwd) : process.cwd()
 
   // Check if config already exists
@@ -53,10 +56,34 @@ export function init(options: { cwd?: string; yes?: boolean }) {
   )
 
   console.log("Created components.json")
+
+  // Install globals and fonts (base styles)
+  console.log("\nInstalling base styles...")
+  const resolved = resolveDependencies(["globals"])
+
+  const { written } = await writeComponentFiles(resolved, DEFAULT_CONFIG, cwd)
+  if (written.length > 0) {
+    for (const file of written) {
+      console.log(`  ${file}`)
+    }
+  }
+
+  // Install npm dependencies from globals
+  const npmDeps: string[] = []
+  for (const item of resolved) {
+    if (item.dependencies) {
+      npmDeps.push(...item.dependencies)
+    }
+  }
+  if (npmDeps.length > 0) {
+    const uniqueDeps = [...new Set(npmDeps)].sort()
+    console.log("")
+    installDependencies(uniqueDeps, cwd)
+  }
+
   console.log("")
   console.log("Next steps:")
-  console.log('  1. Run "stera-ui add globals" to install the base styles')
-  console.log('  2. Run "stera-ui add <component>" to add components')
+  console.log('  Run "stera-ui add <component>" to add components')
   console.log("")
   console.log(
     "See the README for font setup instructions."

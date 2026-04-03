@@ -17,8 +17,8 @@ program
   .description("Initialize Stera UI in your project.")
   .option("-c, --cwd <path>", "Working directory", process.cwd())
   .option("-y, --yes", "Skip confirmation prompts")
-  .action((options) => {
-    init(options)
+  .action(async (options) => {
+    await init(options)
   })
 
 program
@@ -27,8 +27,9 @@ program
   .argument("<components...>", "Components to add")
   .option("-c, --cwd <path>", "Working directory", process.cwd())
   .option("-y, --yes", "Skip confirmation prompts")
-  .action((components, options) => {
-    add(components, options)
+  .option("-o, --overwrite", "Overwrite existing files without prompting")
+  .action(async (components, options) => {
+    await add(components, options)
   })
 
 program
