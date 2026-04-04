@@ -2,17 +2,9 @@ import fs from "node:fs"
 import path from "node:path"
 
 export interface SteraConfig {
-  style: string
-  rsc: boolean
-  tsx: boolean
-  tailwind: {
-    config: string
-    css: string
-    baseColor: string
-    cssVariables: boolean
-    prefix: string
-  }
-  iconLibrary: string
+  $schema?: string
+  version: 1
+  css: string
   aliases: {
     components: string
     utils: string
@@ -22,7 +14,29 @@ export interface SteraConfig {
   }
 }
 
-const CONFIG_FILE = "components.json"
+/** Legacy config shape from shadcn-era bootstrapping. */
+interface LegacySteraConfig {
+  tailwind: { css: string }
+  aliases: SteraConfig["aliases"]
+}
+
+export const CONFIG_FILE = "components.json"
+
+/**
+ * Normalize a legacy (pre-v1) config to the current shape.
+ * Detects old format by checking for `tailwind` key without `version`.
+ */
+function migrateConfig(raw: Record<string, unknown>): SteraConfig {
+  if (!("version" in raw) && "tailwind" in raw) {
+    const legacy = raw as unknown as LegacySteraConfig
+    return {
+      version: 1,
+      css: legacy.tailwind.css || "src/styles/globals.css",
+      aliases: legacy.aliases,
+    }
+  }
+  return raw as unknown as SteraConfig
+}
 
 export function findConfigPath(cwd: string): string | null {
   let dir = path.resolve(cwd)
@@ -42,7 +56,8 @@ export function loadConfig(cwd: string): SteraConfig | null {
   if (!configPath) return null
 
   try {
-    return JSON.parse(fs.readFileSync(configPath, "utf-8"))
+    const raw = JSON.parse(fs.readFileSync(configPath, "utf-8"))
+    return migrateConfig(raw)
   } catch {
     return null
   }

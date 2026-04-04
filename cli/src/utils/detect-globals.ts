@@ -7,7 +7,7 @@ import type { SteraConfig } from "./resolve-config.js"
  * Looks for `--bg-brand` as a distinctive marker that Stera globals are present.
  */
 export function hasGlobalsCss(config: SteraConfig, projectRoot: string): boolean {
-  const cssPath = path.resolve(projectRoot, config.tailwind.css)
+  const cssPath = path.resolve(projectRoot, config.css)
 
   if (!fs.existsSync(cssPath)) {
     return false

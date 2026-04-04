@@ -1,6 +1,6 @@
 import fs from "node:fs"
 import path from "node:path"
-import { findConfigPath, type SteraConfig } from "../utils/resolve-config.js"
+import { findConfigPath, CONFIG_FILE, type SteraConfig } from "../utils/resolve-config.js"
 import { resolveDependencies, getComponent } from "../registry.js"
 import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
@@ -22,17 +22,9 @@ function buildConfig(project: ProjectInfo): SteraConfig {
   }
 
   return {
-    style: "stera",
-    rsc: project.rsc,
-    tsx: true,
-    tailwind: {
-      config: "",
-      css: cssPath,
-      baseColor: "neutral",
-      cssVariables: true,
-      prefix: "",
-    },
-    iconLibrary: "stera-icons",
+    $schema: "https://stera.site/ui/schema.json",
+    version: 1,
+    css: cssPath,
     aliases: {
       components: "@/components",
       utils: "@/lib/utils",
@@ -105,7 +97,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   const config = buildConfig(project)
 
   // Write config
-  const configPath = path.join(cwd, "components.json")
+  const configPath = path.join(cwd, CONFIG_FILE)
   fs.writeFileSync(
     configPath,
     JSON.stringify(config, null, 2) + "\n",
@@ -116,7 +108,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   // Install base styles
   console.log("\nInstalling base styles...")
 
-  const cssDir = path.dirname(path.resolve(cwd, config.tailwind.css))
+  const cssDir = path.dirname(path.resolve(cwd, config.css))
 
   if (project.existingCssFile) {
     // Existing CSS file found — append tokens if not already present

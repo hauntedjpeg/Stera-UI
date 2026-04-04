@@ -50,7 +50,7 @@ export function resolveOutputPath(
 
   // registry:style -> write to the directory containing the tailwind css file
   if (file.type === "registry:style") {
-    const cssDir = path.dirname(config.tailwind.css)
+    const cssDir = path.dirname(config.css)
     const filename = path.basename(file.path)
     return path.join(projectRoot, cssDir, filename)
   }

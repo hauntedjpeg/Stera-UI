@@ -145,18 +145,9 @@ Lists all available components grouped by type, along with their registry depend
 
 ```json
 {
-  "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "stera",
-  "rsc": true,
-  "tsx": true,
-  "tailwind": {
-    "config": "",
-    "css": "styles/globals.css",
-    "baseColor": "neutral",
-    "cssVariables": true,
-    "prefix": ""
-  },
-  "iconLibrary": "stera-icons",
+  "$schema": "https://stera.site/ui/schema.json",
+  "version": 1,
+  "css": "src/styles/globals.css",
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils",
@@ -166,6 +157,14 @@ Lists all available components grouped by type, along with their registry depend
   }
 }
 ```
+
+> **Upgrading?** If you have an older `components.json` with a `tailwind` object and fields like `style`, `rsc`, etc., the CLI will read it just fine — those fields are migrated automatically in memory. No manual changes needed.
+
+### `css`
+
+Path to your Tailwind CSS entry file. The CLI uses this to:
+- Detect whether Stera design tokens are present.
+- Write `globals.css` and `fonts.css` to the same directory during `init`.
 
 ### Aliases
 
@@ -180,12 +179,6 @@ The `aliases` field controls where each file type is written and how imports are
 | `hooks` | `@/hooks` | Hooks (use-mobile, etc.) |
 
 These must match the path aliases in your `tsconfig.json`. For example, if you set `"ui": "@/ui"`, the CLI will write button to `ui/button.tsx` (resolved via tsconfig) and rewrite any `import ... from "@/components/ui/button"` statements in other components to `@/ui/button`.
-
-### `tailwind.css`
-
-Set this to the path of your Tailwind CSS entry file. The CLI uses this to:
-- Detect whether Stera design tokens are present.
-- Write `globals.css` and `fonts.css` to the same directory during `init`.
 
 ---
 

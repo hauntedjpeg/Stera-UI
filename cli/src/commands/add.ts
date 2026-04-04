@@ -1,5 +1,5 @@
 import path from "node:path"
-import { loadConfig, findConfigPath } from "../utils/resolve-config.js"
+import { loadConfig, findConfigPath, CONFIG_FILE } from "../utils/resolve-config.js"
 import { resolveDependencies, getComponent } from "../registry.js"
 import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
@@ -29,14 +29,14 @@ export async function add(
   const configPath = findConfigPath(cwd)
   if (!configPath) {
     console.error(
-      "Error: components.json not found. Run \"stera-ui init\" first."
+      `Error: ${CONFIG_FILE} not found. Run "stera-ui init" first.`
     )
     process.exit(1)
   }
 
   const config = loadConfig(cwd)
   if (!config) {
-    console.error("Error: Failed to parse components.json.")
+    console.error(`Error: Failed to parse ${CONFIG_FILE}.`)
     process.exit(1)
   }
 
@@ -45,7 +45,7 @@ export async function add(
   // Check for globals CSS (warn if missing)
   const isAddingGlobals = components.includes("globals")
   if (!isAddingGlobals && !hasGlobalsCss(config, projectRoot)) {
-    console.warn("\n  Warning: Stera design tokens not found in " + config.tailwind.css)
+    console.warn("\n  Warning: Stera design tokens not found in " + config.css)
     console.warn("  Components may not render correctly.")
     console.warn("  Run \"stera-ui add globals\" to install base styles.\n")
   }
