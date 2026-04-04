@@ -2,7 +2,6 @@ import fs from "node:fs"
 import path from "node:path"
 
 export interface SteraConfig {
-  $schema?: string
   style: string
   rsc: boolean
   tsx: boolean
