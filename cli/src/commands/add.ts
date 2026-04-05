@@ -6,6 +6,7 @@ import { installDependencies } from "../utils/install-deps.js"
 import { applyTransforms } from "../utils/transform.js"
 import { transformImports } from "../utils/transform-imports.js"
 import { hasGlobalsCss } from "../utils/detect-globals.js"
+import { CHECK, WARN, dim } from "../utils/format.js"
 
 const transforms = [transformImports]
 
@@ -19,8 +20,8 @@ export async function add(
   for (const name of components) {
     const item = getComponent(name)
     if (!item) {
-      console.error(`Error: Component "${name}" not found in registry.`)
-      console.error(`Run "stera-ui list" to see available components.`)
+      console.error(`  Error: Component "${name}" not found in registry.`)
+      console.error(`  Run "stera-ui list" to see available components.`)
       process.exit(1)
     }
   }
@@ -29,14 +30,14 @@ export async function add(
   const configPath = findConfigPath(cwd)
   if (!configPath) {
     console.error(
-      `Error: ${CONFIG_FILE} not found. Run "stera-ui init" first.`
+      `  Error: ${CONFIG_FILE} not found. Run "stera-ui init" first.`
     )
     process.exit(1)
   }
 
   const config = loadConfig(cwd)
   if (!config) {
-    console.error(`Error: Failed to parse ${CONFIG_FILE}.`)
+    console.error(`  Error: Failed to parse ${CONFIG_FILE}.`)
     process.exit(1)
   }
 
@@ -45,9 +46,9 @@ export async function add(
   // Check for globals CSS (warn if missing)
   const isAddingGlobals = components.includes("globals")
   if (!isAddingGlobals && !hasGlobalsCss(config, projectRoot)) {
-    console.warn("\n  Warning: Stera design tokens not found in " + config.css)
-    console.warn("  Components may not render correctly.")
-    console.warn("  Run \"stera-ui add globals\" to install base styles.\n")
+    console.warn(`\n  ${WARN}  Stera design tokens not found in ${config.css}`)
+    console.warn(`     Components may not render correctly.`)
+    console.warn(`     Run "stera-ui add globals" to install base styles.\n`)
   }
 
   // Resolve all dependencies
@@ -66,12 +67,11 @@ export async function add(
 
   // Show what will be installed
   const requested = new Set(components)
-  const additional = resolved.filter((item) => !requested.has(item.name))
 
-  console.log("\nComponents to install:")
+  console.log("\n  Installing components\n")
   for (const item of resolved) {
-    const tag = requested.has(item.name) ? "" : " (dependency)"
-    console.log(`  ${item.name}${tag}`)
+    const tag = requested.has(item.name) ? "" : dim("  (dependency)")
+    console.log(`  → ${item.name}${tag}`)
   }
 
   // Collect npm dependencies
@@ -84,9 +84,9 @@ export async function add(
   const uniqueNpmDeps = [...new Set(allNpmDeps)].sort()
 
   if (uniqueNpmDeps.length > 0) {
-    console.log("\nnpm dependencies:")
+    console.log("\n  npm packages\n")
     for (const dep of uniqueNpmDeps) {
-      console.log(`  ${dep}`)
+      console.log(`  → ${dep}`)
     }
   }
 
@@ -100,25 +100,19 @@ export async function add(
     { overwrite: options.overwrite }
   )
 
-  if (written.length > 0) {
-    console.log("Files written:")
-    for (const file of written) {
-      console.log(`  ${file}`)
-    }
+  for (const file of written) {
+    console.log(`  ${CHECK}  ${file}`)
   }
 
-  if (skipped.length > 0) {
-    console.log("Files skipped (unchanged):")
-    for (const file of skipped) {
-      console.log(`  ${file}`)
-    }
+  for (const file of skipped) {
+    console.log(`  ${dim(`·  ${file}  (unchanged)`)}`)
   }
 
   // Install npm dependencies
   if (uniqueNpmDeps.length > 0) {
     console.log("")
-    installDependencies(uniqueNpmDeps, projectRoot)
+    await installDependencies(uniqueNpmDeps, projectRoot)
   }
 
-  console.log("\nDone.")
+  console.log("")
 }

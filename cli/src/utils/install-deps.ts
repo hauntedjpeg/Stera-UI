@@ -1,6 +1,7 @@
 import fs from "node:fs"
 import path from "node:path"
-import { execSync } from "node:child_process"
+import { spawn } from "node:child_process"
+import { createSpinner } from "./spinner.js"
 
 type PackageManager = "pnpm" | "npm" | "yarn" | "bun"
 
@@ -11,24 +12,23 @@ export function detectPackageManager(cwd: string): PackageManager {
   return "npm"
 }
 
-function getInstallCommand(pm: PackageManager, deps: string[]): string {
-  const packages = deps.join(" ")
+function getInstallArgs(pm: PackageManager, deps: string[]): [string, string[]] {
   switch (pm) {
     case "pnpm":
-      return `pnpm add ${packages}`
+      return ["pnpm", ["add", ...deps]]
     case "yarn":
-      return `yarn add ${packages}`
+      return ["yarn", ["add", ...deps]]
     case "bun":
-      return `bun add ${packages}`
+      return ["bun", ["add", ...deps]]
     default:
-      return `npm install ${packages}`
+      return ["npm", ["install", ...deps]]
   }
 }
 
 /**
  * Install npm dependencies, skipping any already in the consumer's package.json.
  */
-export function installDependencies(deps: string[], cwd: string): void {
+export async function installDependencies(deps: string[], cwd: string): Promise<void> {
   if (deps.length === 0) return
 
   // Read existing dependencies to avoid reinstalling
@@ -38,11 +38,7 @@ export function installDependencies(deps: string[], cwd: string): void {
   if (fs.existsSync(pkgPath)) {
     try {
       const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"))
-      const allDeps = {
-        ...pkg.dependencies,
-        ...pkg.devDependencies,
-      }
-      existing = new Set(Object.keys(allDeps))
+      existing = new Set(Object.keys({ ...pkg.dependencies, ...pkg.devDependencies }))
     } catch {
       // Ignore parse errors
     }
@@ -52,8 +48,23 @@ export function installDependencies(deps: string[], cwd: string): void {
   if (toInstall.length === 0) return
 
   const pm = detectPackageManager(cwd)
-  const cmd = getInstallCommand(pm, toInstall)
+  const [cmd, args] = getInstallArgs(pm, toInstall)
+  const spinner = createSpinner(`Installing with ${pm}`)
 
-  console.log(`Installing dependencies with ${pm}...`)
-  execSync(cmd, { cwd, stdio: "inherit" })
+  await new Promise<void>((resolve, reject) => {
+    const proc = spawn(cmd, args, { cwd, stdio: "pipe" })
+    proc.on("close", (code) => {
+      if (code === 0) {
+        spinner.succeed(`Installed with ${pm}`)
+        resolve()
+      } else {
+        spinner.fail(`Install failed (exit ${code})`)
+        reject(new Error(`${pm} exited with code ${code}`))
+      }
+    })
+    proc.on("error", (err) => {
+      spinner.fail(`Install failed`)
+      reject(err)
+    })
+  })
 }

@@ -3,8 +3,8 @@ import path from "node:path"
 import type { SteraConfig } from "./resolve-config.js"
 
 /**
- * Check if the user's CSS file contains Stera design tokens.
- * Looks for `--bg-brand` as a distinctive marker that Stera globals are present.
+ * Check if Stera has already been initialised in the user's project.
+ * Looks for the presence of `stera-ui.css` alongside the user's CSS file.
  */
 export function hasGlobalsCss(config: SteraConfig, projectRoot: string): boolean {
   const cssPath = path.resolve(projectRoot, config.css)
@@ -13,6 +13,6 @@ export function hasGlobalsCss(config: SteraConfig, projectRoot: string): boolean
     return false
   }
 
-  const content = fs.readFileSync(cssPath, "utf-8")
-  return content.includes("--bg-brand")
+  const steraPath = path.join(path.dirname(cssPath), "stera-ui.css")
+  return fs.existsSync(steraPath)
 }

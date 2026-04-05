@@ -6,6 +6,7 @@ import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
 import { hasGlobalsCss } from "../utils/detect-globals.js"
 import { detectProject, type ProjectInfo } from "../utils/detect-project.js"
+import { LOGO, CHECK, dim } from "../utils/format.js"
 
 /**
  * Build a SteraConfig based on detected project structure.
@@ -36,33 +37,50 @@ function buildConfig(project: ProjectInfo): SteraConfig {
 }
 
 /**
- * Strip the import lines from registry globals.css content.
- * The first 3 lines are @import directives that an existing project
- * already has or should manage separately.
+ * Remove only the `@import "tailwindcss"` line from globals content.
+ * The user's project already has this import; all other imports are kept.
  */
-function stripGlobalsImports(content: string): string {
+function stripTailwindCoreImport(content: string): string {
+  return content
+    .split("\n")
+    .filter((line) => !line.trim().match(/^@import\s+["']tailwindcss["']/))
+    .join("\n")
+}
+
+/**
+ * Insert an @import statement into an existing CSS file, placed after the
+ * last existing @import line. If no imports exist, prepend to the file.
+ */
+function insertImportLine(filePath: string, importStatement: string): void {
+  const content = fs.readFileSync(filePath, "utf-8")
   const lines = content.split("\n")
-  // Skip lines that are @import directives or blank lines at the top
-  let startIndex = 0
+
+  let lastImportIndex = -1
   for (let i = 0; i < lines.length; i++) {
-    const trimmed = lines[i].trim()
-    if (trimmed.startsWith("@import") || trimmed === "") {
-      startIndex = i + 1
-    } else {
-      break
+    if (lines[i].trim().startsWith("@import")) {
+      lastImportIndex = i
     }
   }
-  return lines.slice(startIndex).join("\n")
+
+  if (lastImportIndex >= 0) {
+    lines.splice(lastImportIndex + 1, 0, importStatement)
+  } else {
+    lines.unshift(importStatement)
+  }
+
+  fs.writeFileSync(filePath, lines.join("\n"), "utf-8")
 }
 
 export async function init(options: { cwd?: string; yes?: boolean }) {
   const cwd = options.cwd ? path.resolve(options.cwd) : process.cwd()
 
+  console.log(`\n  ${LOGO}  Stera UI\n`)
+
   // Check if config already exists
   const existing = findConfigPath(cwd)
   if (existing) {
-    console.log(`components.json already exists at ${existing}`)
-    console.log('Run "stera-ui add <component>" to add components.')
+    console.log(`  components.json already exists at ${existing}`)
+    console.log('  Run "stera-ui add <component>" to add components.\n')
     return
   }
 
@@ -70,7 +88,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   const pkgPath = path.join(cwd, "package.json")
   if (!fs.existsSync(pkgPath)) {
     console.error(
-      "Error: No package.json found. Please run this in a project directory."
+      "  Error: No package.json found. Please run this in a project directory."
     )
     process.exit(1)
   }
@@ -90,7 +108,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   if (frameworkName) parts.push(frameworkName)
   if (project.hasSrc) parts.push("src/ directory")
   if (parts.length > 0) {
-    console.log(`Detected ${parts.join(" project with ")} project`)
+    console.log(`  Detected ${parts.join(" project with ")} project\n`)
   }
 
   // Build config from detection
@@ -103,38 +121,31 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
     JSON.stringify(config, null, 2) + "\n",
     "utf-8"
   )
-  console.log("\nCreated components.json")
+  console.log(`  ${CHECK}  Created components.json`)
 
   // Install base styles
-  console.log("\nInstalling base styles...")
-
   const cssDir = path.dirname(path.resolve(cwd, config.css))
 
   if (project.existingCssFile) {
     // Existing CSS file found — append tokens if not already present
     if (hasGlobalsCss(config, cwd)) {
       console.log(
-        `  Stera design tokens already present in ${project.existingCssFile}`
+        `  ${CHECK}  Stera already initialised ${dim(`(${path.join(path.dirname(project.existingCssFile), "stera-ui.css")} exists)`)}`
       )
     } else {
       const globalsItem = getComponent("globals")
       if (globalsItem) {
         const globalsContent = globalsItem.files[0].content
-        const tokensOnly = stripGlobalsImports(globalsContent)
+        const steraUiContent = stripTailwindCoreImport(globalsContent)
+
+        const steraUiPath = path.join(cssDir, "stera-ui.css")
+        fs.mkdirSync(cssDir, { recursive: true })
+        fs.writeFileSync(steraUiPath, steraUiContent, "utf-8")
+        console.log(`  ${CHECK}  Created ${path.relative(cwd, steraUiPath)}`)
 
         const existingCssPath = path.resolve(cwd, project.existingCssFile)
-        const existingContent = fs.readFileSync(existingCssPath, "utf-8")
-
-        // Append Stera tokens to existing file
-        const separator = existingContent.endsWith("\n") ? "\n" : "\n\n"
-        fs.writeFileSync(
-          existingCssPath,
-          existingContent + separator + tokensOnly,
-          "utf-8"
-        )
-        console.log(
-          `  Appended Stera design tokens to ${project.existingCssFile}`
-        )
+        insertImportLine(existingCssPath, "@import './stera-ui.css';")
+        console.log(`  ${CHECK}  Added @import to ${project.existingCssFile}`)
       }
     }
 
@@ -145,11 +156,9 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
       fs.mkdirSync(path.dirname(fontsPath), { recursive: true })
       if (!fs.existsSync(fontsPath)) {
         fs.writeFileSync(fontsPath, fontsItem.files[0].content, "utf-8")
-        console.log(`  ${path.relative(cwd, fontsPath)}`)
+        console.log(`  ${CHECK}  Created ${path.relative(cwd, fontsPath)}`)
       } else {
-        console.log(
-          `  ${path.relative(cwd, fontsPath)} (already exists, skipped)`
-        )
+        console.log(`  ${dim(path.relative(cwd, fontsPath) + " (already exists, skipped)")}`)
       }
     }
   } else {
@@ -157,7 +166,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
     const resolved = resolveDependencies(["globals"])
     const { written } = await writeComponentFiles(resolved, config, cwd)
     for (const file of written) {
-      console.log(`  ${file}`)
+      console.log(`  ${CHECK}  Created ${file}`)
     }
   }
 
@@ -166,18 +175,14 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   if (globalsItem?.dependencies) {
     const deps = [...new Set(globalsItem.dependencies)].sort()
     console.log("")
-    installDependencies(deps, cwd)
+    await installDependencies(deps, cwd)
   }
 
   // Next steps
   console.log("")
-  console.log("Next steps:")
-  if (project.existingCssFile) {
-    console.log(
-      `  Add to your CSS file: @import './fonts.css';`
-    )
-  }
-  console.log('  Run "stera-ui add <component>" to add components')
+  console.log("  Next steps:")
+  console.log('    stera-ui add <component>')
   console.log("")
-  console.log("See the README for font setup instructions.")
+  console.log(`  ${dim("See the README for font setup instructions.")}`)
+  console.log("")
 }
