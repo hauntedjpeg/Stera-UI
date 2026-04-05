@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { SiHash, SiX } from "stera-icons"
 
 import { Chip } from "./chip"

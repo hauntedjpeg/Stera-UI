@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { SiLock, SiMusic, SiSettings, SiUser, SiVideo } from "stera-icons"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
