@@ -35,8 +35,8 @@ program
 program
   .command("list")
   .description("List all available components.")
-  .action(() => {
-    list()
+  .action(async () => {
+    await list()
   })
 
 program.parse()

@@ -3,7 +3,7 @@ import path from "node:path"
 
 const ROOT = path.resolve(import.meta.dirname, "..")
 const REGISTRY_PATH = path.join(ROOT, "registry.json")
-const OUTPUT_DIR = path.join(ROOT, "dist")
+const OUTPUT_DIR = path.join(ROOT, "public", "r")
 
 interface RegistryFile {
   path: string
@@ -32,7 +32,12 @@ function buildRegistry() {
   const itemNames = new Set(registry.items.map((item) => item.name))
   const errors: string[] = []
 
-  const builtItems: RegistryItem[] = registry.items.map((item) => {
+  // Ensure output directory exists
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true })
+
+  const indexItems: Omit<RegistryItem, "files">[] = []
+
+  for (const item of registry.items) {
     // Validate registryDependencies reference existing items
     if (item.registryDependencies) {
       for (const dep of item.registryDependencies) {
@@ -66,7 +71,7 @@ function buildRegistry() {
       }
     })
 
-    return {
+    const builtItem: RegistryItem = {
       name: item.name,
       type: item.type,
       ...(item.dependencies?.length && { dependencies: item.dependencies }),
@@ -75,7 +80,21 @@ function buildRegistry() {
       }),
       files,
     }
-  })
+
+    // Write individual component JSON: public/r/{name}.json
+    const itemPath = path.join(OUTPUT_DIR, `${item.name}.json`)
+    fs.writeFileSync(itemPath, JSON.stringify(builtItem, null, 2))
+
+    // Collect index entry (without file contents)
+    indexItems.push({
+      name: item.name,
+      type: item.type,
+      ...(item.dependencies?.length && { dependencies: item.dependencies }),
+      ...(item.registryDependencies?.length && {
+        registryDependencies: item.registryDependencies,
+      }),
+    })
+  }
 
   if (errors.length > 0) {
     console.error("Registry build errors:")
@@ -85,19 +104,19 @@ function buildRegistry() {
     process.exit(1)
   }
 
-  // Write output
-  fs.mkdirSync(OUTPUT_DIR, { recursive: true })
-
-  const output = {
+  // Write registry index: public/r/index.json
+  const indexPath = path.join(OUTPUT_DIR, "index.json")
+  const index = {
     name: registry.name,
-    items: builtItems,
+    items: indexItems,
   }
-
-  const outputPath = path.join(OUTPUT_DIR, "registry.json")
-  fs.writeFileSync(outputPath, JSON.stringify(output, null, 2))
+  fs.writeFileSync(indexPath, JSON.stringify(index, null, 2))
 
   console.log(
-    `Built ${builtItems.length} registry items -> ${path.relative(ROOT, outputPath)}`
+    `Built ${registry.items.length} registry items -> ${path.relative(ROOT, OUTPUT_DIR)}/`
+  )
+  console.log(
+    `  ${registry.items.length} component files + index.json`
   )
 }
 

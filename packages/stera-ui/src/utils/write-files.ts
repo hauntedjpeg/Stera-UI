@@ -2,7 +2,7 @@ import fs from "node:fs"
 import path from "node:path"
 import readline from "node:readline/promises"
 import type { SteraConfig } from "./resolve-config.js"
-import type { RegistryItem } from "../registry.js"
+import type { RegistryItem } from "../registry/index.js"
 import { resolveOutputPath } from "./resolve-paths.js"
 
 export interface WriteOptions {
@@ -76,7 +76,7 @@ export async function writeComponentFiles(
       fs.mkdirSync(dir, { recursive: true })
 
       // Write file
-      fs.writeFileSync(outputPath, file.content, "utf-8")
+      fs.writeFileSync(outputPath, file.content ?? "", "utf-8")
       written.push(relativePath)
     }
   }

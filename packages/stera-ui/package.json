@@ -1,0 +1,40 @@
+{
+  "name": "stera-ui",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Add Stera UI components to your project.",
+  "license": "MIT",
+  "author": "Chaz Giese <chazgiese@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hauntedjpeg/Stera-UI.git",
+    "directory": "packages/stera-ui"
+  },
+  "bin": {
+    "stera-ui": "./dist/index.js"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./registry": "./dist/registry/index.js",
+    "./schema": "./dist/schema/index.js",
+    "./utils": "./dist/utils/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "tsconfig-paths": "^4.2.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.1.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,8 +1,8 @@
-import { getAllComponents } from "../registry.js"
+import { getAllComponents } from "../registry/index.js"
 import { LOGO, dim } from "../utils/format.js"
 
-export function list() {
-  const items = getAllComponents()
+export async function list() {
+  const items = await getAllComponents()
 
   // Group by type
   const groups = new Map<string, typeof items>()

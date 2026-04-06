@@ -1,27 +1,15 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
     "jsx": "react-jsx",
-    "incremental": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/components/ui/*": ["./registry/ui/*"],
-      "@/components/*": ["./registry/components/*"],
-      "@/lib/*": ["./registry/lib/*"],
-      "@/hooks/*": ["./registry/hooks/*"],
-      "@/*": ["./*"]
-    }
+    "noEmit": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "storybook-static", "dist", "cli", "scripts"]
+  "exclude": ["node_modules", "dist", "storybook-static", ".next"]
 }

@@ -1,5 +1,5 @@
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -12,9 +12,17 @@
 /coverage
 
 # production
-/build
-/dist
-/storybook-static
+dist
+storybook-static
+
+# turbo
+.turbo
+
+# next.js
+.next
+
+# generated registry (built from source)
+apps/docs/public/r/
 
 # ide
 .claude/

@@ -1,6 +1,6 @@
 import path from "node:path"
 import { loadConfig, findConfigPath, CONFIG_FILE } from "../utils/resolve-config.js"
-import { resolveDependencies, getComponent } from "../registry.js"
+import { resolveDependencies, getComponent } from "../registry/index.js"
 import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
 import { applyTransforms } from "../utils/transform.js"
@@ -18,7 +18,7 @@ export async function add(
 
   // Validate components exist
   for (const name of components) {
-    const item = getComponent(name)
+    const item = await getComponent(name)
     if (!item) {
       console.error(`  Error: Component "${name}" not found in registry.`)
       console.error(`  Run "stera-ui list" to see available components.`)
@@ -52,16 +52,18 @@ export async function add(
   }
 
   // Resolve all dependencies
-  const resolved = resolveDependencies(components)
+  const resolved = await resolveDependencies(components)
 
   // Apply transforms to file contents
   for (const item of resolved) {
     for (const file of item.files) {
-      file.content = applyTransforms(
-        file.content,
-        { config, filename: file.path },
-        transforms
-      )
+      if (file.content) {
+        file.content = applyTransforms(
+          file.content,
+          { config, filename: file.path },
+          transforms
+        )
+      }
     }
   }
 

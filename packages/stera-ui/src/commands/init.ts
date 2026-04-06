@@ -1,7 +1,7 @@
 import fs from "node:fs"
 import path from "node:path"
 import { findConfigPath, CONFIG_FILE, type SteraConfig } from "../utils/resolve-config.js"
-import { resolveDependencies, getComponent } from "../registry.js"
+import { resolveDependencies, fetchRegistryItem } from "../registry/index.js"
 import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
 import { hasGlobalsCss } from "../utils/detect-globals.js"
@@ -133,9 +133,9 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
         `  ${CHECK}  Stera already initialised ${dim(`(${path.join(path.dirname(project.existingCssFile), "stera-ui.css")} exists)`)}`
       )
     } else {
-      const globalsItem = getComponent("globals")
-      if (globalsItem) {
-        const globalsContent = globalsItem.files[0].content
+      try {
+        const globalsItem = await fetchRegistryItem("globals")
+        const globalsContent = globalsItem.files[0].content ?? ""
         const steraUiContent = stripTailwindCoreImport(globalsContent)
 
         const steraUiPath = path.join(cssDir, "stera-ui.css")
@@ -146,24 +146,28 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
         const existingCssPath = path.resolve(cwd, project.existingCssFile)
         insertImportLine(existingCssPath, "@import './stera-ui.css';")
         console.log(`  ${CHECK}  Added @import to ${project.existingCssFile}`)
+      } catch {
+        // globals not found — skip
       }
     }
 
     // Write fonts.css to the same directory as the existing CSS file
-    const fontsItem = getComponent("fonts")
-    if (fontsItem) {
+    try {
+      const fontsItem = await fetchRegistryItem("fonts")
       const fontsPath = path.join(cssDir, "fonts.css")
       fs.mkdirSync(path.dirname(fontsPath), { recursive: true })
       if (!fs.existsSync(fontsPath)) {
-        fs.writeFileSync(fontsPath, fontsItem.files[0].content, "utf-8")
+        fs.writeFileSync(fontsPath, fontsItem.files[0].content ?? "", "utf-8")
         console.log(`  ${CHECK}  Created ${path.relative(cwd, fontsPath)}`)
       } else {
         console.log(`  ${dim(path.relative(cwd, fontsPath) + " (already exists, skipped)")}`)
       }
+    } catch {
+      // fonts not found — skip
     }
   } else {
     // No existing CSS file — write globals.css and fonts.css from registry
-    const resolved = resolveDependencies(["globals"])
+    const resolved = await resolveDependencies(["globals"])
     const { written } = await writeComponentFiles(resolved, config, cwd)
     for (const file of written) {
       console.log(`  ${CHECK}  Created ${file}`)
@@ -171,11 +175,15 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   }
 
   // Install npm dependencies from globals (tw-animate-css)
-  const globalsItem = getComponent("globals")
-  if (globalsItem?.dependencies) {
-    const deps = [...new Set(globalsItem.dependencies)].sort()
-    console.log("")
-    await installDependencies(deps, cwd)
+  try {
+    const globalsItem = await fetchRegistryItem("globals")
+    if (globalsItem.dependencies) {
+      const deps = [...new Set(globalsItem.dependencies)].sort()
+      console.log("")
+      await installDependencies(deps, cwd)
+    }
+  } catch {
+    // globals not found — skip deps install
   }
 
   // Next steps
