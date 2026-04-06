@@ -249,7 +249,7 @@ function NavMain({
               >
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
-                <SiChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                <SiChevronRight className="ml-auto transition-transform duration-200 group-data-open/collapsible:rotate-90" />
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <SidebarMenuSub>
