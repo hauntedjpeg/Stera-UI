@@ -23,7 +23,7 @@ function buildConfig(project: ProjectInfo): SteraConfig {
   }
 
   return {
-    $schema: "https://stera.site/ui/schema.json",
+    $schema: "https://ui.stera.site/schema.json",
     version: 1,
     css: cssPath,
     aliases: {
