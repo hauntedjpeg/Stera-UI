@@ -15,8 +15,8 @@ export function TooltipDefault() {
     <Preview>
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="outline">Hover</Button>
+          <TooltipTrigger render={<Button variant="outline" />}>
+            Hover
           </TooltipTrigger>
           <TooltipContent>
             <p>Add to library</p>
@@ -33,26 +33,26 @@ export function TooltipSides() {
       <TooltipProvider>
         <div className="flex items-center gap-4">
           <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="outline">Top</Button>
+            <TooltipTrigger render={<Button variant="outline" />}>
+              Top
             </TooltipTrigger>
             <TooltipContent side="top"><p>Top tooltip</p></TooltipContent>
           </Tooltip>
           <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="outline">Right</Button>
+            <TooltipTrigger render={<Button variant="outline" />}>
+              Right
             </TooltipTrigger>
             <TooltipContent side="right"><p>Right tooltip</p></TooltipContent>
           </Tooltip>
           <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="outline">Bottom</Button>
+            <TooltipTrigger render={<Button variant="outline" />}>
+              Bottom
             </TooltipTrigger>
             <TooltipContent side="bottom"><p>Bottom tooltip</p></TooltipContent>
           </Tooltip>
           <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="outline">Left</Button>
+            <TooltipTrigger render={<Button variant="outline" />}>
+              Left
             </TooltipTrigger>
             <TooltipContent side="left"><p>Left tooltip</p></TooltipContent>
           </Tooltip>
@@ -67,8 +67,8 @@ export function TooltipWithKbd() {
     <Preview>
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="outline">Open</Button>
+          <TooltipTrigger render={<Button variant="outline" />}>
+            Open
           </TooltipTrigger>
           <TooltipContent>
             Open dialog <Kbd size="sm">⌘K</Kbd>

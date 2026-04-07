@@ -16,6 +16,7 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxGroup,
+  ComboboxInput,
   ComboboxItem,
   ComboboxLabel,
   ComboboxList,

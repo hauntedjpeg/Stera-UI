@@ -31,8 +31,8 @@ type Story = StoryObj<typeof Tooltip>
 export const Default: Story = {
   render: () => (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="outline">Hover</Button>
+      <TooltipTrigger render={<Button variant="outline" />}>
+        Hover
       </TooltipTrigger>
       <TooltipContent>
         <p>Add to library</p>
@@ -45,32 +45,32 @@ export const Sides: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="outline">Top</Button>
+        <TooltipTrigger render={<Button variant="outline" />}>
+          Top
         </TooltipTrigger>
         <TooltipContent side="top">
           <p>Top tooltip</p>
         </TooltipContent>
       </Tooltip>
       <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="outline">Right</Button>
+        <TooltipTrigger render={<Button variant="outline" />}>
+          Right
         </TooltipTrigger>
         <TooltipContent side="right">
           <p>Right tooltip</p>
         </TooltipContent>
       </Tooltip>
       <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="outline">Bottom</Button>
+        <TooltipTrigger render={<Button variant="outline" />}>
+          Bottom
         </TooltipTrigger>
         <TooltipContent side="bottom">
           <p>Bottom tooltip</p>
         </TooltipContent>
       </Tooltip>
       <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="outline">Left</Button>
+        <TooltipTrigger render={<Button variant="outline" />}>
+          Left
         </TooltipTrigger>
         <TooltipContent side="left">
           <p>Left tooltip</p>
@@ -83,8 +83,8 @@ export const Sides: Story = {
 export const WithKeyboardShortcut: Story = {
   render: () => (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="outline">Open</Button>
+      <TooltipTrigger render={<Button variant="outline" />}>
+        Open
       </TooltipTrigger>
       <TooltipContent>
         Open dialog <Kbd size="sm">⌘K</Kbd>
@@ -96,12 +96,10 @@ export const WithKeyboardShortcut: Story = {
 export const DisabledButton: Story = {
   render: () => (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <span tabIndex={0}>
-          <Button variant="outline" disabled>
-            Disabled button
-          </Button>
-        </span>
+      <TooltipTrigger render={<span tabIndex={0} />}>
+        <Button variant="outline" disabled>
+          Disabled button
+        </Button>
       </TooltipTrigger>
       <TooltipContent>
         <p>You don&apos;t have permission to do this</p>
