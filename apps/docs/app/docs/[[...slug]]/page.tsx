@@ -1,10 +1,4 @@
 import { source } from "../../../lib/source"
-import {
-  DocsPage,
-  DocsBody,
-  DocsTitle,
-  DocsDescription,
-} from "fumadocs-ui/page"
 import { notFound } from "next/navigation"
 import { useMDXComponents } from "../../../mdx-components"
 
@@ -19,13 +13,19 @@ export default async function Page(props: {
   const MDX = page.data.body
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
-      <DocsBody>
+    <article className="mx-auto w-full max-w-3xl px-6 py-10">
+      <header className="mb-8">
+        <h1 className="st-display-sm text-text">{page.data.title}</h1>
+        {page.data.description && (
+          <p className="mt-2 st-body-lg text-text-secondary">
+            {page.data.description}
+          </p>
+        )}
+      </header>
+      <div className="prose">
         <MDX components={useMDXComponents({})} />
-      </DocsBody>
-    </DocsPage>
+      </div>
+    </article>
   )
 }
 

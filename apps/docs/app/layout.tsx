@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { RootProvider } from "fumadocs-ui/provider/next"
+import { ThemeProvider } from "next-themes"
 import "../registry/styles/globals.css"
 
 export const metadata: Metadata = {
@@ -22,7 +22,14 @@ export default function RootLayout({
           minHeight: "100vh",
         }}
       >
-        <RootProvider>{children}</RootProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
