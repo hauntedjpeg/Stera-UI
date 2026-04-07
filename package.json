@@ -24,7 +24,10 @@
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,mjs,json,css,md}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,mjs,json,css,md}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,mjs,json,css,md}\"",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build && changeset publish"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -32,6 +35,8 @@
     ]
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.30.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "turbo": "^2.5.4",

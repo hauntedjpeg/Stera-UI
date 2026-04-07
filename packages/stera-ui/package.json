@@ -10,6 +10,11 @@
     "url": "git+https://github.com/hauntedjpeg/Stera-UI.git",
     "directory": "packages/stera-ui"
   },
+  "keywords": ["cli", "components", "ui", "design-system"],
+  "homepage": "https://ui.stera.site",
+  "engines": {
+    "node": ">=18"
+  },
   "bin": {
     "stera-ui": "./dist/index.js"
   },
