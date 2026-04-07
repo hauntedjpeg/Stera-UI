@@ -15,7 +15,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
         // Group
         "group/input-group",
         // Base
-        "relative flex rounded-xl border border-input shadow-xs outline-none transition-[color,box-shadow] items-center",
+        "relative flex rounded-xl border border-border shadow-xs outline-none transition-[color,box-shadow] items-center",
         // Sizing
         "h-9 w-full min-w-0 has-[[data-slot=input-group-control][data-size=sm]]:h-8 has-[[data-slot=input-group-control][data-size=lg]]:h-10 has-[[data-slot=input-group-control][data-size=xl]]:h-12",
         // Focus

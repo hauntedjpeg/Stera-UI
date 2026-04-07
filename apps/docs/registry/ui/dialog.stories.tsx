@@ -112,7 +112,7 @@ export const StickyFooter: Story = {
         </DialogHeader>
         <DialogContent scroll>
           {Array.from({ length: 8 }).map((_, i) => (
-            <p key={i} className="mb-4 text-sm text-muted-foreground">
+            <p key={i} className="mb-4 text-sm text-text-secondary">
               {loremParagraph}
             </p>
           ))}
@@ -138,7 +138,7 @@ export const ScrollableContent: Story = {
         </DialogHeader>
         <DialogContent>
           {Array.from({ length: 8 }).map((_, i) => (
-            <p key={i} className="mb-4 text-sm text-muted-foreground">
+            <p key={i} className="mb-4 text-sm text-text-secondary">
               {loremParagraph}
             </p>
           ))}

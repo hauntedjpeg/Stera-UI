@@ -294,7 +294,7 @@ export const WithItemHeader: Story = {
     <div className="w-96">
       <Item variant="outline">
         <ItemHeader>
-          <span className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
+          <span className="text-xs text-text-secondary font-medium uppercase tracking-wide">
             Recent
           </span>
           <Badge variant="default" size="sm">3 new</Badge>
@@ -326,8 +326,8 @@ export const WithItemFooter: Story = {
           <ItemDescription>Q4 planning session with the full team.</ItemDescription>
         </ItemContent>
         <ItemFooter>
-          <span className="text-xs text-muted-foreground">Dec 18, 2024</span>
-          <span className="text-xs text-muted-foreground">12 attendees</span>
+          <span className="text-xs text-text-secondary">Dec 18, 2024</span>
+          <span className="text-xs text-text-secondary">12 attendees</span>
         </ItemFooter>
       </Item>
     </div>

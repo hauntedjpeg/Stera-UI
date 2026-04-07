@@ -1,6 +1,7 @@
 {
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.20.0",
   "description": "A component registry for React, built on Base UI and Tailwind CSS.",
   "license": "MIT",
   "author": "Chaz Giese <chazgiese@gmail.com>",

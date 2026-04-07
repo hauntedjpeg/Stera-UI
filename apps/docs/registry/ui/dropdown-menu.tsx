@@ -195,7 +195,7 @@ function DropdownMenuSubTrigger({
         // Sizing
         "gap-2",
         // Animation
-        "data-popup-open:bg-accent data-popup-open:text-accent-foreground data-open:bg-accent data-open:text-accent-foreground",
+        "data-popup-open:bg-bg-surface-hover data-popup-open:text-text data-open:bg-bg-surface-hover data-open:text-text",
         // Variants
         "data-inset:pl-8",
         // Other
@@ -223,7 +223,7 @@ function DropdownMenuSubContent({
       data-slot="dropdown-menu-sub-content"
       className={cn(
         // Base
-        "rounded-xl bg-bg-surface p-1 text-popover-foreground shadow-lg ring-1 ring-border duration-100",
+        "rounded-xl bg-bg-surface p-1 text-text shadow-lg ring-1 ring-border duration-100",
         // Sizing
         "min-w-24 max-w-56",
         // Animation
@@ -308,7 +308,7 @@ function DropdownMenuRadioItem({
         // Variants
         "data-inset:pl-8",
         // Other
-        "cursor-default items-start focus:bg-bg-surface-hover focus:text-accent-foreground focus:**:text-text data-disabled:pointer-events-none data-disabled:text-text-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "cursor-default items-start focus:bg-bg-surface-hover focus:text-text focus:**:text-text data-disabled:pointer-events-none data-disabled:text-text-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}

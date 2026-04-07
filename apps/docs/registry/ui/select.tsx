@@ -62,7 +62,7 @@ function SelectTrigger({
         // Variants
         "data-[size=sm]:h-8 data-[size=md]:h-9 data-[size=lg]:h-10 data-[size=xl]:h-12 data-[size=xl]:pl-4 data-[size=xl]:st-body-lg",
         // Other
-        "items-center justify-between text-sm whitespace-nowrap *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-input/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "items-center justify-between text-sm whitespace-nowrap *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-bg-surface-secondary/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}
@@ -70,7 +70,7 @@ function SelectTrigger({
       {children}
       <SelectPrimitive.Icon
         render={
-          <SiChevronDown className="pointer-events-none size-4 text-muted-foreground" />
+          <SiChevronDown className="pointer-events-none size-4 text-text-secondary" />
         }
       />
     </SelectPrimitive.Trigger>

@@ -62,7 +62,7 @@ export const Controlled: Story = {
       <div className="grid w-80 gap-3">
         <div className="flex items-center justify-between gap-2">
           <Label htmlFor="slider-temperature">Temperature</Label>
-          <span className="text-muted-foreground text-sm">
+          <span className="text-text-secondary text-sm">
             {value.join(", ")}
           </span>
         </div>

@@ -134,7 +134,7 @@ function SheetTitle({ className, ...props }: SheetPrimitive.Title.Props) {
       data-slot="sheet-title"
       className={cn(
         // Other
-        "font-medium text-foreground",
+        "font-medium text-text",
         className,
       )}
       {...props}
@@ -151,7 +151,7 @@ function SheetDescription({
       data-slot="sheet-description"
       className={cn(
         // Other
-        "text-sm text-muted-foreground",
+        "text-sm text-text-secondary",
         className,
       )}
       {...props}

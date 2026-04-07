@@ -49,21 +49,21 @@ export const Menu: Story = {
     <div className="flex items-center gap-2 text-sm md:gap-4">
       <div className="flex flex-col gap-1">
         <span className="font-medium">Settings</span>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-text-secondary">
           Manage preferences
         </span>
       </div>
       <Separator orientation="vertical" />
       <div className="flex flex-col gap-1">
         <span className="font-medium">Account</span>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-text-secondary">
           Profile & security
         </span>
       </div>
       <Separator orientation="vertical" />
       <div className="flex flex-col gap-1">
         <span className="font-medium">Help</span>
-        <span className="text-xs text-muted-foreground">Support & docs</span>
+        <span className="text-xs text-text-secondary">Support & docs</span>
       </div>
     </div>
   ),
@@ -74,17 +74,17 @@ export const List: Story = {
     <div className="flex w-full max-w-sm flex-col gap-2 text-sm">
       <dl className="flex items-center justify-between">
         <dt>Item 1</dt>
-        <dd className="text-muted-foreground">Value 1</dd>
+        <dd className="text-text-secondary">Value 1</dd>
       </dl>
       <Separator />
       <dl className="flex items-center justify-between">
         <dt>Item 2</dt>
-        <dd className="text-muted-foreground">Value 2</dd>
+        <dd className="text-text-secondary">Value 2</dd>
       </dl>
       <Separator />
       <dl className="flex items-center justify-between">
         <dt>Item 3</dt>
-        <dd className="text-muted-foreground">Value 3</dd>
+        <dd className="text-text-secondary">Value 3</dd>
       </dl>
     </div>
   ),

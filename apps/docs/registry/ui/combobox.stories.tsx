@@ -243,10 +243,10 @@ export const CustomItems: Story = {
           <ComboboxList>
             {(status: Status) => (
               <ComboboxItem key={status.value} value={status}>
-                <status.icon className="size-4 text-muted-foreground" />
+                <status.icon className="size-4 text-text-secondary" />
                 <div className="flex flex-col">
                   <span>{status.label}</span>
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs text-text-secondary">
                     {status.description}
                   </span>
                 </div>
@@ -409,7 +409,7 @@ export const AllSizes: Story = {
     <div className="flex flex-col gap-4">
       {(["sm", "md", "lg", "xl"] as const).map((size) => (
         <div key={size} className="flex flex-col gap-1">
-          <span className="text-muted-foreground text-xs">{size}</span>
+          <span className="text-text-secondary text-xs">{size}</span>
           <div className="w-64">
             <Combobox items={frameworks} itemToStringLabel={(fw: Framework) => fw.label}>
               <ComboboxInput size={size} placeholder={`Size ${size}...`} />

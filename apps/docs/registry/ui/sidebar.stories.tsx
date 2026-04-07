@@ -165,11 +165,11 @@ function TeamSwitcher({
             render={
               <SidebarMenuButton
                 size="lg"
-                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                className="data-[state=open]:bg-bg-surface-hover data-[state=open]:text-text"
               />
             }
           >
-            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-bg-brand-tertiary text-text-brand">
               <activeTeam.logo className="size-4" />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
@@ -185,7 +185,7 @@ function TeamSwitcher({
             sideOffset={4}
           >
             <DropdownMenuGroup>
-              <DropdownMenuLabel className="text-xs text-muted-foreground">
+              <DropdownMenuLabel className="text-xs text-text-secondary">
                 Teams
               </DropdownMenuLabel>
               {teams.map((team, index) => (
@@ -210,7 +210,7 @@ function TeamSwitcher({
                 <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
                   <SiPlus className="size-4" />
                 </div>
-                <div className="font-medium text-muted-foreground">
+                <div className="font-medium text-text-secondary">
                   Add team
                 </div>
               </DropdownMenuItem>
@@ -298,16 +298,16 @@ function NavProjects({
                 align={isMobile ? "end" : "start"}
               >
                 <DropdownMenuItem>
-                  <SiFolder className="text-muted-foreground" />
+                  <SiFolder className="text-text-secondary" />
                   <span>View Project</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <SiForward className="text-muted-foreground" />
+                  <SiForward className="text-text-secondary" />
                   <span>Share Project</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <SiTrash className="text-muted-foreground" />
+                  <SiTrash className="text-text-secondary" />
                   <span>Delete Project</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -315,8 +315,8 @@ function NavProjects({
           </SidebarMenuItem>
         ))}
         <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <SiMore className="text-sidebar-foreground/70" />
+          <SidebarMenuButton className="text-text-secondary">
+            <SiMore className="text-text-secondary" />
             <span>More</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
@@ -340,7 +340,7 @@ function NavUser({
             render={
               <SidebarMenuButton
                 size="lg"
-                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                className="data-[state=open]:bg-bg-surface-hover data-[state=open]:text-text"
               />
             }
           >
@@ -432,7 +432,7 @@ export const AppSidebar: Story = {
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
           <SidebarTrigger className="-ml-1" />
         </header>
-        <div className="flex flex-1 items-center justify-center p-8 text-muted-foreground">
+        <div className="flex flex-1 items-center justify-center p-8 text-text-secondary">
           Main content area
         </div>
       </SidebarInset>
@@ -448,7 +448,7 @@ export const Basic: Story = {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton size="lg">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-bg-brand-tertiary text-text-brand">
                   <SiLayoutGrid className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -489,7 +489,7 @@ export const Basic: Story = {
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
         </header>
-        <div className="flex flex-1 items-center justify-center p-8 text-muted-foreground">
+        <div className="flex flex-1 items-center justify-center p-8 text-text-secondary">
           Main content area
         </div>
       </SidebarInset>
@@ -505,7 +505,7 @@ export const FloatingVariant: Story = {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton size="lg">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-bg-brand-tertiary text-text-brand">
                   <SiLayoutGrid className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -546,7 +546,7 @@ export const FloatingVariant: Story = {
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
         </header>
-        <div className="flex flex-1 items-center justify-center p-8 text-muted-foreground">
+        <div className="flex flex-1 items-center justify-center p-8 text-text-secondary">
           Main content area
         </div>
       </SidebarInset>
@@ -562,7 +562,7 @@ export const InsetVariant: Story = {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton size="lg">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-bg-brand-tertiary text-text-brand">
                   <SiLayoutGrid className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -603,7 +603,7 @@ export const InsetVariant: Story = {
         <header className="flex h-16 shrink-0 items-center gap-2 px-4">
           <SidebarTrigger className="-ml-1" />
         </header>
-        <div className="flex flex-1 items-center justify-center p-8 text-muted-foreground">
+        <div className="flex flex-1 items-center justify-center p-8 text-text-secondary">
           Main content area
         </div>
       </SidebarInset>
@@ -653,7 +653,7 @@ export const WithBadge: Story = {
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
         </header>
-        <div className="flex flex-1 items-center justify-center p-8 text-muted-foreground">
+        <div className="flex flex-1 items-center justify-center p-8 text-text-secondary">
           Main content area
         </div>
       </SidebarInset>
@@ -732,17 +732,17 @@ function ControlledDemo() {
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-text-secondary">
             Sidebar is {open ? "open" : "closed"}
           </span>
           <button
             onClick={() => setOpen(!open)}
-            className="ml-auto rounded-md border px-3 py-1.5 text-sm hover:bg-accent"
+            className="ml-auto rounded-md border px-3 py-1.5 text-sm hover:bg-bg-surface-hover"
           >
             Toggle
           </button>
         </header>
-        <div className="flex flex-1 items-center justify-center p-8 text-muted-foreground">
+        <div className="flex flex-1 items-center justify-center p-8 text-text-secondary">
           Use the toggle button or ⌘B to control the sidebar
         </div>
       </SidebarInset>

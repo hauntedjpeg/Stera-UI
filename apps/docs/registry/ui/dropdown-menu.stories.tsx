@@ -409,11 +409,11 @@ export const AvatarTrigger: Story = {
           </Avatar>
           <div className="grid flex-1 text-left text-sm leading-tight">
             <span className="truncate font-semibold">Sofia Collins</span>
-            <span className="truncate text-xs text-muted-foreground">
+            <span className="truncate text-xs text-text-secondary">
               sofia@example.com
             </span>
           </div>
-          <SiChevronsDown className="ml-auto text-muted-foreground" />
+          <SiChevronsDown className="ml-auto text-text-secondary" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-(--anchor-width) min-w-56">
           {avatarMenuContent}

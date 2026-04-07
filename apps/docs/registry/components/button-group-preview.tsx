@@ -49,7 +49,7 @@ export function ButtonGroupOrientation() {
     <Preview>
       <div className="flex items-start gap-12">
         <div className="flex flex-col items-center gap-3">
-          <span className="text-sm text-muted-foreground">Horizontal</span>
+          <span className="text-sm text-text-secondary">Horizontal</span>
           <ButtonGroup orientation="horizontal">
             <Button variant="outline">
               <SiReply data-icon="inline-start" />
@@ -66,7 +66,7 @@ export function ButtonGroupOrientation() {
           </ButtonGroup>
         </div>
         <div className="flex flex-col items-center gap-3">
-          <span className="text-sm text-muted-foreground">Vertical</span>
+          <span className="text-sm text-text-secondary">Vertical</span>
           <ButtonGroup orientation="vertical">
             <Button variant="outline">
               <SiReply data-icon="inline-start" />

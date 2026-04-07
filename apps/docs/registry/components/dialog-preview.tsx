@@ -85,7 +85,7 @@ export function DialogScrollable() {
           </DialogHeader>
           <DialogContent scroll>
             {Array.from({ length: 6 }).map((_, i) => (
-              <p key={i} className="mb-4 text-sm text-muted-foreground">{loremParagraph}</p>
+              <p key={i} className="mb-4 text-sm text-text-secondary">{loremParagraph}</p>
             ))}
           </DialogContent>
           <DialogFooter showCloseButton>

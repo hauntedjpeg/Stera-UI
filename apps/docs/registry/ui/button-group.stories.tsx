@@ -83,7 +83,7 @@ export const Orientation: Story = {
   render: () => (
     <div className="flex items-start gap-8">
       <div className="flex flex-col items-center gap-3">
-        <span className="text-sm text-muted-foreground">Horizontal</span>
+        <span className="text-sm text-text-secondary">Horizontal</span>
         <ButtonGroup orientation="horizontal">
           <Button variant="outline">
             <SiReply data-icon="inline-start" />
@@ -100,7 +100,7 @@ export const Orientation: Story = {
         </ButtonGroup>
       </div>
       <div className="flex flex-col items-center gap-3">
-        <span className="text-sm text-muted-foreground">Vertical</span>
+        <span className="text-sm text-text-secondary">Vertical</span>
         <ButtonGroup orientation="vertical">
           <Button variant="outline">
             <SiReply data-icon="inline-start" />
@@ -356,7 +356,7 @@ export const WithPopover: Story = {
           }
         />
         <PopoverContent className="w-48 p-3">
-          <p className="text-sm text-muted-foreground">Configure archive settings.</p>
+          <p className="text-sm text-text-secondary">Configure archive settings.</p>
         </PopoverContent>
       </Popover>
     </ButtonGroup>

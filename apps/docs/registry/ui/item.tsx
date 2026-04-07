@@ -52,14 +52,14 @@ const itemVariants = cva(
     // Sizing
     "w-full",
     // Other
-    "group/item flex-wrap items-center [a]:transition-colors [a]:hover:bg-muted",
+    "group/item flex-wrap items-center [a]:transition-colors [a]:hover:bg-bg-surface-hover",
   ],
   {
     variants: {
       variant: {
         default: "border-transparent",
         outline: "border-border",
-        muted: "border-transparent bg-muted/50",
+        muted: "border-transparent bg-bg-surface-secondary/50",
       },
       size: {
         default: "gap-3.5 px-4 py-3.5",
@@ -183,11 +183,11 @@ function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
       data-slot="item-description"
       className={cn(
         // Base
-        "text-left text-sm leading-normal font-normal text-muted-foreground",
+        "text-left text-sm leading-normal font-normal text-text-secondary",
         // Variants
         "group-data-[size=xs]/item:text-xs",
         // Other
-        "line-clamp-2 [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
+        "line-clamp-2 [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-text-brand",
         className
       )}
       {...props}

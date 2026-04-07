@@ -302,7 +302,7 @@
     {
       "name": "sidebar",
       "type": "registry:ui",
-      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
+      "dependencies": ["@base-ui/react", "class-variance-authority", "stera-icons"],
       "registryDependencies": ["utils", "use-mobile", "button", "input", "separator", "sheet", "skeleton", "tooltip"],
       "files": [{ "path": "registry/ui/sidebar.tsx", "type": "registry:ui" }]
     },

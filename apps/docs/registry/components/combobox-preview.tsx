@@ -181,10 +181,10 @@ export function ComboboxCustomItems() {
             <ComboboxList>
               {(status: Status) => (
                 <ComboboxItem key={status.value} value={status}>
-                  <status.icon className="size-4 text-muted-foreground" />
+                  <status.icon className="size-4 text-text-secondary" />
                   <div className="flex flex-col">
                     <span>{status.label}</span>
-                    <span className="text-xs text-muted-foreground">{status.description}</span>
+                    <span className="text-xs text-text-secondary">{status.description}</span>
                   </div>
                 </ComboboxItem>
               )}

@@ -46,7 +46,7 @@ function AccordionTrigger({
           // Focus
           "focus-visible:border-border focus-visible:ring-3 focus-visible:ring-ring focus-visible:after:border-ring",
           // Other
-          "transition-all hover:underline aria-disabled:pointer-events-none aria-disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground",
+          "transition-all hover:underline aria-disabled:pointer-events-none aria-disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-text-secondary",
           className
         )}
         {...props}
@@ -77,7 +77,7 @@ function AccordionContent({
           // Sizing
           "h-(--accordion-panel-height)",
           // Other
-          "data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
+          "data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text [&_p:not(:last-child)]:mb-4",
           className
         )}
       >
