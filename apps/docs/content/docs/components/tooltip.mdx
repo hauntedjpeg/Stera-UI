@@ -1,0 +1,76 @@
+---
+title: Tooltip
+description: A floating label that appears on hover or focus to provide contextual information.
+---
+
+<TooltipDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add tooltip
+```
+
+## Usage
+
+```tsx
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+```
+
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">Hover me</Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Tooltip text</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+## Sides
+
+<TooltipSides />
+
+| Side | Description |
+| --- | --- |
+| `top` | Above the trigger (default) |
+| `right` | Right of the trigger |
+| `bottom` | Below the trigger |
+| `left` | Left of the trigger |
+
+## With Kbd
+
+<TooltipWithKbd />
+
+Combine with `Kbd` to show keyboard shortcuts inside tooltips.
+
+## API Reference
+
+### TooltipProvider
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `delayDuration` | `number` | `700` |
+
+### TooltipContent
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` |
+| `align` | `"start" \| "center" \| "end"` | `"center"` |
+| `sideOffset` | `number` | `4` |
+| `alignOffset` | `number` | `0` |
+
+### TooltipTrigger
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |

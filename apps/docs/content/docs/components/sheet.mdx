@@ -1,0 +1,80 @@
+---
+title: Sheet
+description: A slide-in panel that appears from the edge of the screen, used for secondary content or forms.
+---
+
+<SheetDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add sheet
+```
+
+## Usage
+
+```tsx
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+  SheetClose,
+} from "@/components/ui/sheet"
+```
+
+```tsx
+<Sheet>
+  <SheetTrigger render={<Button variant="outline" />}>Open</SheetTrigger>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Sheet Title</SheetTitle>
+      <SheetDescription>Sheet description.</SheetDescription>
+    </SheetHeader>
+    {/* body content */}
+    <SheetFooter>
+      <Button>Save</Button>
+      <SheetClose render={<Button variant="outline" />}>Close</SheetClose>
+    </SheetFooter>
+  </SheetContent>
+</Sheet>
+```
+
+## Sides
+
+<SheetSides />
+
+| Side | Description |
+| --- | --- |
+| `right` | Slides in from the right (default) |
+| `left` | Slides in from the left |
+| `top` | Slides in from the top |
+| `bottom` | Slides in from the bottom |
+
+## No Close Button
+
+<SheetNoCloseButton />
+
+## API Reference
+
+### SheetContent
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `side` | `"right" \| "left" \| "top" \| "bottom"` | `"right"` |
+| `showCloseButton` | `boolean` | `true` |
+
+### SheetTrigger
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `render` | `ReactElement` | Render prop for the trigger element |
+
+### SheetClose
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `render` | `ReactElement` | Render prop for the close element |

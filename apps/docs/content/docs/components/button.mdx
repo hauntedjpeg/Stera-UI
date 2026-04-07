@@ -1,0 +1,67 @@
+---
+title: Button
+description: A button component with multiple variants and sizes.
+---
+
+<ButtonAllVariants />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add button
+```
+
+## Usage
+
+```tsx
+import { Button } from "@/components/ui/button"
+```
+
+```tsx
+<Button variant="brand">Click me</Button>
+```
+
+## Variants
+
+| Variant | Description |
+| --- | --- |
+| `brand` | Primary brand-colored button |
+| `accent` | Accent-colored button |
+| `outline` | Bordered button with transparent background |
+| `subtle` | Subtle background, no border |
+| `ghost` | No background or border |
+| `danger` | Destructive action button |
+| `link` | Styled as a link |
+
+## Sizes
+
+<ButtonAllSizes />
+
+| Size | Description |
+| --- | --- |
+| `xs` | Extra small |
+| `sm` | Small |
+| `md` | Medium (default) |
+| `lg` | Large |
+| `icon` | Square icon button |
+| `icon-xs` | Extra small icon button |
+| `icon-sm` | Small icon button |
+| `icon-lg` | Large icon button |
+
+## With Icons & Kbd
+
+<ButtonWithIcon />
+
+## Disabled
+
+<ButtonDisabled />
+
+## API Reference
+
+The `Button` component extends the native `<button>` element via Base UI's `Button` primitive, with additional props:
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"brand" \| "accent" \| "outline" \| "subtle" \| "ghost" \| "danger" \| "link"` | `"brand"` |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"md"` |
+| `asChild` | `boolean` | `false` |

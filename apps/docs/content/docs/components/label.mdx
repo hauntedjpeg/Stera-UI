@@ -1,0 +1,67 @@
+---
+title: Label
+description: An accessible form label that associates with inputs and other form controls.
+---
+
+<LabelWithInput />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add label
+```
+
+## Usage
+
+```tsx
+import { Label } from "@/components/ui/label"
+```
+
+```tsx
+<Label htmlFor="email">Email address</Label>
+<Input id="email" type="email" />
+```
+
+## With Input
+
+<LabelWithInput />
+
+```tsx
+<div className="flex flex-col gap-2">
+  <Label htmlFor="email">Your email address</Label>
+  <Input id="email" type="email" placeholder="you@example.com" />
+</div>
+```
+
+## With Checkbox
+
+<LabelWithCheckbox />
+
+```tsx
+<div className="flex items-center gap-2">
+  <Checkbox id="terms" />
+  <Label htmlFor="terms">Accept terms and conditions</Label>
+</div>
+```
+
+## Disabled State
+
+When a sibling input is disabled, add `peer-disabled:` classes to the label to reflect the disabled state visually.
+
+<LabelDisabled />
+
+```tsx
+<div className="flex items-center gap-2">
+  <Checkbox id="terms" disabled />
+  <Label
+    htmlFor="terms"
+    className="peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+  >
+    Accept terms and conditions
+  </Label>
+</div>
+```
+
+## API Reference
+
+Renders a `<label>` element. Accepts all standard `<label>` props.

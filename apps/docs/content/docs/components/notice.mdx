@@ -1,0 +1,59 @@
+---
+title: Notice
+description: A toast notification system built on Sonner, themed to match the design system.
+---
+
+<NoticeDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add notice
+```
+
+## Usage
+
+Add `<Notice />` once at the root of your app (e.g. in your layout), then trigger toasts with `toast()` from Sonner anywhere in your code.
+
+```tsx
+import { Notice } from "@/components/ui/notice"
+
+export default function Layout({ children }) {
+  return (
+    <>
+      {children}
+      <Notice />
+    </>
+  )
+}
+```
+
+```tsx
+import { toast } from "sonner"
+
+toast("Event has been created", {
+  description: "Sunday, December 03, 2023 at 9:00 AM",
+  action: { label: "Undo", onClick: () => {} },
+})
+```
+
+## Toast Types
+
+<NoticeTypes />
+
+| Method | Description |
+| --- | --- |
+| `toast()` | Default notification |
+| `toast.success()` | Success confirmation |
+| `toast.info()` | Informational message |
+| `toast.warning()` | Caution or advisory |
+| `toast.error()` | Error or failure |
+
+## API Reference
+
+`Notice` wraps Sonner's `Toaster` component and forwards all props to it. The component automatically reads the current theme via `next-themes`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `position` | Sonner position | `"bottom-right"` |
+| `...props` | All Sonner `Toaster` props | — |

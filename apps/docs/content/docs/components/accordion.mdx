@@ -1,0 +1,62 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+---
+
+<AccordionDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add accordion
+```
+
+## Usage
+
+```tsx
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion"
+```
+
+```tsx
+<Accordion>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Section title</AccordionTrigger>
+    <AccordionContent>Section content goes here.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Multiple Open
+
+<AccordionMultiple />
+
+Pass `multiple` to allow more than one item to be expanded at a time.
+
+## Default Open
+
+<AccordionDefaultOpen />
+
+Use `defaultValue` with an array of item values to pre-expand items on first render.
+
+## API Reference
+
+### Accordion
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `multiple` | `boolean` | `false` |
+| `defaultValue` | `string[]` | `[]` |
+| `value` | `string[]` | — |
+| `onValueChange` | `(value: string[]) => void` | — |
+
+### AccordionItem
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | — |
+| `disabled` | `boolean` | `false` |

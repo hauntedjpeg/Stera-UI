@@ -1,0 +1,82 @@
+---
+title: Badge
+description: A small label for status, category, or count indicators.
+---
+
+<BadgeAllVariants />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add badge
+```
+
+## Usage
+
+```tsx
+import { Badge } from "@/components/ui/badge"
+```
+
+```tsx
+<Badge variant="brand">New</Badge>
+```
+
+## Variants
+
+Each color has three style levels: subtle (default), outline, and solid.
+
+<BadgeAllVariants />
+
+| Variant | Description |
+| --- | --- |
+| `default` | Subtle neutral background |
+| `outline` | Bordered, no background |
+| `solid` | Strong neutral inverse background |
+| `brand` | Brand-colored subtle |
+| `brand-outline` | Brand-colored bordered |
+| `brand-solid` | Brand-colored filled |
+| `accent` | Accent-colored subtle |
+| `accent-outline` | Accent-colored bordered |
+| `accent-solid` | Accent-colored filled |
+| `danger` | Danger-colored subtle |
+| `danger-outline` | Danger-colored bordered |
+| `danger-solid` | Danger-colored filled |
+| `success` | Success-colored subtle |
+| `success-outline` | Success-colored bordered |
+| `success-solid` | Success-colored filled |
+| `warning` | Warning-colored subtle |
+| `warning-outline` | Warning-colored bordered |
+| `warning-solid` | Warning-colored filled |
+
+## Sizes
+
+<BadgeAllSizes />
+
+| Size | Description |
+| --- | --- |
+| `sm` | Small (default) |
+| `md` | Medium |
+| `lg` | Large |
+
+## With Icon
+
+Use `data-icon="inline-start"` or `data-icon="inline-end"` on an icon to adjust spacing.
+
+<BadgeWithIcon />
+
+```tsx
+<Badge variant="success">
+  <SiCircleFill data-icon="inline-start" />
+  Active
+</Badge>
+```
+
+## API Reference
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "outline" \| "solid" \| "brand" \| "brand-outline" \| "brand-solid" \| "accent" \| "accent-outline" \| "accent-solid" \| "danger" \| "danger-outline" \| "danger-solid" \| "success" \| "success-outline" \| "success-solid" \| "warning" \| "warning-outline" \| "warning-solid"` | `"default"` |
+| `size` | `"sm" \| "md" \| "lg"` | `"sm"` |
+| `render` | `React.ReactElement` | — |
+
+Accepts all standard `<span>` props. Supports `render` prop for polymorphic rendering via Base UI's `useRender`.

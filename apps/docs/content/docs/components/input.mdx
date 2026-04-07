@@ -1,0 +1,79 @@
+---
+title: Input
+description: A text input field for collecting single-line user input.
+---
+
+<InputWithField />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add input
+```
+
+## Usage
+
+```tsx
+import { Input } from "@/components/ui/input"
+```
+
+```tsx
+<Input placeholder="Email" />
+```
+
+## With Field
+
+Pair with `Field`, `FieldLabel`, and `FieldDescription` for accessible, labeled inputs.
+
+<InputWithField />
+
+```tsx
+<Field>
+  <FieldLabel htmlFor="username">Username</FieldLabel>
+  <Input id="username" placeholder="johndoe" />
+  <FieldDescription>Choose a unique username for your account.</FieldDescription>
+</Field>
+```
+
+## Sizes
+
+<InputAllSizes />
+
+| Size | Description |
+| --- | --- |
+| `sm` | Small |
+| `md` | Medium (default) |
+| `lg` | Large |
+| `xl` | Extra large |
+
+## Disabled
+
+<InputDisabled />
+
+```tsx
+<Field data-disabled="true">
+  <FieldLabel htmlFor="email">Email</FieldLabel>
+  <Input id="email" disabled defaultValue="jane@example.com" />
+</Field>
+```
+
+## Invalid
+
+<InputInvalid />
+
+```tsx
+<Field data-invalid="true">
+  <FieldLabel htmlFor="email">Email</FieldLabel>
+  <Input id="email" aria-invalid="true" defaultValue="not-an-email" />
+  <FieldError>Please enter a valid email address.</FieldError>
+</Field>
+```
+
+## API Reference
+
+Built on Base UI's `Input` primitive. Accepts all standard `<input>` props except `size`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` |
+| `type` | `string` | `"text"` |

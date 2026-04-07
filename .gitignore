@@ -24,6 +24,9 @@ storybook-static
 # generated registry (built from source)
 apps/docs/public/r/
 
+# fumadocs generated source
+.source/
+
 # ide
 .claude/
 .vscode/

@@ -1,0 +1,103 @@
+---
+title: Dropdown Menu
+description: A menu that appears on trigger, offering a list of actions, links, or selections.
+---
+
+<DropdownMenuDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add dropdown-menu
+```
+
+## Usage
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu"
+```
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger render={<Button variant="outline" />}>Open</DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuGroup>
+      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuItem>Profile</DropdownMenuItem>
+      <DropdownMenuItem>Settings</DropdownMenuItem>
+    </DropdownMenuGroup>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Log out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## With Icons
+
+<DropdownMenuWithIcons />
+
+## With Shortcuts
+
+<DropdownMenuWithShortcuts />
+
+## With Submenu
+
+<DropdownMenuWithSubmenu />
+
+## Destructive
+
+<DropdownMenuDestructive />
+
+## Checkboxes
+
+<DropdownMenuCheckboxes />
+
+## Radio Group
+
+<DropdownMenuRadioItems />
+
+## Title & Description
+
+<DropdownMenuTitleDescription />
+
+Use `DropdownMenuItemContent`, `DropdownMenuItemTitle`, and `DropdownMenuItemDescription` for richer item layouts.
+
+## API Reference
+
+### DropdownMenuItem
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "danger"` | `"default"` |
+| `disabled` | `boolean` | `false` |
+
+### DropdownMenuTrigger
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `render` | `ReactElement` | Render prop for the trigger element |
+
+### Subcomponents
+
+| Component | Description |
+| --- | --- |
+| `DropdownMenuLabel` | Non-interactive section heading |
+| `DropdownMenuSeparator` | Horizontal divider |
+| `DropdownMenuItemShortcut` | Right-aligned keyboard shortcut label |
+| `DropdownMenuItemContent` | Column container for title + description |
+| `DropdownMenuItemTitle` | Primary text inside `DropdownMenuItemContent` |
+| `DropdownMenuItemDescription` | Secondary text inside `DropdownMenuItemContent` |
+| `DropdownMenuCheckboxItem` | Checkbox-style toggle item |
+| `DropdownMenuRadioGroup` | Radio-style selection group |
+| `DropdownMenuRadioItem` | Individual radio item |
+| `DropdownMenuSub` | Submenu container |
+| `DropdownMenuSubTrigger` | Trigger that opens a submenu |
+| `DropdownMenuSubContent` | Content panel for a submenu |

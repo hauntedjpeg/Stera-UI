@@ -1,0 +1,60 @@
+---
+title: Calendar
+description: A date picker component built on react-day-picker, supporting single date, range, and multiple selection modes.
+---
+
+<CalendarDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add calendar
+```
+
+## Usage
+
+```tsx
+import { Calendar } from "@/components/ui/calendar"
+```
+
+```tsx
+const [date, setDate] = useState<Date | undefined>(new Date())
+
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  className="rounded-lg border"
+/>
+```
+
+## Date Range
+
+<CalendarRange />
+
+## Month/Year Dropdown
+
+<CalendarDropdown />
+
+Pass `captionLayout="dropdown"` to replace the navigation arrows with month/year select dropdowns.
+
+## With Presets
+
+<CalendarWithPresets />
+
+## Week Numbers
+
+<CalendarWeekNumbers />
+
+## API Reference
+
+`Calendar` extends all props from [react-day-picker](https://react-day-picker.js.org/).
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `mode` | `"single" \| "range" \| "multiple"` | `"single"` |
+| `selected` | `Date \| DateRange \| Date[]` | — |
+| `onSelect` | `(value) => void` | — |
+| `disabled` | `Date[] \| Matcher` | — |
+| `captionLayout` | `"label" \| "dropdown"` | `"label"` |
+| `showWeekNumber` | `boolean` | `false` |

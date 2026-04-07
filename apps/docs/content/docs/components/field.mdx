@@ -1,0 +1,99 @@
+---
+title: Field
+description: A form field layout system that pairs labels, inputs, descriptions, and error messages.
+---
+
+<FieldDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add field
+```
+
+## Usage
+
+```tsx
+import {
+  Field,
+  FieldLabel,
+  FieldDescription,
+  FieldError,
+} from "@/components/ui/field"
+```
+
+```tsx
+<Field>
+  <FieldLabel htmlFor="email">Email address</FieldLabel>
+  <Input id="email" type="email" placeholder="you@example.com" />
+  <FieldDescription>We will never share your email.</FieldDescription>
+</Field>
+```
+
+## Horizontal Layout
+
+<FieldHorizontal />
+
+Use `orientation="horizontal"` to place label/description on the left and the control on the right. Ideal for toggle rows.
+
+## With Error
+
+<FieldWithError />
+
+Add `data-invalid="true"` to `Field` and `aria-invalid="true"` to the input to trigger error styles.
+
+## Multiple Errors
+
+<FieldMultipleErrors />
+
+Pass an `errors` array to `FieldError` to list multiple validation messages.
+
+## Disabled
+
+<FieldDisabled />
+
+## Checkbox Group
+
+<FieldCheckboxGroup />
+
+Use `FieldSet` and `FieldLegend` to group related checkboxes or radio buttons with a shared label.
+
+## Full Form Example
+
+<FieldFormExample />
+
+## API Reference
+
+### Field
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `orientation` | `"vertical" \| "horizontal" \| "responsive"` | `"vertical"` |
+| `data-invalid` | `"true"` | — |
+| `data-disabled` | `"true"` | — |
+
+### FieldError
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `errors` | `Array<{ message: string }>` | — |
+
+### FieldLegend
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "label"` | `"default"` |
+
+### Subcomponents
+
+| Component | Description |
+| --- | --- |
+| `FieldLabel` | `<label>` element styled for the design system |
+| `FieldDescription` | Supporting helper text |
+| `FieldError` | Error message(s) displayed when invalid |
+| `FieldGroup` | Vertical stack of multiple `Field` components |
+| `FieldSet` | Fieldset wrapper for grouped controls |
+| `FieldLegend` | Legend/heading for a `FieldSet` |
+| `FieldContent` | Column of `FieldTitle` + `FieldDescription` for horizontal layouts |
+| `FieldTitle` | Bold title inside `FieldContent` |
+| `FieldSeparator` | Horizontal divider between field groups, with optional label |

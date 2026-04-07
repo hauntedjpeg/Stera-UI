@@ -1,0 +1,108 @@
+---
+title: Native Select
+description: A styled native browser select element for simple, accessible option selection.
+---
+
+<NativeSelectWithField />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add native-select
+```
+
+## Usage
+
+```tsx
+import {
+  NativeSelect,
+  NativeSelectOptGroup,
+  NativeSelectOption,
+} from "@/components/ui/native-select"
+```
+
+```tsx
+<NativeSelect>
+  <NativeSelectOption value="">Select an option</NativeSelectOption>
+  <NativeSelectOption value="apple">Apple</NativeSelectOption>
+  <NativeSelectOption value="banana">Banana</NativeSelectOption>
+</NativeSelect>
+```
+
+## With Field
+
+<NativeSelectWithField />
+
+```tsx
+<Field>
+  <FieldLabel htmlFor="fruit">Fruit</FieldLabel>
+  <NativeSelect id="fruit" className="w-full">
+    <NativeSelectOption value="">Select a fruit</NativeSelectOption>
+    <NativeSelectOption value="apple">Apple</NativeSelectOption>
+    <NativeSelectOption value="banana">Banana</NativeSelectOption>
+  </NativeSelect>
+  <FieldDescription>Choose your favourite fruit.</FieldDescription>
+</Field>
+```
+
+## With Option Groups
+
+Use `NativeSelectOptGroup` to group related options with a label.
+
+<NativeSelectWithOptGroup />
+
+```tsx
+<NativeSelect>
+  <NativeSelectOption value="">Select a country</NativeSelectOption>
+  <NativeSelectOptGroup label="North America">
+    <NativeSelectOption value="us">United States</NativeSelectOption>
+    <NativeSelectOption value="ca">Canada</NativeSelectOption>
+  </NativeSelectOptGroup>
+  <NativeSelectOptGroup label="Europe">
+    <NativeSelectOption value="gb">United Kingdom</NativeSelectOption>
+    <NativeSelectOption value="de">Germany</NativeSelectOption>
+  </NativeSelectOptGroup>
+</NativeSelect>
+```
+
+## Sizes
+
+<NativeSelectSizes />
+
+| Size | Description |
+| --- | --- |
+| `sm` | Small |
+| `md` | Medium (default) |
+| `lg` | Large |
+| `xl` | Extra large |
+
+## Disabled
+
+<NativeSelectDisabled />
+
+```tsx
+<Field data-disabled="true">
+  <FieldLabel htmlFor="role">Role</FieldLabel>
+  <NativeSelect id="role" disabled>
+    <NativeSelectOption value="admin">Admin</NativeSelectOption>
+  </NativeSelect>
+</Field>
+```
+
+## API Reference
+
+### NativeSelect
+
+Renders a `<select>` inside a positioned wrapper that includes a chevron icon. Accepts all standard `<select>` props except `size`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` |
+
+### NativeSelectOption
+
+Renders an `<option>` element. Accepts all standard `<option>` props.
+
+### NativeSelectOptGroup
+
+Renders an `<optgroup>` element. Accepts all standard `<optgroup>` props.

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,13 +19,39 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/ui/*": ["./registry/ui/*"],
-      "@/components/*": ["./registry/components/*"],
-      "@/lib/*": ["./registry/lib/*"],
-      "@/hooks/*": ["./registry/hooks/*"],
-      "@/*": ["./*"]
-    }
+      "@/components/ui/*": [
+        "./registry/ui/*"
+      ],
+      "@/components/*": [
+        "./registry/components/*"
+      ],
+      "@/lib/*": [
+        "./registry/lib/*"
+      ],
+      "@/hooks/*": [
+        "./registry/hooks/*"
+      ],
+      "@/*": [
+        "./*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "storybook-static", ".next", "scripts"]
+  "include": [
+    ".source/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "storybook-static",
+    ".next",
+    "scripts"
+  ]
 }

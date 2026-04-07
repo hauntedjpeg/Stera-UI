@@ -1,0 +1,66 @@
+---
+title: Empty
+description: An empty state component for zero-data views with icon, title, description, and optional action.
+---
+
+<EmptyDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add empty
+```
+
+## Usage
+
+```tsx
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+  EmptyContent,
+} from "@/components/ui/empty"
+```
+
+```tsx
+<Empty>
+  <EmptyHeader>
+    <EmptyMedia variant="icon">
+      <SiFolderOpen />
+    </EmptyMedia>
+    <EmptyTitle>No projects found</EmptyTitle>
+    <EmptyDescription>Create your first project to get started.</EmptyDescription>
+  </EmptyHeader>
+  <EmptyContent>
+    <Button>Create project</Button>
+  </EmptyContent>
+</Empty>
+```
+
+## With Avatar Group
+
+<EmptyWithAvatarGroup />
+
+## No Results
+
+<EmptyNoResults />
+
+## API Reference
+
+### EmptyMedia
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "icon"` | `"default"` |
+
+### Subcomponents
+
+| Component | Description |
+| --- | --- |
+| `EmptyHeader` | Centered container for media, title, and description |
+| `EmptyMedia` | Slot for an icon or avatar illustration |
+| `EmptyTitle` | Heading text |
+| `EmptyDescription` | Supporting body text |
+| `EmptyContent` | Slot for action buttons below the header |

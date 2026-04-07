@@ -1,0 +1,84 @@
+---
+title: Command
+description: A command palette for fast keyboard-driven navigation and action execution.
+---
+
+<CommandDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add command
+```
+
+## Usage
+
+```tsx
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command"
+```
+
+```tsx
+<Command className="rounded-lg border">
+  <CommandInput placeholder="Type a command or search..." />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading="Settings">
+      <CommandItem>
+        <SiUser />
+        <span>Profile</span>
+        <CommandShortcut>⌘P</CommandShortcut>
+      </CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>
+```
+
+## Command Dialog
+
+<CommandDialogExample />
+
+Use `CommandDialog` and `CommandDialogTrigger` to open the command palette in a modal overlay.
+
+## Title & Description
+
+<CommandTitleDescription />
+
+Use `CommandItemContent`, `CommandItemTitle`, and `CommandItemDescription` for richer item layouts.
+
+## API Reference
+
+### CommandItem
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `disabled` | `boolean` | `false` |
+
+### CommandGroup
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `heading` | `string` | Section label shown above the group |
+
+### Subcomponents
+
+| Component | Description |
+| --- | --- |
+| `CommandInput` | Search/filter text input |
+| `CommandList` | Scrollable list container |
+| `CommandEmpty` | Shown when no items match the query |
+| `CommandSeparator` | Horizontal divider between groups |
+| `CommandShortcut` | Right-aligned keyboard shortcut label |
+| `CommandItemContent` | Column container for title + description |
+| `CommandItemTitle` | Primary text inside `CommandItemContent` |
+| `CommandItemDescription` | Secondary text inside `CommandItemContent` |
+| `CommandDialog` | Modal wrapper for the command palette |
+| `CommandDialogTrigger` | Trigger that opens the `CommandDialog` |

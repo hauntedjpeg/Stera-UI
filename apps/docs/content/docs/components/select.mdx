@@ -1,0 +1,140 @@
+---
+title: Select
+description: A custom dropdown for selecting a single value from a list of options.
+---
+
+<SelectDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add select
+```
+
+## Usage
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+```
+
+```tsx
+<Select>
+  <SelectTrigger className="w-48">
+    <SelectValue placeholder="Select a fruit" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectItem value="apple">Apple</SelectItem>
+      <SelectItem value="banana">Banana</SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>
+```
+
+## With Groups
+
+Use `SelectGroup`, `SelectLabel`, and `SelectSeparator` to organize options into labelled sections.
+
+<SelectGroups />
+
+```tsx
+<SelectContent>
+  <SelectGroup>
+    <SelectLabel>Fruits</SelectLabel>
+    <SelectItem value="Apple">Apple</SelectItem>
+    <SelectItem value="Banana">Banana</SelectItem>
+  </SelectGroup>
+  <SelectSeparator />
+  <SelectGroup>
+    <SelectLabel>Vegetables</SelectLabel>
+    <SelectItem value="Carrot">Carrot</SelectItem>
+    <SelectItem value="Broccoli">Broccoli</SelectItem>
+  </SelectGroup>
+</SelectContent>
+```
+
+## Sizes
+
+<SelectAllSizes />
+
+| Size | Description |
+| --- | --- |
+| `sm` | Small |
+| `md` | Medium (default) |
+| `lg` | Large |
+| `xl` | Extra large |
+
+## Disabled
+
+<SelectDisabled />
+
+```tsx
+<Select disabled>
+  <SelectTrigger className="w-48">
+    <SelectValue placeholder="Select a fruit" />
+  </SelectTrigger>
+  ...
+</Select>
+```
+
+## Invalid
+
+<SelectInvalid />
+
+```tsx
+<Field data-invalid>
+  <FieldLabel>Fruit</FieldLabel>
+  <Select>
+    <SelectTrigger aria-invalid>
+      <SelectValue placeholder="Select a fruit" />
+    </SelectTrigger>
+    ...
+  </Select>
+  <FieldError>Please select a fruit.</FieldError>
+</Field>
+```
+
+## API Reference
+
+### Select
+
+`Select` is an alias for Base UI's `Select.Root`. Accepts all its props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | — |
+| `defaultValue` | `string` | — |
+| `onValueChange` | `(value: string) => void` | — |
+| `disabled` | `boolean` | `false` |
+| `name` | `string` | — |
+
+### SelectTrigger
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` |
+
+### SelectContent
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `side` | `"top" \| "bottom" \| "left" \| "right"` | `"bottom"` |
+| `align` | `"start" \| "center" \| "end"` | `"center"` |
+| `sideOffset` | `number` | `4` |
+| `alignItemWithTrigger` | `boolean` | `true` |
+
+### SelectItem
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | — |
+| `disabled` | `boolean` | `false` |

@@ -1,0 +1,52 @@
+---
+title: Separator
+description: A visual divider between content sections, supporting horizontal and vertical orientations.
+---
+
+<SeparatorDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add separator
+```
+
+## Usage
+
+```tsx
+import { Separator } from "@/components/ui/separator"
+```
+
+```tsx
+<Separator />
+```
+
+## Horizontal
+
+The default orientation. Renders as a full-width horizontal rule.
+
+<SeparatorDefault />
+
+## Vertical
+
+Use `orientation="vertical"` to render a vertical divider. Works best inside a flex container with a fixed height.
+
+<SeparatorVertical />
+
+```tsx
+<div className="flex h-5 items-center gap-4">
+  <span>Blog</span>
+  <Separator orientation="vertical" />
+  <span>Docs</span>
+  <Separator orientation="vertical" />
+  <span>Source</span>
+</div>
+```
+
+## API Reference
+
+Extends Base UI's `Separator` primitive and accepts all its props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |

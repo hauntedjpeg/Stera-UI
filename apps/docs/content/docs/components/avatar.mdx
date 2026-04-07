@@ -1,0 +1,87 @@
+---
+title: Avatar
+description: A user avatar component with image, fallback, badge, and group support.
+---
+
+<AvatarDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add avatar
+```
+
+## Usage
+
+```tsx
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+```
+
+```tsx
+<Avatar>
+  <AvatarImage src="/avatar.jpg" alt="Jane Appleseed" />
+  <AvatarFallback>JA</AvatarFallback>
+</Avatar>
+```
+
+## Fallback Only
+
+<AvatarFallbackOnly />
+
+## Sizes
+
+<AvatarAllSizes />
+
+| Size | Description |
+| --- | --- |
+| `sm` | Small |
+| `default` | Medium (default) |
+| `lg` | Large |
+
+## Shapes
+
+<AvatarShapes />
+
+| Shape | Description |
+| --- | --- |
+| `circle` | Circular (default) |
+| `square` | Rounded square |
+
+## With Badge
+
+<AvatarWithBadge />
+
+| Badge Variant | Description |
+| --- | --- |
+| `subtle` | Neutral indicator |
+| `success` | Online / active |
+| `danger` | Busy / unavailable |
+| `warning` | Away |
+| `icon` | Custom icon inside badge |
+
+## Icon Fallback
+
+<AvatarIconFallbackPreview />
+
+## Avatar Group
+
+<AvatarGroupPreview />
+
+## API Reference
+
+### Avatar
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"sm" \| "default" \| "lg"` | `"default"` |
+| `shape` | `"circle" \| "square"` | `"circle"` |
+
+### AvatarBadge
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"subtle" \| "success" \| "danger" \| "warning" \| "icon"` | `"subtle"` |

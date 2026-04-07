@@ -1,0 +1,88 @@
+---
+title: Toggle
+description: A two-state button that can be pressed or unpressed, commonly used for formatting controls.
+---
+
+<ToggleDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add toggle
+```
+
+## Usage
+
+```tsx
+import { Toggle } from "@/components/ui/toggle"
+```
+
+```tsx
+<Toggle aria-label="Toggle bold">
+  <SiTextBold />
+</Toggle>
+```
+
+## Variants
+
+<ToggleOutline />
+
+| Variant | Description |
+| --- | --- |
+| `default` | No border, background appears on hover/press |
+| `outline` | Bordered with a surface background |
+
+```tsx
+<Toggle variant="outline" aria-label="Toggle bold">
+  <SiTextBold />
+</Toggle>
+```
+
+## With Text
+
+<ToggleWithText />
+
+```tsx
+<Toggle aria-label="Toggle italic">
+  <SiTextItalic />
+  Italic
+</Toggle>
+```
+
+## Sizes
+
+<ToggleSizes />
+
+| Size | Description |
+| --- | --- |
+| `xs` | Extra small |
+| `sm` | Small |
+| `md` | Medium (default) |
+| `lg` | Large |
+| `icon` | Square icon button |
+| `icon-xs` | Extra small icon button |
+| `icon-sm` | Small icon button |
+| `icon-lg` | Large icon button |
+
+## Disabled
+
+<ToggleDisabled />
+
+```tsx
+<Toggle disabled aria-label="Toggle underline">
+  <SiTextUnderline />
+</Toggle>
+```
+
+## API Reference
+
+Built on Base UI's `Toggle` primitive.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "outline"` | `"default"` |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"md"` |
+| `pressed` | `boolean` | — |
+| `defaultPressed` | `boolean` | — |
+| `onPressedChange` | `(pressed: boolean) => void` | — |
+| `disabled` | `boolean` | `false` |

@@ -1,0 +1,92 @@
+---
+title: Combobox
+description: A searchable select input that combines a text field with a filterable dropdown list.
+---
+
+<ComboboxDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add combobox
+```
+
+## Usage
+
+```tsx
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxList,
+  ComboboxItem,
+} from "@/components/ui/combobox"
+```
+
+```tsx
+<Combobox items={items} itemToStringLabel={(item) => item.label}>
+  <ComboboxInput placeholder="Select..." />
+  <ComboboxContent>
+    <ComboboxEmpty>No results found.</ComboboxEmpty>
+    <ComboboxList>
+      {(item) => (
+        <ComboboxItem key={item.value} value={item}>
+          {item.label}
+        </ComboboxItem>
+      )}
+    </ComboboxList>
+  </ComboboxContent>
+</Combobox>
+```
+
+## Multiple Selection
+
+<ComboboxMultiple />
+
+Pass `multiple` to allow selecting more than one item. Use `ComboboxChips` and `ComboboxChipsInput` for the chip-based input.
+
+## Groups
+
+<ComboboxGroups />
+
+Use `ComboboxCollection`, `ComboboxGroup`, `ComboboxLabel`, and `ComboboxSeparator` to organise items into labelled sections.
+
+## Custom Items
+
+<ComboboxCustomItems />
+
+Render any content inside `ComboboxItem` for rich layouts with icons and descriptions.
+
+## Popup Style
+
+<ComboboxPopup />
+
+Use `ComboboxTrigger` with a Button and `ComboboxValue` for a traditional select-style popup trigger.
+
+## Invalid State
+
+<ComboboxInvalid />
+
+## API Reference
+
+### Combobox
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `items` | `T[]` | — |
+| `itemToStringLabel` | `(item: T) => string` | — |
+| `multiple` | `boolean` | `false` |
+| `value` | `T \| T[]` | — |
+| `defaultValue` | `T \| T[]` | — |
+| `onValueChange` | `(value: T \| T[]) => void` | — |
+| `autoHighlight` | `boolean` | `false` |
+
+### ComboboxInput
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` |
+| `showClear` | `boolean` | `false` |
+| `showTrigger` | `boolean` | `true` |
+| `disabled` | `boolean` | `false` |

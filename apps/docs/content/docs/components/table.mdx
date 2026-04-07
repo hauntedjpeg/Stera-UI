@@ -1,0 +1,64 @@
+---
+title: Table
+description: A semantic HTML table component for displaying structured data in rows and columns.
+---
+
+<TableDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add table
+```
+
+## Usage
+
+```tsx
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from "@/components/ui/table"
+```
+
+```tsx
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Name</TableHead>
+      <TableHead>Status</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Invoice #001</TableCell>
+      <TableCell>Paid</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+## With Footer
+
+<TableWithFooter />
+
+`TableFooter` renders a sticky-style summary row at the bottom of the table.
+
+## API Reference
+
+### Subcomponents
+
+| Component | Description |
+| --- | --- |
+| `TableHeader` | `<thead>` wrapper |
+| `TableBody` | `<tbody>` wrapper |
+| `TableFooter` | `<tfoot>` wrapper |
+| `TableRow` | `<tr>` element |
+| `TableHead` | `<th>` column header cell |
+| `TableCell` | `<td>` data cell |
+| `TableCaption` | Accessible caption rendered below the table |

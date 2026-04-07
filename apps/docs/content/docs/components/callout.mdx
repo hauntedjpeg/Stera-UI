@@ -1,0 +1,75 @@
+---
+title: Callout
+description: An inline alert component for surfacing important messages with optional icon, action, and dismiss button.
+---
+
+<CalloutDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add callout
+```
+
+## Usage
+
+```tsx
+import {
+  Callout,
+  CalloutContent,
+  CalloutTitle,
+  CalloutDescription,
+} from "@/components/ui/callout"
+```
+
+```tsx
+<Callout>
+  <CalloutContent>
+    <CalloutTitle>Heads up</CalloutTitle>
+    <CalloutDescription>This is an informational message.</CalloutDescription>
+  </CalloutContent>
+</Callout>
+```
+
+## With Icon
+
+<CalloutWithIcon />
+
+## With Action
+
+<CalloutWithAction />
+
+## With Close
+
+<CalloutWithClose />
+
+## All Variants
+
+<CalloutAllVariants />
+
+| Variant | Description |
+| --- | --- |
+| `default` | Neutral informational callout |
+| `brand` | Brand-colored callout |
+| `accent` | Accent-colored callout |
+| `danger` | Error or destructive warning |
+| `success` | Confirmation or success message |
+| `warning` | Caution or advisory message |
+
+## API Reference
+
+### Callout
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "brand" \| "accent" \| "danger" \| "success" \| "warning"` | `"default"` |
+
+### Subcomponents
+
+| Component | Description |
+| --- | --- |
+| `CalloutContent` | Wrapper for title, description, and action |
+| `CalloutTitle` | Heading text |
+| `CalloutDescription` | Supporting body text |
+| `CalloutAction` | Call-to-action link or button |
+| `CalloutClose` | Dismiss button rendered to the right |

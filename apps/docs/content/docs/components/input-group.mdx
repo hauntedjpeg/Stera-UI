@@ -1,0 +1,82 @@
+---
+title: Input Group
+description: A compound input component for attaching icons, text labels, and action buttons to an input field.
+---
+
+<InputGroupIcon />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add input-group
+```
+
+## Usage
+
+```tsx
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+  InputGroupButton,
+  InputGroupTextarea,
+} from "@/components/ui/input-group"
+```
+
+```tsx
+<InputGroup>
+  <InputGroupAddon align="inline-start">
+    <SiSearch />
+  </InputGroupAddon>
+  <InputGroupInput placeholder="Search..." />
+</InputGroup>
+```
+
+## Text Addons
+
+<InputGroupTextAddon />
+
+## With Button
+
+<InputGroupWithButton />
+
+## With Kbd
+
+<InputGroupWithKbd />
+
+## Sizes
+
+<InputGroupSizes />
+
+| Size | Description |
+| --- | --- |
+| `sm` | Small |
+| `md` | Medium (default) |
+| `lg` | Large |
+| `xl` | Extra large |
+
+## Textarea
+
+<InputGroupTextareaAddon />
+
+## With Label
+
+<InputGroupWithLabel />
+
+## API Reference
+
+### InputGroupAddon
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `align` | `"inline-start" \| "inline-end" \| "block-start" \| "block-end"` | Position relative to the input |
+
+### Subcomponents
+
+| Component | Description |
+| --- | --- |
+| `InputGroupInput` | The text input — accepts all `Input` props including `size` |
+| `InputGroupTextarea` | A textarea variant of the input control |
+| `InputGroupText` | Plain text label inside an addon |
+| `InputGroupButton` | Button inside an addon — accepts all `Button` props |

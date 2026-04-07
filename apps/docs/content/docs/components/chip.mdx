@@ -1,0 +1,82 @@
+---
+title: Chip
+description: A compact interactive element for tags, filters, and selection states.
+---
+
+<ChipAllVariants />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add chip
+```
+
+## Usage
+
+```tsx
+import { Chip } from "@/components/ui/chip"
+```
+
+```tsx
+<Chip>Label</Chip>
+```
+
+## Variants
+
+<ChipAllVariants />
+
+| Variant | Description |
+| --- | --- |
+| `subtle` | Muted background, no border (default) |
+| `outline` | Bordered with a surface background |
+| `solid` | Strong inverse background |
+
+## Sizes
+
+<ChipAllSizes />
+
+| Size | Description |
+| --- | --- |
+| `xs` | Extra small (default) |
+| `sm` | Small |
+| `md` | Medium |
+| `lg` | Large |
+
+## With Icons
+
+Use `data-icon="inline-start"` or `data-icon="inline-end"` on an icon to control spacing and alignment.
+
+<ChipWithIcons />
+
+```tsx
+<Chip variant="subtle" size="sm">
+  <SiHash data-icon="inline-start" />
+  Tag
+</Chip>
+
+<Chip variant="subtle" size="sm">
+  Label
+  <SiX data-icon="inline-end" />
+</Chip>
+```
+
+## Active State
+
+Use the `active` prop to visually mark a chip as selected.
+
+<ChipActiveState />
+
+```tsx
+<Chip variant="subtle" active>Active</Chip>
+```
+
+## API Reference
+
+Built on Base UI's `Button` primitive. Renders as a `<button>` element.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"subtle" \| "outline" \| "solid"` | `"subtle"` |
+| `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"xs"` |
+| `active` | `boolean` | `false` |
+| `disabled` | `boolean` | `false` |

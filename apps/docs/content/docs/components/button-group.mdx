@@ -1,0 +1,114 @@
+---
+title: Button Group
+description: Groups related buttons together with joined borders and consistent sizing.
+---
+
+<ButtonGroupDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add button-group
+```
+
+## Usage
+
+```tsx
+import {
+  ButtonGroup,
+  ButtonGroupSeparator,
+} from "@/components/ui/button-group"
+```
+
+```tsx
+<ButtonGroup>
+  <Button variant="outline">Reply</Button>
+  <Button variant="outline">Forward</Button>
+  <Button variant="outline">Archive</Button>
+</ButtonGroup>
+```
+
+## Orientation
+
+<ButtonGroupOrientation />
+
+Use the `orientation` prop to stack buttons vertically.
+
+| Value | Description |
+| --- | --- |
+| `horizontal` | Buttons arranged side by side (default) |
+| `vertical` | Buttons stacked top to bottom |
+
+## Variants
+
+`ButtonGroup` works with all button variants. Use `ButtonGroupSeparator` between buttons to add a visual divider — it automatically inherits the correct separator color for each variant.
+
+<ButtonGroupAllVariants />
+
+## With Separator
+
+Use `ButtonGroupSeparator` to visually divide groups of icon buttons.
+
+<ButtonGroupWithSeparator />
+
+```tsx
+<ButtonGroup>
+  <Button variant="ghost" size="icon" aria-label="Reply">
+    <SiReply />
+  </Button>
+  <Button variant="ghost" size="icon" aria-label="Forward">
+    <SiForward />
+  </Button>
+  <ButtonGroupSeparator />
+  <Button variant="ghost" size="icon" aria-label="Delete">
+    <SiDelete />
+  </Button>
+</ButtonGroup>
+```
+
+## Split Button
+
+Combine a primary action with a dropdown for additional options.
+
+<ButtonGroupSplit />
+
+```tsx
+<ButtonGroup>
+  <Button variant="brand">
+    <SiPlus data-icon="inline-start" />
+    New message
+  </Button>
+  <ButtonGroupSeparator />
+  <DropdownMenu>
+    <DropdownMenuTrigger
+      render={
+        <Button variant="brand" size="icon" aria-label="More options">
+          <SiChevronDown />
+        </Button>
+      }
+    />
+    <DropdownMenuContent align="end">
+      <DropdownMenuItem>New draft</DropdownMenuItem>
+      <DropdownMenuItem>Schedule send</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ButtonGroup>
+```
+
+## API Reference
+
+### ButtonGroup
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
+
+Renders a `<div role="group">` and accepts all standard `div` props.
+
+### ButtonGroupSeparator
+
+A visual divider between buttons. Extends the `Separator` component and automatically adapts its color to the adjacent button variant.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `orientation` | `"horizontal" \| "vertical"` | `"vertical"` |

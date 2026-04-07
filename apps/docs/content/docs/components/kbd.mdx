@@ -1,0 +1,86 @@
+---
+title: Kbd
+description: Keyboard shortcut display components for showing key combinations in UI.
+---
+
+<KbdDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add kbd
+```
+
+## Usage
+
+```tsx
+import { Kbd, KbdGroup } from "@/components/ui/kbd"
+```
+
+```tsx
+<Kbd>⌘K</Kbd>
+```
+
+## Sizes
+
+<KbdSizes />
+
+| Size | Description |
+| --- | --- |
+| `sm` | Compact, for tight spaces like tooltips |
+| `md` | Default |
+
+## Key Combinations
+
+Use `KbdGroup` to display a sequence of keys.
+
+<KbdKeyCombination />
+
+```tsx
+<KbdGroup>
+  <Kbd>Ctrl</Kbd>
+  <Kbd>B</Kbd>
+</KbdGroup>
+```
+
+## Inside a Button
+
+Use `data-kbd="inline-end"` to position a `Kbd` at the trailing edge of a button.
+
+<KbdWithButton />
+
+```tsx
+<Button>
+  Accept <Kbd data-kbd="inline-end">⏎</Kbd>
+</Button>
+```
+
+## Inside an Input
+
+<KbdWithInput />
+
+```tsx
+<InputGroup>
+  <InputGroupAddon align="inline-start">
+    <SiSearch />
+  </InputGroupAddon>
+  <InputGroupInput placeholder="Search..." />
+  <InputGroupAddon align="inline-end">
+    <Kbd>⌘K</Kbd>
+  </InputGroupAddon>
+</InputGroup>
+```
+
+## API Reference
+
+### Kbd
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"sm" \| "md"` | `"md"` |
+
+Renders a `<kbd>` element. Accepts all standard `<kbd>` props.
+
+### KbdGroup
+
+Renders a `<kbd>` wrapper for grouping multiple `Kbd` components. Accepts all standard `<div>` props.

@@ -1,0 +1,93 @@
+---
+title: Item
+description: A flexible list item component for contacts, notifications, settings rows, and more.
+---
+
+<ItemDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add item
+```
+
+## Usage
+
+```tsx
+import {
+  Item,
+  ItemContent,
+  ItemTitle,
+  ItemDescription,
+  ItemMedia,
+} from "@/components/ui/item"
+```
+
+```tsx
+<Item>
+  <ItemMedia variant="icon">
+    <SiUser />
+  </ItemMedia>
+  <ItemContent>
+    <ItemTitle>Jane Appleseed</ItemTitle>
+    <ItemDescription>Product designer · San Francisco</ItemDescription>
+  </ItemContent>
+</Item>
+```
+
+## All Variants
+
+<ItemAllVariants />
+
+| Variant | Description |
+| --- | --- |
+| `default` | No border, transparent background |
+| `outline` | Visible border, transparent background |
+| `muted` | Subtle muted background, no border |
+
+## All Sizes
+
+<ItemAllSizes />
+
+| Size | Description |
+| --- | --- |
+| `default` | Standard padding and spacing |
+| `sm` | Reduced padding and spacing |
+| `xs` | Compact padding and spacing |
+
+## With Actions
+
+<ItemWithActions />
+
+## Notification List
+
+<ItemNotificationList />
+
+## API Reference
+
+### Item
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "outline" \| "muted"` | `"default"` |
+| `size` | `"default" \| "sm" \| "xs"` | `"default"` |
+| `render` | `ReactElement` | — |
+
+### ItemMedia
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "icon" \| "image"` | `"default"` |
+
+### Subcomponents
+
+| Component | Description |
+| --- | --- |
+| `ItemContent` | Flex column container for title and description |
+| `ItemTitle` | Primary label text |
+| `ItemDescription` | Secondary supporting text |
+| `ItemActions` | Right-aligned slot for badges, buttons, or controls |
+| `ItemGroup` | Wrapper for a list of items |
+| `ItemSeparator` | Horizontal divider between items |
+| `ItemHeader` | Optional header row for a group |
+| `ItemFooter` | Optional footer row for a group |

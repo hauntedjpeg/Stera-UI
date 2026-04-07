@@ -1,0 +1,45 @@
+---
+title: components.json
+description: Configuration reference for your Stera UI project.
+---
+
+The `components.json` file is created by `stera-ui init` and controls how components are installed into your project.
+
+## Schema
+
+```json
+{
+  "$schema": "https://ui.stera.site/schema.json",
+  "version": 1,
+  "css": "src/styles/globals.css",
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  }
+}
+```
+
+## Options
+
+### `css`
+
+The path to your project's main CSS file. Stera UI will create a `stera-ui.css` file alongside it containing the design tokens.
+
+### `aliases`
+
+Path aliases that map to directories in your project. These must match your `tsconfig.json` paths configuration.
+
+| Alias | Default | Description |
+| --- | --- | --- |
+| `components` | `@/components` | General components directory |
+| `utils` | `@/lib/utils` | Path to the `cn()` utility |
+| `ui` | `@/components/ui` | Where UI components are installed |
+| `lib` | `@/lib` | Library/utility directory |
+| `hooks` | `@/hooks` | Custom React hooks |
+
+<Callout type="info">
+Import paths in component source files are automatically rewritten to match your configured aliases when you run `stera-ui add`.
+</Callout>

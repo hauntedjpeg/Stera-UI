@@ -1,0 +1,68 @@
+---
+title: Pagination
+description: Navigation controls for moving between pages of content.
+---
+
+<PaginationDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add pagination
+```
+
+## Usage
+
+```tsx
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationEllipsis,
+} from "@/components/ui/pagination"
+```
+
+```tsx
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#" isActive>1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+```
+
+## Simple
+
+<PaginationSimple />
+
+## With Rows Per Page
+
+<PaginationWithRowsPerPage />
+
+Combine with `NativeSelect` to let users control how many rows are shown per page.
+
+## API Reference
+
+### PaginationLink
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `href` | `string` | — |
+| `isActive` | `boolean` | `false` |
+
+### PaginationPrevious / PaginationNext
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `href` | `string` | — |
+| `text` | `string` | `"Previous"` / `"Next"` |

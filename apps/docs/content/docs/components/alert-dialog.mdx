@@ -1,0 +1,80 @@
+---
+title: Alert Dialog
+description: A modal dialog that interrupts the user with important content and requires a response.
+---
+
+<AlertDialogDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add alert-dialog
+```
+
+## Usage
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from "@/components/ui/alert-dialog"
+```
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger render={<Button variant="outline">Open</Button>} />
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+      <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Confirm</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+## With Media
+
+<AlertDialogWithMedia />
+
+Use `AlertDialogMedia` to display an icon above the title for additional visual context.
+
+## Small Size
+
+<AlertDialogSmall />
+
+## Destructive
+
+<AlertDialogDestructive />
+
+Pass `variant="danger"` to `AlertDialogAction` for destructive confirmations.
+
+## API Reference
+
+### AlertDialogContent
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"default" \| "sm"` | `"default"` |
+
+### AlertDialogAction
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "danger"` | `"default"` |
+
+### AlertDialogTrigger
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `render` | `ReactElement` | Render prop for the trigger element |

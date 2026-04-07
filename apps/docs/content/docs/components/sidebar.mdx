@@ -1,0 +1,111 @@
+---
+title: Sidebar
+description: A collapsible application sidebar with support for navigation groups, badges, tooltips, and multiple layout variants.
+---
+
+<SidebarDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add sidebar
+```
+
+## Usage
+
+Wrap your layout with `SidebarProvider` and use `SidebarInset` for the main content area.
+
+```tsx
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
+```
+
+```tsx
+<SidebarProvider>
+  <Sidebar>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Application</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton isActive render={<a href="/" />}>
+              <SiHome />
+              <span>Home</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>
+    <header className="flex h-16 items-center gap-2 border-b px-4">
+      <SidebarTrigger />
+    </header>
+    {/* page content */}
+  </SidebarInset>
+</SidebarProvider>
+```
+
+## With Badge
+
+<SidebarWithBadge />
+
+Use `SidebarMenuBadge` to display a count or status indicator next to a menu item.
+
+## API Reference
+
+### Sidebar
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"sidebar" \| "floating" \| "inset"` | `"sidebar"` |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"` | `"offcanvas"` |
+| `side` | `"left" \| "right"` | `"left"` |
+
+### SidebarProvider
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `open` | `boolean` | — |
+| `defaultOpen` | `boolean` | `true` |
+| `onOpenChange` | `(open: boolean) => void` | — |
+
+### SidebarMenuButton
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `isActive` | `boolean` | `false` |
+| `size` | `"default" \| "sm" \| "lg"` | `"default"` |
+| `tooltip` | `string` | — |
+| `render` | `ReactElement` | — |
+
+### Subcomponents
+
+| Component | Description |
+| --- | --- |
+| `SidebarHeader` | Top section of the sidebar |
+| `SidebarContent` | Scrollable middle section |
+| `SidebarFooter` | Bottom section of the sidebar |
+| `SidebarGroup` | Logical section within `SidebarContent` |
+| `SidebarGroupLabel` | Label for a sidebar group |
+| `SidebarMenu` | List of menu items |
+| `SidebarMenuItem` | Single menu item wrapper |
+| `SidebarMenuBadge` | Count/status badge on a menu item |
+| `SidebarMenuAction` | Action button shown on hover |
+| `SidebarMenuSub` | Nested sub-menu container |
+| `SidebarMenuSubItem` | Item within a sub-menu |
+| `SidebarMenuSubButton` | Button for a sub-menu item |
+| `SidebarMenuSkeleton` | Loading placeholder for a menu item |
+| `SidebarRail` | Thin rail for collapse-to-icon mode |
+| `SidebarTrigger` | Button to toggle the sidebar open/closed |
+| `SidebarInset` | Main content area paired with the sidebar |

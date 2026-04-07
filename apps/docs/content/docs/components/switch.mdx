@@ -1,0 +1,87 @@
+---
+title: Switch
+description: A toggle control for switching between two states, like on and off.
+---
+
+<SwitchDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add switch
+```
+
+## Usage
+
+```tsx
+import { Switch } from "@/components/ui/switch"
+```
+
+```tsx
+<Switch />
+```
+
+## With Label
+
+Pair with `Field` and `FieldLabel` for an accessible labeled switch.
+
+<SwitchDefault />
+
+```tsx
+<Field orientation="horizontal">
+  <Switch id="airplane-mode" />
+  <FieldLabel htmlFor="airplane-mode">Airplane Mode</FieldLabel>
+</Field>
+```
+
+## With Description
+
+Place `FieldContent` between the label and switch to add a description.
+
+<SwitchWithDescription />
+
+```tsx
+<Field orientation="horizontal">
+  <FieldContent>
+    <FieldLabel htmlFor="marketing">Marketing emails</FieldLabel>
+    <FieldDescription>
+      Receive emails about new products, features, and more.
+    </FieldDescription>
+  </FieldContent>
+  <Switch id="marketing" />
+</Field>
+```
+
+## Sizes
+
+<SwitchSizes />
+
+| Size | Description |
+| --- | --- |
+| `default` | Standard size |
+| `sm` | Compact size |
+
+## Disabled
+
+<SwitchDisabled />
+
+```tsx
+<Field orientation="horizontal" data-disabled="true">
+  <Switch id="airplane-mode" disabled />
+  <FieldLabel htmlFor="airplane-mode">Airplane Mode</FieldLabel>
+</Field>
+```
+
+## API Reference
+
+Built on Base UI's `Switch` primitive.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"default" \| "sm"` | `"default"` |
+| `checked` | `boolean` | — |
+| `defaultChecked` | `boolean` | — |
+| `onCheckedChange` | `(checked: boolean) => void` | — |
+| `disabled` | `boolean` | `false` |
+| `name` | `string` | — |
+| `value` | `string` | — |

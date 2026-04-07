@@ -1,0 +1,67 @@
+---
+title: Skeleton
+description: A placeholder loading state that mimics the shape of content while it loads.
+---
+
+<SkeletonAvatar />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add skeleton
+```
+
+## Usage
+
+```tsx
+import { Skeleton } from "@/components/ui/skeleton"
+```
+
+```tsx
+<Skeleton className="h-4 w-48" />
+```
+
+## Avatar with Text
+
+<SkeletonAvatar />
+
+```tsx
+<div className="flex items-center gap-4">
+  <Skeleton className="h-12 w-12 rounded-full" />
+  <div className="space-y-2">
+    <Skeleton className="h-4 w-[250px]" />
+    <Skeleton className="h-4 w-[200px]" />
+  </div>
+</div>
+```
+
+## Card
+
+<SkeletonCard />
+
+```tsx
+<div className="flex flex-col space-y-3">
+  <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+  <div className="space-y-2">
+    <Skeleton className="h-4 w-[250px]" />
+    <Skeleton className="h-4 w-[200px]" />
+  </div>
+</div>
+```
+
+## Text Block
+
+<SkeletonText />
+
+```tsx
+<div className="space-y-2">
+  <Skeleton className="h-4 w-[300px]" />
+  <Skeleton className="h-4 w-[280px]" />
+  <Skeleton className="h-4 w-[260px]" />
+  <Skeleton className="h-4 w-[200px]" />
+</div>
+```
+
+## API Reference
+
+Renders a `<div>` with a pulse animation. Accepts all standard `<div>` props. Use `className` to control the size and shape.

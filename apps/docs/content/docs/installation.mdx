@@ -1,0 +1,70 @@
+---
+title: Installation
+description: How to install and configure Stera UI in your project.
+---
+
+## Prerequisites
+
+- A React project (Next.js or Vite)
+- Tailwind CSS v4 configured
+- TypeScript (recommended)
+
+## Initialize Stera UI
+
+Run the `init` command in your project directory:
+
+```bash
+pnpm dlx stera-ui init
+```
+
+This will:
+
+1. Detect your project structure (Next.js, Vite, `src/` directory)
+2. Create a `components.json` configuration file
+3. Set up the base design tokens (`stera-ui.css`)
+4. Install required dependencies (`tw-animate-css`)
+
+## Add Components
+
+Use the `add` command to install individual components:
+
+```bash
+pnpm dlx stera-ui add button
+```
+
+You can add multiple components at once:
+
+```bash
+pnpm dlx stera-ui add button dialog dropdown-menu
+```
+
+Dependencies are resolved automatically. For example, adding `dialog` will also install `button` and `utils` if they aren't already present.
+
+## List Available Components
+
+See all available components with:
+
+```bash
+pnpm dlx stera-ui list
+```
+
+This shows components grouped by type (ui, style, component, hook, lib) with their registry dependencies.
+
+## Project Structure
+
+After initialization, your project will have:
+
+```
+your-project/
+├── components.json          # Stera UI configuration
+├── components/
+│   └── ui/                  # Your installed components
+│       ├── button.tsx
+│       ├── dialog.tsx
+│       └── ...
+├── lib/
+│   └── utils.ts             # cn() utility function
+└── styles/
+    ├── globals.css           # Your existing CSS
+    └── stera-ui.css          # Stera design tokens
+```

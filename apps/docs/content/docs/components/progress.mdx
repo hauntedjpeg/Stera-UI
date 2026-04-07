@@ -1,0 +1,65 @@
+---
+title: Progress
+description: A progress bar for displaying task completion or upload status.
+---
+
+<ProgressDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add progress
+```
+
+## Usage
+
+```tsx
+import {
+  Progress,
+  ProgressLabel,
+  ProgressValue,
+} from "@/components/ui/progress"
+```
+
+```tsx
+<Progress value={33} className="w-80" />
+```
+
+## With Label and Value
+
+Use `ProgressLabel` and `ProgressValue` as children of `Progress` to display a description and a numeric percentage.
+
+<ProgressWithLabel />
+
+```tsx
+<Progress value={66} className="w-80">
+  <ProgressLabel>Uploading...</ProgressLabel>
+  <ProgressValue />
+</Progress>
+```
+
+## API Reference
+
+### Progress
+
+Built on Base UI's `Progress.Root`. Automatically renders the track and indicator internally.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `number \| null` | — |
+
+### ProgressLabel
+
+Renders a descriptive label aligned to the start. Accepts all Base UI `Progress.Label` props.
+
+### ProgressValue
+
+Renders the current percentage value aligned to the end. Accepts all Base UI `Progress.Value` props.
+
+### ProgressTrack
+
+The outer bar container. Accepts all Base UI `Progress.Track` props.
+
+### ProgressIndicator
+
+The inner filled bar. Accepts all Base UI `Progress.Indicator` props.

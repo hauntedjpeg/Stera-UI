@@ -1,0 +1,69 @@
+---
+title: Slider
+description: An input for selecting a numeric value within a range by dragging a thumb.
+---
+
+<SliderDefault />
+
+## Installation
+
+```bash
+pnpm dlx stera-ui add slider
+```
+
+## Usage
+
+```tsx
+import { Slider } from "@/components/ui/slider"
+```
+
+```tsx
+<Slider defaultValue={[50]} max={100} step={1} className="w-80" />
+```
+
+## Range
+
+Pass two values in `defaultValue` to create a range slider with two thumbs.
+
+<SliderRange />
+
+```tsx
+<Slider defaultValue={[25, 75]} max={100} step={5} className="w-80" />
+```
+
+## Vertical
+
+<SliderVertical />
+
+```tsx
+<Slider
+  defaultValue={[50]}
+  max={100}
+  orientation="vertical"
+  className="h-40"
+/>
+```
+
+## Disabled
+
+<SliderDisabled />
+
+```tsx
+<Slider defaultValue={[50]} max={100} disabled className="w-80" />
+```
+
+## API Reference
+
+Built on Base UI's `Slider` primitive.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `number[]` | — |
+| `defaultValue` | `number[]` | — |
+| `onValueChange` | `(value: number[]) => void` | — |
+| `onValueCommit` | `(value: number[]) => void` | — |
+| `min` | `number` | `0` |
+| `max` | `number` | `100` |
+| `step` | `number` | `1` |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
+| `disabled` | `boolean` | `false` |
