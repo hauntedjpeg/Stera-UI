@@ -1,6 +1,6 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { ChevronDownIcon } from "lucide-react"
+import { SiChevronDown } from "stera-icons"
 
 import { cn } from "@/lib/utils"
 
@@ -48,7 +48,7 @@ function NativeSelect({ className, size, ...props }: NativeSelectProps) {
         className={cn(nativeSelectVariants({ size }))}
         {...props}
       />
-      <ChevronDownIcon
+      <SiChevronDown
         className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-text-tertiary select-none"
         aria-hidden="true"
         data-slot="native-select-icon"

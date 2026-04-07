@@ -142,14 +142,14 @@
     {
       "name": "command",
       "type": "registry:ui",
-      "dependencies": ["cmdk", "@base-ui/react", "lucide-react"],
+      "dependencies": ["cmdk", "@base-ui/react", "stera-icons"],
       "registryDependencies": ["utils", "dialog", "input-group"],
       "files": [{ "path": "registry/ui/command.tsx", "type": "registry:ui" }]
     },
     {
       "name": "dialog",
       "type": "registry:ui",
-      "dependencies": ["@base-ui/react", "lucide-react"],
+      "dependencies": ["@base-ui/react", "stera-icons"],
       "registryDependencies": ["utils", "button"],
       "files": [{ "path": "registry/ui/dialog.tsx", "type": "registry:ui" }]
     },
@@ -205,7 +205,7 @@
     {
       "name": "input-otp",
       "type": "registry:ui",
-      "dependencies": ["input-otp", "lucide-react"],
+      "dependencies": ["input-otp", "stera-icons"],
       "registryDependencies": ["utils"],
       "files": [{ "path": "registry/ui/input-otp.tsx", "type": "registry:ui" }]
     },
@@ -232,21 +232,21 @@
     {
       "name": "menubar",
       "type": "registry:ui",
-      "dependencies": ["@base-ui/react", "lucide-react"],
+      "dependencies": ["@base-ui/react", "stera-icons"],
       "registryDependencies": ["utils", "dropdown-menu"],
       "files": [{ "path": "registry/ui/menubar.tsx", "type": "registry:ui" }]
     },
     {
       "name": "native-select",
       "type": "registry:ui",
-      "dependencies": ["lucide-react"],
+      "dependencies": ["stera-icons"],
       "registryDependencies": ["utils"],
       "files": [{ "path": "registry/ui/native-select.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pagination",
       "type": "registry:ui",
-      "dependencies": ["lucide-react"],
+      "dependencies": ["stera-icons"],
       "registryDependencies": ["utils", "button"],
       "files": [{ "path": "registry/ui/pagination.tsx", "type": "registry:ui" }]
     },
@@ -295,7 +295,7 @@
     {
       "name": "sheet",
       "type": "registry:ui",
-      "dependencies": ["@base-ui/react", "lucide-react"],
+      "dependencies": ["@base-ui/react", "stera-icons"],
       "registryDependencies": ["utils", "button"],
       "files": [{ "path": "registry/ui/sheet.tsx", "type": "registry:ui" }]
     },
@@ -328,7 +328,7 @@
     {
       "name": "spinner",
       "type": "registry:ui",
-      "dependencies": ["lucide-react"],
+      "dependencies": ["stera-icons"],
       "registryDependencies": ["utils"],
       "files": [{ "path": "registry/ui/spinner.tsx", "type": "registry:ui" }]
     },

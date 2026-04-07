@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { ChevronDownIcon } from "lucide-react"
 import {
+  SiChevronDown,
   SiCopy,
   SiEye,
   SiGlobe,
@@ -195,7 +195,7 @@ export const WithDropdown: Story = {
           <DropdownMenuTrigger
             render={
               <InputGroupButton variant="ghost" className="pr-1.5! text-xs">
-                Search In... <ChevronDownIcon className="size-3" />
+                Search In... <SiChevronDown className="size-3" />
               </InputGroupButton>
             }
           />

@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { XIcon } from "lucide-react"
+import { SiX } from "stera-icons"
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
@@ -99,7 +99,7 @@ function DialogPopup({
               />
             }
           >
-            <XIcon
+            <SiX
             />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
