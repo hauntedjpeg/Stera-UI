@@ -16,7 +16,7 @@
     "node": ">=18"
   },
   "bin": {
-    "stera-ui": "./dist/index.js"
+    "stera-ui": "./dist/cli.js"
   },
   "exports": {
     ".": "./dist/index.js",
