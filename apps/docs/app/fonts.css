@@ -1,0 +1,9 @@
+/*
+ * Override font variables to use next/font CSS variables.
+ * The geist package sets --font-geist-sans and --font-geist-mono
+ * via className on <html> in layout.tsx.
+ */
+:root {
+  --font-display: var(--font-geist-sans);
+  --font-body: var(--font-geist-sans);
+}
