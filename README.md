@@ -150,7 +150,7 @@ Lists all available components grouped by type, along with their registry depend
 
 ```json
 {
-  "$schema": "https://ui.stera.site/schema.json",
+  "$schema": "https://ui.stera.sh/schema.json",
   "version": 1,
   "css": "src/styles/globals.css",
   "aliases": {

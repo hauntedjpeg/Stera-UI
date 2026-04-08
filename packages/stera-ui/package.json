@@ -16,7 +16,7 @@
     "ui",
     "design-system"
   ],
-  "homepage": "https://ui.stera.site",
+  "homepage": "https://ui.stera.sh",
   "engines": {
     "node": ">=18"
   },

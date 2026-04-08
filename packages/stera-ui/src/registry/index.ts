@@ -1,7 +1,7 @@
 import type { RegistryItem } from "../schema/index.js"
 
 const REGISTRY_URL =
-  process.env.REGISTRY_URL ?? "https://ui.stera.site/r"
+  process.env.REGISTRY_URL ?? "https://ui.stera.sh/r"
 
 export type { RegistryItem }
 
