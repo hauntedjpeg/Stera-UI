@@ -1,14 +1,27 @@
 import fs from "node:fs"
 import path from "node:path"
-import { spawn } from "node:child_process"
+import { detect } from "@antfu/ni"
+import { execa } from "execa"
 import { createSpinner } from "./spinner.js"
 
 type PackageManager = "pnpm" | "npm" | "yarn" | "bun"
 
-export function detectPackageManager(cwd: string): PackageManager {
-  if (fs.existsSync(path.join(cwd, "pnpm-lock.yaml"))) return "pnpm"
-  if (fs.existsSync(path.join(cwd, "bun.lockb"))) return "bun"
-  if (fs.existsSync(path.join(cwd, "yarn.lock"))) return "yarn"
+export async function detectPackageManager(cwd: string): Promise<PackageManager> {
+  // Use @antfu/ni which walks up the directory tree to find lock files
+  // This handles monorepos where the lock file is at the root
+  const detected = await detect({ programmatic: true, cwd })
+
+  if (detected === "pnpm@6" || detected === "pnpm") return "pnpm"
+  if (detected === "yarn@berry" || detected === "yarn") return "yarn"
+  if (detected === "bun") return "bun"
+  if (detected === "npm") return "npm"
+
+  // Fallback: check npm_config_user_agent (set by pnpm dlx, npx, etc.)
+  const userAgent = process.env.npm_config_user_agent || ""
+  if (userAgent.startsWith("pnpm")) return "pnpm"
+  if (userAgent.startsWith("yarn")) return "yarn"
+  if (userAgent.startsWith("bun")) return "bun"
+
   return "npm"
 }
 
@@ -47,24 +60,15 @@ export async function installDependencies(deps: string[], cwd: string): Promise<
   const toInstall = deps.filter((dep) => !existing.has(dep))
   if (toInstall.length === 0) return
 
-  const pm = detectPackageManager(cwd)
+  const pm = await detectPackageManager(cwd)
   const [cmd, args] = getInstallArgs(pm, toInstall)
   const spinner = createSpinner(`Installing with ${pm}`)
 
-  await new Promise<void>((resolve, reject) => {
-    const proc = spawn(cmd, args, { cwd, stdio: "pipe" })
-    proc.on("close", (code) => {
-      if (code === 0) {
-        spinner.succeed(`Installed with ${pm}`)
-        resolve()
-      } else {
-        spinner.fail(`Install failed (exit ${code})`)
-        reject(new Error(`${pm} exited with code ${code}`))
-      }
-    })
-    proc.on("error", (err) => {
-      spinner.fail(`Install failed`)
-      reject(err)
-    })
-  })
+  try {
+    await execa(cmd, args, { cwd })
+    spinner.succeed(`Installed with ${pm}`)
+  } catch (error) {
+    spinner.fail(`Install failed`)
+    throw error
+  }
 }
