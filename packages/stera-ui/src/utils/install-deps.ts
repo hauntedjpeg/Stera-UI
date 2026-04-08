@@ -69,6 +69,21 @@ export async function installDependencies(deps: string[], cwd: string): Promise<
     spinner.succeed(`Installed with ${pm}`)
   } catch (error) {
     spinner.fail(`Install failed`)
+
+    // Detect pnpm workspace root error and provide actionable guidance
+    if (
+      error instanceof Error &&
+      "stdout" in error &&
+      typeof (error as any).stdout === "string" &&
+      (error as any).stdout.includes("ERR_PNPM_ADDING_TO_ROOT")
+    ) {
+      throw new Error(
+        `Cannot install dependencies at a pnpm workspace root.\n` +
+        `Run stera-ui init from within a specific workspace package instead,\n` +
+        `or use "pnpm add -w <package>" manually to install at the root.`
+      )
+    }
+
     throw error
   }
 }
