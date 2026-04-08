@@ -266,31 +266,15 @@ These must match the path aliases in your `tsconfig.json`. For example, if you s
 
 ## Font Setup
 
-The Geist font files are not included in this package and must be served by your app. After running `init`, download the Geist variable font and place the files in `public/fonts/`:
+Fonts are configured automatically when you run `stera-ui init`. The CLI detects your project setup and offers three options:
 
-```
-public/
-  fonts/
-    GeistVF.woff2
-    GeistMonoVF.woff2
-```
+- **Use Stera UI defaults** — installs the [`geist`](https://www.npmjs.com/package/geist) package with Geist Sans and Geist Mono
+- **Keep your current fonts** — updates CSS variables to use your existing fonts
+- **Skip** — configure fonts manually later
 
-Geist is available from [vercel/geist-font](https://github.com/vercel/geist-font/releases).
+For **Next.js** projects, the CLI can set up `next/font` for automatic optimization (preloading, self-hosting, layout shift prevention). For **other frameworks**, it copies self-hosted `.woff2` files to `public/fonts/` and provides preload `<link>` tags.
 
-Then apply the font in your root layout:
-
-```tsx
-// app/layout.tsx (Next.js)
-import '@/styles/globals.css'
-
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body className="font-sans">{children}</body>
-    </html>
-  )
-}
-```
+See the [full font documentation](https://ui.stera.sh/docs/fonts) for details on customizing fonts or adding additional font families.
 
 ---
 
