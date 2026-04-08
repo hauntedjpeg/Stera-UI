@@ -6,6 +6,8 @@ export interface ProjectInfo {
   framework: "next" | "vite" | "other"
   rsc: boolean
   existingCssFile: string | null
+  /** Path to the root layout file (layout.tsx for Next.js, index.html for Vite) */
+  layoutFile: string | null
 }
 
 /**
@@ -78,5 +80,22 @@ export function detectProject(cwd: string): ProjectInfo {
   // Find existing Tailwind CSS file
   const existingCssFile = findTailwindCssFile(cwd)
 
-  return { hasSrc, framework, rsc, existingCssFile }
+  // Find layout file
+  let layoutFile: string | null = null
+  if (framework === "next") {
+    const appDir = hasSrc ? "src/app" : "app"
+    for (const ext of ["tsx", "jsx", "ts", "js"]) {
+      const candidate = `${appDir}/layout.${ext}`
+      if (fs.existsSync(path.join(cwd, candidate))) {
+        layoutFile = candidate
+        break
+      }
+    }
+  } else if (framework === "vite") {
+    if (fs.existsSync(path.join(cwd, "index.html"))) {
+      layoutFile = "index.html"
+    }
+  }
+
+  return { hasSrc, framework, rsc, existingCssFile, layoutFile }
 }

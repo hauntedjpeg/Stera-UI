@@ -47,6 +47,12 @@ export const configSchema = z.object({
     lib: z.string(),
     hooks: z.string(),
   }),
+  fonts: z
+    .object({
+      strategy: z.enum(["stera-default", "keep-existing", "skip"]),
+      nextFont: z.boolean().optional(),
+    })
+    .optional(),
 })
 
 export type SteraConfig = z.infer<typeof configSchema>

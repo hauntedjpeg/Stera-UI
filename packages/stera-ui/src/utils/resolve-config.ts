@@ -12,6 +12,10 @@ export interface SteraConfig {
     lib: string
     hooks: string
   }
+  fonts?: {
+    strategy: "stera-default" | "keep-existing" | "skip"
+    nextFont?: boolean
+  }
 }
 
 /** Legacy config shape from shadcn-era bootstrapping. */

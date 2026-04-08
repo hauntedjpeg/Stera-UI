@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@antfu/ni": "^30.0.0",
+    "@inquirer/prompts": "^7.0.0",
     "commander": "^13.1.0",
     "execa": "^9.6.1",
     "tsconfig-paths": "^4.2.0",
