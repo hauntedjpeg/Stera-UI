@@ -1,5 +1,11 @@
 # stera-ui
 
+## 0.1.2
+
+### Patch Changes
+
+- [`3b5fc16`](https://github.com/hauntedjpeg/Stera-UI/commit/3b5fc163ac1854cedc27d063fd2924678ac44f60) Thanks [@hauntedjpeg](https://github.com/hauntedjpeg)! - Update registry and schema URLs from ui.stera.site to ui.stera.sh
+
 ## 0.1.1
 
 ### Patch Changes
