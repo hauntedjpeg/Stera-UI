@@ -28,7 +28,7 @@ const buttonVariants = cva(
         accent:
           "bg-bg-accent text-text-onaccent border-bg-accent hover:bg-bg-accent-hover hover:border-border-accent-hover",
         outline:
-          "border border-border bg-bg-surface hover:bg-bg-surface-hover aria-expanded:bg-bg-surface-hover aria-expanded:text-text",
+          "text-text border border-border bg-bg-surface hover:bg-bg-surface-hover aria-expanded:bg-bg-surface-hover aria-expanded:text-text",
         subtle:
           "bg-bg-surface-secondary text-text border-bg-surface-secondary hover:bg-bg-surface-secondary-hover hover:border-bg-surface-secondary-hover aria-expanded:bg-bg-surface-tertiary-hover aria-expanded:border-bg-surface-tertiary-hover aria-expanded:text-text",
         ghost:
