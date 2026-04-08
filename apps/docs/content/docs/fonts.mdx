@@ -1,0 +1,201 @@
+---
+title: Fonts
+description: How to set up and configure fonts in your Stera UI project.
+---
+
+Stera UI uses self-hosted font files for the best performance. This means fonts are served directly from your project — no external network requests, no third-party tracking, and full control over caching.
+
+Fonts are configured in two files:
+
+- `styles/fonts.css` — `@font-face` declarations that load font files
+- `styles/globals.css` — CSS variables (`--font-display`, `--font-body`) that assign fonts to the design system
+
+By default, Stera UI ships with [Geist Sans](https://vercel.com/font) and Geist Mono.
+
+## General Setup
+
+Use this approach for Vite, Remix, or any non-Next.js framework.
+
+### 1. Add Font Files
+
+Get your font files in `.woff2` format. Variable fonts are recommended — they support the full weight range in a single file, reducing the number of requests.
+
+Place them in your `public/fonts/` directory:
+
+```
+public/
+└── fonts/
+    └── inter/
+        ├── Inter-Variable.woff2
+        └── Inter-Italic.woff2
+```
+
+### 2. Declare `@font-face` Rules
+
+Add `@font-face` blocks in `styles/fonts.css`:
+
+```css title="styles/fonts.css"
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter/Inter-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter/Inter-Italic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+```
+
+### 3. Preload Font Files
+
+Add preload links in your HTML `<head>` so the browser starts downloading font files early — before it parses CSS. Only preload the weights and styles used above the fold (typically just the regular/normal variant):
+
+```html
+<link
+  rel="preload"
+  href="/fonts/inter/Inter-Variable.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin="anonymous"
+/>
+```
+
+Where you add this depends on your framework — in Vite it goes in `index.html`, in Remix it goes in the `<head>` of your root route via the `links` export.
+
+### 4. Import the Font Stylesheet
+
+Make sure `fonts.css` is imported at the top of your `globals.css`, before any other imports:
+
+```css title="styles/globals.css"
+@import './fonts.css';
+@import "tailwindcss";
+/* ... */
+```
+
+### 5. Update CSS Variables
+
+Set `--font-display` and `--font-body` in the `:root` block of `globals.css` to your font family name:
+
+```css title="styles/globals.css"
+:root {
+  --font-display: Inter;
+  --font-body: Inter;
+  /* ... */
+}
+```
+
+All Stera UI typography utilities (`st-body-md`, `st-heading-lg`, `st-display-sm`, etc.) reference these variables, so your font will apply everywhere automatically.
+
+## Next.js Setup
+
+Next.js has a built-in font system (`next/font`) that optimizes font loading automatically. It self-hosts font files at build time, adds preload hints, and uses `size-adjust` to eliminate layout shift. This is the recommended approach for Next.js projects.
+
+### 1. Add Font Files
+
+Place your `.woff2` files anywhere in your project. A common convention is an `app/fonts/` directory:
+
+```
+app/
+└── fonts/
+    ├── Inter-Variable.woff2
+    └── Inter-Italic.woff2
+```
+
+### 2. Configure Fonts in Your Root Layout
+
+Import `localFont` from `next/font/local` and configure your font with a CSS variable:
+
+```tsx title="app/layout.tsx"
+import localFont from 'next/font/local';
+
+const inter = localFont({
+  src: [
+    {
+      path: './fonts/Inter-Variable.woff2',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Inter-Italic.woff2',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={inter.variable}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+### 3. Update CSS Variables
+
+In `globals.css`, set the font variables to reference the CSS variable created by `next/font`:
+
+```css title="styles/globals.css"
+:root {
+  --font-display: var(--font-inter);
+  --font-body: var(--font-inter);
+  /* ... */
+}
+```
+
+When using `next/font`, you do not need a separate `fonts.css` file — Next.js handles the `@font-face` declarations for you.
+
+## Adding Additional Fonts
+
+To add a second font (for example, a monospace font for code), repeat the same steps:
+
+**General setup** — add another `@font-face` block in `fonts.css`:
+
+```css title="styles/fonts.css"
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono/JetBrainsMono-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+```
+
+**Next.js** — add another `localFont` call in your layout:
+
+```tsx
+const jetbrainsMono = localFont({
+  src: './fonts/JetBrainsMono-Variable.woff2',
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+});
+
+// Apply both variable classes
+<html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+```
+
+Then reference the new font wherever needed in your CSS:
+
+```css
+:root {
+  --font-mono: 'JetBrains Mono'; /* or var(--font-jetbrains-mono) for Next.js */
+}
+```
+
+## Best Practices
+
+- **Use `.woff2` format.** It offers the best compression and is supported by all modern browsers.
+- **Prefer variable fonts.** A single variable font file replaces multiple static weight files, reducing total download size.
+- **Always set `font-display: swap`.** This ensures text remains visible while fonts load, preventing a flash of invisible text (FOIT).
+- **Self-host your fonts.** Avoids external network requests, eliminates third-party cookies/tracking, and gives you full control over caching headers.
