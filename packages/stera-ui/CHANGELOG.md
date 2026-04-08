@@ -1,5 +1,11 @@
 # stera-ui
 
+## 0.2.1
+
+### Patch Changes
+
+- [`30e3d8f`](https://github.com/hauntedjpeg/Stera-UI/commit/30e3d8f549324ed3c031fc82d63acf8b02457e29) Thanks [@hauntedjpeg](https://github.com/hauntedjpeg)! - Show a friendly error message when running init in a pnpm workspace root instead of a raw stack trace
+
 ## 0.2.0
 
 ### Minor Changes
