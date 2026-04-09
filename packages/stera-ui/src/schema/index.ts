@@ -6,6 +6,7 @@ export const registryItemTypeSchema = z.enum([
   "registry:hook",
   "registry:lib",
   "registry:style",
+  "registry:font",
 ])
 
 export type RegistryItemType = z.infer<typeof registryItemTypeSchema>
@@ -19,15 +20,45 @@ export const registryItemFileSchema = z.object({
 
 export type RegistryItemFile = z.infer<typeof registryItemFileSchema>
 
-export const registryItemSchema = z.object({
-  name: z.string(),
-  type: registryItemTypeSchema,
-  dependencies: z.array(z.string()).optional(),
-  registryDependencies: z.array(z.string()).optional(),
-  files: z.array(registryItemFileSchema),
+// Font metadata schema for registry:font items.
+export const registryItemFontSchema = z.object({
+  family: z.string(),
+  provider: z.literal("google"),
+  import: z.string(),
+  variable: z.string(),
+  weight: z.array(z.string()).optional(),
+  subsets: z.array(z.string()).optional(),
+  selector: z.string().optional(),
+  dependency: z.string().optional(),
 })
 
+export type RegistryItemFont = z.infer<typeof registryItemFontSchema>
+
+// Common fields shared by all registry items.
+const registryItemCommonSchema = z.object({
+  name: z.string(),
+  dependencies: z.array(z.string()).optional(),
+  registryDependencies: z.array(z.string()).optional(),
+  files: z.array(registryItemFileSchema).optional(),
+})
+
+// registry:font items have a font field, all other types do not.
+export const registryItemSchema = z.discriminatedUnion("type", [
+  registryItemCommonSchema.extend({
+    type: z.literal("registry:font"),
+    font: registryItemFontSchema,
+    files: z.array(registryItemFileSchema).optional(),
+  }),
+  registryItemCommonSchema.extend({
+    type: registryItemTypeSchema.exclude(["registry:font"]),
+    files: z.array(registryItemFileSchema),
+  }),
+])
+
 export type RegistryItem = z.infer<typeof registryItemSchema>
+
+// Helper type for registry:font items specifically.
+export type RegistryFontItem = Extract<RegistryItem, { type: "registry:font" }>
 
 export const registryIndexSchema = z.object({
   name: z.string(),

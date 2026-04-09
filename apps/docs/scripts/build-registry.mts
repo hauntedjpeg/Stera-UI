@@ -11,12 +11,24 @@ interface RegistryFile {
   content?: string
 }
 
+interface RegistryFontMeta {
+  family: string
+  provider: string
+  import: string
+  variable: string
+  weight?: string[]
+  subsets?: string[]
+  selector?: string
+  dependency?: string
+}
+
 interface RegistryItem {
   name: string
   type: string
   dependencies?: string[]
   registryDependencies?: string[]
-  files: RegistryFile[]
+  files?: RegistryFile[]
+  font?: RegistryFontMeta
 }
 
 interface Registry {
@@ -49,8 +61,26 @@ function buildRegistry() {
       }
     }
 
+    // Font items have no files to read — emit them directly.
+    if (item.type === "registry:font") {
+      const builtItem: RegistryItem = {
+        name: item.name,
+        type: item.type,
+        ...(item.font && { font: item.font }),
+      }
+
+      const itemPath = path.join(OUTPUT_DIR, `${item.name}.json`)
+      fs.writeFileSync(itemPath, JSON.stringify(builtItem, null, 2))
+
+      indexItems.push({
+        name: item.name,
+        type: item.type,
+      })
+      continue
+    }
+
     // Read file contents and strip the registry/ prefix from paths
-    const files: RegistryFile[] = item.files.map((file) => {
+    const files: RegistryFile[] = (item.files ?? []).map((file) => {
       const fullPath = path.join(ROOT, file.path)
 
       if (!fs.existsSync(fullPath)) {

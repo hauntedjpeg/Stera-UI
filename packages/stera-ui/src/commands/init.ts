@@ -1,29 +1,27 @@
 import fs from "node:fs"
 import path from "node:path"
-import { select, confirm } from "@inquirer/prompts"
+import { select } from "@inquirer/prompts"
 import { findConfigPath, CONFIG_FILE, type SteraConfig } from "../utils/resolve-config.js"
 import { resolveDependencies, fetchRegistryItem } from "../registry/index.js"
+import type { RegistryFontItem } from "../schema/index.js"
 import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
 import { hasGlobalsCss } from "../utils/detect-globals.js"
 import { detectProject, type ProjectInfo } from "../utils/detect-project.js"
 import { detectFonts, type DetectedFonts } from "../utils/detect-fonts.js"
 import { patchCssVariables } from "../utils/patch-css-vars.js"
-import { setupFontsGeneric } from "../utils/setup-fonts-generic.js"
-import { setupFontsNextjs } from "../utils/setup-fonts-nextjs.js"
+import { massageTreeForFonts, updateFonts } from "../utils/update-fonts.js"
 import { LOGO, CHECK, dim } from "../utils/format.js"
 
 type FontStrategy = "stera-default" | "keep-existing" | "skip"
 
-interface FontChoice {
-  strategy: FontStrategy
-  useNextFont: boolean
-}
+/** Default font registry items to fetch for the "stera-default" strategy. */
+const DEFAULT_FONT_NAMES = ["font-geist", "font-geist-mono"]
 
 /**
  * Build a SteraConfig based on detected project structure.
  */
-function buildConfig(project: ProjectInfo, fontChoice: FontChoice): SteraConfig {
+function buildConfig(project: ProjectInfo, strategy: FontStrategy): SteraConfig {
   // Determine CSS file path
   let cssPath: string
   if (project.existingCssFile) {
@@ -46,8 +44,7 @@ function buildConfig(project: ProjectInfo, fontChoice: FontChoice): SteraConfig 
       hooks: "@/hooks",
     },
     fonts: {
-      strategy: fontChoice.strategy,
-      ...(fontChoice.useNextFont ? { nextFont: true } : {}),
+      strategy,
     },
   }
 }
@@ -90,25 +87,18 @@ function insertImportLine(filePath: string, importStatement: string): void {
 /**
  * Prompt user for font strategy. Skipped when --yes is passed.
  */
-async function promptFontChoice(
-  project: ProjectInfo,
+async function promptFontStrategy(
   detected: DetectedFonts,
   skipPrompts: boolean
-): Promise<FontChoice> {
+): Promise<FontStrategy> {
   const hasExistingFonts =
     detected.hasNextFont || detected.hasFontFace || detected.hasGoogleFontsLink
 
-  // Default strategy
   const defaultStrategy: FontStrategy = hasExistingFonts
     ? "keep-existing"
     : "stera-default"
 
-  if (skipPrompts) {
-    return {
-      strategy: defaultStrategy,
-      useNextFont: project.framework === "next" && defaultStrategy === "stera-default",
-    }
-  }
+  if (skipPrompts) return defaultStrategy
 
   // Show detected fonts
   if (hasExistingFonts) {
@@ -121,7 +111,6 @@ async function promptFontChoice(
     console.log(`  Detected existing fonts: ${sources.join(" via ")}\n`)
   }
 
-  // Font strategy prompt
   type StrategyChoice = { value: FontStrategy; name: string; description: string }
   const choices: StrategyChoice[] = []
 
@@ -136,7 +125,7 @@ async function promptFontChoice(
   choices.push({
     value: "stera-default",
     name: "Use Stera UI default fonts (Geist Sans + Geist Mono)",
-    description: "Self-hosted, optimized variable fonts",
+    description: "Optimized variable fonts via next/font or fontsource",
   })
 
   choices.push({
@@ -151,39 +140,50 @@ async function promptFontChoice(
     default: defaultStrategy,
   })
 
-  // Next.js optimization prompt
-  let useNextFont = false
-  if (project.framework === "next" && strategy === "stera-default") {
-    useNextFont = await confirm({
-      message: "Use next/font for automatic optimization? (recommended)",
-      default: true,
-    })
-  }
-
   console.log("")
-
-  return { strategy, useNextFont }
+  return strategy
 }
 
 /**
- * Execute the chosen font strategy.
+ * Fetch font registry items for the default Stera fonts.
+ */
+async function fetchDefaultFonts(): Promise<RegistryFontItem[]> {
+  const fonts: RegistryFontItem[] = []
+  for (const name of DEFAULT_FONT_NAMES) {
+    try {
+      const item = await fetchRegistryItem(name)
+      if (item.type === "registry:font") {
+        fonts.push(item as RegistryFontItem)
+      }
+    } catch {
+      // Font not found in registry — skip silently.
+    }
+  }
+  return fonts
+}
+
+/**
+ * Execute the chosen font strategy using the registry-driven approach.
+ *
+ * - **stera-default**: Fetches font items from registry, then:
+ *   - Next.js: patches layout with next/font/google imports via AST
+ *   - Other: installs @fontsource-variable/* packages + adds CSS @import
+ * - **keep-existing**: Patches CSS variables to reference user's existing fonts
+ * - **skip**: Does nothing
  */
 async function executeFontStrategy(
-  fontChoice: FontChoice,
+  strategy: FontStrategy,
   project: ProjectInfo,
   detected: DetectedFonts,
   config: SteraConfig,
   cwd: string
-): Promise<{ preloadTags?: string }> {
-  const cssDir = path.dirname(path.resolve(cwd, config.css))
-  const cssPath = path.resolve(cwd, config.css)
+): Promise<void> {
+  if (strategy === "skip") return
 
-  if (fontChoice.strategy === "skip") {
-    return {}
-  }
+  if (strategy === "keep-existing") {
+    const cssPath = path.resolve(cwd, config.css)
+    const cssDir = path.dirname(cssPath)
 
-  if (fontChoice.strategy === "keep-existing") {
-    // Patch CSS variables to use the user's existing fonts
     if (fs.existsSync(cssPath)) {
       const fontFamily =
         detected.fontFamilies.length > 0 ? detected.fontFamilies[0] : null
@@ -193,16 +193,16 @@ async function executeFontStrategy(
           : fontFamily ?? "Geist"
 
       const patched = patchCssVariables(cssPath, {
-        "--font-display": fontValue,
-        "--font-body": fontValue,
+        "--font-heading": fontValue,
+        "--font-sans": fontValue,
       })
 
       // Also check stera-ui.css if it exists
       const steraUiPath = path.join(cssDir, "stera-ui.css")
       if (fs.existsSync(steraUiPath)) {
         patchCssVariables(steraUiPath, {
-          "--font-display": fontValue,
-          "--font-body": fontValue,
+          "--font-heading": fontValue,
+          "--font-sans": fontValue,
         })
       }
 
@@ -210,27 +210,55 @@ async function executeFontStrategy(
         console.log(`  ${CHECK}  Updated font variables to use ${fontValue}`)
       }
     }
-    return {}
+    return
   }
 
   // strategy === "stera-default"
-  if (fontChoice.useNextFont && project.layoutFile) {
-    // Strategy A: next/font
-    await installDependencies(["geist"], cwd)
+  const fonts = await fetchDefaultFonts()
+  if (fonts.length === 0) return
 
-    // Find the CSS file to patch (could be globals.css or stera-ui.css)
+  // Process fonts based on framework
+  const fontTree = massageTreeForFonts(fonts, project)
+
+  // Install font dependencies
+  if (fontTree.dependencies.length > 0) {
+    await installDependencies(fontTree.dependencies, cwd)
+  }
+
+  // Add CSS @import lines for fontsource (non-Next.js)
+  if (fontTree.cssImports.length > 0) {
+    const cssPath = path.resolve(cwd, config.css)
+    const cssDir = path.dirname(cssPath)
     const targetCss = fs.existsSync(path.join(cssDir, "stera-ui.css"))
       ? path.join(cssDir, "stera-ui.css")
       : cssPath
 
-    setupFontsNextjs(cwd, project.layoutFile, targetCss)
-    return {}
-  } else {
-    // Strategy B: generic self-hosted
-    await installDependencies(["geist"], cwd)
-    const result = setupFontsGeneric(cwd, cssDir)
-    return { preloadTags: result.preloadTags }
+    if (fs.existsSync(targetCss)) {
+      for (const importLine of fontTree.cssImports) {
+        insertImportLine(targetCss, importLine)
+      }
+      console.log(`  ${CHECK}  Added font imports to ${path.relative(cwd, targetCss)}`)
+    }
   }
+
+  // Patch CSS variables
+  if (Object.keys(fontTree.cssVars).length > 0) {
+    const cssPath = path.resolve(cwd, config.css)
+    const cssDir = path.dirname(cssPath)
+    const targetCss = fs.existsSync(path.join(cssDir, "stera-ui.css"))
+      ? path.join(cssDir, "stera-ui.css")
+      : cssPath
+
+    if (fs.existsSync(targetCss)) {
+      const patched = patchCssVariables(targetCss, fontTree.cssVars)
+      if (patched.length > 0) {
+        console.log(`  ${CHECK}  Updated font variables in ${path.relative(cwd, targetCss)}`)
+      }
+    }
+  }
+
+  // For Next.js: patch layout file with next/font imports
+  await updateFonts(fonts, project, cwd)
 }
 
 export async function init(options: { cwd?: string; yes?: boolean }) {
@@ -277,14 +305,13 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   const detectedFonts = detectFonts(cwd, project)
 
   // Prompt for font strategy
-  const fontChoice = await promptFontChoice(
-    project,
+  const strategy = await promptFontStrategy(
     detectedFonts,
     options.yes ?? false
   )
 
   // Build config from detection
-  const config = buildConfig(project, fontChoice)
+  const config = buildConfig(project, strategy)
 
   // Write config
   const configPath = path.join(cwd, CONFIG_FILE)
@@ -307,7 +334,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
     } else {
       try {
         const globalsItem = await fetchRegistryItem("globals")
-        const globalsContent = globalsItem.files[0].content ?? ""
+        const globalsContent = globalsItem.files?.[0]?.content ?? ""
         const steraUiContent = stripTailwindCoreImport(globalsContent)
 
         const steraUiPath = path.join(cssDir, "stera-ui.css")
@@ -323,17 +350,21 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
       }
     }
   } else {
-    // No existing CSS file — write globals.css and fonts.css from registry
+    // No existing CSS file — write globals.css from registry
+    // Note: we no longer write fonts.css since fonts are handled by
+    // fontsource packages or next/font instead of @font-face files.
     const resolved = await resolveDependencies(["globals"])
-    const { written } = await writeComponentFiles(resolved, config, cwd)
+    // Filter out the old "fonts" registry dependency (if still resolved)
+    const filtered = resolved.filter((item) => item.name !== "fonts")
+    const { written } = await writeComponentFiles(filtered, config, cwd)
     for (const file of written) {
       console.log(`  ${CHECK}  Created ${file}`)
     }
   }
 
   // Execute font strategy
-  const fontResult = await executeFontStrategy(
-    fontChoice,
+  await executeFontStrategy(
+    strategy,
     project,
     detectedFonts,
     config,
@@ -357,16 +388,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   console.log("  Next steps:")
   console.log('    stera-ui add <component>')
 
-  if (fontResult.preloadTags) {
-    console.log("")
-    console.log(`  ${dim("For optimal font loading, add these to your HTML <head>:")}`)
-    console.log("")
-    for (const line of fontResult.preloadTags.split("\n")) {
-      console.log(`    ${dim(line)}`)
-    }
-  }
-
-  if (fontChoice.strategy === "skip") {
+  if (strategy === "skip") {
     console.log("")
     console.log(`  ${dim("Font setup was skipped. See https://ui.stera.sh for font configuration docs.")}`)
   }

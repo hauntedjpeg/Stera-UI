@@ -56,7 +56,7 @@ export async function add(
 
   // Apply transforms to file contents
   for (const item of resolved) {
-    for (const file of item.files) {
+    for (const file of item.files ?? []) {
       if (file.content) {
         file.content = applyTransforms(
           file.content,

@@ -11,13 +11,48 @@
       "name": "globals",
       "type": "registry:style",
       "dependencies": ["tw-animate-css"],
-      "registryDependencies": ["fonts"],
       "files": [{ "path": "registry/styles/globals.css", "type": "registry:style" }]
     },
     {
       "name": "fonts",
       "type": "registry:style",
       "files": [{ "path": "registry/styles/fonts.css", "type": "registry:style" }]
+    },
+    {
+      "name": "font-geist",
+      "type": "registry:font",
+      "font": {
+        "family": "'Geist Variable', sans-serif",
+        "provider": "google",
+        "import": "Geist",
+        "variable": "--font-sans",
+        "subsets": ["latin"],
+        "dependency": "@fontsource-variable/geist"
+      }
+    },
+    {
+      "name": "font-geist-mono",
+      "type": "registry:font",
+      "font": {
+        "family": "'Geist Mono Variable', monospace",
+        "provider": "google",
+        "import": "Geist_Mono",
+        "variable": "--font-mono",
+        "subsets": ["latin"],
+        "dependency": "@fontsource-variable/geist-mono"
+      }
+    },
+    {
+      "name": "font-inter",
+      "type": "registry:font",
+      "font": {
+        "family": "'Inter Variable', sans-serif",
+        "provider": "google",
+        "import": "Inter",
+        "variable": "--font-sans",
+        "subsets": ["latin"],
+        "dependency": "@fontsource-variable/inter"
+      }
     },
     {
       "name": "theme-provider",

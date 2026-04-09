@@ -47,7 +47,7 @@ export async function writeComponentFiles(
   const skipped: string[] = []
 
   for (const item of items) {
-    for (const file of item.files) {
+    for (const file of item.files ?? []) {
       const outputPath = resolveOutputPath(config, projectRoot, file)
       const relativePath = path.relative(projectRoot, outputPath)
 

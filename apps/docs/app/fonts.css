@@ -4,6 +4,6 @@
  * via className on <html> in layout.tsx.
  */
 :root {
-  --font-display: var(--font-geist-sans);
-  --font-body: var(--font-geist-sans);
+  --font-heading: var(--font-geist-sans);
+  --font-sans: var(--font-geist-sans);
 }
