@@ -50,14 +50,34 @@ function buildConfig(project: ProjectInfo, strategy: FontStrategy): SteraConfig 
 }
 
 /**
- * Remove only the `@import "tailwindcss"` line from globals content.
- * The user's project already has this import; all other imports are kept.
+ * Strip all `@import` lines from registry globals content.
+ *
+ * `stera-ui.css` is imported as a partial — it should not contain its own
+ * `@import` statements (which would duplicate imports the user already has).
+ *
+ * Returns the cleaned content and any non-tailwindcss import statements that
+ * need to be ensured in the user's main CSS file.
  */
-function stripTailwindCoreImport(content: string): string {
-  return content
-    .split("\n")
-    .filter((line) => !line.trim().match(/^@import\s+["']tailwindcss["']/))
-    .join("\n")
+function stripImportLines(content: string): {
+  content: string
+  imports: string[]
+} {
+  const lines = content.split("\n")
+  const imports: string[] = []
+  const kept: string[] = []
+
+  for (const line of lines) {
+    if (line.trim().match(/^@import\s+["'].+["']/)) {
+      // Collect non-tailwindcss imports — the user already has tailwindcss
+      if (!line.trim().match(/^@import\s+["']tailwindcss["']/)) {
+        imports.push(line.trim())
+      }
+    } else {
+      kept.push(line)
+    }
+  }
+
+  return { content: kept.join("\n"), imports }
 }
 
 /**
@@ -66,6 +86,14 @@ function stripTailwindCoreImport(content: string): string {
  */
 function insertImportLine(filePath: string, importStatement: string): void {
   const content = fs.readFileSync(filePath, "utf-8")
+
+  // Deduplicate: skip if an @import for the same path already exists
+  const importPath = importStatement.match(/["']([^"']+)["']/)?.[1]
+  if (importPath) {
+    const escaped = importPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    if (new RegExp(`@import\\s+["']${escaped}["']`).test(content)) return
+  }
+
   const lines = content.split("\n")
 
   let lastImportIndex = -1
@@ -335,7 +363,8 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
       try {
         const globalsItem = await fetchRegistryItem("globals")
         const globalsContent = globalsItem.files?.[0]?.content ?? ""
-        const steraUiContent = stripTailwindCoreImport(globalsContent)
+        const { content: steraUiContent, imports } =
+          stripImportLines(globalsContent)
 
         const steraUiPath = path.join(cssDir, "stera-ui.css")
         fs.mkdirSync(cssDir, { recursive: true })
@@ -343,6 +372,10 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
         console.log(`  ${CHECK}  Created ${path.relative(cwd, steraUiPath)}`)
 
         const existingCssPath = path.resolve(cwd, project.existingCssFile)
+        // Add required imports (e.g. tw-animate-css) to user's main CSS
+        for (const imp of imports) {
+          insertImportLine(existingCssPath, imp)
+        }
         insertImportLine(existingCssPath, "@import './stera-ui.css';")
         console.log(`  ${CHECK}  Added @import to ${project.existingCssFile}`)
       } catch {
