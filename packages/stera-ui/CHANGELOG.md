@@ -1,5 +1,13 @@
 # stera-ui
 
+## 0.3.1
+
+### Patch Changes
+
+- [`de2d6e7`](https://github.com/hauntedjpeg/Stera-UI/commit/de2d6e771cd940656d82598958c5499198017020) Thanks [@hauntedjpeg](https://github.com/hauntedjpeg)! - Prevent duplicate `@import` declarations when initializing in a project with an existing CSS file
+  - `stera-ui.css` no longer contains `@import` lines; required imports (e.g. `tw-animate-css`) are added to the user's main CSS instead
+  - `insertImportLine` now skips imports that already exist, preventing duplicates across init and font setup
+
 ## 0.3.0
 
 ### Minor Changes
