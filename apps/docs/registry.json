@@ -13,12 +13,7 @@
       "dependencies": ["tw-animate-css"],
       "files": [{ "path": "registry/styles/globals.css", "type": "registry:style" }]
     },
-    {
-      "name": "fonts",
-      "type": "registry:style",
-      "files": [{ "path": "registry/styles/fonts.css", "type": "registry:style" }]
-    },
-    {
+{
       "name": "font-geist",
       "type": "registry:font",
       "font": {

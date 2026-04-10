@@ -112,8 +112,8 @@
 }
 
 :root {
-    --font-heading: Geist;
-    --font-sans: Geist;
+    --font-heading: var(--font-geist-sans);
+    --font-sans: var(--font-geist-sans);
     --weight-subtle: 300;
     --weight-regular: 400;
     --weight-medium: 500;
