@@ -3,7 +3,6 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { ThemeProvider } from "next-themes"
 import "../registry/styles/globals.css"
-import "./fonts.css"
 
 export const metadata: Metadata = {
   title: "Stera UI",
