@@ -139,11 +139,11 @@ function SidebarProvider({
         }
         className={cn(
           // Base
-          "flex min-h-svh bg-sidebar",
+          "flex min-h-svh",
           // Sizing
           "w-full",
           // Variants
-          "has-data-[variant=inset]:bg-sidebar",
+          "has-data-[variant=inset]:bg-bg-surface",
           // Other
           "group/sidebar-wrapper",
           className
@@ -260,7 +260,7 @@ function Sidebar({
         <div
           data-sidebar="sidebar"
           data-slot="sidebar-inner"
-          className="flex size-full flex-col bg-bg-surface group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:shadow-sm group-data-[variant=floating]:ring-1 group-data-[variant=floating]:ring-border"
+          className="flex size-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:shadow-sm group-data-[variant=floating]:ring-1 group-data-[variant=floating]:ring-border"
         >
           {children}
         </div>
@@ -332,7 +332,7 @@ function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
       data-slot="sidebar-inset"
       className={cn(
         // Base
-        "relative flex flex-1 flex-col bg-bg-surface",
+        "relative flex flex-1 flex-col",
         // Sizing
         "w-full",
         // Variants
@@ -581,7 +581,7 @@ const sidebarMenuButtonVariants = cva(
     // Sizing
     "w-full gap-2",
     // Variants
-    "group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! data-open:hover:bg-bg-surface-hover data-open:hover:text-text data-active:bg-bg-brand-tertiary data-active:st-body-md-strong data-active:text-text-brand",
+    "group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! data-open:hover:bg-bg-surface-hover data-open:hover:text-text data-active:bg-bg-surface-tertiary data-active:st-body-md-strong data-active:text-text",
     // Other
     "peer/menu-button group/menu-button disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate",
   ],

@@ -5,7 +5,7 @@ description: How fonts are set up and configured in your Stera UI project.
 
 Stera UI uses self-hosted fonts for the best performance — no external network requests, no third-party tracking, and full control over caching. When you run `stera-ui init`, fonts are configured automatically based on your project.
 
-By default, Stera UI ships with [Geist Sans](https://vercel.com/font) and Geist Mono via the [`geist`](https://www.npmjs.com/package/geist) npm package.
+By default, Stera UI ships with [Geist Sans](https://vercel.com/font) and Geist Mono via the [`geist`](https://www.npmjs.com/package/geist) npm package (Next.js) or [`@fontsource-variable`](https://fontsource.org/) packages (other frameworks).
 
 ## How It Works
 
@@ -13,7 +13,7 @@ During `stera-ui init`, the CLI detects your project setup and walks you through
 
 1. **Detects existing fonts** — scans for `next/font` imports, `@font-face` rules, and Google Fonts links
 2. **Prompts you to choose** — keep your current fonts, adopt Stera UI defaults (Geist), or skip font setup entirely
-3. **Configures fonts for your framework** — Next.js projects can opt into `next/font` for automatic optimization; other frameworks get self-hosted font files with preload guidance
+3. **Configures fonts for your framework** — Next.js projects use `next/font` for automatic optimization; other frameworks get `@fontsource-variable` packages
 
 Your choice is saved in `components.json` under the `fonts` field.
 
@@ -23,16 +23,31 @@ Fonts are wired into the design system through two CSS variables in `globals.css
 
 ```css title="styles/globals.css"
 :root {
-  --font-display: Geist;
-  --font-body: Geist;
+  --font-heading: var(--font-geist-sans);
+  --font-sans: var(--font-geist-sans);
 }
 ```
 
-All Stera UI typography utilities (`st-body-md`, `st-heading-lg`, `st-display-sm`, etc.) reference these variables, so changing your font is a one-line edit.
+All Stera UI typography utilities reference these variables, so changing your font is a one-line edit.
+
+### Typography Utilities
+
+Stera UI provides a full set of typography utility classes. Body and heading utilities use `--font-sans`, while display and hero utilities use `--font-heading` — allowing you to use a different font for large display text if desired.
+
+| Utility | Font Variable | Weight | Tracking |
+| --- | --- | --- | --- |
+| `st-body-sm`, `st-body-sm-strong` | `--font-sans` | regular / strong | wide |
+| `st-body-md`, `st-body-md-compact`, `st-body-md-strong` | `--font-sans` | regular / strong | normal |
+| `st-body-lg`, `st-body-lg-strong` | `--font-sans` | regular / strong | normal |
+| `st-heading-sm`, `st-heading-md`, `st-heading-lg` | `--font-sans` | medium | tight |
+| `st-display-sm`, `st-display-md`, `st-display-lg` | `--font-heading` | medium | tighter |
+| `st-hero-sm`, `st-hero-md`, `st-hero-lg`, `st-hero-xl` | `--font-heading` | medium | tightest |
+
+Weight and letter-spacing are controlled by design tokens (`--weight-regular`, `--weight-strong`, `--weight-medium`, `--letter-spacing-tight`, etc.) defined in `globals.css`.
 
 ## Next.js Projects
 
-If you're using Next.js and chose Stera UI fonts during init, the CLI installs the `geist` package and configures `next/font` in your root layout:
+If you chose Stera UI fonts during init, the CLI installs the `geist` package and configures `next/font` in your root layout:
 
 ```tsx title="app/layout.tsx"
 import { GeistSans } from "geist/font/sans"
@@ -51,20 +66,20 @@ export default function RootLayout({
 }
 ```
 
-The CSS variables are updated to reference the `next/font` CSS variables:
+The CSS variables are set to reference the `next/font` CSS variables:
 
 ```css title="styles/globals.css"
 :root {
-  --font-display: var(--font-geist-sans);
-  --font-body: var(--font-geist-sans);
+  --font-heading: var(--font-geist-sans);
+  --font-sans: var(--font-geist-sans);
 }
 ```
 
-`next/font` handles everything else — self-hosting, preloading, `@font-face` generation, and `size-adjust` to eliminate layout shift. You do not need a `fonts.css` file.
+`next/font` handles everything else — self-hosting, preloading, `@font-face` generation, and `size-adjust` to eliminate layout shift.
 
 ### Using a Different Font with Next.js
 
-To use a different font, import `localFont` from `next/font/local` and configure it with a CSS variable:
+To use a different font, import it from `next/font` and configure it with a CSS variable:
 
 ```tsx title="app/layout.tsx"
 import localFont from "next/font/local"
@@ -86,99 +101,73 @@ Then update the CSS variables:
 
 ```css title="styles/globals.css"
 :root {
-  --font-display: var(--font-inter);
-  --font-body: var(--font-inter);
+  --font-heading: var(--font-inter);
+  --font-sans: var(--font-inter);
 }
 ```
 
 ## Vite, Remix, and Other Frameworks
 
-For non-Next.js frameworks, `stera-ui init` installs the `geist` package, copies the variable font `.woff2` files to `public/fonts/`, and creates a `fonts.css` file with `@font-face` declarations.
+For non-Next.js frameworks, `stera-ui init` installs `@fontsource-variable` packages and adds CSS imports to your stylesheet. No manual font file management is needed.
 
-The resulting file structure:
+The CLI adds these imports to your CSS file:
 
-```
-public/
-└── fonts/
-    ├── geist/
-    │   ├── Geist-Variable.woff2
-    │   └── Geist-Italic.woff2
-    └── geist-mono/
-        ├── GeistMono-Variable.woff2
-        └── GeistMono-Italic.woff2
+```css title="styles/globals.css"
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
 ```
 
-### Preloading
-
-For optimal performance, add preload links to your HTML `<head>` so the browser starts downloading fonts before it parses CSS. The CLI prints these tags after init — only preload the regular (non-italic) variants:
-
-```html
-<link rel="preload" href="/fonts/geist/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/geist-mono/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin />
-```
-
-Where you add this depends on your framework — in Vite it goes in `index.html`, in Remix it goes in the `links` export of your root route.
-
-### Using a Different Font
-
-1. Place your `.woff2` files in `public/fonts/`:
-
-```
-public/
-└── fonts/
-    └── inter/
-        ├── Inter-Variable.woff2
-        └── Inter-Italic.woff2
-```
-
-2. Add `@font-face` blocks in `styles/fonts.css`:
-
-```css title="styles/fonts.css"
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/inter/Inter-Variable.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/inter/Inter-Italic.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-}
-```
-
-3. Update the CSS variables in `globals.css`:
+Then sets the CSS variables to reference the font families:
 
 ```css title="styles/globals.css"
 :root {
-  --font-display: Inter;
-  --font-body: Inter;
+  --font-heading: 'Geist Variable', sans-serif;
+  --font-sans: 'Geist Variable', sans-serif;
 }
 ```
+
+Fontsource packages handle self-hosting and `@font-face` generation automatically.
+
+### Using a Different Font
+
+1. Install the fontsource package for your font:
+
+```bash
+pnpm add @fontsource-variable/inter
+```
+
+2. Import it in your CSS:
+
+```css title="styles/globals.css"
+@import "@fontsource-variable/inter";
+```
+
+3. Update the CSS variables:
+
+```css title="styles/globals.css"
+:root {
+  --font-heading: 'Inter Variable', sans-serif;
+  --font-sans: 'Inter Variable', sans-serif;
+}
+```
+
+Browse available fonts at [fontsource.org](https://fontsource.org/).
 
 ## Adding a Second Font
 
 To add an additional font (for example, a monospace font for code), follow the same pattern as your primary font.
 
-**Non-Next.js** — add another `@font-face` block in `fonts.css` and a new CSS variable:
+**Non-Next.js** — install and import a fontsource package:
 
-```css title="styles/fonts.css"
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: url('/fonts/jetbrains-mono/JetBrainsMono-Variable.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
+```css title="styles/globals.css"
+@import "@fontsource-variable/jetbrains-mono";
 ```
 
-**Next.js** — add another `localFont` call in your layout:
+**Next.js** — add another font in your layout:
 
 ```tsx
+import localFont from "next/font/local"
+
 const jetbrainsMono = localFont({
   src: "./fonts/JetBrainsMono-Variable.woff2",
   variable: "--font-jetbrains-mono",
@@ -192,14 +181,14 @@ Then reference the new font wherever needed:
 
 ```css
 :root {
-  --font-mono: 'JetBrains Mono'; /* or var(--font-jetbrains-mono) for Next.js */
+  --font-mono: 'JetBrains Mono Variable'; /* or var(--font-jetbrains-mono) for Next.js */
 }
 ```
 
 ## Best Practices
 
-- **Use `.woff2` format.** It offers the best compression and is supported by all modern browsers.
 - **Prefer variable fonts.** A single variable font file replaces multiple static weight files, reducing total download size.
 - **Always set `font-display: swap`.** This ensures text remains visible while fonts load, preventing a flash of invisible text (FOIT).
 - **Self-host your fonts.** Avoids external network requests, eliminates third-party cookies/tracking, and gives you full control over caching headers.
 - **Use `next/font` in Next.js projects.** It handles preloading, self-hosting, and layout shift prevention automatically.
+- **Use fontsource in other frameworks.** It provides the same self-hosting benefits with zero configuration.

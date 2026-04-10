@@ -7,7 +7,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
     <SidebarProvider>
       <DocsSidebar tree={source.pageTree} />
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset className="bg-black">{children}</SidebarInset>
     </SidebarProvider>
   )
 }

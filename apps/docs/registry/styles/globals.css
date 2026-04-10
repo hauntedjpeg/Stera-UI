@@ -112,8 +112,8 @@
 }
 
 :root {
-    --font-heading: var(--font-geist-sans);
-    --font-sans: var(--font-geist-sans);
+    --font-heading: Geist;
+    --font-sans: Geist;
     --weight-subtle: 300;
     --weight-regular: 400;
     --weight-medium: 500;
@@ -149,19 +149,19 @@
     --accent-900: #2e5e00;
     --accent-950: #071c00;
     --accent-925: #183c00;
-    --neutral-50: #f7f7f7;
-    --neutral-100: #efefef;
+    --neutral-50: #f5f5f5;
+    --neutral-100: #dcdcdc;
     --neutral-150: #e8e8e8;
-    --neutral-200: #dcdcdc;
-    --neutral-300: #bdbdbd;
-    --neutral-400: #989898;
-    --neutral-500: #7c7c7c;
-    --neutral-600: #656565;
-    --neutral-700: #525252;
-    --neutral-800: #464646;
-    --neutral-900: #3d3d3d;
-    --neutral-925: #292929;
-    --neutral-950: #2c2c2c;
+    --neutral-200: #c4c4c4;
+    --neutral-300: #acacac;
+    --neutral-400: #959595;
+    --neutral-500: #7e7e7e;
+    --neutral-600: #686868;
+    --neutral-700: #535353;
+    --neutral-800: #3f3f3f;
+    --neutral-900: #2c2c2c;
+    --neutral-925: #1a1a1a;
+    --neutral-950: #09090b;
     --danger-50: #fef3ee;
     --danger-100: #fee4d6;
     --danger-200: #fbc5ad;
@@ -255,7 +255,7 @@
     --bg-surface-secondary-hover: var(--neutral-100);
     --bg-surface-tertiary: var(--neutral-100);
     --bg-surface-tertiary-hover: var(--neutral-150);
-    --bg-surface-inverse: var(--neutral-950);
+    --bg-surface-inverse: var(--neutral-925);
     --bg-surface-inverse-hover: var(--neutral-900);
     --bg-brand: var(--brand-500);
     --bg-brand-hover: var(--brand-600);
@@ -357,7 +357,7 @@
   }
 
   .dark {
-    --bg-surface: var(--neutral-950);
+    --bg-surface: var(--neutral-925);
     --bg-surface-hover: var(--neutral-900);
     --bg-surface-secondary: var(--neutral-900);
     --bg-surface-secondary-hover: var(--neutral-800);
@@ -591,7 +591,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-bg-surface text-text antialiased;
+    @apply bg-black text-text antialiased;
     font-feature-settings: "ss03";
   }
 }
