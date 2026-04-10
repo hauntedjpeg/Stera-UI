@@ -577,11 +577,11 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 const sidebarMenuButtonVariants = cva(
   [
     // Base
-    "flex items-center overflow-hidden rounded-md p-2 text-left st-md-compact ring-ring outline-hidden transition-[width,height,padding] hover:bg-bg-surface-hover hover:text-text focus-visible:ring-ring active:bg-bg-surface-secondary-hover active:text-text",
+    "flex items-center overflow-hidden rounded-md p-2 text-left st-md-compact ring-ring outline-hidden transition-[width,height,padding] hover:bg-bg-surface-hover hover:text-text focus-visible:ring-ring active:text-text",
     // Sizing
     "w-full gap-2",
     // Variants
-    "group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! data-open:hover:bg-bg-surface-hover data-open:hover:text-text data-active:bg-bg-surface-tertiary data-active:st-body-md-strong data-active:text-text",
+    "group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! data-open:hover:bg-bg-surface-hover data-open:hover:text-text data-active:bg-bg-surface-secondary data-active:st-body-md-strong data-active:text-text",
     // Other
     "peer/menu-button group/menu-button disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate",
   ],

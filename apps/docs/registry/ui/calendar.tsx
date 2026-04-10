@@ -337,15 +337,15 @@ function CalendarDayButton({
         // Focus
         "group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10",
         // Range End
-        "data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-bg-brand data-[range-end=true]:text-text-onbrand data-[range-end=true]:[&>span]:text-text-onbrand-secondary",
+        "data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-bg-brand data-[range-end=true]:hover:bg-bg-brand-secondary! data-[range-end=true]:text-text-onbrand data-[range-end=true]:hover:text-text-onbrand! data-[range-end=true]:[&>span]:text-text-onbrand-secondary",
         // Range Middle
         "data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-bg-surface-tertiary data-[range-middle=true]:text-text",
         // Range Start
-        "data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-bg-brand data-[range-start=true]:text-text-onbrand data-[range-start=true]:[&>span]:text-text-onbrand-secondary",
+        "data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-bg-brand data-[range-start=true]:hover:bg-bg-brand-secondary! data-[range-start=true]:text-text-onbrand data-[range-start=true]:hover:text-text-onbrand! data-[range-start=true]:[&>span]:text-text-onbrand-secondary",
         // Selected
-        "data-[selected-single=true]:bg-bg-brand data-[selected-single=true]:text-text-onbrand",
+        "data-[selected-single=true]:bg-bg-brand data-[selected-single=true]:hover:bg-bg-brand-secondary! data-[selected-single=true]:text-text-onbrand data-[selected-single=true]:hover:text-text-onbrand!",
         // Other
-        "isolate z-10 dark:hover:text-text [&>span]:st-body-sm [&>span]:text-text-tertiary data-[selected-single=true]:[&>span]:text-text-onbrand-secondary",
+        "isolate z-10 [&>span]:st-body-sm [&>span]:text-text-tertiary data-[selected-single=true]:[&>span]:text-text-onbrand-secondary",
         defaultClassNames.day,
         className,
       )}
