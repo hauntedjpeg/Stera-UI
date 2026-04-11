@@ -583,7 +583,7 @@ const sidebarMenuButtonVariants = cva(
     // Variants
     "group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! data-open:hover:bg-bg-surface-hover data-open:hover:text-text data-active:bg-bg-surface-secondary data-active:st-body-md-strong data-active:text-text",
     // Other
-    "peer/menu-button group/menu-button disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate",
+    "peer/menu-button group/menu-button disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate",
   ],
   {
     variants: {

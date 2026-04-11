@@ -17,6 +17,7 @@ import {
   SidebarMenuSubItem,
   SidebarMenuSubButton,
 } from "@/components/ui/sidebar"
+import { SiAsteriskAlt } from "stera-icons"
 
 interface PageTreeRoot {
   name: ReactNode
@@ -51,12 +52,9 @@ export function DocsSidebar({ tree }: { tree: PageTreeRoot }) {
   return (
     <Sidebar>
       <SidebarHeader>
-        <Link
-          href="/"
-          className="flex items-center gap-2 px-2 py-1 st-body-md-strong text-text"
-        >
-          Stera UI
-        </Link>
+        <SidebarMenuButton size="lg" render={<Link href={"/"} />}>
+          <SiAsteriskAlt className="size-6" /><span className="st-heading-sm">Stera UI</span>
+        </SidebarMenuButton>
       </SidebarHeader>
       <SidebarContent>
         <TreeNodes nodes={tree.children} pathname={pathname} />
