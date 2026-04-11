@@ -51,7 +51,7 @@ const badgeVariants = cva(
         "success-solid":
           "bg-bg-success text-text-onsuccess",
         warning:
-          "bg-bg-warning-tertiary text-text-onwarning",
+          "bg-bg-warning-tertiary text-text-warning-secondary",
         "warning-outline":
           "bg-bg-surface text-text-warning-secondary border-border-warning",
         "warning-solid":
