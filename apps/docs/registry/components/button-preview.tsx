@@ -67,7 +67,7 @@ export function ButtonWithIcon() {
           New item
         </Button>
         <Button variant="outline" size="icon" aria-label="Download">
-          <SiDownload />
+          <SiDownload size={16} />
         </Button>
         <Button variant="outline">
           Open command menu
