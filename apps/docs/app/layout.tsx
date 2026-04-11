@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
-import { ThemeProvider } from "next-themes"
+import { ThemeProvider } from "../registry/components/theme-provider"
 import "../registry/styles/globals.css"
 
 export const metadata: Metadata = {
@@ -24,12 +24,7 @@ export default function RootLayout({
           minHeight: "100vh",
         }}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider>
           {children}
         </ThemeProvider>
       </body>

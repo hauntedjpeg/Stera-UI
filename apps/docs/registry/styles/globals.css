@@ -325,9 +325,9 @@
     --text-onwarning: var(--black-900);
     --text-onwarning-secondary: var(--black-800);
     --text-onwarning-tertiary: var(--black-700);
-    --border: var(--neutral-100);
-    --border-secondary: var(--neutral-200);
-    --border-tertiary: var(--neutral-500);
+    --border: var(--neutral-50);
+    --border-secondary: var(--neutral-100);
+    --border-tertiary: var(--neutral-200);
     --border-brand: var(--brand-200);
     --border-brand-secondary: var(--brand-700);
     --border-onbrand: var(--brand-400);
@@ -419,9 +419,12 @@
     --text-warning: var(--warning-300);
     --text-warning-secondary: var(--warning-400);
     --text-warning-tertiary: var(--warning-800);
-    --border: var(--neutral-700);
-    --border-secondary: var(--neutral-500);
-    --border-tertiary: var(--neutral-200);
+    --text-onwarning: var(--warning-300);
+    --text-onwarning-secondary: var(--warning-200);
+    --text-onwarning-tertiary: var(--warning-100);
+    --border: var(--neutral-800);
+    --border-secondary: var(--neutral-700);
+    --border-tertiary: var(--neutral-600);
     --border-brand: var(--brand-900);
     --border-onbrand: var(--brand-500);
     --border-onbrand-secondary: var(--brand-300);

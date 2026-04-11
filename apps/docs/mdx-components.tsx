@@ -300,9 +300,9 @@ const mdxDefaults: MDXComponents = {
   a: (props) => {
     const href = props.href ?? ""
     if (href.startsWith("/") || href.startsWith("#")) {
-      return <Link href={href} className="text-text-brand underline underline-offset-4 hover:text-text-brand-secondary" {...props} />
+      return <Link href={href} className="text-text-accent underline underline-offset-4 hover:text-text-accent" {...props} />
     }
-    return <a className="text-text-brand underline underline-offset-4 hover:text-text-brand-secondary" target="_blank" rel="noopener noreferrer" {...props} />
+    return <a className="text-text underline underline-offset-4 hover:text-text-secondary" target="_blank" rel="noopener noreferrer" {...props} />
   },
   table: (props) => (
     <div className="my-6 overflow-auto">
@@ -316,7 +316,7 @@ const mdxDefaults: MDXComponents = {
     // Inline code only — code blocks are wrapped in <pre> by rehype-pretty-code
     const isBlock = typeof props.className === "string" && props.className.includes("language-")
     if (isBlock) return <code {...props} />
-    return <code className="rounded bg-bg-surface-secondary px-1.5 py-0.5 st-body-md text-text-accent" {...props} />
+    return <code className="rounded bg-bg-surface-secondary px-1.5 py-0.5" {...props} />
   },
   ul: (props) => <ul className="my-4 ml-6 list-disc st-body-lg text-text-secondary [&>li]:mt-1" {...props} />,
   ol: (props) => <ol className="my-4 ml-6 list-decimal st-body-lg text-text-secondary [&>li]:mt-1" {...props} />,

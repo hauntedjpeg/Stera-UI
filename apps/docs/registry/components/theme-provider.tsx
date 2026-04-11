@@ -12,6 +12,7 @@ function ThemeProvider({
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange
+      storageKey=""
       {...props}
     >
       {children}
