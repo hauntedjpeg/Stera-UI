@@ -26,7 +26,7 @@ import {
 
 export function SidebarDefault() {
   return (
-    <div className="rounded-lg border overflow-hidden h-[400px] flex [transform:translateZ(0)]">
+    <div className="rounded-lg border overflow-hidden h-[400px] flex transform-[translateZ(0)]">
       <SidebarProvider>
         <Sidebar>
           <SidebarHeader>
@@ -82,7 +82,7 @@ export function SidebarDefault() {
 
 export function SidebarWithBadge() {
   return (
-    <div className="rounded-lg border overflow-hidden h-[400px] flex [transform:translateZ(0)]">
+    <div className="rounded-lg border overflow-hidden h-[400px] flex transform-[translateZ(0)]">
       <SidebarProvider>
         <Sidebar>
           <SidebarContent>
@@ -130,7 +130,7 @@ export function SidebarWithBadge() {
 
 export function SidebarVariants() {
   return (
-    <div className="rounded-lg border overflow-hidden h-[400px] flex [transform:translateZ(0)]">
+    <div className="rounded-lg border overflow-hidden h-[400px] flex transform-[translateZ(0)]">
       <SidebarProvider>
         <Sidebar variant="floating">
           <SidebarContent>
