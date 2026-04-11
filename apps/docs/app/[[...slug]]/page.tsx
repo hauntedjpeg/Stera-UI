@@ -1,6 +1,6 @@
-import { source } from "../../../lib/source"
+import { source } from "../../lib/source"
 import { notFound } from "next/navigation"
-import { useMDXComponents } from "../../../mdx-components"
+import { useMDXComponents } from "@/mdx-components"
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>
