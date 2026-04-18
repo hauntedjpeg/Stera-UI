@@ -1,8 +1,17 @@
 import { getAllComponents } from "../registry/index.js"
 import { LOGO, dim } from "../utils/format.js"
+import { createSpinner } from "../utils/spinner.js"
 
 export async function list() {
-  const items = await getAllComponents()
+  const spinner = createSpinner("Fetching registry")
+  let items
+  try {
+    items = await getAllComponents()
+  } catch (err) {
+    spinner.fail("Failed to fetch registry")
+    throw err
+  }
+  spinner.succeed("Registry resolved")
 
   // Group by type
   const groups = new Map<string, typeof items>()

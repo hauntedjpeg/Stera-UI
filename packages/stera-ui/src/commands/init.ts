@@ -12,6 +12,7 @@ import { detectFonts, type DetectedFonts } from "../utils/detect-fonts.js"
 import { patchCssVariables } from "../utils/patch-css-vars.js"
 import { massageTreeForFonts, updateFonts } from "../utils/update-fonts.js"
 import { LOGO, CHECK, dim } from "../utils/format.js"
+import { createSpinner } from "../utils/spinner.js"
 
 type FontStrategy = "stera-default" | "keep-existing" | "skip"
 
@@ -176,17 +177,24 @@ async function promptFontStrategy(
  * Fetch font registry items for the default Stera fonts.
  */
 async function fetchDefaultFonts(): Promise<RegistryFontItem[]> {
+  const spinner = createSpinner("Fetching fonts")
   const fonts: RegistryFontItem[] = []
-  for (const name of DEFAULT_FONT_NAMES) {
-    try {
-      const item = await fetchRegistryItem(name)
-      if (item.type === "registry:font") {
-        fonts.push(item as RegistryFontItem)
+  try {
+    for (const name of DEFAULT_FONT_NAMES) {
+      try {
+        const item = await fetchRegistryItem(name)
+        if (item.type === "registry:font") {
+          fonts.push(item as RegistryFontItem)
+        }
+      } catch {
+        // Font not found in registry — skip silently.
       }
-    } catch {
-      // Font not found in registry — skip silently.
     }
+  } catch (err) {
+    spinner.fail("Failed to fetch fonts")
+    throw err
   }
+  spinner.succeed("Fonts resolved")
   return fonts
 }
 
@@ -360,8 +368,16 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
         `  ${CHECK}  Stera already initialised ${dim(`(${path.join(path.dirname(project.existingCssFile), "stera-ui.css")} exists)`)}`
       )
     } else {
+      const fetchSpinner = createSpinner("Fetching base styles")
+      let globalsItem
       try {
-        const globalsItem = await fetchRegistryItem("globals")
+        globalsItem = await fetchRegistryItem("globals")
+      } catch {
+        fetchSpinner.fail("Base styles not found — skipping")
+        globalsItem = null
+      }
+      if (globalsItem) {
+        fetchSpinner.succeed("Base styles resolved")
         const globalsContent = globalsItem.files?.[0]?.content ?? ""
         const { content: steraUiContent, imports } =
           stripImportLines(globalsContent)
@@ -378,15 +394,21 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
         }
         insertImportLine(existingCssPath, "@import './stera-ui.css';")
         console.log(`  ${CHECK}  Added @import to ${project.existingCssFile}`)
-      } catch {
-        // globals not found — skip
       }
     }
   } else {
     // No existing CSS file — write globals.css from registry
     // Note: we no longer write fonts.css since fonts are handled by
     // fontsource packages or next/font instead of @font-face files.
-    const resolved = await resolveDependencies(["globals"])
+    const fetchSpinner = createSpinner("Fetching base styles")
+    let resolved
+    try {
+      resolved = await resolveDependencies(["globals"])
+    } catch (err) {
+      fetchSpinner.fail("Failed to fetch base styles")
+      throw err
+    }
+    fetchSpinner.succeed("Base styles resolved")
     // Filter out the old "fonts" registry dependency (if still resolved)
     const filtered = resolved.filter((item) => item.name !== "fonts")
     const { written } = await writeComponentFiles(filtered, config, cwd)
@@ -405,15 +427,21 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   )
 
   // Install npm dependencies from globals (tw-animate-css)
+  const depsSpinner = createSpinner("Fetching package list")
+  let globalsForDeps
   try {
-    const globalsItem = await fetchRegistryItem("globals")
-    if (globalsItem.dependencies) {
-      const deps = [...new Set(globalsItem.dependencies)].sort()
+    globalsForDeps = await fetchRegistryItem("globals")
+  } catch {
+    depsSpinner.fail("Package list unavailable — skipping")
+    globalsForDeps = null
+  }
+  if (globalsForDeps) {
+    depsSpinner.succeed("Package list resolved")
+    if (globalsForDeps.dependencies) {
+      const deps = [...new Set(globalsForDeps.dependencies)].sort()
       console.log("")
       await installDependencies(deps, cwd)
     }
-  } catch {
-    // globals not found — skip deps install
   }
 
   // Next steps

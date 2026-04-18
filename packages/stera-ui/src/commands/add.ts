@@ -7,6 +7,7 @@ import { applyTransforms } from "../utils/transform.js"
 import { transformImports } from "../utils/transform-imports.js"
 import { hasGlobalsCss } from "../utils/detect-globals.js"
 import { CHECK, WARN, dim } from "../utils/format.js"
+import { createSpinner } from "../utils/spinner.js"
 
 const transforms = [transformImports]
 
@@ -16,43 +17,57 @@ export async function add(
 ) {
   const cwd = options.cwd ? path.resolve(options.cwd) : process.cwd()
 
+  const spinner = createSpinner("Fetching registry")
+
   // Validate components exist
-  for (const name of components) {
-    const item = await getComponent(name)
-    if (!item) {
-      console.error(`  Error: Component "${name}" not found in registry.`)
-      console.error(`  Run "stera-ui list" to see available components.`)
-      process.exit(1)
+  try {
+    for (const name of components) {
+      const item = await getComponent(name)
+      if (!item) {
+        spinner.fail(`Component "${name}" not found in registry.`)
+        console.error(`  Run "stera-ui list" to see available components.`)
+        process.exit(1)
+      }
     }
+  } catch (err) {
+    spinner.fail("Failed to fetch registry")
+    throw err
   }
 
   // Load config
   const configPath = findConfigPath(cwd)
   if (!configPath) {
-    console.error(
-      `  Error: ${CONFIG_FILE} not found. Run "stera-ui init" first.`
-    )
+    spinner.fail(`${CONFIG_FILE} not found. Run "stera-ui init" first.`)
     process.exit(1)
   }
 
   const config = loadConfig(cwd)
   if (!config) {
-    console.error(`  Error: Failed to parse ${CONFIG_FILE}.`)
+    spinner.fail(`Failed to parse ${CONFIG_FILE}.`)
     process.exit(1)
   }
 
   const projectRoot = path.dirname(configPath)
 
-  // Check for globals CSS (warn if missing)
+  // Resolve all dependencies
+  let resolved
+  try {
+    resolved = await resolveDependencies(components)
+  } catch (err) {
+    spinner.fail("Failed to fetch registry")
+    throw err
+  }
+
+  spinner.succeed("Registry resolved")
+
+  // Check for globals CSS (warn if missing) — after spinner so it doesn't
+  // corrupt the single-line render.
   const isAddingGlobals = components.includes("globals")
   if (!isAddingGlobals && !hasGlobalsCss(config, projectRoot)) {
     console.warn(`\n  ${WARN}  Stera design tokens not found in ${config.css}`)
     console.warn(`     Components may not render correctly.`)
     console.warn(`     Run "stera-ui add globals" to install base styles.\n`)
   }
-
-  // Resolve all dependencies
-  const resolved = await resolveDependencies(components)
 
   // Apply transforms to file contents
   for (const item of resolved) {
