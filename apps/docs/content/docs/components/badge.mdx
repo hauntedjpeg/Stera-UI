@@ -3,7 +3,7 @@ title: Badge
 description: A small label for status, category, or count indicators.
 ---
 
-<BadgeAllVariants />
+<BadgePreview />
 
 ## Installation
 
@@ -18,58 +18,61 @@ import { Badge } from "@/components/ui/badge"
 ```
 
 ```tsx
-<Badge variant="brand">New</Badge>
+<Badge>Stera</Badge>
 ```
 
-## Variants
+## Examples
 
-Each color has three style levels: subtle (default), outline, and solid.
+### Variant
 
-<BadgeAllVariants />
+Use the `variant` prop to change the style of the badge.
+
+<BadgePreview />
 
 | Variant | Description |
 | --- | --- |
 | `default` | Subtle neutral background |
 | `outline` | Bordered, no background |
 | `solid` | Strong neutral inverse background |
-| `brand` | Brand-colored subtle |
-| `brand-outline` | Brand-colored bordered |
-| `brand-solid` | Brand-colored filled |
-| `accent` | Accent-colored subtle |
-| `accent-outline` | Accent-colored bordered |
-| `accent-solid` | Accent-colored filled |
-| `danger` | Danger-colored subtle |
-| `danger-outline` | Danger-colored bordered |
-| `danger-solid` | Danger-colored filled |
-| `success` | Success-colored subtle |
-| `success-outline` | Success-colored bordered |
-| `success-solid` | Success-colored filled |
-| `warning` | Warning-colored subtle |
-| `warning-outline` | Warning-colored bordered |
-| `warning-solid` | Warning-colored filled |
 
-## Sizes
+### Colors
+
+Appy semantic and brand colors to a badge
+
+<BadgeAllColors />
+
+| Variant | Description |
+| --- | --- |
+| `default` | Subtle neutral background |
+| `brand` | Primary brand color |
+| `accent` | Accent brand color |
+| `danger` | Red color |
+| `success` | Green color |
+| `warning` | Yellow color |
+
+### With Icon
+
+You can render an icon inside the badge. Use data-icon="inline-start" to render the icon on the left and data-icon="inline-end" to render the icon on the right.
+
+<BadgeWithIcon />
+
+### With Spinner
+
+You can render a spinner inside the badge. Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` prop to the spinner.
+
+<BadgeWithSpinner />
+
+### Sizes
+
+Use `size` prop to select between `sm` (default), `md`, and `lg`.
 
 <BadgeAllSizes />
 
 | Size | Description |
 | --- | --- |
-| `sm` | Small (default) |
-| `md` | Medium |
-| `lg` | Large |
-
-## With Icon
-
-Use `data-icon="inline-start"` or `data-icon="inline-end"` on an icon to adjust spacing.
-
-<BadgeWithIcon />
-
-```tsx
-<Badge variant="success">
-  <SiCircleFill data-icon="inline-start" />
-  Active
-</Badge>
-```
+| `sm` | 16px height (default) |
+| `md` | 20px height |
+| `lg` | 24px height |
 
 ## API Reference
 

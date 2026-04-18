@@ -23,6 +23,7 @@ export default async function Page(props: {
         )}
       </header>
       <div className="prose">
+        {/* eslint-disable-next-line react-hooks/rules-of-hooks -- fumadocs helper, not a React hook */}
         <MDX components={useMDXComponents({})} />
       </div>
     </article>
