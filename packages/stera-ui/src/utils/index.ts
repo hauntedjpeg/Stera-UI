@@ -2,7 +2,7 @@ export { applyTransforms, type TransformContext, type TransformFn } from "./tran
 export { transformImports } from "./transform-imports.js"
 export { resolveOutputPath } from "./resolve-paths.js"
 export { loadConfig, findConfigPath, CONFIG_FILE } from "./resolve-config.js"
-export { detectProject, type ProjectInfo } from "./detect-project.js"
+export { detectProject, detectAliasPrefix, type ProjectInfo } from "./detect-project.js"
 export { hasGlobalsCss } from "./detect-globals.js"
 export { installDependencies, detectPackageManager } from "./install-deps.js"
 export { writeComponentFiles, type WriteOptions, type WriteResult } from "./write-files.js"

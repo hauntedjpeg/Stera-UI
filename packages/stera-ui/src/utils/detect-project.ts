@@ -1,5 +1,6 @@
 import fs from "node:fs"
 import path from "node:path"
+import { loadConfig } from "tsconfig-paths"
 
 export interface ProjectInfo {
   hasSrc: boolean
@@ -98,4 +99,43 @@ export function detectProject(cwd: string): ProjectInfo {
   }
 
   return { hasSrc, framework, rsc, existingCssFile, layoutFile }
+}
+
+/**
+ * Detect the alias prefix (e.g. "@" or "~") from the project's tsconfig.json
+ * `compilerOptions.paths`. Mirrors shadcn's approach.
+ *
+ * Returns null when tsconfig can't be loaded or defines no path mappings —
+ * `init` should surface a clear error in that case rather than templating
+ * aliases that won't resolve.
+ */
+export function detectAliasPrefix(cwd: string): string | null {
+  let tsConfig
+  try {
+    tsConfig = loadConfig(cwd)
+  } catch {
+    return null
+  }
+
+  if (
+    tsConfig.resultType !== "success" ||
+    Object.keys(tsConfig.paths).length === 0
+  ) {
+    return null
+  }
+
+  // Prefer aliases whose target points at the project root, src/, or app/.
+  for (const [alias, targets] of Object.entries(tsConfig.paths)) {
+    if (
+      targets.includes("./*") ||
+      targets.includes("./src/*") ||
+      targets.includes("./app/*")
+    ) {
+      return alias.replace(/\/\*$/, "")
+    }
+  }
+
+  // Fall back to the first defined alias key.
+  const first = Object.keys(tsConfig.paths)[0]
+  return first ? first.replace(/\/\*$/, "") : null
 }

@@ -14,22 +14,43 @@ const TYPE_TO_ALIAS: Record<string, keyof SteraConfig["aliases"]> = {
  * Resolve a config alias (e.g. "@/components/ui") to a filesystem directory
  * relative to the project root, using the project's tsconfig.json paths.
  *
- * Falls back to stripping "@/" if tsconfig can't be loaded.
+ * Throws when the alias can't be resolved. `init` validates that tsconfig
+ * defines paths before writing components.json, so a failure here means the
+ * project regressed (tsconfig edited, components.json hand-written, etc.) —
+ * surface it loudly rather than silently dropping files at the repo root.
  */
 function resolveAlias(alias: string, projectRoot: string): string {
   const tsConfig = loadConfig(projectRoot)
 
-  if (tsConfig.resultType === "success") {
-    const match = createMatchPath(tsConfig.absoluteBaseUrl, tsConfig.paths)
-    const resolved = match(alias, undefined, () => true, [".ts", ".tsx"])
+  if (
+    tsConfig.resultType === "success" &&
+    Object.keys(tsConfig.paths).length > 0
+  ) {
+    // `createMatchPath` with `fileExists = () => true` happily falls back to
+    // joining `<baseUrl>/<alias>` when no path key matches (so e.g.
+    // "#nowhere/components" resolves to "<root>/#nowhere/components").
+    // Guard against that by confirming the alias actually starts with a
+    // configured paths prefix before trusting the match result.
+    const hasMatchingPrefix = Object.keys(tsConfig.paths).some((key) => {
+      const prefix = key.replace(/\/\*$/, "")
+      return alias === prefix || alias.startsWith(`${prefix}/`)
+    })
 
-    if (resolved) {
-      return path.relative(projectRoot, resolved)
+    if (hasMatchingPrefix) {
+      const match = createMatchPath(tsConfig.absoluteBaseUrl, tsConfig.paths)
+      const resolved = match(alias, undefined, () => true, [".ts", ".tsx"])
+
+      if (resolved) {
+        return path.relative(projectRoot, resolved)
+      }
     }
   }
 
-  // Fallback: strip "@/" prefix
-  return alias.replace(/^@\//, "")
+  throw new Error(
+    `Could not resolve alias "${alias}" from tsconfig.json. ` +
+      `Ensure compilerOptions.paths defines a mapping for it (e.g. "${alias}/*"), ` +
+      `then re-run. See https://ui.stera.sh/docs/installation.`
+  )
 }
 
 /**

@@ -7,7 +7,7 @@ import type { RegistryFontItem } from "../schema/index.js"
 import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
 import { hasGlobalsCss } from "../utils/detect-globals.js"
-import { detectProject, type ProjectInfo } from "../utils/detect-project.js"
+import { detectProject, detectAliasPrefix, type ProjectInfo } from "../utils/detect-project.js"
 import { detectFonts, type DetectedFonts } from "../utils/detect-fonts.js"
 import { patchCssVariables } from "../utils/patch-css-vars.js"
 import { massageTreeForFonts, updateFonts } from "../utils/update-fonts.js"
@@ -22,7 +22,11 @@ const DEFAULT_FONT_NAMES = ["font-geist", "font-geist-mono"]
 /**
  * Build a SteraConfig based on detected project structure.
  */
-function buildConfig(project: ProjectInfo, strategy: FontStrategy): SteraConfig {
+function buildConfig(
+  project: ProjectInfo,
+  strategy: FontStrategy,
+  aliasPrefix: string
+): SteraConfig {
   // Determine CSS file path
   let cssPath: string
   if (project.existingCssFile) {
@@ -38,11 +42,11 @@ function buildConfig(project: ProjectInfo, strategy: FontStrategy): SteraConfig 
     version: 1,
     css: cssPath,
     aliases: {
-      components: "@/components",
-      utils: "@/lib/utils",
-      ui: "@/components/ui",
-      lib: "@/lib",
-      hooks: "@/hooks",
+      components: `${aliasPrefix}/components`,
+      utils: `${aliasPrefix}/lib/utils`,
+      ui: `${aliasPrefix}/components/ui`,
+      lib: `${aliasPrefix}/lib`,
+      hooks: `${aliasPrefix}/hooks`,
     },
     fonts: {
       strategy,
@@ -322,6 +326,22 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   // Detect project structure
   const project = detectProject(cwd)
 
+  // Require a tsconfig path alias — otherwise generated components.json
+  // aliases won't resolve and `add` would scatter files at the repo root.
+  const aliasPrefix = detectAliasPrefix(cwd)
+  if (!aliasPrefix) {
+    console.error("")
+    console.error("  Error: No import alias found in your tsconfig.json file.")
+    console.error(
+      '  Stera UI requires a path alias (e.g. "@/*": ["./src/*"]) in compilerOptions.paths.'
+    )
+    console.error(
+      "  See https://ui.stera.sh/docs/installation for setup instructions per framework."
+    )
+    console.error("")
+    process.exit(1)
+  }
+
   // Log what was detected
   const frameworkName =
     project.framework === "next"
@@ -347,7 +367,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   )
 
   // Build config from detection
-  const config = buildConfig(project, strategy)
+  const config = buildConfig(project, strategy, aliasPrefix)
 
   // Write config
   const configPath = path.join(cwd, CONFIG_FILE)

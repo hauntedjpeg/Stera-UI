@@ -4,7 +4,9 @@ import type { SteraConfig } from "./resolve-config.js"
 
 /**
  * Check if Stera has already been initialised in the user's project.
- * Looks for the presence of `stera-ui.css` alongside the user's CSS file.
+ * Returns true if either a sibling `stera-ui.css` exists (existing-CSS init
+ * path) or the user's CSS file itself contains Stera tokens inline
+ * (no-existing-CSS init path, or a hand-rolled setup).
  */
 export function hasGlobalsCss(config: SteraConfig, projectRoot: string): boolean {
   const cssPath = path.resolve(projectRoot, config.css)
@@ -14,5 +16,14 @@ export function hasGlobalsCss(config: SteraConfig, projectRoot: string): boolean
   }
 
   const steraPath = path.join(path.dirname(cssPath), "stera-ui.css")
-  return fs.existsSync(steraPath)
+  if (fs.existsSync(steraPath)) {
+    return true
+  }
+
+  try {
+    const contents = fs.readFileSync(cssPath, "utf-8")
+    return contents.includes("--color-bg-surface")
+  } catch {
+    return false
+  }
 }
