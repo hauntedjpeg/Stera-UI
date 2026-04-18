@@ -1,6 +1,7 @@
 import type { MDXComponents } from "mdx/types"
 import type { ReactNode } from "react"
 import Link from "next/link"
+import Image, { type ImageProps } from "next/image"
 import { Preview } from "@/components/preview"
 import {
   ButtonAllVariants,
@@ -16,9 +17,11 @@ import {
   ButtonGroupSplit,
 } from "@/components/button-group-preview"
 import {
-  BadgeAllVariants,
+  BadgePreview,
   BadgeAllSizes,
   BadgeWithIcon,
+  BadgeWithSpinner,
+  BadgeAllColors,
 } from "@/components/badge-preview"
 import {
   SeparatorDefault,
@@ -320,7 +323,15 @@ const mdxDefaults: MDXComponents = {
   },
   ul: (props) => <ul className="my-4 ml-6 list-disc st-body-lg text-text-secondary [&>li]:mt-1" {...props} />,
   ol: (props) => <ol className="my-4 ml-6 list-decimal st-body-lg text-text-secondary [&>li]:mt-1" {...props} />,
-  img: (props) => <img className="my-4 rounded-lg" {...props} />,
+  img: (props: ImageProps) => (
+    <Image
+      className="my-4 rounded-lg"
+      width={800}
+      height={450}
+      {...props}
+      alt={props.alt ?? ""}
+    />
+  ),
   hr: () => <hr className="my-8 border-border" />,
   blockquote: (props) => <blockquote className="my-4 border-l-2 border-border-brand pl-4 text-text-secondary italic" {...props} />,
 }
@@ -340,9 +351,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ButtonGroupWithSeparator,
     ButtonGroupAllVariants,
     ButtonGroupSplit,
-    BadgeAllVariants,
+    BadgePreview,
     BadgeAllSizes,
     BadgeWithIcon,
+    BadgeWithSpinner,
+    BadgeAllColors,
     SeparatorDefault,
     SeparatorVertical,
     KbdDefault,

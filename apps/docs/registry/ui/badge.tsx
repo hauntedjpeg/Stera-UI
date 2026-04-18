@@ -9,7 +9,7 @@ const badgeVariants = cva(
     // Group
     "group/badge",
     // Base
-    "inline-flex items-center justify-center rounded-full border border-transparent [&_svg:not([class*='size-'])]:size-3",
+    "inline-flex items-center justify-center rounded-full border border-transparent",
     // Sizing
     "w-fit shrink-0 gap-1",
     // Variants
@@ -59,16 +59,16 @@ const badgeVariants = cva(
       },
       size: {
         sm:
-          "h-4 px-1.5 st-body-sm-strong",
+          "h-4 px-1.5 st-body-sm-strong [&_svg]:size-3",
         md:
-          "h-5 px-2 st-body-sm-strong",
+          "h-5 px-2 st-body-sm-strong [&_svg]:size-3",
         lg:
           "h-6 px-2 st-body-sm-strong [&_svg:not([class*='size-'])]:size-4",
       },
     },
     defaultVariants: {
       variant: "default",
-      size: "sm",
+      size: "md",
     },
   }
 )
@@ -76,7 +76,7 @@ const badgeVariants = cva(
 function Badge({
   className,
   variant = "default",
-  size = "sm",
+  size = "md",
   render,
   ...props
 }: useRender.ComponentProps<"span"> & VariantProps<typeof badgeVariants>) {
