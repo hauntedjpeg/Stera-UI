@@ -1,0 +1,131 @@
+/* ============================================================
+ * Code & syntax styling — single source of truth
+ *
+ * Pipeline recap:
+ *   MDX fence         → fumadocs-core rehypeCode → <pre class="shiki">
+ *   <ComponentSource> → fumadocs-core highlight  → <pre class="shiki">
+ *   Both paths wrap the <pre> in <CodeBlock> (figure.st-code-block)
+ *   so all visuals below apply uniformly.
+ *
+ * Sections:
+ *   1. Inline code
+ *   2. Block container (figure wrapper)
+ *   3. Shiki <pre>            (typography + layout — applies anywhere)
+ *   4. Dual-theme color resolution
+ *   5. Line numbers (auto, multi-line only)
+ *   6. Notation transformers (highlight + diff)
+ * ============================================================ */
+
+/* ---------- 1. Inline code ---------- */
+:not(pre) > code {
+  background-color: var(--bg-surface-secondary);
+  color: var(--text);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875em;
+}
+
+/* ---------- 2. Block container (figure wrapper) ---------- */
+.st-code-block {
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background-color: var(--bg-surface-secondary);
+  overflow: hidden;
+}
+
+.st-code-block__title {
+  padding: 0.5rem 0.875rem;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-surface);
+}
+
+/* When a CodeBlock is embedded (e.g. below a ComponentPreview) the outer
+ * container already supplies border + radius, so the figure is plain. */
+.st-code-block[data-embedded] {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  max-height: 24rem;
+  overflow: auto;
+}
+
+/* ---------- 3. Shiki <pre> ---------- */
+.shiki {
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  background-color: transparent !important; /* override Shiki's inline bg */
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.shiki code {
+  display: block;
+  min-width: max-content;
+  background: transparent;
+  padding: 0;
+}
+
+/* ---------- 4. Dual-theme color resolution ---------- */
+.shiki,
+.shiki span {
+  color: var(--shiki-light);
+}
+
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark);
+}
+
+/* ---------- 5. Line numbers (auto, multi-line only) ----------
+ * Opt out on a fence with `noLineNumbers` meta — the shiki transformer in
+ * source.config.ts tags the <pre> with data-line-numbers="false". */
+.shiki:has(.line ~ .line):not([data-line-numbers="false"]) {
+  counter-reset: line;
+}
+
+.shiki:has(.line ~ .line):not([data-line-numbers="false"]) .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.75rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: var(--text-tertiary);
+  user-select: none;
+}
+
+/* Shiki emits a trailing empty .line — hide it (and its line number). */
+.shiki:has(.line ~ .line) .line:last-child:empty {
+  display: none;
+}
+
+/* ---------- 6. Notation transformers (highlight + diff) ---------- */
+.shiki .highlighted {
+  display: inline-block;
+  width: 100%;
+  background-color: color-mix(in oklch, var(--bg-accent-secondary) 40%, transparent);
+}
+
+.shiki .diff {
+  display: inline-block;
+  width: 100%;
+}
+
+.shiki .diff.add {
+  background-color: color-mix(in oklch, var(--bg-success-secondary) 50%, transparent);
+}
+
+.shiki .diff.remove {
+  background-color: color-mix(in oklch, var(--bg-danger-secondary) 50%, transparent);
+}

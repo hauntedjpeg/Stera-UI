@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image, { type ImageProps } from "next/image"
 import { Preview } from "@/components/preview"
 import { ComponentPreview } from "@/components/component-preview"
+import { CodeBlock } from "@/registry/components/code-block"
 
 function Callout({ children }: { type?: string; children: ReactNode }) {
   return (
@@ -59,12 +60,8 @@ const mdxDefaults: MDXComponents = {
   ),
   th: (props) => <th className="border-b border-border-secondary px-4 py-2 st-body-md-strong text-text" {...props} />,
   td: (props) => <td className="border-b border-border px-4 py-2 text-text-secondary" {...props} />,
-  code: (props) => {
-    // Inline code has string children; shiki-rendered block code has span children
-    const isInline = typeof props.children === "string"
-    if (!isInline) return <code {...props} />
-    return <code className="rounded bg-bg-surface-secondary px-1.5 py-0.5" {...props} />
-  },
+  code: (props) => <code {...props} />,
+  pre: (props) => <CodeBlock>{<pre {...props} />}</CodeBlock>,
   ul: (props) => <ul className="my-4 ml-6 list-disc st-body-lg text-text-secondary [&>li]:mt-1" {...props} />,
   ol: (props) => <ol className="my-4 ml-6 list-decimal st-body-lg text-text-secondary [&>li]:mt-1" {...props} />,
   img: (props: ImageProps) => (

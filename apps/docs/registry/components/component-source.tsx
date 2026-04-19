@@ -2,10 +2,9 @@ import "server-only"
 
 import { highlight } from "fumadocs-core/highlight"
 
-import { cn } from "@/lib/utils"
 import { readRegistryFile } from "@/lib/read-file"
 import { getRegistrySourcePath } from "@/lib/registry"
-import { CopyButton } from "@/components/copy-button"
+import { CodeBlock } from "@/components/code-block"
 
 export async function ComponentSource({
   name,
@@ -28,15 +27,8 @@ export async function ComponentSource({
   })
 
   return (
-    <div
-      className={cn(
-        "stera-code-block relative [&_pre]:m-0! [&_pre]:max-h-96 [&_pre]:overflow-auto [&_pre]:rounded-none [&_pre]:border-0 [&_pre]:bg-bg-surface-secondary [&_pre]:p-4 [&_pre]:text-sm [&_code]:bg-transparent! [&_code]:p-0!",
-        className
-      )}
-      data-slot="component-source"
-    >
-      <CopyButton value={code} />
+    <CodeBlock embedded className={className} data-slot="component-source">
       {rendered}
-    </div>
+    </CodeBlock>
   )
 }

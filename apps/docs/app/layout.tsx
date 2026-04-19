@@ -8,7 +8,7 @@ import { source } from "../lib/source"
 import { DocsSidebar } from "./docs-sidebar"
 import { MobileHeader } from "./docs-header"
 import "../registry/styles/globals.css"
-import "./code-blocks.css"
+import "./code.css"
 
 export const metadata: Metadata = {
   title: "Stera UI",
