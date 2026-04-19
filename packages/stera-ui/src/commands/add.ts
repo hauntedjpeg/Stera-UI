@@ -5,8 +5,8 @@ import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
 import { applyTransforms } from "../utils/transform.js"
 import { transformImports } from "../utils/transform-imports.js"
-import { hasGlobalsCss } from "../utils/detect-globals.js"
-import { CHECK, WARN, dim } from "../utils/format.js"
+import { writeSteraUiCss } from "../utils/write-stera-css.js"
+import { CHECK, CROSS, dim } from "../utils/format.js"
 import { createSpinner } from "../utils/spinner.js"
 
 const transforms = [transformImports]
@@ -16,6 +16,52 @@ export async function add(
   options: { cwd?: string; yes?: boolean; overwrite?: boolean }
 ) {
   const cwd = options.cwd ? path.resolve(options.cwd) : process.cwd()
+
+  // Load config first — needed for both the globals refresh and component installs.
+  const configPath = findConfigPath(cwd)
+  if (!configPath) {
+    console.error(`  ${CROSS}  ${CONFIG_FILE} not found. Run "stera-ui init" first.`)
+    process.exit(1)
+  }
+
+  const config = loadConfig(cwd)
+  if (!config) {
+    console.error(`  ${CROSS}  Failed to parse ${CONFIG_FILE}.`)
+    process.exit(1)
+  }
+
+  const projectRoot = path.dirname(configPath)
+
+  // `add globals` is a special refresh operation — it overwrites stera-ui.css
+  // with the latest registry content. Not compatible with adding components
+  // in the same invocation.
+  if (components.includes("globals")) {
+    if (components.length > 1) {
+      console.error(
+        `  ${CROSS}  "stera-ui add globals" refreshes design tokens and cannot be combined with other components.`
+      )
+      console.error(
+        `     Run "stera-ui add globals" and "stera-ui add ${components
+          .filter((c) => c !== "globals")
+          .join(" ")}" separately.`
+      )
+      process.exit(1)
+    }
+
+    const spinner = createSpinner("Refreshing base styles")
+    let result
+    try {
+      result = await writeSteraUiCss(config, projectRoot)
+    } catch (err) {
+      spinner.fail("Failed to refresh base styles")
+      throw err
+    }
+    spinner.succeed(
+      `Refreshed ${path.relative(projectRoot, result.steraUiPath)}`
+    )
+    console.log("")
+    return
+  }
 
   const spinner = createSpinner("Fetching registry")
 
@@ -34,21 +80,6 @@ export async function add(
     throw err
   }
 
-  // Load config
-  const configPath = findConfigPath(cwd)
-  if (!configPath) {
-    spinner.fail(`${CONFIG_FILE} not found. Run "stera-ui init" first.`)
-    process.exit(1)
-  }
-
-  const config = loadConfig(cwd)
-  if (!config) {
-    spinner.fail(`Failed to parse ${CONFIG_FILE}.`)
-    process.exit(1)
-  }
-
-  const projectRoot = path.dirname(configPath)
-
   // Resolve all dependencies
   let resolved
   try {
@@ -59,15 +90,6 @@ export async function add(
   }
 
   spinner.succeed("Registry resolved")
-
-  // Check for globals CSS (warn if missing) — after spinner so it doesn't
-  // corrupt the single-line render.
-  const isAddingGlobals = components.includes("globals")
-  if (!isAddingGlobals && !hasGlobalsCss(config, projectRoot)) {
-    console.warn(`\n  ${WARN}  Stera design tokens not found in ${config.css}`)
-    console.warn(`     Components may not render correctly.`)
-    console.warn(`     Run "stera-ui add globals" to install base styles.\n`)
-  }
 
   // Apply transforms to file contents
   for (const item of resolved) {
