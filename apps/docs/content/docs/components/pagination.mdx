@@ -3,7 +3,7 @@ title: Pagination
 description: Navigation controls for moving between pages of content.
 ---
 
-<PaginationDefault />
+<ComponentPreview name="pagination-demo" />
 
 ## Installation
 
@@ -11,43 +11,13 @@ description: Navigation controls for moving between pages of content.
 pnpm dlx stera-ui add pagination
 ```
 
-## Usage
-
-```tsx
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationPrevious,
-  PaginationNext,
-  PaginationEllipsis,
-} from "@/components/ui/pagination"
-```
-
-```tsx
-<Pagination>
-  <PaginationContent>
-    <PaginationItem>
-      <PaginationPrevious href="#" />
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationLink href="#" isActive>1</PaginationLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationNext href="#" />
-    </PaginationItem>
-  </PaginationContent>
-</Pagination>
-```
-
 ## Simple
 
-<PaginationSimple />
+<ComponentPreview name="pagination-simple" />
 
 ## With Rows Per Page
 
-<PaginationWithRowsPerPage />
+<ComponentPreview name="pagination-with-rows-per-page" />
 
 Combine with `NativeSelect` to let users control how many rows are shown per page.
 

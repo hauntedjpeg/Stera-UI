@@ -3,7 +3,7 @@ title: Table
 description: A semantic HTML table component for displaying structured data in rows and columns.
 ---
 
-<TableDefault />
+<ComponentPreview name="table-demo" />
 
 ## Installation
 
@@ -11,41 +11,9 @@ description: A semantic HTML table component for displaying structured data in r
 pnpm dlx stera-ui add table
 ```
 
-## Usage
-
-```tsx
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableFooter,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableCaption,
-} from "@/components/ui/table"
-```
-
-```tsx
-<Table>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Name</TableHead>
-      <TableHead>Status</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell>Invoice #001</TableCell>
-      <TableCell>Paid</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
-```
-
 ## With Footer
 
-<TableWithFooter />
+<ComponentPreview name="table-with-footer" />
 
 `TableFooter` renders a sticky-style summary row at the bottom of the table.
 

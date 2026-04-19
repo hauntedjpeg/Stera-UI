@@ -263,6 +263,70 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/registry/examples/breadcrumb-collapsed")),
     path: "examples/breadcrumb-collapsed.tsx",
   },
+  "item-demo": {
+    component: dynamic(() => import("@/registry/examples/item-demo")),
+    path: "examples/item-demo.tsx",
+  },
+  "item-variants": {
+    component: dynamic(() => import("@/registry/examples/item-variants")),
+    path: "examples/item-variants.tsx",
+  },
+  "item-sizes": {
+    component: dynamic(() => import("@/registry/examples/item-sizes")),
+    path: "examples/item-sizes.tsx",
+  },
+  "item-with-actions": {
+    component: dynamic(() => import("@/registry/examples/item-with-actions")),
+    path: "examples/item-with-actions.tsx",
+  },
+  "item-notification-list": {
+    component: dynamic(() => import("@/registry/examples/item-notification-list")),
+    path: "examples/item-notification-list.tsx",
+  },
+  "pagination-demo": {
+    component: dynamic(() => import("@/registry/examples/pagination-demo")),
+    path: "examples/pagination-demo.tsx",
+  },
+  "pagination-simple": {
+    component: dynamic(() => import("@/registry/examples/pagination-simple")),
+    path: "examples/pagination-simple.tsx",
+  },
+  "pagination-with-rows-per-page": {
+    component: dynamic(() => import("@/registry/examples/pagination-with-rows-per-page")),
+    path: "examples/pagination-with-rows-per-page.tsx",
+  },
+  "toggle-group-demo": {
+    component: dynamic(() => import("@/registry/examples/toggle-group-demo")),
+    path: "examples/toggle-group-demo.tsx",
+  },
+  "toggle-group-outline": {
+    component: dynamic(() => import("@/registry/examples/toggle-group-outline")),
+    path: "examples/toggle-group-outline.tsx",
+  },
+  "toggle-group-sizes": {
+    component: dynamic(() => import("@/registry/examples/toggle-group-sizes")),
+    path: "examples/toggle-group-sizes.tsx",
+  },
+  "toggle-group-vertical": {
+    component: dynamic(() => import("@/registry/examples/toggle-group-vertical")),
+    path: "examples/toggle-group-vertical.tsx",
+  },
+  "toggle-group-disabled": {
+    component: dynamic(() => import("@/registry/examples/toggle-group-disabled")),
+    path: "examples/toggle-group-disabled.tsx",
+  },
+  "toggle-group-custom": {
+    component: dynamic(() => import("@/registry/examples/toggle-group-custom")),
+    path: "examples/toggle-group-custom.tsx",
+  },
+  "table-demo": {
+    component: dynamic(() => import("@/registry/examples/table-demo")),
+    path: "examples/table-demo.tsx",
+  },
+  "table-with-footer": {
+    component: dynamic(() => import("@/registry/examples/table-with-footer")),
+    path: "examples/table-with-footer.tsx",
+  },
 }
 
 export function getRegistryComponent(name: string): ComponentType | null {

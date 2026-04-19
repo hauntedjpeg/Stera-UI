@@ -62,13 +62,6 @@ import {
   TooltipWithKbd,
 } from "@/components/tooltip-preview"
 import {
-  ItemDefault,
-  ItemAllVariants,
-  ItemAllSizes,
-  ItemWithActions,
-  ItemNotificationList,
-} from "@/components/item-preview"
-import {
   TabsDefault,
   TabsLine,
   TabsVertical,
@@ -76,19 +69,6 @@ import {
   TabsSizes,
   TabsWithIcons,
 } from "@/components/tabs-preview"
-import {
-  PaginationDefault,
-  PaginationSimple,
-  PaginationWithRowsPerPage,
-} from "@/components/pagination-preview"
-import {
-  ToggleGroupDefault,
-  ToggleGroupOutline,
-  ToggleGroupSizes,
-  ToggleGroupVertical,
-  ToggleGroupDisabled,
-  ToggleGroupCustom,
-} from "@/components/toggle-group-preview"
 import {
   InputGroupIcon,
   InputGroupTextAddon,
@@ -146,10 +126,6 @@ import {
   ComboboxPopup,
   ComboboxInvalid,
 } from "@/components/combobox-preview"
-import {
-  TableDefault,
-  TableWithFooter,
-} from "@/components/table-preview"
 import {
   CalendarDefault,
   CalendarRange,
@@ -285,26 +261,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     TooltipDefault,
     TooltipSides,
     TooltipWithKbd,
-    ItemDefault,
-    ItemAllVariants,
-    ItemAllSizes,
-    ItemWithActions,
-    ItemNotificationList,
     TabsDefault,
     TabsLine,
     TabsVertical,
     TabsDisabled,
     TabsSizes,
     TabsWithIcons,
-    PaginationDefault,
-    PaginationSimple,
-    PaginationWithRowsPerPage,
-    ToggleGroupDefault,
-    ToggleGroupOutline,
-    ToggleGroupSizes,
-    ToggleGroupVertical,
-    ToggleGroupDisabled,
-    ToggleGroupCustom,
     InputGroupIcon,
     InputGroupTextAddon,
     InputGroupWithButton,
@@ -346,8 +308,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ComboboxCustomItems,
     ComboboxPopup,
     ComboboxInvalid,
-    TableDefault,
-    TableWithFooter,
     CalendarDefault,
     CalendarRange,
     CalendarDropdown,
