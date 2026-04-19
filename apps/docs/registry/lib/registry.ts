@@ -603,6 +603,106 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/registry/examples/alert-dialog-destructive")),
     path: "examples/alert-dialog-destructive.tsx",
   },
+  "dropdown-menu-demo": {
+    component: dynamic(() => import("@/registry/examples/dropdown-menu-demo")),
+    path: "examples/dropdown-menu-demo.tsx",
+  },
+  "dropdown-menu-with-icons": {
+    component: dynamic(() => import("@/registry/examples/dropdown-menu-with-icons")),
+    path: "examples/dropdown-menu-with-icons.tsx",
+  },
+  "dropdown-menu-with-shortcuts": {
+    component: dynamic(() => import("@/registry/examples/dropdown-menu-with-shortcuts")),
+    path: "examples/dropdown-menu-with-shortcuts.tsx",
+  },
+  "dropdown-menu-with-submenu": {
+    component: dynamic(() => import("@/registry/examples/dropdown-menu-with-submenu")),
+    path: "examples/dropdown-menu-with-submenu.tsx",
+  },
+  "dropdown-menu-destructive": {
+    component: dynamic(() => import("@/registry/examples/dropdown-menu-destructive")),
+    path: "examples/dropdown-menu-destructive.tsx",
+  },
+  "dropdown-menu-checkboxes": {
+    component: dynamic(() => import("@/registry/examples/dropdown-menu-checkboxes")),
+    path: "examples/dropdown-menu-checkboxes.tsx",
+  },
+  "dropdown-menu-radio-items": {
+    component: dynamic(() => import("@/registry/examples/dropdown-menu-radio-items")),
+    path: "examples/dropdown-menu-radio-items.tsx",
+  },
+  "dropdown-menu-title-description": {
+    component: dynamic(() => import("@/registry/examples/dropdown-menu-title-description")),
+    path: "examples/dropdown-menu-title-description.tsx",
+  },
+  "command-demo": {
+    component: dynamic(() => import("@/registry/examples/command-demo")),
+    path: "examples/command-demo.tsx",
+  },
+  "command-dialog-example": {
+    component: dynamic(() => import("@/registry/examples/command-dialog-example")),
+    path: "examples/command-dialog-example.tsx",
+  },
+  "command-title-description": {
+    component: dynamic(() => import("@/registry/examples/command-title-description")),
+    path: "examples/command-title-description.tsx",
+  },
+  "combobox-demo": {
+    component: dynamic(() => import("@/registry/examples/combobox-demo")),
+    path: "examples/combobox-demo.tsx",
+  },
+  "combobox-multiple": {
+    component: dynamic(() => import("@/registry/examples/combobox-multiple")),
+    path: "examples/combobox-multiple.tsx",
+  },
+  "combobox-groups": {
+    component: dynamic(() => import("@/registry/examples/combobox-groups")),
+    path: "examples/combobox-groups.tsx",
+  },
+  "combobox-custom-items": {
+    component: dynamic(() => import("@/registry/examples/combobox-custom-items")),
+    path: "examples/combobox-custom-items.tsx",
+  },
+  "combobox-popup": {
+    component: dynamic(() => import("@/registry/examples/combobox-popup")),
+    path: "examples/combobox-popup.tsx",
+  },
+  "combobox-invalid": {
+    component: dynamic(() => import("@/registry/examples/combobox-invalid")),
+    path: "examples/combobox-invalid.tsx",
+  },
+  "calendar-demo": {
+    component: dynamic(() => import("@/registry/examples/calendar-demo")),
+    path: "examples/calendar-demo.tsx",
+  },
+  "calendar-range": {
+    component: dynamic(() => import("@/registry/examples/calendar-range")),
+    path: "examples/calendar-range.tsx",
+  },
+  "calendar-dropdown": {
+    component: dynamic(() => import("@/registry/examples/calendar-dropdown")),
+    path: "examples/calendar-dropdown.tsx",
+  },
+  "calendar-with-presets": {
+    component: dynamic(() => import("@/registry/examples/calendar-with-presets")),
+    path: "examples/calendar-with-presets.tsx",
+  },
+  "calendar-week-numbers": {
+    component: dynamic(() => import("@/registry/examples/calendar-week-numbers")),
+    path: "examples/calendar-week-numbers.tsx",
+  },
+  "sidebar-demo": {
+    component: dynamic(() => import("@/registry/examples/sidebar-demo")),
+    path: "examples/sidebar-demo.tsx",
+  },
+  "sidebar-with-badge": {
+    component: dynamic(() => import("@/registry/examples/sidebar-with-badge")),
+    path: "examples/sidebar-with-badge.tsx",
+  },
+  "sidebar-variants": {
+    component: dynamic(() => import("@/registry/examples/sidebar-variants")),
+    path: "examples/sidebar-variants.tsx",
+  },
 }
 
 export function getRegistryComponent(name: string): ComponentType | null {

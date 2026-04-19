@@ -3,7 +3,7 @@ title: Combobox
 description: A searchable select input that combines a text field with a filterable dropdown list.
 ---
 
-<ComboboxDefault />
+<ComponentPreview name="combobox-demo" />
 
 ## Installation
 
@@ -11,62 +11,33 @@ description: A searchable select input that combines a text field with a filtera
 pnpm dlx stera-ui add combobox
 ```
 
-## Usage
-
-```tsx
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxList,
-  ComboboxItem,
-} from "@/components/ui/combobox"
-```
-
-```tsx
-<Combobox items={items} itemToStringLabel={(item) => item.label}>
-  <ComboboxInput placeholder="Select..." />
-  <ComboboxContent>
-    <ComboboxEmpty>No results found.</ComboboxEmpty>
-    <ComboboxList>
-      {(item) => (
-        <ComboboxItem key={item.value} value={item}>
-          {item.label}
-        </ComboboxItem>
-      )}
-    </ComboboxList>
-  </ComboboxContent>
-</Combobox>
-```
-
 ## Multiple Selection
 
-<ComboboxMultiple />
+<ComponentPreview name="combobox-multiple" />
 
 Pass `multiple` to allow selecting more than one item. Use `ComboboxChips` and `ComboboxChipsInput` for the chip-based input.
 
 ## Groups
 
-<ComboboxGroups />
+<ComponentPreview name="combobox-groups" />
 
 Use `ComboboxCollection`, `ComboboxGroup`, `ComboboxLabel`, and `ComboboxSeparator` to organise items into labelled sections.
 
 ## Custom Items
 
-<ComboboxCustomItems />
+<ComponentPreview name="combobox-custom-items" />
 
 Render any content inside `ComboboxItem` for rich layouts with icons and descriptions.
 
 ## Popup Style
 
-<ComboboxPopup />
+<ComponentPreview name="combobox-popup" />
 
 Use `ComboboxTrigger` with a Button and `ComboboxValue` for a traditional select-style popup trigger.
 
 ## Invalid State
 
-<ComboboxInvalid />
+<ComponentPreview name="combobox-invalid" />
 
 ## API Reference
 

@@ -4,41 +4,6 @@ import Link from "next/link"
 import Image, { type ImageProps } from "next/image"
 import { Preview } from "@/components/preview"
 import { ComponentPreview } from "@/components/component-preview"
-import {
-  DropdownMenuDefault,
-  DropdownMenuWithIcons,
-  DropdownMenuWithShortcuts,
-  DropdownMenuWithSubmenu,
-  DropdownMenuDestructive,
-  DropdownMenuCheckboxes,
-  DropdownMenuRadioItems,
-  DropdownMenuTitleDescription,
-} from "@/components/dropdown-menu-preview"
-import {
-  CommandDefault,
-  CommandDialogExample,
-  CommandTitleDescription,
-} from "@/components/command-preview"
-import {
-  ComboboxDefault,
-  ComboboxMultiple,
-  ComboboxGroups,
-  ComboboxCustomItems,
-  ComboboxPopup,
-  ComboboxInvalid,
-} from "@/components/combobox-preview"
-import {
-  CalendarDefault,
-  CalendarRange,
-  CalendarDropdown,
-  CalendarWithPresets,
-  CalendarWeekNumbers,
-} from "@/components/calendar-preview"
-import {
-  SidebarDefault,
-  SidebarWithBadge,
-  SidebarVariants,
-} from "@/components/sidebar-preview"
 
 function Callout({ children }: { type?: string; children: ReactNode }) {
   return (
@@ -123,31 +88,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Steps,
     Preview,
     ComponentPreview,
-    DropdownMenuDefault,
-    DropdownMenuWithIcons,
-    DropdownMenuWithShortcuts,
-    DropdownMenuWithSubmenu,
-    DropdownMenuDestructive,
-    DropdownMenuCheckboxes,
-    DropdownMenuRadioItems,
-    DropdownMenuTitleDescription,
-    CommandDefault,
-    CommandDialogExample,
-    CommandTitleDescription,
-    ComboboxDefault,
-    ComboboxMultiple,
-    ComboboxGroups,
-    ComboboxCustomItems,
-    ComboboxPopup,
-    ComboboxInvalid,
-    CalendarDefault,
-    CalendarRange,
-    CalendarDropdown,
-    CalendarWithPresets,
-    CalendarWeekNumbers,
-    SidebarDefault,
-    SidebarWithBadge,
-    SidebarVariants,
     ...components,
   }
 }

@@ -3,7 +3,7 @@ title: Command
 description: A command palette for fast keyboard-driven navigation and action execution.
 ---
 
-<CommandDefault />
+<ComponentPreview name="command-demo" />
 
 ## Installation
 
@@ -11,46 +11,15 @@ description: A command palette for fast keyboard-driven navigation and action ex
 pnpm dlx stera-ui add command
 ```
 
-## Usage
-
-```tsx
-import {
-  Command,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command"
-```
-
-```tsx
-<Command className="rounded-lg border">
-  <CommandInput placeholder="Type a command or search..." />
-  <CommandList>
-    <CommandEmpty>No results found.</CommandEmpty>
-    <CommandGroup heading="Settings">
-      <CommandItem>
-        <SiUser />
-        <span>Profile</span>
-        <CommandShortcut>⌘P</CommandShortcut>
-      </CommandItem>
-    </CommandGroup>
-  </CommandList>
-</Command>
-```
-
 ## Command Dialog
 
-<CommandDialogExample />
+<ComponentPreview name="command-dialog-example" />
 
 Use `CommandDialog` and `CommandDialogTrigger` to open the command palette in a modal overlay.
 
 ## Title & Description
 
-<CommandTitleDescription />
+<ComponentPreview name="command-title-description" />
 
 Use `CommandItemContent`, `CommandItemTitle`, and `CommandItemDescription` for richer item layouts.
 
