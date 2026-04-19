@@ -3,6 +3,7 @@ import type { ReactNode } from "react"
 import Link from "next/link"
 import Image, { type ImageProps } from "next/image"
 import { Preview } from "@/components/preview"
+import { ComponentPreview } from "@/components/component-preview"
 import {
   ButtonAllVariants,
   ButtonAllSizes,
@@ -342,6 +343,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Callout,
     Steps,
     Preview,
+    ComponentPreview,
     ButtonAllVariants,
     ButtonAllSizes,
     ButtonWithIcon,
