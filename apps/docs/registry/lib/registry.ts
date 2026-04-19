@@ -199,6 +199,70 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/registry/examples/avatar-group")),
     path: "examples/avatar-group.tsx",
   },
+  "card-demo": {
+    component: dynamic(() => import("@/registry/examples/card-demo")),
+    path: "examples/card-demo.tsx",
+  },
+  "card-with-action": {
+    component: dynamic(() => import("@/registry/examples/card-with-action")),
+    path: "examples/card-with-action.tsx",
+  },
+  "card-sizes": {
+    component: dynamic(() => import("@/registry/examples/card-sizes")),
+    path: "examples/card-sizes.tsx",
+  },
+  "callout-demo": {
+    component: dynamic(() => import("@/registry/examples/callout-demo")),
+    path: "examples/callout-demo.tsx",
+  },
+  "callout-with-icon": {
+    component: dynamic(() => import("@/registry/examples/callout-with-icon")),
+    path: "examples/callout-with-icon.tsx",
+  },
+  "callout-with-action": {
+    component: dynamic(() => import("@/registry/examples/callout-with-action")),
+    path: "examples/callout-with-action.tsx",
+  },
+  "callout-with-close": {
+    component: dynamic(() => import("@/registry/examples/callout-with-close")),
+    path: "examples/callout-with-close.tsx",
+  },
+  "callout-variants": {
+    component: dynamic(() => import("@/registry/examples/callout-variants")),
+    path: "examples/callout-variants.tsx",
+  },
+  "notice-demo": {
+    component: dynamic(() => import("@/registry/examples/notice-demo")),
+    path: "examples/notice-demo.tsx",
+  },
+  "notice-types": {
+    component: dynamic(() => import("@/registry/examples/notice-types")),
+    path: "examples/notice-types.tsx",
+  },
+  "empty-demo": {
+    component: dynamic(() => import("@/registry/examples/empty-demo")),
+    path: "examples/empty-demo.tsx",
+  },
+  "empty-with-avatar-group": {
+    component: dynamic(() => import("@/registry/examples/empty-with-avatar-group")),
+    path: "examples/empty-with-avatar-group.tsx",
+  },
+  "empty-no-results": {
+    component: dynamic(() => import("@/registry/examples/empty-no-results")),
+    path: "examples/empty-no-results.tsx",
+  },
+  "breadcrumb-demo": {
+    component: dynamic(() => import("@/registry/examples/breadcrumb-demo")),
+    path: "examples/breadcrumb-demo.tsx",
+  },
+  "breadcrumb-custom-separator": {
+    component: dynamic(() => import("@/registry/examples/breadcrumb-custom-separator")),
+    path: "examples/breadcrumb-custom-separator.tsx",
+  },
+  "breadcrumb-collapsed": {
+    component: dynamic(() => import("@/registry/examples/breadcrumb-collapsed")),
+    path: "examples/breadcrumb-collapsed.tsx",
+  },
 }
 
 export function getRegistryComponent(name: string): ComponentType | null {

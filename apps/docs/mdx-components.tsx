@@ -57,32 +57,6 @@ import {
   SliderDisabled,
 } from "@/components/slider-preview"
 import {
-  CardDefault,
-  CardWithAction,
-  CardSizes,
-} from "@/components/card-preview"
-import {
-  CalloutDefault,
-  CalloutWithIcon,
-  CalloutWithAction,
-  CalloutWithClose,
-  CalloutAllVariants,
-} from "@/components/callout-preview"
-import {
-  NoticeDefault,
-  NoticeTypes,
-} from "@/components/notice-preview"
-import {
-  EmptyDefault,
-  EmptyWithAvatarGroup,
-  EmptyNoResults,
-} from "@/components/empty-preview"
-import {
-  BreadcrumbDefault,
-  BreadcrumbCustomSeparator,
-  BreadcrumbCollapsed,
-} from "@/components/breadcrumb-preview"
-import {
   TooltipDefault,
   TooltipSides,
   TooltipWithKbd,
@@ -308,22 +282,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SliderRange,
     SliderVertical,
     SliderDisabled,
-    CardDefault,
-    CardWithAction,
-    CardSizes,
-    CalloutDefault,
-    CalloutWithIcon,
-    CalloutWithAction,
-    CalloutWithClose,
-    CalloutAllVariants,
-    NoticeDefault,
-    NoticeTypes,
-    EmptyDefault,
-    EmptyWithAvatarGroup,
-    EmptyNoResults,
-    BreadcrumbDefault,
-    BreadcrumbCustomSeparator,
-    BreadcrumbCollapsed,
     TooltipDefault,
     TooltipSides,
     TooltipWithKbd,

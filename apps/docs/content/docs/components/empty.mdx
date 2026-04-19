@@ -3,7 +3,7 @@ title: Empty
 description: An empty state component for zero-data views with icon, title, description, and optional action.
 ---
 
-<EmptyDefault />
+<ComponentPreview name="empty-demo" />
 
 ## Installation
 
@@ -11,41 +11,13 @@ description: An empty state component for zero-data views with icon, title, desc
 pnpm dlx stera-ui add empty
 ```
 
-## Usage
-
-```tsx
-import {
-  Empty,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-  EmptyDescription,
-  EmptyContent,
-} from "@/components/ui/empty"
-```
-
-```tsx
-<Empty>
-  <EmptyHeader>
-    <EmptyMedia variant="icon">
-      <SiFolderOpen />
-    </EmptyMedia>
-    <EmptyTitle>No projects found</EmptyTitle>
-    <EmptyDescription>Create your first project to get started.</EmptyDescription>
-  </EmptyHeader>
-  <EmptyContent>
-    <Button>Create project</Button>
-  </EmptyContent>
-</Empty>
-```
-
 ## With Avatar Group
 
-<EmptyWithAvatarGroup />
+<ComponentPreview name="empty-with-avatar-group" />
 
 ## No Results
 
-<EmptyNoResults />
+<ComponentPreview name="empty-no-results" />
 
 ## API Reference
 

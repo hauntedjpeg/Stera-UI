@@ -3,7 +3,7 @@ title: Breadcrumb
 description: A navigation trail showing the user's current location within a hierarchy.
 ---
 
-<BreadcrumbDefault />
+<ComponentPreview name="breadcrumb-demo" />
 
 ## Installation
 
@@ -11,42 +11,15 @@ description: A navigation trail showing the user's current location within a hie
 pnpm dlx stera-ui add breadcrumb
 ```
 
-## Usage
-
-```tsx
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-```
-
-```tsx
-<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink render={<a href="/" />}>Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>Current Page</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>
-```
-
 ## Custom Separator
 
-<BreadcrumbCustomSeparator />
+<ComponentPreview name="breadcrumb-custom-separator" />
 
 Pass any element as a child of `BreadcrumbSeparator` to replace the default chevron icon.
 
 ## Collapsed
 
-<BreadcrumbCollapsed />
+<ComponentPreview name="breadcrumb-collapsed" />
 
 Use `BreadcrumbEllipsis` to represent hidden middle items in long paths.
 

@@ -3,7 +3,7 @@ title: Notice
 description: A toast notification system built on Sonner, themed to match the design system.
 ---
 
-<NoticeDefault />
+<ComponentPreview name="notice-demo" />
 
 ## Installation
 
@@ -28,18 +28,9 @@ export default function Layout({ children }) {
 }
 ```
 
-```tsx
-import { toast } from "sonner"
-
-toast("Event has been created", {
-  description: "Sunday, December 03, 2023 at 9:00 AM",
-  action: { label: "Undo", onClick: () => {} },
-})
-```
-
 ## Toast Types
 
-<NoticeTypes />
+<ComponentPreview name="notice-types" />
 
 | Method | Description |
 | --- | --- |
