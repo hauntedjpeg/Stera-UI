@@ -3,7 +3,7 @@ title: Dialog
 description: A modal window that overlays the page to display focused content or capture user input.
 ---
 
-<DialogDefault />
+<ComponentPreview name="dialog-demo" />
 
 ## Installation
 
@@ -11,49 +11,15 @@ description: A modal window that overlays the page to display focused content or
 pnpm dlx stera-ui add dialog
 ```
 
-## Usage
-
-```tsx
-import {
-  Dialog,
-  DialogTrigger,
-  DialogPopup,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogContent,
-  DialogFooter,
-  DialogClose,
-} from "@/components/ui/dialog"
-```
-
-```tsx
-<Dialog>
-  <DialogTrigger render={<Button variant="outline">Open</Button>} />
-  <DialogPopup>
-    <DialogHeader>
-      <DialogTitle>Dialog Title</DialogTitle>
-      <DialogDescription>Dialog description.</DialogDescription>
-    </DialogHeader>
-    <DialogContent>
-      {/* body content */}
-    </DialogContent>
-    <DialogFooter showCloseButton>
-      <Button>Save</Button>
-    </DialogFooter>
-  </DialogPopup>
-</Dialog>
-```
-
 ## Confirmation Dialog
 
-<DialogConfirm />
+<ComponentPreview name="dialog-confirm" />
 
 Use `DialogClose` with a custom button to create cancel/confirm action pairs.
 
 ## Scrollable Content
 
-<DialogScrollable />
+<ComponentPreview name="dialog-scrollable" />
 
 Set `scroll="content"` on `DialogPopup` and `scroll` on `DialogContent` to let the body scroll while the header and footer remain sticky.
 

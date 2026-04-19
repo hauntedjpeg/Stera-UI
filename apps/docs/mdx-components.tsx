@@ -5,35 +5,6 @@ import Image, { type ImageProps } from "next/image"
 import { Preview } from "@/components/preview"
 import { ComponentPreview } from "@/components/component-preview"
 import {
-  TooltipDefault,
-  TooltipSides,
-  TooltipWithKbd,
-} from "@/components/tooltip-preview"
-import {
-  TabsDefault,
-  TabsLine,
-  TabsVertical,
-  TabsDisabled,
-  TabsSizes,
-  TabsWithIcons,
-} from "@/components/tabs-preview"
-import {
-  DialogDefault,
-  DialogConfirm,
-  DialogScrollable,
-} from "@/components/dialog-preview"
-import {
-  SheetDefault,
-  SheetSides,
-  SheetNoCloseButton,
-} from "@/components/sheet-preview"
-import {
-  AlertDialogDefault,
-  AlertDialogWithMedia,
-  AlertDialogSmall,
-  AlertDialogDestructive,
-} from "@/components/alert-dialog-preview"
-import {
   DropdownMenuDefault,
   DropdownMenuWithIcons,
   DropdownMenuWithShortcuts,
@@ -152,25 +123,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Steps,
     Preview,
     ComponentPreview,
-    TooltipDefault,
-    TooltipSides,
-    TooltipWithKbd,
-    TabsDefault,
-    TabsLine,
-    TabsVertical,
-    TabsDisabled,
-    TabsSizes,
-    TabsWithIcons,
-    DialogDefault,
-    DialogConfirm,
-    DialogScrollable,
-    SheetDefault,
-    SheetSides,
-    SheetNoCloseButton,
-    AlertDialogDefault,
-    AlertDialogWithMedia,
-    AlertDialogSmall,
-    AlertDialogDestructive,
     DropdownMenuDefault,
     DropdownMenuWithIcons,
     DropdownMenuWithShortcuts,

@@ -3,7 +3,7 @@ title: Sheet
 description: A slide-in panel that appears from the edge of the screen, used for secondary content or forms.
 ---
 
-<SheetDefault />
+<ComponentPreview name="sheet-demo" />
 
 ## Installation
 
@@ -11,41 +11,9 @@ description: A slide-in panel that appears from the edge of the screen, used for
 pnpm dlx stera-ui add sheet
 ```
 
-## Usage
-
-```tsx
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-  SheetFooter,
-  SheetClose,
-} from "@/components/ui/sheet"
-```
-
-```tsx
-<Sheet>
-  <SheetTrigger render={<Button variant="outline" />}>Open</SheetTrigger>
-  <SheetContent>
-    <SheetHeader>
-      <SheetTitle>Sheet Title</SheetTitle>
-      <SheetDescription>Sheet description.</SheetDescription>
-    </SheetHeader>
-    {/* body content */}
-    <SheetFooter>
-      <Button>Save</Button>
-      <SheetClose render={<Button variant="outline" />}>Close</SheetClose>
-    </SheetFooter>
-  </SheetContent>
-</Sheet>
-```
-
 ## Sides
 
-<SheetSides />
+<ComponentPreview name="sheet-sides" />
 
 | Side | Description |
 | --- | --- |
@@ -56,7 +24,7 @@ import {
 
 ## No Close Button
 
-<SheetNoCloseButton />
+<ComponentPreview name="sheet-no-close-button" />
 
 ## API Reference
 

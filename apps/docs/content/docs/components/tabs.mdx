@@ -3,7 +3,7 @@ title: Tabs
 description: A set of layered content panels that are displayed one at a time via tab triggers.
 ---
 
-<TabsDefault />
+<ComponentPreview name="tabs-demo" />
 
 ## Installation
 
@@ -11,43 +11,21 @@ description: A set of layered content panels that are displayed one at a time vi
 pnpm dlx stera-ui add tabs
 ```
 
-## Usage
-
-```tsx
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "@/components/ui/tabs"
-```
-
-```tsx
-<Tabs defaultValue="account">
-  <TabsList>
-    <TabsTrigger value="account">Account</TabsTrigger>
-    <TabsTrigger value="password">Password</TabsTrigger>
-  </TabsList>
-  <TabsContent value="account">Account content.</TabsContent>
-  <TabsContent value="password">Password content.</TabsContent>
-</Tabs>
-```
-
 ## Line Variant
 
-<TabsLine />
+<ComponentPreview name="tabs-line" />
 
 ## Vertical
 
-<TabsVertical />
+<ComponentPreview name="tabs-vertical" />
 
 ## Disabled
 
-<TabsDisabled />
+<ComponentPreview name="tabs-disabled" />
 
 ## Sizes
 
-<TabsSizes />
+<ComponentPreview name="tabs-sizes" />
 
 | Size | Description |
 | --- | --- |
@@ -57,7 +35,7 @@ import {
 
 ## With Icons
 
-<TabsWithIcons />
+<ComponentPreview name="tabs-with-icons" />
 
 ## API Reference
 

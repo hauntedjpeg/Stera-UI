@@ -3,7 +3,7 @@ title: Tooltip
 description: A floating label that appears on hover or focus to provide contextual information.
 ---
 
-<TooltipDefault />
+<ComponentPreview name="tooltip-demo" />
 
 ## Installation
 
@@ -11,33 +11,9 @@ description: A floating label that appears on hover or focus to provide contextu
 pnpm dlx stera-ui add tooltip
 ```
 
-## Usage
-
-```tsx
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-```
-
-```tsx
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">Hover me</Button>
-    </TooltipTrigger>
-    <TooltipContent>
-      <p>Tooltip text</p>
-    </TooltipContent>
-  </Tooltip>
-</TooltipProvider>
-```
-
 ## Sides
 
-<TooltipSides />
+<ComponentPreview name="tooltip-sides" />
 
 | Side | Description |
 | --- | --- |
@@ -48,7 +24,7 @@ import {
 
 ## With Kbd
 
-<TooltipWithKbd />
+<ComponentPreview name="tooltip-with-kbd" />
 
 Combine with `Kbd` to show keyboard shortcuts inside tooltips.
 

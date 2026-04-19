@@ -3,7 +3,7 @@ title: Alert Dialog
 description: A modal dialog that interrupts the user with important content and requires a response.
 ---
 
-<AlertDialogDefault />
+<ComponentPreview name="alert-dialog-demo" />
 
 ## Installation
 
@@ -11,51 +11,19 @@ description: A modal dialog that interrupts the user with important content and 
 pnpm dlx stera-ui add alert-dialog
 ```
 
-## Usage
-
-```tsx
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogAction,
-  AlertDialogCancel,
-} from "@/components/ui/alert-dialog"
-```
-
-```tsx
-<AlertDialog>
-  <AlertDialogTrigger render={<Button variant="outline">Open</Button>} />
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-      <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>Cancel</AlertDialogCancel>
-      <AlertDialogAction>Confirm</AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-```
-
 ## With Media
 
-<AlertDialogWithMedia />
+<ComponentPreview name="alert-dialog-with-media" />
 
 Use `AlertDialogMedia` to display an icon above the title for additional visual context.
 
 ## Small Size
 
-<AlertDialogSmall />
+<ComponentPreview name="alert-dialog-small" />
 
 ## Destructive
 
-<AlertDialogDestructive />
+<ComponentPreview name="alert-dialog-destructive" />
 
 Pass `variant="danger"` to `AlertDialogAction` for destructive confirmations.
 

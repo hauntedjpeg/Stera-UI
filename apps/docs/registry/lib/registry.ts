@@ -527,6 +527,82 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/registry/examples/field-form-example")),
     path: "examples/field-form-example.tsx",
   },
+  "tooltip-demo": {
+    component: dynamic(() => import("@/registry/examples/tooltip-demo")),
+    path: "examples/tooltip-demo.tsx",
+  },
+  "tooltip-sides": {
+    component: dynamic(() => import("@/registry/examples/tooltip-sides")),
+    path: "examples/tooltip-sides.tsx",
+  },
+  "tooltip-with-kbd": {
+    component: dynamic(() => import("@/registry/examples/tooltip-with-kbd")),
+    path: "examples/tooltip-with-kbd.tsx",
+  },
+  "tabs-demo": {
+    component: dynamic(() => import("@/registry/examples/tabs-demo")),
+    path: "examples/tabs-demo.tsx",
+  },
+  "tabs-line": {
+    component: dynamic(() => import("@/registry/examples/tabs-line")),
+    path: "examples/tabs-line.tsx",
+  },
+  "tabs-vertical": {
+    component: dynamic(() => import("@/registry/examples/tabs-vertical")),
+    path: "examples/tabs-vertical.tsx",
+  },
+  "tabs-disabled": {
+    component: dynamic(() => import("@/registry/examples/tabs-disabled")),
+    path: "examples/tabs-disabled.tsx",
+  },
+  "tabs-sizes": {
+    component: dynamic(() => import("@/registry/examples/tabs-sizes")),
+    path: "examples/tabs-sizes.tsx",
+  },
+  "tabs-with-icons": {
+    component: dynamic(() => import("@/registry/examples/tabs-with-icons")),
+    path: "examples/tabs-with-icons.tsx",
+  },
+  "dialog-demo": {
+    component: dynamic(() => import("@/registry/examples/dialog-demo")),
+    path: "examples/dialog-demo.tsx",
+  },
+  "dialog-confirm": {
+    component: dynamic(() => import("@/registry/examples/dialog-confirm")),
+    path: "examples/dialog-confirm.tsx",
+  },
+  "dialog-scrollable": {
+    component: dynamic(() => import("@/registry/examples/dialog-scrollable")),
+    path: "examples/dialog-scrollable.tsx",
+  },
+  "sheet-demo": {
+    component: dynamic(() => import("@/registry/examples/sheet-demo")),
+    path: "examples/sheet-demo.tsx",
+  },
+  "sheet-sides": {
+    component: dynamic(() => import("@/registry/examples/sheet-sides")),
+    path: "examples/sheet-sides.tsx",
+  },
+  "sheet-no-close-button": {
+    component: dynamic(() => import("@/registry/examples/sheet-no-close-button")),
+    path: "examples/sheet-no-close-button.tsx",
+  },
+  "alert-dialog-demo": {
+    component: dynamic(() => import("@/registry/examples/alert-dialog-demo")),
+    path: "examples/alert-dialog-demo.tsx",
+  },
+  "alert-dialog-with-media": {
+    component: dynamic(() => import("@/registry/examples/alert-dialog-with-media")),
+    path: "examples/alert-dialog-with-media.tsx",
+  },
+  "alert-dialog-small": {
+    component: dynamic(() => import("@/registry/examples/alert-dialog-small")),
+    path: "examples/alert-dialog-small.tsx",
+  },
+  "alert-dialog-destructive": {
+    component: dynamic(() => import("@/registry/examples/alert-dialog-destructive")),
+    path: "examples/alert-dialog-destructive.tsx",
+  },
 }
 
 export function getRegistryComponent(name: string): ComponentType | null {
