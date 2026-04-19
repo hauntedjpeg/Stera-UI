@@ -3,7 +3,7 @@ title: Radio Group
 description: A set of mutually exclusive options where only one can be selected at a time.
 ---
 
-<RadioGroupDefault />
+<ComponentPreview name="radio-group-demo" />
 
 ## Installation
 
@@ -11,74 +11,19 @@ description: A set of mutually exclusive options where only one can be selected 
 pnpm dlx stera-ui add radio-group
 ```
 
-## Usage
-
-```tsx
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-```
-
-```tsx
-<RadioGroup defaultValue="comfortable">
-  <Field orientation="horizontal">
-    <RadioGroupItem value="default" id="r1" />
-    <FieldLabel htmlFor="r1">Default</FieldLabel>
-  </Field>
-  <Field orientation="horizontal">
-    <RadioGroupItem value="comfortable" id="r2" />
-    <FieldLabel htmlFor="r2">Comfortable</FieldLabel>
-  </Field>
-</RadioGroup>
-```
-
 ## With Descriptions
 
-<RadioGroupWithDescription />
-
-```tsx
-<RadioGroup defaultValue="comfortable">
-  <Field orientation="horizontal">
-    <RadioGroupItem value="default" id="r1" />
-    <FieldContent>
-      <FieldLabel htmlFor="r1">Default</FieldLabel>
-      <FieldDescription>Standard spacing for most use cases.</FieldDescription>
-    </FieldContent>
-  </Field>
-</RadioGroup>
-```
+<ComponentPreview name="radio-group-with-description" />
 
 ## In a Fieldset
 
 Use `FieldSet` and `FieldLegend` to group radio items with an accessible legend.
 
-<RadioGroupFieldset />
-
-```tsx
-<FieldSet>
-  <FieldLegend variant="label">Subscription Plan</FieldLegend>
-  <FieldDescription>Yearly and lifetime plans offer significant savings.</FieldDescription>
-  <RadioGroup defaultValue="monthly">
-    <Field orientation="horizontal">
-      <RadioGroupItem value="monthly" id="plan-monthly" />
-      <FieldLabel htmlFor="plan-monthly">Monthly ($9.99/month)</FieldLabel>
-    </Field>
-    <Field orientation="horizontal">
-      <RadioGroupItem value="yearly" id="plan-yearly" />
-      <FieldLabel htmlFor="plan-yearly">Yearly ($99.99/year)</FieldLabel>
-    </Field>
-  </RadioGroup>
-</FieldSet>
-```
+<ComponentPreview name="radio-group-fieldset" />
 
 ## Disabled
 
-<RadioGroupDisabled />
-
-```tsx
-<Field orientation="horizontal" data-disabled>
-  <RadioGroupItem value="option1" id="r1" disabled />
-  <FieldLabel htmlFor="r1">Disabled</FieldLabel>
-</Field>
-```
+<ComponentPreview name="radio-group-disabled" />
 
 ## API Reference
 

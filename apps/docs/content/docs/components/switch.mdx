@@ -3,7 +3,7 @@ title: Switch
 description: A toggle control for switching between two states, like on and off.
 ---
 
-<SwitchDefault />
+<ComponentPreview name="switch-demo" />
 
 ## Installation
 
@@ -11,50 +11,21 @@ description: A toggle control for switching between two states, like on and off.
 pnpm dlx stera-ui add switch
 ```
 
-## Usage
-
-```tsx
-import { Switch } from "@/components/ui/switch"
-```
-
-```tsx
-<Switch />
-```
-
 ## With Label
 
 Pair with `Field` and `FieldLabel` for an accessible labeled switch.
 
-<SwitchDefault />
-
-```tsx
-<Field orientation="horizontal">
-  <Switch id="airplane-mode" />
-  <FieldLabel htmlFor="airplane-mode">Airplane Mode</FieldLabel>
-</Field>
-```
+<ComponentPreview name="switch-demo" />
 
 ## With Description
 
 Place `FieldContent` between the label and switch to add a description.
 
-<SwitchWithDescription />
-
-```tsx
-<Field orientation="horizontal">
-  <FieldContent>
-    <FieldLabel htmlFor="marketing">Marketing emails</FieldLabel>
-    <FieldDescription>
-      Receive emails about new products, features, and more.
-    </FieldDescription>
-  </FieldContent>
-  <Switch id="marketing" />
-</Field>
-```
+<ComponentPreview name="switch-with-description" />
 
 ## Sizes
 
-<SwitchSizes />
+<ComponentPreview name="switch-sizes" />
 
 | Size | Description |
 | --- | --- |
@@ -63,14 +34,7 @@ Place `FieldContent` between the label and switch to add a description.
 
 ## Disabled
 
-<SwitchDisabled />
-
-```tsx
-<Field orientation="horizontal" data-disabled="true">
-  <Switch id="airplane-mode" disabled />
-  <FieldLabel htmlFor="airplane-mode">Airplane Mode</FieldLabel>
-</Field>
-```
+<ComponentPreview name="switch-disabled" />
 
 ## API Reference
 

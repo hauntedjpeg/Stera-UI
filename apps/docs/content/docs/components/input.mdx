@@ -3,7 +3,7 @@ title: Input
 description: A text input field for collecting single-line user input.
 ---
 
-<InputWithField />
+<ComponentPreview name="input-with-field" />
 
 ## Installation
 
@@ -11,33 +11,15 @@ description: A text input field for collecting single-line user input.
 pnpm dlx stera-ui add input
 ```
 
-## Usage
-
-```tsx
-import { Input } from "@/components/ui/input"
-```
-
-```tsx
-<Input placeholder="Email" />
-```
-
 ## With Field
 
 Pair with `Field`, `FieldLabel`, and `FieldDescription` for accessible, labeled inputs.
 
-<InputWithField />
-
-```tsx
-<Field>
-  <FieldLabel htmlFor="username">Username</FieldLabel>
-  <Input id="username" placeholder="johndoe" />
-  <FieldDescription>Choose a unique username for your account.</FieldDescription>
-</Field>
-```
+<ComponentPreview name="input-with-field" />
 
 ## Sizes
 
-<InputAllSizes />
+<ComponentPreview name="input-all-sizes" />
 
 | Size | Description |
 | --- | --- |
@@ -48,26 +30,11 @@ Pair with `Field`, `FieldLabel`, and `FieldDescription` for accessible, labeled 
 
 ## Disabled
 
-<InputDisabled />
-
-```tsx
-<Field data-disabled="true">
-  <FieldLabel htmlFor="email">Email</FieldLabel>
-  <Input id="email" disabled defaultValue="jane@example.com" />
-</Field>
-```
+<ComponentPreview name="input-disabled" />
 
 ## Invalid
 
-<InputInvalid />
-
-```tsx
-<Field data-invalid="true">
-  <FieldLabel htmlFor="email">Email</FieldLabel>
-  <Input id="email" aria-invalid="true" defaultValue="not-an-email" />
-  <FieldError>Please enter a valid email address.</FieldError>
-</Field>
-```
+<ComponentPreview name="input-invalid" />
 
 ## API Reference
 

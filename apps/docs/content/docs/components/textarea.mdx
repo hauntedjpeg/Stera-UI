@@ -3,7 +3,7 @@ title: Textarea
 description: A multi-line text input that grows with its content.
 ---
 
-<TextareaWithField />
+<ComponentPreview name="textarea-with-field" />
 
 ## Installation
 
@@ -11,61 +11,21 @@ description: A multi-line text input that grows with its content.
 pnpm dlx stera-ui add textarea
 ```
 
-## Usage
-
-```tsx
-import { Textarea } from "@/components/ui/textarea"
-```
-
-```tsx
-<Textarea placeholder="Type your message here." />
-```
-
 ## With Field
 
-<TextareaWithField />
-
-```tsx
-<Field>
-  <FieldLabel htmlFor="message">Your message</FieldLabel>
-  <Textarea id="message" placeholder="Type your message here." />
-  <FieldDescription>Your message will be copied to the support team.</FieldDescription>
-</Field>
-```
+<ComponentPreview name="textarea-with-field" />
 
 ## With Button
 
-<TextareaWithButton />
-
-```tsx
-<div className="flex flex-col gap-2">
-  <Textarea placeholder="Type your message here." />
-  <Button variant="brand" className="self-end">Send message</Button>
-</div>
-```
+<ComponentPreview name="textarea-with-button" />
 
 ## Disabled
 
-<TextareaDisabled />
-
-```tsx
-<Field data-disabled="true">
-  <FieldLabel htmlFor="message">Your message</FieldLabel>
-  <Textarea id="message" disabled />
-</Field>
-```
+<ComponentPreview name="textarea-disabled" />
 
 ## Invalid
 
-<TextareaInvalid />
-
-```tsx
-<Field data-invalid="true">
-  <FieldLabel htmlFor="message">Your message</FieldLabel>
-  <Textarea id="message" aria-invalid="true" />
-  <FieldError>Your message must be at least 10 characters.</FieldError>
-</Field>
-```
+<ComponentPreview name="textarea-invalid" />
 
 ## API Reference
 

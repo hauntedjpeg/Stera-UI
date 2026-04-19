@@ -327,6 +327,94 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/registry/examples/table-with-footer")),
     path: "examples/table-with-footer.tsx",
   },
+  "input-demo": {
+    component: dynamic(() => import("@/registry/examples/input-demo")),
+    path: "examples/input-demo.tsx",
+  },
+  "input-with-field": {
+    component: dynamic(() => import("@/registry/examples/input-with-field")),
+    path: "examples/input-with-field.tsx",
+  },
+  "input-all-sizes": {
+    component: dynamic(() => import("@/registry/examples/input-all-sizes")),
+    path: "examples/input-all-sizes.tsx",
+  },
+  "input-disabled": {
+    component: dynamic(() => import("@/registry/examples/input-disabled")),
+    path: "examples/input-disabled.tsx",
+  },
+  "input-invalid": {
+    component: dynamic(() => import("@/registry/examples/input-invalid")),
+    path: "examples/input-invalid.tsx",
+  },
+  "textarea-demo": {
+    component: dynamic(() => import("@/registry/examples/textarea-demo")),
+    path: "examples/textarea-demo.tsx",
+  },
+  "textarea-with-field": {
+    component: dynamic(() => import("@/registry/examples/textarea-with-field")),
+    path: "examples/textarea-with-field.tsx",
+  },
+  "textarea-disabled": {
+    component: dynamic(() => import("@/registry/examples/textarea-disabled")),
+    path: "examples/textarea-disabled.tsx",
+  },
+  "textarea-invalid": {
+    component: dynamic(() => import("@/registry/examples/textarea-invalid")),
+    path: "examples/textarea-invalid.tsx",
+  },
+  "textarea-with-button": {
+    component: dynamic(() => import("@/registry/examples/textarea-with-button")),
+    path: "examples/textarea-with-button.tsx",
+  },
+  "switch-demo": {
+    component: dynamic(() => import("@/registry/examples/switch-demo")),
+    path: "examples/switch-demo.tsx",
+  },
+  "switch-with-description": {
+    component: dynamic(() => import("@/registry/examples/switch-with-description")),
+    path: "examples/switch-with-description.tsx",
+  },
+  "switch-sizes": {
+    component: dynamic(() => import("@/registry/examples/switch-sizes")),
+    path: "examples/switch-sizes.tsx",
+  },
+  "switch-disabled": {
+    component: dynamic(() => import("@/registry/examples/switch-disabled")),
+    path: "examples/switch-disabled.tsx",
+  },
+  "checkbox-demo": {
+    component: dynamic(() => import("@/registry/examples/checkbox-demo")),
+    path: "examples/checkbox-demo.tsx",
+  },
+  "checkbox-with-description": {
+    component: dynamic(() => import("@/registry/examples/checkbox-with-description")),
+    path: "examples/checkbox-with-description.tsx",
+  },
+  "checkbox-group": {
+    component: dynamic(() => import("@/registry/examples/checkbox-group")),
+    path: "examples/checkbox-group.tsx",
+  },
+  "checkbox-disabled": {
+    component: dynamic(() => import("@/registry/examples/checkbox-disabled")),
+    path: "examples/checkbox-disabled.tsx",
+  },
+  "radio-group-demo": {
+    component: dynamic(() => import("@/registry/examples/radio-group-demo")),
+    path: "examples/radio-group-demo.tsx",
+  },
+  "radio-group-with-description": {
+    component: dynamic(() => import("@/registry/examples/radio-group-with-description")),
+    path: "examples/radio-group-with-description.tsx",
+  },
+  "radio-group-fieldset": {
+    component: dynamic(() => import("@/registry/examples/radio-group-fieldset")),
+    path: "examples/radio-group-fieldset.tsx",
+  },
+  "radio-group-disabled": {
+    component: dynamic(() => import("@/registry/examples/radio-group-disabled")),
+    path: "examples/radio-group-disabled.tsx",
+  },
 }
 
 export function getRegistryComponent(name: string): ComponentType | null {

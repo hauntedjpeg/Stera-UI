@@ -3,7 +3,7 @@ title: Checkbox
 description: A control that allows users to select one or more items from a set.
 ---
 
-<CheckboxDefault />
+<ComponentPreview name="checkbox-demo" />
 
 ## Installation
 
@@ -11,77 +11,25 @@ description: A control that allows users to select one or more items from a set.
 pnpm dlx stera-ui add checkbox
 ```
 
-## Usage
-
-```tsx
-import { Checkbox } from "@/components/ui/checkbox"
-```
-
-```tsx
-<Checkbox />
-```
-
 ## With Label
 
 Wrap `Checkbox` in a `FieldLabel` to make the label clickable.
 
-<CheckboxDefault />
-
-```tsx
-<FieldLabel>
-  <Checkbox />
-  Accept terms and conditions
-</FieldLabel>
-```
+<ComponentPreview name="checkbox-demo" />
 
 ## With Description
 
-<CheckboxWithDescription />
-
-```tsx
-<Field orientation="horizontal">
-  <Checkbox id="terms" />
-  <FieldContent>
-    <FieldLabel htmlFor="terms">Accept terms and conditions</FieldLabel>
-    <FieldDescription>
-      By clicking this checkbox, you agree to the terms and conditions.
-    </FieldDescription>
-  </FieldContent>
-</Field>
-```
+<ComponentPreview name="checkbox-with-description" />
 
 ## Checkbox Group
 
 Use `FieldSet` and `FieldLegend` to semantically group related checkboxes.
 
-<CheckboxGroup />
-
-```tsx
-<FieldSet>
-  <FieldLegend variant="label">Show these items on the desktop:</FieldLegend>
-  <FieldGroup>
-    <Field orientation="horizontal">
-      <Checkbox id="hard-disks" defaultChecked />
-      <FieldLabel htmlFor="hard-disks">Hard disks</FieldLabel>
-    </Field>
-    <Field orientation="horizontal">
-      <Checkbox id="external-disks" defaultChecked />
-      <FieldLabel htmlFor="external-disks">External disks</FieldLabel>
-    </Field>
-  </FieldGroup>
-</FieldSet>
-```
+<ComponentPreview name="checkbox-group" />
 
 ## Disabled
 
-<CheckboxDisabled />
-
-```tsx
-<Field orientation="horizontal" data-disabled="true">
-  <Checkbox id="notifications" disabled />
-  <FieldLabel htmlFor="notifications">Enable notifications</FieldLabel>
-</Field>
-```
+<ComponentPreview name="checkbox-disabled" />
 
 ## API Reference
 

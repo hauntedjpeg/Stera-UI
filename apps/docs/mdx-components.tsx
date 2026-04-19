@@ -5,38 +5,6 @@ import Image, { type ImageProps } from "next/image"
 import { Preview } from "@/components/preview"
 import { ComponentPreview } from "@/components/component-preview"
 import {
-  InputDefault,
-  InputWithField,
-  InputAllSizes,
-  InputDisabled,
-  InputInvalid,
-} from "@/components/input-preview"
-import {
-  TextareaDefault,
-  TextareaWithField,
-  TextareaDisabled,
-  TextareaInvalid,
-  TextareaWithButton,
-} from "@/components/textarea-preview"
-import {
-  SwitchDefault,
-  SwitchWithDescription,
-  SwitchSizes,
-  SwitchDisabled,
-} from "@/components/switch-preview"
-import {
-  CheckboxDefault,
-  CheckboxWithDescription,
-  CheckboxGroup,
-  CheckboxDisabled,
-} from "@/components/checkbox-preview"
-import {
-  RadioGroupDefault,
-  RadioGroupWithDescription,
-  RadioGroupFieldset,
-  RadioGroupDisabled,
-} from "@/components/radio-group-preview"
-import {
   SelectDefault,
   SelectGroups,
   SelectAllSizes,
@@ -222,28 +190,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Steps,
     Preview,
     ComponentPreview,
-    InputDefault,
-    InputWithField,
-    InputAllSizes,
-    InputDisabled,
-    InputInvalid,
-    TextareaDefault,
-    TextareaWithField,
-    TextareaDisabled,
-    TextareaInvalid,
-    TextareaWithButton,
-    SwitchDefault,
-    SwitchWithDescription,
-    SwitchSizes,
-    SwitchDisabled,
-    CheckboxDefault,
-    CheckboxWithDescription,
-    CheckboxGroup,
-    CheckboxDisabled,
-    RadioGroupDefault,
-    RadioGroupWithDescription,
-    RadioGroupFieldset,
-    RadioGroupDisabled,
     SelectDefault,
     SelectGroups,
     SelectAllSizes,
