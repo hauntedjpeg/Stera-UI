@@ -3,7 +3,7 @@ title: Toggle
 description: A two-state button that can be pressed or unpressed, commonly used for formatting controls.
 ---
 
-<ToggleDefault />
+<ComponentPreview name="toggle-demo" />
 
 ## Installation
 
@@ -11,47 +11,22 @@ description: A two-state button that can be pressed or unpressed, commonly used 
 pnpm dlx stera-ui add toggle
 ```
 
-## Usage
-
-```tsx
-import { Toggle } from "@/components/ui/toggle"
-```
-
-```tsx
-<Toggle aria-label="Toggle bold">
-  <SiTextBold />
-</Toggle>
-```
-
 ## Variants
 
-<ToggleOutline />
+<ComponentPreview name="toggle-outline" />
 
 | Variant | Description |
 | --- | --- |
 | `default` | No border, background appears on hover/press |
 | `outline` | Bordered with a surface background |
 
-```tsx
-<Toggle variant="outline" aria-label="Toggle bold">
-  <SiTextBold />
-</Toggle>
-```
-
 ## With Text
 
-<ToggleWithText />
-
-```tsx
-<Toggle aria-label="Toggle italic">
-  <SiTextItalic />
-  Italic
-</Toggle>
-```
+<ComponentPreview name="toggle-with-text" />
 
 ## Sizes
 
-<ToggleSizes />
+<ComponentPreview name="toggle-sizes" />
 
 | Size | Description |
 | --- | --- |
@@ -66,13 +41,7 @@ import { Toggle } from "@/components/ui/toggle"
 
 ## Disabled
 
-<ToggleDisabled />
-
-```tsx
-<Toggle disabled aria-label="Toggle underline">
-  <SiTextUnderline />
-</Toggle>
-```
+<ComponentPreview name="toggle-disabled" />
 
 ## API Reference
 

@@ -5,26 +5,6 @@ import Image, { type ImageProps } from "next/image"
 import { Preview } from "@/components/preview"
 import { ComponentPreview } from "@/components/component-preview"
 import {
-  ButtonAllVariants,
-  ButtonAllSizes,
-  ButtonWithIcon,
-  ButtonDisabled,
-} from "@/components/button-preview"
-import {
-  ButtonGroupDefault,
-  ButtonGroupOrientation,
-  ButtonGroupWithSeparator,
-  ButtonGroupAllVariants,
-  ButtonGroupSplit,
-} from "@/components/button-group-preview"
-import {
-  ToggleDefault,
-  ToggleOutline,
-  ToggleWithText,
-  ToggleSizes,
-  ToggleDisabled,
-} from "@/components/toggle-preview"
-import {
   InputDefault,
   InputWithField,
   InputAllSizes,
@@ -77,15 +57,6 @@ import {
   SliderDisabled,
 } from "@/components/slider-preview"
 import {
-  AvatarDefault,
-  AvatarFallbackOnly,
-  AvatarAllSizes,
-  AvatarShapes,
-  AvatarWithBadge,
-  AvatarIconFallbackPreview,
-  AvatarGroupPreview,
-} from "@/components/avatar-preview"
-import {
   CardDefault,
   CardWithAction,
   CardSizes,
@@ -123,11 +94,6 @@ import {
   ItemWithActions,
   ItemNotificationList,
 } from "@/components/item-preview"
-import {
-  AccordionDefault,
-  AccordionMultiple,
-  AccordionDefaultOpen,
-} from "@/components/accordion-preview"
 import {
   TabsDefault,
   TabsLine,
@@ -306,20 +272,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Steps,
     Preview,
     ComponentPreview,
-    ButtonAllVariants,
-    ButtonAllSizes,
-    ButtonWithIcon,
-    ButtonDisabled,
-    ButtonGroupDefault,
-    ButtonGroupOrientation,
-    ButtonGroupWithSeparator,
-    ButtonGroupAllVariants,
-    ButtonGroupSplit,
-    ToggleDefault,
-    ToggleOutline,
-    ToggleWithText,
-    ToggleSizes,
-    ToggleDisabled,
     InputDefault,
     InputWithField,
     InputAllSizes,
@@ -356,13 +308,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SliderRange,
     SliderVertical,
     SliderDisabled,
-    AvatarDefault,
-    AvatarFallbackOnly,
-    AvatarAllSizes,
-    AvatarShapes,
-    AvatarWithBadge,
-    AvatarIconFallbackPreview,
-    AvatarGroupPreview,
     CardDefault,
     CardWithAction,
     CardSizes,
@@ -387,9 +332,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ItemAllSizes,
     ItemWithActions,
     ItemNotificationList,
-    AccordionDefault,
-    AccordionMultiple,
-    AccordionDefaultOpen,
     TabsDefault,
     TabsLine,
     TabsVertical,

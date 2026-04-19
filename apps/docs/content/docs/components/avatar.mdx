@@ -3,7 +3,7 @@ title: Avatar
 description: A user avatar component with image, fallback, badge, and group support.
 ---
 
-<AvatarDefault />
+<ComponentPreview name="avatar-demo" />
 
 ## Installation
 
@@ -11,30 +11,13 @@ description: A user avatar component with image, fallback, badge, and group supp
 pnpm dlx stera-ui add avatar
 ```
 
-## Usage
-
-```tsx
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
-```
-
-```tsx
-<Avatar>
-  <AvatarImage src="/avatar.jpg" alt="Jane Appleseed" />
-  <AvatarFallback>JA</AvatarFallback>
-</Avatar>
-```
-
 ## Fallback Only
 
-<AvatarFallbackOnly />
+<ComponentPreview name="avatar-fallback" />
 
 ## Sizes
 
-<AvatarAllSizes />
+<ComponentPreview name="avatar-sizes" />
 
 | Size | Description |
 | --- | --- |
@@ -44,7 +27,7 @@ import {
 
 ## Shapes
 
-<AvatarShapes />
+<ComponentPreview name="avatar-shapes" />
 
 | Shape | Description |
 | --- | --- |
@@ -53,7 +36,7 @@ import {
 
 ## With Badge
 
-<AvatarWithBadge />
+<ComponentPreview name="avatar-with-badge" />
 
 | Badge Variant | Description |
 | --- | --- |
@@ -65,11 +48,11 @@ import {
 
 ## Icon Fallback
 
-<AvatarIconFallbackPreview />
+<ComponentPreview name="avatar-icon-fallback" />
 
 ## Avatar Group
 
-<AvatarGroupPreview />
+<ComponentPreview name="avatar-group" />
 
 ## API Reference
 

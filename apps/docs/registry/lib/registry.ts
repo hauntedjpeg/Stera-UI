@@ -115,6 +115,90 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/registry/examples/chip-active")),
     path: "examples/chip-active.tsx",
   },
+  "button-demo": {
+    component: dynamic(() => import("@/registry/examples/button-demo")),
+    path: "examples/button-demo.tsx",
+  },
+  "button-sizes": {
+    component: dynamic(() => import("@/registry/examples/button-sizes")),
+    path: "examples/button-sizes.tsx",
+  },
+  "button-with-icon": {
+    component: dynamic(() => import("@/registry/examples/button-with-icon")),
+    path: "examples/button-with-icon.tsx",
+  },
+  "button-disabled": {
+    component: dynamic(() => import("@/registry/examples/button-disabled")),
+    path: "examples/button-disabled.tsx",
+  },
+  "button-group-demo": {
+    component: dynamic(() => import("@/registry/examples/button-group-demo")),
+    path: "examples/button-group-demo.tsx",
+  },
+  "button-group-orientation": {
+    component: dynamic(() => import("@/registry/examples/button-group-orientation")),
+    path: "examples/button-group-orientation.tsx",
+  },
+  "button-group-with-separator": {
+    component: dynamic(() => import("@/registry/examples/button-group-with-separator")),
+    path: "examples/button-group-with-separator.tsx",
+  },
+  "button-group-variants": {
+    component: dynamic(() => import("@/registry/examples/button-group-variants")),
+    path: "examples/button-group-variants.tsx",
+  },
+  "button-group-split": {
+    component: dynamic(() => import("@/registry/examples/button-group-split")),
+    path: "examples/button-group-split.tsx",
+  },
+  "toggle-demo": {
+    component: dynamic(() => import("@/registry/examples/toggle-demo")),
+    path: "examples/toggle-demo.tsx",
+  },
+  "toggle-outline": {
+    component: dynamic(() => import("@/registry/examples/toggle-outline")),
+    path: "examples/toggle-outline.tsx",
+  },
+  "toggle-with-text": {
+    component: dynamic(() => import("@/registry/examples/toggle-with-text")),
+    path: "examples/toggle-with-text.tsx",
+  },
+  "toggle-sizes": {
+    component: dynamic(() => import("@/registry/examples/toggle-sizes")),
+    path: "examples/toggle-sizes.tsx",
+  },
+  "toggle-disabled": {
+    component: dynamic(() => import("@/registry/examples/toggle-disabled")),
+    path: "examples/toggle-disabled.tsx",
+  },
+  "avatar-demo": {
+    component: dynamic(() => import("@/registry/examples/avatar-demo")),
+    path: "examples/avatar-demo.tsx",
+  },
+  "avatar-fallback": {
+    component: dynamic(() => import("@/registry/examples/avatar-fallback")),
+    path: "examples/avatar-fallback.tsx",
+  },
+  "avatar-sizes": {
+    component: dynamic(() => import("@/registry/examples/avatar-sizes")),
+    path: "examples/avatar-sizes.tsx",
+  },
+  "avatar-shapes": {
+    component: dynamic(() => import("@/registry/examples/avatar-shapes")),
+    path: "examples/avatar-shapes.tsx",
+  },
+  "avatar-with-badge": {
+    component: dynamic(() => import("@/registry/examples/avatar-with-badge")),
+    path: "examples/avatar-with-badge.tsx",
+  },
+  "avatar-icon-fallback": {
+    component: dynamic(() => import("@/registry/examples/avatar-icon-fallback")),
+    path: "examples/avatar-icon-fallback.tsx",
+  },
+  "avatar-group": {
+    component: dynamic(() => import("@/registry/examples/avatar-group")),
+    path: "examples/avatar-group.tsx",
+  },
 }
 
 export function getRegistryComponent(name: string): ComponentType | null {
