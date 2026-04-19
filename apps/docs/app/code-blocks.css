@@ -1,10 +1,12 @@
-/* rehype-pretty-code dual theme support */
-code[data-theme*=' '],
-code[data-theme*=' '] span {
+/* Shiki dual-theme support for fumadocs-core rehypeCode + highlight output */
+.shiki,
+.shiki span {
   color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
 }
 
-.dark code[data-theme*=' '],
-.dark code[data-theme*=' '] span {
+.dark .shiki,
+.dark .shiki span {
   color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
 }
