@@ -11,6 +11,7 @@ export default defineConfig([
     ".source/**",
     "public/r/**",
     ".turbo/**",
+    "next-env.d.ts",
   ]),
   ...next,
   ...nextTs,
