@@ -3,7 +3,7 @@ title: Kbd
 description: Keyboard shortcut display components for showing key combinations in UI.
 ---
 
-<KbdDefault />
+<ComponentPreview name="kbd-demo" />
 
 ## Installation
 
@@ -11,19 +11,9 @@ description: Keyboard shortcut display components for showing key combinations i
 pnpm dlx stera-ui add kbd
 ```
 
-## Usage
-
-```tsx
-import { Kbd, KbdGroup } from "@/components/ui/kbd"
-```
-
-```tsx
-<Kbd>⌘K</Kbd>
-```
-
 ## Sizes
 
-<KbdSizes />
+<ComponentPreview name="kbd-sizes" />
 
 | Size | Description |
 | --- | --- |
@@ -34,42 +24,17 @@ import { Kbd, KbdGroup } from "@/components/ui/kbd"
 
 Use `KbdGroup` to display a sequence of keys.
 
-<KbdKeyCombination />
-
-```tsx
-<KbdGroup>
-  <Kbd>Ctrl</Kbd>
-  <Kbd>B</Kbd>
-</KbdGroup>
-```
+<ComponentPreview name="kbd-key-combination" />
 
 ## Inside a Button
 
 Use `data-kbd="inline-end"` to position a `Kbd` at the trailing edge of a button.
 
-<KbdWithButton />
-
-```tsx
-<Button>
-  Accept <Kbd data-kbd="inline-end">⏎</Kbd>
-</Button>
-```
+<ComponentPreview name="kbd-with-button" />
 
 ## Inside an Input
 
-<KbdWithInput />
-
-```tsx
-<InputGroup>
-  <InputGroupAddon align="inline-start">
-    <SiSearch />
-  </InputGroupAddon>
-  <InputGroupInput placeholder="Search..." />
-  <InputGroupAddon align="inline-end">
-    <Kbd>⌘K</Kbd>
-  </InputGroupAddon>
-</InputGroup>
-```
+<ComponentPreview name="kbd-with-input" />
 
 ## API Reference
 

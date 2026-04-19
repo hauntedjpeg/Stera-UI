@@ -18,24 +18,6 @@ import {
   ButtonGroupSplit,
 } from "@/components/button-group-preview"
 import {
-  BadgePreview,
-  BadgeAllSizes,
-  BadgeWithIcon,
-  BadgeWithSpinner,
-  BadgeAllColors,
-} from "@/components/badge-preview"
-import {
-  SeparatorDefault,
-  SeparatorVertical,
-} from "@/components/separator-preview"
-import {
-  KbdDefault,
-  KbdSizes,
-  KbdKeyCombination,
-  KbdWithButton,
-  KbdWithInput,
-} from "@/components/kbd-preview"
-import {
   LabelWithInput,
   LabelWithCheckbox,
   LabelDisabled,
@@ -353,18 +335,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ButtonGroupWithSeparator,
     ButtonGroupAllVariants,
     ButtonGroupSplit,
-    BadgePreview,
-    BadgeAllSizes,
-    BadgeWithIcon,
-    BadgeWithSpinner,
-    BadgeAllColors,
-    SeparatorDefault,
-    SeparatorVertical,
-    KbdDefault,
-    KbdSizes,
-    KbdKeyCombination,
-    KbdWithButton,
-    KbdWithInput,
     LabelWithInput,
     LabelWithCheckbox,
     LabelDisabled,

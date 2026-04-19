@@ -3,22 +3,12 @@ title: Badge
 description: A small label for status, category, or count indicators.
 ---
 
-<BadgePreview />
+<ComponentPreview name="badge-demo" />
 
 ## Installation
 
 ```bash
 pnpm dlx stera-ui add badge
-```
-
-## Usage
-
-```tsx
-import { Badge } from "@/components/ui/badge"
-```
-
-```tsx
-<Badge>Stera</Badge>
 ```
 
 ## Examples
@@ -27,7 +17,7 @@ import { Badge } from "@/components/ui/badge"
 
 Use the `variant` prop to change the style of the badge.
 
-<BadgePreview />
+<ComponentPreview name="badge-demo" />
 
 | Variant | Description |
 | --- | --- |
@@ -39,7 +29,7 @@ Use the `variant` prop to change the style of the badge.
 
 Appy semantic and brand colors to a badge
 
-<BadgeAllColors />
+<ComponentPreview name="badge-colors" />
 
 | Variant | Description |
 | --- | --- |
@@ -54,19 +44,19 @@ Appy semantic and brand colors to a badge
 
 You can render an icon inside the badge. Use data-icon="inline-start" to render the icon on the left and data-icon="inline-end" to render the icon on the right.
 
-<BadgeWithIcon />
+<ComponentPreview name="badge-with-icon" />
 
 ### With Spinner
 
 You can render a spinner inside the badge. Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` prop to the spinner.
 
-<BadgeWithSpinner />
+<ComponentPreview name="badge-with-spinner" />
 
 ### Sizes
 
 Use `size` prop to select between `sm` (default), `md`, and `lg`.
 
-<BadgeAllSizes />
+<ComponentPreview name="badge-sizes" />
 
 | Size | Description |
 | --- | --- |
