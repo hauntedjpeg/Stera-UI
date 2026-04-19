@@ -3,7 +3,7 @@ title: Slider
 description: An input for selecting a numeric value within a range by dragging a thumb.
 ---
 
-<SliderDefault />
+<ComponentPreview name="slider-demo" />
 
 ## Installation
 
@@ -11,46 +11,19 @@ description: An input for selecting a numeric value within a range by dragging a
 pnpm dlx stera-ui add slider
 ```
 
-## Usage
-
-```tsx
-import { Slider } from "@/components/ui/slider"
-```
-
-```tsx
-<Slider defaultValue={[50]} max={100} step={1} className="w-80" />
-```
-
 ## Range
 
 Pass two values in `defaultValue` to create a range slider with two thumbs.
 
-<SliderRange />
-
-```tsx
-<Slider defaultValue={[25, 75]} max={100} step={5} className="w-80" />
-```
+<ComponentPreview name="slider-range" />
 
 ## Vertical
 
-<SliderVertical />
-
-```tsx
-<Slider
-  defaultValue={[50]}
-  max={100}
-  orientation="vertical"
-  className="h-40"
-/>
-```
+<ComponentPreview name="slider-vertical" />
 
 ## Disabled
 
-<SliderDisabled />
-
-```tsx
-<Slider defaultValue={[50]} max={100} disabled className="w-80" />
-```
+<ComponentPreview name="slider-disabled" />
 
 ## API Reference
 

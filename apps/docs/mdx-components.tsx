@@ -5,26 +5,6 @@ import Image, { type ImageProps } from "next/image"
 import { Preview } from "@/components/preview"
 import { ComponentPreview } from "@/components/component-preview"
 import {
-  SelectDefault,
-  SelectGroups,
-  SelectAllSizes,
-  SelectDisabled,
-  SelectInvalid,
-} from "@/components/select-preview"
-import {
-  NativeSelectDefault,
-  NativeSelectWithField,
-  NativeSelectWithOptGroup,
-  NativeSelectSizes,
-  NativeSelectDisabled,
-} from "@/components/native-select-preview"
-import {
-  SliderDefault,
-  SliderRange,
-  SliderVertical,
-  SliderDisabled,
-} from "@/components/slider-preview"
-import {
   TooltipDefault,
   TooltipSides,
   TooltipWithKbd,
@@ -37,24 +17,6 @@ import {
   TabsSizes,
   TabsWithIcons,
 } from "@/components/tabs-preview"
-import {
-  InputGroupIcon,
-  InputGroupTextAddon,
-  InputGroupWithButton,
-  InputGroupWithKbd,
-  InputGroupSizes,
-  InputGroupTextareaAddon,
-  InputGroupWithLabel,
-} from "@/components/input-group-preview"
-import {
-  FieldDefault,
-  FieldHorizontal,
-  FieldWithError,
-  FieldMultipleErrors,
-  FieldDisabled,
-  FieldCheckboxGroup,
-  FieldFormExample,
-} from "@/components/field-preview"
 import {
   DialogDefault,
   DialogConfirm,
@@ -190,20 +152,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Steps,
     Preview,
     ComponentPreview,
-    SelectDefault,
-    SelectGroups,
-    SelectAllSizes,
-    SelectDisabled,
-    SelectInvalid,
-    NativeSelectDefault,
-    NativeSelectWithField,
-    NativeSelectWithOptGroup,
-    NativeSelectSizes,
-    NativeSelectDisabled,
-    SliderDefault,
-    SliderRange,
-    SliderVertical,
-    SliderDisabled,
     TooltipDefault,
     TooltipSides,
     TooltipWithKbd,
@@ -213,20 +161,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     TabsDisabled,
     TabsSizes,
     TabsWithIcons,
-    InputGroupIcon,
-    InputGroupTextAddon,
-    InputGroupWithButton,
-    InputGroupWithKbd,
-    InputGroupSizes,
-    InputGroupTextareaAddon,
-    InputGroupWithLabel,
-    FieldDefault,
-    FieldHorizontal,
-    FieldWithError,
-    FieldMultipleErrors,
-    FieldDisabled,
-    FieldCheckboxGroup,
-    FieldFormExample,
     DialogDefault,
     DialogConfirm,
     DialogScrollable,

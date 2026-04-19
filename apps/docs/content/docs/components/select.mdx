@@ -3,7 +3,7 @@ title: Select
 description: A custom dropdown for selecting a single value from a list of options.
 ---
 
-<SelectDefault />
+<ComponentPreview name="select-demo" />
 
 ## Installation
 
@@ -11,60 +11,15 @@ description: A custom dropdown for selecting a single value from a list of optio
 pnpm dlx stera-ui add select
 ```
 
-## Usage
-
-```tsx
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-```
-
-```tsx
-<Select>
-  <SelectTrigger className="w-48">
-    <SelectValue placeholder="Select a fruit" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectGroup>
-      <SelectItem value="apple">Apple</SelectItem>
-      <SelectItem value="banana">Banana</SelectItem>
-    </SelectGroup>
-  </SelectContent>
-</Select>
-```
-
 ## With Groups
 
 Use `SelectGroup`, `SelectLabel`, and `SelectSeparator` to organize options into labelled sections.
 
-<SelectGroups />
-
-```tsx
-<SelectContent>
-  <SelectGroup>
-    <SelectLabel>Fruits</SelectLabel>
-    <SelectItem value="Apple">Apple</SelectItem>
-    <SelectItem value="Banana">Banana</SelectItem>
-  </SelectGroup>
-  <SelectSeparator />
-  <SelectGroup>
-    <SelectLabel>Vegetables</SelectLabel>
-    <SelectItem value="Carrot">Carrot</SelectItem>
-    <SelectItem value="Broccoli">Broccoli</SelectItem>
-  </SelectGroup>
-</SelectContent>
-```
+<ComponentPreview name="select-groups" />
 
 ## Sizes
 
-<SelectAllSizes />
+<ComponentPreview name="select-all-sizes" />
 
 | Size | Description |
 | --- | --- |
@@ -75,33 +30,11 @@ Use `SelectGroup`, `SelectLabel`, and `SelectSeparator` to organize options into
 
 ## Disabled
 
-<SelectDisabled />
-
-```tsx
-<Select disabled>
-  <SelectTrigger className="w-48">
-    <SelectValue placeholder="Select a fruit" />
-  </SelectTrigger>
-  ...
-</Select>
-```
+<ComponentPreview name="select-disabled" />
 
 ## Invalid
 
-<SelectInvalid />
-
-```tsx
-<Field data-invalid>
-  <FieldLabel>Fruit</FieldLabel>
-  <Select>
-    <SelectTrigger aria-invalid>
-      <SelectValue placeholder="Select a fruit" />
-    </SelectTrigger>
-    ...
-  </Select>
-  <FieldError>Please select a fruit.</FieldError>
-</Field>
-```
+<ComponentPreview name="select-invalid" />
 
 ## API Reference
 

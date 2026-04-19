@@ -3,7 +3,7 @@ title: Field
 description: A form field layout system that pairs labels, inputs, descriptions, and error messages.
 ---
 
-<FieldDefault />
+<ComponentPreview name="field-demo" />
 
 ## Installation
 
@@ -11,56 +11,37 @@ description: A form field layout system that pairs labels, inputs, descriptions,
 pnpm dlx stera-ui add field
 ```
 
-## Usage
-
-```tsx
-import {
-  Field,
-  FieldLabel,
-  FieldDescription,
-  FieldError,
-} from "@/components/ui/field"
-```
-
-```tsx
-<Field>
-  <FieldLabel htmlFor="email">Email address</FieldLabel>
-  <Input id="email" type="email" placeholder="you@example.com" />
-  <FieldDescription>We will never share your email.</FieldDescription>
-</Field>
-```
-
 ## Horizontal Layout
 
-<FieldHorizontal />
+<ComponentPreview name="field-horizontal" />
 
 Use `orientation="horizontal"` to place label/description on the left and the control on the right. Ideal for toggle rows.
 
 ## With Error
 
-<FieldWithError />
+<ComponentPreview name="field-with-error" />
 
 Add `data-invalid="true"` to `Field` and `aria-invalid="true"` to the input to trigger error styles.
 
 ## Multiple Errors
 
-<FieldMultipleErrors />
+<ComponentPreview name="field-multiple-errors" />
 
 Pass an `errors` array to `FieldError` to list multiple validation messages.
 
 ## Disabled
 
-<FieldDisabled />
+<ComponentPreview name="field-disabled" />
 
 ## Checkbox Group
 
-<FieldCheckboxGroup />
+<ComponentPreview name="field-checkbox-group" />
 
 Use `FieldSet` and `FieldLegend` to group related checkboxes or radio buttons with a shared label.
 
 ## Full Form Example
 
-<FieldFormExample />
+<ComponentPreview name="field-form-example" />
 
 ## API Reference
 

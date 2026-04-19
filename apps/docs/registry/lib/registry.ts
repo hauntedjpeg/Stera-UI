@@ -415,6 +415,118 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/registry/examples/radio-group-disabled")),
     path: "examples/radio-group-disabled.tsx",
   },
+  "select-demo": {
+    component: dynamic(() => import("@/registry/examples/select-demo")),
+    path: "examples/select-demo.tsx",
+  },
+  "select-groups": {
+    component: dynamic(() => import("@/registry/examples/select-groups")),
+    path: "examples/select-groups.tsx",
+  },
+  "select-all-sizes": {
+    component: dynamic(() => import("@/registry/examples/select-all-sizes")),
+    path: "examples/select-all-sizes.tsx",
+  },
+  "select-disabled": {
+    component: dynamic(() => import("@/registry/examples/select-disabled")),
+    path: "examples/select-disabled.tsx",
+  },
+  "select-invalid": {
+    component: dynamic(() => import("@/registry/examples/select-invalid")),
+    path: "examples/select-invalid.tsx",
+  },
+  "native-select-demo": {
+    component: dynamic(() => import("@/registry/examples/native-select-demo")),
+    path: "examples/native-select-demo.tsx",
+  },
+  "native-select-with-field": {
+    component: dynamic(() => import("@/registry/examples/native-select-with-field")),
+    path: "examples/native-select-with-field.tsx",
+  },
+  "native-select-with-opt-group": {
+    component: dynamic(() => import("@/registry/examples/native-select-with-opt-group")),
+    path: "examples/native-select-with-opt-group.tsx",
+  },
+  "native-select-sizes": {
+    component: dynamic(() => import("@/registry/examples/native-select-sizes")),
+    path: "examples/native-select-sizes.tsx",
+  },
+  "native-select-disabled": {
+    component: dynamic(() => import("@/registry/examples/native-select-disabled")),
+    path: "examples/native-select-disabled.tsx",
+  },
+  "slider-demo": {
+    component: dynamic(() => import("@/registry/examples/slider-demo")),
+    path: "examples/slider-demo.tsx",
+  },
+  "slider-range": {
+    component: dynamic(() => import("@/registry/examples/slider-range")),
+    path: "examples/slider-range.tsx",
+  },
+  "slider-vertical": {
+    component: dynamic(() => import("@/registry/examples/slider-vertical")),
+    path: "examples/slider-vertical.tsx",
+  },
+  "slider-disabled": {
+    component: dynamic(() => import("@/registry/examples/slider-disabled")),
+    path: "examples/slider-disabled.tsx",
+  },
+  "input-group-icon": {
+    component: dynamic(() => import("@/registry/examples/input-group-icon")),
+    path: "examples/input-group-icon.tsx",
+  },
+  "input-group-text-addon": {
+    component: dynamic(() => import("@/registry/examples/input-group-text-addon")),
+    path: "examples/input-group-text-addon.tsx",
+  },
+  "input-group-with-button": {
+    component: dynamic(() => import("@/registry/examples/input-group-with-button")),
+    path: "examples/input-group-with-button.tsx",
+  },
+  "input-group-with-kbd": {
+    component: dynamic(() => import("@/registry/examples/input-group-with-kbd")),
+    path: "examples/input-group-with-kbd.tsx",
+  },
+  "input-group-sizes": {
+    component: dynamic(() => import("@/registry/examples/input-group-sizes")),
+    path: "examples/input-group-sizes.tsx",
+  },
+  "input-group-textarea-addon": {
+    component: dynamic(() => import("@/registry/examples/input-group-textarea-addon")),
+    path: "examples/input-group-textarea-addon.tsx",
+  },
+  "input-group-with-label": {
+    component: dynamic(() => import("@/registry/examples/input-group-with-label")),
+    path: "examples/input-group-with-label.tsx",
+  },
+  "field-demo": {
+    component: dynamic(() => import("@/registry/examples/field-demo")),
+    path: "examples/field-demo.tsx",
+  },
+  "field-horizontal": {
+    component: dynamic(() => import("@/registry/examples/field-horizontal")),
+    path: "examples/field-horizontal.tsx",
+  },
+  "field-with-error": {
+    component: dynamic(() => import("@/registry/examples/field-with-error")),
+    path: "examples/field-with-error.tsx",
+  },
+  "field-multiple-errors": {
+    component: dynamic(() => import("@/registry/examples/field-multiple-errors")),
+    path: "examples/field-multiple-errors.tsx",
+  },
+  "field-disabled": {
+    component: dynamic(() => import("@/registry/examples/field-disabled")),
+    path: "examples/field-disabled.tsx",
+  },
+  "field-checkbox-group": {
+    component: dynamic(() => import("@/registry/examples/field-checkbox-group")),
+    path: "examples/field-checkbox-group.tsx",
+  },
+  "field-form-example": {
+    component: dynamic(() => import("@/registry/examples/field-form-example")),
+    path: "examples/field-form-example.tsx",
+  },
 }
 
 export function getRegistryComponent(name: string): ComponentType | null {

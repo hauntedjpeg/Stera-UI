@@ -3,7 +3,7 @@ title: Native Select
 description: A styled native browser select element for simple, accessible option selection.
 ---
 
-<NativeSelectWithField />
+<ComponentPreview name="native-select-with-field" />
 
 ## Installation
 
@@ -11,63 +11,19 @@ description: A styled native browser select element for simple, accessible optio
 pnpm dlx stera-ui add native-select
 ```
 
-## Usage
-
-```tsx
-import {
-  NativeSelect,
-  NativeSelectOptGroup,
-  NativeSelectOption,
-} from "@/components/ui/native-select"
-```
-
-```tsx
-<NativeSelect>
-  <NativeSelectOption value="">Select an option</NativeSelectOption>
-  <NativeSelectOption value="apple">Apple</NativeSelectOption>
-  <NativeSelectOption value="banana">Banana</NativeSelectOption>
-</NativeSelect>
-```
-
 ## With Field
 
-<NativeSelectWithField />
-
-```tsx
-<Field>
-  <FieldLabel htmlFor="fruit">Fruit</FieldLabel>
-  <NativeSelect id="fruit" className="w-full">
-    <NativeSelectOption value="">Select a fruit</NativeSelectOption>
-    <NativeSelectOption value="apple">Apple</NativeSelectOption>
-    <NativeSelectOption value="banana">Banana</NativeSelectOption>
-  </NativeSelect>
-  <FieldDescription>Choose your favourite fruit.</FieldDescription>
-</Field>
-```
+<ComponentPreview name="native-select-with-field" />
 
 ## With Option Groups
 
 Use `NativeSelectOptGroup` to group related options with a label.
 
-<NativeSelectWithOptGroup />
-
-```tsx
-<NativeSelect>
-  <NativeSelectOption value="">Select a country</NativeSelectOption>
-  <NativeSelectOptGroup label="North America">
-    <NativeSelectOption value="us">United States</NativeSelectOption>
-    <NativeSelectOption value="ca">Canada</NativeSelectOption>
-  </NativeSelectOptGroup>
-  <NativeSelectOptGroup label="Europe">
-    <NativeSelectOption value="gb">United Kingdom</NativeSelectOption>
-    <NativeSelectOption value="de">Germany</NativeSelectOption>
-  </NativeSelectOptGroup>
-</NativeSelect>
-```
+<ComponentPreview name="native-select-with-opt-group" />
 
 ## Sizes
 
-<NativeSelectSizes />
+<ComponentPreview name="native-select-sizes" />
 
 | Size | Description |
 | --- | --- |
@@ -78,16 +34,7 @@ Use `NativeSelectOptGroup` to group related options with a label.
 
 ## Disabled
 
-<NativeSelectDisabled />
-
-```tsx
-<Field data-disabled="true">
-  <FieldLabel htmlFor="role">Role</FieldLabel>
-  <NativeSelect id="role" disabled>
-    <NativeSelectOption value="admin">Admin</NativeSelectOption>
-  </NativeSelect>
-</Field>
-```
+<ComponentPreview name="native-select-disabled" />
 
 ## API Reference
 
