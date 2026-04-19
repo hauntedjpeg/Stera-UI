@@ -18,32 +18,12 @@ import {
   ButtonGroupSplit,
 } from "@/components/button-group-preview"
 import {
-  LabelWithInput,
-  LabelWithCheckbox,
-  LabelDisabled,
-} from "@/components/label-preview"
-import {
-  SkeletonAvatar,
-  SkeletonCard,
-  SkeletonText,
-} from "@/components/skeleton-preview"
-import {
-  ProgressDefault,
-  ProgressWithLabel,
-} from "@/components/progress-preview"
-import {
   ToggleDefault,
   ToggleOutline,
   ToggleWithText,
   ToggleSizes,
   ToggleDisabled,
 } from "@/components/toggle-preview"
-import {
-  ChipAllVariants,
-  ChipAllSizes,
-  ChipWithIcons,
-  ChipActiveState,
-} from "@/components/chip-preview"
 import {
   InputDefault,
   InputWithField,
@@ -335,23 +315,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ButtonGroupWithSeparator,
     ButtonGroupAllVariants,
     ButtonGroupSplit,
-    LabelWithInput,
-    LabelWithCheckbox,
-    LabelDisabled,
-    SkeletonAvatar,
-    SkeletonCard,
-    SkeletonText,
-    ProgressDefault,
-    ProgressWithLabel,
     ToggleDefault,
     ToggleOutline,
     ToggleWithText,
     ToggleSizes,
     ToggleDisabled,
-    ChipAllVariants,
-    ChipAllSizes,
-    ChipWithIcons,
-    ChipActiveState,
     InputDefault,
     InputWithField,
     InputAllSizes,

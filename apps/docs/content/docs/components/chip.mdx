@@ -3,7 +3,7 @@ title: Chip
 description: A compact interactive element for tags, filters, and selection states.
 ---
 
-<ChipAllVariants />
+<ComponentPreview name="chip-demo" />
 
 ## Installation
 
@@ -11,19 +11,9 @@ description: A compact interactive element for tags, filters, and selection stat
 pnpm dlx stera-ui add chip
 ```
 
-## Usage
-
-```tsx
-import { Chip } from "@/components/ui/chip"
-```
-
-```tsx
-<Chip>Label</Chip>
-```
-
 ## Variants
 
-<ChipAllVariants />
+<ComponentPreview name="chip-demo" />
 
 | Variant | Description |
 | --- | --- |
@@ -33,7 +23,7 @@ import { Chip } from "@/components/ui/chip"
 
 ## Sizes
 
-<ChipAllSizes />
+<ComponentPreview name="chip-sizes" />
 
 | Size | Description |
 | --- | --- |
@@ -46,29 +36,13 @@ import { Chip } from "@/components/ui/chip"
 
 Use `data-icon="inline-start"` or `data-icon="inline-end"` on an icon to control spacing and alignment.
 
-<ChipWithIcons />
-
-```tsx
-<Chip variant="subtle" size="sm">
-  <SiHash data-icon="inline-start" />
-  Tag
-</Chip>
-
-<Chip variant="subtle" size="sm">
-  Label
-  <SiX data-icon="inline-end" />
-</Chip>
-```
+<ComponentPreview name="chip-with-icons" />
 
 ## Active State
 
 Use the `active` prop to visually mark a chip as selected.
 
-<ChipActiveState />
-
-```tsx
-<Chip variant="subtle" active>Active</Chip>
-```
+<ComponentPreview name="chip-active" />
 
 ## API Reference
 

@@ -3,7 +3,7 @@ title: Progress
 description: A progress bar for displaying task completion or upload status.
 ---
 
-<ProgressDefault />
+<ComponentPreview name="progress-demo" />
 
 ## Installation
 
@@ -11,32 +11,11 @@ description: A progress bar for displaying task completion or upload status.
 pnpm dlx stera-ui add progress
 ```
 
-## Usage
-
-```tsx
-import {
-  Progress,
-  ProgressLabel,
-  ProgressValue,
-} from "@/components/ui/progress"
-```
-
-```tsx
-<Progress value={33} className="w-80" />
-```
-
 ## With Label and Value
 
 Use `ProgressLabel` and `ProgressValue` as children of `Progress` to display a description and a numeric percentage.
 
-<ProgressWithLabel />
-
-```tsx
-<Progress value={66} className="w-80">
-  <ProgressLabel>Uploading...</ProgressLabel>
-  <ProgressValue />
-</Progress>
-```
+<ComponentPreview name="progress-with-label" />
 
 ## API Reference
 

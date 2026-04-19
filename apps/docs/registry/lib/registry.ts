@@ -67,6 +67,54 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/registry/examples/kbd-with-input")),
     path: "examples/kbd-with-input.tsx",
   },
+  "label-demo": {
+    component: dynamic(() => import("@/registry/examples/label-demo")),
+    path: "examples/label-demo.tsx",
+  },
+  "label-with-checkbox": {
+    component: dynamic(() => import("@/registry/examples/label-with-checkbox")),
+    path: "examples/label-with-checkbox.tsx",
+  },
+  "label-disabled": {
+    component: dynamic(() => import("@/registry/examples/label-disabled")),
+    path: "examples/label-disabled.tsx",
+  },
+  "skeleton-demo": {
+    component: dynamic(() => import("@/registry/examples/skeleton-demo")),
+    path: "examples/skeleton-demo.tsx",
+  },
+  "skeleton-card": {
+    component: dynamic(() => import("@/registry/examples/skeleton-card")),
+    path: "examples/skeleton-card.tsx",
+  },
+  "skeleton-text": {
+    component: dynamic(() => import("@/registry/examples/skeleton-text")),
+    path: "examples/skeleton-text.tsx",
+  },
+  "progress-demo": {
+    component: dynamic(() => import("@/registry/examples/progress-demo")),
+    path: "examples/progress-demo.tsx",
+  },
+  "progress-with-label": {
+    component: dynamic(() => import("@/registry/examples/progress-with-label")),
+    path: "examples/progress-with-label.tsx",
+  },
+  "chip-demo": {
+    component: dynamic(() => import("@/registry/examples/chip-demo")),
+    path: "examples/chip-demo.tsx",
+  },
+  "chip-sizes": {
+    component: dynamic(() => import("@/registry/examples/chip-sizes")),
+    path: "examples/chip-sizes.tsx",
+  },
+  "chip-with-icons": {
+    component: dynamic(() => import("@/registry/examples/chip-with-icons")),
+    path: "examples/chip-with-icons.tsx",
+  },
+  "chip-active": {
+    component: dynamic(() => import("@/registry/examples/chip-active")),
+    path: "examples/chip-active.tsx",
+  },
 }
 
 export function getRegistryComponent(name: string): ComponentType | null {
