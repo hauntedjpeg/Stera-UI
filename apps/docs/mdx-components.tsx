@@ -59,11 +59,10 @@ const mdxDefaults: MDXComponents = {
   ),
   th: (props) => <th className="border-b border-border-secondary px-4 py-2 st-body-md-strong text-text" {...props} />,
   td: (props) => <td className="border-b border-border px-4 py-2 text-text-secondary" {...props} />,
-  pre: (props) => <pre className="my-4 overflow-auto rounded-lg border border-border bg-bg-surface-secondary p-4 text-sm" {...props} />,
   code: (props) => {
-    // Inline code only — code blocks are wrapped in <pre> by rehype-pretty-code
-    const isBlock = typeof props.className === "string" && props.className.includes("language-")
-    if (isBlock) return <code {...props} />
+    // Inline code has string children; shiki-rendered block code has span children
+    const isInline = typeof props.children === "string"
+    if (!isInline) return <code {...props} />
     return <code className="rounded bg-bg-surface-secondary px-1.5 py-0.5" {...props} />
   },
   ul: (props) => <ul className="my-4 ml-6 list-disc st-body-lg text-text-secondary [&>li]:mt-1" {...props} />,

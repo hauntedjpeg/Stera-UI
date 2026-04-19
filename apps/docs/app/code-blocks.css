@@ -2,11 +2,21 @@
 .shiki,
 .shiki span {
   color: var(--shiki-light);
-  background-color: var(--shiki-light-bg);
 }
 
 .dark .shiki,
 .dark .shiki span {
   color: var(--shiki-dark);
-  background-color: var(--shiki-dark-bg);
+}
+
+.shiki {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  overflow: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background-color: var(--bg-surface-secondary);
+  padding: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }

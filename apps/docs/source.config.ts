@@ -7,6 +7,7 @@ export default defineConfig({
         light: "github-light-default",
         dark: "github-dark",
       },
+      defaultColor: false,
     },
   },
 })

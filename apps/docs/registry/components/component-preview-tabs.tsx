@@ -28,7 +28,7 @@ export function ComponentPreviewTabs({
         data-slot="preview"
         data-align={align}
         className={cn(
-          "flex h-72 w-full justify-center bg-bg-canvas p-10",
+          "flex min-h-72 w-full justify-center bg-bg-canvas p-10",
           "data-[align=center]:items-center data-[align=start]:items-start data-[align=end]:items-end",
           previewClassName
         )}

@@ -37,7 +37,7 @@ export function ComponentPreview({
       previewClassName={previewClassName}
       align={align}
       hideCode={hideCode}
-      component={<Component />}
+      component={React.createElement(Component)}
       source={<ComponentSource name={name} />}
     />
   )

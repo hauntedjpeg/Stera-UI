@@ -30,7 +30,7 @@ export async function ComponentSource({
   return (
     <div
       className={cn(
-        "stera-code-block relative [&_pre]:!m-0 [&_pre]:max-h-96 [&_pre]:overflow-auto [&_pre]:rounded-none [&_pre]:border-0 [&_pre]:bg-bg-surface-secondary [&_pre]:p-4 [&_pre]:text-sm [&_code]:!bg-transparent [&_code]:!p-0",
+        "stera-code-block relative [&_pre]:m-0! [&_pre]:max-h-96 [&_pre]:overflow-auto [&_pre]:rounded-none [&_pre]:border-0 [&_pre]:bg-bg-surface-secondary [&_pre]:p-4 [&_pre]:text-sm [&_code]:bg-transparent! [&_code]:p-0!",
         className
       )}
       data-slot="component-source"
