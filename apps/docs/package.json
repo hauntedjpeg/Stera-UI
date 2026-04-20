@@ -8,8 +8,6 @@
     "build": "pnpm build:registry && next build",
     "build:registry": "tsx scripts/build-registry.mts",
     "postinstall": "fumadocs-mdx",
-    "storybook": "storybook dev -p 6006",
-    "build:storybook": "storybook build",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
   },
@@ -39,9 +37,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@storybook/addon-docs": "^10.3.4",
-    "@storybook/addon-themes": "^10.3.4",
-    "@storybook/react-vite": "^10.3.4",
     "@tailwindcss/postcss": "^4.1.18",
     "@tanstack/react-table": "^8.21.3",
     "@types/mdx": "^2.0.13",
@@ -50,12 +45,9 @@
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.2",
     "eslint-config-next": "^16.2.4",
-    "eslint-plugin-storybook": "10.3.4",
     "postcss": "^8",
-    "storybook": "^10.3.4",
     "tailwindcss": "^4.1.18",
     "tsx": "^4.19.0",
-    "typescript": "^5.9.3",
-    "vite": "^6.4.1"
+    "typescript": "^5.9.3"
   }
 }
