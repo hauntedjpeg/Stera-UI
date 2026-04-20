@@ -12,30 +12,30 @@ export default function ItemVariants() {
   return (
     <div className="w-96">
       <ItemGroup>
-        <Item variant="default">
+        <Item variant="ghost">
           <ItemMedia variant="icon">
             <SiArchive />
           </ItemMedia>
           <ItemContent>
-            <ItemTitle>Default variant</ItemTitle>
+            <ItemTitle>Ghost variant</ItemTitle>
             <ItemDescription>No border, transparent background.</ItemDescription>
           </ItemContent>
         </Item>
-        <Item variant="outline">
+        <Item>
           <ItemMedia variant="icon">
             <SiArchive />
           </ItemMedia>
           <ItemContent>
-            <ItemTitle>Outline variant</ItemTitle>
+            <ItemTitle>Outline variant (Default)</ItemTitle>
             <ItemDescription>Visible border, transparent background.</ItemDescription>
           </ItemContent>
         </Item>
-        <Item variant="muted">
+        <Item variant="subtle">
           <ItemMedia variant="icon">
             <SiArchive />
           </ItemMedia>
           <ItemContent>
-            <ItemTitle>Muted variant</ItemTitle>
+            <ItemTitle>Subtle variant</ItemTitle>
             <ItemDescription>Subtle muted background, no border.</ItemDescription>
           </ItemContent>
         </Item>

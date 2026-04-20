@@ -17,7 +17,7 @@ function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
         // Sizing
         "w-full gap-4",
         // Variants
-        "has-data-[size=sm]:gap-2.5 has-data-[size=xs]:gap-2",
+        "has-data-[size=md]:gap-3 has-data-[size=xs]:gap-2",
         // Other
         "group/item-group",
         className
@@ -48,7 +48,7 @@ function ItemSeparator({
 const itemVariants = cva(
   [
     // Base
-    "flex rounded-md border text-sm outline-none transition-colors duration-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
+    "flex rounded-xl border outline-none transition-colors duration-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring",
     // Sizing
     "w-full",
     // Other
@@ -57,27 +57,27 @@ const itemVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-transparent",
         outline: "border-border",
-        muted: "border-transparent bg-bg-surface-secondary/50",
+        subtle: "border-transparent bg-bg-surface-secondary",
+        ghost: "border-transparent",
       },
       size: {
-        default: "gap-3.5 px-4 py-3.5",
-        sm: "gap-2.5 px-3 py-2.5",
-        xs: "gap-2 px-2.5 py-2 in-data-[slot=dropdown-menu-content]:p-0",
+        sm: "p-2 gap-2 in-data-[slot=dropdown-menu-content]:p-0 in-data-[slot=dropdown-menu-content]:rounded-lg",
+        md: "p-3 gap-3",
+        lg: "p-4 gap-3",
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: "outline",
+      size: "md",
     },
   }
 )
 
 function Item({
   className,
-  variant = "default",
-  size = "default",
+  variant = "outline",
+  size = "md",
   render,
   ...props
 }: useRender.ComponentProps<"div"> & VariantProps<typeof itemVariants>) {
@@ -104,8 +104,6 @@ const itemMediaVariants = cva(
     "flex items-center justify-center",
     // Sizing
     "shrink-0 gap-2",
-    // Position
-    "group-has-data-[slot=item-description]/item:translate-y-0.5",
     // Other
     "group-has-data-[slot=item-description]/item:self-start [&_svg]:pointer-events-none",
   ],
@@ -115,7 +113,7 @@ const itemMediaVariants = cva(
         default: "bg-transparent",
         icon: "[&_svg:not([class*='size-'])]:size-4",
         image:
-          "size-10 overflow-hidden rounded-sm group-data-[size=sm]/item:size-8 group-data-[size=xs]/item:size-6 [&_img]:size-full [&_img]:object-cover",
+          "size-10 overflow-hidden rounded-lg group-data-[size=sm]/item:size-8 [&_img]:size-full [&_img]:object-cover",
       },
     },
     defaultVariants: {
@@ -149,7 +147,7 @@ function ItemContent({ className, ...props }: React.ComponentProps<"div">) {
         // Sizing
         "flex-1 gap-1",
         // Variants
-        "group-data-[size=xs]/item:gap-0",
+        "group-data-[size=sm]/item:gap-0",
         // Other
         "[&+[data-slot=item-content]]:flex-none",
         className
@@ -165,7 +163,7 @@ function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="item-title"
       className={cn(
         // Base
-        "flex text-sm leading-snug font-medium underline-offset-4",
+        "flex st-body-md-strong underline-offset-4",
         // Sizing
         "w-fit gap-2",
         // Other
@@ -183,9 +181,9 @@ function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
       data-slot="item-description"
       className={cn(
         // Base
-        "text-left text-sm leading-normal font-normal text-text-secondary",
+        "st-body-md text-text-secondary",
         // Variants
-        "group-data-[size=xs]/item:text-xs",
+        "group-data-[size=sm]/item:st-body-sm",
         // Other
         "line-clamp-2 [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-text-brand",
         className
@@ -203,7 +201,7 @@ function ItemActions({ className, ...props }: React.ComponentProps<"div">) {
         // Base
         "flex",
         // Sizing
-        "gap-2",
+        "gap-2 [&_svg:not([class*='size-'])]:size-4",
         // Other
         "items-center",
         className

@@ -12,31 +12,31 @@ export default function ItemSizes() {
   return (
     <div className="w-96">
       <ItemGroup>
-        <Item size="default" variant="outline">
+        <Item size="lg">
           <ItemMedia variant="icon">
             <SiFolder />
           </ItemMedia>
           <ItemContent>
-            <ItemTitle>Default size</ItemTitle>
+            <ItemTitle>Large size</ItemTitle>
+            <ItemDescription>Increased padding and spacing.</ItemDescription>
+          </ItemContent>
+        </Item>
+        <Item size="md">
+          <ItemMedia variant="icon">
+            <SiFolder />
+          </ItemMedia>
+          <ItemContent>
+            <ItemTitle>Medium size (Default)</ItemTitle>
             <ItemDescription>Standard padding and spacing.</ItemDescription>
           </ItemContent>
         </Item>
-        <Item size="sm" variant="outline">
+        <Item size="sm">
           <ItemMedia variant="icon">
             <SiFolder />
           </ItemMedia>
           <ItemContent>
             <ItemTitle>Small size</ItemTitle>
             <ItemDescription>Reduced padding and spacing.</ItemDescription>
-          </ItemContent>
-        </Item>
-        <Item size="xs" variant="outline">
-          <ItemMedia variant="icon">
-            <SiFolder />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>Extra small size</ItemTitle>
-            <ItemDescription>Compact padding and spacing.</ItemDescription>
           </ItemContent>
         </Item>
       </ItemGroup>

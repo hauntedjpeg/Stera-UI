@@ -275,13 +275,13 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/registry/examples/item-sizes")),
     path: "examples/item-sizes.tsx",
   },
-  "item-with-actions": {
-    component: dynamic(() => import("@/registry/examples/item-with-actions")),
-    path: "examples/item-with-actions.tsx",
+  "item-icon": {
+    component: dynamic(() => import("@/registry/examples/item-icon")),
+    path: "examples/item-icon.tsx",
   },
-  "item-notification-list": {
-    component: dynamic(() => import("@/registry/examples/item-notification-list")),
-    path: "examples/item-notification-list.tsx",
+  "item-avatar": {
+    component: dynamic(() => import("@/registry/examples/item-avatar")),
+    path: "examples/item-avatar.tsx",
   },
   "pagination-demo": {
     component: dynamic(() => import("@/registry/examples/pagination-demo")),
