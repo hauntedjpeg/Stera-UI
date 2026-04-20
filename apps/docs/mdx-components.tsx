@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image, { type ImageProps } from "next/image"
 import { Preview } from "@/components/preview"
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlock } from "@/registry/components/code-block"
+import { CodeBlock } from "@/components/code-block"
 
 function Callout({ children }: { type?: string; children: ReactNode }) {
   return (

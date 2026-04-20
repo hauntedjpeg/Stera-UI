@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CopyButton } from "@/registry/components/copy-button"
+import { CopyButton } from "./copy-button"
 
 function extractText(node: React.ReactNode): string {
   if (node == null || typeof node === "boolean") return ""

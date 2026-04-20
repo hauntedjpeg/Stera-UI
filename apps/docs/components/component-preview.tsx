@@ -1,8 +1,8 @@
 import * as React from "react"
 
-import { getRegistryComponent } from "@/lib/registry"
-import { ComponentPreviewTabs } from "@/components/component-preview-tabs"
-import { ComponentSource } from "@/components/component-source"
+import { getRegistryComponent } from "../lib/registry"
+import { ComponentPreviewTabs } from "./component-preview-tabs"
+import { ComponentSource } from "./component-source"
 
 export function ComponentPreview({
   name,

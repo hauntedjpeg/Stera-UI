@@ -23,13 +23,16 @@
         "./registry/ui/*"
       ],
       "@/components/*": [
-        "./registry/components/*"
+        "./components/*"
       ],
       "@/lib/*": [
         "./registry/lib/*"
       ],
       "@/hooks/*": [
         "./registry/hooks/*"
+      ],
+      "@/examples/*": [
+        "./examples/*"
       ],
       "@/*": [
         "./*"

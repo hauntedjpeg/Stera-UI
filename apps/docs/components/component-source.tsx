@@ -2,9 +2,9 @@ import "server-only"
 
 import { highlight } from "fumadocs-core/highlight"
 
-import { readRegistryFile } from "@/lib/read-file"
-import { getRegistrySourcePath } from "@/lib/registry"
-import { CodeBlock } from "@/components/code-block"
+import { readRegistryFile } from "../lib/read-file"
+import { getRegistrySourcePath } from "../lib/registry"
+import { CodeBlock } from "./code-block"
 
 export async function ComponentSource({
   name,
