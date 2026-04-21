@@ -11,15 +11,32 @@ description: A flexible list item component for contacts, notifications, setting
 pnpm dlx stera-ui add item
 ```
 
+## Composition
+
+Compose `Item` using only the components you need, nested according to this hierarchy:
+
+```text noLineNumbers
+ItemGroup
+└── Item
+    ├── ItemHeader
+    ├── ItemBody
+    │   ├── ItemMedia
+    │   ├── ItemContent
+    │   │   ├── ItemTitle
+    │   │   └── ItemDescription
+    │   └── ItemActions
+    └── ItemFooter
+```
+
 ## All Variants
 
 <ComponentPreview name="item-variants" />
 
 | Variant | Description |
 | --- | --- |
-| `default` | No border, transparent background |
-| `outline` | Visible border, transparent background |
-| `muted` | Subtle muted background, no border |
+| `outline` | Visible border, transparent background (default) |
+| `subtle` | Subtle muted background, no border |
+| `ghost` | No border, transparent background |
 
 ## All Sizes
 
@@ -27,9 +44,9 @@ pnpm dlx stera-ui add item
 
 | Size | Description |
 | --- | --- |
-| `default` | Standard padding and spacing |
 | `sm` | Reduced padding and spacing |
-| `xs` | Compact padding and spacing |
+| `md` | Standard padding and spacing (default) |
+| `lg` | Increased padding and spacing |
 
 ## Examples
 
@@ -63,8 +80,8 @@ Use `ItemFooter` to add a footer below the item content.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `variant` | `"default" \| "outline" \| "muted"` | `"default"` |
-| `size` | `"default" \| "sm" \| "xs"` | `"default"` |
+| `variant` | `"outline" \| "subtle" \| "ghost"` | `"outline"` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `render` | `ReactElement` | — |
 
 ### ItemMedia
@@ -77,6 +94,7 @@ Use `ItemFooter` to add a footer below the item content.
 
 | Component | Description |
 | --- | --- |
+| `ItemBody` | Flex row wrapper for media, content, and actions inside an `Item` |
 | `ItemContent` | Flex column container for title and description |
 | `ItemTitle` | Primary label text |
 | `ItemDescription` | Secondary supporting text |
