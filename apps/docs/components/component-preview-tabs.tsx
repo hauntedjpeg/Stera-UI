@@ -1,9 +1,13 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { PreviewCodeSheet } from "./preview-code-sheet"
 
 export function ComponentPreviewTabs({
   component,
   source,
+  rawSource,
+  caption,
+  slug,
   previewClassName,
   align = "center",
   hideCode = false,
@@ -11,6 +15,9 @@ export function ComponentPreviewTabs({
 }: {
   component: React.ReactNode
   source: React.ReactNode
+  rawSource: string
+  caption?: string
+  slug?: string
   previewClassName?: string
   align?: "center" | "start" | "end"
   hideCode?: boolean
@@ -36,9 +43,12 @@ export function ComponentPreviewTabs({
         {component}
       </div>
       {!hideCode && (
-        <div data-slot="code" className="relative border-t border-border">
-          {source}
-        </div>
+        <PreviewCodeSheet
+          source={source}
+          rawSource={rawSource}
+          caption={caption}
+          slug={slug}
+        />
       )}
     </div>
   )

@@ -2,7 +2,9 @@
 
 import * as React from "react"
 import { SiCheck, SiCopy } from "stera-icons"
+
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 export function CopyButton({
   value,
@@ -20,19 +22,17 @@ export function CopyButton({
   }, [copied])
 
   return (
-    <button
-      type="button"
+    <Button
+      variant="outline"
+      size="icon-sm"
       aria-label={copied ? "Copied" : "Copy code"}
       onClick={async () => {
         await navigator.clipboard.writeText(value)
         setCopied(true)
       }}
-      className={cn(
-        "absolute top-3 right-3 z-10 inline-flex size-7 items-center justify-center rounded-md border border-border bg-bg-surface text-text-secondary transition-colors hover:text-text",
-        className
-      )}
+      className={cn("absolute top-3 right-3 z-10", className)}
     >
-      {copied ? <SiCheck className="size-3.5" /> : <SiCopy className="size-3.5" />}
-    </button>
+      {copied ? <SiCheck /> : <SiCopy />}
+    </Button>
   )
 }

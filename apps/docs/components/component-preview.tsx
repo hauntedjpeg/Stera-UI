@@ -1,20 +1,27 @@
 import * as React from "react"
 
-import { getRegistryComponent } from "../lib/registry"
+import { readRegistryFile } from "../lib/read-file"
+import {
+  getRegistryComponent,
+  getRegistryComponentSlug,
+  getRegistrySourcePath,
+} from "../lib/registry"
 import { ComponentPreviewTabs } from "./component-preview-tabs"
 import { ComponentSource } from "./component-source"
 
-export function ComponentPreview({
+export async function ComponentPreview({
   name,
   align = "center",
   previewClassName,
   hideCode = false,
+  caption,
   className,
 }: {
   name: string
   align?: "center" | "start" | "end"
   previewClassName?: string
   hideCode?: boolean
+  caption?: string
   className?: string
 }) {
   const Component = getRegistryComponent(name)
@@ -31,14 +38,21 @@ export function ComponentPreview({
     )
   }
 
+  const sourcePath = getRegistrySourcePath(name)
+  const rawSource = sourcePath ? await readRegistryFile(sourcePath) : ""
+  const slug = getRegistryComponentSlug(name) ?? undefined
+
   return (
     <ComponentPreviewTabs
       className={className}
       previewClassName={previewClassName}
       align={align}
       hideCode={hideCode}
+      caption={caption}
+      slug={slug}
       component={React.createElement(Component)}
       source={<ComponentSource name={name} />}
+      rawSource={rawSource}
     />
   )
 }
