@@ -283,6 +283,14 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/item-avatar")),
     path: "examples/item-avatar.tsx",
   },
+  "item-header": {
+    component: dynamic(() => import("@/examples/item-header")),
+    path: "examples/item-header.tsx",
+  },
+  "item-footer": {
+    component: dynamic(() => import("@/examples/item-footer")),
+    path: "examples/item-footer.tsx",
+  },
   "pagination-demo": {
     component: dynamic(() => import("@/examples/pagination-demo")),
     path: "examples/pagination-demo.tsx",

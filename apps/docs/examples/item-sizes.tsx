@@ -1,6 +1,7 @@
 import { SiFolder } from "stera-icons"
 import {
   Item,
+  ItemBody,
   ItemContent,
   ItemDescription,
   ItemGroup,
@@ -13,31 +14,37 @@ export default function ItemSizes() {
     <div className="w-96">
       <ItemGroup>
         <Item size="lg">
-          <ItemMedia variant="icon">
-            <SiFolder />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>Large size</ItemTitle>
-            <ItemDescription>Increased padding and spacing.</ItemDescription>
-          </ItemContent>
+          <ItemBody>
+            <ItemMedia variant="icon">
+              <SiFolder />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>Large size</ItemTitle>
+              <ItemDescription>Increased padding and spacing.</ItemDescription>
+            </ItemContent>
+          </ItemBody>
         </Item>
         <Item size="md">
-          <ItemMedia variant="icon">
-            <SiFolder />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>Medium size (Default)</ItemTitle>
-            <ItemDescription>Standard padding and spacing.</ItemDescription>
-          </ItemContent>
+          <ItemBody>
+            <ItemMedia variant="icon">
+              <SiFolder />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>Medium size (Default)</ItemTitle>
+              <ItemDescription>Standard padding and spacing.</ItemDescription>
+            </ItemContent>
+          </ItemBody>
         </Item>
         <Item size="sm">
-          <ItemMedia variant="icon">
-            <SiFolder />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>Small size</ItemTitle>
-            <ItemDescription>Reduced padding and spacing.</ItemDescription>
-          </ItemContent>
+          <ItemBody>
+            <ItemMedia variant="icon">
+              <SiFolder />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>Small size</ItemTitle>
+              <ItemDescription>Reduced padding and spacing.</ItemDescription>
+            </ItemContent>
+          </ItemBody>
         </Item>
       </ItemGroup>
     </div>

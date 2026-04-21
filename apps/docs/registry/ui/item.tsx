@@ -36,8 +36,8 @@ function ItemSeparator({
       data-slot="item-separator"
       orientation="horizontal"
       className={cn(
-        // Other
-        "my-2",
+        // Margin
+        "basis-full",
         className
       )}
       {...props}
@@ -48,11 +48,11 @@ function ItemSeparator({
 const itemVariants = cva(
   [
     // Base
-    "flex rounded-xl border outline-none transition-colors duration-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring",
+    "rounded-xl border outline-none transition-colors duration-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring",
     // Sizing
     "w-full",
     // Other
-    "group/item flex-wrap items-center [a]:transition-colors [a]:hover:bg-bg-surface-hover",
+    "group/item [a]:transition-colors [a]:hover:bg-bg-surface-hover",
   ],
   {
     variants: {
@@ -62,9 +62,9 @@ const itemVariants = cva(
         ghost: "border-transparent",
       },
       size: {
-        sm: "p-2 gap-2 in-data-[slot=dropdown-menu-content]:p-0 in-data-[slot=dropdown-menu-content]:rounded-lg",
-        md: "p-3 gap-3",
-        lg: "p-4 gap-3",
+        sm: "in-data-[slot=dropdown-menu-content]:p-0 in-data-[slot=dropdown-menu-content]:rounded-lg",
+        md: "",
+        lg: "",
       },
     },
     defaultVariants: {
@@ -121,6 +121,28 @@ const itemMediaVariants = cva(
     },
   }
 )
+
+function ItemBody({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="item-body"
+      className={cn(
+        // Base
+        "flex gap-3 items-center",
+        // Sizing
+        "flex-1",
+        // SM
+        "group-data-[size=sm]/item:p-2 group-data-[size=sm]/item:gap-2",
+        // MD
+        "group-data-[size=md]/item:p-3",
+        // LG
+        "group-data-[size=lg]/item:p-4 group-data-[size=sm]/item:gap-4",
+        className
+      )}
+      {...props}
+    />
+  )
+}
 
 function ItemMedia({
   className,
@@ -217,11 +239,17 @@ function ItemHeader({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="item-header"
       className={cn(
         // Base
-        "flex",
+        "flex st-body-md-compact",
         // Sizing
         "basis-full gap-2",
         // Other
         "items-center justify-between",
+        // SM
+        "group-data-[size=sm]/item:p-2 group-data-[size=sm]/item:gap-2",
+        // MD
+        "group-data-[size=md]/item:p-3",
+        // LG
+        "group-data-[size=lg]/item:p-4 group-data-[size=sm]/item:gap-4",
         className
       )}
       {...props}
@@ -235,11 +263,17 @@ function ItemFooter({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="item-footer"
       className={cn(
         // Base
-        "flex",
+        "flex st-body-md-compact",
         // Sizing
         "basis-full gap-2",
         // Other
         "items-center justify-between",
+        // SM
+        "group-data-[size=sm]/item:p-2 group-data-[size=sm]/item:gap-2",
+        // MD
+        "group-data-[size=md]/item:p-3",
+        // LG
+        "group-data-[size=lg]/item:p-4 group-data-[size=sm]/item:gap-4",
         className
       )}
       {...props}
@@ -249,6 +283,7 @@ function ItemFooter({ className, ...props }: React.ComponentProps<"div">) {
 
 export {
   Item,
+  ItemBody,
   ItemMedia,
   ItemContent,
   ItemActions,

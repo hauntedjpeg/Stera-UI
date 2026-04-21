@@ -1,6 +1,7 @@
 import { SiArchive } from "stera-icons"
 import {
   Item,
+  ItemBody,
   ItemContent,
   ItemDescription,
   ItemGroup,
@@ -13,31 +14,37 @@ export default function ItemVariants() {
     <div className="w-96">
       <ItemGroup>
         <Item variant="ghost">
-          <ItemMedia variant="icon">
-            <SiArchive />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>Ghost variant</ItemTitle>
-            <ItemDescription>No border, transparent background.</ItemDescription>
-          </ItemContent>
+          <ItemBody>
+            <ItemMedia variant="icon">
+              <SiArchive />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>Ghost variant</ItemTitle>
+              <ItemDescription>No border, transparent background.</ItemDescription>
+            </ItemContent>
+          </ItemBody>
         </Item>
         <Item>
-          <ItemMedia variant="icon">
-            <SiArchive />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>Outline variant (Default)</ItemTitle>
-            <ItemDescription>Visible border, transparent background.</ItemDescription>
-          </ItemContent>
+          <ItemBody>
+            <ItemMedia variant="icon">
+              <SiArchive />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>Outline variant (Default)</ItemTitle>
+              <ItemDescription>Visible border, transparent background.</ItemDescription>
+            </ItemContent>
+          </ItemBody>
         </Item>
         <Item variant="subtle">
-          <ItemMedia variant="icon">
-            <SiArchive />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>Subtle variant</ItemTitle>
-            <ItemDescription>Subtle muted background, no border.</ItemDescription>
-          </ItemContent>
+          <ItemBody>
+            <ItemMedia variant="icon">
+              <SiArchive />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>Subtle variant</ItemTitle>
+              <ItemDescription>Subtle muted background, no border.</ItemDescription>
+            </ItemContent>
+          </ItemBody>
         </Item>
       </ItemGroup>
     </div>
