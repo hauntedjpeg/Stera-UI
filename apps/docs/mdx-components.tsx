@@ -17,7 +17,7 @@ function Callout({ children }: { type?: string; children: ReactNode }) {
 
 function Steps({ children }: { children: ReactNode }) {
   return (
-    <div className="my-6 ml-4 border-l-2 border-border pl-6 [counter-reset:step] [&>h3]:mt-6 [&>h3]:before:mr-3 [&>h3]:before:inline-flex [&>h3]:before:size-7 [&>h3]:before:items-center [&>h3]:before:justify-center [&>h3]:before:rounded-full [&>h3]:before:border [&>h3]:before:border-border-brand [&>h3]:before:st-body-sm-strong [&>h3]:before:text-text-brand [&>h3]:before:[counter-increment:step] [&>h3]:before:content-[counter(step)]">
+    <div className="my-6 [counter-reset:step] [&>h3]:mt-6 [&>h3]:before:mr-3 [&>h3]:before:inline-flex [&>h3]:before:size-7 [&>h3]:before:items-center [&>h3]:before:justify-center [&>h3]:before:rounded-full [&>h3]:before:border [&>h3]:before:border-border [&>h3]:before:st-body-sm-strong [&>h3]:before:text-text [&>h3]:before:[counter-increment:step] [&>h3]:before:content-[counter(step)]">
       {children}
     </div>
   )
@@ -41,7 +41,7 @@ const mdxDefaults: MDXComponents = {
     <h2 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-md text-text mt-12 mb-3" {...props} />
   ),
   h3: (props) => (
-    <h3 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-sm text-text mt-12 mb-2 [h2+&]:mt-4" {...props} />
+    <h3 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-sm text-text mt-8 mb-2 [h2+&]:mt-4" {...props} />
   ),
   h4: (props) => (
     <h4 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-sm text-text mt-4 mb-2" {...props} />
