@@ -27,13 +27,13 @@ const badgeVariants = cva(
         "solid":
           "bg-bg-surface-inverse text-text-oninverse",
         brand:
-          "bg-bg-brand-tertiary text-text-brand-secondary",
+          "bg-bg-brand-tertiary text-text-brand",
         "brand-outline":
           "bg-bg-surface text-text-brand border-border-brand",
         "brand-solid":
           "bg-bg-brand text-text-onbrand",
         accent:
-          "bg-bg-accent-tertiary text-text-accent-secondary",
+          "bg-bg-accent-tertiary text-text-accent",
         "accent-outline":
           "bg-bg-surface text-text-accent border-border-accent",
         "accent-solid":
