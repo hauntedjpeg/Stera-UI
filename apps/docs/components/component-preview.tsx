@@ -6,7 +6,7 @@ import {
   getRegistryComponentSlug,
   getRegistrySourcePath,
 } from "../lib/registry"
-import { ComponentPreviewTabs } from "./component-preview-tabs"
+import { ComponentPreviewFrame } from "./component-preview-frame"
 import { ComponentSource } from "./component-source"
 
 export async function ComponentPreview({
@@ -43,7 +43,7 @@ export async function ComponentPreview({
   const slug = getRegistryComponentSlug(name) ?? undefined
 
   return (
-    <ComponentPreviewTabs
+    <ComponentPreviewFrame
       className={className}
       previewClassName={previewClassName}
       align={align}

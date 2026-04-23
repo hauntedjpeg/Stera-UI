@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { PreviewCodeSheet } from "./preview-code-sheet"
 
-export function ComponentPreviewTabs({
+export function ComponentPreviewFrame({
   component,
   source,
   rawSource,
