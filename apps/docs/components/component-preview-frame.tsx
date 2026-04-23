@@ -5,7 +5,6 @@ import { PreviewCodeSheet } from "./preview-code-sheet"
 export function ComponentPreviewFrame({
   component,
   source,
-  rawSource,
   caption,
   slug,
   previewClassName,
@@ -15,7 +14,6 @@ export function ComponentPreviewFrame({
 }: {
   component: React.ReactNode
   source: React.ReactNode
-  rawSource: string
   caption?: string
   slug?: string
   previewClassName?: string
@@ -45,7 +43,6 @@ export function ComponentPreviewFrame({
       {!hideCode && (
         <PreviewCodeSheet
           source={source}
-          rawSource={rawSource}
           caption={caption}
           slug={slug}
         />
