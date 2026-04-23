@@ -9,7 +9,7 @@ import { InstallSnippet } from "@/components/install-snippet"
 
 function Callout({ children }: { type?: string; children: ReactNode }) {
   return (
-    <div className="my-4 rounded-lg border border-border-brand bg-bg-brand-tertiary p-4 st-body-md text-text-secondary">
+    <div className="my-4 rounded-lg border border-border bg-bg-surface-secondary p-4 st-body-md text-text-secondary">
       {children}
     </div>
   )
@@ -38,10 +38,10 @@ const mdxDefaults: MDXComponents = {
     <h1 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-display-sm text-text mt-8 mb-4 first:mt-0" {...props} />
   ),
   h2: (props) => (
-    <h2 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-lg text-text mt-8 mb-3 first:mt-0" {...props} />
+    <h2 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-md text-text mt-12 mb-3" {...props} />
   ),
   h3: (props) => (
-    <h3 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-md text-text mt-6 mb-2" {...props} />
+    <h3 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-sm text-text mt-12 mb-2 [h2+&]:mt-4" {...props} />
   ),
   h4: (props) => (
     <h4 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-sm text-text mt-4 mb-2" {...props} />
@@ -55,11 +55,11 @@ const mdxDefaults: MDXComponents = {
     return <a className="text-text underline underline-offset-4 hover:text-text-secondary" target="_blank" rel="noopener noreferrer" {...props} />
   },
   table: (props) => (
-    <div className="my-6 overflow-auto">
+    <div className="my-6 overflow-auto border border-border rounded-xl">
       <table className="w-full st-body-md text-left" {...props} />
     </div>
   ),
-  th: (props) => <th className="border-b border-border-secondary px-4 py-2 st-body-md-strong text-text" {...props} />,
+  th: (props) => <th className="bg-bg-surface-secondary border-b border-border px-4 py-2 st-body-sm-strong text-text" {...props} />,
   td: (props) => <td className="border-b border-border px-4 py-2 text-text-secondary" {...props} />,
   code: (props) => <code {...props} />,
   pre: (props) => <CodeBlock>{<pre {...props} />}</CodeBlock>,
