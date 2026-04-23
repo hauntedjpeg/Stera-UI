@@ -5,6 +5,7 @@ import Image, { type ImageProps } from "next/image"
 import { Preview } from "@/components/preview"
 import { ComponentPreview } from "@/components/component-preview"
 import { CodeBlock } from "@/components/code-block"
+import { InstallSnippet } from "@/components/install-snippet"
 
 function Callout({ children }: { type?: string; children: ReactNode }) {
   return (
@@ -84,6 +85,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Steps,
     Preview,
     ComponentPreview,
+    InstallSnippet,
     ...components,
   }
 }

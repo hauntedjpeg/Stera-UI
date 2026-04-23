@@ -81,7 +81,7 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
         // Base
         "relative inline-flex border border-transparent whitespace-nowrap text-text-secondary items-center justify-center group-data-[orientation=vertical]/tabs:justify-start transition-all after:content-[''] after:bg-text after:opacity-0",
         // Position
-        "after:absolute group-data-[orientation=horizontal]/tabs:after:inset-x-0 group-data-[orientation=horizontal]/tabs:after:bottom-[-5px] group-data-[orientation=vertical]/tabs:after:inset-y-0 group-data-[orientation=vertical]/tabs:after:-right-1",
+        "after:absolute group-data-[orientation=horizontal]/tabs:after:inset-x-0 group-data-[orientation=horizontal]/tabs:after:-bottom-1.25 group-data-[orientation=vertical]/tabs:after:inset-y-0 group-data-[orientation=vertical]/tabs:after:-right-1",
         // Sizing
         "h-[calc(100%-1px)] flex-1 group-data-[orientation=vertical]/tabs:w-full group-data-[orientation=horizontal]/tabs:after:h-0.5 group-data-[orientation=vertical]/tabs:after:w-0.5",
         // SM (Default)
@@ -93,7 +93,7 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
         // Animation
         "data-active:bg-bg-surface data-active:text-text",
         // Variants
-        "group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
+        "group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=default]/tabs-list:data-active:border group-data-[variant=default]/tabs-list:data-active:border-border group-data-[variant=line]/tabs-list:data-active:shadow-none group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
         // Other
         "after:transition-opacity hover:text-text focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className

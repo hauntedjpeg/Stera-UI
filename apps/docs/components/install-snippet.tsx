@@ -19,9 +19,11 @@ type ManagerValue = (typeof MANAGERS)[number]["value"]
 export function InstallSnippet({
   slug,
   className,
+  hideHeading = false,
 }: {
   slug: string
   className?: string
+  hideHeading?: boolean
 }) {
   const [value, setValue] = React.useState<ManagerValue>("pnpm")
   const [copied, setCopied] = React.useState(false)
@@ -37,18 +39,20 @@ export function InstallSnippet({
 
   return (
     <div className={cn("flex flex-col gap-2", className)}>
-      <h3 className="st-body-md-strong text-text">Installation</h3>
+      {!hideHeading && (
+        <h3 className="st-body-lg-strong text-text">Installation</h3>
+      )}
       <Tabs
         value={value}
         onValueChange={(v) => setValue(v as ManagerValue)}
-        className="overflow-hidden rounded-xl border border-border bg-bg-surface"
+        className="overflow-hidden bg-bg-surface-secondary rounded-xl gap-0"
       >
         <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-2">
           <div className="flex items-center gap-2 text-text-secondary">
             <span className="font-mono text-sm select-none" aria-hidden>
               {">_"}
             </span>
-            <TabsList>
+            <TabsList size="md">
               {MANAGERS.map((m) => (
                 <TabsTrigger key={m.value} value={m.value}>
                   {m.value}
@@ -57,8 +61,9 @@ export function InstallSnippet({
             </TabsList>
           </div>
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon-sm"
+            className="text-text-secondary hover:bg-bg-surface-secondary-hover"
             aria-label={copied ? "Copied" : "Copy command"}
             onClick={async () => {
               await navigator.clipboard.writeText(activeCommand)
@@ -72,7 +77,7 @@ export function InstallSnippet({
           <TabsContent
             key={m.value}
             value={m.value}
-            className="px-4 py-3 font-mono text-sm text-text"
+            className="px-4 py-4 font-mono text-sm text-text"
           >
             {m.command(slug)}
           </TabsContent>

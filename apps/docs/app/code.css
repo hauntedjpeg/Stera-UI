@@ -32,7 +32,6 @@
   position: relative;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  border: 1px solid var(--border);
   border-radius: 0.75rem;
   background-color: var(--bg-surface-secondary);
   overflow: hidden;
@@ -52,8 +51,7 @@
 .st-code-block[data-embedded] {
   margin: 0;
   border: 0;
-  border-radius: 0;
-  max-height: 24rem;
+  border-radius: 0.75rem;
   overflow: auto;
 }
 
