@@ -29,6 +29,7 @@ apps/docs/public/r/
 # ide
 .claude/
 .vscode/
+.zed/
 
 # misc
 .DS_Store
