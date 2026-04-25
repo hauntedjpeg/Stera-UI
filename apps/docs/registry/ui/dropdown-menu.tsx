@@ -41,7 +41,7 @@ function DropdownMenuContent({
           data-slot="dropdown-menu-content"
           className={cn(
             // Base
-            "rounded-xl bg-bg-surface p-1 text-text shadow-md ring-1 ring-border outline-none overflow-x-hidden overflow-y-auto duration-100",
+            "rounded-xl bg-surface p-1 text-text shadow-md ring-1 ring-border outline-none overflow-x-hidden overflow-y-auto duration-100",
             // Position
             "origin-(--transform-origin)",
             // Sizing
@@ -106,9 +106,9 @@ function DropdownMenuItem({
         // Base
         "flex relative cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 data-inset:pl-8 st-body-md-compact text-text outline-hidden select-none",
         // Focus
-        "focus:bg-bg-surface-hover",
+        "focus:bg-surface-hover",
         // Danger
-        "data-[variant=danger]:text-text-danger data-[variant=danger]:focus:bg-bg-danger-tertiary data-[variant=danger]:focus:text-danger not-data-[variant=danger]:focus:**:text-text data-[variant=danger]:*:[svg]:text-text-danger",
+        "data-[variant=danger]:text-text-danger data-[variant=danger]:focus:bg-surface-danger-tertiary data-[variant=danger]:focus:text-danger not-data-[variant=danger]:focus:**:text-text data-[variant=danger]:*:[svg]:text-text-danger",
         // Disabled
         "data-disabled:text-text-teriary data-disabled:pointer-events-none",
         // Other
@@ -195,11 +195,11 @@ function DropdownMenuSubTrigger({
         // Sizing
         "gap-2",
         // Animation
-        "data-popup-open:bg-bg-surface-hover data-popup-open:text-text data-open:bg-bg-surface-hover data-open:text-text",
+        "data-popup-open:bg-surface-hover data-popup-open:text-text data-open:bg-surface-hover data-open:text-text",
         // Variants
         "data-inset:pl-8",
         // Other
-        "cursor-default items-start focus:bg-bg-surface-hover [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "cursor-default items-start focus:bg-surface-hover [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
@@ -223,7 +223,7 @@ function DropdownMenuSubContent({
       data-slot="dropdown-menu-sub-content"
       className={cn(
         // Base
-        "rounded-xl bg-bg-surface p-1 text-text shadow-lg ring-1 ring-border duration-100",
+        "rounded-xl bg-surface p-1 text-text shadow-lg ring-1 ring-border duration-100",
         // Sizing
         "min-w-24 max-w-56",
         // Animation
@@ -260,7 +260,7 @@ function DropdownMenuCheckboxItem({
         // Variants
         "data-inset:pl-8",
         // Other
-        "cursor-default items-start focus:bg-bg-surface-hover focus:text-text focus:**:text-text data-disabled:pointer-events-none data-disabled:text-text-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "cursor-default items-start focus:bg-surface-hover focus:text-text focus:**:text-text data-disabled:pointer-events-none data-disabled:text-text-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       checked={checked}
@@ -308,7 +308,7 @@ function DropdownMenuRadioItem({
         // Variants
         "data-inset:pl-8",
         // Other
-        "cursor-default items-start focus:bg-bg-surface-hover focus:text-text focus:**:text-text data-disabled:pointer-events-none data-disabled:text-text-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "cursor-default items-start focus:bg-surface-hover focus:text-text focus:**:text-text data-disabled:pointer-events-none data-disabled:text-text-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}

@@ -40,7 +40,7 @@ const tabsListVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-bg-surface-secondary",
+        default: "bg-surface-secondary",
         line: "gap-1 bg-transparent",
       },
       size: {
@@ -91,7 +91,7 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
         // LG
         "group-data-[size=lg]/tabs-list:px-4 group-data-[size=lg]/tabs-list:py-2 group-data-[size=lg]/tabs-list:gap-2 group-data-[size=lg]/tabs-list:[&_svg:not([class*='size-'])]:size-4",
         // Animation
-        "data-active:bg-bg-surface data-active:text-text",
+        "data-active:bg-surface data-active:text-text",
         // Variants
         "group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=default]/tabs-list:data-active:border group-data-[variant=default]/tabs-list:data-active:border-border group-data-[variant=line]/tabs-list:data-active:shadow-none group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
         // Other

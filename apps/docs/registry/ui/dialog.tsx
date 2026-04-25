@@ -74,7 +74,7 @@ function DialogPopup({
         data-slot="dialog-popup"
         className={cn(
           // Base
-          "grid rounded-xl bg-bg-surface p-6 text-sm ring-1 ring-border outline-none",
+          "grid rounded-xl bg-surface p-6 text-sm ring-1 ring-border outline-none",
           // Position
           "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
           // Sizing

@@ -125,7 +125,7 @@ function ComboboxContent({
           data-chips={!!anchor}
           className={cn(
             // Base
-            "relative overflow-hidden rounded-xl bg-bg-surface text-text shadow-md ring-1 ring-border duration-100",
+            "relative overflow-hidden rounded-xl bg-surface text-text shadow-md ring-1 ring-border duration-100",
             // Position
             "origin-(--transform-origin)",
             // Sizing
@@ -133,7 +133,7 @@ function ComboboxContent({
             // Animation
             "data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
             // Other
-            "group/combobox-content *:data-[slot=input-group]:m-1 *:data-[slot=input-group]:mb-0 *:data-[slot=input-group]:h-8 *:data-[slot=input-group]:border-border *:data-[slot=input-group]:bg-bg-surface-secondary/30 *:data-[slot=input-group]:shadow-none",
+            "group/combobox-content *:data-[slot=input-group]:m-1 *:data-[slot=input-group]:mb-0 *:data-[slot=input-group]:h-8 *:data-[slot=input-group]:border-border *:data-[slot=input-group]:bg-surface-secondary/30 *:data-[slot=input-group]:shadow-none",
             className,
           )}
           {...props}
@@ -177,7 +177,7 @@ function ComboboxItem({
         // Sizing
         "w-full gap-2",
         // Animation
-        "data-highlighted:bg-bg-surface-secondary data-highlighted:text-text not-data-[variant=destructive]:data-highlighted:**:text-text data-disabled:pointer-events-none data-disabled:opacity-50",
+        "data-highlighted:bg-surface-secondary data-highlighted:text-text not-data-[variant=destructive]:data-highlighted:**:text-text data-disabled:pointer-events-none data-disabled:opacity-50",
         // Other
         "cursor-default items-center select-none st-body-md-compact [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className,

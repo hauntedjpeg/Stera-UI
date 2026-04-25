@@ -45,7 +45,7 @@ export function InstallSnippet({
       <Tabs
         value={value}
         onValueChange={(v) => setValue(v as ManagerValue)}
-        className="overflow-hidden bg-bg-surface-secondary rounded-xl gap-0"
+        className="overflow-hidden bg-surface-secondary rounded-xl gap-0"
       >
         <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-2">
           <div className="flex items-center gap-2 text-text-secondary">
@@ -63,7 +63,7 @@ export function InstallSnippet({
           <Button
             variant="ghost"
             size="icon-sm"
-            className="text-text-secondary hover:bg-bg-surface-secondary-hover"
+            className="text-text-secondary hover:bg-surface-secondary-hover"
             aria-label={copied ? "Copied" : "Copy command"}
             onClick={async () => {
               await navigator.clipboard.writeText(activeCommand)

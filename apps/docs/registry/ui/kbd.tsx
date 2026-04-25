@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils"
 const kbdVariants = cva(
   [
     // Base
-    "inline-flex items-center justify-center rounded-md bg-bg-surface-tertiary px-1 w-fit gap-1",
+    "inline-flex items-center justify-center rounded-md bg-surface-tertiary px-1 w-fit gap-1",
     // Variants
-    "in-data-[slot=tooltip-content]:bg-bg-surface-tertiary in-data-[slot=tooltip-content]:text-text",
+    "in-data-[slot=tooltip-content]:bg-surface-tertiary in-data-[slot=tooltip-content]:text-text",
     // Other
     "pointer-events-none font-sans text-xs/4 text-text-secondary select-none",
   ],

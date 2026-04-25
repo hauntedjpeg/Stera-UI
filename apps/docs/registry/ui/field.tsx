@@ -134,7 +134,7 @@ function FieldLabel({
       data-slot="field-label"
       className={cn(
         // Base
-        "flex has-[>[data-slot=field]]:has-data-checked:border-border-brand has-[>[data-slot=field]]:has-data-checked:bg-bg-brand-tertiary has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-2 has-[>[data-slot=field]]:flex-col",
+        "flex has-[>[data-slot=field]]:has-data-checked:border-border-brand has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-tertiary has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-2 has-[>[data-slot=field]]:flex-col",
         // Sizing
         "w-fit gap-2 has-[>[data-slot=field]]:w-full",
         // Other
@@ -205,7 +205,7 @@ function FieldSeparator({
       <Separator className="absolute inset-0 top-1/2" />
       {children && (
         <span
-          className="relative mx-auto block w-fit bg-bg-surface px-2 text-text-secondary"
+          className="relative mx-auto block w-fit bg-surface px-2 text-text-secondary"
           data-slot="field-separator-content"
         >
           {children}

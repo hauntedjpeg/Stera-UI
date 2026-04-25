@@ -9,7 +9,7 @@ import { InstallSnippet } from "@/components/install-snippet"
 
 function Callout({ children }: { type?: string; children: ReactNode }) {
   return (
-    <div className="my-4 rounded-lg border border-border bg-bg-surface-secondary p-4 st-body-md text-text-secondary">
+    <div className="my-4 rounded-lg border border-border bg-surface-secondary p-4 st-body-md text-text-secondary">
       {children}
     </div>
   )
@@ -59,7 +59,7 @@ const mdxDefaults: MDXComponents = {
       <table className="w-full st-body-md text-left" {...props} />
     </div>
   ),
-  th: (props) => <th className="bg-bg-surface-secondary border-b border-border px-4 py-2 st-body-sm-strong text-text" {...props} />,
+  th: (props) => <th className="bg-surface-secondary border-b border-border px-4 py-2 st-body-sm-strong text-text" {...props} />,
   td: (props) => <td className="border-b border-border px-4 py-2 text-text-secondary" {...props} />,
   code: (props) => <code {...props} />,
   pre: (props) => <CodeBlock>{<pre {...props} />}</CodeBlock>,

@@ -28,7 +28,7 @@ export function ComponentPreview({
     return (
       <p className="my-6 text-sm text-text-secondary">
         Example{" "}
-        <code className="rounded bg-bg-surface-secondary px-1.5 py-0.5 font-mono">
+        <code className="rounded bg-surface-secondary px-1.5 py-0.5 font-mono">
           {name}
         </code>{" "}
         not found in registry.

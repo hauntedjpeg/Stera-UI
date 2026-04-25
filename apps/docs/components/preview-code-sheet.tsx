@@ -25,7 +25,7 @@ export function PreviewCodeSheet({
   const title = caption ?? slug ?? "Source"
 
   return (
-    <div className="flex items-center justify-between gap-2 border-t border-border bg-bg-surface px-4 py-2">
+    <div className="flex items-center justify-between gap-2 border-t border-border bg-surface px-4 py-2">
       <span className="text-sm text-text-secondary">{caption}</span>
       <Sheet>
         <SheetTrigger

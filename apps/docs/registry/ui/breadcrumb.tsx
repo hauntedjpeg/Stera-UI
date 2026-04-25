@@ -48,7 +48,7 @@ function BreadcrumbLink({
     defaultTagName: "a",
     props: mergeProps<"a">(
       {
-        className: cn("inline-flex items-center h-8 px-2 rounded-lg hover:bg-bg-surface-hover hover:text-text transition-colors", className),
+        className: cn("inline-flex items-center h-8 px-2 rounded-lg hover:bg-surface-hover hover:text-text transition-colors", className),
       },
       props
     ),

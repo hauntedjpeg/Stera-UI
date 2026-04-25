@@ -16,17 +16,17 @@ const calloutVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-bg-surface text-text [&>svg]:text-current",
+          "bg-surface text-text [&>svg]:text-current",
         brand:
-          "bg-bg-brand-tertiary border-border-brand [&>svg]:text-text-brand",
+          "bg-surface-brand-tertiary border-border-brand [&>svg]:text-text-brand",
         accent:
-          "bg-bg-accent-tertiary border-border-accent [&>svg]:text-text-accent",
+          "bg-surface-accent-tertiary border-border-accent [&>svg]:text-text-accent",
         danger:
-          "bg-bg-danger-tertiary border-border-danger [&>svg]:text-text-danger",
+          "bg-surface-danger-tertiary border-border-danger [&>svg]:text-text-danger",
         success:
-          "bg-bg-success-tertiary border-border-success [&>svg]:text-text-success",
+          "bg-surface-success-tertiary border-border-success [&>svg]:text-text-success",
         warning:
-          "bg-bg-warning-tertiary border-border-warning [&>svg]:text-text-warning-secondary"
+          "bg-surface-warning-tertiary border-border-warning [&>svg]:text-text-warning-secondary"
       },
     },
     defaultVariants: {

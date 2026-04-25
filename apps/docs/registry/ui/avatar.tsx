@@ -67,7 +67,7 @@ function AvatarFallback({
       data-slot="avatar-fallback"
       className={cn(
         // Base
-        "flex rounded-full bg-bg-surface-inverse st-body-sm-strong text-text-oninverse",
+        "flex rounded-full bg-surface-inverse st-body-sm-strong text-text-oninverse",
         // Sizing
         "size-full",
         // Variants
@@ -92,7 +92,7 @@ function AvatarIconFallback({
       data-slot="avatar-icon-fallback"
       className={cn(
         // Base
-        "flex items-center justify-center rounded-full bg-bg-surface-inverse text-text-oninverse",
+        "flex items-center justify-center rounded-full bg-surface-inverse text-text-oninverse",
         // Sizing
         "size-full",
         // Icon sizing
@@ -122,12 +122,12 @@ const avatarBadgeVariants = cva(
   {
     variants: {
       variant: {
-        subtle: "bg-bg-surface-tertiary-hover text-text",
-        danger: "bg-bg-danger text-text-ondanger",
-        success: "bg-bg-success text-text-onsuccess",
-        warning: "bg-bg-warning text-text-onwarning",
+        subtle: "bg-surface-tertiary-hover text-text",
+        danger: "bg-surface-danger text-text-ondanger",
+        success: "bg-surface-success text-text-onsuccess",
+        warning: "bg-surface-warning text-text-onwarning",
         icon: [
-          "bg-bg-surface-inverse text-text-oninverse",
+          "bg-surface-inverse text-text-oninverse",
         ],
       },
     },
@@ -178,7 +178,7 @@ function AvatarGroupCount({
       data-slot="avatar-group-count"
       className={cn(
         // Base
-        "relative flex bg-bg-surface-tertiary st-body-sm-strong text-text-secondary rounded-full ring-2 ring-bg-surface",
+        "relative flex bg-surface-tertiary st-body-sm-strong text-text-secondary rounded-full ring-2 ring-bg-surface",
         // Sizing
         "size-8 shrink-0",
         // Variants

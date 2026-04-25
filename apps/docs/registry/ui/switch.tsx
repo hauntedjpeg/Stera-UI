@@ -19,14 +19,14 @@ function Switch({
         // Variants
         "data-[size=default]:h-4 data-[size=default]:w-7 data-[size=sm]:h-3 data-[size=sm]:w-5",
         // Other
-        "peer group/switch data-checked:bg-bg-brand data-unchecked:bg-bg-surface-tertiary data-disabled:cursor-not-allowed",
+        "peer group/switch data-checked:bg-surface-brand data-unchecked:bg-surface-tertiary data-disabled:cursor-not-allowed",
         className
       )}
       {...props}
     >
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
-        className="pointer-events-none block rounded-full bg-bg-surface ring-0 transition-transform group-data-[size=default]/switch:size-3.5 group-data-[size=sm]/switch:size-2.5 group-data-[size=default]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=sm]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=default]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-unchecked:translate-x-0 data-disabled:bg-text-disabled"
+        className="pointer-events-none block rounded-full bg-surface ring-0 transition-transform group-data-[size=default]/switch:size-3.5 group-data-[size=sm]/switch:size-2.5 group-data-[size=default]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=sm]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=default]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-unchecked:translate-x-0 data-disabled:bg-text-disabled"
       />
     </SwitchPrimitive.Root>
   )

@@ -60,7 +60,7 @@ function AlertDialogContent({
           // Group
           "group/alert-dialog-content",
           // Base
-          "fixed grid rounded-2xl p-5 bg-bg-surface border border-border shadow-lg duration-100 outline-none",
+          "fixed grid rounded-2xl p-5 bg-surface border border-border shadow-lg duration-100 outline-none",
           // Position
           "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
           // Sizing
@@ -130,7 +130,7 @@ function AlertDialogMedia({
       data-slot="alert-dialog-media"
       className={cn(
         // Base
-        "inline-flex items-center justify-center rounded-lg bg-bg-surface-secondary",
+        "inline-flex items-center justify-center rounded-lg bg-surface-secondary",
         // Sizing
         "size-10",
         // Variants

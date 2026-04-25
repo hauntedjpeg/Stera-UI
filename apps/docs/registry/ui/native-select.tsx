@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils"
 const nativeSelectVariants = cva(
   [
     // Base
-    "w-full min-w-0 appearance-none rounded-xl border border-border bg-bg-surface transition-[color,box-shadow] outline-none select-none",
+    "w-full min-w-0 appearance-none rounded-xl border border-border bg-surface transition-[color,box-shadow] outline-none select-none",
     // Focus
     "focus-visible:border-border-brand-secondary focus-visible:ring-3 focus-visible:ring-ring-brand",
     // Disabled
-    "disabled:text-text-tertiary disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:border-border-secondary",
+    "disabled:text-text-tertiary disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:border-border-secondary",
     // Invalid
     "aria-invalid:border-border-danger-secondary aria-invalid:ring-3 aria-invalid:ring-ring-danger",
   ],

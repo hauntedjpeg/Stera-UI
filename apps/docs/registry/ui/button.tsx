@@ -24,17 +24,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         brand:
-          "bg-bg-brand text-text-onbrand border-bg-brand hover:bg-bg-brand-hover hover:border-border-brand-hover focus-visible:border-border-brand-secondary focus-visible:ring-ring-brand",
+          "bg-surface-brand text-text-onbrand border-surface-brand hover:bg-surface-brand-hover hover:border-border-brand-hover focus-visible:border-border-brand-secondary focus-visible:ring-ring-brand",
         accent:
-          "bg-bg-accent text-text-onaccent border-bg-accent hover:bg-bg-accent-hover hover:border-border-accent-hover",
+          "bg-surface-accent text-text-onaccent border-surface-accent hover:bg-surface-accent-hover hover:border-border-accent-hover",
         outline:
-          "text-text border border-border bg-bg-surface hover:bg-bg-surface-hover aria-expanded:bg-bg-surface-hover aria-expanded:text-text",
+          "text-text border border-border bg-surface hover:bg-surface-hover aria-expanded:bg-surface-hover aria-expanded:text-text",
         subtle:
-          "bg-bg-surface-secondary text-text border-bg-surface-secondary hover:bg-bg-surface-secondary-hover hover:border-bg-surface-secondary-hover aria-expanded:bg-bg-surface-tertiary-hover aria-expanded:border-bg-surface-tertiary-hover aria-expanded:text-text",
+          "bg-surface-secondary text-text border-surface-secondary hover:bg-surface-secondary-hover hover:border-bg-surface-secondary-hover aria-expanded:bg-surface-tertiary-hover aria-expanded:border-bg-surface-tertiary-hover aria-expanded:text-text",
         ghost:
-          "hover:bg-bg-surface-hover hover:text-text aria-expanded:bg-bg-surface-hover aria-expanded:text-text",
+          "hover:bg-surface-hover hover:text-text aria-expanded:bg-surface-hover aria-expanded:text-text",
         danger:
-          "bg-bg-danger-tertiary text-text-danger border-bg-danger-tertiary hover:bg-bg-danger-tertiary-hover hover:border-bg-danger-tertiary-hover focus-visible:border-border-danger-secondary focus-visible:ring-ring-danger",
+          "bg-surface-danger-tertiary text-text-danger border-surface-danger-tertiary hover:bg-surface-danger-tertiary-hover hover:border-surface-danger-tertiary-hover focus-visible:border-border-danger-secondary focus-visible:ring-ring-danger",
         link: "gap-1 text-text underline-offset-4 hover:underline",
       },
       size: {

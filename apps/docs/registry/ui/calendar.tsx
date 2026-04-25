@@ -30,7 +30,7 @@ function Calendar({
       showOutsideDays={showOutsideDays}
       className={cn(
         // Base
-        "bg-bg-surface p-3",
+        "bg-surface p-3",
         // Other
         "group/calendar [--cell-radius:var(--radius-md)] [--cell-size:--spacing(8)] in-data-[slot=card-content]:bg-transparent in-data-[slot=popover-content]:bg-transparent",
         String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
@@ -119,7 +119,7 @@ function Calendar({
         ),
         dropdown: cn(
           // Base
-          "bg-bg-surface",
+          "bg-surface",
           // Position
           "absolute inset-0",
           // Other
@@ -188,11 +188,11 @@ function Calendar({
         ),
         range_start: cn(
           // Base
-          "rounded-l-(--cell-radius) bg-bg-surface-tertiary",
+          "rounded-l-(--cell-radius) bg-surface-tertiary",
           // Position
           "relative after:absolute after:inset-y-0 after:right-0",
           // Other
-          "isolate z-0 after:w-4 after:bg-bg-surface-tertiary",
+          "isolate z-0 after:w-4 after:bg-surface-tertiary",
           defaultClassNames.range_start,
         ),
         range_middle: cn(
@@ -202,16 +202,16 @@ function Calendar({
         ),
         range_end: cn(
           // Base
-          "rounded-r-(--cell-radius) bg-bg-surface-tertiary",
+          "rounded-r-(--cell-radius) bg-surface-tertiary",
           // Position
           "relative after:absolute after:inset-y-0 after:left-0",
           // Other
-          "isolate z-0 after:w-4 after:bg-bg-surface-tertiary",
+          "isolate z-0 after:w-4 after:bg-surface-tertiary",
           defaultClassNames.range_end,
         ),
         today: cn(
           // Base
-          "rounded-(--cell-radius) bg-bg-brand-tertiary text-text-brand",
+          "rounded-(--cell-radius) bg-surface-brand-tertiary text-text-brand",
           defaultClassNames.today,
         ),
         outside: cn(
@@ -337,13 +337,13 @@ function CalendarDayButton({
         // Focus
         "group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10",
         // Range End
-        "data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-bg-brand data-[range-end=true]:hover:bg-bg-brand-secondary! data-[range-end=true]:text-text-onbrand data-[range-end=true]:hover:text-text-onbrand! data-[range-end=true]:[&>span]:text-text-onbrand-secondary",
+        "data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-surface-brand data-[range-end=true]:hover:bg-surface-brand-secondary! data-[range-end=true]:text-text-onbrand data-[range-end=true]:hover:text-text-onbrand! data-[range-end=true]:[&>span]:text-text-onbrand-secondary",
         // Range Middle
-        "data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-bg-surface-tertiary data-[range-middle=true]:text-text",
+        "data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-surface-tertiary data-[range-middle=true]:text-text",
         // Range Start
-        "data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-bg-brand data-[range-start=true]:hover:bg-bg-brand-secondary! data-[range-start=true]:text-text-onbrand data-[range-start=true]:hover:text-text-onbrand! data-[range-start=true]:[&>span]:text-text-onbrand-secondary",
+        "data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-surface-brand data-[range-start=true]:hover:bg-surface-brand-secondary! data-[range-start=true]:text-text-onbrand data-[range-start=true]:hover:text-text-onbrand! data-[range-start=true]:[&>span]:text-text-onbrand-secondary",
         // Selected
-        "data-[selected-single=true]:bg-bg-brand data-[selected-single=true]:hover:bg-bg-brand-secondary! data-[selected-single=true]:text-text-onbrand data-[selected-single=true]:hover:text-text-onbrand!",
+        "data-[selected-single=true]:bg-surface-brand data-[selected-single=true]:hover:bg-surface-brand-secondary! data-[selected-single=true]:text-text-onbrand data-[selected-single=true]:hover:text-text-onbrand!",
         // Other
         "isolate z-10 [&>span]:st-body-sm [&>span]:text-text-tertiary data-[selected-single=true]:[&>span]:text-text-onbrand-secondary",
         defaultClassNames.day,

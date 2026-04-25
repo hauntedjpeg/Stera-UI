@@ -21,41 +21,41 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-bg-surface-tertiary text-text",
+          "bg-surface-tertiary text-text",
         "outline":
-          "bg-bg-surface text-text border-border",
+          "bg-surface text-text border-border",
         "solid":
-          "bg-bg-surface-inverse text-text-oninverse",
+          "bg-surface-inverse text-text-oninverse",
         brand:
-          "bg-bg-brand-tertiary text-text-brand",
+          "bg-surface-brand-tertiary text-text-brand",
         "brand-outline":
-          "bg-bg-surface text-text-brand border-border-brand",
+          "bg-surface text-text-brand border-border-brand",
         "brand-solid":
-          "bg-bg-brand text-text-onbrand",
+          "bg-surface-brand text-text-onbrand",
         accent:
-          "bg-bg-accent-tertiary text-text-accent",
+          "bg-surface-accent-tertiary text-text-accent",
         "accent-outline":
-          "bg-bg-surface text-text-accent border-border-accent",
+          "bg-surface text-text-accent border-border-accent",
         "accent-solid":
-          "bg-bg-accent text-text-onaccent",
+          "bg-surface-accent text-text-onaccent",
         danger:
-          "bg-bg-danger-tertiary text-text-danger-secondary",
+          "bg-surface-danger-tertiary text-text-danger-secondary",
         "danger-outline":
-          "bg-bg-surface text-text-danger border-border-danger",
+          "bg-surface text-text-danger border-border-danger",
         "danger-solid":
-          "bg-bg-danger text-text-ondanger",
+          "bg-surface-danger text-text-ondanger",
         success:
-          "bg-bg-success-tertiary text-text-success-secondary",
+          "bg-surface-success-tertiary text-text-success-secondary",
         "success-outline":
-          "bg-bg-surface text-text-success border-border-success",
+          "bg-surface text-text-success border-border-success",
         "success-solid":
-          "bg-bg-success text-text-onsuccess",
+          "bg-surface-success text-text-onsuccess",
         warning:
-          "bg-bg-warning-tertiary text-text-warning-secondary",
+          "bg-surface-warning-tertiary text-text-warning-secondary",
         "warning-outline":
-          "bg-bg-surface text-text-warning-secondary border-border-warning",
+          "bg-surface text-text-warning-secondary border-border-warning",
         "warning-solid":
-          "bg-bg-warning text-text-onwarning",
+          "bg-surface-warning text-text-onwarning",
       },
       size: {
         sm:

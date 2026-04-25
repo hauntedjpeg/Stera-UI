@@ -30,7 +30,7 @@ function Command({
       data-slot="command"
       className={cn(
         // Base
-        "flex flex-col overflow-hidden rounded-xl! bg-bg-surface p-0 text-text",
+        "flex flex-col overflow-hidden rounded-xl! bg-surface p-0 text-text",
         // Sizing
         "size-full",
         className,
@@ -89,7 +89,7 @@ function CommandInput({
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div data-slot="command-input-wrapper" className="p-2 pb-0">
-      <InputGroup className="h-8! rounded-lg! border-border bg-bg-surface-secondary shadow-none! *:data-[slot=input-group-addon]:pl-2!">
+      <InputGroup className="h-8! rounded-lg! border-border bg-surface-secondary shadow-none! *:data-[slot=input-group-addon]:pl-2!">
         <CommandPrimitive.Input
           data-slot="command-input"
           className={cn(
@@ -98,7 +98,7 @@ function CommandInput({
             // Sizing
             "w-full",
             // Other
-            "disabled:cursor-not-allowed disabled:bg-bg-disabled",
+            "disabled:cursor-not-allowed disabled:bg-surface-disabled",
             className,
           )}
           {...props}
@@ -201,7 +201,7 @@ function CommandItem({
         // Base
         "flex relative cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 st-body-md-compact text-text outline-hidden select-none",
         // Selected
-        "data-[selected=true]:bg-bg-surface-hover data-[selected=true]:text-text data-[selected=true]:**:text-text",
+        "data-[selected=true]:bg-surface-hover data-[selected=true]:text-text data-[selected=true]:**:text-text",
         // Disabled
         "data-[disabled=true]:text-text-tertiary data-[disabled=true]:pointer-events-none",
         // Other

@@ -52,13 +52,13 @@ const itemVariants = cva(
     // Sizing
     "w-full",
     // Other
-    "group/item [a]:transition-colors [a]:hover:bg-bg-surface-hover",
+    "group/item [a]:transition-colors [a]:hover:bg-surface-hover",
   ],
   {
     variants: {
       variant: {
         outline: "border-border",
-        subtle: "border-transparent bg-bg-surface-secondary",
+        subtle: "border-transparent bg-surface-secondary",
         ghost: "border-transparent",
       },
       size: {

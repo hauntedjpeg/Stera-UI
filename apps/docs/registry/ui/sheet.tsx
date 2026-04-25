@@ -57,7 +57,7 @@ function SheetContent({
         data-side={side}
         className={cn(
           // Base
-          "fixed flex flex-col bg-bg-surface bg-clip-padding shadow-lg",
+          "fixed flex flex-col bg-surface bg-clip-padding shadow-lg",
           // Position
           "data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=right]:inset-y-0 data-[side=right]:right-0 data-[side=top]:inset-x-0 data-[side=top]:top-0",
           // Sizing

@@ -24,11 +24,11 @@ const chipVariants = cva(
     variants: {
       variant: {
         subtle:
-          "bg-bg-surface-tertiary text-text hover:bg-bg-surface-tertiary-hover data-[active]:bg-bg-surface-tertiary data-[active]:border-[1.5px] data-[active]:border-border-tertiary",
+          "bg-surface-tertiary text-text hover:bg-surface-tertiary-hover data-[active]:bg-surface-tertiary data-[active]:border-[1.5px] data-[active]:border-border-tertiary",
         outline:
-          "bg-bg-surface text-text border-border hover:bg-bg-surface-hover data-[active]:bg-bg-surface-secondary data-[active]:border-[1.5px] data-[active]:border-border-tertiary",
+          "bg-surface text-text border-border hover:bg-surface-hover data-[active]:bg-surface-secondary data-[active]:border-[1.5px] data-[active]:border-border-tertiary",
         solid:
-          "bg-bg-surface-inverse text-text-oninverse hover:bg-bg-surface-inverse-hover data-[active]:border-[1.5px] data-[active]:border-border-secondary",
+          "bg-surface-inverse text-text-oninverse hover:bg-surface-inverse-hover data-[active]:border-[1.5px] data-[active]:border-border-secondary",
       },
       size: {
         xs:
