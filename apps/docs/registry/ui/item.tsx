@@ -136,7 +136,7 @@ function ItemBody({ className, ...props }: React.ComponentProps<"div">) {
         // MD
         "group-data-[size=md]/item:p-3",
         // LG
-        "group-data-[size=lg]/item:p-4 group-data-[size=sm]/item:gap-4",
+        "group-data-[size=lg]/item:p-4 group-data-[size=lg]/item:gap-4",
         className
       )}
       {...props}
