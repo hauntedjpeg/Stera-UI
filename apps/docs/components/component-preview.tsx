@@ -1,13 +1,15 @@
 import * as React from "react"
 
+import { readRegistryFile } from "../lib/read-file"
 import {
   getRegistryComponent,
   getRegistryComponentSlug,
+  getRegistrySourcePath,
 } from "../lib/registry"
 import { ComponentPreviewFrame } from "./component-preview-frame"
 import { ComponentSource } from "./component-source"
 
-export function ComponentPreview({
+export async function ComponentPreview({
   name,
   align = "center",
   previewClassName,
@@ -37,6 +39,8 @@ export function ComponentPreview({
   }
 
   const slug = getRegistryComponentSlug(name) ?? undefined
+  const relPath = getRegistrySourcePath(name)
+  const code = relPath ? await readRegistryFile(relPath) : ""
 
   return (
     <ComponentPreviewFrame
@@ -46,8 +50,16 @@ export function ComponentPreview({
       hideCode={hideCode}
       caption={caption}
       slug={slug}
+      code={code}
       component={React.createElement(Component)}
-      source={<ComponentSource name={name} />}
+      source={
+        <ComponentSource
+          name={name}
+          code={code}
+          hideCopyButton
+          hideLineNumbers
+        />
+      }
     />
   )
 }

@@ -4,6 +4,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { CopyButton } from "@/components/copy-button"
 import {
   Sheet,
   SheetContent,
@@ -11,14 +12,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { InstallSnippet } from "./install-snippet"
 
 export function PreviewCodeSheet({
   source,
+  code,
   caption,
   slug,
 }: {
   source: React.ReactNode
+  code: string
   caption?: string
   slug?: string
 }) {
@@ -35,22 +37,22 @@ export function PreviewCodeSheet({
             </Button>
           )}
         />
-        <SheetContent className="data-[side=right]:sm:max-w-3xl">
-          <SheetHeader>
-            <SheetTitle>{title}</SheetTitle>
+        <SheetContent className="data-[side=right]:sm:max-w-xl! data-[side=right]:sm:w-full! bg-(--neutral-2) gap-0!" showCloseButton={false}>
+          <SheetHeader className="flex-row items-center gap-2">
+            <SheetTitle className="flex-1">{title}</SheetTitle>
+            <CopyButton className="border-none bg-surface-secondary hover:bg-surface-secondary-hover" value={code} />
           </SheetHeader>
-          <div
-            className={cn(
-              "flex flex-1 flex-col gap-4 overflow-auto px-4 pb-4",
-              "[&_figure.st-code-block]:my-0",
-            )}
-          >
-            {slug && <InstallSnippet slug={slug} />}
-            <div className="flex flex-col gap-2">
-              <h3 className="st-body-md-strong text-text">Source</h3>
+          <div className="flex flex-col no-scrollbar overflow-y-auto p-1 pt-0 flex-1">
+            <div
+              className={cn(
+                "overflow-auto flex-1 bg-surface rounded-xl border border-border",
+                "[&_figure.st-code-block]:my-0",
+              )}
+            >
               {source}
             </div>
           </div>
+
         </SheetContent>
       </Sheet>
     </div>

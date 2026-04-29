@@ -6,28 +6,50 @@ import { readRegistryFile } from "../lib/read-file"
 import { getRegistrySourcePath } from "../lib/registry"
 import { CodeBlock } from "./code-block"
 
+const transformerForceNoLineNumbers = {
+  name: "stera:force-no-line-numbers",
+  pre(node: { properties: Record<string, unknown> }) {
+    node.properties["data-line-numbers"] = "false"
+  },
+}
+
 export async function ComponentSource({
   name,
+  code,
   className,
+  hideCopyButton,
+  hideLineNumbers,
 }: {
   name: string
+  code?: string
   className?: string
+  hideCopyButton?: boolean
+  hideLineNumbers?: boolean
 }) {
-  const relPath = getRegistrySourcePath(name)
-  if (!relPath) return null
+  let source = code
+  if (source === undefined) {
+    const relPath = getRegistrySourcePath(name)
+    if (!relPath) return null
+    source = await readRegistryFile(relPath)
+  }
 
-  const code = await readRegistryFile(relPath)
-  const rendered = await highlight(code, {
+  const rendered = await highlight(source, {
     lang: "tsx",
     themes: {
       light: "github-light-default",
       dark: "github-dark",
     },
     defaultColor: false,
+    transformers: hideLineNumbers ? [transformerForceNoLineNumbers] : undefined,
   })
 
   return (
-    <CodeBlock embedded className={className} data-slot="component-source">
+    <CodeBlock
+      embedded
+      hideCopyButton={hideCopyButton}
+      className={className}
+      data-slot="component-source"
+    >
       {rendered}
     </CodeBlock>
   )

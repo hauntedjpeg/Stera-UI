@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -33,14 +34,16 @@ export default function FieldFormExample() {
       </Field>
       <Field>
         <FieldLabel htmlFor="fp-form-role">Role</FieldLabel>
-        <Select defaultValue="editor">
+        <Select defaultValue="Editor">
           <SelectTrigger id="fp-form-role" className="w-full">
             <SelectValue placeholder="Select a role" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="admin">Admin</SelectItem>
-            <SelectItem value="editor">Editor</SelectItem>
-            <SelectItem value="viewer">Viewer</SelectItem>
+            <SelectGroup>
+              <SelectItem value="Admin">Admin</SelectItem>
+              <SelectItem value="Editor">Editor</SelectItem>
+              <SelectItem value="Viewer">Viewer</SelectItem>
+            </SelectGroup>
           </SelectContent>
         </Select>
       </Field>

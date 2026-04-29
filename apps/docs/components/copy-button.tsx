@@ -30,7 +30,7 @@ export function CopyButton({
         await navigator.clipboard.writeText(value)
         setCopied(true)
       }}
-      className={cn("absolute top-3 right-3 z-10", className)}
+      className={cn(className)}
     >
       {copied ? <SiCheck /> : <SiCopy />}
     </Button>

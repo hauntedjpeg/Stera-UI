@@ -15,11 +15,13 @@ function extractText(node: React.ReactNode): string {
 export function CodeBlock({
   children,
   embedded,
+  hideCopyButton,
   className,
   ...rest
 }: React.HTMLAttributes<HTMLElement> & {
   children?: React.ReactNode
   embedded?: boolean
+  hideCopyButton?: boolean
 }) {
   const raw = extractText(children).replace(/\n$/, "")
 
@@ -37,7 +39,9 @@ export function CodeBlock({
       {...rest}
     >
       {title && <figcaption className="st-code-block__title">{title}</figcaption>}
-      <CopyButton value={raw} />
+      {!hideCopyButton && (
+        <CopyButton value={raw} className="absolute top-3 right-3 z-10" />
+      )}
       {children}
     </figure>
   )
