@@ -15,7 +15,7 @@ function Switch({
       data-size={size}
       className={cn(
         // Base
-        "relative inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring aria-invalid:border-border-danger-secondary aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+        "relative inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger",
         // Variants
         "data-[size=default]:h-4 data-[size=default]:w-7 data-[size=sm]:h-3 data-[size=sm]:w-5",
         // Other

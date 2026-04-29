@@ -219,7 +219,7 @@ function ChartTooltipContent({
                   // Sizing
                   "w-full gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
                   // Other
-                  "[&>svg]:text-text-secondary",
+                  "[&>svg]:text-text-subtle",
                   indicator === "dot" && "items-center",
                 )}
               >
@@ -265,7 +265,7 @@ function ChartTooltipContent({
                     >
                       <div className="grid gap-1.5">
                         {nestLabel ? tooltipLabel : null}
-                        <span className="text-text-secondary">
+                        <span className="text-text-subtle">
                           {itemConfig?.label || item.name}
                         </span>
                       </div>
@@ -330,7 +330,7 @@ function ChartLegendContent({
                 // Sizing
                 "gap-1.5 [&>svg]:h-3 [&>svg]:w-3",
                 // Other
-                "[&>svg]:text-text-secondary",
+                "[&>svg]:text-text-subtle",
               )}
             >
               {itemConfig?.icon && !hideIcon ? (

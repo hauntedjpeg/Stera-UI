@@ -48,7 +48,7 @@ export function InstallSnippet({
         className="overflow-hidden bg-surface-secondary rounded-xl gap-0"
       >
         <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-2">
-          <div className="flex items-center gap-2 text-text-secondary">
+          <div className="flex items-center gap-2 text-text-subtle">
             <span className="font-mono text-sm select-none" aria-hidden>
               {">_"}
             </span>
@@ -63,7 +63,7 @@ export function InstallSnippet({
           <Button
             variant="ghost"
             size="icon-sm"
-            className="text-text-secondary hover:bg-surface-secondary-hover"
+            className="text-text-subtle hover:bg-surface-secondary-hover"
             aria-label={copied ? "Copied" : "Copy command"}
             onClick={async () => {
               await navigator.clipboard.writeText(activeCommand)

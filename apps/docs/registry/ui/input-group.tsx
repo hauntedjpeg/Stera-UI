@@ -21,7 +21,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
         // Focus
         "in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-0 has-[[data-slot=input-group-control]:focus-visible]:border-bg-brand has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring-brand",
         // Disabled
-        "has-[[data-slot=input-group-control]:disabled]:bg-surface-disabled has-[[data-slot=input-group-control]:disabled]:text-text-tertiary has-[[data-slot=input-group-control]:disabled]:border-border-secondary has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed",
+        "has-[[data-slot=input-group-control]:disabled]:bg-surface-disabled has-[[data-slot=input-group-control]:disabled]:text-text-subtlest has-[[data-slot=input-group-control]:disabled]:border-border-strong has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed",
         // Invalid
         "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-destructive/20 [aria-invalid=true]:ring-destructive/40",
         // Variants
@@ -40,7 +40,7 @@ const inputGroupAddonVariants = cva(
     // Sizing
     "h-auto gap-2",
     // Other
-    "cursor-text group-has-[[data-slot=input-group-control]:disabled]/input-group:text-text-tertiary [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4 group-has-[[data-slot=input-group-control][data-size=xl]]/input-group:[&>svg:not([class*='size-'])]:size-5",
+    "cursor-text group-has-[[data-slot=input-group-control]:disabled]/input-group:text-text-subtlest [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4 group-has-[[data-slot=input-group-control][data-size=xl]]/input-group:[&>svg:not([class*='size-'])]:size-5",
   ],
   {
     variants: {
@@ -108,7 +108,7 @@ function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
     <span
       className={cn(
         // Base
-        "flex items-center st-body-md text-text-tertiary",
+        "flex items-center st-body-md text-text-subtlest",
         // Sizing
         "gap-2",
         // Other

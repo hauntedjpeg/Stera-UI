@@ -203,7 +203,7 @@ function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
       data-slot="item-description"
       className={cn(
         // Base
-        "st-body-md text-text-secondary",
+        "st-body-md text-text-subtle",
         // Variants
         "group-data-[size=sm]/item:st-body-sm",
         // Other

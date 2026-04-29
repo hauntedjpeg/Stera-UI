@@ -36,7 +36,7 @@ function ComboboxTrigger({
       {...props}
     >
       {children}
-      <SiChevronDown className="pointer-events-none size-4 text-secondary" />
+      <SiChevronDown className="pointer-events-none size-4 text-text-subtle" />
     </ComboboxPrimitive.Trigger>
   )
 }
@@ -217,7 +217,7 @@ function ComboboxLabel({
       // Base
       "p-2",
       // Other
-      "st-body-sm text-text-tertiary",
+      "st-body-sm text-text-subtlest",
       className,
     )}
       {...props}
@@ -241,7 +241,7 @@ function ComboboxEmpty({ className, ...props }: ComboboxPrimitive.Empty.Props) {
         // Sizing
         "w-full",
         // Other
-        "hidden justify-center text-center text-sm text-text-secondary group-data-empty/combobox-content:flex",
+        "hidden justify-center text-center text-sm text-text-subtle group-data-empty/combobox-content:flex",
         className,
       )}
       {...props}
@@ -320,7 +320,7 @@ function ComboboxChip({
         data-slot="combobox-chip-remove"
       >
         {children}
-        <SiX className="pointer-events-none size-3 text-text-tertiary" />
+        <SiX className="pointer-events-none size-3 text-text-subtlest" />
       </ComboboxPrimitive.ChipRemove>
     </ComboboxPrimitive.Chip>
   )

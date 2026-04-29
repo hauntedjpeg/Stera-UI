@@ -9,13 +9,13 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
       data-slot="checkbox"
       className={cn(
         // Base
-        "relative flex items-center justify-center rounded-[5px] border border-border-secondary outline-none transition-shadow",
+        "relative flex items-center justify-center rounded-[5px] border border-border-strong outline-none transition-shadow",
         // Position
         "after:absolute after:-inset-x-3 after:-inset-y-2",
         // Sizing
         "size-4 shrink-0",
         //Focus
-        "focus-visible:border-border-brand-secondary focus-visible:ring-3 focus-visible:ring-ring-brand",
+        "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
         // Disabled
         "disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:bg-surface-disabled",
         // Invalid

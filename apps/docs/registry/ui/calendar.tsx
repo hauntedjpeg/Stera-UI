@@ -146,7 +146,7 @@ function Calendar({
           // Sizing
           "flex-1",
           // Other
-          "st-body-md-strong text-text-secondary select-none",
+          "st-body-md-strong text-text-subtle select-none",
           defaultClassNames.weekday,
         ),
         week: cn(
@@ -167,7 +167,7 @@ function Calendar({
         ),
         week_number: cn(
           // Other
-          "st-body-md-compact text-text-secondary select-none",
+          "st-body-md-compact text-text-subtle select-none",
           defaultClassNames.week_number,
         ),
         day: cn(
@@ -211,17 +211,17 @@ function Calendar({
         ),
         today: cn(
           // Base
-          "rounded-(--cell-radius) bg-surface-brand-tertiary text-text-brand",
+          "rounded-(--cell-radius) bg-surface-brand-subtle text-text-brand",
           defaultClassNames.today,
         ),
         outside: cn(
           // Other
-          "text-text-tertiary aria-selected:text-text-tertiary",
+          "text-text-subtlest aria-selected:text-text-subtlest",
           defaultClassNames.outside,
         ),
         disabled: cn(
           // Other
-          "text-text-tertiary",
+          "text-text-subtlest",
           defaultClassNames.disabled,
         ),
         hidden: cn(
@@ -337,15 +337,15 @@ function CalendarDayButton({
         // Focus
         "group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10",
         // Range End
-        "data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-surface-brand data-[range-end=true]:hover:bg-surface-brand-secondary! data-[range-end=true]:text-text-onbrand data-[range-end=true]:hover:text-text-onbrand! data-[range-end=true]:[&>span]:text-text-onbrand-secondary",
+        "data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-surface-brand data-[range-end=true]:hover:bg-surface-brand-strong! data-[range-end=true]:text-text-onbrand data-[range-end=true]:hover:text-text-onbrand! data-[range-end=true]:[&>span]:text-text-onbrand-subtle",
         // Range Middle
         "data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-surface-tertiary data-[range-middle=true]:text-text",
         // Range Start
-        "data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-surface-brand data-[range-start=true]:hover:bg-surface-brand-secondary! data-[range-start=true]:text-text-onbrand data-[range-start=true]:hover:text-text-onbrand! data-[range-start=true]:[&>span]:text-text-onbrand-secondary",
+        "data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-surface-brand data-[range-start=true]:hover:bg-surface-brand-strong! data-[range-start=true]:text-text-onbrand data-[range-start=true]:hover:text-text-onbrand! data-[range-start=true]:[&>span]:text-text-onbrand-subtle",
         // Selected
-        "data-[selected-single=true]:bg-surface-brand data-[selected-single=true]:hover:bg-surface-brand-secondary! data-[selected-single=true]:text-text-onbrand data-[selected-single=true]:hover:text-text-onbrand!",
+        "data-[selected-single=true]:bg-surface-brand data-[selected-single=true]:hover:bg-surface-brand-strong! data-[selected-single=true]:text-text-onbrand data-[selected-single=true]:hover:text-text-onbrand!",
         // Other
-        "isolate z-10 [&>span]:st-body-sm [&>span]:text-text-tertiary data-[selected-single=true]:[&>span]:text-text-onbrand-secondary",
+        "isolate z-10 [&>span]:st-body-sm [&>span]:text-text-subtlest data-[selected-single=true]:[&>span]:text-text-onbrand-subtle",
         defaultClassNames.day,
         className,
       )}

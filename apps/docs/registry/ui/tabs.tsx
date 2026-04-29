@@ -29,7 +29,7 @@ function Tabs({
 const tabsListVariants = cva(
   [
     // Base
-    "inline-flex rounded-xl p-0.5 items-center justify-center st-body-md-strong text-text-secondary group-data-[orientation=vertical]/tabs:flex-col",
+    "inline-flex rounded-xl p-0.5 items-center justify-center st-body-md-strong text-text-subtle group-data-[orientation=vertical]/tabs:flex-col",
     // Sizing
     "w-fit group-data-[orientation=vertical]/tabs:h-fit",
     // Variants
@@ -79,7 +79,7 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
       data-slot="tabs-trigger"
       className={cn(
         // Base
-        "relative inline-flex border border-transparent whitespace-nowrap text-text-secondary items-center justify-center group-data-[orientation=vertical]/tabs:justify-start transition-all after:content-[''] after:bg-text after:opacity-0",
+        "relative inline-flex border border-transparent whitespace-nowrap text-text-subtle items-center justify-center group-data-[orientation=vertical]/tabs:justify-start transition-all after:content-[''] after:bg-text after:opacity-0",
         // Position
         "after:absolute group-data-[orientation=horizontal]/tabs:after:inset-x-0 group-data-[orientation=horizontal]/tabs:after:-bottom-1.25 group-data-[orientation=vertical]/tabs:after:inset-y-0 group-data-[orientation=vertical]/tabs:after:-right-1",
         // Sizing

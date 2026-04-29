@@ -9,11 +9,11 @@ const nativeSelectVariants = cva(
     // Base
     "w-full min-w-0 appearance-none rounded-xl border border-border bg-surface transition-[color,box-shadow] outline-none select-none",
     // Focus
-    "focus-visible:border-border-brand-secondary focus-visible:ring-3 focus-visible:ring-ring-brand",
+    "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
     // Disabled
-    "disabled:text-text-tertiary disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:border-border-secondary",
+    "disabled:text-text-subtlest disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:border-border-strong",
     // Invalid
-    "aria-invalid:border-border-danger-secondary aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+    "aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger",
   ],
   {
     variants: {
@@ -49,7 +49,7 @@ function NativeSelect({ className, size, ...props }: NativeSelectProps) {
         {...props}
       />
       <SiChevronDown
-        className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-text-tertiary select-none"
+        className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-text-subtlest select-none"
         aria-hidden="true"
         data-slot="native-select-icon"
       />

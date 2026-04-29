@@ -109,7 +109,7 @@ function AvatarIconFallback({
 const avatarBadgeVariants = cva(
   [
     // Base
-    "inline-flex rounded-full bg-blend-color ring-2 ring-bg-surface",
+    "inline-flex rounded-full bg-blend-color ring-2 ring-surface",
     // Position
     "absolute right-0 bottom-0",
     // Dot sizing (overridden by icon variant)
@@ -157,7 +157,7 @@ function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="avatar-group"
       className={cn(
         // Base
-        "flex *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-bg-surface",
+        "flex *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-surface",
         // Sizing
         "-space-x-2",
         // Other
@@ -178,7 +178,7 @@ function AvatarGroupCount({
       data-slot="avatar-group-count"
       className={cn(
         // Base
-        "relative flex bg-surface-tertiary st-body-sm-strong text-text-secondary rounded-full ring-2 ring-bg-surface",
+        "relative flex bg-surface-tertiary st-body-sm-strong text-text-subtle rounded-full ring-2 ring-surface",
         // Sizing
         "size-8 shrink-0",
         // Variants

@@ -18,15 +18,15 @@ const calloutVariants = cva(
         default:
           "bg-surface text-text [&>svg]:text-current",
         brand:
-          "bg-surface-brand-tertiary border-border-brand [&>svg]:text-text-brand",
+          "bg-surface-brand-subtle border-border-brand [&>svg]:text-text-brand",
         accent:
-          "bg-surface-accent-tertiary border-border-accent [&>svg]:text-text-accent",
+          "bg-surface-accent-subtle border-border-accent [&>svg]:text-text-accent",
         danger:
-          "bg-surface-danger-tertiary border-border-danger [&>svg]:text-text-danger",
+          "bg-surface-danger-subtle border-border-danger [&>svg]:text-text-danger",
         success:
-          "bg-surface-success-tertiary border-border-success [&>svg]:text-text-success",
+          "bg-surface-success-subtle border-border-success [&>svg]:text-text-success",
         warning:
-          "bg-surface-warning-tertiary border-border-warning [&>svg]:text-text-warning-secondary"
+          "bg-surface-warning-subtle border-border-warning [&>svg]:text-text-warning-subtle"
       },
     },
     defaultVariants: {
@@ -81,7 +81,7 @@ function CalloutDescription({
     <div
       data-slot="callout-description"
       className={cn(
-        "st-body-md text-text-secondary text-balance md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text-brand",
+        "st-body-md text-text-subtle text-balance md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text-brand",
         className
       )}
       {...props}

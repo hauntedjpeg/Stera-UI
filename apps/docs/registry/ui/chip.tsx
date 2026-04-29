@@ -12,7 +12,7 @@ const chipVariants = cva(
     // Text
     "whitespace-nowrap st-body-md-strong",
     // Focus
-    "focus-visible:border-border-tertiary focus-visible:ring-3 focus-visible:ring-ring",
+    "focus-visible:border-border-strongest focus-visible:ring-3 focus-visible:ring-ring",
     // Disabled
     "disabled:pointer-events-none disabled:opacity-50",
     // Icons
@@ -24,11 +24,11 @@ const chipVariants = cva(
     variants: {
       variant: {
         subtle:
-          "bg-surface-tertiary text-text hover:bg-surface-tertiary-hover data-[active]:bg-surface-tertiary data-[active]:border-[1.5px] data-[active]:border-border-tertiary",
+          "bg-surface-tertiary text-text hover:bg-surface-tertiary-hover data-[active]:bg-surface-tertiary data-[active]:border-[1.5px] data-[active]:border-border-strongest",
         outline:
-          "bg-surface text-text border-border hover:bg-surface-hover data-[active]:bg-surface-secondary data-[active]:border-[1.5px] data-[active]:border-border-tertiary",
+          "bg-surface text-text border-border hover:bg-surface-hover data-[active]:bg-surface-secondary data-[active]:border-[1.5px] data-[active]:border-border-strongest",
         solid:
-          "bg-surface-inverse text-text-oninverse hover:bg-surface-inverse-hover data-[active]:border-[1.5px] data-[active]:border-border-secondary",
+          "bg-surface-inverse text-text-oninverse hover:bg-surface-inverse-hover data-[active]:border-[1.5px] data-[active]:border-border-strong",
       },
       size: {
         xs:

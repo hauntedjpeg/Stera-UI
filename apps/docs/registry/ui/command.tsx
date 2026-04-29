@@ -160,7 +160,7 @@ function CommandGroup({
         // Base
         "overflow-hidden p-2 text-text",
         // Other
-        "**:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-text-secondary",
+        "**:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-text-subtle",
         className,
       )}
       {...props}
@@ -203,7 +203,7 @@ function CommandItem({
         // Selected
         "data-[selected=true]:bg-surface-hover data-[selected=true]:text-text data-[selected=true]:**:text-text",
         // Disabled
-        "data-[disabled=true]:text-text-tertiary data-[disabled=true]:pointer-events-none",
+        "data-[disabled=true]:text-text-subtlest data-[disabled=true]:pointer-events-none",
         // Other
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className,
@@ -225,7 +225,7 @@ function CommandShortcut({
       data-slot="command-shortcut"
       className={cn(
         // Base
-        "text-xs/4 text-text-tertiary",
+        "text-xs/4 text-text-subtlest",
         // Other
         "ml-auto tracking-wide group-data-[selected=true]/command-item:text-text",
         className,

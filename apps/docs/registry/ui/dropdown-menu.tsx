@@ -76,7 +76,7 @@ function DropdownMenuLabel({
       data-inset={inset}
       className={cn(
         // Base
-        "p-2 st-body-sm text-text-tertiary",
+        "p-2 st-body-sm text-text-subtlest",
         // Variants
         "data-inset:pl-8",
         className
@@ -108,9 +108,9 @@ function DropdownMenuItem({
         // Focus
         "focus:bg-surface-hover",
         // Danger
-        "data-[variant=danger]:text-text-danger data-[variant=danger]:focus:bg-surface-danger-tertiary data-[variant=danger]:focus:text-danger not-data-[variant=danger]:focus:**:text-text data-[variant=danger]:*:[svg]:text-text-danger",
+        "data-[variant=danger]:text-text-danger data-[variant=danger]:focus:bg-surface-danger-subtle data-[variant=danger]:focus:text-danger not-data-[variant=danger]:focus:**:text-text data-[variant=danger]:*:[svg]:text-text-danger",
         // Disabled
-        "data-disabled:text-text-teriary data-disabled:pointer-events-none",
+        "data-disabled:text-text-subtlest data-disabled:pointer-events-none",
         // Other
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
@@ -165,7 +165,7 @@ function DropdownMenuItemDescription({
       data-slot="dropdown-menu-item-description"
       className={cn(
         // Base
-        "st-body-sm text-text-secondary truncate",
+        "st-body-sm text-text-subtle truncate",
         className
       )}
       {...props}
@@ -355,7 +355,7 @@ function DropdownMenuItemShortcut({
       data-slot="dropdown-menu-item-shortcut"
       className={cn(
         // Base
-        "text-xs/4 text-text-tertiary",
+        "text-xs/4 text-text-subtlest",
         // Other
         "ml-auto tracking-wide group-focus/dropdown-menu-item:text-text",
         className

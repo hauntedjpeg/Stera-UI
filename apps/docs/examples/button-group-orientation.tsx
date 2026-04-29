@@ -6,7 +6,7 @@ export default function ButtonGroupOrientation() {
   return (
     <div className="flex items-start gap-12">
       <div className="flex flex-col items-center gap-3">
-        <span className="text-sm text-text-secondary">Horizontal</span>
+        <span className="text-sm text-text-subtle">Horizontal</span>
         <ButtonGroup orientation="horizontal">
           <Button variant="outline">
             <SiReply data-icon="inline-start" />
@@ -23,7 +23,7 @@ export default function ButtonGroupOrientation() {
         </ButtonGroup>
       </div>
       <div className="flex flex-col items-center gap-3">
-        <span className="text-sm text-text-secondary">Vertical</span>
+        <span className="text-sm text-text-subtle">Vertical</span>
         <ButtonGroup orientation="vertical">
           <Button variant="outline">
             <SiReply data-icon="inline-start" />

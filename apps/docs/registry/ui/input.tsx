@@ -7,17 +7,17 @@ import { cn } from "@/lib/utils"
 const inputVariants = cva(
   [
     // Base
-    "rounded-xl border border-border bg-surface px-3 py-1 file:border-0 file:bg-transparent aria-invalid:border-border-danger-secondary",
+    "rounded-xl border border-border bg-surface px-3 py-1 file:border-0 file:bg-transparent aria-invalid:border-border-danger-strong",
     // Sizing
     "w-full min-w-0",
     // Focus
-    "focus-visible:border-border-brand-secondary focus-visible:ring-3 focus-visible:ring-ring-brand",
+    "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
     // Disabled
-    "disabled:text-text-tertiary disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:border-border-secondary",
+    "disabled:text-text-subtlest disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:border-border-strong",
     // Invalid
     "aria-invalid:ring-3 aria-invalid:ring-ring-danger",
     // Other
-    "transition-[color,box-shadow] outline-none file:inline-flex file:font-medium file:text-text placeholder:text-text-tertiary",
+    "transition-[color,box-shadow] outline-none file:inline-flex file:font-medium file:text-text placeholder:text-text-subtlest",
   ],
   {
     variants: {

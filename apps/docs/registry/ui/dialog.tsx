@@ -208,7 +208,7 @@ function DialogDescription({
         // Base
         "text-sm",
         // Other
-        "text-text-secondary *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-text",
+        "text-text-subtle *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-text",
         className,
       )}
       {...props}

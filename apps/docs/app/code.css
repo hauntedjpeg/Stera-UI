@@ -42,7 +42,7 @@
   border-bottom: 1px solid var(--border);
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 0.75rem;
-  color: var(--text-secondary);
+  color: var(--text-subtle);
   background-color: var(--surface);
 }
 
@@ -99,7 +99,7 @@
   width: 1.75rem;
   margin-right: 1rem;
   text-align: right;
-  color: var(--text-tertiary);
+  color: var(--text-subtlest);
   user-select: none;
 }
 
@@ -112,7 +112,7 @@
 .shiki .highlighted {
   display: inline-block;
   width: 100%;
-  background-color: color-mix(in oklch, var(--surface-accent-secondary) 40%, transparent);
+  background-color: color-mix(in oklch, var(--surface-accent-strong) 40%, transparent);
 }
 
 .shiki .diff {
@@ -121,9 +121,9 @@
 }
 
 .shiki .diff.add {
-  background-color: color-mix(in oklch, var(--surface-success-secondary) 50%, transparent);
+  background-color: color-mix(in oklch, var(--surface-success-strong) 50%, transparent);
 }
 
 .shiki .diff.remove {
-  background-color: color-mix(in oklch, var(--surface-danger-secondary) 50%, transparent);
+  background-color: color-mix(in oklch, var(--surface-danger-strong) 50%, transparent);
 }

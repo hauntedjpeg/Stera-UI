@@ -35,10 +35,10 @@ export default function ComboboxCustomItems() {
           <ComboboxList>
             {(status: Status) => (
               <ComboboxItem key={status.value} value={status}>
-                <status.icon className="size-4 text-text-secondary" />
+                <status.icon className="size-4 text-text-subtle" />
                 <div className="flex flex-col">
                   <span>{status.label}</span>
-                  <span className="text-xs text-text-secondary">{status.description}</span>
+                  <span className="text-xs text-text-subtle">{status.description}</span>
                 </div>
               </ComboboxItem>
             )}

@@ -9,7 +9,7 @@ import { InstallSnippet } from "@/components/install-snippet"
 
 function Callout({ children }: { type?: string; children: ReactNode }) {
   return (
-    <div className="my-4 rounded-lg border border-border bg-surface-secondary p-4 st-body-md text-text-secondary">
+    <div className="my-4 rounded-lg border border-border bg-surface-secondary p-4 st-body-md text-text-subtle">
       {children}
     </div>
   )
@@ -46,13 +46,13 @@ const mdxDefaults: MDXComponents = {
   h4: (props) => (
     <h4 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-sm text-text mt-4 mb-2" {...props} />
   ),
-  p: (props) => <p className="st-body-lg text-text-secondary mb-4 leading-relaxed" {...props} />,
+  p: (props) => <p className="st-body-lg text-text-subtle mb-4 leading-relaxed" {...props} />,
   a: (props) => {
     const href = props.href ?? ""
     if (href.startsWith("/") || href.startsWith("#")) {
       return <Link href={href} className="text-text-accent underline underline-offset-4 hover:text-text-accent" {...props} />
     }
-    return <a className="text-text underline underline-offset-4 hover:text-text-secondary" target="_blank" rel="noopener noreferrer" {...props} />
+    return <a className="text-text underline underline-offset-4 hover:text-text-subtle" target="_blank" rel="noopener noreferrer" {...props} />
   },
   table: (props) => (
     <div className="my-6 overflow-auto border border-border rounded-xl">
@@ -60,11 +60,11 @@ const mdxDefaults: MDXComponents = {
     </div>
   ),
   th: (props) => <th className="bg-surface-secondary border-b border-border px-4 py-2 st-body-sm-strong text-text" {...props} />,
-  td: (props) => <td className="border-b border-border px-4 py-2 text-text-secondary" {...props} />,
+  td: (props) => <td className="border-b border-border px-4 py-2 text-text-subtle" {...props} />,
   code: (props) => <code {...props} />,
   pre: (props) => <CodeBlock>{<pre {...props} />}</CodeBlock>,
-  ul: (props) => <ul className="my-4 ml-6 list-disc st-body-lg text-text-secondary [&>li]:mt-1" {...props} />,
-  ol: (props) => <ol className="my-4 ml-6 list-decimal st-body-lg text-text-secondary [&>li]:mt-1" {...props} />,
+  ul: (props) => <ul className="my-4 ml-6 list-disc st-body-lg text-text-subtle [&>li]:mt-1" {...props} />,
+  ol: (props) => <ol className="my-4 ml-6 list-decimal st-body-lg text-text-subtle [&>li]:mt-1" {...props} />,
   img: (props: ImageProps) => (
     <Image
       className="my-4 rounded-lg"
@@ -75,7 +75,7 @@ const mdxDefaults: MDXComponents = {
     />
   ),
   hr: () => <hr className="my-8 border-border" />,
-  blockquote: (props) => <blockquote className="my-4 border-l-2 border-border-brand pl-4 text-text-secondary italic" {...props} />,
+  blockquote: (props) => <blockquote className="my-4 border-l-2 border-border-brand pl-4 text-text-subtle italic" {...props} />,
 }
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {

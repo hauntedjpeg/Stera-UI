@@ -12,11 +12,11 @@ const buttonVariants = cva(
     // Text
     "whitespace-nowrap",
     // Focus
-    "focus-visible:border-border-tertiary focus-visible:ring-3 focus-visible:ring-ring",
+    "focus-visible:border-border-strongest focus-visible:ring-3 focus-visible:ring-ring",
     // Disabled
     "disabled:pointer-events-none disabled:opacity-50",
     // Invalid
-    "aria-invalid:border-border-danger-secondary aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+    "aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger",
     // Other
     "active:translate-y-px [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   ],
@@ -24,9 +24,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         brand:
-          "bg-surface-brand text-text-onbrand border-surface-brand hover:bg-surface-brand-hover hover:border-border-brand-hover focus-visible:border-border-brand-secondary focus-visible:ring-ring-brand",
+          "bg-surface-brand text-text-onbrand border-surface-brand hover:bg-surface-brand-hover hover:border-border-brand-strong focus-visible:border-border-brand-strong focus-visible:ring-ring-brand",
         accent:
-          "bg-surface-accent text-text-onaccent border-surface-accent hover:bg-surface-accent-hover hover:border-border-accent-hover",
+          "bg-surface-accent text-text-onaccent border-surface-accent hover:bg-surface-accent-hover hover:border-border-accent-strong",
         outline:
           "text-text border border-border bg-surface hover:bg-surface-hover aria-expanded:bg-surface-hover aria-expanded:text-text",
         subtle:
@@ -34,7 +34,7 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-surface-hover hover:text-text aria-expanded:bg-surface-hover aria-expanded:text-text",
         danger:
-          "bg-surface-danger-tertiary text-text-danger border-surface-danger-tertiary hover:bg-surface-danger-tertiary-hover hover:border-surface-danger-tertiary-hover focus-visible:border-border-danger-secondary focus-visible:ring-ring-danger",
+          "bg-surface-danger-subtle text-text-danger border-surface-danger-subtle hover:bg-surface-danger-subtle-hover hover:border-surface-danger-subtle-hover focus-visible:border-border-danger-strong focus-visible:ring-ring-danger",
         link: "gap-1 text-text underline-offset-4 hover:underline",
       },
       size: {

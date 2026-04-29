@@ -19,19 +19,19 @@ function RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {
       data-slot="radio-group-item"
       className={cn(
         // Base
-        "group/radio-group-item relative flex items-center justify-center rounded-full border border-border-secondary outline-none transition-shadow",
+        "group/radio-group-item relative flex items-center justify-center rounded-full border border-border-strong outline-none transition-shadow",
         // Position / hit area
         "after:absolute after:-inset-x-3 after:-inset-y-2",
         // Sizing
         "size-4 shrink-0",
         // Focus
-        "focus-visible:border-border-brand-secondary focus-visible:ring-3 focus-visible:ring-ring-brand",
+        "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
         // Disabled
         "disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:bg-surface-disabled",
         // Invalid
         "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:aria-checked:border-primary",
         // Checked
-        "data-checked:border-border-brand-secondary data-checked:bg-surface-brand data-checked:text-text-onbrand",
+        "data-checked:border-border-brand-strong data-checked:bg-surface-brand data-checked:text-text-onbrand",
         // Variants
         "group-has-disabled/field:text-text-disabled",
         // Other

@@ -58,7 +58,7 @@ function SelectTrigger({
         // Sizing
         "w-fit gap-1.5",
         // Animation
-        "transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring-brand disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-border-danger aria-invalid:ring-3 aria-invalid:ring-ring-danger data-placeholder:text-text-tertiary",
+        "transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring-brand disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-border-danger aria-invalid:ring-3 aria-invalid:ring-ring-danger data-placeholder:text-text-subtlest",
         // Variants
         "data-[size=sm]:h-8 data-[size=md]:h-9 data-[size=lg]:h-10 data-[size=xl]:h-12 data-[size=xl]:pl-4 data-[size=xl]:st-body-lg",
         // Other
@@ -70,7 +70,7 @@ function SelectTrigger({
       {children}
       <SelectPrimitive.Icon
         render={
-          <SiChevronDown className="pointer-events-none size-4 text-text-secondary" />
+          <SiChevronDown className="pointer-events-none size-4 text-text-subtle" />
         }
       />
     </SelectPrimitive.Trigger>
@@ -139,7 +139,7 @@ function SelectLabel({
         // Base
         "p-2",
         // Other
-        "st-body-sm text-text-secondary",
+        "st-body-sm text-text-subtle",
         className,
       )}
       {...props}

@@ -24,7 +24,7 @@ export default function SidebarDemo() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton size="lg">
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-surface-brand-tertiary text-text-brand">
+                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-surface-brand-subtle text-text-brand">
                     <SiLayoutGrid className="size-4" />
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
@@ -62,7 +62,7 @@ export default function SidebarDemo() {
           <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1" />
           </header>
-          <div className="flex flex-1 items-center justify-center p-8 text-text-secondary">
+          <div className="flex flex-1 items-center justify-center p-8 text-text-subtle">
             Main content area
           </div>
         </SidebarInset>

@@ -84,13 +84,13 @@ function ButtonGroupSeparator({
          // Brand
          "[[data-variant=brand]+&]:bg-border-onbrand",
          // Subtle
-         "[[data-variant=subtle]+&]:bg-border-secondary",
+         "[[data-variant=subtle]+&]:bg-border-strong",
          // Danger
-         "[[data-variant=danger]+&]:bg-border-ondanger-secondary",
+         "[[data-variant=danger]+&]:bg-border-ondanger-subtle",
          // Accent
          "[[data-variant=accent]+&]:bg-border-onaccent",
          // Ghost
-         "[[data-variant=ghost]+&]:bg-border-secondary [[data-variant=ghost]+&]:data-[orientation=vertical]:my-2",
+         "[[data-variant=ghost]+&]:bg-border-strong [[data-variant=ghost]+&]:data-[orientation=vertical]:my-2",
         className
       )}
       {...props}

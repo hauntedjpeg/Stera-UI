@@ -24,7 +24,7 @@ export default function EmptyDemo() {
       <EmptyContent>
         <Button>Create project</Button>
       </EmptyContent>
-      <Button variant="link" size="sm" className="text-text-secondary">
+      <Button variant="link" size="sm" className="text-text-subtle">
         Learn more
         <SiArrowUpRight />
       </Button>

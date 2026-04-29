@@ -46,7 +46,7 @@ function AccordionTrigger({
           // Focus
           "focus-visible:border-border focus-visible:ring-3 focus-visible:ring-ring focus-visible:after:border-ring",
           // Other
-          "transition-all hover:underline aria-disabled:pointer-events-none aria-disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-text-secondary",
+          "transition-all hover:underline aria-disabled:pointer-events-none aria-disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-text-subtle",
           className
         )}
         {...props}

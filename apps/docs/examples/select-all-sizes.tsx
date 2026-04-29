@@ -12,7 +12,7 @@ export default function SelectAllSizes() {
     <div className="flex flex-col gap-4">
       {(["sm", "md", "lg", "xl"] as const).map((size) => (
         <div key={size} className="flex flex-col gap-1">
-          <span className="text-text-tertiary text-xs">{size}</span>
+          <span className="text-text-subtlest text-xs">{size}</span>
           <Select>
             <SelectTrigger size={size} className="w-48">
               <SelectValue placeholder="Select a fruit" />

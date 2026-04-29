@@ -134,7 +134,7 @@ function FieldLabel({
       data-slot="field-label"
       className={cn(
         // Base
-        "flex has-[>[data-slot=field]]:has-data-checked:border-border-brand has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-tertiary has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-2 has-[>[data-slot=field]]:flex-col",
+        "flex has-[>[data-slot=field]]:has-data-checked:border-border-brand has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-subtle has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-2 has-[>[data-slot=field]]:flex-col",
         // Sizing
         "w-fit gap-2 has-[>[data-slot=field]]:w-full",
         // Other
@@ -172,7 +172,7 @@ function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
         // Position
         "[[data-variant=legend]+&]:-mt-1.5 last:mt-0 nth-last-2:-mt-1",
         // Other
-        "text-left st-body-sm text-text-secondary group-has-data-horizontal/field:text-balance [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-text-brand",
+        "text-left st-body-sm text-text-subtle group-has-data-horizontal/field:text-balance [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-text-brand",
         className,
       )}
       {...props}
@@ -205,7 +205,7 @@ function FieldSeparator({
       <Separator className="absolute inset-0 top-1/2" />
       {children && (
         <span
-          className="relative mx-auto block w-fit bg-surface px-2 text-text-secondary"
+          className="relative mx-auto block w-fit bg-surface px-2 text-text-subtle"
           data-slot="field-separator-content"
         >
           {children}

@@ -172,7 +172,7 @@ function AlertDialogDescription({
       data-slot="alert-dialog-description"
       className={cn(
         // Base
-        "st-body-md text-text-secondary",
+        "st-body-md text-text-subtle",
         // Other
         "text-balance md:text-pretty *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-text",
         className

@@ -8,11 +8,11 @@ const toggleVariants = cva(
     // Base
     "inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent text-sm font-medium whitespace-nowrap transition-all outline-none select-none",
     // Focus
-    "focus-visible:border-border-tertiary focus-visible:ring-3 focus-visible:ring-ring",
+    "focus-visible:border-border-strongest focus-visible:ring-3 focus-visible:ring-ring",
     // Disabled
     "disabled:pointer-events-none disabled:opacity-50",
     // Invalid
-    "aria-invalid:border-border-danger-secondary aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+    "aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger",
     // Other
     "group/toggle active:translate-y-px [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   ],

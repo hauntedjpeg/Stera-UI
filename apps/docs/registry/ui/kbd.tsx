@@ -9,7 +9,7 @@ const kbdVariants = cva(
     // Variants
     "in-data-[slot=tooltip-content]:bg-surface-tertiary in-data-[slot=tooltip-content]:text-text",
     // Other
-    "pointer-events-none font-sans text-xs/4 text-text-secondary select-none",
+    "pointer-events-none font-sans text-xs/4 text-text-subtle select-none",
   ],
   {
     variants: {

@@ -211,7 +211,7 @@ function MenubarShortcut({
     <DropdownMenuItemShortcut
       data-slot="menubar-shortcut"
       className={cn(
-        "ml-auto text-xs tracking-widest text-text-secondary group-focus/menubar-item:text-text",
+        "ml-auto text-xs tracking-widest text-text-subtle group-focus/menubar-item:text-text",
         className
       )}
       {...props}

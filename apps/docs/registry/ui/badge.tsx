@@ -27,33 +27,33 @@ const badgeVariants = cva(
         "solid":
           "bg-surface-inverse text-text-oninverse",
         brand:
-          "bg-surface-brand-tertiary text-text-brand",
+          "bg-surface-brand-subtle text-text-brand-strong",
         "brand-outline":
           "bg-surface text-text-brand border-border-brand",
         "brand-solid":
           "bg-surface-brand text-text-onbrand",
         accent:
-          "bg-surface-accent-tertiary text-text-accent",
+          "bg-surface-accent-subtle text-text-accent-strong",
         "accent-outline":
           "bg-surface text-text-accent border-border-accent",
         "accent-solid":
           "bg-surface-accent text-text-onaccent",
         danger:
-          "bg-surface-danger-tertiary text-text-danger-secondary",
+          "bg-surface-danger-subtle text-text-danger-strong",
         "danger-outline":
           "bg-surface text-text-danger border-border-danger",
         "danger-solid":
           "bg-surface-danger text-text-ondanger",
         success:
-          "bg-surface-success-tertiary text-text-success-secondary",
+          "bg-surface-success-subtle text-text-success-strong",
         "success-outline":
           "bg-surface text-text-success border-border-success",
         "success-solid":
           "bg-surface-success text-text-onsuccess",
         warning:
-          "bg-surface-warning-tertiary text-text-warning-secondary",
+          "bg-surface-warning-subtle text-text-warning-strong",
         "warning-outline":
-          "bg-surface text-text-warning-secondary border-border-warning",
+          "bg-surface text-text-warning-subtle border-border-warning",
         "warning-solid":
           "bg-surface-warning text-text-onwarning",
       },

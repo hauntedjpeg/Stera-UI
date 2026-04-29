@@ -17,7 +17,7 @@ export default async function Page(props: {
       <header className="mb-8">
         <h1 className="st-display-sm text-text">{page.data.title}</h1>
         {page.data.description && (
-          <p className="mt-2 st-body-lg text-text-secondary">
+          <p className="mt-2 st-body-lg text-text-subtle">
             {page.data.description}
           </p>
         )}

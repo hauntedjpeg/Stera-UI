@@ -151,7 +151,7 @@ function SheetDescription({
       data-slot="sheet-description"
       className={cn(
         // Other
-        "text-sm text-text-secondary",
+        "text-sm text-text-subtle",
         className,
       )}
       {...props}

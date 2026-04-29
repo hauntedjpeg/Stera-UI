@@ -467,7 +467,7 @@ function SidebarGroupLabel({
       {
         className: cn(
           // Base
-          "flex shrink-0 items-center rounded-md px-2 st-body-sm text-text-secondary ring-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2",
+          "flex shrink-0 items-center rounded-md px-2 st-body-sm text-text-subtle ring-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2",
           // Sizing
           "h-8",
           // Variants
@@ -832,9 +832,9 @@ function SidebarMenuSubButton({
           // Sizing
           "h-7 min-w-0 gap-2",
           // Variants
-          "group-data-[collapsible=icon]:hidden data-[size=md]:text-sm data-[size=sm]:text-xs data-active:bg-surface-brand-tertiary data-active:text-text-brand",
+          "group-data-[collapsible=icon]:hidden data-[size=md]:text-sm data-[size=sm]:text-xs data-active:bg-surface-brand-subtle data-active:text-text-brand",
           // Other
-          "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-text-secondary",
+          "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-text-subtle",
           className
         ),
       },

@@ -26,7 +26,7 @@ export function ComponentPreview({
 
   if (!Component) {
     return (
-      <p className="my-6 text-sm text-text-secondary">
+      <p className="my-6 text-sm text-text-subtle">
         Example{" "}
         <code className="rounded bg-surface-secondary px-1.5 py-0.5 font-mono">
           {name}
