@@ -212,11 +212,11 @@
       "files": [{ "path": "registry/ui/field.tsx", "type": "registry:ui" }]
     },
     {
-      "name": "hover-card",
+      "name": "preview-card",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react"],
       "registryDependencies": ["utils"],
-      "files": [{ "path": "registry/ui/hover-card.tsx", "type": "registry:ui" }]
+      "files": [{ "path": "registry/ui/preview-card.tsx", "type": "registry:ui" }]
     },
     {
       "name": "input",

@@ -219,7 +219,7 @@ These must match the path aliases in your `tsconfig.json`. For example, if you s
 | `dropdown-menu` | `utils`                                                                               |
 | `empty`         | `utils`                                                                               |
 | `field`         | `utils`, `label`, `separator`                                                         |
-| `hover-card`    | `utils`                                                                               |
+| `preview-card`  | `utils`                                                                               |
 | `input`         | `utils`                                                                               |
 | `input-group`   | `utils`, `button`, `input`, `textarea`                                                |
 | `input-otp`     | `utils`                                                                               |
