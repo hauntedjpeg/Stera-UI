@@ -1,0 +1,54 @@
+---
+title: Preview Card
+description: For sighted users to preview content available behind a link.
+---
+
+<ComponentPreview name="preview-card-demo" />
+
+## Installation
+
+<InstallSnippet slug="preview-card" hideHeading />
+
+## Sides
+
+<ComponentPreview name="preview-card-sides" />
+
+| Side | Description |
+| --- | --- |
+| `top` | Above the trigger |
+| `right` | Right of the trigger |
+| `bottom` | Below the trigger (default) |
+| `left` | Left of the trigger |
+
+## Delay
+
+<ComponentPreview name="preview-card-delay" />
+
+Use `delay` and `closeDelay` on `PreviewCardTrigger` to control when the card opens and closes.
+
+## API Reference
+
+### PreviewCard
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `defaultOpen` | `boolean` | `false` |
+| `open` | `boolean` | — |
+| `onOpenChange` | `(open: boolean) => void` | — |
+
+### PreviewCardTrigger
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `delay` | `number` | `600` |
+| `closeDelay` | `number` | `300` |
+| `render` | `ReactElement` | — |
+
+### PreviewCardContent
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` |
+| `align` | `"start" \| "center" \| "end"` | `"center"` |
+| `sideOffset` | `number` | `4` |
+| `alignOffset` | `number` | `4` |

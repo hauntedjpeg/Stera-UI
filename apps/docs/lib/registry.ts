@@ -888,6 +888,21 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/sidebar-variants.tsx",
     slug: "sidebar",
   },
+  "preview-card-demo": {
+    component: dynamic(() => import("@/examples/preview-card-demo")),
+    path: "examples/preview-card-demo.tsx",
+    slug: "preview-card",
+  },
+  "preview-card-sides": {
+    component: dynamic(() => import("@/examples/preview-card-sides")),
+    path: "examples/preview-card-sides.tsx",
+    slug: "preview-card",
+  },
+  "preview-card-delay": {
+    component: dynamic(() => import("@/examples/preview-card-delay")),
+    path: "examples/preview-card-delay.tsx",
+    slug: "preview-card",
+  },
 }
 
 export function getRegistryComponent(name: string): ComponentType | null {
