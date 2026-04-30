@@ -28,7 +28,6 @@ apps/docs/public/r/
 
 # ide
 .claude/
-.vscode/
 .zed/
 
 # misc
