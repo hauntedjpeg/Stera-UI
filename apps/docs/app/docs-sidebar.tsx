@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import type { ReactNode } from "react"
+import { useEffect, type ReactNode } from "react"
 import {
   Sidebar,
   SidebarContent,
@@ -16,6 +16,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
+  useSidebar,
 } from "@/components/ui/sidebar"
 import { SiAsteriskAlt } from "stera-icons"
 
@@ -48,6 +49,11 @@ interface PageTreeFolder {
 
 export function DocsSidebar({ tree }: { tree: PageTreeRoot }) {
   const pathname = usePathname()
+  const { isMobile, setOpenMobile } = useSidebar()
+
+  useEffect(() => {
+    if (isMobile) setOpenMobile(false)
+  }, [pathname, isMobile, setOpenMobile])
 
   return (
     <Sidebar>
@@ -130,10 +136,6 @@ function TreeNode({
   }
 
   if (node.type === "folder") {
-    const isChildActive =
-      (node.index && pathname === node.index.url) ||
-      hasActiveChild(node.children, pathname)
-
     return (
       <SidebarMenuItem>
         {node.index ? (
@@ -172,15 +174,4 @@ function TreeNode({
   }
 
   return null
-}
-
-function hasActiveChild(nodes: PageTreeNode[], pathname: string): boolean {
-  for (const node of nodes) {
-    if (node.type === "page" && pathname === node.url) return true
-    if (node.type === "folder") {
-      if (node.index && pathname === node.index.url) return true
-      if (hasActiveChild(node.children, pathname)) return true
-    }
-  }
-  return false
 }
