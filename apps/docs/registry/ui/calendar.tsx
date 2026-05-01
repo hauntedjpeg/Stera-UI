@@ -144,7 +144,7 @@ function Calendar({
           // Base
           "rounded-(--cell-radius)",
           // Sizing
-          "flex-1",
+          "flex-1 min-w-(--cell-size)",
           // Other
           "st-body-md-strong text-text-subtle select-none",
           defaultClassNames.weekday,
@@ -176,7 +176,7 @@ function Calendar({
           // Position
           "relative",
           // Sizing
-          "aspect-square h-full w-full",
+          "flex-1 aspect-square min-w-(--cell-size)",
           // Animation
           "[&:last-child[data-selected=true]_button]:rounded-r-(--cell-radius)",
           // Other
@@ -316,7 +316,6 @@ function CalendarDayButton({
   return (
     <Button
       variant="ghost"
-      size="icon"
       data-day={day.date.toLocaleDateString(locale?.code)}
       data-selected-single={
         modifiers.selected &&
@@ -329,11 +328,11 @@ function CalendarDayButton({
       data-range-middle={modifiers.range_middle}
       className={cn(
         // Base
-        "flex flex-col border-0 st-body-md-compact rounded-lg",
+        "flex flex-col items-center justify-center border-0 st-body-md-compact rounded-(--cell-radius)",
         // Position
         "relative",
         // Sizing
-        "aspect-square size-auto w-full min-w-(--cell-size) gap-1",
+        "size-full gap-1 p-0",
         // Focus
         "group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10",
         // Range End
