@@ -34,6 +34,11 @@
   margin-bottom: 1rem;
   border-radius: 0.75rem;
   overflow: hidden;
+  background-color: var(--surface-secondary);
+}
+
+[data-slot="sheet-content"] .st-code-block {
+  background-color: var(--surface);
 }
 
 .st-code-block__title {
