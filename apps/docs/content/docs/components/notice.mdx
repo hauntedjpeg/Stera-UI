@@ -1,6 +1,6 @@
 ---
 title: Notice
-description: A toast notification system built on Sonner, themed to match the design system.
+description: A toast notification system built on Base UI's Toast primitive.
 ---
 
 <ComponentPreview name="notice-demo" />
@@ -11,7 +11,7 @@ description: A toast notification system built on Sonner, themed to match the de
 
 ## Usage
 
-Add `<Notice />` once at the root of your app (e.g. in your layout), then trigger toasts with `toast()` from Sonner anywhere in your code.
+Add `<Notice />` once at the root of your app (e.g. in your layout), then trigger toasts with `noticeManager.add(...)` from anywhere in your code. `noticeManager` is a singleton, so it works in event handlers, server actions, or any module — no hook required.
 
 ```tsx
 import { Notice } from "@/components/ui/notice"
@@ -26,23 +26,58 @@ export default function Layout({ children }) {
 }
 ```
 
+```tsx
+import { noticeManager } from "@/components/ui/notice"
+
+noticeManager.add({
+  type: "success",
+  title: "Event has been created",
+  description: "Sunday, December 03, 2023 at 9:00 AM",
+})
+```
+
+Inside a React component, you can also use `useNoticeManager()` to access the same API along with the live list of toasts.
+
 ## Toast Types
 
 <ComponentPreview name="notice-types" />
 
-| Method | Description |
+Pass a `type` to switch the leading icon and color treatment. Built-in types: `success`, `info`, `warning`, `error`, `loading`. Omit `type` for a plain notice with no icon.
+
+| Type | Description |
 | --- | --- |
-| `toast()` | Default notification |
-| `toast.success()` | Success confirmation |
-| `toast.info()` | Informational message |
-| `toast.warning()` | Caution or advisory |
-| `toast.error()` | Error or failure |
+| _(none)_ | Default notification |
+| `success` | Success confirmation |
+| `info` | Informational message |
+| `warning` | Caution or advisory |
+| `error` | Error or failure |
+| `loading` | In-progress operation |
 
 ## API Reference
 
-`Notice` wraps Sonner's `Toaster` component and forwards all props to it. The component automatically reads the current theme via `next-themes`.
+### `<Notice />`
+
+Drop-in viewport that renders the provider, portal, viewport, and a default toast layout. Use it once at the root of your app.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `position` | Sonner position | `"bottom-right"` |
-| `...props` | All Sonner `Toaster` props | — |
+| `position` | `"top-left" \| "top-center" \| "top-right" \| "bottom-left" \| "bottom-center" \| "bottom-right"` | `"bottom-right"` |
+| `limit` | `number` | `3` |
+| `timeout` | `number` (ms, `0` to disable auto-dismiss) | `5000` |
+
+### `noticeManager`
+
+A singleton created with `Toast.createToastManager()` from Base UI. Use it to trigger toasts from anywhere.
+
+| Method | Description |
+| --- | --- |
+| `add(options)` | Create a toast. Returns the toast id. Reusing an existing id updates the toast in place. |
+| `update(id, options)` | Update an existing toast. |
+| `close(id?)` | Close a specific toast, or all toasts when called with no id. |
+| `promise(promise, { loading, success, error })` | Render an async toast that transitions through `loading` → `success` / `error`. |
+
+`add` accepts: `id`, `type`, `title`, `description`, `timeout`, `priority`, `actionProps`, `onClose`, `onRemove`, and `data`. See the [Base UI Toast docs](https://base-ui.com/react/components/toast) for the full option list.
+
+### Lower-level parts
+
+For custom layouts, compose the parts directly: `NoticeProvider`, `NoticePortal`, `NoticeViewport`, `NoticeRoot`, `NoticeContent`, `NoticeTitle`, `NoticeDescription`, `NoticeAction`, `NoticeClose`. Each is a thin wrapper around the matching `Toast.*` part from `@base-ui/react/toast`. `useNoticeManager` is re-exported as `Toast.useToastManager`.

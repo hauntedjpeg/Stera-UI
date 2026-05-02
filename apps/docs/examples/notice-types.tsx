@@ -1,27 +1,39 @@
 "use client"
 
-import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
-import { Notice } from "@/components/ui/notice"
+import { Notice, noticeManager } from "@/components/ui/notice"
 
 export default function NoticeTypes() {
   return (
     <>
       <Notice />
       <div className="flex flex-wrap gap-2">
-        <Button variant="outline" onClick={() => toast("Event has been created")}>
+        <Button
+          variant="outline"
+          onClick={() =>
+            noticeManager.add({ title: "Event has been created" })
+          }
+        >
           Default
         </Button>
         <Button
           variant="outline"
-          onClick={() => toast.success("Event has been created")}
+          onClick={() =>
+            noticeManager.add({
+              type: "success",
+              title: "Event has been created",
+            })
+          }
         >
           Success
         </Button>
         <Button
           variant="outline"
           onClick={() =>
-            toast.info("Be at the area 10 minutes before the event time")
+            noticeManager.add({
+              type: "info",
+              title: "Be at the area 10 minutes before the event time",
+            })
           }
         >
           Info
@@ -29,14 +41,22 @@ export default function NoticeTypes() {
         <Button
           variant="outline"
           onClick={() =>
-            toast.warning("Event start time cannot be earlier than 8am")
+            noticeManager.add({
+              type: "warning",
+              title: "Event start time cannot be earlier than 8am",
+            })
           }
         >
           Warning
         </Button>
         <Button
           variant="outline"
-          onClick={() => toast.error("Event has not been created")}
+          onClick={() =>
+            noticeManager.add({
+              type: "error",
+              title: "Event has not been created",
+            })
+          }
         >
           Error
         </Button>

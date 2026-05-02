@@ -352,7 +352,8 @@
     {
       "name": "notice",
       "type": "registry:ui",
-      "dependencies": ["sonner", "next-themes", "stera-icons"],
+      "dependencies": ["@base-ui/react", "stera-icons"],
+      "registryDependencies": ["utils"],
       "files": [{ "path": "registry/ui/notice.tsx", "type": "registry:ui" }]
     },
     {
