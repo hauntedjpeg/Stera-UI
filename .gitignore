@@ -19,6 +19,7 @@ dist
 
 # next.js
 .next
+next-env.d.ts
 
 # generated registry (built from source)
 apps/docs/public/r/
