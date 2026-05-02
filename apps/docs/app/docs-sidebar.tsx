@@ -9,7 +9,6 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
@@ -18,7 +17,6 @@ import {
   SidebarMenuSubButton,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { SiAsteriskAlt } from "stera-icons"
 
 interface PageTreeRoot {
   name: ReactNode
@@ -56,13 +54,8 @@ export function DocsSidebar({ tree }: { tree: PageTreeRoot }) {
   }, [pathname, isMobile, setOpenMobile])
 
   return (
-    <Sidebar>
-      <SidebarHeader>
-        <SidebarMenuButton size="lg" render={<Link href={"/"} />}>
-          <SiAsteriskAlt className="size-6" /><span className="st-heading-sm">Stera UI</span>
-        </SidebarMenuButton>
-      </SidebarHeader>
-      <SidebarContent>
+    <Sidebar className="group-data-[side=left]:border-r-0">
+      <SidebarContent className="pb-16">
         <TreeNodes nodes={tree.children} pathname={pathname} />
       </SidebarContent>
     </Sidebar>
@@ -126,6 +119,7 @@ function TreeNode({
     return (
       <SidebarMenuItem>
         <SidebarMenuButton
+          className="w-fit data-active:bg-surface-tertiary"
           isActive={pathname === node.url}
           render={<Link href={node.url} />}
         >
@@ -140,13 +134,14 @@ function TreeNode({
       <SidebarMenuItem>
         {node.index ? (
           <SidebarMenuButton
+            className="w-fit data-active:bg-surface-tertiary"
             isActive={pathname === node.index.url}
             render={<Link href={node.index.url} />}
           >
             {node.name}
           </SidebarMenuButton>
         ) : (
-          <SidebarMenuButton isActive={false}>
+          <SidebarMenuButton className="w-fit" isActive={false}>
             {node.name}
           </SidebarMenuButton>
         )}
@@ -157,6 +152,7 @@ function TreeNode({
                 return (
                   <SidebarMenuSubItem key={i}>
                     <SidebarMenuSubButton
+                      className="w-fit data-active:bg-surface-tertiary"
                       isActive={pathname === child.url}
                       render={<Link href={child.url} />}
                     >

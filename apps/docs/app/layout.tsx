@@ -9,6 +9,7 @@ import { DocsSidebar } from "./docs-sidebar"
 import { MobileHeader } from "./docs-header"
 import "../registry/styles/globals.css"
 import "./code.css"
+import "./docs.css"
 
 export const metadata: Metadata = {
   title: "Stera UI",
