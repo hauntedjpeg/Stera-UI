@@ -7,7 +7,7 @@ import {
 export default function AvatarFallbackOnly() {
   return (
     <Avatar>
-      <AvatarImage src="/broken-image.png" alt="User" />
+      <AvatarImage src="#" alt="User" />
       <AvatarFallback>JD</AvatarFallback>
     </Avatar>
   )
