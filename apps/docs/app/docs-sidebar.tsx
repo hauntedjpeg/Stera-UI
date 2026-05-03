@@ -57,11 +57,10 @@ export function DocsSidebar({ tree }: { tree: PageTreeRoot }) {
   return (
     <Sidebar
       className={cn(
-        "group-data-[side=left]:border-r-0",
-        "md:top-(--header-height) md:bottom-auto md:h-[calc(100svh-var(--header-height))]"
+        "group-data-[side=left]:border-r-0 md:pl-4",
       )}
     >
-      <SidebarContent className="pb-16">
+      <SidebarContent className="pb-16 md:pt-(--header-height) scrollbar-hide">
         <TreeNodes nodes={tree.children} pathname={pathname} />
       </SidebarContent>
     </Sidebar>
