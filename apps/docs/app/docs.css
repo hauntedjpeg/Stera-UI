@@ -1,3 +1,7 @@
-.glass-brand {
-  box-shadow: 0 0 0 1px var(--surface-brand) inset, 1.5px 1.5px 0 0 var(--surface-brand-strong-hover) inset, 0 0 0 1.25px var(--surface-brand-strong-hover) inset, -1.5px -1.5px 0 0 var(--surface-brand-strong-hover) inset;
+@utility glass-brand {
+  box-shadow:
+    0 0 0 1px var(--surface-brand) inset,
+    1.5px 1.5px 0 0 var(--surface-brand-strong-hover) inset,
+    0 0 0 1.25px var(--surface-brand-strong-hover) inset,
+    -1.5px -1.5px 0 0 var(--surface-brand-strong-hover) inset;
 }

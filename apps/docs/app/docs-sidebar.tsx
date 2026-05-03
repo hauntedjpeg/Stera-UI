@@ -17,6 +17,7 @@ import {
   SidebarMenuSubButton,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { cn } from "@/lib/utils"
 
 interface PageTreeRoot {
   name: ReactNode
@@ -54,7 +55,12 @@ export function DocsSidebar({ tree }: { tree: PageTreeRoot }) {
   }, [pathname, isMobile, setOpenMobile])
 
   return (
-    <Sidebar className="group-data-[side=left]:border-r-0">
+    <Sidebar
+      className={cn(
+        "group-data-[side=left]:border-r-0",
+        "md:top-(--header-height) md:bottom-auto md:h-[calc(100svh-var(--header-height))]"
+      )}
+    >
       <SidebarContent className="pb-16">
         <TreeNodes nodes={tree.children} pathname={pathname} />
       </SidebarContent>
