@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator"
 const buttonGroupVariants = cva(
   [
     // Base
-    "flex items-stretch has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-md",
+    "flex items-stretch has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-xl",
     // Position
     "*:focus-visible:relative",
     // Sizing
@@ -22,7 +22,7 @@ const buttonGroupVariants = cva(
         horizontal:
           "[&>[data-slot]:has(~[data-slot])]:rounded-r-none [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0 [&>[data-slot]:has(+[data-slot='button-group-separator'])]:border-r-0",
         vertical:
-          "flex-col *:data-slot:rounded-b-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-md! [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0",
+          "flex-col [&>[data-slot]:has(~[data-slot])]:rounded-b-none [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0 [&>[data-slot]:has(+[data-slot='button-group-separator'])]:border-b-0",
       },
     },
     defaultVariants: {
