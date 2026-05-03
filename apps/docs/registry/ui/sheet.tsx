@@ -61,9 +61,9 @@ function SheetContent({
           // Base
           "fixed flex flex-col bg-surface bg-clip-padding shadow-lg border border-border rounded-xl",
           // Position
-          "data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=right]:inset-y-2 data-[side=right]:right-2 data-[side=top]:inset-x-0 data-[side=top]:top-0",
+          "data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=left]:inset-y-2 data-[side=left]:left-2 data-[side=right]:inset-y-2 data-[side=right]:right-2 data-[side=top]:inset-x-0 data-[side=top]:top-0",
           // Sizing
-          "gap-4 data-[side=bottom]:h-auto data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=right]:h-[calc(100%-16px)] data-[side=right]:w-3/4 data-[side=top]:h-auto data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm",
+          "gap-4 data-[side=bottom]:h-auto data-[side=left]:h-[calc(100%-16px)] data-[side=left]:w-3/4 data-[side=right]:h-[calc(100%-16px)] data-[side=right]:w-3/4 data-[side=top]:h-auto data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm",
           // Animation
           "data-open:animate-in data-open:fade-in-0 data-[side=bottom]:data-open:slide-in-from-bottom-10 data-[side=left]:data-open:slide-in-from-left-10 data-[side=right]:data-open:slide-in-from-right-10 data-[side=top]:data-open:slide-in-from-top-10 data-closed:animate-out data-closed:fade-out-0 data-[side=bottom]:data-closed:slide-out-to-bottom-10 data-[side=left]:data-closed:slide-out-to-left-10 data-[side=right]:data-closed:slide-out-to-right-10 data-[side=top]:data-closed:slide-out-to-top-10",
           // Other
