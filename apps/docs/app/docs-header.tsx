@@ -10,12 +10,12 @@ import { DocsSearch, type PageTree } from "./docs-search"
 export function DocsHeader({ tree }: { tree: PageTree }) {
   return (
     <header className="sticky top-0 z-20 flex h-(--header-height) items-center gap-2 easing-fade px-6 py-4">
-      <SidebarTrigger size="icon" className="md:hidden glass-brand backdrop-blur-md rounded-full" />
+      <SidebarTrigger size="icon-lg" className="md:hidden glass-brand backdrop-blur-md rounded-full" />
       <Link
         href="/"
         className={cn(
-          buttonVariants({ variant: "ghost", size: "md" }),
-          "glass-brand backdrop-blur-md rounded-full"
+          buttonVariants({ variant: "ghost", size: "lg" }),
+          "glass-brand backdrop-blur-md rounded-full md:h-9 md:gap-2 md:px-3 md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5"
         )}
       >
         <SiAsteriskAlt data-icon="inline-start" />
@@ -25,8 +25,8 @@ export function DocsHeader({ tree }: { tree: PageTree }) {
       <Link
         href="https://stera.sh/"
         className={cn(
-          buttonVariants({ variant: "ghost", size: "md" }),
-          "glass-brand backdrop-blur-md rounded-full ml-auto"
+          buttonVariants({ variant: "ghost", size: "lg" }),
+          "glass-brand backdrop-blur-md rounded-full ml-auto md:h-9 md:gap-2 md:px-3 md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5"
         )}
       >
         Icons
@@ -37,8 +37,8 @@ export function DocsHeader({ tree }: { tree: PageTree }) {
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          buttonVariants({ variant: "ghost", size: "icon" }),
-          "glass-brand backdrop-blur-md rounded-full"
+          buttonVariants({ variant: "ghost", size: "icon-lg" }),
+          "glass-brand backdrop-blur-md rounded-full md:size-9 md:[&_svg:not([class*='size-'])]:size-4"
         )}
       >
         <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24">
