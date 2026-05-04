@@ -10,7 +10,7 @@ import {
 export default function SelectAllSizes() {
   return (
     <div className="flex flex-col gap-4">
-      {(["sm", "md", "lg", "xl"] as const).map((size) => (
+      {(["sm", "md", "lg"] as const).map((size) => (
         <div key={size} className="flex flex-col gap-1">
           <span className="text-text-subtlest text-xs">{size}</span>
           <Select>

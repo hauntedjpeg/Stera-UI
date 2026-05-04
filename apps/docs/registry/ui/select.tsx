@@ -46,7 +46,7 @@ function SelectTrigger({
   children,
   ...props
 }: SelectPrimitive.Trigger.Props & {
-  size?: "sm" | "md" | "lg" | "xl"
+  size?: "sm" | "md" | "lg"
 }) {
   return (
     <SelectPrimitive.Trigger
@@ -54,13 +54,15 @@ function SelectTrigger({
       data-size={size}
       className={cn(
         // Base
-        "flex rounded-xl border border-border bg-surface py-2 pr-2 pl-2.5 outline-none",
+        "flex h-9 rounded-xl border border-border bg-surface py-2.5 pr-2.5 pl-3 outline-none st-body-md-compact",
         // Sizing
         "w-fit gap-1.5",
         // Animation
         "transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring-brand disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-border-danger aria-invalid:ring-3 aria-invalid:ring-ring-danger data-placeholder:text-text-subtlest",
-        // Variants
-        "data-[size=sm]:h-8 data-[size=md]:h-9 data-[size=lg]:h-10 data-[size=xl]:h-12 data-[size=xl]:pl-4 data-[size=xl]:st-body-lg",
+        // SM
+        "data-[size=sm]:h-8 data-[size=sm]:py-2 data-[size=sm]:pr-2 data-[size=sm]:pl-2.5",
+        // LG
+        "data-[size=lg]:h-11 data-[size=lg]:py-3.5 data-[size=lg]:pr-3.5 data-[size=lg]:pl-4",
         // Other
         "items-center justify-between text-sm whitespace-nowrap *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-surface-secondary/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className,
@@ -191,7 +193,7 @@ function SelectSeparator({
       data-slot="select-separator"
       className={cn(
         // Base
-        "-mx-1 my-1 bg-border",
+        "-mx-1 my-0 bg-border",
         // Sizing
         "h-px",
         // Other
