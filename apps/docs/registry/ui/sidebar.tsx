@@ -197,6 +197,11 @@ function Sidebar({
   collapsible?: "offcanvas" | "icon" | "none"
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+  // Avoid SSR hydration mismatch when isMobile flips post-mount.
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Static container — `variant` and `side` don't apply because nothing collapses, floats, or insets.
   if (collapsible === "none") {
@@ -217,7 +222,7 @@ function Sidebar({
     )
   }
 
-  if (isMobile) {
+  if (mounted && isMobile) {
     return (
       <Sheet open={openMobile} onOpenChange={setOpenMobile}>
         <SheetContent
