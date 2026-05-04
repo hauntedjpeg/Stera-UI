@@ -15,10 +15,6 @@ export default function InputAllSizes() {
         <span className="text-text-subtlest text-xs">lg</span>
         <Input size="lg" placeholder="Large" />
       </div>
-      <div className="flex flex-col gap-1">
-        <span className="text-text-subtlest text-xs">xl</span>
-        <Input size="xl" placeholder="Extra Large" />
-      </div>
     </div>
   )
 }

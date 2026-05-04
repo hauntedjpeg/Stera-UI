@@ -17,7 +17,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
         // Base
         "relative flex rounded-xl border border-border shadow-xs outline-none transition-[color,box-shadow] items-center",
         // Sizing
-        "h-9 w-full min-w-0 has-[[data-slot=input-group-control][data-size=sm]]:h-8 has-[[data-slot=input-group-control][data-size=lg]]:h-10 has-[[data-slot=input-group-control][data-size=xl]]:h-12",
+        "h-9 w-full min-w-0 has-[[data-slot=input-group-control][data-size=sm]]:h-8 has-[[data-slot=input-group-control][data-size=lg]]:h-11",
         // Focus
         "in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-0 has-[[data-slot=input-group-control]:focus-visible]:border-bg-brand has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring-brand",
         // Disabled
@@ -40,15 +40,15 @@ const inputGroupAddonVariants = cva(
     // Sizing
     "h-auto gap-2",
     // Other
-    "cursor-text group-has-[[data-slot=input-group-control]:disabled]/input-group:text-text-subtlest [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4 group-has-[[data-slot=input-group-control][data-size=xl]]/input-group:[&>svg:not([class*='size-'])]:size-5",
+    "cursor-text group-has-[[data-slot=input-group-control]:disabled]/input-group:text-text-subtlest [&>svg:not([class*='size-'])]:size-4 [&>svg]:text-text-subtle",
   ],
   {
     variants: {
       align: {
         "inline-start":
-          "order-first pl-3 py-2.5 has-[>button]:-ml-1 has-[>kbd]:ml-[-0.15rem] group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pl-2.5 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:py-2 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:py-3 group-has-[[data-slot=input-group-control][data-size=xl]]/input-group:pl-4 group-has-[[data-slot=input-group-control][data-size=xl]]/input-group:py-3.5",
+          "order-first pl-2.5 py-2.5 has-[>button]:-ml-1 has-[>kbd]:ml-[-0.15rem] group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pl-2 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:py-2 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:pl-3.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:py-3.5",
         "inline-end":
-          "order-last pr-3 py-2.5 has-[>button]:-mr-1 has-[>kbd]:mr-[-0.15rem] group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pr-2.5 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:py-2 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:py-3 group-has-[[data-slot=input-group-control][data-size=xl]]/input-group:pr-4 group-has-[[data-slot=input-group-control][data-size=xl]]/input-group:py-3.5",
+          "order-last pr-2.5 py-2.5 has-[>button]:-mr-1 has-[>kbd]:mr-[-0.15rem] group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pr-2 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:py-2 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:pr-3.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:py-3.5",
         "block-start":
           "order-first w-full justify-start px-2.5 pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-2",
         "block-end":
@@ -64,6 +64,7 @@ const inputGroupAddonVariants = cva(
 function InputGroupAddon({
   className,
   align = "inline-start",
+  onClick,
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
   return (
@@ -73,10 +74,12 @@ function InputGroupAddon({
       data-align={align}
       className={cn(inputGroupAddonVariants({ align }), className)}
       onClick={(e) => {
-        if ((e.target as HTMLElement).closest("button")) {
-          return
-        }
-        e.currentTarget.parentElement?.querySelector("input")?.focus()
+        onClick?.(e)
+        if (e.defaultPrevented) return
+        if ((e.target as HTMLElement).closest("button")) return
+        e.currentTarget.parentElement
+          ?.querySelector<HTMLElement>("[data-slot=input-group-control]")
+          ?.focus()
       }}
       {...props}
     />
@@ -86,7 +89,7 @@ function InputGroupAddon({
 function InputGroupButton({
   className,
   type = "button",
-  variant = "ghost",
+  variant = "outline",
   size = "xs",
   ...props
 }: React.ComponentProps<typeof Button> & {

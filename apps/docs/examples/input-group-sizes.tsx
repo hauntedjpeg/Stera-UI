@@ -22,10 +22,6 @@ export default function InputGroupSizes() {
         <InputGroupAddon align="inline-start"><SiSearch /></InputGroupAddon>
         <InputGroupInput size="lg" placeholder="Large" />
       </InputGroup>
-      <InputGroup>
-        <InputGroupAddon align="inline-start"><SiSearch /></InputGroupAddon>
-        <InputGroupInput size="xl" placeholder="Extra large" />
-      </InputGroup>
     </div>
   )
 }
