@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next"
 import type { CSSProperties, ReactNode } from "react"
-import { cookies } from "next/headers"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { ThemeProvider } from "@/registry/components/theme-provider"
@@ -41,17 +40,12 @@ export const viewport: Viewport = {
   ],
 }
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  const cookieStore = await cookies()
-  const sidebarState = cookieStore.get("sidebar_state")?.value
-  const defaultOpen = sidebarState !== "false"
-
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <body>
         <ThemeProvider>
           <SidebarProvider
-            defaultOpen={defaultOpen}
             className="flex-col"
             style={{ "--header-height": "4.5rem" } as CSSProperties}
           >
