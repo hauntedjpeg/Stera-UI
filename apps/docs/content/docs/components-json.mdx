@@ -3,7 +3,7 @@ title: components.json
 description: Configuration reference for your Stera UI project.
 ---
 
-The `components.json` file is created by `stera-ui init` and controls how components are installed into your project.
+`components.json` is created by `stera-ui init` and tells the CLI where to put files and how to rewrite import paths.
 
 ## Schema
 
@@ -18,6 +18,9 @@ The `components.json` file is created by `stera-ui init` and controls how compon
     "ui": "@/components/ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
+  },
+  "fonts": {
+    "strategy": "stera-default"
   }
 }
 ```
@@ -26,20 +29,29 @@ The `components.json` file is created by `stera-ui init` and controls how compon
 
 ### `css`
 
-The path to your project's main CSS file. Stera UI will create a `stera-ui.css` file alongside it containing the design tokens.
+Path to your main CSS file. `stera-ui.css` (design tokens) is created next to it.
 
 ### `aliases`
 
-Path aliases that map to directories in your project. These must match your `tsconfig.json` paths configuration.
+Path aliases used when components are written to disk. Must match your `tsconfig.json` paths.
 
 | Alias | Default | Description |
 | --- | --- | --- |
 | `components` | `@/components` | General components directory |
 | `utils` | `@/lib/utils` | Path to the `cn()` utility |
 | `ui` | `@/components/ui` | Where UI components are installed |
-| `lib` | `@/lib` | Library/utility directory |
+| `lib` | `@/lib` | Library directory |
 | `hooks` | `@/hooks` | Custom React hooks |
 
+### `fonts`
+
+Records the font choice made during `init`. The CLI reads this on subsequent runs.
+
+| Field | Values | Description |
+| --- | --- | --- |
+| `strategy` | `stera-default` \| `keep-existing` \| `skip` | How fonts were configured |
+| `nextFont` | `boolean` | Whether `next/font` was wired up (Next.js only) |
+
 <Callout type="info">
-Import paths in component source files are automatically rewritten to match your configured aliases when you run `stera-ui add`.
+Imports inside component source are rewritten to match these aliases when you run `stera-ui add`.
 </Callout>

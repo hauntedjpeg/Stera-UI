@@ -3,23 +3,15 @@ title: Introduction
 description: A component registry for React, built on Base UI and Tailwind CSS.
 ---
 
-Stera UI is a collection of reusable components built on [Base UI](https://base-ui.com) primitives and styled with [Tailwind CSS](https://tailwindcss.com).
+Stera UI is a component registry. The CLI copies component source into your project — there is no runtime package to install or version to track.
 
-Components are **copied into your project** — you own the code and can customize freely. This is not a traditional component library; there's no runtime dependency on Stera UI.
+Components are built on [Base UI](https://base-ui.com) primitives, styled with [Tailwind CSS v4](https://tailwindcss.com), and use [stera-icons](https://www.npmjs.com/package/stera-icons) for iconography. Theming is handled through CSS custom properties; dark mode is included.
 
-## Features
-
-- Built on **Base UI** headless primitives for accessible, unstyled foundations
-- Styled with **Tailwind CSS v4** and CSS custom properties for easy theming
-- Uses **stera-icons** for consistent iconography
-- **CLI tool** for adding components to your project
-- Full **dark mode** support via CSS variables
-
-## Getting Started
+## Quick start
 
 <Steps>
 
-### Install the CLI
+### Initialize
 
 ```bash
 pnpm dlx stera-ui init
@@ -31,7 +23,7 @@ pnpm dlx stera-ui init
 pnpm dlx stera-ui add button dialog
 ```
 
-### Import and use
+### Use them
 
 ```tsx
 import { Button } from "@/components/ui/button"

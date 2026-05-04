@@ -3,68 +3,78 @@ title: Installation
 description: How to install and configure Stera UI in your project.
 ---
 
-## Prerequisites
+## Requirements
 
-- A React project (Next.js or Vite)
-- Tailwind CSS v4 configured
+- React project (Next.js or Vite)
+- Tailwind CSS v4
 - TypeScript (recommended)
 
-## Initialize Stera UI
-
-Run the `init` command in your project directory:
+## Initialize
 
 ```bash
 pnpm dlx stera-ui init
 ```
 
-This will:
+`init` detects your project structure, writes `components.json`, creates `stera-ui.css` with the design tokens, and installs `tw-animate-css`.
 
-1. Detect your project structure (Next.js, Vite, `src/` directory)
-2. Create a `components.json` configuration file
-3. Set up the base design tokens (`stera-ui.css`)
-4. Install required dependencies (`tw-animate-css`)
-
-## Add Components
-
-Use the `add` command to install individual components:
+## Add components
 
 ```bash
 pnpm dlx stera-ui add button
 ```
 
-You can add multiple components at once:
+Multiple at once:
 
 ```bash
 pnpm dlx stera-ui add button dialog dropdown-menu
 ```
 
-Dependencies are resolved automatically. For example, adding `dialog` will also install `button` and `utils` if they aren't already present.
+Registry dependencies are resolved automatically — adding `dialog` also pulls in `button` and `utils` if missing.
 
-## List Available Components
+### Flags
 
-See all available components with:
+- `--yes` — skip prompts and accept defaults
+- `--overwrite` — replace existing files without asking
+
+## Refresh design tokens
+
+```bash
+pnpm dlx stera-ui add globals
+```
+
+Re-pulls the latest `stera-ui.css` from the registry. Use this to pick up token updates without re-adding components.
+
+## List components
 
 ```bash
 pnpm dlx stera-ui list
 ```
 
-This shows components grouped by type (ui, style, component, hook, lib) with their registry dependencies.
+Groups components by type: `ui`, `component`, `font`, `hook`, `lib`, `style`.
 
-## Project Structure
+## Project structure
 
-After initialization, your project will have:
+After `init`:
 
 ```text noLineNumbers
 your-project/
 ├── components.json          # Stera UI configuration
-├── components/
-│   └── ui/                  # Your installed components
-│       ├── button.tsx
-│       ├── dialog.tsx
-│       └── ...
-├── lib/
-│   └── utils.ts             # cn() utility function
 └── styles/
-    ├── globals.css           # Your existing CSS
-    └── stera-ui.css          # Stera design tokens
+    ├── globals.css          # Imports stera-ui.css + peer styles
+    └── stera-ui.css         # Design tokens + utilities
+```
+
+After your first `stera-ui add`:
+
+```text noLineNumbers
+your-project/
+├── components.json
+├── components/
+│   └── ui/                  # Installed components
+│       └── button.tsx
+├── lib/
+│   └── utils.ts             # cn() utility
+└── styles/
+    ├── globals.css
+    └── stera-ui.css
 ```
