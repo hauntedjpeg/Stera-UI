@@ -13,7 +13,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/registry/ui/command"
-import { SiSearch } from "stera-icons"
+import { SiComponentFill, SiSearch } from "stera-icons"
 
 interface PageItem {
   type: "page"
@@ -115,9 +115,10 @@ export function DocsSearch({ tree }: { tree: PageTree }) {
         onOpenChange={setOpen}
         title="Search docs"
         description="Find pages in the documentation"
+        className="glass-brand rounded-3xl [&_.group\/input-group]:border-none [&_.group\/input-group]:bg-transparent **:data-[slot='command-input-wrapper']:pb-2"
       >
         <Command>
-          <CommandInput placeholder="Search documentation..." />
+          <CommandInput placeholder="Search docs"/>
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             {groups.map(([section, items]) => (
@@ -131,7 +132,8 @@ export function DocsSearch({ tree }: { tree: PageTree }) {
                       router.push(it.url)
                     }}
                   >
-                    {it.label}
+                    {section === "Components" && <SiComponentFill />}
+                    <span>{it.label}</span>
                   </CommandItem>
                 ))}
               </CommandGroup>

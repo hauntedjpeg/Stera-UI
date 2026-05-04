@@ -17,7 +17,7 @@ import {
 
 export default function CommandTitleDescription() {
   return (
-    <Command className="max-w-sm rounded-lg border">
+    <Command className="max-w-sm rounded-lg border bg-surface">
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>

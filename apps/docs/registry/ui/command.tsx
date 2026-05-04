@@ -30,7 +30,7 @@ function Command({
       data-slot="command"
       className={cn(
         // Base
-        "flex flex-col overflow-hidden rounded-xl! bg-surface p-0 text-text",
+        "flex flex-col overflow-hidden text-text",
         // Sizing
         "size-full",
         className,
@@ -64,11 +64,11 @@ function CommandDialog({
     <Dialog {...props}>
       {trigger}
       <DialogPopup
+        position="top"
+        scroll={false}
         className={cn(
           // Base
           "overflow-hidden p-0",
-          // Position
-          "top-1/3 translate-y-0",
           className,
         )}
         showCloseButton={showCloseButton}

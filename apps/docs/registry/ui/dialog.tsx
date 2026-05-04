@@ -37,7 +37,7 @@ function DialogOverlay({
         // Animation
         "data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
         // Other
-        "isolate z-50 duration-100 supports-backdrop-filter:backdrop-blur-xs",
+        "isolate z-50 duration-200 supports-backdrop-filter:backdrop-blur-xs",
         className,
       )}
       {...props}
@@ -47,6 +47,10 @@ function DialogOverlay({
 
 const dialogPopupVariants = cva([], {
   variants: {
+    position: {
+      center: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+      top: "top-[20vh] left-1/2 -translate-x-1/2",
+    },
     scroll: {
       true: "max-h-[80vh] overflow-y-auto scrollbar-hide",
       content: "max-h-[80vh] flex flex-col overflow-hidden",
@@ -54,6 +58,7 @@ const dialogPopupVariants = cva([], {
     },
   },
   defaultVariants: {
+    position: "center",
     scroll: true,
   },
 })
@@ -63,6 +68,7 @@ function DialogPopup({
   children,
   showCloseButton = true,
   scroll = true,
+  position = "center",
   ...props
 }: DialogPrimitive.Popup.Props & {
   showCloseButton?: boolean
@@ -76,14 +82,14 @@ function DialogPopup({
           // Base
           "grid rounded-xl bg-surface p-6 text-sm ring-1 ring-border outline-none",
           // Position
-          "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+          "fixed",
           // Sizing
           "w-full max-w-[calc(100%-2rem)] gap-6 sm:max-w-md",
           // Animation
           "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
           // Other
-          "z-50 duration-100",
-          dialogPopupVariants({ scroll, className }),
+          "z-50 duration-200",
+          dialogPopupVariants({ position, scroll, className }),
         )}
         {...props}
       >
