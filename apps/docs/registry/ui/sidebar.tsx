@@ -631,7 +631,7 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 const sidebarMenuButtonVariants = cva(
   [
     // Base
-    "flex items-center overflow-hidden rounded-lg p-2 text-left st-md-compact ring-ring outline-hidden transition-[width,height,padding] hover:bg-surface-hover hover:text-text focus-visible:ring-ring active:text-text",
+    "flex items-center overflow-hidden rounded-lg p-2 text-left st-body-md-compact ring-ring outline-hidden transition-[width,height,padding] hover:bg-surface-hover hover:text-text focus-visible:ring-ring active:text-text",
     // Sizing
     "w-full gap-2",
     // Variants — adjacent action button reserves space
