@@ -23,6 +23,16 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/accordion-default-open.tsx",
     slug: "accordion",
   },
+  "accordion-icons": {
+    component: dynamic(() => import("@/examples/accordion-icons")),
+    path: "examples/accordion-icons.tsx",
+    slug: "accordion",
+  },
+  "accordion-borders": {
+    component: dynamic(() => import("@/examples/accordion-borders")),
+    path: "examples/accordion-borders.tsx",
+    slug: "accordion",
+  },
   "badge-demo": {
     component: dynamic(() => import("@/examples/badge-demo")),
     path: "examples/badge-demo.tsx",
