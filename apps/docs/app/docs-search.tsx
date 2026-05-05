@@ -101,7 +101,7 @@ export function DocsSearch({ tree }: { tree: PageTree }) {
         onClick={() => setOpen(true)}
         className={cn(
           buttonVariants({ variant: "ghost", size: "lg" }),
-          "glass-brand backdrop-blur-md rounded-full md:h-9 md:gap-2 px-3! md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5",
+          "glass-brand backdrop-blur-md rounded-full md:h-9 md:gap-2 w-11 sm:w-auto px-3! md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5",
         )}
       >
         <SiSearch data-icon="inline-start" />

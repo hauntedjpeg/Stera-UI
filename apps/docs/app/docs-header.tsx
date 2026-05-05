@@ -9,7 +9,7 @@ import { DocsSearch, type PageTree } from "./docs-search"
 
 export function DocsHeader({ tree }: { tree: PageTree }) {
   return (
-    <header className="sticky top-0 z-20 flex h-(--header-height) items-center gap-2 easing-fade px-6 py-4">
+    <header className="sticky top-0 z-20 flex h-(--header-height) items-center gap-2 easing-fade px-4 md:px-6 py-4">
       <SidebarTrigger size="icon-lg" className="md:hidden glass-brand backdrop-blur-md rounded-full" />
       <Link
         href="/"
