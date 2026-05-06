@@ -11,6 +11,7 @@ import {
   SiX,
 } from "stera-icons"
 
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 type NoticePosition =
@@ -21,7 +22,8 @@ type NoticePosition =
   | "bottom-center"
   | "bottom-right"
 
-const noticeManager = ToastPrimitive.createToastManager()
+const createNoticeManager = ToastPrimitive.createToastManager
+const noticeManager = createNoticeManager()
 const useNoticeManager = ToastPrimitive.useToastManager
 
 function NoticeProvider({ ...props }: ToastPrimitive.Provider.Props) {
@@ -86,7 +88,7 @@ function NoticeRoot({
         "data-[position^=bottom]:h-(--height)",
         "data-[position^=bottom]:transform-[translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)-(var(--toast-index)*var(--peek))-(var(--shrink)*var(--height))))_scale(var(--scale))]",
         "data-[position^=bottom]:data-expanded:transform-[translateX(var(--toast-swipe-movement-x))_translateY(var(--offset-y))]",
-        "`data-[position^=bottom]:data-expanded:h-(--toast-height)",
+        "data-[position^=bottom]:data-expanded:h-(--toast-height)",
         "data-[position^=bottom]:data-starting-style:transform-[translateY(150%)]",
         "data-[position^=bottom]:[&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:transform-[translateY(150%)]",
         // Top-anchored variants
@@ -96,7 +98,7 @@ function NoticeRoot({
         "data-[position^=top]:transform-[translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)+(var(--toast-index)*var(--peek))+(var(--shrink)*var(--height))))_scale(var(--scale))]",
         "data-[position^=top]:data-expanded:transform-[translateX(var(--toast-swipe-movement-x))_translateY(var(--offset-y))]",
         "data-[position^=top]:data-expanded:h-(--toast-height)",
-        "`data-[position^=top]:data-starting-style:transform-[translateY(-150%)]",
+        "data-[position^=top]:data-starting-style:transform-[translateY(-150%)]",
         "data-[position^=top]:[&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:transform-[translateY(-150%)]",
         // Limit / ending opacity
         "data-limited:opacity-0",
@@ -137,7 +139,7 @@ function NoticeTitle({ className, ...props }: ToastPrimitive.Title.Props) {
   return (
     <ToastPrimitive.Title
       data-slot="notice-title"
-      className={cn("st-body-md-strong m-0", className)}
+      className={cn("st-body-md-strong mb-0", className)}
       {...props}
     />
   )
@@ -163,13 +165,13 @@ function NoticeAction({
   return (
     <ToastPrimitive.Action
       data-slot="notice-action"
-      className={cn(
-        "st-body-sm-strong inline-flex items-center justify-center whitespace-nowrap",
-        "h-9 px-3 mt-2 rounded-xl border border-border bg-surface text-text",
-        "hover:bg-surface-hover transition-all",
-        "focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ring-brand",
-        className,
-      )}
+      render={
+        <Button
+          variant="outline"
+          size="sm"
+          className={cn("mt-2", className)}
+        />
+      }
       {...props}
     />
   )
@@ -180,15 +182,16 @@ function NoticeClose({ className, ...props }: ToastPrimitive.Close.Props) {
     <ToastPrimitive.Close
       data-slot="notice-close"
       aria-label="Close"
-      className={cn(
-        "absolute top-2 right-2 inline-flex items-center justify-center",
-        "size-5 rounded-md border-none bg-transparent text-text-subtle",
-        "hover:bg-surface-hover hover:text-text",
-        className,
-      )}
+      render={
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          className={cn("absolute top-2 right-2", className)}
+        />
+      }
       {...props}
     >
-      <SiX className="size-3.5" />
+      <SiX />
     </ToastPrimitive.Close>
   )
 }
@@ -205,6 +208,7 @@ interface NoticeProps {
   position?: NoticePosition
   limit?: ToastPrimitive.Provider.Props["limit"]
   timeout?: ToastPrimitive.Provider.Props["timeout"]
+  toastManager?: ToastPrimitive.Provider.Props["toastManager"]
 }
 
 function NoticeList({ position }: { position: NoticePosition }) {
@@ -217,7 +221,7 @@ function NoticeList({ position }: { position: NoticePosition }) {
           <NoticeRoot key={toast.id} toast={toast} position={position}>
             <NoticeContent>
               <div className={cn("flex items-start", icon && "gap-2")}>
-                {icon && <div className="pt-0.5 shrink-0">{icon}</div>}
+                {icon && <div className="shrink-0">{icon}</div>}
                 <div className="flex-1 min-w-0 pr-4">
                   <NoticeTitle />
                   <NoticeDescription />
@@ -237,10 +241,11 @@ function Notice({
   position = "bottom-right",
   limit,
   timeout,
+  toastManager = noticeManager,
 }: NoticeProps) {
   return (
     <NoticeProvider
-      toastManager={noticeManager}
+      toastManager={toastManager}
       limit={limit}
       timeout={timeout}
     >
@@ -254,6 +259,7 @@ function Notice({
 }
 
 export {
+  createNoticeManager,
   Notice,
   NoticeAction,
   NoticeClose,

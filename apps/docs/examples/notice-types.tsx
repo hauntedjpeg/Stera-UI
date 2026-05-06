@@ -1,17 +1,19 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Notice, noticeManager } from "@/components/ui/notice"
+import { createNoticeManager, Notice } from "@/components/ui/notice"
+
+const typesManager = createNoticeManager()
 
 export default function NoticeTypes() {
   return (
     <>
-      <Notice />
+      <Notice toastManager={typesManager} />
       <div className="flex flex-wrap gap-2">
         <Button
           variant="outline"
           onClick={() =>
-            noticeManager.add({ title: "Event has been created" })
+            typesManager.add({ title: "Event has been created" })
           }
         >
           Default
@@ -19,7 +21,7 @@ export default function NoticeTypes() {
         <Button
           variant="outline"
           onClick={() =>
-            noticeManager.add({
+            typesManager.add({
               type: "success",
               title: "Event has been created",
             })
@@ -30,7 +32,7 @@ export default function NoticeTypes() {
         <Button
           variant="outline"
           onClick={() =>
-            noticeManager.add({
+            typesManager.add({
               type: "info",
               title: "Be at the area 10 minutes before the event time",
             })
@@ -41,7 +43,7 @@ export default function NoticeTypes() {
         <Button
           variant="outline"
           onClick={() =>
-            noticeManager.add({
+            typesManager.add({
               type: "warning",
               title: "Event start time cannot be earlier than 8am",
             })
@@ -52,7 +54,7 @@ export default function NoticeTypes() {
         <Button
           variant="outline"
           onClick={() =>
-            noticeManager.add({
+            typesManager.add({
               type: "error",
               title: "Event has not been created",
             })
