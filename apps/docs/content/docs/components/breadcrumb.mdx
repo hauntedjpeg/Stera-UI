@@ -11,15 +11,31 @@ description: A navigation trail showing the user's current location within a hie
 
 ## Custom Separator
 
+Pass any element as a child of `BreadcrumbSeparator` to replace the default chevron icon.
+
 <ComponentPreview name="breadcrumb-custom-separator" caption="Custom Separator" />
 
-Pass any element as a child of `BreadcrumbSeparator` to replace the default chevron icon.
+## Dropdown
+
+Compose `BreadcrumbItem` with `DropdownMenu` to turn an item into a sibling-page picker.
+
+<ComponentPreview name="breadcrumb-dropdown-inline" caption="Dropdown" />
+
+Or use a compact ellipsis trigger to expose collapsed siblings.
+
+<ComponentPreview name="breadcrumb-dropdown" caption="Dropdown (Ellipsis)" />
 
 ## Collapsed
 
+Use `BreadcrumbEllipsis` to represent hidden middle items in long paths.
+
 <ComponentPreview name="breadcrumb-collapsed" caption="Collapsed" />
 
-Use `BreadcrumbEllipsis` to represent hidden middle items in long paths.
+## Link Component
+
+Use the `render` prop on `BreadcrumbLink` to swap the underlying anchor for a routing-library link such as Next.js `Link`.
+
+<ComponentPreview name="breadcrumb-link" caption="Link Component" />
 
 ## API Reference
 

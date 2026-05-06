@@ -338,6 +338,21 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/breadcrumb-collapsed.tsx",
     slug: "breadcrumb",
   },
+  "breadcrumb-dropdown": {
+    component: dynamic(() => import("@/examples/breadcrumb-dropdown")),
+    path: "examples/breadcrumb-dropdown.tsx",
+    slug: "breadcrumb",
+  },
+  "breadcrumb-dropdown-inline": {
+    component: dynamic(() => import("@/examples/breadcrumb-dropdown-inline")),
+    path: "examples/breadcrumb-dropdown-inline.tsx",
+    slug: "breadcrumb",
+  },
+  "breadcrumb-link": {
+    component: dynamic(() => import("@/examples/breadcrumb-link")),
+    path: "examples/breadcrumb-link.tsx",
+    slug: "breadcrumb",
+  },
   "item-demo": {
     component: dynamic(() => import("@/examples/item-demo")),
     path: "examples/item-demo.tsx",
