@@ -30,6 +30,7 @@ apps/docs/public/r/
 # ide
 .claude/
 .zed/
+CLAUDE.md
 
 # misc
 .DS_Store
