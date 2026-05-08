@@ -873,6 +873,11 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/combobox-invalid.tsx",
     slug: "combobox",
   },
+  "combobox-clear": {
+    component: dynamic(() => import("@/examples/combobox-clear")),
+    path: "examples/combobox-clear.tsx",
+    slug: "combobox",
+  },
   "calendar-demo": {
     component: dynamic(() => import("@/examples/calendar-demo")),
     path: "examples/calendar-demo.tsx",
