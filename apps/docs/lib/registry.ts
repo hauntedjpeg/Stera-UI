@@ -158,6 +158,11 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/button-demo.tsx",
     slug: "button",
   },
+  "button-variants": {
+    component: dynamic(() => import("@/examples/button-variants")),
+    path: "examples/button-variants.tsx",
+    slug: "button",
+  },
   "button-sizes": {
     component: dynamic(() => import("@/examples/button-sizes")),
     path: "examples/button-sizes.tsx",
@@ -183,19 +188,49 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/button-group-orientation.tsx",
     slug: "button-group",
   },
-  "button-group-with-separator": {
-    component: dynamic(() => import("@/examples/button-group-with-separator")),
-    path: "examples/button-group-with-separator.tsx",
+  "button-group-size": {
+    component: dynamic(() => import("@/examples/button-group-size")),
+    path: "examples/button-group-size.tsx",
     slug: "button-group",
   },
-  "button-group-variants": {
-    component: dynamic(() => import("@/examples/button-group-variants")),
-    path: "examples/button-group-variants.tsx",
+  "button-group-nested": {
+    component: dynamic(() => import("@/examples/button-group-nested")),
+    path: "examples/button-group-nested.tsx",
+    slug: "button-group",
+  },
+  "button-group-separator": {
+    component: dynamic(() => import("@/examples/button-group-separator")),
+    path: "examples/button-group-separator.tsx",
     slug: "button-group",
   },
   "button-group-split": {
     component: dynamic(() => import("@/examples/button-group-split")),
     path: "examples/button-group-split.tsx",
+    slug: "button-group",
+  },
+  "button-group-input": {
+    component: dynamic(() => import("@/examples/button-group-input")),
+    path: "examples/button-group-input.tsx",
+    slug: "button-group",
+  },
+  "button-group-input-group": {
+    component: dynamic(() => import("@/examples/button-group-input-group")),
+    path: "examples/button-group-input-group.tsx",
+    slug: "button-group",
+  },
+  "button-group-dropdown": {
+    component: dynamic(() => import("@/examples/button-group-dropdown")),
+    path: "examples/button-group-dropdown.tsx",
+    slug: "button-group",
+  },
+  "button-group-select": {
+    component: dynamic(() => import("@/examples/button-group-select")),
+    path: "examples/button-group-select.tsx",
+    slug: "button-group",
+  },
+  "button-group-popover": {
+    component: dynamic(() => import("@/examples/button-group-popover")),
+    path: "examples/button-group-popover.tsx",
     slug: "button-group",
   },
   "toggle-demo": {

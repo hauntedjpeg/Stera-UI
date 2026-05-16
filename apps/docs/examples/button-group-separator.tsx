@@ -4,7 +4,7 @@ import {
   ButtonGroupSeparator,
 } from "@/components/ui/button-group"
 
-export default function ButtonGroupVariants() {
+export default function ButtonGroupSeparatorDemo() {
   return (
     <div className="flex flex-col items-start gap-4">
       <ButtonGroup>
