@@ -9,37 +9,73 @@ description: A menu that appears on trigger, offering a list of actions, links, 
 
 <InstallSnippet slug="dropdown-menu" hideHeading />
 
-## With Icons
+## Composition
+
+Use the following composition to build a `DropdownMenu`:
+
+```text
+DropdownMenu
+├── DropdownMenuTrigger
+└── DropdownMenuContent
+    ├── DropdownMenuGroup
+    │   ├── DropdownMenuLabel
+    │   ├── DropdownMenuItem
+    │   └── DropdownMenuItem
+    ├── DropdownMenuSeparator
+    ├── DropdownMenuGroup
+    │   ├── DropdownMenuLabel
+    │   ├── DropdownMenuCheckboxItem
+    │   └── DropdownMenuCheckboxItem
+    ├── DropdownMenuSeparator
+    ├── DropdownMenuGroup
+    │   ├── DropdownMenuLabel
+    │   └── DropdownMenuRadioGroup
+    │       ├── DropdownMenuRadioItem
+    │       └── DropdownMenuRadioItem
+    └── DropdownMenuSub
+        ├── DropdownMenuSubTrigger
+        └── DropdownMenuSubContent
+            └── DropdownMenuGroup
+                ├── DropdownMenuLabel
+                ├── DropdownMenuItem
+                └── DropdownMenuItem
+```
+
+## Examples
+
+### With Icons
 
 <ComponentPreview name="dropdown-menu-with-icons" />
 
-## With Shortcuts
+### With Shortcuts
 
 <ComponentPreview name="dropdown-menu-with-shortcuts" />
 
-## With Submenu
+### With Submenu
 
 <ComponentPreview name="dropdown-menu-with-submenu" />
 
-## Destructive
+### Destructive
 
 <ComponentPreview name="dropdown-menu-destructive" />
 
-## Checkboxes
+### Checkboxes
 
 <ComponentPreview name="dropdown-menu-checkboxes" />
 
-## Radio Group
+### Radio Group
 
 <ComponentPreview name="dropdown-menu-radio-items" />
 
-## Title & Description
+### Title & Description
 
 <ComponentPreview name="dropdown-menu-title-description" />
 
 Use `DropdownMenuItemContent`, `DropdownMenuItemTitle`, and `DropdownMenuItemDescription` for richer item layouts.
 
 ## API Reference
+
+See the [Base UI documentation](https://base-ui.com/react/components/menu) for the full API reference.
 
 ### DropdownMenuItem
 

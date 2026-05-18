@@ -9,19 +9,59 @@ description: A compound input component for attaching icons, text labels, and ac
 
 <InstallSnippet slug="input-group" hideHeading />
 
-## Text Addons
+## Composition
+
+Use the following composition to build an `InputGroup`:
+
+```text
+InputGroup
+├── InputGroupInput or InputGroupTextarea
+├── InputGroupAddon
+├── InputGroupButton
+└── InputGroupText
+```
+
+## Align
+
+Use the `align` prop on `InputGroupAddon` to position the addon relative to the input.
+
+<Callout>
+  For proper focus management, `InputGroupAddon` should always be placed after
+  `InputGroupInput` or `InputGroupTextarea` in the DOM. Use the `align` prop to
+  visually position the addon.
+</Callout>
+
+### inline-start
+
+Use `align="inline-start"` to position the addon at the start of the input. This is the default.
+
+### inline-end
+
+Use `align="inline-end"` to position the addon at the end of the input.
+
+### block-start
+
+Use `align="block-start"` to position the addon above the input.
+
+### block-end
+
+Use `align="block-end"` to position the addon below the input.
+
+## Examples
+
+### Text Addons
 
 <ComponentPreview name="input-group-text-addon" />
 
-## With Button
+### With Button
 
 <ComponentPreview name="input-group-with-button" />
 
-## With Kbd
+### With Kbd
 
 <ComponentPreview name="input-group-with-kbd" />
 
-## Sizes
+### Sizes
 
 <ComponentPreview name="input-group-sizes" />
 
@@ -31,11 +71,11 @@ description: A compound input component for attaching icons, text labels, and ac
 | `md` | Medium (default) |
 | `lg` | Large |
 
-## Textarea
+### Textarea
 
 <ComponentPreview name="input-group-textarea-addon" />
 
-## With Label
+### With Label
 
 <ComponentPreview name="input-group-with-label" />
 

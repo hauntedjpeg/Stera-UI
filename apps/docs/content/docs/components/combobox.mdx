@@ -9,37 +9,95 @@ description: A searchable select input that combines a text field with a filtera
 
 <InstallSnippet slug="combobox" hideHeading />
 
-## Multiple Selection
+## Composition
+
+### Simple
+
+A single-line input and a flat list.
+
+```text
+Combobox
+├── ComboboxInput
+└── ComboboxContent
+    ├── ComboboxEmpty
+    └── ComboboxList
+        ├── ComboboxItem
+        └── ComboboxItem
+```
+
+### With chips
+
+Multi-select with `multiple`, chips, and a chips input.
+
+```text
+Combobox
+├── ComboboxChips
+│   ├── ComboboxValue
+│   │   └── ComboboxChip
+│   └── ComboboxChipsInput
+└── ComboboxContent
+    ├── ComboboxEmpty
+    └── ComboboxList
+        ├── ComboboxItem
+        └── ComboboxItem
+```
+
+### With groups and collection
+
+Nested items per group using `ComboboxCollection` inside each `ComboboxGroup`, with a separator between groups.
+
+```text
+Combobox
+├── ComboboxInput
+└── ComboboxContent
+    ├── ComboboxEmpty
+    └── ComboboxList
+        ├── ComboboxGroup
+        │   ├── ComboboxLabel
+        │   └── ComboboxCollection
+        │       ├── ComboboxItem
+        │       └── ComboboxItem
+        ├── ComboboxSeparator
+        └── ComboboxGroup
+            ├── ComboboxLabel
+            └── ComboboxCollection
+                ├── ComboboxItem
+                └── ComboboxItem
+```
+
+## Examples
+
+### Multiple Selection
 
 <ComponentPreview name="combobox-multiple" />
 
 Pass `multiple` to allow selecting more than one item. Use `ComboboxChips` and `ComboboxChipsInput` for the chip-based input.
 
-## Groups
+### Groups
 
 <ComponentPreview name="combobox-groups" />
 
 Use `ComboboxCollection`, `ComboboxGroup`, `ComboboxLabel`, and `ComboboxSeparator` to organise items into labelled sections.
 
-## Custom Items
+### Custom Items
 
 <ComponentPreview name="combobox-custom-items" />
 
 Render any content inside `ComboboxItem` for rich layouts with icons and descriptions.
 
-## Popup Style
+### Popup Style
 
 <ComponentPreview name="combobox-popup" />
 
 Use `ComboboxTrigger` with a Button and `ComboboxValue` for a traditional select-style popup trigger.
 
-## Clear Button
+### Clear Button
 
 <ComponentPreview name="combobox-clear" />
 
 Pass `showClear` to `ComboboxInput` to render a clear button that resets the value when an item is selected.
 
-## Invalid State
+### Invalid State
 
 <ComponentPreview name="combobox-invalid" />
 

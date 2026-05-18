@@ -6,36 +6,28 @@ export default function ButtonGroupOrientation() {
   return (
     <div className="flex items-start gap-12">
       <div className="flex flex-col items-center gap-3">
-        <span className="text-sm text-text-subtle">Horizontal</span>
         <ButtonGroup orientation="horizontal">
-          <Button variant="outline">
-            <SiReply data-icon="inline-start" />
-            Reply
+          <Button size="icon" variant="outline">
+            <SiReply />
           </Button>
-          <Button variant="outline">
-            <SiForward data-icon="inline-start" />
-            Forward
+          <Button size="icon" variant="outline">
+            <SiForward />
           </Button>
-          <Button variant="outline">
-            <SiArchive data-icon="inline-start" />
-            Archive
+          <Button size="icon" variant="outline">
+            <SiArchive />
           </Button>
         </ButtonGroup>
       </div>
       <div className="flex flex-col items-center gap-3">
-        <span className="text-sm text-text-subtle">Vertical</span>
         <ButtonGroup orientation="vertical">
-          <Button variant="outline">
-            <SiReply data-icon="inline-start" />
-            Reply
+          <Button size="icon" variant="outline">
+            <SiReply />
           </Button>
-          <Button variant="outline">
-            <SiForward data-icon="inline-start" />
-            Forward
+          <Button size="icon" variant="outline">
+            <SiForward />
           </Button>
-          <Button variant="outline">
-            <SiArchive data-icon="inline-start" />
-            Archive
+          <Button size="icon" variant="outline">
+            <SiArchive />
           </Button>
         </ButtonGroup>
       </div>

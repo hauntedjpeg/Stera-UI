@@ -9,17 +9,36 @@ description: A modal dialog that interrupts the user with important content and 
 
 <InstallSnippet slug="alert-dialog" hideHeading />
 
-## With Media
+## Composition
+
+Use the following composition to build an `AlertDialog`:
+
+```text
+AlertDialog
+├── AlertDialogTrigger
+└── AlertDialogContent
+    ├── AlertDialogHeader
+    │   ├── AlertDialogMedia
+    │   ├── AlertDialogTitle
+    │   └── AlertDialogDescription
+    └── AlertDialogFooter
+        ├── AlertDialogCancel
+        └── AlertDialogAction
+```
+
+## Examples
+
+### With Media
 
 <ComponentPreview name="alert-dialog-with-media" caption="With Media" />
 
 Use `AlertDialogMedia` to display an icon above the title for additional visual context.
 
-## Small Size
+### Small Size
 
 <ComponentPreview name="alert-dialog-small" caption="Small Size" />
 
-## Destructive
+### Destructive
 
 <ComponentPreview name="alert-dialog-destructive" caption="Destructive" />
 

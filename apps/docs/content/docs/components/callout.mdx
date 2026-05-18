@@ -9,19 +9,35 @@ description: An inline alert component for surfacing important messages with opt
 
 <InstallSnippet slug="callout" hideHeading />
 
-## With Icon
+## Composition
+
+Use the following composition to build an `Callout`:
+
+```text
+Callout
+├── Icon
+├── CalloutContent
+│   ├── CalloutTitle
+│   ├── CalloutDescription
+│   └── CalloutAction
+└── CalloutClose
+```
+
+## Examples
+
+### With Icon
 
 <ComponentPreview name="callout-with-icon" />
 
-## With Action
+### With Action
 
 <ComponentPreview name="callout-with-action" />
 
-## With Close
+### With Close
 
 <ComponentPreview name="callout-with-close" />
 
-## All Variants
+### All Variants
 
 <ComponentPreview name="callout-variants" />
 

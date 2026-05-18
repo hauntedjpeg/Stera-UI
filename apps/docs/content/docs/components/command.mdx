@@ -9,13 +9,33 @@ description: A command palette for fast keyboard-driven navigation and action ex
 
 <InstallSnippet slug="command" hideHeading />
 
-## Command Dialog
+## Composition
+
+Use the following composition to build a `Command`:
+
+```text
+Command
+├── CommandInput
+└── CommandList
+    ├── CommandEmpty
+    ├── CommandGroup
+    │   ├── CommandItem
+    │   └── CommandItem
+    ├── CommandSeparator
+    └── CommandGroup
+        ├── CommandItem
+        └── CommandItem
+```
+
+## Examples
+
+### Command Dialog
 
 <ComponentPreview name="command-dialog-example" />
 
 Use `CommandDialog` and `CommandDialogTrigger` to open the command palette in a modal overlay.
 
-## Title & Description
+### Title & Description
 
 <ComponentPreview name="command-title-description" />
 

@@ -9,11 +9,39 @@ description: A user avatar component with image, fallback, badge, and group supp
 
 <InstallSnippet slug="avatar" hideHeading />
 
-## Fallback Only
+## Composition
+
+Use the following composition to build an `Avatar`:
+
+```text
+Avatar
+├── AvatarImage
+├── AvatarFallback
+└── AvatarBadge
+```
+
+Use the following composition to build an `AvatarGroup`:
+
+```text
+AvatarGroup
+├── Avatar
+│   ├── AvatarImage
+│   ├── AvatarFallback
+│   └── AvatarBadge
+├── Avatar
+│   ├── AvatarImage
+│   ├── AvatarFallback
+│   └── AvatarBadge
+└── AvatarGroupCount
+```
+
+## Examples
+
+### Fallback Only
 
 <ComponentPreview name="avatar-fallback" caption="Fallback Only" />
 
-## Sizes
+### Sizes
 
 <ComponentPreview name="avatar-sizes" caption="Avatar Sizes" />
 
@@ -23,7 +51,7 @@ description: A user avatar component with image, fallback, badge, and group supp
 | `default` | Medium (default) |
 | `lg` | Large |
 
-## Shapes
+### Shapes
 
 <ComponentPreview name="avatar-shapes" caption="Avatar Shapes" />
 
@@ -32,7 +60,7 @@ description: A user avatar component with image, fallback, badge, and group supp
 | `circle` | Circular (default) |
 | `square` | Rounded square |
 
-## With Badge
+### With Badge
 
 <ComponentPreview name="avatar-with-badge" caption="With Badge" />
 
@@ -44,11 +72,11 @@ description: A user avatar component with image, fallback, badge, and group supp
 | `warning` | Away |
 | `icon` | Custom icon inside badge |
 
-## Icon Fallback
+### Icon Fallback
 
 <ComponentPreview name="avatar-icon-fallback" caption="Icon Fallback" />
 
-## Avatar Group
+### Avatar Group
 
 <ComponentPreview name="avatar-group" caption="Avatar Group" />
 

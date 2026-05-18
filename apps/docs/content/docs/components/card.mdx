@@ -9,11 +9,27 @@ description: A container component for grouping related content with optional he
 
 <InstallSnippet slug="card" hideHeading />
 
-## With Action
+## Composition
+
+Use the following composition to build a `Card`:
+
+```text
+Card
+├── CardHeader
+│   ├── CardTitle
+│   ├── CardDescription
+│   └── CardAction
+├── CardContent
+└── CardFooter
+```
+
+## Examples
+
+### With Action
 
 <ComponentPreview name="card-with-action" />
 
-## Sizes
+### Sizes
 
 <ComponentPreview name="card-sizes" />
 

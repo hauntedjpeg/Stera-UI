@@ -9,11 +9,26 @@ description: An empty state component for zero-data views with icon, title, desc
 
 <InstallSnippet slug="empty" hideHeading />
 
-## With Avatar Group
+## Composition
+
+Use the following composition to build an `Empty` state:
+
+```text
+Empty
+├── EmptyHeader
+│   ├── EmptyMedia
+│   ├── EmptyTitle
+│   └── EmptyDescription
+└── EmptyContent
+```
+
+## Examples
+
+### With Avatar Group
 
 <ComponentPreview name="empty-with-avatar-group" />
 
-## No Results
+### No Results
 
 <ComponentPreview name="empty-no-results" />
 

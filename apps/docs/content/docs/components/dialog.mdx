@@ -9,19 +9,37 @@ description: A modal window that overlays the page to display focused content or
 
 <InstallSnippet slug="dialog" hideHeading />
 
-## Confirmation Dialog
+## Composition
+
+Use the following composition to build a `Dialog`:
+
+```text
+Dialog
+├── DialogTrigger
+└── DialogContent
+    ├── DialogHeader
+    │   ├── DialogTitle
+    │   └── DialogDescription
+    └── DialogFooter
+```
+
+## Examples
+
+### Confirmation Dialog
 
 <ComponentPreview name="dialog-confirm" />
 
 Use `DialogClose` with a custom button to create cancel/confirm action pairs.
 
-## Scrollable Content
+### Scrollable Content
 
 <ComponentPreview name="dialog-scrollable" />
 
 Set `scroll="content"` on `DialogPopup` and `scroll` on `DialogContent` to let the body scroll while the header and footer remain sticky.
 
 ## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/dialog#api-reference) documentation for more information.
 
 ### DialogPopup
 

@@ -9,37 +9,112 @@ description: A form field layout system that pairs labels, inputs, descriptions,
 
 <InstallSnippet slug="field" hideHeading />
 
-## Horizontal Layout
+## Composition
+
+### Field
+
+A single control with label, helper text, and validation.
+
+```text
+Field
+├── FieldLabel
+├── Input / Textarea / Switch / Select
+├── FieldDescription
+└── FieldError
+```
+
+### FieldGroup
+
+Related fields in one group. Use `FieldSeparator` between sections when needed.
+
+```text
+FieldGroup
+├── Field
+│   ├── FieldLabel
+│   ├── Input / Textarea / Switch / Select
+│   ├── FieldDescription
+│   └── FieldError
+├── FieldSeparator
+└── Field
+    ├── FieldLabel
+    └── Input / Textarea / Switch / Select
+```
+
+### FieldSet
+
+Semantic grouping with a legend and description, usually containing a `FieldGroup`.
+
+```text
+FieldSet
+├── FieldLegend
+├── FieldDescription
+└── FieldGroup
+    ├── Field
+    │   ├── FieldLabel
+    │   ├── Input / Textarea / Switch / Select
+    │   ├── FieldDescription
+    │   └── FieldError
+    └── Field
+        ├── FieldLabel
+        └── Input / Textarea / Switch / Select
+```
+
+## Anatomy
+
+The `Field` family is designed for composing accessible forms. A typical field is structured as follows:
+
+```tsx showLineNumbers
+<Field>
+  <FieldLabel htmlFor="input-id">Label</FieldLabel>
+  {/* Input, Select, Switch, etc. */}
+  <FieldDescription>Optional helper text.</FieldDescription>
+  <FieldError>Validation message.</FieldError>
+</Field>
+```
+
+- `Field` is the core wrapper for a single field.
+- `FieldContent` is a flex column that groups label and description. Not required if you have no description.
+- Wrap related fields with `FieldGroup`, and use `FieldSet` with `FieldLegend` for semantic grouping.
+
+## Examples
+
+### Horizontal Layout
 
 <ComponentPreview name="field-horizontal" />
 
 Use `orientation="horizontal"` to place label/description on the left and the control on the right. Ideal for toggle rows.
 
-## With Error
+### With Error
 
 <ComponentPreview name="field-with-error" />
 
 Add `data-invalid="true"` to `Field` and `aria-invalid="true"` to the input to trigger error styles.
 
-## Multiple Errors
+### Multiple Errors
 
 <ComponentPreview name="field-multiple-errors" />
 
 Pass an `errors` array to `FieldError` to list multiple validation messages.
 
-## Disabled
+### Disabled
 
 <ComponentPreview name="field-disabled" />
 
-## Checkbox Group
+### Checkbox Group
 
 <ComponentPreview name="field-checkbox-group" />
 
 Use `FieldSet` and `FieldLegend` to group related checkboxes or radio buttons with a shared label.
 
-## Full Form Example
+### Full Form Example
 
 <ComponentPreview name="field-form-example" />
+
+## Accessibility
+
+- `FieldSet` and `FieldLegend` keep related controls grouped for keyboard and assistive tech users.
+- `Field` outputs `role="group"` so nested controls inherit labeling from `FieldLabel` and `FieldLegend` when combined.
+- Apply `FieldSeparator` sparingly to ensure screen readers encounter clear section boundaries.
 
 ## API Reference
 

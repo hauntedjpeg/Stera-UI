@@ -1,43 +1,108 @@
 ---
 title: Checkbox
-description: A control that allows users to select one or more items from a set.
+description: A control that allows the user to toggle between checked and not checked.
 ---
 
-<ComponentPreview name="checkbox-demo" />
+<ComponentPreview name="checkbox-demo" caption="Checkbox" />
 
 ## Installation
 
 <InstallSnippet slug="checkbox" hideHeading />
 
-## With Label
+## Composition
 
-Wrap `Checkbox` in a `FieldLabel` to make the label clickable.
+Use the following composition to pair a `Checkbox` with a label:
 
-<ComponentPreview name="checkbox-demo" />
+```text
+Field
+├── Checkbox
+└── FieldLabel
+```
 
-## With Description
+To add a description, wrap the label and helper text in `FieldContent`:
 
-<ComponentPreview name="checkbox-with-description" />
+```text
+Field
+├── Checkbox
+└── FieldContent
+    ├── FieldLabel (or FieldTitle)
+    └── FieldDescription
+```
 
-## Checkbox Group
+To group related checkboxes, nest `Field`s inside a `FieldGroup` and `FieldSet`:
+
+```text
+FieldSet
+├── FieldLegend
+└── FieldGroup
+    ├── Field
+    │   ├── Checkbox
+    │   └── FieldLabel
+    └── Field
+        ├── Checkbox
+        └── FieldLabel
+```
+
+## Checked State
+
+Use `defaultChecked` for uncontrolled checkboxes, or pair `checked` with `onCheckedChange` to control the state.
+
+<ComponentPreview name="checkbox-controlled" caption="Controlled Checkbox" />
+
+## Indeterminate
+
+Pass the `indeterminate` prop to render the mixed state — useful for "select all" controls whose children are partially selected.
+
+<ComponentPreview name="checkbox-indeterminate" caption="Indeterminate" />
+
+## Invalid State
+
+Set `aria-invalid` on the checkbox and `data-invalid="true"` on the surrounding `Field` to show invalid styles.
+
+<ComponentPreview name="checkbox-invalid" caption="Invalid" />
+
+## Examples
+
+### Basic
+
+Pair the checkbox with `Field` and `FieldLabel` for proper layout and labeling.
+
+<ComponentPreview name="checkbox-basic" caption="Basic" />
+
+### Description
+
+Use `FieldContent` and `FieldDescription` for helper text alongside the label.
+
+<ComponentPreview name="checkbox-with-description" caption="With Description" />
+
+### Disabled
+
+Add the `disabled` prop to the checkbox and `data-disabled="true"` on the `Field` to apply disabled styles to the label as well.
+
+<ComponentPreview name="checkbox-disabled" caption="Disabled" />
+
+### Group
 
 Use `FieldSet` and `FieldLegend` to semantically group related checkboxes.
 
-<ComponentPreview name="checkbox-group" />
+<ComponentPreview name="checkbox-group" caption="Checkbox Group" />
 
-## Disabled
+### Table
 
-<ComponentPreview name="checkbox-disabled" />
+Use checkboxes inside a `Table` for row selection. Apply `data-state="selected"` to the `TableRow` to style selected rows.
+
+<ComponentPreview name="checkbox-in-table" caption="In a Table" />
 
 ## API Reference
 
-Built on Base UI's `Checkbox` primitive.
+Built on Base UI's `Checkbox` primitive. See the [Base UI Checkbox API](https://base-ui.com/react/components/checkbox#api-reference) for the full surface. Common props:
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `checked` | `boolean \| "indeterminate"` | — |
-| `defaultChecked` | `boolean` | — |
-| `onCheckedChange` | `(checked: boolean \| "indeterminate") => void` | — |
+| `checked` | `boolean` | — |
+| `defaultChecked` | `boolean` | `false` |
+| `indeterminate` | `boolean` | `false` |
+| `onCheckedChange` | `(checked: boolean) => void` | — |
 | `disabled` | `boolean` | `false` |
 | `name` | `string` | — |
 | `value` | `string` | — |
