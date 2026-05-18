@@ -568,6 +568,31 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/checkbox-disabled.tsx",
     slug: "checkbox",
   },
+  "checkbox-basic": {
+    component: dynamic(() => import("@/examples/checkbox-basic")),
+    path: "examples/checkbox-basic.tsx",
+    slug: "checkbox",
+  },
+  "checkbox-controlled": {
+    component: dynamic(() => import("@/examples/checkbox-controlled")),
+    path: "examples/checkbox-controlled.tsx",
+    slug: "checkbox",
+  },
+  "checkbox-indeterminate": {
+    component: dynamic(() => import("@/examples/checkbox-indeterminate")),
+    path: "examples/checkbox-indeterminate.tsx",
+    slug: "checkbox",
+  },
+  "checkbox-invalid": {
+    component: dynamic(() => import("@/examples/checkbox-invalid")),
+    path: "examples/checkbox-invalid.tsx",
+    slug: "checkbox",
+  },
+  "checkbox-in-table": {
+    component: dynamic(() => import("@/examples/checkbox-in-table")),
+    path: "examples/checkbox-in-table.tsx",
+    slug: "checkbox",
+  },
   "radio-group-demo": {
     component: dynamic(() => import("@/examples/radio-group-demo")),
     path: "examples/radio-group-demo.tsx",

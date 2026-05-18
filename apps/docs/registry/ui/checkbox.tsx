@@ -1,7 +1,7 @@
 import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox"
 
 import { cn } from "@/lib/utils"
-import { SiCheckFill } from "stera-icons"
+import { SiCheckFill, SiMinusFill } from "stera-icons"
 
 function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
   return (
@@ -20,22 +20,28 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         "disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:bg-surface-disabled",
         // Invalid
         "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:aria-checked:border-primary",
-        // Checked
+        // Checked / Indeterminate
         "data-checked:border-surface-brand data-checked:bg-surface-brand data-checked:text-text-onbrand",
+        "data-indeterminate:border-surface-brand data-indeterminate:bg-surface-brand data-indeterminate:text-text-onbrand",
         // Variants
         "group-has-disabled/field:text-text-disabled",
         // Other
-        "peer",
+        "peer group/checkbox",
         className,
       )}
       {...props}
     >
       <CheckboxPrimitive.Indicator
         data-slot="checkbox-indicator"
-        className="grid place-content-center text-current transition-none [&>svg]:size-3"
+        className={cn(
+          "grid place-content-center text-current transition-none [&>svg]:size-3",
+          // Show check by default, minus when indeterminate
+          "*:data-[slot=check]:block *:data-[slot=minus]:hidden",
+          "`group-data-indeterminate/checkbox:*:data-[slot=check]:hidden group-data-indeterminate/checkbox:*:data-[slot=minus]:block",
+        )}
       >
-        <SiCheckFill
-        />
+        <SiCheckFill data-slot="check" />
+        <SiMinusFill data-slot="minus" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   )

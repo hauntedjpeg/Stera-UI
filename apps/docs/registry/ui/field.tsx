@@ -80,13 +80,13 @@ const fieldVariants = cva(
       orientation: {
         vertical: "flex-col *:w-full [&>.sr-only]:w-auto",
         horizontal:
-          "flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+          "flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto",
         responsive:
-          "flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+          "flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto",
       },
     },
     defaultVariants: {
-      orientation: "vertical",
+      orientation: "horizontal",
     },
   }
 )
@@ -134,7 +134,7 @@ function FieldLabel({
       data-slot="field-label"
       className={cn(
         // Base
-        "flex has-[>[data-slot=field]]:has-data-checked:border-border-brand has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-subtle has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-2 has-[>[data-slot=field]]:flex-col",
+        "flex has-[>[data-slot=field]]:has-data-checked:border-border-brand has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-subtle has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-3 has-[>[data-slot=field]]:flex-col",
         // Sizing
         "w-fit gap-2 has-[>[data-slot=field]]:w-full",
         // Other
