@@ -12,7 +12,7 @@ description: How to install and configure Stera UI in your project.
 ## Initialize
 
 ```bash
-pnpm dlx stera-ui init
+pnpm dlx stera-ui@latest init
 ```
 
 `init` detects your project structure, writes `components.json`, creates `stera-ui.css` with the design tokens, and installs `tw-animate-css`.
@@ -20,13 +20,13 @@ pnpm dlx stera-ui init
 ## Add components
 
 ```bash
-pnpm dlx stera-ui add button
+pnpm dlx stera-ui@latest add button
 ```
 
 Multiple at once:
 
 ```bash
-pnpm dlx stera-ui add button dialog dropdown-menu
+pnpm dlx stera-ui@latest add button dialog dropdown-menu
 ```
 
 Registry dependencies are resolved automatically — adding `dialog` also pulls in `button` and `utils` if missing.
@@ -39,7 +39,7 @@ Registry dependencies are resolved automatically — adding `dialog` also pulls 
 ## Refresh design tokens
 
 ```bash
-pnpm dlx stera-ui add globals
+pnpm dlx stera-ui@latest add globals
 ```
 
 Re-pulls the latest `stera-ui.css` from the registry. Use this to pick up token updates without re-adding components.
