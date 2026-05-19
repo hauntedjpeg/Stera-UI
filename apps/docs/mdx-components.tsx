@@ -41,7 +41,7 @@ const mdxDefaults: MDXComponents = {
     <h2 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-md text-text mt-12 mb-3" {...props} />
   ),
   h3: (props) => (
-    <h3 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-sm text-text mt-8 mb-2 [h2+&]:mt-4" {...props} />
+    <h3 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-sm text-text mt-8 mb-2 [h2+&]:mt-4 flex" {...props} />
   ),
   h4: (props) => (
     <h4 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-sm text-text mt-4 mb-2" {...props} />
