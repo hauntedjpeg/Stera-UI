@@ -32,7 +32,7 @@ export default async function Page(props: {
         </article>
       </div>
       <aside className="hidden w-64 shrink-0 px-4 py-10 lg:block">
-        <div className="sticky top-[calc(var(--header-height)+2rem)]">
+        <div className="sticky top-[calc(var(--header-height)+3rem)]">
           <DocsToc toc={toc} />
         </div>
       </aside>
