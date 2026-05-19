@@ -23,28 +23,18 @@ function Steps({ children }: { children: ReactNode }) {
   )
 }
 
-function slugify(text: string): string {
-  return text
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]+/g, "")
-    .replace(/--+/g, "-")
-}
-
 const mdxDefaults: MDXComponents = {
   h1: (props) => (
-    <h1 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-display-sm text-text mt-8 mb-4 first:mt-0" {...props} />
+    <h1 className="st-display-sm text-text mt-8 mb-4 first:mt-0 scroll-mt-[calc(var(--header-height)+2rem)]" {...props} />
   ),
   h2: (props) => (
-    <h2 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-md text-text mt-12 mb-3" {...props} />
+    <h2 className="st-heading-md text-text mt-12 mb-3 scroll-mt-[calc(var(--header-height)+2rem)]" {...props} />
   ),
   h3: (props) => (
-    <h3 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-sm text-text mt-8 mb-2 [h2+&]:mt-4 flex" {...props} />
+    <h3 className="st-heading-sm text-text mt-8 mb-2 [h2+&]:mt-4 flex scroll-mt-[calc(var(--header-height)+2rem)]" {...props} />
   ),
   h4: (props) => (
-    <h4 id={typeof props.children === "string" ? slugify(props.children) : undefined} className="st-heading-sm text-text mt-4 mb-2" {...props} />
+    <h4 className="st-heading-sm text-text mt-4 mb-2 scroll-mt-[calc(var(--header-height)+2rem)]" {...props} />
   ),
   p: (props) => <p className="st-body-lg text-text-subtle mb-4 leading-relaxed" {...props} />,
   a: (props) => {
