@@ -6,7 +6,7 @@ import { rehypeCodeDefaultOptions } from "fumadocs-core/mdx-plugins"
  *
  *   ```bash noLineNumbers
  *   your-project/
- *   ├── components.json
+ *   ├── stera.config.json
  *   ```
  */
 const transformerNoLineNumbers = {

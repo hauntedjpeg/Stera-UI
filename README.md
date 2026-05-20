@@ -25,7 +25,7 @@ Initializes Stera UI in your project. Run this once before adding any components
 
 **What it does:**
 
-1. Creates a `components.json` configuration file in your project root.
+1. Creates a `stera.config.json` configuration file in your project root.
 2. Writes `styles/globals.css` containing the Stera design tokens (CSS variables for colors, borders, etc.) and typography utilities.
 3. Writes `styles/fonts.css` which loads the Geist variable font.
 4. Installs `tw-animate-css` as a dependency.
@@ -33,7 +33,7 @@ Initializes Stera UI in your project. Run this once before adding any components
 **Requirements:**
 
 - A `package.json` must exist in the current directory.
-- If `components.json` already exists, `init` exits early without making changes.
+- If `stera.config.json` already exists, `init` exits early without making changes. Projects with the legacy `components.json` filename are detected and offered an inline rename.
 
 **Options:**
 
@@ -67,7 +67,7 @@ Adds one or more components to your project.
 **What it does:**
 
 1. Resolves the component and all of its dependencies (other components, utilities, and hooks it relies on).
-2. Rewrites import paths in component files to match your configured aliases (see `components.json`).
+2. Rewrites import paths in component files to match your configured aliases (see `stera.config.json`).
 3. Checks for existing files before writing:
   - **Identical content** — skips silently.
   - **Different content** — prompts you to confirm before overwriting.
@@ -144,9 +144,9 @@ Lists all available components grouped by type, along with their registry depend
 
 ---
 
-## components.json
+## stera.config.json
 
-`components.json` is created by `init` and tells the CLI where to write files in your project. You can edit it to match your project structure.
+`stera.config.json` is created by `init` and tells the CLI where to write files in your project. You can edit it to match your project structure.
 
 ```json
 {
@@ -163,7 +163,7 @@ Lists all available components grouped by type, along with their registry depend
 }
 ```
 
-> **Upgrading?** If you have an older `components.json` with a `tailwind` object and fields like `style`, `rsc`, etc., the CLI will read it just fine — those fields are migrated automatically in memory. No manual changes needed.
+> **Upgrading?** Projects from earlier releases have `components.json` instead. The CLI still reads it (with a deprecation warning) and `stera-ui init` offers to rename it for you. Older configs with a `tailwind` object and fields like `style`, `rsc`, etc. are also migrated automatically in memory — no manual changes needed.
 
 ### `css`
 

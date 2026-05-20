@@ -15,8 +15,8 @@ const TYPE_TO_ALIAS: Record<string, keyof SteraConfig["aliases"]> = {
  * relative to the project root, using the project's tsconfig.json paths.
  *
  * Throws when the alias can't be resolved. `init` validates that tsconfig
- * defines paths before writing components.json, so a failure here means the
- * project regressed (tsconfig edited, components.json hand-written, etc.) —
+ * defines paths before writing stera.config.json, so a failure here means the
+ * project regressed (tsconfig edited, stera.config.json hand-written, etc.) —
  * surface it loudly rather than silently dropping files at the repo root.
  */
 function resolveAlias(alias: string, projectRoot: string): string {

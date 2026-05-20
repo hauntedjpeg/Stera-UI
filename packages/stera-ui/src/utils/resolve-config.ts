@@ -24,7 +24,8 @@ interface LegacySteraConfig {
   aliases: SteraConfig["aliases"]
 }
 
-export const CONFIG_FILE = "components.json"
+export const CONFIG_FILE = "stera.config.json"
+export const LEGACY_CONFIG_FILE = "components.json"
 
 /**
  * Normalize a legacy (pre-v1) config to the current shape.
@@ -42,12 +43,25 @@ function migrateConfig(raw: Record<string, unknown>): SteraConfig {
   return raw as unknown as SteraConfig
 }
 
+let warnedLegacyFilename = false
+
+function warnLegacyFilenameOnce(legacyPath: string): void {
+  if (warnedLegacyFilename) return
+  warnedLegacyFilename = true
+  console.warn(
+    `  ⚠ Found ${LEGACY_CONFIG_FILE}. Rename to ${CONFIG_FILE} — legacy filename support will be removed in a future release.\n    (${legacyPath})`
+  )
+}
+
 export function findConfigPath(cwd: string): string | null {
   let dir = path.resolve(cwd)
 
   while (true) {
     const configPath = path.join(dir, CONFIG_FILE)
     if (fs.existsSync(configPath)) return configPath
+
+    const legacyPath = path.join(dir, LEGACY_CONFIG_FILE)
+    if (fs.existsSync(legacyPath)) return legacyPath
 
     const parent = path.dirname(dir)
     if (parent === dir) return null
@@ -58,6 +72,10 @@ export function findConfigPath(cwd: string): string | null {
 export function loadConfig(cwd: string): SteraConfig | null {
   const configPath = findConfigPath(cwd)
   if (!configPath) return null
+
+  if (path.basename(configPath) === LEGACY_CONFIG_FILE) {
+    warnLegacyFilenameOnce(configPath)
+  }
 
   try {
     const raw = JSON.parse(fs.readFileSync(configPath, "utf-8"))

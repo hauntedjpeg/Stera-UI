@@ -1,8 +1,13 @@
 import fs from "node:fs"
 import fsp from "node:fs/promises"
 import path from "node:path"
-import { select } from "@inquirer/prompts"
-import { findConfigPath, CONFIG_FILE, type SteraConfig } from "../utils/resolve-config.js"
+import { confirm, select } from "@inquirer/prompts"
+import {
+  findConfigPath,
+  CONFIG_FILE,
+  LEGACY_CONFIG_FILE,
+  type SteraConfig,
+} from "../utils/resolve-config.js"
 import { fetchRegistryItem } from "../registry/index.js"
 import type { RegistryFontItem } from "../schema/index.js"
 import { installDependencies } from "../utils/install-deps.js"
@@ -219,7 +224,31 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   // Check if config already exists
   const existing = findConfigPath(cwd)
   if (existing) {
-    console.log(`  components.json already exists at ${existing}`)
+    const existingName = path.basename(existing)
+    if (existingName === LEGACY_CONFIG_FILE) {
+      console.log(
+        `  Found legacy ${LEGACY_CONFIG_FILE} at ${existing}`
+      )
+      const shouldRename = options.yes
+        ? true
+        : await confirm({
+            message: `Rename it to ${CONFIG_FILE}?`,
+            default: true,
+          })
+      if (shouldRename) {
+        const renamed = path.join(path.dirname(existing), CONFIG_FILE)
+        fs.renameSync(existing, renamed)
+        console.log(`  ${CHECK}  Renamed to ${CONFIG_FILE}`)
+        console.log('  Run "stera-ui add <component>" to add components.\n')
+      } else {
+        console.log(
+          `  Keeping ${LEGACY_CONFIG_FILE} for now. Legacy filename support will be removed in a future release.\n`
+        )
+      }
+      return
+    }
+
+    console.log(`  ${CONFIG_FILE} already exists at ${existing}`)
     console.log('  Run "stera-ui add <component>" to add components.\n')
     return
   }
@@ -236,7 +265,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   // Detect project structure
   const project = detectProject(cwd)
 
-  // Require a tsconfig path alias — otherwise generated components.json
+  // Require a tsconfig path alias — otherwise generated stera.config.json
   // aliases won't resolve and `add` would scatter files at the repo root.
   const aliasPrefix = detectAliasPrefix(cwd)
   if (!aliasPrefix) {
@@ -286,7 +315,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
     JSON.stringify(config, null, 2) + "\n",
     "utf-8"
   )
-  console.log(`  ${CHECK}  Created components.json`)
+  console.log(`  ${CHECK}  Created ${CONFIG_FILE}`)
 
   // Install base styles: always write stera-ui.css, then ensure the user's
   // globals.css exists and imports it. globals.css is user-owned from this

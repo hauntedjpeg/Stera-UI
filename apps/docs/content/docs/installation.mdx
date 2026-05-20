@@ -15,7 +15,7 @@ description: How to install and configure Stera UI in your project.
 pnpm dlx stera-ui@latest init
 ```
 
-`init` detects your project structure, writes `components.json`, creates `stera-ui.css` with the design tokens, and installs `tw-animate-css`.
+`init` detects your project structure, writes `stera.config.json`, creates `stera-ui.css` with the design tokens, and installs `tw-animate-css`.
 
 ## Add components
 
@@ -58,7 +58,7 @@ After `init`:
 
 ```text noLineNumbers
 your-project/
-├── components.json          # Stera UI configuration
+├── stera.config.json       # Stera UI configuration
 └── styles/
     ├── globals.css          # Imports stera-ui.css + peer styles
     └── stera-ui.css         # Design tokens + utilities
@@ -68,7 +68,7 @@ After your first `stera-ui add`:
 
 ```text noLineNumbers
 your-project/
-├── components.json
+├── stera.config.json
 ├── components/
 │   └── ui/                  # Installed components
 │       └── button.tsx

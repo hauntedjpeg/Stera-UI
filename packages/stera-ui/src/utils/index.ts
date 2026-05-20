@@ -1,7 +1,7 @@
 export { applyTransforms, type TransformContext, type TransformFn } from "./transform.js"
 export { transformImports } from "./transform-imports.js"
 export { resolveOutputPath } from "./resolve-paths.js"
-export { loadConfig, findConfigPath, CONFIG_FILE } from "./resolve-config.js"
+export { loadConfig, findConfigPath, CONFIG_FILE, LEGACY_CONFIG_FILE } from "./resolve-config.js"
 export { detectProject, detectAliasPrefix, type ProjectInfo } from "./detect-project.js"
 export { writeSteraUiCss, type WriteSteraCssResult } from "./write-stera-css.js"
 export { insertImportLine } from "./css-imports.js"

@@ -1,9 +1,13 @@
 ---
-title: components.json
+title: stera.config.json
 description: Configuration reference for your Stera UI project.
 ---
 
-`components.json` is created by `stera-ui init` and tells the CLI where to put files and how to rewrite import paths.
+`stera.config.json` is created by `stera-ui init` and tells the CLI where to put files and how to rewrite import paths.
+
+<Callout type="info">
+  Projects that ran `init` on an earlier release will have `components.json`. The CLI still reads that filename for now and prints a deprecation warning — run `stera-ui init` again or rename the file to silence it.
+</Callout>
 
 ## Schema
 
