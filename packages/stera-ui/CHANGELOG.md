@@ -1,5 +1,15 @@
 # stera-ui
 
+## 0.5.0
+
+### Minor Changes
+
+- [`0723b61`](https://github.com/hauntedjpeg/Stera-UI/commit/0723b6138cb1019658db78902ecd91148f10126d) Thanks [@hauntedjpeg](https://github.com/hauntedjpeg)! - Rename the CLI config file from `components.json` to `stera.config.json`.
+
+  `stera-ui init` now writes `stera.config.json`. Existing projects don't need to do anything — the CLI still reads `components.json` and prints a one-time deprecation warning telling you to rename. Running `stera-ui init` in a project that has the legacy filename will offer an inline rename. Legacy filename support will be removed in a future release.
+
+  The hosted JSON schema URL (`https://ui.stera.sh/schema.json`) is unchanged.
+
 ## 0.4.0
 
 ### Minor Changes
