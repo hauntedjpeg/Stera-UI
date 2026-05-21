@@ -6,10 +6,12 @@ import { Preview } from "@/components/preview"
 import { ComponentPreview } from "@/components/component-preview"
 import { CodeBlock } from "@/components/code-block"
 import { InstallSnippet } from "@/components/install-snippet"
+import { SiInfoCircle } from "stera-icons"
 
 function Callout({ children }: { type?: string; children: ReactNode }) {
   return (
-    <div className="my-4 rounded-lg border border-border bg-surface-secondary p-4 st-body-md text-text-subtle">
+    <div className="flex gap-3 my-4 rounded-xl border border-border bg-surface-secondary p-4 st-body-md text-text-subtle [&_p]:mb-0 [&_p]:st-body-md [&_svg]:size-4 [&_svg]:mt-0.5 [&_svg]:shrink-0">
+      <SiInfoCircle />
       {children}
     </div>
   )
@@ -36,7 +38,7 @@ const mdxDefaults: MDXComponents = {
   h4: (props) => (
     <h4 className="st-heading-sm text-text mt-4 mb-2 scroll-mt-[calc(var(--header-height)+2rem)]" {...props} />
   ),
-  p: (props) => <p className="st-body-lg text-text-subtle mb-4 leading-relaxed" {...props} />,
+  p: (props) => <p className="st-body-lg text-text-subtle mb-4" {...props} />,
   a: (props) => {
     const href = props.href ?? ""
     if (href.startsWith("/") || href.startsWith("#")) {

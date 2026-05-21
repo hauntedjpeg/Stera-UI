@@ -40,7 +40,7 @@ export function CodeBlock({
     >
       {title && <figcaption className="st-code-block__title">{title}</figcaption>}
       {!hideCopyButton && (
-        <CopyButton value={raw} className="absolute top-3 right-3 z-10" />
+        <CopyButton value={raw} className="absolute top-2.25 right-2.25 z-10" />
       )}
       {children}
     </figure>

@@ -33,7 +33,7 @@ export default function EmptyWithAvatarGroup() {
         </EmptyMedia>
         <EmptyTitle>No team members</EmptyTitle>
         <EmptyDescription>
-          Your team doesn't have any members yet. Invite people to collaborate.
+          Your team doesn&apos;t have any members yet. Invite people to collaborate.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>

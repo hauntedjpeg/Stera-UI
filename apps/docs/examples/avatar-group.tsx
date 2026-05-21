@@ -11,13 +11,13 @@ export default function AvatarGroupDemo() {
     <AvatarGroup>
       <Avatar>
         <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarFallback>RG</AvatarFallback>
+      </Avatar>
+      <Avatar>
+        <AvatarFallback>LF</AvatarFallback>
+      </Avatar>
+      <Avatar>
         <AvatarFallback>CG</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarFallback>LR</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarFallback>JD</AvatarFallback>
       </Avatar>
       <AvatarGroupCount>+4</AvatarGroupCount>
     </AvatarGroup>

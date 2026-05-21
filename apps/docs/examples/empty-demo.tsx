@@ -18,7 +18,7 @@ export default function EmptyDemo() {
         </EmptyMedia>
         <EmptyTitle>No projects found</EmptyTitle>
         <EmptyDescription>
-          You don't have any projects yet. Create your first project to get started.
+          You don&apos;t have any projects yet. Create your first project to get started.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>

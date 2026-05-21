@@ -23,7 +23,7 @@ export function CopyButton({
 
   return (
     <Button
-      variant="outline"
+      variant="subtle"
       size="icon-sm"
       aria-label={copied ? "Copied" : "Copy code"}
       onClick={async () => {

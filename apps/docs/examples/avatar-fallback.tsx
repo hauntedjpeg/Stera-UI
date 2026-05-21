@@ -8,7 +8,7 @@ export default function AvatarFallbackOnly() {
   return (
     <Avatar>
       <AvatarImage src="#" alt="User" />
-      <AvatarFallback>JD</AvatarFallback>
+      <AvatarFallback>CG</AvatarFallback>
     </Avatar>
   )
 }

@@ -3,9 +3,7 @@ title: Introduction
 description: A component registry for React, built on Base UI and Tailwind CSS.
 ---
 
-Stera UI is a component registry. The CLI copies component source into your project — there is no runtime package to install or version to track.
-
-Components are built on [Base UI](https://base-ui.com) primitives, styled with [Tailwind CSS v4](https://tailwindcss.com), and use [stera-icons](https://stera.sh/) for iconography. Theming is handled through CSS custom properties; dark mode is included.
+Stera UI components are built on [Base UI](https://base-ui.com), styled with [Tailwind CSS v4](https://tailwindcss.com), and use [stera-icons](https://stera.sh/) for iconography. The CLI copies source directly into your project, so there's no runtime package to install or version to track. Theming uses CSS custom properties, and dark mode is included.
 
 ## Quick start
 
@@ -34,3 +32,17 @@ export function MyPage() {
 ```
 
 </Steps>
+
+## More
+
+Stera UI began as a Figma component library, intended as the starting point for design systems. Kind of like a set of sane defaults.
+
+I maticulously craft each component for a great designer experience. Stera UI is designed for you so you can design for others. Components should be easy to use, flexible, and composable. The hope is that if detatch a component its because your exploring a new exciting idea, instead of being frustrated by an annoyingly rigid component.
+
+Then I discovered Shadcn's UI registry and was like... whoa, I didn't know you could do that. To me it felt like a Figma library. Like I can basically copy and paste this into my project and now I own it?? I wanted this for Stera UI! I stared by bootstraping using Shadcn UI. As I worked to modify each component to match it's Figma counterpart I learned more and more about Base UI and how fucking awesome it is.
+
+Stera started as a little brother to Shadcn, but now they're more like second cousins. Components are structured to more closely follows Base UI's best practices and intentions. Base UI really is the star of the show.
+
+I have more to say but I'll get to it later. Writing my thoughts manually without AI is hard!
+
+PS, the pipeline is: Figma -> Stera UI Bridge Plugin -> Tailwind 4 config -> Your Project

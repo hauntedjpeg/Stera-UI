@@ -14,17 +14,17 @@ import { Button } from "@/components/ui/button"
 export default function AlertDialogDemo() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger render={<Button variant="outline">Open dialog</Button>} />
+      <AlertDialogTrigger render={<Button variant="outline">Open</Button>} />
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogTitle>Publish this project?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. Please confirm you want to proceed.
+            Published projects are publicly accessible to everyone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Confirm</AlertDialogAction>
+          <AlertDialogAction>Publish</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

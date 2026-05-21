@@ -1,4 +1,4 @@
-import { SiDelete } from "stera-icons"
+import { SiGlobe } from "stera-icons"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,20 +16,20 @@ import { Button } from "@/components/ui/button"
 export default function AlertDialogWithMedia() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger render={<Button variant="outline">Delete file</Button>} />
+      <AlertDialogTrigger render={<Button variant="outline">Open</Button>} />
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogMedia>
-            <SiDelete />
+            <SiGlobe />
           </AlertDialogMedia>
-          <AlertDialogTitle>Delete file</AlertDialogTitle>
+          <AlertDialogTitle>Publish this project?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete the file. This action cannot be undone.
+            Published projects are publicly accessible to everyone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Delete</AlertDialogAction>
+          <AlertDialogAction>Publish</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

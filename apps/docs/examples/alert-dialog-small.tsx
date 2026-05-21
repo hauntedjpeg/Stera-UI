@@ -14,17 +14,17 @@ import { Button } from "@/components/ui/button"
 export default function AlertDialogSmall() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger render={<Button variant="outline">Save changes?</Button>} />
+      <AlertDialogTrigger render={<Button variant="outline">Open</Button>} />
       <AlertDialogContent size="sm">
         <AlertDialogHeader>
-          <AlertDialogTitle>Save changes?</AlertDialogTitle>
+          <AlertDialogTitle>Publish project?</AlertDialogTitle>
           <AlertDialogDescription>
-            You have unsaved changes. Would you like to save before leaving?
+            Published projects are publicly accessible to everyone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Discard</AlertDialogCancel>
-          <AlertDialogAction>Save</AlertDialogAction>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Publish</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
