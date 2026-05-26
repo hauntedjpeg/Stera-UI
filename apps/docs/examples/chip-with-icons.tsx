@@ -12,19 +12,11 @@ export default function ChipWithIcons() {
         <SiHash data-icon="inline-start" />
         Tag
       </Chip>
-      <Chip variant="solid" size="sm">
-        <SiHash data-icon="inline-start" />
-        Tag
-      </Chip>
       <Chip variant="subtle" size="sm">
         Label
         <SiX data-icon="inline-end" />
       </Chip>
       <Chip variant="outline" size="sm">
-        Label
-        <SiX data-icon="inline-end" />
-      </Chip>
-      <Chip variant="solid" size="sm">
         Label
         <SiX data-icon="inline-end" />
       </Chip>
