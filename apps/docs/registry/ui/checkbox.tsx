@@ -37,7 +37,7 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
           "grid place-content-center text-current transition-none [&>svg]:size-3",
           // Show check by default, minus when indeterminate
           "*:data-[slot=check]:block *:data-[slot=minus]:hidden",
-          "`group-data-indeterminate/checkbox:*:data-[slot=check]:hidden group-data-indeterminate/checkbox:*:data-[slot=minus]:block"
+          "group-data-indeterminate/checkbox:*:data-[slot=check]:hidden group-data-indeterminate/checkbox:*:data-[slot=minus]:block"
         )}
       >
         <SiCheckFill data-slot="check" />
