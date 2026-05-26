@@ -41,13 +41,13 @@ function DropdownMenuContent({
           data-slot="dropdown-menu-content"
           className={cn(
             // Base
-            "rounded-xl bg-surface p-1 text-text shadow-md ring-1 ring-border outline-none overflow-x-hidden overflow-y-auto duration-100",
+            "overflow-x-hidden overflow-y-auto rounded-xl bg-surface p-1 text-text shadow-md ring-1 ring-border duration-100 outline-none",
             // Position
             "origin-(--transform-origin)",
             // Sizing
-            "max-h-(--available-height) min-w-40 max-w-56",
+            "max-h-(--available-height) max-w-56 min-w-40",
             // Animation
-            "data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95",
+            "data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
             // Other
             "z-50",
             className
@@ -104,13 +104,13 @@ function DropdownMenuItem({
         // Group
         "group/dropdown-menu-item",
         // Base
-        "flex relative cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 data-inset:pl-8 st-body-md-compact text-text outline-hidden select-none",
+        "relative flex cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 st-body-md-compact text-text outline-hidden select-none data-inset:pl-8",
         // Focus
         "focus:bg-surface-hover",
         // Danger
-        "data-[variant=danger]:text-text-danger data-[variant=danger]:focus:bg-surface-danger-subtle data-[variant=danger]:focus:text-danger not-data-[variant=danger]:focus:**:text-text data-[variant=danger]:*:[svg]:text-text-danger",
+        "data-[variant=danger]:focus:text-danger not-data-[variant=danger]:focus:**:text-text data-[variant=danger]:text-text-danger data-[variant=danger]:focus:bg-surface-danger-subtle data-[variant=danger]:*:[svg]:text-text-danger",
         // Disabled
-        "data-disabled:text-text-subtlest data-disabled:pointer-events-none",
+        "data-disabled:pointer-events-none data-disabled:text-text-subtlest",
         // Other
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
@@ -131,7 +131,7 @@ function DropdownMenuItemContent({
         // Base
         "flex flex-col",
         // Sizing
-        "flex-1 gap-1 min-w-0",
+        "min-w-0 flex-1 gap-1",
         className
       )}
       {...props}
@@ -165,7 +165,7 @@ function DropdownMenuItemDescription({
       data-slot="dropdown-menu-item-description"
       className={cn(
         // Base
-        "st-body-sm text-text-subtle truncate",
+        "truncate st-body-sm text-text-subtle",
         className
       )}
       {...props}
@@ -195,7 +195,7 @@ function DropdownMenuSubTrigger({
         // Sizing
         "gap-2",
         // Animation
-        "data-popup-open:bg-surface-hover data-popup-open:text-text data-open:bg-surface-hover data-open:text-text",
+        "data-open:bg-surface-hover data-open:text-text data-popup-open:bg-surface-hover data-popup-open:text-text",
         // Variants
         "data-inset:pl-8",
         // Other
@@ -225,9 +225,9 @@ function DropdownMenuSubContent({
         // Base
         "rounded-xl bg-surface p-1 text-text shadow-lg ring-1 ring-border duration-100",
         // Sizing
-        "min-w-24 max-w-56",
+        "max-w-56 min-w-24",
         // Animation
-        "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+        "data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         className
       )}
       align={align}
@@ -318,8 +318,7 @@ function DropdownMenuRadioItem({
         data-slot="dropdown-menu-radio-item-indicator"
       >
         <MenuPrimitive.RadioItemIndicator>
-          <SiCheck
-          />
+          <SiCheck />
         </MenuPrimitive.RadioItemIndicator>
       </span>
       {children}

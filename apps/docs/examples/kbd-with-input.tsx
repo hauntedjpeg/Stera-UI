@@ -1,7 +1,11 @@
 "use client"
 
 import { SiSearch } from "stera-icons"
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group"
 import { Kbd } from "@/components/ui/kbd"
 
 export default function KbdWithInput() {

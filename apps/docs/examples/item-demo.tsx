@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 
 export default function ItemDemo() {
   return (
-    <div className="flex flex-col w-96 gap-4">
+    <div className="flex w-96 flex-col gap-4">
       <Item>
         <ItemBody>
           <ItemContent>
@@ -25,17 +25,23 @@ export default function ItemDemo() {
         </ItemBody>
       </Item>
 
-      <Item render={<a href="#">
-        <ItemBody>
-          <ItemMedia variant="icon">
-            <SiCheckCircleFill />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>Upload successful</ItemTitle>
-          </ItemContent>
-          <ItemActions><SiChevronRight /></ItemActions>
-        </ItemBody>
-      </a>} />
+      <Item
+        render={
+          <a href="#">
+            <ItemBody>
+              <ItemMedia variant="icon">
+                <SiCheckCircleFill />
+              </ItemMedia>
+              <ItemContent>
+                <ItemTitle>Upload successful</ItemTitle>
+              </ItemContent>
+              <ItemActions>
+                <SiChevronRight />
+              </ItemActions>
+            </ItemBody>
+          </a>
+        }
+      />
     </div>
   )
 }

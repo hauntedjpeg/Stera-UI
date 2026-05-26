@@ -17,7 +17,9 @@ export default function DropdownMenuRadioItems() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" className="w-fit" />}>
+      <DropdownMenuTrigger
+        render={<Button variant="outline" className="w-fit" />}
+      >
         Radio Group
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -26,7 +28,9 @@ export default function DropdownMenuRadioItems() {
           <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
             <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="right" disabled>Right</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="right" disabled>
+              Right
+            </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuGroup>
       </DropdownMenuContent>

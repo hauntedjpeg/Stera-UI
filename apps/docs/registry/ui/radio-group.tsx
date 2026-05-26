@@ -19,7 +19,7 @@ function RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {
       data-slot="radio-group-item"
       className={cn(
         // Base
-        "group/radio-group-item relative flex items-center justify-center rounded-full border border-border-strong outline-none transition-shadow",
+        "group/radio-group-item relative flex items-center justify-center rounded-full border border-border-strong transition-shadow outline-none",
         // Position / hit area
         "after:absolute after:-inset-x-3 after:-inset-y-2",
         // Sizing
@@ -29,14 +29,14 @@ function RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {
         // Disabled
         "disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:bg-surface-disabled",
         // Invalid
-        "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:aria-checked:border-primary",
+        "aria-invalid:border-destructive aria-invalid:aria-checked:border-primary aria-invalid:ring-3 aria-invalid:ring-ring-danger",
         // Checked
         "data-checked:border-border-brand-strong data-checked:bg-surface-brand data-checked:text-text-onbrand",
         // Variants
         "group-has-disabled/field:text-text-disabled",
         // Other
         "peer",
-        className,
+        className
       )}
       {...props}
     >

@@ -50,7 +50,9 @@ export default function ComboboxMultiple() {
           <ComboboxEmpty>No framework found.</ComboboxEmpty>
           <ComboboxList>
             {(fw: Framework) => (
-              <ComboboxItem key={fw.value} value={fw}>{fw.label}</ComboboxItem>
+              <ComboboxItem key={fw.value} value={fw}>
+                {fw.label}
+              </ComboboxItem>
             )}
           </ComboboxList>
         </ComboboxContent>

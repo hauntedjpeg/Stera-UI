@@ -29,13 +29,21 @@ export default function ComboboxInvalid() {
     <div className="w-64">
       <Field data-invalid="true">
         <FieldLabel>Framework</FieldLabel>
-        <Combobox items={frameworks} itemToStringLabel={(fw: Framework) => fw.label}>
-          <ComboboxInput aria-invalid="true" placeholder="Select framework..." />
+        <Combobox
+          items={frameworks}
+          itemToStringLabel={(fw: Framework) => fw.label}
+        >
+          <ComboboxInput
+            aria-invalid="true"
+            placeholder="Select framework..."
+          />
           <ComboboxContent>
             <ComboboxEmpty>No framework found.</ComboboxEmpty>
             <ComboboxList>
               {(fw: Framework) => (
-                <ComboboxItem key={fw.value} value={fw}>{fw.label}</ComboboxItem>
+                <ComboboxItem key={fw.value} value={fw}>
+                  {fw.label}
+                </ComboboxItem>
               )}
             </ComboboxList>
           </ComboboxContent>

@@ -15,7 +15,9 @@ export default function InputGroupTextareaAddon() {
         <InputGroupTextarea placeholder="Enter your message..." rows={3} />
         <InputGroupAddon align="block-end">
           <InputGroupText>Line 1, Column 1</InputGroupText>
-          <InputGroupButton variant="brand" className="ml-auto">Run</InputGroupButton>
+          <InputGroupButton variant="brand" className="ml-auto">
+            Run
+          </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
     </div>

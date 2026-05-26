@@ -15,7 +15,7 @@ function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
         "p-1",
         // Position
         "scroll-my-1",
-        className,
+        className
       )}
       {...props}
     />
@@ -33,7 +33,7 @@ function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
         "flex-1",
         // Other
         "text-left",
-        className,
+        className
       )}
       {...props}
     />
@@ -54,7 +54,7 @@ function SelectTrigger({
       data-size={size}
       className={cn(
         // Base
-        "flex h-9 rounded-xl border border-border bg-surface py-2.5 pr-2.5 pl-3 outline-none st-body-md-compact",
+        "flex h-9 rounded-xl border border-border bg-surface py-2.5 pr-2.5 pl-3 st-body-md-compact outline-none",
         // Sizing
         "w-fit gap-1.5",
         // Animation
@@ -65,7 +65,7 @@ function SelectTrigger({
         "data-[size=lg]:h-11 data-[size=lg]:py-3.5 data-[size=lg]:pr-3.5 data-[size=lg]:pl-4",
         // Other
         "items-center justify-between text-sm whitespace-nowrap *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-surface-secondary/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        className,
+        className
       )}
       {...props}
     >
@@ -108,16 +108,16 @@ function SelectContent({
           data-align-trigger={alignItemWithTrigger}
           className={cn(
             // Base
-            "relative rounded-xl bg-surface shadow-md border border-border overflow-x-hidden overflow-y-auto",
+            "relative overflow-x-hidden overflow-y-auto rounded-xl border border-border bg-surface shadow-md",
             // Position
             "origin-(--transform-origin)",
             // Sizing
             "max-h-(--available-height) w-(--anchor-width) min-w-36",
             // Animation
-            "duration-100 data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+            "duration-100 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
             // Other
             "isolate z-50 text-text",
-            className,
+            className
           )}
           {...props}
         >
@@ -142,7 +142,7 @@ function SelectLabel({
         "p-2",
         // Other
         "st-body-sm text-text-subtle",
-        className,
+        className
       )}
       {...props}
     />
@@ -165,8 +165,8 @@ function SelectItem({
         // Animation
         "hover:bg-surface-hover focus:bg-surface-hover focus:text-text not-data-[variant=danger]:focus:**:text-text data-disabled:pointer-events-none data-disabled:text-text-disabled",
         // Other
-        "items-center cursor-default st-body-md-compact [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
-        className,
+        "cursor-default items-center st-body-md-compact [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        className
       )}
       {...props}
     >
@@ -198,7 +198,7 @@ function SelectSeparator({
         "h-px",
         // Other
         "pointer-events-none",
-        className,
+        className
       )}
       {...props}
     />
@@ -221,7 +221,7 @@ function SelectScrollUpButton({
         "w-full",
         // Other
         "z-10 cursor-default items-center justify-center [&_svg:not([class*='size-'])]:size-4",
-        className,
+        className
       )}
       {...props}
     >
@@ -246,7 +246,7 @@ function SelectScrollDownButton({
         "w-full",
         // Other
         "z-10 cursor-default items-center justify-center [&_svg:not([class*='size-'])]:size-4",
-        className,
+        className
       )}
       {...props}
     >

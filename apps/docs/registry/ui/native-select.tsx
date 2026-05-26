@@ -11,17 +11,17 @@ const nativeSelectVariants = cva(
     // Focus
     "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
     // Disabled
-    "disabled:text-text-subtlest disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:border-border-strong",
+    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:border-border-strong disabled:bg-surface-disabled disabled:text-text-subtlest",
     // Invalid
     "aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger",
   ],
   {
     variants: {
       size: {
-        sm: "h-8 pl-2.5 pr-8 st-body-md-compact",
-        md: "h-9 pl-3 pr-8 st-body-md-compact",
-        lg: "h-10 pl-3 pr-8 st-body-md-compact",
-        xl: "h-12 pl-4 pr-10 st-body-lg",
+        sm: "h-8 pr-8 pl-2.5 st-body-md-compact",
+        md: "h-9 pr-8 pl-3 st-body-md-compact",
+        lg: "h-10 pr-8 pl-3 st-body-md-compact",
+        xl: "h-12 pr-10 pl-4 st-body-lg",
       },
     },
     defaultVariants: {

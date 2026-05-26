@@ -11,7 +11,9 @@ export default function CheckboxWithDescription() {
     <Field orientation="horizontal">
       <Checkbox id="terms-checkbox" />
       <FieldContent>
-        <FieldLabel htmlFor="terms-checkbox">Accept terms and conditions</FieldLabel>
+        <FieldLabel htmlFor="terms-checkbox">
+          Accept terms and conditions
+        </FieldLabel>
         <FieldDescription>
           By clicking this checkbox, you agree to the terms and conditions.
         </FieldDescription>

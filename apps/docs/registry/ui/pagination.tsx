@@ -162,8 +162,7 @@ function PaginationEllipsis({
       )}
       {...props}
     >
-      <SiMore
-      />
+      <SiMore />
       <span className="sr-only">More pages</span>
     </span>
   )

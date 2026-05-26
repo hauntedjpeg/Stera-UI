@@ -16,7 +16,8 @@ export default function EmptyNoResults() {
         </EmptyMedia>
         <EmptyTitle>No results found</EmptyTitle>
         <EmptyDescription>
-          We couldn&apos;t find anything matching your search. Try different keywords.
+          We couldn&apos;t find anything matching your search. Try different
+          keywords.
         </EmptyDescription>
       </EmptyHeader>
     </Empty>

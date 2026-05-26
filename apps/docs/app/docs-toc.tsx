@@ -16,9 +16,7 @@ export function DocsToc({ toc }: { toc: TableOfContents }) {
   React.useEffect(() => {
     if (items.length === 0) return
 
-    const ids = items
-      .map((item) => item.url.replace(/^#/, ""))
-      .filter(Boolean)
+    const ids = items.map((item) => item.url.replace(/^#/, "")).filter(Boolean)
     const elements = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)
@@ -54,8 +52,7 @@ export function DocsToc({ toc }: { toc: TableOfContents }) {
   if (items.length === 0) return null
 
   return (
-    <nav aria-label="On this page" className="text-text-subtle">
-      <p className="st-body-sm-strong text-text mb-3">On this page</p>
+    <nav aria-label="Content outline" className="text-text-subtle">
       <ScrollArea className="max-h-[calc(100vh-var(--header-height)-4rem)]">
         <ul className="space-y-1.5">
           {items.map((item) => {
@@ -66,9 +63,9 @@ export function DocsToc({ toc }: { toc: TableOfContents }) {
                 <a
                   href={item.url}
                   className={cn(
-                    "block st-body-sm transition-colors hover:text-text",
+                    "block st-body-md-compact transition-colors hover:text-text",
                     item.depth === 3 && "pl-4",
-                    isActive ? "text-text-accent" : "text-text-subtle"
+                    isActive ? "text-text" : "text-text-subtlest"
                   )}
                 >
                   {item.title}

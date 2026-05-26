@@ -11,7 +11,11 @@ import {
 import { fetchRegistryItem } from "../registry/index.js"
 import type { RegistryFontItem } from "../schema/index.js"
 import { installDependencies } from "../utils/install-deps.js"
-import { detectProject, detectAliasPrefix, type ProjectInfo } from "../utils/detect-project.js"
+import {
+  detectProject,
+  detectAliasPrefix,
+  type ProjectInfo,
+} from "../utils/detect-project.js"
 import { detectFonts, type DetectedFonts } from "../utils/detect-fonts.js"
 import { patchCssVariables } from "../utils/patch-css-vars.js"
 import { massageTreeForFonts, updateFonts } from "../utils/update-fonts.js"
@@ -87,7 +91,11 @@ async function promptFontStrategy(
     console.log(`  Detected existing fonts: ${sources.join(" via ")}\n`)
   }
 
-  type StrategyChoice = { value: FontStrategy; name: string; description: string }
+  type StrategyChoice = {
+    value: FontStrategy
+    name: string
+    description: string
+  }
   const choices: StrategyChoice[] = []
 
   if (hasExistingFonts) {
@@ -169,10 +177,9 @@ async function executeFontStrategy(
   if (strategy === "keep-existing") {
     const fontFamily =
       detected.fontFamilies.length > 0 ? detected.fontFamilies[0] : null
-    const fontValue =
-      detected.nextFontVariable
-        ? `var(${detected.nextFontVariable})`
-        : fontFamily ?? "Geist"
+    const fontValue = detected.nextFontVariable
+      ? `var(${detected.nextFontVariable})`
+      : (fontFamily ?? "Geist")
 
     const patched = patchCssVariables(steraUiPath, {
       "--font-heading": fontValue,
@@ -202,13 +209,17 @@ async function executeFontStrategy(
     for (const importLine of fontTree.cssImports) {
       await insertImportLine(steraUiPath, importLine)
     }
-    console.log(`  ${CHECK}  Added font imports to ${path.relative(cwd, steraUiPath)}`)
+    console.log(
+      `  ${CHECK}  Added font imports to ${path.relative(cwd, steraUiPath)}`
+    )
   }
 
   if (Object.keys(fontTree.cssVars).length > 0) {
     const patched = patchCssVariables(steraUiPath, fontTree.cssVars)
     if (patched.length > 0) {
-      console.log(`  ${CHECK}  Updated font variables in ${path.relative(cwd, steraUiPath)}`)
+      console.log(
+        `  ${CHECK}  Updated font variables in ${path.relative(cwd, steraUiPath)}`
+      )
     }
   }
 
@@ -226,9 +237,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   if (existing) {
     const existingName = path.basename(existing)
     if (existingName === LEGACY_CONFIG_FILE) {
-      console.log(
-        `  Found legacy ${LEGACY_CONFIG_FILE} at ${existing}`
-      )
+      console.log(`  Found legacy ${LEGACY_CONFIG_FILE} at ${existing}`)
       const shouldRename = options.yes
         ? true
         : await confirm({
@@ -300,21 +309,14 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   const detectedFonts = detectFonts(cwd, project)
 
   // Prompt for font strategy
-  const strategy = await promptFontStrategy(
-    detectedFonts,
-    options.yes ?? false
-  )
+  const strategy = await promptFontStrategy(detectedFonts, options.yes ?? false)
 
   // Build config from detection
   const config = buildConfig(project, strategy, aliasPrefix)
 
   // Write config
   const configPath = path.join(cwd, CONFIG_FILE)
-  fs.writeFileSync(
-    configPath,
-    JSON.stringify(config, null, 2) + "\n",
-    "utf-8"
-  )
+  fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n", "utf-8")
   console.log(`  ${CHECK}  Created ${CONFIG_FILE}`)
 
   // Install base styles: always write stera-ui.css, then ensure the user's
@@ -362,13 +364,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   }
 
   // Execute font strategy (patches stera-ui.css only)
-  await executeFontStrategy(
-    strategy,
-    project,
-    detectedFonts,
-    config,
-    cwd
-  )
+  await executeFontStrategy(strategy, project, detectedFonts, config, cwd)
 
   // Install npm dependencies declared by the globals registry item
   // (e.g. tw-animate-css).
@@ -381,11 +377,13 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   // Next steps
   console.log("")
   console.log("  Next steps:")
-  console.log('    stera-ui add <component>')
+  console.log("    stera-ui add <component>")
 
   if (strategy === "skip") {
     console.log("")
-    console.log(`  ${dim("Font setup was skipped. See https://ui.stera.sh for font configuration docs.")}`)
+    console.log(
+      `  ${dim("Font setup was skipped. See https://ui.stera.sh for font configuration docs.")}`
+    )
   }
 
   console.log("")

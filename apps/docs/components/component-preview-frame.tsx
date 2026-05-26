@@ -36,7 +36,7 @@ export function ComponentPreviewFrame({
         data-align={align}
         className={cn(
           "flex min-h-72 w-full justify-center bg-surface p-10",
-          "data-[align=center]:items-center data-[align=start]:items-start data-[align=end]:items-end",
+          "data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start",
           previewClassName
         )}
       >

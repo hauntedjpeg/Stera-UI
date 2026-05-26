@@ -1,7 +1,4 @@
-import {
-  SiGlobe,
-  SiDotFill
-} from "stera-icons"
+import { SiGlobe, SiDotFill } from "stera-icons"
 import {
   Item,
   ItemBody,
@@ -11,18 +8,15 @@ import {
   ItemFooter,
   ItemMedia,
   ItemSeparator,
-  ItemTitle
+  ItemTitle,
 } from "@/components/ui/item"
 import { Button } from "@/components/ui/button"
-import {
-  Avatar,
-  AvatarIconFallback
-} from "@/components/ui/avatar"
+import { Avatar, AvatarIconFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 
 export default function ItemDemo() {
   return (
-    <div className="flex flex-col w-96 gap-4">
+    <div className="flex w-96 flex-col gap-4">
       <Item>
         <ItemBody>
           <ItemMedia variant="icon">
@@ -43,7 +37,10 @@ export default function ItemDemo() {
         <ItemSeparator />
         <ItemFooter>
           <span>Dev Server</span>
-          <Badge variant="success"><SiDotFill data-icon="inline-start" />Running</Badge>
+          <Badge variant="success">
+            <SiDotFill data-icon="inline-start" />
+            Running
+          </Badge>
         </ItemFooter>
       </Item>
     </div>

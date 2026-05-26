@@ -26,13 +26,18 @@ const frameworks: Framework[] = [
 export default function ComboboxDemo() {
   return (
     <div className="w-64">
-      <Combobox items={frameworks} itemToStringLabel={(fw: Framework) => fw.label}>
+      <Combobox
+        items={frameworks}
+        itemToStringLabel={(fw: Framework) => fw.label}
+      >
         <ComboboxInput placeholder="Select framework..." />
         <ComboboxContent>
           <ComboboxEmpty>No framework found.</ComboboxEmpty>
           <ComboboxList>
             {(fw: Framework) => (
-              <ComboboxItem key={fw.value} value={fw}>{fw.label}</ComboboxItem>
+              <ComboboxItem key={fw.value} value={fw}>
+                {fw.label}
+              </ComboboxItem>
             )}
           </ComboboxList>
         </ComboboxContent>

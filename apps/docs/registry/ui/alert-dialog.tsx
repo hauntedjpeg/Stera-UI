@@ -33,7 +33,7 @@ function AlertDialogOverlay({
         // Position
         "inset-0",
         // Animation
-        "data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        "data-closed:animate-out data-closed:fade-out-0 data-open:animate-in data-open:fade-in-0",
         // Other
         "isolate z-50",
         className
@@ -60,7 +60,7 @@ function AlertDialogContent({
           // Group
           "group/alert-dialog-content",
           // Base
-          "fixed grid rounded-2xl p-5 bg-surface border border-border shadow-lg duration-100 outline-none",
+          "fixed grid rounded-2xl border border-border bg-surface p-5 shadow-lg duration-100 outline-none",
           // Position
           "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
           // Sizing
@@ -68,7 +68,7 @@ function AlertDialogContent({
           // Variants
           "data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-sm",
           // Animation
-          "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95",
           // Other
           "z-50",
           className
@@ -191,7 +191,8 @@ function AlertDialogAction({
   return (
     <Button
       data-slot="alert-dialog-action"
-      variant={variant} size={size}
+      variant={variant}
+      size={size}
       className={cn(className)}
       {...props}
     />

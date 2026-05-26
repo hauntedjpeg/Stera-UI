@@ -16,7 +16,7 @@ import {
 
 export default function SidebarVariants() {
   return (
-    <div className="rounded-lg border overflow-hidden h-[400px] flex transform-[translateZ(0)]">
+    <div className="flex h-[400px] transform-[translateZ(0)] overflow-hidden rounded-lg border">
       <SidebarProvider>
         <Sidebar variant="floating">
           <SidebarContent>
@@ -25,17 +25,20 @@ export default function SidebarVariants() {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton isActive render={<a href="#" />}>
-                    <SiHome /><span>Home</span>
+                    <SiHome />
+                    <span>Home</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton render={<a href="#" />}>
-                    <SiSettings /><span>Settings</span>
+                    <SiSettings />
+                    <span>Settings</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton render={<a href="#" />}>
-                    <SiUser /><span>Profile</span>
+                    <SiUser />
+                    <span>Profile</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>

@@ -1,152 +1,29 @@
 # stera-ui
 
-A component registry for React, built on [Base UI](https://base-ui.com) and [Tailwind CSS](https://tailwindcss.com).
+Stera UI components are built on [Base UI](https://base-ui.com), styled with [Tailwind CSS v4](https://tailwindcss.com), and use [stera-icons](https://stera.sh/) for iconography. The CLI copies source directly into your project, so there's no runtime package to install or version to track. Theming uses CSS custom properties, and dark mode is included.
 
-Components are copied directly into your project — you own the code. There is no runtime library to install or update.
+Full documentation: [ui.stera.sh](https://ui.stera.sh).
 
 ## Quick Start
 
 ```bash
-pnpm dlx stera-ui init
-pnpm dlx stera-ui add button
+pnpm dlx stera-ui@latest init
+pnpm dlx stera-ui@latest add button
 ```
-
----
 
 ## CLI
 
-### `init`
+| Command                          | Description                                                                                                                                                       |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `stera-ui init`                  | Scaffolds `stera.config.json`, writes `stera-ui.css` (design tokens, typography, dark mode), wires it into your Tailwind entry, and walks you through font setup. |
+| `stera-ui add <component> [...]` | Copies the requested components (and their dependencies) into your project, rewriting import paths to match your aliases and installing any missing npm packages. |
+| `stera-ui list`                  | Lists all available components grouped by type, with their registry dependencies.                                                                                 |
 
-```bash
-pnpm dlx stera-ui init
-```
+All commands accept `--cwd <path>` and `--yes`. `add` also accepts `--overwrite`. See [`stera-ui --help`](https://ui.stera.sh/docs/cli) for the full reference.
 
-Initializes Stera UI in your project. Run this once before adding any components.
+## Configuration
 
-**What it does:**
-
-1. Creates a `stera.config.json` configuration file in your project root.
-2. Writes `styles/globals.css` containing the Stera design tokens (CSS variables for colors, borders, etc.) and typography utilities.
-3. Writes `styles/fonts.css` which loads the Geist variable font.
-4. Installs `tw-animate-css` as a dependency.
-
-**Requirements:**
-
-- A `package.json` must exist in the current directory.
-- If `stera.config.json` already exists, `init` exits early without making changes. Projects with the legacy `components.json` filename are detected and offered an inline rename.
-
-**Options:**
-
-
-| Option             | Description                                             |
-| ------------------ | ------------------------------------------------------- |
-| `-c, --cwd <path>` | Run in a different directory instead of the current one |
-| `-y, --yes`        | Skip confirmation prompts                               |
-
-
-**After running `init`**, import the globals into your Tailwind CSS entry point if it isn't already:
-
-```css
-@import './fonts.css';
-@import 'tailwindcss';
-@import 'tw-animate-css';
-```
-
-See [Font Setup](#font-setup) for how to load the Geist font in your app.
-
----
-
-### `add`
-
-```bash
-pnpm dlx stera-ui add <component> [components...]
-```
-
-Adds one or more components to your project.
-
-**What it does:**
-
-1. Resolves the component and all of its dependencies (other components, utilities, and hooks it relies on).
-2. Rewrites import paths in component files to match your configured aliases (see `stera.config.json`).
-3. Checks for existing files before writing:
-  - **Identical content** — skips silently.
-  - **Different content** — prompts you to confirm before overwriting.
-  - **New file** — writes without prompting.
-4. Installs any required npm packages that aren't already in your `package.json`.
-
-**Example — adding a single component:**
-
-```bash
-pnpm dlx stera-ui add button
-```
-
-Output:
-
-```
-Components to install:
-  button
-  utils (dependency)
-
-npm dependencies:
-  @base-ui/react
-  class-variance-authority
-  clsx
-  tailwind-merge
-
-Files written:
-  components/ui/button.tsx
-  lib/utils.ts
-```
-
-**Example — adding multiple components at once:**
-
-```bash
-pnpm dlx stera-ui add card table badge
-```
-
-Shared dependencies (like `utils`) are only written once regardless of how many components need them.
-
-**Dependency resolution:**
-
-When you add a component, its registry dependencies are automatically included. For example, adding `sidebar` also adds `button`, `input`, `separator`, `sheet`, `skeleton`, `tooltip`, `use-mobile`, and `utils`. The dependency list is shown before any files are written.
-
-**Globals warning:**
-
-If Stera design tokens are not detected in your CSS file, a warning is shown:
-
-```
-Warning: Stera design tokens not found in styles/globals.css
-Components may not render correctly.
-Run "stera-ui add globals" to install base styles.
-```
-
-Run `pnpm dlx stera-ui add globals` to install the base styles, or `pnpm dlx stera-ui init` to set up a fresh project correctly.
-
-**Options:**
-
-
-| Option             | Description                                             |
-| ------------------ | ------------------------------------------------------- |
-| `-o, --overwrite`  | Overwrite existing files without prompting              |
-| `-c, --cwd <path>` | Run in a different directory instead of the current one |
-| `-y, --yes`        | Skip confirmation prompts                               |
-
-
----
-
-### `list`
-
-```bash
-pnpm dlx stera-ui list
-```
-
-Lists all available components grouped by type, along with their registry dependencies.
-
----
-
-## stera.config.json
-
-`stera.config.json` is created by `init` and tells the CLI where to write files in your project. You can edit it to match your project structure.
+`stera-ui init` writes a `stera.config.json` to your project root:
 
 ```json
 {
@@ -159,128 +36,24 @@ Lists all available components grouped by type, along with their registry depend
     "ui": "@/components/ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
-  }
+  },
+  "fonts": { "strategy": "stera-default" }
 }
 ```
 
-> **Upgrading?** Projects from earlier releases have `components.json` instead. The CLI still reads it (with a deprecation warning) and `stera-ui init` offers to rename it for you. Older configs with a `tailwind` object and fields like `style`, `rsc`, etc. are also migrated automatically in memory — no manual changes needed.
+`css` is your Tailwind entry; aliases must match your `tsconfig.json` paths. Field-by-field reference at [ui.stera.sh/docs/configuration](https://ui.stera.sh/docs/configuration). Projects from earlier releases with a `components.json` are detected and offered an inline rename.
 
-### `css`
+## Components
 
-Path to your Tailwind CSS entry file. The CLI uses this to:
+50+ components ship today — accordion, button, calendar, chart, combobox, command, dialog, sidebar, table, and the rest. Browse the full catalog with live examples at [ui.stera.sh/docs/components](https://ui.stera.sh/docs/components), or run `stera-ui list` locally.
 
-- Detect whether Stera design tokens are present.
-- Write `globals.css` and `fonts.css` to the same directory during `init`.
+## Fonts
 
-### Aliases
-
-The `aliases` field controls where each file type is written and how imports are rewritten inside component files.
-
-
-| Key          | Default           | What it controls                         |
-| ------------ | ----------------- | ---------------------------------------- |
-| `ui`         | `@/components/ui` | UI components (button, card, etc.)       |
-| `components` | `@/components`    | Non-UI components (theme-provider, etc.) |
-| `lib`        | `@/lib`           | Library utilities                        |
-| `utils`      | `@/lib/utils`     | The `cn()` utility function              |
-| `hooks`      | `@/hooks`         | Hooks (use-mobile, etc.)                 |
-
-
-These must match the path aliases in your `tsconfig.json`. For example, if you set `"ui": "@/ui"`, the CLI will write button to `ui/button.tsx` (resolved via tsconfig) and rewrite any `import ... from "@/components/ui/button"` statements in other components to `@/ui/button`.
-
----
-
-## Available Components
-
-### UI Components
-
-
-| Name            | Dependencies                                                                          |
-| --------------- | ------------------------------------------------------------------------------------- |
-| `accordion`     | `utils`                                                                               |
-| `alert-dialog`  | `utils`, `button`                                                                     |
-| `aspect-ratio`  | `utils`                                                                               |
-| `avatar`        | `utils`                                                                               |
-| `badge`         | `utils`                                                                               |
-| `breadcrumb`    | `utils`                                                                               |
-| `button`        | `utils`                                                                               |
-| `button-group`  | `utils`, `separator`                                                                  |
-| `calendar`      | `utils`, `button`                                                                     |
-| `callout`       | `utils`                                                                               |
-| `card`          | `utils`                                                                               |
-| `chart`         | `utils`                                                                               |
-| `checkbox`      | `utils`                                                                               |
-| `chip`          | `utils`                                                                               |
-| `collapsible`   | —                                                                                     |
-| `combobox`      | `utils`, `button`, `chip`, `input-group`                                              |
-| `command`       | `utils`, `dialog`, `input-group`                                                      |
-| `dialog`        | `utils`, `button`                                                                     |
-| `drawer`        | `utils`                                                                               |
-| `dropdown-menu` | `utils`                                                                               |
-| `empty`         | `utils`                                                                               |
-| `field`         | `utils`, `label`, `separator`                                                         |
-| `preview-card`  | `utils`                                                                               |
-| `input`         | `utils`                                                                               |
-| `input-group`   | `utils`, `button`, `input`, `textarea`                                                |
-| `input-otp`     | `utils`                                                                               |
-| `item`          | `utils`, `separator`                                                                  |
-| `kbd`           | `utils`                                                                               |
-| `label`         | `utils`                                                                               |
-| `menubar`       | `utils`, `dropdown-menu`                                                              |
-| `native-select` | `utils`                                                                               |
-| `notice`        | —                                                                                     |
-| `pagination`    | `utils`, `button`                                                                     |
-| `popover`       | `utils`                                                                               |
-| `progress`      | `utils`                                                                               |
-| `radio-group`   | `utils`                                                                               |
-| `scroll-area`   | `utils`                                                                               |
-| `select`        | `utils`                                                                               |
-| `separator`     | `utils`                                                                               |
-| `sheet`         | `utils`, `button`                                                                     |
-| `sidebar`       | `utils`, `use-mobile`, `button`, `input`, `separator`, `sheet`, `skeleton`, `tooltip` |
-| `skeleton`      | `utils`                                                                               |
-| `slider`        | `utils`                                                                               |
-| `spinner`       | `utils`                                                                               |
-| `switch`        | `utils`                                                                               |
-| `table`         | `utils`                                                                               |
-| `tabs`          | `utils`                                                                               |
-| `textarea`      | `utils`                                                                               |
-| `toggle`        | `utils`                                                                               |
-| `toggle-group`  | `utils`, `toggle`                                                                     |
-| `tooltip`       | `utils`                                                                               |
-
-
-### Other
-
-
-| Name             | Type      | Description                                       |
-| ---------------- | --------- | ------------------------------------------------- |
-| `utils`          | lib       | `cn()` utility (clsx + tailwind-merge)            |
-| `globals`        | style     | Design tokens, typography utilities, dark mode    |
-| `fonts`          | style     | Geist variable font (loaded by `globals`)         |
-| `theme-provider` | component | Dark mode provider (next-themes)                  |
-| `use-mobile`     | hook      | Returns `true` when viewport width is below 768px |
-
-
----
-
-## Font Setup
-
-Fonts are configured automatically when you run `stera-ui init`. The CLI detects your project setup and offers three options:
-
-- **Use Stera UI defaults** — installs the [`geist`](https://www.npmjs.com/package/geist) package with Geist Sans and Geist Mono
-- **Keep your current fonts** — updates CSS variables to use your existing fonts
-- **Skip** — configure fonts manually later
-
-For **Next.js** projects, the CLI can set up `next/font` for automatic optimization (preloading, self-hosting, layout shift prevention). For **other frameworks**, it copies self-hosted `.woff2` files to `public/fonts/` and provides preload `<link>` tags.
-
-See the [full font documentation](https://ui.stera.sh/docs/fonts) for details on customizing fonts or adding additional font families.
-
----
+`init` walks you through font setup: Geist Sans + Geist Mono by default (via `next/font` for Next.js, `@fontsource-variable/*` otherwise), or keep your existing fonts. See [ui.stera.sh/docs/fonts](https://ui.stera.sh/docs/fonts).
 
 ## Dark Mode
 
-Dark mode is implemented with [next-themes](https://github.com/pacocoursey/next-themes) and a class-based CSS variable strategy. Add the `ThemeProvider` to your root layout:
+Dark mode is class-based and works with [next-themes](https://github.com/pacocoursey/next-themes):
 
 ```bash
 pnpm dlx stera-ui add theme-provider
@@ -288,7 +61,7 @@ pnpm dlx stera-ui add theme-provider
 
 ```tsx
 // app/layout.tsx
-import { ThemeProvider } from '@/components/theme-provider'
+import { ThemeProvider } from "@/components/theme-provider"
 
 export default function RootLayout({ children }) {
   return (
@@ -302,4 +75,3 @@ export default function RootLayout({ children }) {
   )
 }
 ```
-

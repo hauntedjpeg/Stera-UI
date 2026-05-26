@@ -7,17 +7,17 @@ import { cn } from "@/lib/utils"
 const inputVariants = cva(
   [
     // Base
-    "rounded-xl border border-border bg-surface px-3 py-1 file:border-0 file:bg-transparent aria-invalid:border-border-danger-strong st-body-md",
+    "rounded-xl border border-border bg-surface px-3 py-1 st-body-md file:border-0 file:bg-transparent aria-invalid:border-border-danger-strong",
     // Sizing
     "w-full min-w-0",
     // Focus
     "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
     // Disabled
-    "disabled:text-text-subtlest disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:border-border-strong",
+    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:border-border-strong disabled:bg-surface-disabled disabled:text-text-subtlest",
     // Invalid
     "aria-invalid:ring-3 aria-invalid:ring-ring-danger",
     // Other
-    "transition-[color,box-shadow] file:inline-flex file:font-medium file:text-text placeholder:text-text-subtlest outline-none",
+    "transition-[color,box-shadow] outline-none file:inline-flex file:font-medium file:text-text placeholder:text-text-subtlest",
   ],
   {
     variants: {
@@ -38,7 +38,8 @@ function Input({
   type,
   size = "md",
   ...props
-}: Omit<React.ComponentProps<"input">, "size"> & VariantProps<typeof inputVariants>) {
+}: Omit<React.ComponentProps<"input">, "size"> &
+  VariantProps<typeof inputVariants>) {
   return (
     <InputPrimitive
       type={type}

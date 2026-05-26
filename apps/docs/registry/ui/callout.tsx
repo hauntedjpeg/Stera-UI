@@ -10,23 +10,22 @@ const calloutVariants = cva(
     // Sizing
     "w-full gap-x-3",
     // Icon
-    "[&>svg]:[svg:not([class*='size-'])]:size-4 [&>svg]:[svg]:shrink-0",
+    "[&>svg]:[svg]:shrink-0 [&>svg]:[svg:not([class*='size-'])]:size-4",
   ],
   {
     variants: {
       variant: {
-        default:
-          "bg-surface text-text [&>svg]:text-current",
+        default: "bg-surface text-text [&>svg]:text-current",
         brand:
-          "bg-surface-brand-subtle border-border-brand [&>svg]:text-text-brand",
+          "border-border-brand bg-surface-brand-subtle [&>svg]:text-text-brand",
         accent:
-          "bg-surface-accent-subtle border-border-accent [&>svg]:text-text-accent",
+          "border-border-accent bg-surface-accent-subtle [&>svg]:text-text-accent",
         danger:
-          "bg-surface-danger-subtle border-border-danger [&>svg]:text-text-danger",
+          "border-border-danger bg-surface-danger-subtle [&>svg]:text-text-danger",
         success:
-          "bg-surface-success-subtle border-border-success [&>svg]:text-text-success",
+          "border-border-success bg-surface-success-subtle [&>svg]:text-text-success",
         warning:
-          "bg-surface-warning-subtle border-border-warning [&>svg]:text-text-warning-subtle"
+          "border-border-warning bg-surface-warning-subtle [&>svg]:text-text-warning-subtle",
       },
     },
     defaultVariants: {
@@ -54,7 +53,7 @@ function CalloutContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="callout-content"
-      className={cn("flex flex-col flex-1 gap-1", className)}
+      className={cn("flex flex-1 flex-col gap-1", className)}
       {...props}
     />
   )
@@ -81,7 +80,7 @@ function CalloutDescription({
     <div
       data-slot="callout-description"
       className={cn(
-        "st-body-md text-text-subtle text-balance md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text-brand",
+        "st-body-md text-balance text-text-subtle md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text-brand",
         className
       )}
       {...props}
@@ -103,7 +102,10 @@ function CalloutClose({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="callout-close"
-      className={cn("inline-flex items-center justify-center shrink-0 size-4", className)}
+      className={cn(
+        "inline-flex size-4 shrink-0 items-center justify-center",
+        className
+      )}
       {...props}
     />
   )

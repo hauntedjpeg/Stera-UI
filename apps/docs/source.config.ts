@@ -11,7 +11,10 @@ import { rehypeCodeDefaultOptions } from "fumadocs-core/mdx-plugins"
  */
 const transformerNoLineNumbers = {
   name: "stera:no-line-numbers",
-  pre(this: { options: { meta?: { __raw?: string } } }, node: { properties: Record<string, unknown> }) {
+  pre(
+    this: { options: { meta?: { __raw?: string } } },
+    node: { properties: Record<string, unknown> }
+  ) {
     const meta = this.options.meta?.__raw ?? ""
     if (/\bnoLineNumbers\b/.test(meta)) {
       node.properties["data-line-numbers"] = "false"

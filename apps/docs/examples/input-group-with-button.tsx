@@ -22,9 +22,14 @@ export default function InputGroupWithButton() {
         </InputGroupAddon>
       </InputGroup>
       <InputGroup>
-        <InputGroupInput defaultValue="https://example.com/invite/abc123" readOnly />
+        <InputGroupInput
+          defaultValue="https://example.com/invite/abc123"
+          readOnly
+        />
         <InputGroupAddon align="inline-end">
-          <InputGroupButton size="icon-xs" aria-label="Copy"><SiCopy /></InputGroupButton>
+          <InputGroupButton size="icon-xs" aria-label="Copy">
+            <SiCopy />
+          </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
     </div>

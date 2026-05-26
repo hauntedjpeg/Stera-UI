@@ -1,12 +1,5 @@
-import {
-  NativeSelect,
-  NativeSelectOption,
-} from "@/components/ui/native-select"
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-} from "@/components/ui/field"
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select"
+import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
 
 export default function NativeSelectDisabled() {
   return (
@@ -17,7 +10,9 @@ export default function NativeSelectDisabled() {
         <NativeSelectOption value="editor">Editor</NativeSelectOption>
         <NativeSelectOption value="viewer">Viewer</NativeSelectOption>
       </NativeSelect>
-      <FieldDescription>Contact your administrator to change your role.</FieldDescription>
+      <FieldDescription>
+        Contact your administrator to change your role.
+      </FieldDescription>
     </Field>
   )
 }

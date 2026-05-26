@@ -1,5 +1,9 @@
 import path from "node:path"
-import { loadConfig, findConfigPath, CONFIG_FILE } from "../utils/resolve-config.js"
+import {
+  loadConfig,
+  findConfigPath,
+  CONFIG_FILE,
+} from "../utils/resolve-config.js"
 import { resolveDependencies, getComponent } from "../registry/index.js"
 import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
@@ -20,7 +24,9 @@ export async function add(
   // Load config first — needed for both the globals refresh and component installs.
   const configPath = findConfigPath(cwd)
   if (!configPath) {
-    console.error(`  ${CROSS}  ${CONFIG_FILE} not found. Run "stera-ui init" first.`)
+    console.error(
+      `  ${CROSS}  ${CONFIG_FILE} not found. Run "stera-ui init" first.`
+    )
     process.exit(1)
   }
 

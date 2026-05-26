@@ -1,10 +1,7 @@
 ---
 name: Request
 about: New component or feature
-title: ''
+title: ""
 labels: request
 assignees: hauntedjpeg
-
 ---
-
-

@@ -20,11 +20,15 @@ export default function DialogScrollable() {
       <DialogPopup scroll="content">
         <DialogHeader>
           <DialogTitle>Sticky Footer</DialogTitle>
-          <DialogDescription>The footer stays visible while the content scrolls.</DialogDescription>
+          <DialogDescription>
+            The footer stays visible while the content scrolls.
+          </DialogDescription>
         </DialogHeader>
         <DialogContent scroll>
           {Array.from({ length: 6 }).map((_, i) => (
-            <p key={i} className="mb-4 text-sm text-text-subtle">{loremParagraph}</p>
+            <p key={i} className="mb-4 text-sm text-text-subtle">
+              {loremParagraph}
+            </p>
           ))}
         </DialogContent>
         <DialogFooter showCloseButton>

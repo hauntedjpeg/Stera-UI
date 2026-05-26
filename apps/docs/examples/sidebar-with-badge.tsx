@@ -17,7 +17,7 @@ import {
 
 export default function SidebarWithBadge() {
   return (
-    <div className="rounded-lg border overflow-hidden h-[400px] flex transform-[translateZ(0)]">
+    <div className="flex h-[400px] transform-[translateZ(0)] overflow-hidden rounded-lg border">
       <SidebarProvider>
         <Sidebar>
           <SidebarContent>
@@ -26,24 +26,28 @@ export default function SidebarWithBadge() {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton render={<a href="#" />}>
-                    <SiHome /><span>Home</span>
+                    <SiHome />
+                    <span>Home</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton render={<a href="#" />}>
-                    <SiBell /><span>Notifications</span>
+                    <SiBell />
+                    <span>Notifications</span>
                   </SidebarMenuButton>
                   <SidebarMenuBadge>24</SidebarMenuBadge>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton render={<a href="#" />}>
-                    <SiCode /><span>Messages</span>
+                    <SiCode />
+                    <span>Messages</span>
                   </SidebarMenuButton>
                   <SidebarMenuBadge>3</SidebarMenuBadge>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton render={<a href="#" />}>
-                    <SiUser /><span>Profile</span>
+                    <SiUser />
+                    <span>Profile</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>

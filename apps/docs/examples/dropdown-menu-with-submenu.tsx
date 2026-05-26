@@ -15,7 +15,9 @@ import {
 export default function DropdownMenuWithSubmenu() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" className="w-fit" />}>
+      <DropdownMenuTrigger
+        render={<Button variant="outline" className="w-fit" />}
+      >
         Open
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -30,7 +32,9 @@ export default function DropdownMenuWithSubmenu() {
               <DropdownMenuItem>More...</DropdownMenuItem>
             </DropdownMenuSubContent>
           </DropdownMenuSub>
-          <DropdownMenuItem>New Team<DropdownMenuItemShortcut>⌘+T</DropdownMenuItemShortcut></DropdownMenuItem>
+          <DropdownMenuItem>
+            New Team<DropdownMenuItemShortcut>⌘+T</DropdownMenuItemShortcut>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

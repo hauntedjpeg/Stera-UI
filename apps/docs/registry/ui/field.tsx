@@ -16,7 +16,7 @@ function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
         "flex flex-col",
         // Sizing
         "gap-6 has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",
-        className,
+        className
       )}
       {...props}
     />
@@ -37,7 +37,7 @@ function FieldLegend({
         "data-[variant=label]:st-body-md-strong data-[variant=legend]:st-body-lg-strong",
         // Other
         "mb-3",
-        className,
+        className
       )}
       {...props}
     />
@@ -57,7 +57,7 @@ function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
         "data-[slot=checkbox-group]:gap-3 *:data-[slot=field-group]:gap-4",
         // Other
         "group/field-group @container/field-group",
-        className,
+        className
       )}
       {...props}
     />
@@ -118,7 +118,7 @@ function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
         "flex-1 gap-1",
         // Other
         "group/field-content leading-snug",
-        className,
+        className
       )}
       {...props}
     />
@@ -134,12 +134,12 @@ function FieldLabel({
       data-slot="field-label"
       className={cn(
         // Base
-        "flex has-[>[data-slot=field]]:has-data-checked:border-border-brand has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-subtle has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-3 has-[>[data-slot=field]]:flex-col",
+        "flex has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border has-[>[data-slot=field]]:has-data-checked:border-border-brand has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-subtle *:data-[slot=field]:p-3",
         // Sizing
         "w-fit gap-2 has-[>[data-slot=field]]:w-full",
         // Other
         "group/field-label peer/field-label group-data-[disabled=true]/field:opacity-50",
-        className,
+        className
       )}
       {...props}
     />
@@ -157,7 +157,7 @@ function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
         "w-fit gap-2",
         // Other
         "st-body-md-strong group-data-[disabled=true]/field:opacity-50",
-        className,
+        className
       )}
       {...props}
     />
@@ -170,10 +170,10 @@ function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
       data-slot="field-description"
       className={cn(
         // Position
-        "[[data-variant=legend]+&]:-mt-1.5 last:mt-0 nth-last-2:-mt-1",
+        "last:mt-0 nth-last-2:-mt-1 [[data-variant=legend]+&]:-mt-1.5",
         // Other
         "text-left st-body-sm text-text-subtle group-has-data-horizontal/field:text-balance [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-text-brand",
-        className,
+        className
       )}
       {...props}
     />
@@ -198,7 +198,7 @@ function FieldSeparator({
         "h-4",
         // Other
         "-my-2 st-body-sm group-data-[variant=outline]/field-group:-mb-2",
-        className,
+        className
       )}
       {...props}
     >
@@ -261,7 +261,7 @@ function FieldError({
       className={cn(
         // Other
         "st-body-sm text-text-danger",
-        className,
+        className
       )}
       {...props}
     >

@@ -122,7 +122,7 @@ function ComboboxContent({
             // Sizing
             "max-h-(--available-height) w-(--anchor-width) max-w-(--available-width) min-w-[calc(var(--anchor-width)+--spacing(7))] data-[chips=true]:min-w-(--anchor-width)",
             // Animation
-            "duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+            "duration-100 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
             // Embedded InputGroup (chips/search input inside popup)
             "*:data-[slot=input-group]:m-1 *:data-[slot=input-group]:mb-0 *:data-[slot=input-group]:h-8 *:data-[slot=input-group]:border-border *:data-[slot=input-group]:bg-surface-secondary *:data-[slot=input-group]:shadow-none",
             className
@@ -161,7 +161,7 @@ function ComboboxItem({
         // Sizing
         "w-full gap-2",
         // Animation
-        "data-highlighted:bg-surface-hover data-highlighted:text-text not-data-[variant=danger]:data-highlighted:**:text-text data-disabled:pointer-events-none data-disabled:text-text-disabled",
+        "data-disabled:pointer-events-none data-disabled:text-text-disabled data-highlighted:bg-surface-hover data-highlighted:text-text not-data-[variant=danger]:data-highlighted:**:text-text",
         // Other
         "cursor-default st-body-md-compact [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
@@ -286,7 +286,7 @@ function ComboboxChip({
           data-slot="combobox-chip-remove"
           className={cn(
             buttonVariants({ variant: "ghost", size: "icon-xs" }),
-            "text-text-subtlest hover:text-text hover:bg-transparent"
+            "text-text-subtlest hover:bg-transparent hover:text-text"
           )}
         >
           <SiX className="pointer-events-none" />

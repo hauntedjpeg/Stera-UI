@@ -35,10 +35,10 @@ function DialogOverlay({
         // Position
         "fixed inset-0",
         // Animation
-        "data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        "data-closed:animate-out data-closed:fade-out-0 data-open:animate-in data-open:fade-in-0",
         // Other
         "isolate z-50 duration-200 supports-backdrop-filter:backdrop-blur-xs",
-        className,
+        className
       )}
       {...props}
     />
@@ -53,7 +53,7 @@ const dialogPopupVariants = cva([], {
     },
     scroll: {
       true: "max-h-[80vh] overflow-y-auto scrollbar-hide",
-      content: "max-h-[80vh] flex flex-col overflow-hidden",
+      content: "flex max-h-[80vh] flex-col overflow-hidden",
       false: "",
     },
   },
@@ -86,10 +86,10 @@ function DialogPopup({
           // Sizing
           "w-full max-w-[calc(100%-2rem)] gap-6 sm:max-w-md",
           // Animation
-          "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95",
           // Other
           "z-50 duration-200",
-          dialogPopupVariants({ position, scroll, className }),
+          dialogPopupVariants({ position, scroll, className })
         )}
         {...props}
       >
@@ -105,8 +105,7 @@ function DialogPopup({
               />
             }
           >
-            <SiX
-            />
+            <SiX />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         )}
@@ -118,7 +117,7 @@ function DialogPopup({
 const dialogContentVariants = cva([], {
   variants: {
     scroll: {
-      true: "overflow-y-auto scrollbar-hide flex-1 min-h-0",
+      true: "min-h-0 flex-1 overflow-y-auto scrollbar-hide",
       false: "",
     },
   },
@@ -150,7 +149,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
         "flex flex-col",
         // Sizing
         "gap-2",
-        className,
+        className
       )}
       {...props}
     />
@@ -175,7 +174,7 @@ function DialogFooter({
         "gap-2",
         // Other
         "sm:flex-row sm:justify-end",
-        className,
+        className
       )}
       {...props}
     >
@@ -196,7 +195,7 @@ function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
       className={cn(
         // Other
         "leading-none font-medium",
-        className,
+        className
       )}
       {...props}
     />
@@ -215,7 +214,7 @@ function DialogDescription({
         "text-sm",
         // Other
         "text-text-subtle *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-text",
-        className,
+        className
       )}
       {...props}
     />

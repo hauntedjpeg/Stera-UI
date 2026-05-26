@@ -51,7 +51,7 @@ const nodeText = (n: ReactNode) => (typeof n === "string" ? n : String(n ?? ""))
 function flatten(
   nodes: TreeNode[],
   section = "Docs",
-  out: FlatItem[] = [],
+  out: FlatItem[] = []
 ): FlatItem[] {
   for (const n of nodes) {
     if (n.type === "separator") {
@@ -101,12 +101,12 @@ export function DocsSearch({ tree }: { tree: PageTree }) {
         onClick={() => setOpen(true)}
         className={cn(
           buttonVariants({ variant: "ghost", size: "lg" }),
-          "glass-brand backdrop-blur-md rounded-full md:h-9 md:gap-2 w-11 sm:w-auto px-3! md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5",
+          "glass-brand w-11 rounded-full px-3! backdrop-blur-md sm:w-auto md:h-9 md:gap-2 md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5"
         )}
       >
         <SiSearch data-icon="inline-start" />
         <span className="hidden sm:inline">Search docs</span>
-        <kbd className="hidden md:inline text-xs/4 text-text-subtlest tracking-wide">
+        <kbd className="hidden text-xs/4 tracking-wide text-text-subtlest md:inline">
           ⌘K
         </kbd>
       </button>
@@ -115,10 +115,10 @@ export function DocsSearch({ tree }: { tree: PageTree }) {
         onOpenChange={setOpen}
         title="Search docs"
         description="Find pages in the documentation"
-        className="glass-brand rounded-3xl [&_.group\/input-group]:border-none [&_.group\/input-group]:bg-transparent **:data-[slot='command-input-wrapper']:pb-2"
+        className="glass-brand rounded-3xl **:data-[slot='command-input-wrapper']:pb-2 [&_.group\/input-group]:border-none [&_.group\/input-group]:bg-transparent"
       >
         <Command>
-          <CommandInput placeholder="Search docs"/>
+          <CommandInput placeholder="Search docs" />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             {groups.map(([section, items]) => (

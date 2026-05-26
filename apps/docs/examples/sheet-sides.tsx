@@ -17,7 +17,9 @@ export default function SheetSides() {
     <div className="flex flex-wrap gap-2">
       {SHEET_SIDES.map((side) => (
         <Sheet key={side}>
-          <SheetTrigger render={<Button variant="outline" className="capitalize" />}>
+          <SheetTrigger
+            render={<Button variant="outline" className="capitalize" />}
+          >
             {side}
           </SheetTrigger>
           <SheetContent
@@ -27,12 +29,15 @@ export default function SheetSides() {
             <SheetHeader>
               <SheetTitle>Edit profile</SheetTitle>
               <SheetDescription>
-                Make changes to your profile here. Click save when you&apos;re done.
+                Make changes to your profile here. Click save when you&apos;re
+                done.
               </SheetDescription>
             </SheetHeader>
             <SheetFooter>
               <Button type="submit">Save changes</Button>
-              <SheetClose render={<Button variant="outline" />}>Cancel</SheetClose>
+              <SheetClose render={<Button variant="outline" />}>
+                Cancel
+              </SheetClose>
             </SheetFooter>
           </SheetContent>
         </Sheet>

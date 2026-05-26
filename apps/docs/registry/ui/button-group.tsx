@@ -20,9 +20,9 @@ const buttonGroupVariants = cva(
     variants: {
       orientation: {
         horizontal:
-          "[&>[data-slot]:has(~[data-slot])]:rounded-r-none [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0 [&>[data-slot]:has(+[data-slot='button-group-separator'])]:border-r-0",
+          "[&>[data-slot]:has(+[data-slot='button-group-separator'])]:border-r-0 [&>[data-slot]:has(~[data-slot])]:rounded-r-none [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0",
         vertical:
-          "flex-col [&>[data-slot]:has(~[data-slot])]:rounded-b-none [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0 [&>[data-slot]:has(+[data-slot='button-group-separator'])]:border-b-0",
+          "flex-col [&>[data-slot]:has(+[data-slot='button-group-separator'])]:border-b-0 [&>[data-slot]:has(~[data-slot])]:rounded-b-none [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0",
       },
     },
     defaultVariants: {
@@ -81,16 +81,16 @@ function ButtonGroupSeparator({
       orientation={orientation}
       className={cn(
         "relative self-stretch bg-border data-[orientation=horizontal]:mx-px data-[orientation=horizontal]:w-auto data-[orientation=vertical]:h-auto",
-         // Brand
-         "[[data-variant=brand]+&]:bg-border-onbrand",
-         // Subtle
-         "[[data-variant=subtle]+&]:bg-border-strong",
-         // Danger
-         "[[data-variant=danger]+&]:bg-border-ondanger-subtle",
-         // Accent
-         "[[data-variant=accent]+&]:bg-border-onaccent",
-         // Ghost
-         "[[data-variant=ghost]+&]:bg-border-strong [[data-variant=ghost]+&]:data-[orientation=vertical]:my-2",
+        // Brand
+        "[[data-variant=brand]+&]:bg-border-onbrand",
+        // Subtle
+        "[[data-variant=subtle]+&]:bg-border-strong",
+        // Danger
+        "[[data-variant=danger]+&]:bg-border-ondanger-subtle",
+        // Accent
+        "[[data-variant=accent]+&]:bg-border-onaccent",
+        // Ghost
+        "[[data-variant=ghost]+&]:bg-border-strong [[data-variant=ghost]+&]:data-[orientation=vertical]:my-2",
         className
       )}
       {...props}

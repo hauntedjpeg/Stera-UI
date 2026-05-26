@@ -13,57 +13,37 @@ const badgeVariants = cva(
     // Sizing
     "w-fit shrink-0 gap-1",
     // Variants
-    "has-data-[icon=inline-start]:pl-1 has-data-[icon=inline-end]:pr-1",
+    "has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1",
     // Other
     "overflow-hidden whitespace-nowrap transition-all [&>svg]:pointer-events-none",
   ],
   {
     variants: {
       variant: {
-        default:
-          "bg-surface-tertiary text-text",
-        "outline":
-          "bg-surface text-text border-border",
-        "solid":
-          "bg-surface-inverse text-text-oninverse",
-        brand:
-          "bg-surface-brand-subtle text-text-brand-strong",
-        "brand-outline":
-          "bg-surface text-text-brand border-border-brand",
-        "brand-solid":
-          "bg-surface-brand text-text-onbrand",
-        accent:
-          "bg-surface-accent-subtle text-text-accent-strong",
-        "accent-outline":
-          "bg-surface text-text-accent border-border-accent",
-        "accent-solid":
-          "bg-surface-accent text-text-onaccent",
-        danger:
-          "bg-surface-danger-subtle text-text-danger-strong",
-        "danger-outline":
-          "bg-surface text-text-danger border-border-danger",
-        "danger-solid":
-          "bg-surface-danger text-text-ondanger",
-        success:
-          "bg-surface-success-subtle text-text-success-strong",
-        "success-outline":
-          "bg-surface text-text-success border-border-success",
-        "success-solid":
-          "bg-surface-success text-text-onsuccess",
-        warning:
-          "bg-surface-warning-subtle text-text-warning-strong",
+        default: "bg-surface-tertiary text-text",
+        outline: "border-border bg-surface text-text",
+        solid: "bg-surface-inverse text-text-oninverse",
+        brand: "bg-surface-brand-subtle text-text-brand-strong",
+        "brand-outline": "border-border-brand bg-surface text-text-brand",
+        "brand-solid": "bg-surface-brand text-text-onbrand",
+        accent: "bg-surface-accent-subtle text-text-accent-strong",
+        "accent-outline": "border-border-accent bg-surface text-text-accent",
+        "accent-solid": "bg-surface-accent text-text-onaccent",
+        danger: "bg-surface-danger-subtle text-text-danger-strong",
+        "danger-outline": "border-border-danger bg-surface text-text-danger",
+        "danger-solid": "bg-surface-danger text-text-ondanger",
+        success: "bg-surface-success-subtle text-text-success-strong",
+        "success-outline": "border-border-success bg-surface text-text-success",
+        "success-solid": "bg-surface-success text-text-onsuccess",
+        warning: "bg-surface-warning-subtle text-text-warning-strong",
         "warning-outline":
-          "bg-surface text-text-warning-subtle border-border-warning",
-        "warning-solid":
-          "bg-surface-warning text-text-onwarning",
+          "border-border-warning bg-surface text-text-warning-subtle",
+        "warning-solid": "bg-surface-warning text-text-onwarning",
       },
       size: {
-        sm:
-          "h-4 px-1.5 st-body-sm-strong [&_svg]:size-3",
-        md:
-          "h-5 px-2 st-body-sm-strong [&_svg]:size-3",
-        lg:
-          "h-6 px-2 st-body-sm-strong [&_svg:not([class*='size-'])]:size-4",
+        sm: "h-4 px-1.5 st-body-sm-strong [&_svg]:size-3",
+        md: "h-5 px-2 st-body-sm-strong [&_svg]:size-3",
+        lg: "h-6 px-2 st-body-sm-strong [&_svg:not([class*='size-'])]:size-4",
       },
     },
     defaultVariants: {

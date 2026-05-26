@@ -13,16 +13,21 @@ import {
 export default function DialogConfirm() {
   return (
     <Dialog>
-      <DialogTrigger render={<Button variant="outline">Delete Account</Button>} />
+      <DialogTrigger
+        render={<Button variant="outline">Delete Account</Button>}
+      />
       <DialogPopup scroll={false} showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
+          <DialogClose render={<Button variant="outline" />}>
+            Cancel
+          </DialogClose>
           <Button variant="danger">Delete</Button>
         </DialogFooter>
       </DialogPopup>

@@ -14,12 +14,15 @@ import { Button } from "@/components/ui/button"
 export default function AlertDialogDestructive() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger render={<Button variant="danger">Delete project</Button>} />
+      <AlertDialogTrigger
+        render={<Button variant="danger">Delete project</Button>}
+      />
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Delete project?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete the project and all associated data. This action cannot be undone.
+            This will permanently delete the project and all associated data.
+            This action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

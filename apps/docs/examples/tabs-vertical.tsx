@@ -1,9 +1,4 @@
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function TabsVertical() {
   return (
@@ -13,7 +8,9 @@ export default function TabsVertical() {
         <TabsTrigger value="password">Password</TabsTrigger>
         <TabsTrigger value="settings">Settings</TabsTrigger>
       </TabsList>
-      <TabsContent value="account">Make changes to your account here.</TabsContent>
+      <TabsContent value="account">
+        Make changes to your account here.
+      </TabsContent>
       <TabsContent value="password">Change your password here.</TabsContent>
       <TabsContent value="settings">Update your settings here.</TabsContent>
     </Tabs>

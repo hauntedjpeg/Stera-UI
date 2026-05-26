@@ -14,25 +14,33 @@ export default function TooltipSides() {
           <TooltipTrigger render={<Button variant="outline" />}>
             Top
           </TooltipTrigger>
-          <TooltipContent side="top"><p>Top tooltip</p></TooltipContent>
+          <TooltipContent side="top">
+            <p>Top tooltip</p>
+          </TooltipContent>
         </Tooltip>
         <Tooltip>
           <TooltipTrigger render={<Button variant="outline" />}>
             Right
           </TooltipTrigger>
-          <TooltipContent side="right"><p>Right tooltip</p></TooltipContent>
+          <TooltipContent side="right">
+            <p>Right tooltip</p>
+          </TooltipContent>
         </Tooltip>
         <Tooltip>
           <TooltipTrigger render={<Button variant="outline" />}>
             Bottom
           </TooltipTrigger>
-          <TooltipContent side="bottom"><p>Bottom tooltip</p></TooltipContent>
+          <TooltipContent side="bottom">
+            <p>Bottom tooltip</p>
+          </TooltipContent>
         </Tooltip>
         <Tooltip>
           <TooltipTrigger render={<Button variant="outline" />}>
             Left
           </TooltipTrigger>
-          <TooltipContent side="left"><p>Left tooltip</p></TooltipContent>
+          <TooltipContent side="left">
+            <p>Left tooltip</p>
+          </TooltipContent>
         </Tooltip>
       </div>
     </TooltipProvider>

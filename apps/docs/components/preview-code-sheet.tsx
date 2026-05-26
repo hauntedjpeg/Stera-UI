@@ -37,22 +37,27 @@ export function PreviewCodeSheet({
             </Button>
           )}
         />
-        <SheetContent className="data-[side=right]:sm:max-w-xl! data-[side=right]:sm:w-full! bg-(--neutral-2) gap-0!" showCloseButton={false}>
+        <SheetContent
+          className="gap-0! bg-(--neutral-2) data-[side=right]:sm:w-full! data-[side=right]:sm:max-w-xl!"
+          showCloseButton={false}
+        >
           <SheetHeader className="flex-row items-center gap-2">
             <SheetTitle className="flex-1">{title}</SheetTitle>
-            <CopyButton className="border-none bg-surface-secondary hover:bg-surface-secondary-hover" value={code} />
+            <CopyButton
+              className="border-none bg-surface-secondary hover:bg-surface-secondary-hover"
+              value={code}
+            />
           </SheetHeader>
-          <div className="flex flex-col no-scrollbar overflow-y-auto p-1 pt-0 flex-1">
+          <div className="no-scrollbar flex flex-1 flex-col overflow-y-auto p-1 pt-0">
             <div
               className={cn(
-                "overflow-auto flex-1 bg-surface rounded-xl border border-border",
-                "[&_figure.st-code-block]:my-0",
+                "flex-1 overflow-auto rounded-xl border border-border bg-surface",
+                "[&_figure.st-code-block]:my-0"
               )}
             >
               {source}
             </div>
           </div>
-
         </SheetContent>
       </Sheet>
     </div>

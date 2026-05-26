@@ -8,10 +8,22 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const MANAGERS = [
-  { value: "pnpm", command: (slug: string) => `pnpm dlx stera-ui@latest add ${slug}` },
-  { value: "npm", command: (slug: string) => `npx stera-ui@latest add ${slug}` },
-  { value: "bun", command: (slug: string) => `bunx stera-ui@latest add ${slug}` },
-  { value: "yarn", command: (slug: string) => `yarn dlx stera-ui@latest add ${slug}` },
+  {
+    value: "pnpm",
+    command: (slug: string) => `pnpm dlx stera-ui@latest add ${slug}`,
+  },
+  {
+    value: "npm",
+    command: (slug: string) => `npx stera-ui@latest add ${slug}`,
+  },
+  {
+    value: "bun",
+    command: (slug: string) => `bunx stera-ui@latest add ${slug}`,
+  },
+  {
+    value: "yarn",
+    command: (slug: string) => `yarn dlx stera-ui@latest add ${slug}`,
+  },
 ] as const
 
 type ManagerValue = (typeof MANAGERS)[number]["value"]
@@ -45,7 +57,7 @@ export function InstallSnippet({
       <Tabs
         value={value}
         onValueChange={(v) => setValue(v as ManagerValue)}
-        className="overflow-hidden bg-surface-secondary rounded-xl gap-0"
+        className="gap-0 overflow-hidden rounded-xl bg-surface-secondary"
       >
         <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-2">
           <div className="flex items-center gap-2 text-text-subtle">

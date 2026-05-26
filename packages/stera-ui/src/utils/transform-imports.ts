@@ -39,7 +39,11 @@ export const transformImports: TransformFn = (content, ctx) => {
 
   // Exact match for utils (most specific — @/lib/utils is a full path, not a prefix)
   if (aliases.utils !== DEFAULT_ALIASES.utils) {
-    rules.push({ type: "exact", from: DEFAULT_ALIASES.utils, to: aliases.utils })
+    rules.push({
+      type: "exact",
+      from: DEFAULT_ALIASES.utils,
+      to: aliases.utils,
+    })
   }
 
   // Prefix matches — order matters: more specific first
@@ -47,13 +51,21 @@ export const transformImports: TransformFn = (content, ctx) => {
     rules.push({ type: "prefix", from: DEFAULT_ALIASES.ui, to: aliases.ui })
   }
   if (aliases.components !== DEFAULT_ALIASES.components) {
-    rules.push({ type: "prefix", from: DEFAULT_ALIASES.components, to: aliases.components })
+    rules.push({
+      type: "prefix",
+      from: DEFAULT_ALIASES.components,
+      to: aliases.components,
+    })
   }
   if (aliases.lib !== DEFAULT_ALIASES.lib) {
     rules.push({ type: "prefix", from: DEFAULT_ALIASES.lib, to: aliases.lib })
   }
   if (aliases.hooks !== DEFAULT_ALIASES.hooks) {
-    rules.push({ type: "prefix", from: DEFAULT_ALIASES.hooks, to: aliases.hooks })
+    rules.push({
+      type: "prefix",
+      from: DEFAULT_ALIASES.hooks,
+      to: aliases.hooks,
+    })
   }
 
   // Nothing to transform if all aliases match defaults

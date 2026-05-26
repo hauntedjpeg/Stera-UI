@@ -1,9 +1,6 @@
 import { SiChevronDown, SiPlus } from "stera-icons"
 import { Button } from "@/components/ui/button"
-import {
-  ButtonGroup,
-  ButtonGroupSeparator,
-} from "@/components/ui/button-group"
+import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group"
 import {
   DropdownMenu,
   DropdownMenuContent,

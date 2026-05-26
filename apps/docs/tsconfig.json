@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,24 +15,12 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/ui/*": [
-        "./registry/ui/*"
-      ],
-      "@/components/*": [
-        "./components/*"
-      ],
-      "@/lib/*": [
-        "./registry/lib/*"
-      ],
-      "@/hooks/*": [
-        "./registry/hooks/*"
-      ],
-      "@/examples/*": [
-        "./examples/*"
-      ],
-      "@/*": [
-        "./*"
-      ]
+      "@/components/ui/*": ["./registry/ui/*"],
+      "@/components/*": ["./components/*"],
+      "@/lib/*": ["./registry/lib/*"],
+      "@/hooks/*": ["./registry/hooks/*"],
+      "@/examples/*": ["./examples/*"],
+      "@/*": ["./*"]
     },
     "plugins": [
       {
@@ -51,9 +35,5 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    "scripts"
-  ]
+  "exclude": ["node_modules", ".next", "scripts"]
 }

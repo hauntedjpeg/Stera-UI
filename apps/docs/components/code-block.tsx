@@ -38,7 +38,9 @@ export function CodeBlock({
       data-embedded={embedded ? "" : undefined}
       {...rest}
     >
-      {title && <figcaption className="st-code-block__title">{title}</figcaption>}
+      {title && (
+        <figcaption className="st-code-block__title">{title}</figcaption>
+      )}
       {!hideCopyButton && (
         <CopyButton value={raw} className="absolute top-2.25 right-2.25 z-10" />
       )}

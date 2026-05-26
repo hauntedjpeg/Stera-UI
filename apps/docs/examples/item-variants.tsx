@@ -20,7 +20,9 @@ export default function ItemVariants() {
             </ItemMedia>
             <ItemContent>
               <ItemTitle>Ghost variant</ItemTitle>
-              <ItemDescription>No border, transparent background.</ItemDescription>
+              <ItemDescription>
+                No border, transparent background.
+              </ItemDescription>
             </ItemContent>
           </ItemBody>
         </Item>
@@ -31,7 +33,9 @@ export default function ItemVariants() {
             </ItemMedia>
             <ItemContent>
               <ItemTitle>Outline variant (Default)</ItemTitle>
-              <ItemDescription>Visible border, transparent background.</ItemDescription>
+              <ItemDescription>
+                Visible border, transparent background.
+              </ItemDescription>
             </ItemContent>
           </ItemBody>
         </Item>
@@ -42,7 +46,9 @@ export default function ItemVariants() {
             </ItemMedia>
             <ItemContent>
               <ItemTitle>Subtle variant</ItemTitle>
-              <ItemDescription>Subtle muted background, no border.</ItemDescription>
+              <ItemDescription>
+                Subtle muted background, no border.
+              </ItemDescription>
             </ItemContent>
           </ItemBody>
         </Item>

@@ -26,7 +26,9 @@ export default function CommandTitleDescription() {
             <SiUser />
             <CommandItemContent>
               <CommandItemTitle>Profile</CommandItemTitle>
-              <CommandItemDescription>View and edit your profile</CommandItemDescription>
+              <CommandItemDescription>
+                View and edit your profile
+              </CommandItemDescription>
             </CommandItemContent>
             <CommandShortcut>⇧⌘P</CommandShortcut>
           </CommandItem>
@@ -34,7 +36,9 @@ export default function CommandTitleDescription() {
             <SiCreditCard />
             <CommandItemContent>
               <CommandItemTitle>Billing</CommandItemTitle>
-              <CommandItemDescription>Manage your subscription</CommandItemDescription>
+              <CommandItemDescription>
+                Manage your subscription
+              </CommandItemDescription>
             </CommandItemContent>
             <CommandShortcut>⌘B</CommandShortcut>
           </CommandItem>
@@ -42,7 +46,9 @@ export default function CommandTitleDescription() {
             <SiSettings />
             <CommandItemContent>
               <CommandItemTitle>Settings</CommandItemTitle>
-              <CommandItemDescription>Configure preferences</CommandItemDescription>
+              <CommandItemDescription>
+                Configure preferences
+              </CommandItemDescription>
             </CommandItemContent>
             <CommandShortcut>⌘S</CommandShortcut>
           </CommandItem>
@@ -51,7 +57,9 @@ export default function CommandTitleDescription() {
             <SiSliders />
             <CommandItemContent>
               <CommandItemTitle>Integrations</CommandItemTitle>
-              <CommandItemDescription>Connect third-party services</CommandItemDescription>
+              <CommandItemDescription>
+                Connect third-party services
+              </CommandItemDescription>
             </CommandItemContent>
           </CommandItem>
         </CommandGroup>

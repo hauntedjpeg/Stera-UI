@@ -1,7 +1,6 @@
 import type { RegistryItem } from "../schema/index.js"
 
-const REGISTRY_URL =
-  process.env.REGISTRY_URL ?? "https://ui.stera.sh/r"
+const REGISTRY_URL = process.env.REGISTRY_URL ?? "https://ui.stera.sh/r"
 
 export type { RegistryItem }
 
@@ -45,7 +44,9 @@ export async function fetchRegistryItem(name: string): Promise<RegistryItem> {
 /**
  * Get a component from the registry index (no file contents).
  */
-export async function getComponent(name: string): Promise<RegistryIndexItem | undefined> {
+export async function getComponent(
+  name: string
+): Promise<RegistryIndexItem | undefined> {
   const index = await fetchRegistryIndex()
   return index.find((item) => item.name === name)
 }
@@ -61,7 +62,9 @@ export async function getAllComponents(): Promise<RegistryIndexItem[]> {
  * Resolve all dependencies for the given component names.
  * Fetches full registry items (with file contents) for each.
  */
-export async function resolveDependencies(names: string[]): Promise<RegistryItem[]> {
+export async function resolveDependencies(
+  names: string[]
+): Promise<RegistryItem[]> {
   const resolved = new Map<string, RegistryItem>()
   const queue = [...names]
 

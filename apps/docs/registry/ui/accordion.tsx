@@ -1,10 +1,7 @@
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
 
 import { cn } from "@/lib/utils"
-import {
-  SiChevronDown,
-  SiChevronUp
-} from "stera-icons"
+import { SiChevronDown, SiChevronUp } from "stera-icons"
 
 function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
   return (
@@ -55,8 +52,14 @@ function AccordionTrigger({
         {...props}
       >
         {children}
-        <SiChevronDown data-slot="accordion-trigger-icon" className="pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden ml-auto" />
-        <SiChevronUp data-slot="accordion-trigger-icon" className="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline ml-auto" />
+        <SiChevronDown
+          data-slot="accordion-trigger-icon"
+          className="pointer-events-none ml-auto shrink-0 group-aria-expanded/accordion-trigger:hidden"
+        />
+        <SiChevronUp
+          data-slot="accordion-trigger-icon"
+          className="pointer-events-none ml-auto hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
+        />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   )
@@ -70,14 +73,14 @@ function AccordionContent({
   return (
     <AccordionPrimitive.Panel
       data-slot="accordion-content"
-      className="overflow-hidden data-open:animate-accordion-down data-closed:animate-accordion-up"
+      className="overflow-hidden data-closed:animate-accordion-up data-open:animate-accordion-down"
       {...props}
     >
       {/* className is forwarded to the inner box, not the Panel, so consumer styles don't fight the height animation. */}
       <div
         className={cn(
           // Base
-          "pt-0 pb-3 pl-3 pr-4 st-body-md text-text-subtle",
+          "pt-0 pr-4 pb-3 pl-3 st-body-md text-text-subtle",
           // Sizing
           "h-(--accordion-panel-height)",
           // Other

@@ -434,7 +434,9 @@ const examples: Record<string, RegistryEntry> = {
     slug: "pagination",
   },
   "pagination-with-rows-per-page": {
-    component: dynamic(() => import("@/examples/pagination-with-rows-per-page")),
+    component: dynamic(
+      () => import("@/examples/pagination-with-rows-per-page")
+    ),
     path: "examples/pagination-with-rows-per-page.tsx",
     slug: "pagination",
   },
@@ -884,7 +886,9 @@ const examples: Record<string, RegistryEntry> = {
     slug: "dropdown-menu",
   },
   "dropdown-menu-title-description": {
-    component: dynamic(() => import("@/examples/dropdown-menu-title-description")),
+    component: dynamic(
+      () => import("@/examples/dropdown-menu-title-description")
+    ),
     path: "examples/dropdown-menu-title-description.tsx",
     slug: "dropdown-menu",
   },

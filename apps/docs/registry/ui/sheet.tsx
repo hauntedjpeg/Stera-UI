@@ -34,7 +34,7 @@ function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
         "data-open:animate-in data-open:fade-in-0",
         "data-closed:animate-out data-closed:fade-out-0",
         "duration-200",
-        className,
+        className
       )}
       {...props}
     />
@@ -59,16 +59,16 @@ function SheetContent({
         data-side={side}
         className={cn(
           // Base
-          "fixed flex flex-col bg-surface bg-clip-padding shadow-lg border border-border rounded-xl",
+          "fixed flex flex-col rounded-xl border border-border bg-surface bg-clip-padding shadow-lg",
           // Position
           "data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=left]:inset-y-2 data-[side=left]:left-2 data-[side=right]:inset-y-2 data-[side=right]:right-2 data-[side=top]:inset-x-0 data-[side=top]:top-0",
           // Sizing
           "gap-4 data-[side=bottom]:h-auto data-[side=left]:h-[calc(100%-16px)] data-[side=left]:w-3/4 data-[side=right]:h-[calc(100%-16px)] data-[side=right]:w-3/4 data-[side=top]:h-auto data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm",
           // Animation
-          "data-open:animate-in data-open:fade-in-0 data-[side=bottom]:data-open:slide-in-from-bottom-10 data-[side=left]:data-open:slide-in-from-left-10 data-[side=right]:data-open:slide-in-from-right-10 data-[side=top]:data-open:slide-in-from-top-10 data-closed:animate-out data-closed:fade-out-0 data-[side=bottom]:data-closed:slide-out-to-bottom-10 data-[side=left]:data-closed:slide-out-to-left-10 data-[side=right]:data-closed:slide-out-to-right-10 data-[side=top]:data-closed:slide-out-to-top-10",
+          "data-closed:animate-out data-closed:fade-out-0 data-open:animate-in data-open:fade-in-0 data-[side=bottom]:data-closed:slide-out-to-bottom-10 data-[side=bottom]:data-open:slide-in-from-bottom-10 data-[side=left]:data-closed:slide-out-to-left-10 data-[side=left]:data-open:slide-in-from-left-10 data-[side=right]:data-closed:slide-out-to-right-10 data-[side=right]:data-open:slide-in-from-right-10 data-[side=top]:data-closed:slide-out-to-top-10 data-[side=top]:data-open:slide-in-from-top-10",
           // Other
           "z-50 text-sm transition duration-200 ease-in-out",
-          className,
+          className
         )}
         {...props}
       >
@@ -84,8 +84,7 @@ function SheetContent({
               />
             }
           >
-            <SiX
-            />
+            <SiX />
             <span className="sr-only">Close</span>
           </SheetPrimitive.Close>
         )}
@@ -103,7 +102,7 @@ function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
         "flex flex-col p-4",
         // Sizing
         "gap-1.5",
-        className,
+        className
       )}
       {...props}
     />
@@ -121,7 +120,7 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
         "mt-auto",
         // Sizing
         "gap-2",
-        className,
+        className
       )}
       {...props}
     />
@@ -135,7 +134,7 @@ function SheetTitle({ className, ...props }: SheetPrimitive.Title.Props) {
       className={cn(
         // Other
         "font-medium text-text",
-        className,
+        className
       )}
       {...props}
     />
@@ -152,7 +151,7 @@ function SheetDescription({
       className={cn(
         // Other
         "text-sm text-text-subtle",
-        className,
+        className
       )}
       {...props}
     />

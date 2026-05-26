@@ -20,7 +20,9 @@ export interface WriteResult {
  */
 async function confirmOverwrite(relativePath: string): Promise<boolean> {
   if (!process.stdin.isTTY) {
-    console.log(`  Skipping ${relativePath} (already exists, use --overwrite to replace)`)
+    console.log(
+      `  Skipping ${relativePath} (already exists, use --overwrite to replace)`
+    )
     return false
   }
 
@@ -28,7 +30,9 @@ async function confirmOverwrite(relativePath: string): Promise<boolean> {
     input: process.stdin,
     output: process.stdout,
   })
-  const answer = await rl.question(`  ${relativePath} already exists. Overwrite? (y/N) `)
+  const answer = await rl.question(
+    `  ${relativePath} already exists. Overwrite? (y/N) `
+  )
   rl.close()
   return answer.toLowerCase() === "y"
 }

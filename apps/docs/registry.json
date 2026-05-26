@@ -11,9 +11,11 @@
       "name": "globals",
       "type": "registry:style",
       "dependencies": ["tw-animate-css"],
-      "files": [{ "path": "registry/styles/globals.css", "type": "registry:style" }]
+      "files": [
+        { "path": "registry/styles/globals.css", "type": "registry:style" }
+      ]
     },
-{
+    {
       "name": "font-geist",
       "type": "registry:font",
       "font": {
@@ -53,12 +55,19 @@
       "name": "theme-provider",
       "type": "registry:component",
       "dependencies": ["next-themes"],
-      "files": [{ "path": "registry/components/theme-provider.tsx", "type": "registry:component" }]
+      "files": [
+        {
+          "path": "registry/components/theme-provider.tsx",
+          "type": "registry:component"
+        }
+      ]
     },
     {
       "name": "use-mobile",
       "type": "registry:hook",
-      "files": [{ "path": "registry/hooks/use-mobile.ts", "type": "registry:hook" }]
+      "files": [
+        { "path": "registry/hooks/use-mobile.ts", "type": "registry:hook" }
+      ]
     },
     {
       "name": "accordion",
@@ -72,13 +81,17 @@
       "type": "registry:ui",
       "dependencies": ["@base-ui/react"],
       "registryDependencies": ["utils", "button"],
-      "files": [{ "path": "registry/ui/alert-dialog.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/alert-dialog.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "aspect-ratio",
       "type": "registry:ui",
       "registryDependencies": ["utils"],
-      "files": [{ "path": "registry/ui/aspect-ratio.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/aspect-ratio.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "avatar",
@@ -113,7 +126,9 @@
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "class-variance-authority"],
       "registryDependencies": ["utils", "separator"],
-      "files": [{ "path": "registry/ui/button-group.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/button-group.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "calendar",
@@ -160,7 +175,9 @@
       "name": "collapsible",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react"],
-      "files": [{ "path": "registry/ui/collapsible.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/collapsible.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "combobox",
@@ -195,7 +212,9 @@
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "stera-icons"],
       "registryDependencies": ["utils"],
-      "files": [{ "path": "registry/ui/dropdown-menu.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/dropdown-menu.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "empty",
@@ -216,7 +235,9 @@
       "type": "registry:ui",
       "dependencies": ["@base-ui/react"],
       "registryDependencies": ["utils"],
-      "files": [{ "path": "registry/ui/preview-card.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/preview-card.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "input",
@@ -230,7 +251,9 @@
       "type": "registry:ui",
       "dependencies": ["class-variance-authority"],
       "registryDependencies": ["utils", "button", "input", "textarea"],
-      "files": [{ "path": "registry/ui/input-group.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/input-group.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "input-otp",
@@ -271,7 +294,9 @@
       "type": "registry:ui",
       "dependencies": ["stera-icons"],
       "registryDependencies": ["utils"],
-      "files": [{ "path": "registry/ui/native-select.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/native-select.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "pagination",
@@ -299,14 +324,18 @@
       "type": "registry:ui",
       "dependencies": ["@base-ui/react"],
       "registryDependencies": ["utils"],
-      "files": [{ "path": "registry/ui/radio-group.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/radio-group.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "scroll-area",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react"],
       "registryDependencies": ["utils"],
-      "files": [{ "path": "registry/ui/scroll-area.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/scroll-area.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "select",
@@ -332,8 +361,21 @@
     {
       "name": "sidebar",
       "type": "registry:ui",
-      "dependencies": ["@base-ui/react", "class-variance-authority", "stera-icons"],
-      "registryDependencies": ["utils", "use-mobile", "button", "input", "separator", "sheet", "skeleton", "tooltip"],
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "stera-icons"
+      ],
+      "registryDependencies": [
+        "utils",
+        "use-mobile",
+        "button",
+        "input",
+        "separator",
+        "sheet",
+        "skeleton",
+        "tooltip"
+      ],
       "files": [{ "path": "registry/ui/sidebar.tsx", "type": "registry:ui" }]
     },
     {
@@ -401,7 +443,9 @@
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "class-variance-authority"],
       "registryDependencies": ["utils", "toggle"],
-      "files": [{ "path": "registry/ui/toggle-group.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/toggle-group.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "tooltip",

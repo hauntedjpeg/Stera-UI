@@ -48,7 +48,7 @@ function ItemSeparator({
 const itemVariants = cva(
   [
     // Base
-    "rounded-xl border outline-none transition-colors duration-100 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring",
+    "rounded-xl border transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring",
     // Sizing
     "w-full",
     // Other
@@ -62,7 +62,7 @@ const itemVariants = cva(
         ghost: "border-transparent",
       },
       size: {
-        sm: "in-data-[slot=dropdown-menu-content]:p-0 in-data-[slot=dropdown-menu-content]:rounded-lg",
+        sm: "in-data-[slot=dropdown-menu-content]:rounded-lg in-data-[slot=dropdown-menu-content]:p-0",
         md: "",
         lg: "",
       },
@@ -128,15 +128,15 @@ function ItemBody({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="item-body"
       className={cn(
         // Base
-        "flex gap-3 items-center",
+        "flex items-center gap-3",
         // Sizing
         "flex-1",
         // SM
-        "group-data-[size=sm]/item:p-2 group-data-[size=sm]/item:gap-2",
+        "group-data-[size=sm]/item:gap-2 group-data-[size=sm]/item:p-2",
         // MD
         "group-data-[size=md]/item:p-3",
         // LG
-        "group-data-[size=lg]/item:p-4 group-data-[size=lg]/item:gap-4",
+        "group-data-[size=lg]/item:gap-4 group-data-[size=lg]/item:p-4",
         className
       )}
       {...props}
@@ -245,7 +245,7 @@ function ItemHeader({ className, ...props }: React.ComponentProps<"div">) {
         // Other
         "items-center justify-between",
         // SM
-        "group-data-[size=sm]/item:p-2 group-data-[size=sm]/item:gap-2",
+        "group-data-[size=sm]/item:gap-2 group-data-[size=sm]/item:p-2",
         // MD
         "group-data-[size=md]/item:p-3",
         // LG
@@ -269,7 +269,7 @@ function ItemFooter({ className, ...props }: React.ComponentProps<"div">) {
         // Other
         "items-center justify-between",
         // SM
-        "group-data-[size=sm]/item:p-2 group-data-[size=sm]/item:gap-2",
+        "group-data-[size=sm]/item:gap-2 group-data-[size=sm]/item:p-2",
         // MD
         "group-data-[size=md]/item:p-3",
         // LG

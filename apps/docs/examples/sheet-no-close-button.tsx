@@ -11,7 +11,9 @@ import {
 export default function SheetNoCloseButton() {
   return (
     <Sheet>
-      <SheetTrigger render={<Button variant="outline" />}>Open Sheet</SheetTrigger>
+      <SheetTrigger render={<Button variant="outline" />}>
+        Open Sheet
+      </SheetTrigger>
       <SheetContent showCloseButton={false}>
         <SheetHeader>
           <SheetTitle>No Close Button</SheetTitle>

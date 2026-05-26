@@ -11,15 +11,29 @@ import {
 export default function DropdownMenuDestructive() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" className="w-fit" />}>
+      <DropdownMenuTrigger
+        render={<Button variant="outline" className="w-fit" />}
+      >
         Actions
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem><SiPencil />Edit</DropdownMenuItem>
-        <DropdownMenuItem><SiShare />Share</DropdownMenuItem>
+        <DropdownMenuItem>
+          <SiPencil />
+          Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <SiShare />
+          Share
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem><SiArchive />Archive</DropdownMenuItem>
-        <DropdownMenuItem variant="danger"><SiTrash />Delete</DropdownMenuItem>
+        <DropdownMenuItem>
+          <SiArchive />
+          Archive
+        </DropdownMenuItem>
+        <DropdownMenuItem variant="danger">
+          <SiTrash />
+          Delete
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

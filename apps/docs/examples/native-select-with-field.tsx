@@ -1,12 +1,5 @@
-import {
-  NativeSelect,
-  NativeSelectOption,
-} from "@/components/ui/native-select"
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-} from "@/components/ui/field"
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select"
+import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
 
 export default function NativeSelectWithField() {
   return (

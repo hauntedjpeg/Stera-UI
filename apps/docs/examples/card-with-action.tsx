@@ -21,7 +21,10 @@ export default function CardWithAction() {
         </CardAction>
       </CardHeader>
       <CardContent>
-        <p>Manage your notification preferences and stay up to date with the latest activity.</p>
+        <p>
+          Manage your notification preferences and stay up to date with the
+          latest activity.
+        </p>
       </CardContent>
       <CardFooter>
         <Button variant="outline">View all</Button>

@@ -283,7 +283,7 @@ function Sidebar({
         data-side={side}
         className={cn(
           // Base
-          "fixed hidden z-10 transition-[left,right,width] duration-200 ease-linear md:flex",
+          "fixed z-10 hidden transition-[left,right,width] duration-200 ease-linear md:flex",
           // Position
           "inset-y-0 data-[side=left]:left-0 data-[side=left]:group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)] data-[side=right]:right-0 data-[side=right]:group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
           // Sizing
@@ -349,9 +349,9 @@ function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
       title="Toggle Sidebar"
       className={cn(
         // Base
-        "absolute hidden z-20 transition-all ease-linear after:absolute hover:after:bg-border sm:flex",
+        "absolute z-20 hidden transition-all ease-linear after:absolute hover:after:bg-border sm:flex",
         // Position
-        "inset-y-0 group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:inset-y-0 after:inset-s-1/2 ltr:-translate-x-1/2 rtl:-translate-x-1/2 group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full",
+        "inset-y-0 group-data-[collapsible=offcanvas]:translate-x-0 group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:inset-y-0 after:inset-s-1/2 group-data-[collapsible=offcanvas]:after:left-full ltr:-translate-x-1/2 rtl:-translate-x-1/2",
         // Sizing
         "w-4 after:w-0.5",
         // Variants
@@ -643,7 +643,7 @@ const sidebarMenuButtonVariants = cva(
     // Variants — active state
     "data-active:bg-surface-secondary data-active:st-body-md-strong data-active:text-text",
     // Other
-    "peer/menu-button group/menu-button disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate",
+    "peer/menu-button group/menu-button disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&>span:last-child]:truncate",
   ],
   {
     variants: {
@@ -896,7 +896,7 @@ function SidebarMenuSubButton({
           // Sizing
           "h-7 min-w-0 gap-2",
           // Variants
-          "group-data-[collapsible=icon]:hidden data-[size=md]:text-sm data-[size=sm]:text-xs data-active:bg-surface-brand-subtle data-active:text-text-brand",
+          "group-data-[collapsible=icon]:hidden data-active:bg-surface-brand-subtle data-active:text-text-brand data-[size=md]:text-sm data-[size=sm]:text-xs",
           // Other
           "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-text-subtle",
           className

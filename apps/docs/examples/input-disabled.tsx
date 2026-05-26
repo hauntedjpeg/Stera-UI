@@ -1,9 +1,5 @@
 import { Input } from "@/components/ui/input"
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-} from "@/components/ui/field"
+import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
 
 export default function InputDisabled() {
   return (

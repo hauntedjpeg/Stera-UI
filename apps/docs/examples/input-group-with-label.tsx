@@ -15,7 +15,9 @@ export default function InputGroupWithLabel() {
       <Field>
         <FieldLabel htmlFor="ig-email">Email address</FieldLabel>
         <InputGroup>
-          <InputGroupAddon align="inline-start"><SiMail /></InputGroupAddon>
+          <InputGroupAddon align="inline-start">
+            <SiMail />
+          </InputGroupAddon>
           <InputGroupInput id="ig-email" placeholder="you@example.com" />
         </InputGroup>
       </Field>

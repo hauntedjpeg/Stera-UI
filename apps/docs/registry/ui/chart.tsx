@@ -60,8 +60,8 @@ function ChartContainer({
           // Sizing
           "aspect-video",
           // Other
-          "justify-center [&_.recharts-cartesian-axis-tick_text]:fill-bg-surface-secondary [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
-          className,
+          "[&_.recharts-cartesian-axis-tick_text]:fill-bg-surface-secondary [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted justify-center [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
+          className
         )}
         {...props}
       >
@@ -152,7 +152,7 @@ function ChartTooltipContent({
           className={cn(
             // Other
             "font-medium",
-            labelClassName,
+            labelClassName
           )}
         >
           {labelFormatter(value, payload)}
@@ -169,7 +169,7 @@ function ChartTooltipContent({
         className={cn(
           // Other
           "font-medium",
-          labelClassName,
+          labelClassName
         )}
       >
         {value}
@@ -193,13 +193,13 @@ function ChartTooltipContent({
 
   return (
     <div
-        className={cn(
-          // Base
-          "grid items-start rounded-lg border border-border/50 bg-surface px-2.5 py-1.5 text-xs shadow-xl",
-          // Sizing
-          "min-w-32 gap-1.5",
-          className,
-        )}
+      className={cn(
+        // Base
+        "grid items-start rounded-lg border border-border/50 bg-surface px-2.5 py-1.5 text-xs shadow-xl",
+        // Sizing
+        "min-w-32 gap-1.5",
+        className
+      )}
     >
       {!nestLabel ? tooltipLabel : null}
       <div className="grid gap-1.5">
@@ -220,7 +220,7 @@ function ChartTooltipContent({
                   "w-full gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
                   // Other
                   "[&>svg]:text-text-subtle",
-                  indicator === "dot" && "items-center",
+                  indicator === "dot" && "items-center"
                 )}
               >
                 {formatter && item?.value !== undefined && item.name ? (
@@ -243,7 +243,7 @@ function ChartTooltipContent({
                               "w-0 border-[1.5px] border-dashed bg-transparent":
                                 indicator === "dashed",
                               "my-0.5": nestLabel && indicator === "dashed",
-                            },
+                            }
                           )}
                           style={
                             {
@@ -260,7 +260,7 @@ function ChartTooltipContent({
                         "flex justify-between leading-none",
                         nestLabel ? "items-end" : "items-center",
                         // Sizing
-                        "flex-1",
+                        "flex-1"
                       )}
                     >
                       <div className="grid gap-1.5">
@@ -312,7 +312,7 @@ function ChartLegendContent({
         verticalAlign === "top" ? "pb-3" : "pt-3",
         // Sizing
         "gap-4",
-        className,
+        className
       )}
     >
       {payload
@@ -330,7 +330,7 @@ function ChartLegendContent({
                 // Sizing
                 "gap-1.5 [&>svg]:h-3 [&>svg]:w-3",
                 // Other
-                "[&>svg]:text-text-subtle",
+                "[&>svg]:text-text-subtle"
               )}
             >
               {itemConfig?.icon && !hideIcon ? (

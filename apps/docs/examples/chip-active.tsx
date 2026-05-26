@@ -15,12 +15,6 @@ export default function ChipActive() {
           Active
         </Chip>
       </div>
-      <div className="flex items-center gap-2">
-        <Chip variant="solid">Default</Chip>
-        <Chip variant="solid" active>
-          Active
-        </Chip>
-      </div>
     </div>
   )
 }

@@ -401,9 +401,7 @@ function updateHtmlClassName(
   }
 }
 
-function ensureCnImport(
-  sourceFile: ReturnType<Project["createSourceFile"]>
-) {
+function ensureCnImport(sourceFile: ReturnType<Project["createSourceFile"]>) {
   const existingImport = sourceFile.getImportDeclaration((decl) =>
     decl.getNamedImports().some((imp) => imp.getName() === "cn")
   )

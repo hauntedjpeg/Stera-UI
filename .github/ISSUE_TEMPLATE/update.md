@@ -1,10 +1,7 @@
 ---
 name: Update
 about: Modify an existing component or feature
-title: ''
+title: ""
 labels: update
 assignees: hauntedjpeg
-
 ---
-
-

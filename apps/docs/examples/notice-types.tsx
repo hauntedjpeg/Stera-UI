@@ -12,9 +12,7 @@ export default function NoticeTypes() {
       <div className="flex flex-wrap gap-2">
         <Button
           variant="outline"
-          onClick={() =>
-            typesManager.add({ title: "Event has been created" })
-          }
+          onClick={() => typesManager.add({ title: "Event has been created" })}
         >
           Default
         </Button>

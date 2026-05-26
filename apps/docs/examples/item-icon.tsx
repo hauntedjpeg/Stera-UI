@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 
 export default function ItemDemo() {
   return (
-    <div className="flex flex-col w-96 gap-4">
+    <div className="flex w-96 flex-col gap-4">
       <Item>
         <ItemBody>
           <ItemMedia variant="icon">
@@ -20,7 +20,9 @@ export default function ItemDemo() {
           </ItemMedia>
           <ItemContent>
             <ItemTitle>Security Alert</ItemTitle>
-            <ItemDescription>New login detected from unknown device.</ItemDescription>
+            <ItemDescription>
+              New login detected from unknown device.
+            </ItemDescription>
           </ItemContent>
           <ItemActions>
             <Button size="sm">Review</Button>

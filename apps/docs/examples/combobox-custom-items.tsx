@@ -19,10 +19,30 @@ interface Status {
 }
 
 const statuses: Status[] = [
-  { value: "backlog", label: "Backlog", icon: SiCircle, description: "Not yet started" },
-  { value: "in-progress", label: "In Progress", icon: SiCircleDash, description: "Currently being worked on" },
-  { value: "done", label: "Done", icon: SiCheckCircle, description: "Completed" },
-  { value: "cancelled", label: "Cancelled", icon: SiXCircle, description: "Will not be completed" },
+  {
+    value: "backlog",
+    label: "Backlog",
+    icon: SiCircle,
+    description: "Not yet started",
+  },
+  {
+    value: "in-progress",
+    label: "In Progress",
+    icon: SiCircleDash,
+    description: "Currently being worked on",
+  },
+  {
+    value: "done",
+    label: "Done",
+    icon: SiCheckCircle,
+    description: "Completed",
+  },
+  {
+    value: "cancelled",
+    label: "Cancelled",
+    icon: SiXCircle,
+    description: "Will not be completed",
+  },
 ]
 
 export default function ComboboxCustomItems() {
@@ -38,7 +58,9 @@ export default function ComboboxCustomItems() {
                 <status.icon className="size-4 text-text-subtle" />
                 <div className="flex flex-col">
                   <span>{status.label}</span>
-                  <span className="text-xs text-text-subtle">{status.description}</span>
+                  <span className="text-xs text-text-subtle">
+                    {status.description}
+                  </span>
                 </div>
               </ComboboxItem>
             )}

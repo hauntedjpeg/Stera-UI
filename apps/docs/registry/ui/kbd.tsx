@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 const kbdVariants = cva(
   [
     // Base
-    "inline-flex items-center justify-center rounded-md bg-surface-tertiary px-1 w-fit gap-1",
+    "inline-flex w-fit items-center justify-center gap-1 rounded-md bg-surface-tertiary px-1",
     // Variants
     "in-data-[slot=tooltip-content]:bg-surface-tertiary in-data-[slot=tooltip-content]:text-text",
     // Other
@@ -14,7 +14,7 @@ const kbdVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-4 min-w-4 px-0.5 rounded-sm [&_svg:not([class*='size-'])]:size-2.5",
+        sm: "h-4 min-w-4 rounded-sm px-0.5 [&_svg:not([class*='size-'])]:size-2.5",
         md: "h-5 min-w-5 [&_svg:not([class*='size-'])]:size-3",
       },
     },
@@ -47,7 +47,7 @@ function KbdGroup({ className, ...props }: React.ComponentProps<"div">) {
         "inline-flex items-center",
         // Sizing
         "gap-1",
-        className,
+        className
       )}
       {...props}
     />

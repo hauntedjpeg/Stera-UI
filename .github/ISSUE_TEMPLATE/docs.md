@@ -1,10 +1,7 @@
 ---
 name: Docs
 about: Improvements or additions to documentation
-title: ''
+title: ""
 labels: docs
 assignees: hauntedjpeg
-
 ---
-
-

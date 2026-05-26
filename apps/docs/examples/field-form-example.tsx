@@ -22,14 +22,19 @@ import { Textarea } from "@/components/ui/textarea"
 
 export default function FieldFormExample() {
   return (
-    <FieldGroup className="max-w-lg w-full">
+    <FieldGroup className="w-full max-w-lg">
       <Field>
         <FieldLabel htmlFor="fp-form-name">Full name</FieldLabel>
         <Input id="fp-form-name" placeholder="Jane Doe" />
       </Field>
       <Field data-invalid="true">
         <FieldLabel htmlFor="fp-form-email">Email address</FieldLabel>
-        <Input id="fp-form-email" type="email" aria-invalid="true" defaultValue="invalid-email" />
+        <Input
+          id="fp-form-email"
+          type="email"
+          aria-invalid="true"
+          defaultValue="invalid-email"
+        />
         <FieldError>Please enter a valid email address.</FieldError>
       </Field>
       <Field>
@@ -56,7 +61,9 @@ export default function FieldFormExample() {
       <Field orientation="horizontal">
         <FieldContent>
           <FieldTitle>Marketing emails</FieldTitle>
-          <FieldDescription>Receive emails about new products and features.</FieldDescription>
+          <FieldDescription>
+            Receive emails about new products and features.
+          </FieldDescription>
         </FieldContent>
         <Switch />
       </Field>

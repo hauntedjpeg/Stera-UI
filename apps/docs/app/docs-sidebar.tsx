@@ -55,12 +55,8 @@ export function DocsSidebar({ tree }: { tree: PageTreeRoot }) {
   }, [pathname, isMobile, setOpenMobile])
 
   return (
-    <Sidebar
-      className={cn(
-        "group-data-[side=left]:border-r-0 md:pl-4",
-      )}
-    >
-      <SidebarContent className="pb-16 md:pt-24 scrollbar-hide">
+    <Sidebar className={cn("group-data-[side=left]:border-r-0 md:pl-4")}>
+      <SidebarContent className="pb-16 scrollbar-hide md:pt-24">
         <TreeNodes nodes={tree.children} pathname={pathname} />
       </SidebarContent>
     </Sidebar>

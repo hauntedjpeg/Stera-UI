@@ -24,36 +24,28 @@ const buttonVariants = cva(
     variants: {
       variant: {
         brand:
-          "bg-surface-brand text-text-onbrand border-surface-brand hover:bg-surface-brand-hover hover:border-border-brand-strong focus-visible:border-border-brand-strong focus-visible:ring-ring-brand",
+          "border-surface-brand bg-surface-brand text-text-onbrand hover:border-border-brand-strong hover:bg-surface-brand-hover focus-visible:border-border-brand-strong focus-visible:ring-ring-brand",
         accent:
-          "bg-surface-accent text-text-onaccent border-surface-accent hover:bg-surface-accent-hover hover:border-border-accent-strong",
+          "border-surface-accent bg-surface-accent text-text-onaccent hover:border-border-accent-strong hover:bg-surface-accent-hover",
         outline:
-          "text-text border border-border bg-surface hover:bg-surface-hover aria-expanded:bg-surface-hover aria-expanded:text-text",
+          "border border-border bg-surface text-text hover:bg-surface-hover aria-expanded:bg-surface-hover aria-expanded:text-text",
         subtle:
-          "bg-surface-secondary text-text border-surface-secondary hover:bg-surface-secondary-hover hover:border-bg-surface-secondary-hover aria-expanded:bg-surface-tertiary-hover aria-expanded:border-bg-surface-tertiary-hover aria-expanded:text-text",
+          "hover:border-bg-surface-secondary-hover aria-expanded:border-bg-surface-tertiary-hover border-surface-secondary bg-surface-secondary text-text hover:bg-surface-secondary-hover aria-expanded:bg-surface-tertiary-hover aria-expanded:text-text",
         ghost:
           "hover:bg-surface-hover hover:text-text aria-expanded:bg-surface-hover aria-expanded:text-text",
         danger:
-          "bg-surface-danger-subtle text-text-danger border-surface-danger-subtle hover:bg-surface-danger-subtle-hover hover:border-surface-danger-subtle-hover focus-visible:border-border-danger-strong focus-visible:ring-ring-danger",
+          "border-surface-danger-subtle bg-surface-danger-subtle text-text-danger hover:border-surface-danger-subtle-hover hover:bg-surface-danger-subtle-hover focus-visible:border-border-danger-strong focus-visible:ring-ring-danger",
         link: "gap-1 text-text underline-offset-4 hover:underline",
       },
       size: {
-        xs:
-          "h-6 gap-1.5 rounded-lg px-2 st-body-sm-strong has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 has-data-[kbd=inline-end]:pr-1 has-data-[kbd=inline-start]:pl-1 [&_svg:not([class*='size-'])]:size-3",
-        sm:
-          "h-8 gap-2 px-3 st-body-sm-strong has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 has-data-[kbd=inline-end]:pr-1.5 has-data-[kbd=inline-start]:pl-1.5 data-[variant=link]:gap-1",
-        md:
-          "h-9 gap-2 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 has-data-[kbd=inline-end]:pr-2.5 has-data-[kbd=inline-start]:pl-2.5 data-[variant=link]:gap-1",
-        lg:
-          "h-11 gap-3 px-5 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 has-data-[kbd=inline-end]:pr-3 has-data-[kbd=inline-start]:pl-3",
-        icon:
-          "size-9 [&_svg:not([class*='size-'])]:size-4",
-        "icon-xs":
-          "size-6 rounded-lg [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm":
-          "size-8",
-        "icon-lg":
-          "size-11 [&_svg:not([class*='size-'])]:size-6",
+        xs: "h-6 gap-1.5 rounded-lg px-2 st-body-sm-strong has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 has-data-[kbd=inline-end]:pr-1 has-data-[kbd=inline-start]:pl-1 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-8 gap-2 px-3 st-body-sm-strong has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 has-data-[kbd=inline-end]:pr-1.5 has-data-[kbd=inline-start]:pl-1.5 data-[variant=link]:gap-1",
+        md: "h-9 gap-2 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 has-data-[kbd=inline-end]:pr-2.5 has-data-[kbd=inline-start]:pl-2.5 data-[variant=link]:gap-1",
+        lg: "h-11 gap-3 px-5 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 has-data-[kbd=inline-end]:pr-3 has-data-[kbd=inline-start]:pl-3",
+        icon: "size-9 [&_svg:not([class*='size-'])]:size-4",
+        "icon-xs": "size-6 rounded-lg [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm": "size-8",
+        "icon-lg": "size-11 [&_svg:not([class*='size-'])]:size-6",
       },
     },
     defaultVariants: {

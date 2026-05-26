@@ -46,7 +46,10 @@ const groupedFrameworks = [
 export default function ComboboxGroups() {
   return (
     <div className="w-64">
-      <Combobox items={groupedFrameworks} itemToStringLabel={(fw: Framework) => fw.label}>
+      <Combobox
+        items={groupedFrameworks}
+        itemToStringLabel={(fw: Framework) => fw.label}
+      >
         <ComboboxInput placeholder="Select framework..." />
         <ComboboxContent>
           <ComboboxEmpty>No framework found.</ComboboxEmpty>
@@ -57,7 +60,9 @@ export default function ComboboxGroups() {
                   {index > 0 && <ComboboxSeparator />}
                   <ComboboxLabel>{group.label}</ComboboxLabel>
                   {group.items.map((fw) => (
-                    <ComboboxItem key={fw.value} value={fw}>{fw.label}</ComboboxItem>
+                    <ComboboxItem key={fw.value} value={fw}>
+                      {fw.label}
+                    </ComboboxItem>
                   ))}
                 </ComboboxGroup>
               )}

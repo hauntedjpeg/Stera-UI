@@ -15,7 +15,9 @@ import {
 export default function DropdownMenuTitleDescription() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" className="w-fit" />}>
+      <DropdownMenuTrigger
+        render={<Button variant="outline" className="w-fit" />}
+      >
         Open
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-56">
@@ -23,7 +25,9 @@ export default function DropdownMenuTitleDescription() {
           <SiUser />
           <DropdownMenuItemContent>
             <DropdownMenuItemTitle>Profile</DropdownMenuItemTitle>
-            <DropdownMenuItemDescription>View and edit your profile</DropdownMenuItemDescription>
+            <DropdownMenuItemDescription>
+              View and edit your profile
+            </DropdownMenuItemDescription>
           </DropdownMenuItemContent>
           <DropdownMenuItemShortcut>⇧⌘P</DropdownMenuItemShortcut>
         </DropdownMenuItem>
@@ -31,7 +35,9 @@ export default function DropdownMenuTitleDescription() {
           <SiCreditCard />
           <DropdownMenuItemContent>
             <DropdownMenuItemTitle>Billing</DropdownMenuItemTitle>
-            <DropdownMenuItemDescription>Manage your subscription</DropdownMenuItemDescription>
+            <DropdownMenuItemDescription>
+              Manage your subscription
+            </DropdownMenuItemDescription>
           </DropdownMenuItemContent>
           <DropdownMenuItemShortcut>⌘B</DropdownMenuItemShortcut>
         </DropdownMenuItem>
@@ -40,7 +46,9 @@ export default function DropdownMenuTitleDescription() {
           <SiSignOut />
           <DropdownMenuItemContent>
             <DropdownMenuItemTitle>Log out</DropdownMenuItemTitle>
-            <DropdownMenuItemDescription>Sign out of your account</DropdownMenuItemDescription>
+            <DropdownMenuItemDescription>
+              Sign out of your account
+            </DropdownMenuItemDescription>
           </DropdownMenuItemContent>
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -1,8 +1,13 @@
 @utility glass-brand {
-  box-shadow:0.5px 0.5px 0 0 var(--black-8) inset, 0 0 0 0.5px var(--black-5) inset, -0.5px -0.5px 0 0 var(--black-6) inset;
+  box-shadow:
+    0.5px 0.5px 0 0 var(--black-8) inset,
+    0 0 0 0.5px var(--black-5) inset,
+    -0.5px -0.5px 0 0 var(--black-6) inset;
 
   @variant dark {
-    box-shadow: 0.5px 0.5px 0 0 var(--white-5) inset, -0.5px -0.5px 0 0 var(--white-4) inset;
+    box-shadow:
+      0.5px 0.5px 0 0 var(--white-5) inset,
+      -0.5px -0.5px 0 0 var(--white-4) inset;
   }
 }
 
@@ -30,7 +35,7 @@
   @variant dark {
     background: linear-gradient(
       180deg,
-      #0C0C0C 0%,
+      #0c0c0c 0%,
       rgba(12, 12, 12, 0.99) 8.59%,
       rgba(12, 12, 12, 0.98) 17.48%,
       rgba(12, 12, 12, 0.95) 26.53%,
@@ -39,13 +44,13 @@
       rgba(12, 12, 12, 0.82) 53.34%,
       rgba(12, 12, 12, 0.75) 61.73%,
       rgba(12, 12, 12, 0.68) 69.63%,
-      rgba(12, 12, 12, 0.60) 76.9%,
+      rgba(12, 12, 12, 0.6) 76.9%,
       rgba(12, 12, 12, 0.52) 83.41%,
       rgba(12, 12, 12, 0.42) 89.03%,
       rgba(12, 12, 12, 0.33) 93.63%,
       rgba(12, 12, 12, 0.22) 97.08%,
       rgba(12, 12, 12, 0.11) 99.25%,
-      rgba(12, 12, 12, 0.00) 100%
+      rgba(12, 12, 12, 0) 100%
     );
   }
 }

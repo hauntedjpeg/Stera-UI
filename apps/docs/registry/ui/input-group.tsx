@@ -15,15 +15,15 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
         // Group
         "group/input-group",
         // Base
-        "relative flex rounded-xl border border-border shadow-xs outline-none transition-[color,box-shadow] items-center",
+        "relative flex items-center rounded-xl border border-border shadow-xs transition-[color,box-shadow] outline-none",
         // Sizing
-        "h-9 w-full min-w-0 has-[[data-slot=input-group-control][data-size=sm]]:h-8 has-[[data-slot=input-group-control][data-size=lg]]:h-11",
+        "h-9 w-full min-w-0 has-[[data-slot=input-group-control][data-size=lg]]:h-11 has-[[data-slot=input-group-control][data-size=sm]]:h-8",
         // Focus
-        "in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-0 has-[[data-slot=input-group-control]:focus-visible]:border-bg-brand has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring-brand",
+        "has-[[data-slot=input-group-control]:focus-visible]:border-bg-brand in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-0 has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring-brand",
         // Disabled
-        "has-[[data-slot=input-group-control]:disabled]:bg-surface-disabled has-[[data-slot=input-group-control]:disabled]:text-text-subtlest has-[[data-slot=input-group-control]:disabled]:border-border-strong has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed",
+        "has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed has-[[data-slot=input-group-control]:disabled]:border-border-strong has-[[data-slot=input-group-control]:disabled]:bg-surface-disabled has-[[data-slot=input-group-control]:disabled]:text-text-subtlest",
         // Invalid
-        "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-destructive/20 [aria-invalid=true]:ring-destructive/40",
+        "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-destructive/20 [aria-invalid=true]:ring-destructive/40 has-[[data-slot][aria-invalid=true]]:ring-3",
         // Variants
         "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pr-2 has-[>[data-align=inline-start]]:[&>input]:pl-2",
         className
@@ -40,15 +40,15 @@ const inputGroupAddonVariants = cva(
     // Sizing
     "h-auto gap-2",
     // Other
-    "cursor-text group-has-[[data-slot=input-group-control]:disabled]/input-group:text-text-subtlest [&>svg:not([class*='size-'])]:size-4 [&>svg]:text-text-subtle",
+    "cursor-text group-has-[[data-slot=input-group-control]:disabled]/input-group:text-text-subtlest [&>svg]:text-text-subtle [&>svg:not([class*='size-'])]:size-4",
   ],
   {
     variants: {
       align: {
         "inline-start":
-          "order-first pl-2.5 py-2.5 has-[>button]:-ml-1 has-[>kbd]:ml-[-0.15rem] group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pl-2 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:py-2 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:pl-3.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:py-3.5",
+          "order-first py-2.5 pl-2.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:py-3.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:pl-3.5 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:py-2 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pl-2 has-[>button]:-ml-1 has-[>kbd]:ml-[-0.15rem]",
         "inline-end":
-          "order-last pr-2.5 py-2.5 has-[>button]:-mr-1 has-[>kbd]:mr-[-0.15rem] group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pr-2 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:py-2 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:pr-3.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:py-3.5",
+          "order-last py-2.5 pr-2.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:py-3.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:pr-3.5 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:py-2 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pr-2 has-[>button]:-mr-1 has-[>kbd]:mr-[-0.15rem]",
         "block-start":
           "order-first w-full justify-start px-2.5 pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-2",
         "block-end":
@@ -135,7 +135,7 @@ function InputGroupInput({
       size={size}
       className={cn(
         // Base
-        "rounded-none border-0 bg-transparent shadow-none ring-0 focus-visible:ring-0 aria-invalid:ring-0 disabled:bg-transparent",
+        "rounded-none border-0 bg-transparent shadow-none ring-0 focus-visible:ring-0 disabled:bg-transparent aria-invalid:ring-0",
         // Sizing
         "flex-1",
         className

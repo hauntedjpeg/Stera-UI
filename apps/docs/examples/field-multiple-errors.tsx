@@ -1,15 +1,16 @@
-import {
-  Field,
-  FieldError,
-  FieldLabel,
-} from "@/components/ui/field"
+import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
 export default function FieldMultipleErrors() {
   return (
-    <Field data-invalid="true" className="max-w-sm w-full">
+    <Field data-invalid="true" className="w-full max-w-sm">
       <FieldLabel htmlFor="field-multi-error-password">Password</FieldLabel>
-      <Input id="field-multi-error-password" type="password" aria-invalid="true" defaultValue="abc" />
+      <Input
+        id="field-multi-error-password"
+        type="password"
+        aria-invalid="true"
+        defaultValue="abc"
+      />
       <FieldError
         errors={[
           { message: "Password must be at least 8 characters." },

@@ -31,7 +31,7 @@ function Avatar({
         "data-[shape=square]:rounded-md data-[shape=square]:after:rounded-lg",
         // Other
         "group/avatar select-none after:rounded-full",
-        className,
+        className
       )}
       {...props}
     />
@@ -51,7 +51,7 @@ function AvatarImage({ className, ...props }: AvatarPrimitive.Image.Props) {
         "group-data-[shape=square]/avatar:rounded-lg",
         // Other
         "object-cover",
-        className,
+        className
       )}
       {...props}
     />
@@ -76,7 +76,7 @@ function AvatarFallback({
         "group-data-[shape=square]/avatar:rounded-md",
         // Other
         "items-center justify-center",
-        className,
+        className
       )}
       {...props}
     />
@@ -96,10 +96,10 @@ function AvatarIconFallback({
         // Sizing
         "size-full",
         // Icon sizing
-        "[&>svg]:size-5 group-data-[size=sm]/avatar:[&>svg]:size-4 group-data-[size=lg]/avatar:[&>svg]:size-6",
+        "[&>svg]:size-5 group-data-[size=lg]/avatar:[&>svg]:size-6 group-data-[size=sm]/avatar:[&>svg]:size-4",
         // Shape
         "group-data-[shape=square]/avatar:rounded-md",
-        className,
+        className
       )}
       {...props}
     />
@@ -126,9 +126,7 @@ const avatarBadgeVariants = cva(
         danger: "bg-surface-danger text-text-ondanger",
         success: "bg-surface-success text-text-onsuccess",
         warning: "bg-surface-warning text-text-onwarning",
-        icon: [
-          "bg-surface-inverse text-text-oninverse",
-        ],
+        icon: ["bg-surface-inverse text-text-oninverse"],
       },
     },
     defaultVariants: {
@@ -162,7 +160,7 @@ function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
         "-space-x-2",
         // Other
         "group/avatar-group",
-        className,
+        className
       )}
       {...props}
     />
@@ -178,7 +176,7 @@ function AvatarGroupCount({
       data-slot="avatar-group-count"
       className={cn(
         // Base
-        "relative flex bg-surface-tertiary st-body-sm-strong text-text-subtle rounded-full ring-2 ring-surface",
+        "relative flex rounded-full bg-surface-tertiary st-body-sm-strong text-text-subtle ring-2 ring-surface",
         // Sizing
         "size-8 shrink-0",
         // Variants
@@ -187,7 +185,7 @@ function AvatarGroupCount({
         "group-has-data-[shape=square]/avatar-group:rounded-md",
         // Other
         "items-center justify-center [&>svg]:size-4",
-        className,
+        className
       )}
       {...props}
     />

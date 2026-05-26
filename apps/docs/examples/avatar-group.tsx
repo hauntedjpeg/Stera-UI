@@ -10,7 +10,10 @@ export default function AvatarGroupDemo() {
   return (
     <AvatarGroup>
       <Avatar>
-        <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+        <AvatarImage
+          src="https://github.com/hauntedjpeg.png"
+          alt="@hauntedjpeg"
+        />
         <AvatarFallback>RG</AvatarFallback>
       </Avatar>
       <Avatar>

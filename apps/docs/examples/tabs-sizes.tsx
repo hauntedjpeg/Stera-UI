@@ -1,13 +1,8 @@
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function TabsSizes() {
   return (
-    <div className="flex flex-col gap-6 w-[400px]">
+    <div className="flex w-[400px] flex-col gap-6">
       <Tabs defaultValue="account">
         <TabsList size="sm">
           <TabsTrigger value="account">Account</TabsTrigger>

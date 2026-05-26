@@ -1,4 +1,8 @@
-import { Progress, ProgressLabel, ProgressValue } from "@/components/ui/progress"
+import {
+  Progress,
+  ProgressLabel,
+  ProgressValue,
+} from "@/components/ui/progress"
 
 export default function ProgressWithLabel() {
   return (

@@ -1,12 +1,29 @@
-export { applyTransforms, type TransformContext, type TransformFn } from "./transform.js"
+export {
+  applyTransforms,
+  type TransformContext,
+  type TransformFn,
+} from "./transform.js"
 export { transformImports } from "./transform-imports.js"
 export { resolveOutputPath } from "./resolve-paths.js"
-export { loadConfig, findConfigPath, CONFIG_FILE, LEGACY_CONFIG_FILE } from "./resolve-config.js"
-export { detectProject, detectAliasPrefix, type ProjectInfo } from "./detect-project.js"
+export {
+  loadConfig,
+  findConfigPath,
+  CONFIG_FILE,
+  LEGACY_CONFIG_FILE,
+} from "./resolve-config.js"
+export {
+  detectProject,
+  detectAliasPrefix,
+  type ProjectInfo,
+} from "./detect-project.js"
 export { writeSteraUiCss, type WriteSteraCssResult } from "./write-stera-css.js"
 export { insertImportLine } from "./css-imports.js"
 export { installDependencies, detectPackageManager } from "./install-deps.js"
-export { writeComponentFiles, type WriteOptions, type WriteResult } from "./write-files.js"
+export {
+  writeComponentFiles,
+  type WriteOptions,
+  type WriteResult,
+} from "./write-files.js"
 export { brand, dim, LOGO, CHECK, CROSS, WARN } from "./format.js"
 export { createSpinner } from "./spinner.js"
 export { massageTreeForFonts, updateFonts } from "./update-fonts.js"

@@ -6,7 +6,9 @@ import { createSpinner } from "./spinner.js"
 
 type PackageManager = "pnpm" | "npm" | "yarn" | "bun"
 
-export async function detectPackageManager(cwd: string): Promise<PackageManager> {
+export async function detectPackageManager(
+  cwd: string
+): Promise<PackageManager> {
   // Use @antfu/ni which walks up the directory tree to find lock files
   // This handles monorepos where the lock file is at the root
   const detected = await detect({ programmatic: true, cwd })
@@ -25,7 +27,10 @@ export async function detectPackageManager(cwd: string): Promise<PackageManager>
   return "npm"
 }
 
-function getInstallArgs(pm: PackageManager, deps: string[]): [string, string[]] {
+function getInstallArgs(
+  pm: PackageManager,
+  deps: string[]
+): [string, string[]] {
   switch (pm) {
     case "pnpm":
       return ["pnpm", ["add", ...deps]]
@@ -41,7 +46,10 @@ function getInstallArgs(pm: PackageManager, deps: string[]): [string, string[]] 
 /**
  * Install npm dependencies, skipping any already in the consumer's package.json.
  */
-export async function installDependencies(deps: string[], cwd: string): Promise<void> {
+export async function installDependencies(
+  deps: string[],
+  cwd: string
+): Promise<void> {
   if (deps.length === 0) return
 
   // Read existing dependencies to avoid reinstalling
@@ -51,7 +59,9 @@ export async function installDependencies(deps: string[], cwd: string): Promise<
   if (fs.existsSync(pkgPath)) {
     try {
       const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"))
-      existing = new Set(Object.keys({ ...pkg.dependencies, ...pkg.devDependencies }))
+      existing = new Set(
+        Object.keys({ ...pkg.dependencies, ...pkg.devDependencies })
+      )
     } catch {
       // Ignore parse errors
     }
@@ -79,8 +89,8 @@ export async function installDependencies(deps: string[], cwd: string): Promise<
     ) {
       throw new Error(
         `Cannot install dependencies at a pnpm workspace root.\n` +
-        `Run stera-ui init from within a specific workspace package instead,\n` +
-        `or use "pnpm add -w <package>" manually to install at the root.`
+          `Run stera-ui init from within a specific workspace package instead,\n` +
+          `or use "pnpm add -w <package>" manually to install at the root.`
       )
     }
 

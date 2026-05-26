@@ -36,7 +36,10 @@ export default function ComboboxPopup() {
       >
         <ComboboxTrigger
           render={
-            <Button variant="outline" className="w-full justify-between font-normal" />
+            <Button
+              variant="outline"
+              className="w-full justify-between font-normal"
+            />
           }
         >
           <ComboboxValue />
@@ -46,7 +49,9 @@ export default function ComboboxPopup() {
           <ComboboxEmpty>No framework found.</ComboboxEmpty>
           <ComboboxList>
             {(fw: Framework) => (
-              <ComboboxItem key={fw.value} value={fw}>{fw.label}</ComboboxItem>
+              <ComboboxItem key={fw.value} value={fw}>
+                {fw.label}
+              </ComboboxItem>
             )}
           </ComboboxList>
         </ComboboxContent>

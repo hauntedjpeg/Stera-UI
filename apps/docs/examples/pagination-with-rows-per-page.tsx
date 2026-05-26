@@ -18,7 +18,7 @@ export default function PaginationWithRowsPerPage() {
           <NativeSelectOption value="50">50</NativeSelectOption>
         </NativeSelect>
       </div>
-      <Pagination className="w-auto mx-0">
+      <Pagination className="mx-0 w-auto">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious href="#" text="" />

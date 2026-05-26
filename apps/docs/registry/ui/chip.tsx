@@ -10,7 +10,7 @@ const chipVariants = cva(
     // Base
     "inline-flex shrink-0 items-center justify-center rounded-full border border-transparent transition-all outline-none select-none",
     // Text
-    "whitespace-nowrap st-body-md-strong",
+    "st-body-md-strong whitespace-nowrap",
     // Focus
     "focus-visible:border-border-strongest focus-visible:ring-3 focus-visible:ring-ring",
     // Disabled
@@ -24,21 +24,15 @@ const chipVariants = cva(
     variants: {
       variant: {
         subtle:
-          "bg-surface-tertiary text-text hover:bg-surface-tertiary-hover data-[active]:bg-surface-tertiary data-[active]:border-[1.5px] data-[active]:border-border-strongest",
+          "bg-surface-tertiary text-text hover:bg-surface-tertiary-hover data-[active]:border-[1.5px] data-[active]:border-border-strongest data-[active]:bg-surface-tertiary",
         outline:
-          "bg-surface text-text border-border hover:bg-surface-hover data-[active]:bg-surface-secondary data-[active]:border-[1.5px] data-[active]:border-border-strongest",
-        solid:
-          "bg-surface-inverse text-text-oninverse hover:bg-surface-inverse-hover data-[active]:border-[1.5px] data-[active]:border-border-strong",
+          "border-border bg-surface text-text hover:bg-surface-hover data-[active]:border-[1.5px] data-[active]:border-border-strongest data-[active]:bg-surface-secondary",
       },
       size: {
-        xs:
-          "px-2 h-6 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1",
-        sm:
-          "px-3 h-8 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        md:
-          "px-3.5 h-9 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
-        lg:
-          "px-4 h-10 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
+        xs: "h-6 px-2 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1",
+        sm: "h-8 px-3 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        md: "h-9 px-3.5 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
+        lg: "h-10 px-4 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
       },
     },
     defaultVariants: {

@@ -9,7 +9,7 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
       data-slot="checkbox"
       className={cn(
         // Base
-        "relative flex items-center justify-center rounded-[5px] border border-border-strong outline-none transition-shadow",
+        "relative flex items-center justify-center rounded-[5px] border border-border-strong transition-shadow outline-none",
         // Position
         "after:absolute after:-inset-x-3 after:-inset-y-2",
         // Sizing
@@ -19,7 +19,7 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         // Disabled
         "disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:bg-surface-disabled",
         // Invalid
-        "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:aria-checked:border-primary",
+        "aria-invalid:border-destructive aria-invalid:aria-checked:border-primary aria-invalid:ring-3 aria-invalid:ring-ring-danger",
         // Checked / Indeterminate
         "data-checked:border-surface-brand data-checked:bg-surface-brand data-checked:text-text-onbrand",
         "data-indeterminate:border-surface-brand data-indeterminate:bg-surface-brand data-indeterminate:text-text-onbrand",
@@ -27,7 +27,7 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         "group-has-disabled/field:text-text-disabled",
         // Other
         "peer group/checkbox",
-        className,
+        className
       )}
       {...props}
     >
@@ -37,7 +37,7 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
           "grid place-content-center text-current transition-none [&>svg]:size-3",
           // Show check by default, minus when indeterminate
           "*:data-[slot=check]:block *:data-[slot=minus]:hidden",
-          "`group-data-indeterminate/checkbox:*:data-[slot=check]:hidden group-data-indeterminate/checkbox:*:data-[slot=minus]:block",
+          "`group-data-indeterminate/checkbox:*:data-[slot=check]:hidden group-data-indeterminate/checkbox:*:data-[slot=minus]:block"
         )}
       >
         <SiCheckFill data-slot="check" />

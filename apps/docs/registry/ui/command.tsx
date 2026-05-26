@@ -10,10 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import {
-  InputGroup,
-  InputGroupAddon,
-} from "@/components/ui/input-group"
+import { InputGroup, InputGroupAddon } from "@/components/ui/input-group"
 import { SiSearch, SiCheck } from "stera-icons"
 import {
   DropdownMenuItemContent as CommandItemContent,
@@ -33,7 +30,7 @@ function Command({
         "flex flex-col overflow-hidden text-text",
         // Sizing
         "size-full",
-        className,
+        className
       )}
       {...props}
     />
@@ -56,7 +53,7 @@ function CommandDialog({
 }) {
   const childArray = React.Children.toArray(children)
   const trigger = childArray.find(
-    (child) => React.isValidElement(child) && child.type === DialogTrigger,
+    (child) => React.isValidElement(child) && child.type === DialogTrigger
   )
   const rest = childArray.filter((child) => child !== trigger)
 
@@ -69,7 +66,7 @@ function CommandDialog({
         className={cn(
           // Base
           "overflow-hidden p-0",
-          className,
+          className
         )}
         showCloseButton={showCloseButton}
       >
@@ -99,7 +96,7 @@ function CommandInput({
             "w-full",
             // Other
             "disabled:cursor-not-allowed disabled:bg-surface-disabled",
-            className,
+            className
           )}
           {...props}
         />
@@ -125,7 +122,7 @@ function CommandList({
         "max-h-72 scroll-py-1",
         // Other
         "no-scrollbar",
-        className,
+        className
       )}
       {...props}
     />
@@ -142,7 +139,7 @@ function CommandEmpty({
       className={cn(
         // Base
         "py-6 text-center st-body-md",
-        className,
+        className
       )}
       {...props}
     />
@@ -161,7 +158,7 @@ function CommandGroup({
         "overflow-hidden p-2 text-text",
         // Other
         "**:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-text-subtle",
-        className,
+        className
       )}
       {...props}
     />
@@ -180,7 +177,7 @@ function CommandSeparator({
         "-mx-2 bg-border",
         // Sizing
         "h-px w-auto",
-        className,
+        className
       )}
       {...props}
     />
@@ -199,14 +196,14 @@ function CommandItem({
         // Group
         "group/command-item",
         // Base
-        "flex relative cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 st-body-md-compact text-text outline-hidden select-none",
+        "relative flex cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 st-body-md-compact text-text outline-hidden select-none",
         // Selected
         "data-[selected=true]:bg-surface-hover data-[selected=true]:text-text data-[selected=true]:**:text-text",
         // Disabled
-        "data-[disabled=true]:text-text-subtlest data-[disabled=true]:pointer-events-none",
+        "data-[disabled=true]:pointer-events-none data-[disabled=true]:text-text-subtlest",
         // Other
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        className,
+        className
       )}
       {...props}
     >
@@ -228,7 +225,7 @@ function CommandShortcut({
         "text-xs/4 text-text-subtlest",
         // Other
         "ml-auto tracking-wide group-data-[selected=true]/command-item:text-text",
-        className,
+        className
       )}
       {...props}
     />

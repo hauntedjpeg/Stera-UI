@@ -1,10 +1,7 @@
 ---
 name: Figma
 about: Design source update
-title: ''
+title: ""
 labels: figma
 assignees: hauntedjpeg
-
 ---
-
-

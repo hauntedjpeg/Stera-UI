@@ -6,23 +6,22 @@ import {
   ItemContent,
   ItemDescription,
   ItemMedia,
-  ItemTitle
+  ItemTitle,
 } from "@/components/ui/item"
 import { Button } from "@/components/ui/button"
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage
-} from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function ItemDemo() {
   return (
-    <div className="flex flex-col w-96 gap-4">
+    <div className="flex w-96 flex-col gap-4">
       <Item>
         <ItemBody>
           <ItemMedia variant="icon">
             <Avatar size="lg">
-              <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+              <AvatarImage
+                src="https://github.com/hauntedjpeg.png"
+                alt="@hauntedjpeg"
+              />
               <AvatarFallback>B</AvatarFallback>
             </Avatar>
           </ItemMedia>
@@ -31,7 +30,9 @@ export default function ItemDemo() {
             <ItemDescription>Last active 2 min ago</ItemDescription>
           </ItemContent>
           <ItemActions>
-            <Button variant="ghost" size="icon-sm"><SiPlus /></Button>
+            <Button variant="ghost" size="icon-sm">
+              <SiPlus />
+            </Button>
           </ItemActions>
         </ItemBody>
       </Item>
@@ -40,7 +41,10 @@ export default function ItemDemo() {
         <ItemBody>
           <ItemMedia variant="icon">
             <Avatar shape="square" size="lg">
-              <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+              <AvatarImage
+                src="https://github.com/hauntedjpeg.png"
+                alt="@hauntedjpeg"
+              />
               <AvatarFallback>B</AvatarFallback>
             </Avatar>
           </ItemMedia>
@@ -49,7 +53,9 @@ export default function ItemDemo() {
             <ItemDescription>Last active 2 min ago</ItemDescription>
           </ItemContent>
           <ItemActions>
-            <Button variant="ghost" size="icon-sm"><SiPlus /></Button>
+            <Button variant="ghost" size="icon-sm">
+              <SiPlus />
+            </Button>
           </ItemActions>
         </ItemBody>
       </Item>
