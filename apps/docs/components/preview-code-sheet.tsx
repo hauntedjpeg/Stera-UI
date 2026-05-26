@@ -2,7 +2,6 @@
 
 import * as React from "react"
 
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { CopyButton } from "@/components/copy-button"
 import {
@@ -38,25 +37,18 @@ export function PreviewCodeSheet({
           )}
         />
         <SheetContent
-          className="gap-0! bg-(--neutral-2) data-[side=right]:sm:w-full! data-[side=right]:sm:max-w-xl!"
+          className="gap-0! bg-(--neutral-2) data-[side=right]:sm:w-full! data-[side=right]:sm:max-w-xl! rounded-xl"
           showCloseButton={false}
         >
-          <SheetHeader className="flex-row items-center gap-2">
+          <SheetHeader className="flex-row items-center gap-2 p-1 pl-4">
             <SheetTitle className="flex-1">{title}</SheetTitle>
             <CopyButton
               className="border-none bg-surface-secondary hover:bg-surface-secondary-hover"
               value={code}
             />
           </SheetHeader>
-          <div className="no-scrollbar flex flex-1 flex-col overflow-y-auto p-1 pt-0">
-            <div
-              className={cn(
-                "flex-1 overflow-auto rounded-xl border border-border bg-surface",
-                "[&_figure.st-code-block]:my-0"
-              )}
-            >
-              {source}
-            </div>
+          <div className="no-scrollbar flex flex-1 flex-col border border-border -m-px mt-0 -mb rounded-xl overflow-y-auto bg-surface">
+            {source}
           </div>
         </SheetContent>
       </Sheet>
