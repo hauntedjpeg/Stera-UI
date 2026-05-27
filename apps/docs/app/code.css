@@ -91,14 +91,14 @@
   color: var(--shiki-dark);
 }
 
-/* ---------- 5. Line numbers (auto, multi-line only) ----------
- * Opt out on a fence with `noLineNumbers` meta — the shiki transformer in
- * source.config.ts tags the <pre> with data-line-numbers="false". */
-.shiki:has(.line ~ .line):not([data-line-numbers="false"]) {
+/* ---------- 5. Line numbers (opt-in) ----------
+ * Off by default. Opt in on a fence with `showLineNumbers` meta — the shiki
+ * transformer in source.config.ts tags the <pre> with data-line-numbers="true". */
+.shiki[data-line-numbers="true"] {
   counter-reset: line;
 }
 
-.shiki:has(.line ~ .line):not([data-line-numbers="false"]) .line::before {
+.shiki[data-line-numbers="true"] .line::before {
   counter-increment: line;
   content: counter(line);
   display: inline-block;
