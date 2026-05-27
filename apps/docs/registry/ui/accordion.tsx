@@ -8,10 +8,10 @@ function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
     <AccordionPrimitive.Root
       data-slot="accordion"
       className={cn(
-        // Base
+        // Layout
         "flex flex-col",
-        // Sizing
-        "w-full",
+        // Box
+        "w-full gap-2",
         className
       )}
       {...props}
@@ -41,12 +41,24 @@ function AccordionTrigger({
         className={cn(
           // Group
           "group/accordion-trigger",
-          // Base
-          "relative flex flex-1 items-start gap-3 p-3 text-left st-body-md-strong outline-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          // Layout
+          "relative flex flex-1 items-start",
+          // Box
+          "gap-3 p-3",
+          // Typography
+          "text-left st-body-md-strong",
+          // Surface
+          "bg-surface-secondary rounded-xl",
+          // Child selectors
+          "[&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          // Transition
+          "transition-all",
+          // Hover
+          "hover:bg-surface-secondary-hover",
           // Focus
-          "focus-visible:border-border focus-visible:ring-3 focus-visible:ring-ring",
-          // States
-          "transition-all aria-disabled:pointer-events-none aria-disabled:opacity-50",
+          "outline-none focus-visible:border-border focus-visible:ring-3 focus-visible:ring-ring",
+          // Disabled
+          "aria-disabled:pointer-events-none aria-disabled:opacity-50",
           className
         )}
         {...props}
@@ -54,11 +66,29 @@ function AccordionTrigger({
         {children}
         <SiChevronDown
           data-slot="accordion-trigger-icon"
-          className="pointer-events-none ml-auto shrink-0 group-aria-expanded/accordion-trigger:hidden"
+          className={cn(
+            // Layout
+            "ml-auto",
+            // Box
+            "shrink-0",
+            // Interaction
+            "pointer-events-none",
+            // Visibility — shown by default, hidden when trigger is expanded
+            "group-aria-expanded/accordion-trigger:hidden"
+          )}
         />
         <SiChevronUp
           data-slot="accordion-trigger-icon"
-          className="pointer-events-none ml-auto hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
+          className={cn(
+            // Layout
+            "ml-auto",
+            // Box
+            "shrink-0",
+            // Interaction
+            "pointer-events-none",
+            // Visibility — hidden by default, shown when trigger is expanded
+            "hidden group-aria-expanded/accordion-trigger:inline"
+          )}
         />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
@@ -73,18 +103,24 @@ function AccordionContent({
   return (
     <AccordionPrimitive.Panel
       data-slot="accordion-content"
-      className="overflow-hidden data-closed:animate-accordion-up data-open:animate-accordion-down"
+      className={cn(
+        // Box — Base UI populates --accordion-panel-height with the measured panel height while open
+        "h-(--accordion-panel-height) overflow-hidden",
+        // Transition
+        "transition-[height] duration-200 ease-out",
+        // Data state — Base UI sets these on enter/exit so the transition has a 0 end-point
+        "data-starting-style:h-0 data-ending-style:h-0"
+      )}
       {...props}
     >
-      {/* className is forwarded to the inner box, not the Panel, so consumer styles don't fight the height animation. */}
       <div
         className={cn(
-          // Base
-          "pt-0 pr-4 pb-3 pl-3 st-body-md text-text-subtle",
-          // Sizing
-          "h-(--accordion-panel-height)",
-          // Other
-          "data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text [&_p:not(:last-child)]:mb-4",
+          // Box
+          "p-3",
+          // Typography
+          "st-body-md text-text-subtle",
+          // Child selectors
+          "[&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text [&_p:not(:last-child)]:mb-4",
           className
         )}
       >
