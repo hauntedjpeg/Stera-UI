@@ -38,6 +38,8 @@ noticeManager.add({
 
 Inside a React component, you can also use `useNoticeManager()` to access the same API along with the live list of toasts.
 
+If you need an isolated manager — for example, multiple `<Notice />` viewports, scoped state in tests, or keeping a feature's toasts separate from the app-wide queue — create one with [`createNoticeManager()`](#createnoticemanager) and pass it via the `toastManager` prop.
+
 ## Toast Types
 
 <ComponentPreview name="notice-types" />
@@ -66,6 +68,28 @@ Drop-in viewport that renders the provider, portal, viewport, and a default toas
 | `position` | `"top-left" \| "top-center" \| "top-right" \| "bottom-left" \| "bottom-center" \| "bottom-right"` | `"bottom-right"` |
 | `limit` | `number` | `3` |
 | `timeout` | `number` (ms, `0` to disable auto-dismiss) | `5000` |
+| `toastManager` | `ReturnType<typeof createNoticeManager>` | `noticeManager` |
+
+Pass a `toastManager` to swap the default singleton for a scoped manager created with `createNoticeManager()`.
+
+### `createNoticeManager()`
+
+Returns a fresh toast manager. Use it when you need an isolated queue — multiple viewports, tests, or feature-scoped notifications. The default export `noticeManager` is simply `createNoticeManager()` called once at module load.
+
+```tsx
+import { createNoticeManager, Notice } from "@/components/ui/notice"
+
+const billingNotices = createNoticeManager()
+
+export function BillingArea() {
+  return (
+    <>
+      <Notice toastManager={billingNotices} />
+      {/* billingNotices.add(...) only renders here */}
+    </>
+  )
+}
+```
 
 ### `noticeManager`
 
@@ -82,4 +106,4 @@ A singleton created with `Toast.createToastManager()` from Base UI. Use it to tr
 
 ### Lower-level parts
 
-For custom layouts, compose the parts directly: `NoticeProvider`, `NoticePortal`, `NoticeViewport`, `NoticeRoot`, `NoticeContent`, `NoticeTitle`, `NoticeDescription`, `NoticeAction`, `NoticeClose`. Each is a thin wrapper around the matching `Toast.*` part from `@base-ui/react/toast`. `useNoticeManager` is re-exported as `Toast.useToastManager`.
+For custom layouts, compose the parts directly: `NoticeProvider`, `NoticePortal`, `NoticeViewport`, `NoticeRoot`, `NoticeContent`, `NoticeTitle`, `NoticeDescription`, `NoticeAction`, `NoticeClose`. Each is a thin wrapper around the matching `Toast.*` part from `@base-ui/react/toast`. `useNoticeManager` is re-exported from Base UI's `Toast.useToastManager`.

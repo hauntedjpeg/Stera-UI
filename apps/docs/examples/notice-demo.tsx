@@ -1,18 +1,16 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { createNoticeManager, Notice } from "@/components/ui/notice"
-
-const demoManager = createNoticeManager()
+import { Notice, noticeManager } from "@/components/ui/notice"
 
 export default function NoticeDemo() {
   return (
     <>
-      <Notice toastManager={demoManager} />
+      <Notice />
       <Button
         variant="outline"
         onClick={() =>
-          demoManager.add({
+          noticeManager.add({
             title: "Event has been created",
             description: "Sunday, December 03, 2023 at 9:00 AM",
             actionProps: {
@@ -22,7 +20,7 @@ export default function NoticeDemo() {
           })
         }
       >
-        Show Toast
+        Notice
       </Button>
     </>
   )

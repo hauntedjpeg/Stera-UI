@@ -9,7 +9,23 @@ description: A progress bar for displaying task completion or upload status.
 
 <InstallSnippet slug="progress" hideHeading />
 
-## With Label and Value
+## Composition
+
+Use the following composition to build a `Progress`:
+
+```text
+Progress
+├── ProgressLabel
+├── ProgressValue
+└── ProgressTrack
+    └── ProgressIndicator
+```
+
+`ProgressTrack` and `ProgressIndicator` are rendered automatically by `Progress`. `ProgressLabel` and `ProgressValue` are optional.
+
+## Examples
+
+### With Label and Value
 
 Use `ProgressLabel` and `ProgressValue` as children of `Progress` to display a description and a numeric percentage.
 

@@ -9,17 +9,29 @@ description: A set of mutually exclusive options where only one can be selected 
 
 <InstallSnippet slug="radio-group" hideHeading />
 
-## With Descriptions
+## Composition
+
+Use the following composition to build a `RadioGroup`:
+
+```text
+RadioGroup
+├── RadioGroupItem
+└── RadioGroupItem
+```
+
+## Examples
+
+### With Descriptions
 
 <ComponentPreview name="radio-group-with-description" />
 
-## In a Fieldset
+### In a Fieldset
 
 Use `FieldSet` and `FieldLegend` to group radio items with an accessible legend.
 
 <ComponentPreview name="radio-group-fieldset" />
 
-## Disabled
+### Disabled
 
 <ComponentPreview name="radio-group-disabled" />
 

@@ -9,7 +9,20 @@ description: Keyboard shortcut display components for showing key combinations i
 
 <InstallSnippet slug="kbd" hideHeading />
 
-## Sizes
+## Composition
+
+Use the following composition to build `Kbd` and `KbdGroup`:
+
+```text
+Kbd
+KbdGroup
+├── Kbd
+└── Kbd
+```
+
+## Examples
+
+### Sizes
 
 <ComponentPreview name="kbd-sizes" />
 
@@ -18,19 +31,19 @@ description: Keyboard shortcut display components for showing key combinations i
 | `sm` | Compact, for tight spaces like tooltips |
 | `md` | Default |
 
-## Key Combinations
+### Key Combinations
 
 Use `KbdGroup` to display a sequence of keys.
 
 <ComponentPreview name="kbd-key-combination" />
 
-## Inside a Button
+### Inside a Button
 
 Use `data-kbd="inline-end"` to position a `Kbd` at the trailing edge of a button.
 
 <ComponentPreview name="kbd-with-button" />
 
-## Inside an Input
+### Inside an Input
 
 <ComponentPreview name="kbd-with-input" />
 

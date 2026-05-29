@@ -3,23 +3,58 @@ title: Native Select
 description: A styled native browser select element for simple, accessible option selection.
 ---
 
+<Callout>
+  For a styled select component, see the [Select](/components/select)
+  component.
+</Callout>
+
 <ComponentPreview name="native-select-with-field" />
 
 ## Installation
 
 <InstallSnippet slug="native-select" hideHeading />
 
-## With Field
+## Composition
+
+### Simple
+
+Options placed directly under `NativeSelect` (no `NativeSelectOptGroup`).
+
+```text
+NativeSelect
+├── NativeSelectOption
+├── NativeSelectOption
+├── NativeSelectOption
+└── NativeSelectOption
+```
+
+### With groups
+
+Use `NativeSelectOptGroup` to organize options into categories.
+
+```text
+NativeSelect
+├── NativeSelectOptGroup
+│   ├── NativeSelectOption
+│   └── NativeSelectOption
+└── NativeSelectOptGroup
+    ├── NativeSelectOption
+    └── NativeSelectOption
+```
+
+## Examples
+
+### With Field
 
 <ComponentPreview name="native-select-with-field" />
 
-## With Option Groups
+### With Option Groups
 
 Use `NativeSelectOptGroup` to group related options with a label.
 
 <ComponentPreview name="native-select-with-opt-group" />
 
-## Sizes
+### Sizes
 
 <ComponentPreview name="native-select-sizes" />
 
@@ -30,7 +65,7 @@ Use `NativeSelectOptGroup` to group related options with a label.
 | `lg` | Large |
 | `xl` | Extra large |
 
-## Disabled
+### Disabled
 
 <ComponentPreview name="native-select-disabled" />
 

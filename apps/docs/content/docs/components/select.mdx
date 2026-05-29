@@ -9,13 +9,29 @@ description: A custom dropdown for selecting a single value from a list of optio
 
 <InstallSnippet slug="select" hideHeading />
 
-## With Groups
+## Composition
 
-Use `SelectGroup`, `SelectLabel`, and `SelectSeparator` to organize options into labelled sections.
+Use the following composition to build a `Select`:
 
-<ComponentPreview name="select-groups" />
+```text
+Select
+├── SelectTrigger
+│   └── SelectValue
+└── SelectContent
+    ├── SelectGroup
+    │   ├── SelectLabel
+    │   ├── SelectItem
+    │   └── SelectItem
+    ├── SelectSeparator
+    └── SelectGroup
+        ├── SelectLabel
+        ├── SelectItem
+        └── SelectItem
+```
 
-## Sizes
+## Examples
+
+### Sizes
 
 <ComponentPreview name="select-all-sizes" />
 
@@ -25,11 +41,17 @@ Use `SelectGroup`, `SelectLabel`, and `SelectSeparator` to organize options into
 | `md` | Medium (default) |
 | `lg` | Large |
 
-## Disabled
+### With Groups
+
+Use `SelectGroup`, `SelectLabel`, and `SelectSeparator` to organize options into labelled sections.
+
+<ComponentPreview name="select-groups" />
+
+### Disabled
 
 <ComponentPreview name="select-disabled" />
 
-## Invalid
+### Invalid
 
 <ComponentPreview name="select-invalid" />
 

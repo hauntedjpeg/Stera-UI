@@ -9,11 +9,30 @@ description: Navigation controls for moving between pages of content.
 
 <InstallSnippet slug="pagination" hideHeading />
 
-## Simple
+## Composition
+
+Use the following composition to build a `Pagination`:
+
+```text
+Pagination
+└── PaginationContent
+    ├── PaginationItem
+    │   └── PaginationPrevious
+    ├── PaginationItem
+    │   └── PaginationLink
+    ├── PaginationItem
+    │   └── PaginationEllipsis
+    └── PaginationItem
+        └── PaginationNext
+```
+
+## Examples
+
+### Simple
 
 <ComponentPreview name="pagination-simple" />
 
-## With Rows Per Page
+### With Rows Per Page
 
 <ComponentPreview name="pagination-with-rows-per-page" />
 
