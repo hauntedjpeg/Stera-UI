@@ -178,7 +178,7 @@ function SheetContent({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-2.5 right-2.5"
+                  className="absolute top-2.5 right-2.5 text-text-subtle"
                 />
               }
             >
@@ -234,7 +234,7 @@ function SheetTitle({ className, ...props }: DrawerPrimitive.Title.Props) {
       data-slot="sheet-title"
       className={cn(
         // Other
-        "font-medium text-text",
+        "st-body-lg-strong text-text",
         className
       )}
       {...props}
