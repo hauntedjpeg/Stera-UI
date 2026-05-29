@@ -605,6 +605,11 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/radio-group-with-description.tsx",
     slug: "radio-group",
   },
+  "radio-group-choice-card": {
+    component: dynamic(() => import("@/examples/radio-group-choice-card")),
+    path: "examples/radio-group-choice-card.tsx",
+    slug: "radio-group",
+  },
   "radio-group-fieldset": {
     component: dynamic(() => import("@/examples/radio-group-fieldset")),
     path: "examples/radio-group-fieldset.tsx",
