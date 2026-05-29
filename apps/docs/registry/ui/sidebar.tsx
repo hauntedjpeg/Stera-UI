@@ -224,7 +224,7 @@ function Sidebar({
 
   if (mounted && isMobile) {
     return (
-      <Sheet open={openMobile} onOpenChange={setOpenMobile}>
+      <Sheet open={openMobile} onOpenChange={setOpenMobile} side={side}>
         <SheetContent
           dir={dir}
           data-sidebar="sidebar"
@@ -236,7 +236,6 @@ function Sidebar({
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
             } as React.CSSProperties
           }
-          side={side}
         >
           <SheetHeader className="sr-only">
             <SheetTitle>Sidebar</SheetTitle>
