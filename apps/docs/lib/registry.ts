@@ -820,14 +820,19 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/sheet-demo.tsx",
     slug: "sheet",
   },
-  "sheet-sides": {
-    component: dynamic(() => import("@/examples/sheet-sides")),
-    path: "examples/sheet-sides.tsx",
+  "sheet-bottom": {
+    component: dynamic(() => import("@/examples/sheet-bottom")),
+    path: "examples/sheet-bottom.tsx",
     slug: "sheet",
   },
-  "sheet-no-close-button": {
-    component: dynamic(() => import("@/examples/sheet-no-close-button")),
-    path: "examples/sheet-no-close-button.tsx",
+  "sheet-snap-points": {
+    component: dynamic(() => import("@/examples/sheet-snap-points")),
+    path: "examples/sheet-snap-points.tsx",
+    slug: "sheet",
+  },
+  "sheet-nested": {
+    component: dynamic(() => import("@/examples/sheet-nested")),
+    path: "examples/sheet-nested.tsx",
     slug: "sheet",
   },
   "alert-dialog-demo": {

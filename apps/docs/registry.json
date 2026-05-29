@@ -201,13 +201,6 @@
       "files": [{ "path": "registry/ui/dialog.tsx", "type": "registry:ui" }]
     },
     {
-      "name": "drawer",
-      "type": "registry:ui",
-      "dependencies": ["vaul"],
-      "registryDependencies": ["utils"],
-      "files": [{ "path": "registry/ui/drawer.tsx", "type": "registry:ui" }]
-    },
-    {
       "name": "dropdown-menu",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "stera-icons"],

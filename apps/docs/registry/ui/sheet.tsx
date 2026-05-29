@@ -1,39 +1,154 @@
+"use client"
+
 import * as React from "react"
-import { Dialog as SheetPrimitive } from "@base-ui/react/dialog"
+import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { SiX } from "stera-icons"
 
-function Sheet({ ...props }: SheetPrimitive.Root.Props) {
-  return <SheetPrimitive.Root data-slot="sheet" {...props} />
+type SheetSide = "top" | "right" | "bottom" | "left"
+
+const SIDE_TO_SWIPE_DIRECTION = {
+  top: "up",
+  right: "right",
+  bottom: "down",
+  left: "left",
+} as const satisfies Record<SheetSide, "up" | "right" | "down" | "left">
+
+const SheetContext = React.createContext<{ side: SheetSide }>({ side: "right" })
+
+function useSheetSide() {
+  return React.useContext(SheetContext).side
 }
 
-function SheetTrigger({ ...props }: SheetPrimitive.Trigger.Props) {
-  return <SheetPrimitive.Trigger data-slot="sheet-trigger" {...props} />
-}
-
-function SheetClose({ ...props }: SheetPrimitive.Close.Props) {
-  return <SheetPrimitive.Close data-slot="sheet-close" {...props} />
-}
-
-function SheetPortal({ ...props }: SheetPrimitive.Portal.Props) {
-  return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />
-}
-
-function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
+function Sheet({
+  side = "right",
+  swipeDirection,
+  ...props
+}: DrawerPrimitive.Root.Props & { side?: SheetSide }) {
+  const value = React.useMemo(() => ({ side }), [side])
   return (
-    <SheetPrimitive.Backdrop
-      data-slot="sheet-overlay"
+    <SheetContext.Provider value={value}>
+      <DrawerPrimitive.Root
+        data-slot="sheet"
+        swipeDirection={swipeDirection ?? SIDE_TO_SWIPE_DIRECTION[side]}
+        {...props}
+      />
+    </SheetContext.Provider>
+  )
+}
+
+function SheetTrigger({ ...props }: DrawerPrimitive.Trigger.Props) {
+  return <DrawerPrimitive.Trigger data-slot="sheet-trigger" {...props} />
+}
+
+function SheetClose({ ...props }: DrawerPrimitive.Close.Props) {
+  return <DrawerPrimitive.Close data-slot="sheet-close" {...props} />
+}
+
+function SheetPortal({ ...props }: DrawerPrimitive.Portal.Props) {
+  return <DrawerPrimitive.Portal data-slot="sheet-portal" {...props} />
+}
+
+function SheetBackdrop({
+  className,
+  ...props
+}: DrawerPrimitive.Backdrop.Props) {
+  return (
+    <DrawerPrimitive.Backdrop
+      data-slot="sheet-backdrop"
       className={cn(
         // Base
-        "fixed inset-0 z-50 bg-black/10",
+        "fixed inset-0 z-50 bg-black/20 dark:bg-black/60",
         // Blur
         "supports-backdrop-filter:backdrop-blur-xs",
-        // Tailwind v4 + tailwindcss-animate, keyed off bare data-open/data-closed
-        "data-open:animate-in data-open:fade-in-0",
-        "data-closed:animate-out data-closed:fade-out-0",
-        "duration-200",
+        // Swipe-driven opacity
+        "opacity-[calc(1-var(--drawer-swipe-progress,0))]",
+        // Open/close transition
+        "transition-opacity duration-200 ease-out",
+        "data-starting-style:opacity-0 data-ending-style:opacity-0",
+        "data-swiping:duration-0",
+        "data-ending-style:duration-[calc(var(--drawer-swipe-strength,1)*400ms)]",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function SheetViewport({
+  className,
+  ...props
+}: DrawerPrimitive.Viewport.Props) {
+  const side = useSheetSide()
+  return (
+    <DrawerPrimitive.Viewport
+      data-slot="sheet-viewport"
+      data-side={side}
+      className={cn(
+        // Base
+        "fixed inset-0 z-50 flex p-2",
+        // Position by side
+        "data-[side=right]:items-stretch data-[side=right]:justify-end",
+        "data-[side=left]:items-stretch data-[side=left]:justify-start",
+        "data-[side=top]:items-start data-[side=top]:justify-stretch",
+        "data-[side=bottom]:items-end data-[side=bottom]:justify-stretch",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function SheetPopup({ className, ...props }: DrawerPrimitive.Popup.Props) {
+  const side = useSheetSide()
+  return (
+    <DrawerPrimitive.Popup
+      data-slot="sheet-popup"
+      data-side={side}
+      className={cn(
+        // Group
+        "group/sheet",
+        // Base
+        "relative flex flex-col bg-surface text-sm text-text ring-1 ring-border rounded-xl shadow-lg outline-none",
+        // Sizing per side
+        "data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:sm:max-w-sm",
+        "data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:sm:max-w-sm",
+        "data-[side=top]:w-full data-[side=top]:max-h-[80vh]",
+        "data-[side=bottom]:w-full data-[side=bottom]:max-h-[80vh]",
+        // Scrolling
+        "overflow-y-auto overscroll-contain touch-auto",
+        // Swipe-driven transform (bottom adds snap-point offset)
+        "data-[side=right]:transform-[translateX(var(--drawer-swipe-movement-x))]",
+        "data-[side=left]:transform-[translateX(var(--drawer-swipe-movement-x))]",
+        "data-[side=top]:transform-[translateY(var(--drawer-swipe-movement-y))]",
+        "data-[side=bottom]:transform-[translateY(calc(var(--drawer-snap-point-offset,0px)+var(--drawer-swipe-movement-y)))]",
+        // Transition
+        "transition-[transform,opacity] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform",
+        "data-swiping:duration-0 data-swiping:select-none",
+        "data-ending-style:duration-[calc(var(--drawer-swipe-strength,1)*400ms)]",
+        // Starting/ending — slide off-screen
+        "data-[side=right]:data-starting-style:transform-[translateX(100%)] data-[side=right]:data-ending-style:transform-[translateX(100%)]",
+        "data-[side=left]:data-starting-style:transform-[translateX(-100%)] data-[side=left]:data-ending-style:transform-[translateX(-100%)]",
+        "data-[side=top]:data-starting-style:transform-[translateY(-100%)] data-[side=top]:data-ending-style:transform-[translateY(-100%)]",
+        "data-[side=bottom]:data-starting-style:transform-[translateY(100%)] data-[side=bottom]:data-ending-style:transform-[translateY(100%)]",
+        // Light nested-drawer affordance
+        "data-nested-drawer-open:opacity-90",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function SheetHandle({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sheet-handle"
+      aria-hidden
+      className={cn(
+        "mx-auto mt-2 h-1 w-12 shrink-0 rounded-full bg-surface-secondary",
         className
       )}
       {...props}
@@ -44,51 +159,35 @@ function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
 function SheetContent({
   className,
   children,
-  side = "right",
   showCloseButton = true,
   ...props
-}: SheetPrimitive.Popup.Props & {
-  side?: "top" | "right" | "bottom" | "left"
+}: DrawerPrimitive.Popup.Props & {
   showCloseButton?: boolean
 }) {
+  const side = useSheetSide()
   return (
     <SheetPortal>
-      <SheetOverlay />
-      <SheetPrimitive.Popup
-        data-slot="sheet-content"
-        data-side={side}
-        className={cn(
-          // Base
-          "fixed flex flex-col rounded-xl border border-border bg-surface bg-clip-padding shadow-lg",
-          // Position
-          "data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=left]:inset-y-2 data-[side=left]:left-2 data-[side=right]:inset-y-2 data-[side=right]:right-2 data-[side=top]:inset-x-0 data-[side=top]:top-0",
-          // Sizing
-          "gap-4 data-[side=bottom]:h-auto data-[side=left]:h-[calc(100%-16px)] data-[side=left]:w-3/4 data-[side=right]:h-[calc(100%-16px)] data-[side=right]:w-3/4 data-[side=top]:h-auto data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm",
-          // Animation
-          "data-closed:animate-out data-closed:fade-out-0 data-open:animate-in data-open:fade-in-0 data-[side=bottom]:data-closed:slide-out-to-bottom-10 data-[side=bottom]:data-open:slide-in-from-bottom-10 data-[side=left]:data-closed:slide-out-to-left-10 data-[side=left]:data-open:slide-in-from-left-10 data-[side=right]:data-closed:slide-out-to-right-10 data-[side=right]:data-open:slide-in-from-right-10 data-[side=top]:data-closed:slide-out-to-top-10 data-[side=top]:data-open:slide-in-from-top-10",
-          // Other
-          "z-50 text-sm transition duration-200 ease-in-out",
-          className
-        )}
-        {...props}
-      >
-        {children}
-        {showCloseButton && (
-          <SheetPrimitive.Close
-            data-slot="sheet-close"
-            render={
-              <Button
-                variant="ghost"
-                className="absolute top-4 right-4"
-                size="icon-sm"
-              />
-            }
-          >
-            <SiX />
-            <span className="sr-only">Close</span>
-          </SheetPrimitive.Close>
-        )}
-      </SheetPrimitive.Popup>
+      <SheetBackdrop />
+      <SheetViewport>
+        <SheetPopup className={className} {...props}>
+          {side === "bottom" && <SheetHandle />}
+          {children}
+          {showCloseButton && (
+            <SheetClose
+              render={
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-2.5 right-2.5"
+                />
+              }
+            >
+              <SiX />
+              <span className="sr-only">Close</span>
+            </SheetClose>
+          )}
+        </SheetPopup>
+      </SheetViewport>
     </SheetPortal>
   )
 }
@@ -102,6 +201,8 @@ function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
         "flex flex-col p-4",
         // Sizing
         "gap-1.5",
+        // Pad right when the corner close button (a direct child of SheetPopup) is present
+        "group-has-[>[data-slot=sheet-close]]/sheet:pr-14",
         className
       )}
       {...props}
@@ -115,11 +216,11 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="sheet-footer"
       className={cn(
         // Base
-        "flex flex-col p-4",
+        "flex p-4",
         // Position
         "mt-auto",
         // Sizing
-        "gap-2",
+        "gap-2 *:flex-1",
         className
       )}
       {...props}
@@ -127,9 +228,9 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function SheetTitle({ className, ...props }: SheetPrimitive.Title.Props) {
+function SheetTitle({ className, ...props }: DrawerPrimitive.Title.Props) {
   return (
-    <SheetPrimitive.Title
+    <DrawerPrimitive.Title
       data-slot="sheet-title"
       className={cn(
         // Other
@@ -144,9 +245,9 @@ function SheetTitle({ className, ...props }: SheetPrimitive.Title.Props) {
 function SheetDescription({
   className,
   ...props
-}: SheetPrimitive.Description.Props) {
+}: DrawerPrimitive.Description.Props) {
   return (
-    <SheetPrimitive.Description
+    <DrawerPrimitive.Description
       data-slot="sheet-description"
       className={cn(
         // Other
@@ -162,6 +263,11 @@ export {
   Sheet,
   SheetTrigger,
   SheetClose,
+  SheetPortal,
+  SheetBackdrop,
+  SheetViewport,
+  SheetPopup,
+  SheetHandle,
   SheetContent,
   SheetHeader,
   SheetFooter,

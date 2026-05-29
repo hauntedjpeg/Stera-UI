@@ -1,6 +1,6 @@
 ---
 title: Sheet
-description: A slide-in panel that appears from the edge of the screen, used for secondary content or forms.
+description: A panel that slides in from the edge of the screen to surface focused content or contextual actions.
 ---
 
 <ComponentPreview name="sheet-demo" />
@@ -9,30 +9,64 @@ description: A slide-in panel that appears from the edge of the screen, used for
 
 <InstallSnippet slug="sheet" hideHeading />
 
-## Sides
+## Composition
 
-<ComponentPreview name="sheet-sides" />
+Use the following composition to build a `Sheet`:
 
-| Side | Description |
-| --- | --- |
-| `right` | Slides in from the right (default) |
-| `left` | Slides in from the left |
-| `top` | Slides in from the top |
-| `bottom` | Slides in from the bottom |
+```text
+Sheet
+├── SheetTrigger
+└── SheetContent
+    ├── SheetHeader
+    │   ├── SheetTitle
+    │   └── SheetDescription
+    └── SheetFooter
+        └── SheetClose
+```
 
-## No Close Button
+Pass `side` on `<Sheet>` to control both the position and the swipe-to-dismiss direction. `"right"` is the default.
 
-<ComponentPreview name="sheet-no-close-button" />
+## Examples
+
+### Bottom sheet
+
+<ComponentPreview name="sheet-bottom" />
+
+A bottom-anchored sheet renders a drag handle automatically and dismisses on swipe-down.
+
+### Snap points
+
+<ComponentPreview name="sheet-snap-points" />
+
+Pass `snapPoints` to make a bottom sheet snap between heights. Values can be fractions of the viewport (`0`–`1`), pixel values (`>1` or `"148px"`), or `rem` strings.
+
+### Nested sheets
+
+<ComponentPreview name="sheet-nested" />
+
+Sheets can be opened from inside another sheet — each layer manages its own focus and stacks correctly.
 
 ## API Reference
 
-Built on Base UI's [Dialog](https://base-ui.com/react/components/dialog#api-reference) primitive — see the full API reference there.
+Built on Base UI's [Drawer](https://base-ui.com/react/components/drawer#api-reference) primitive — see the full API reference there.
+
+### Sheet
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `side` | `"right" \| "left" \| "top" \| "bottom"` | `"right"` |
+| `swipeDirection` | `"up" \| "down" \| "left" \| "right"` | derived from `side` |
+| `snapPoints` | `(number \| string)[]` | – |
+| `snapPoint` | `number \| string \| null` | – |
+| `onSnapPointChange` | `(snapPoint, details) => void` | – |
+| `open` | `boolean` | – |
+| `onOpenChange` | `(open, details) => void` | – |
+| `modal` | `boolean \| "trap-focus"` | `true` |
 
 ### SheetContent
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `side` | `"right" \| "left" \| "top" \| "bottom"` | `"right"` |
 | `showCloseButton` | `boolean` | `true` |
 
 ### SheetTrigger

@@ -1,26 +1,31 @@
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 
-export default function SheetNoCloseButton() {
+export default function SheetBottom() {
   return (
-    <Sheet>
+    <Sheet side="bottom">
       <SheetTrigger render={<Button variant="outline" />}>
-        Open Sheet
+        Open bottom sheet
       </SheetTrigger>
       <SheetContent showCloseButton={false}>
-        <SheetHeader>
-          <SheetTitle>No Close Button</SheetTitle>
+        <SheetHeader className="text-center">
+          <SheetTitle>Notifications</SheetTitle>
           <SheetDescription>
-            This sheet doesn&apos;t have a close button. Click outside to close.
+            You are all caught up. Swipe down to dismiss.
           </SheetDescription>
         </SheetHeader>
+        <SheetFooter className="items-center">
+          <SheetClose render={<Button variant="outline" />}>Close</SheetClose>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   )
