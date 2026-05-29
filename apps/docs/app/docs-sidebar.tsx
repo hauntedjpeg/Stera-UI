@@ -94,7 +94,7 @@ function TreeNodes({
       {groups.map((group, i) => (
         <SidebarGroup key={i}>
           {group.separator?.name && (
-            <SidebarGroupLabel>{group.separator.name}</SidebarGroupLabel>
+            <SidebarGroupLabel className="px-3">{group.separator.name}</SidebarGroupLabel>
           )}
           <SidebarGroupContent>
             <SidebarMenu>
@@ -120,7 +120,7 @@ function TreeNode({
     return (
       <SidebarMenuItem>
         <SidebarMenuButton
-          className="w-fit data-active:bg-surface-tertiary"
+          className="w-fit data-active:bg-surface-inverse data-active:text-text-oninverse rounded-full px-3"
           isActive={pathname === node.url}
           render={<Link href={node.url} />}
         >
@@ -135,7 +135,7 @@ function TreeNode({
       <SidebarMenuItem>
         {node.index ? (
           <SidebarMenuButton
-            className="w-fit data-active:bg-surface-tertiary"
+            className="w-fit data-active:bg-surface-inverse data-active:text-text-oninverse"
             isActive={pathname === node.index.url}
             render={<Link href={node.index.url} />}
           >
