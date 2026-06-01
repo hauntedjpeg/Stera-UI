@@ -67,7 +67,7 @@ function AvatarFallback({
       data-slot="avatar-fallback"
       className={cn(
         // Base
-        "flex rounded-full bg-surface-inverse st-body-sm-strong text-text-oninverse",
+        "flex rounded-full bg-surface-tertiary st-body-sm-strong text-text-subtle",
         // Sizing
         "size-full",
         // Variants
@@ -92,7 +92,7 @@ function AvatarIconFallback({
       data-slot="avatar-icon-fallback"
       className={cn(
         // Base
-        "flex items-center justify-center rounded-full bg-surface-inverse text-text-oninverse",
+        "flex items-center justify-center rounded-full bg-surface-tertiary text-text-subtle",
         // Sizing
         "size-full",
         // Icon sizing
