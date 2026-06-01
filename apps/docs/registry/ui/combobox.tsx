@@ -244,6 +244,8 @@ function ComboboxChips({
     <ComboboxPrimitive.Chips
       data-slot="combobox-chips"
       className={cn(
+        // Group
+        "group/combobox-chips",
         // Base
         "flex flex-wrap items-center rounded-xl border border-border bg-transparent bg-clip-padding px-3 py-1 transition-colors",
         // Sizing
@@ -303,7 +305,11 @@ function ComboboxChipsInput({
   return (
     <ComboboxPrimitive.Input
       data-slot="combobox-chip-input"
-      className={cn("min-w-16 flex-1 outline-none", className)}
+      className={cn(
+        "min-w-16 flex-1 outline-none",
+        "group-has-data-[slot=combobox-chip]/combobox-chips:placeholder:text-transparent",
+        className
+      )}
       {...props}
     />
   )
