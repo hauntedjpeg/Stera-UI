@@ -3,36 +3,39 @@ title: Switch
 description: A toggle control for switching between two states, like on and off.
 ---
 
-<ComponentPreview name="switch-demo" />
+<ComponentPreview name="switch-demo" caption="Switch" />
 
 ## Installation
 
 <InstallSnippet slug="switch" hideHeading />
 
-## With Label
+## Examples
 
-Pair with `Field` and `FieldLabel` for an accessible labeled switch.
-
-<ComponentPreview name="switch-demo" />
-
-## With Description
+### With Description
 
 Place `FieldContent` between the label and switch to add a description.
 
-<ComponentPreview name="switch-with-description" />
+<ComponentPreview name="switch-with-description" caption="With Description" />
 
-## Sizes
+### Choice Card
 
-<ComponentPreview name="switch-sizes" />
+Wrap a `Field` inside `FieldLabel` to make the entire card clickable. The card highlights automatically when the switch is checked.
+
+<ComponentPreview name="switch-choice-card" caption="Choice Card" />
+
+### Sizes
+
+<ComponentPreview name="switch-sizes" caption="Sizes" />
 
 | Size | Description |
 | --- | --- |
-| `default` | Standard size |
-| `sm` | Compact size |
+| `sm` | Compact size (24×16) |
+| `md` | Standard size (32×16) |
+| `lg` | Large size (64×28) |
 
-## Disabled
+### Disabled
 
-<ComponentPreview name="switch-disabled" />
+<ComponentPreview name="switch-disabled" caption="Disabled" />
 
 ## API Reference
 
@@ -40,7 +43,7 @@ Built on Base UI's [Switch](https://base-ui.com/react/components/switch#api-refe
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `size` | `"default" \| "sm"` | `"default"` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `checked` | `boolean` | — |
 | `defaultChecked` | `boolean` | — |
 | `onCheckedChange` | `(checked: boolean) => void` | — |

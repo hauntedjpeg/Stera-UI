@@ -4,29 +4,48 @@ import { cn } from "@/lib/utils"
 
 function Switch({
   className,
-  size = "default",
+  size = "md",
   ...props
 }: SwitchPrimitive.Root.Props & {
-  size?: "sm" | "default"
+  size?: "sm" | "md" | "lg"
 }) {
   return (
     <SwitchPrimitive.Root
       data-slot="switch"
       data-size={size}
       className={cn(
+        // Group hooks
+        "peer group/switch",
         // Base
-        "relative inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger",
-        // Variants
-        "data-[size=default]:h-4 data-[size=default]:w-7 data-[size=sm]:h-3 data-[size=sm]:w-5",
-        // Other
-        "peer group/switch data-checked:bg-surface-brand data-disabled:cursor-not-allowed data-unchecked:bg-surface-tertiary",
+        "relative inline-flex shrink-0 items-center rounded-full border-2 border-transparent shadow-xs transition-all outline-none after:absolute after:-inset-x-3 after:-inset-y-2",
+        // Focus
+        "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring",
+        // Invalid
+        "data-invalid:border-border-danger-strong data-invalid:ring-3 data-invalid:ring-ring-danger",
+        // State
+        "data-checked:bg-surface-brand data-unchecked:bg-surface-tertiary data-disabled:cursor-not-allowed",
+        // Size
+        "data-[size=sm]:h-4 data-[size=sm]:w-6",
+        "data-[size=md]:h-4 data-[size=md]:w-8",
+        "data-[size=lg]:h-7 data-[size=lg]:w-16",
         className
       )}
       {...props}
     >
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
-        className="pointer-events-none block rounded-full bg-surface ring-0 transition-transform group-data-[size=default]/switch:size-3.5 group-data-[size=sm]/switch:size-2.5 group-data-[size=default]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=sm]/switch:data-checked:translate-x-[calc(100%-2px)] data-disabled:bg-text-disabled group-data-[size=default]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-unchecked:translate-x-0"
+        className={cn(
+          // Base
+          "pointer-events-none block rounded-full bg-surface ring-0 transition-transform",
+          // Disabled
+          "data-disabled:bg-text-disabled",
+          // Size — sm
+          "group-data-[size=sm]/switch:size-3 group-data-[size=sm]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-checked:translate-x-2",
+          // Size — md
+          "group-data-[size=md]/switch:w-4.5 group-data-[size=md]/switch:h-3 group-data-[size=md]/switch:data-unchecked:translate-x-0 group-data-[size=md]/switch:data-checked:translate-x-2.5",
+          // Size — lg
+          "group-data-[size=lg]/switch:w-9.5 group-data-[size=lg]/switch:h-6  group-data-[size=lg]/switch:data-unchecked:translate-x-0 group-data-[size=lg]/switch:data-checked:translate-x-5.5"
+        )}
       />
     </SwitchPrimitive.Root>
   )

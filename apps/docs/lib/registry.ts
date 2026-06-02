@@ -550,6 +550,11 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/switch-disabled.tsx",
     slug: "switch",
   },
+  "switch-choice-card": {
+    component: dynamic(() => import("@/examples/switch-choice-card")),
+    path: "examples/switch-choice-card.tsx",
+    slug: "switch",
+  },
   "checkbox-demo": {
     component: dynamic(() => import("@/examples/checkbox-demo")),
     path: "examples/checkbox-demo.tsx",
