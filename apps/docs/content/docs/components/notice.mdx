@@ -3,7 +3,7 @@ title: Notice
 description: A toast notification system built on Base UI's Toast primitive.
 ---
 
-<ComponentPreview name="notice-demo" />
+<ComponentPreview name="notice-demo" caption="notice" />
 
 ## Installation
 
@@ -40,9 +40,9 @@ Inside a React component, you can also use `useNoticeManager()` to access the sa
 
 If you need an isolated manager — for example, multiple `<Notice />` viewports, scoped state in tests, or keeping a feature's toasts separate from the app-wide queue — create one with [`createNoticeManager()`](#createnoticemanager) and pass it via the `toastManager` prop.
 
-## Toast Types
+## Notice Types
 
-<ComponentPreview name="notice-types" />
+<ComponentPreview name="notice-types" caption="Notice Types" />
 
 Pass a `type` to switch the leading icon and color treatment. Built-in types: `success`, `info`, `warning`, `error`, `loading`. Omit `type` for a plain notice with no icon.
 
