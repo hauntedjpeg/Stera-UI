@@ -41,13 +41,13 @@ export function PreviewCodeSheet({
           showCloseButton={false}
         >
           <SheetHeader className="flex-row items-center gap-2 p-1 pl-4">
-            <SheetTitle className="flex-1">{title}</SheetTitle>
+            <SheetTitle className="flex-1 st-body-md-compact">{title}</SheetTitle>
             <CopyButton
               className="border-none bg-surface-secondary hover:bg-surface-secondary-hover"
               value={code}
             />
           </SheetHeader>
-          <div className="no-scrollbar flex flex-1 flex-col border border-border -m-px mt-0 -mb rounded-xl overflow-y-auto bg-surface">
+          <div className="no-scrollbar flex flex-1 flex-col border border-border -m-px mt-0 -mb rounded-xl overflow-y-auto bg-black [&_figure]:overflow-visible [&_figure]:bg-black! [&_figure]:flex [&_figure]:flex-1 [&_pre]:overflow-visible [&_pre]:flex-1">
             {source}
           </div>
         </SheetContent>
