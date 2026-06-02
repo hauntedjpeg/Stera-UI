@@ -3,7 +3,7 @@ title: Sheet
 description: A panel that slides in from the edge of the screen to surface focused content or contextual actions.
 ---
 
-<ComponentPreview name="sheet-demo" />
+<ComponentPreview name="sheet-demo" caption="Sheet" />
 
 ## Installation
 
@@ -28,23 +28,27 @@ Pass `side` on `<Sheet>` to control both the position and the swipe-to-dismiss d
 
 ## Examples
 
-### Bottom sheet
+### Bottom Sheet
 
-<ComponentPreview name="sheet-bottom" />
+<ComponentPreview name="sheet-bottom" caption="Bottom Sheet" />
 
 A bottom-anchored sheet renders a drag handle automatically and dismisses on swipe-down.
 
 ### Snap points
 
-<ComponentPreview name="sheet-snap-points" />
+<ComponentPreview name="sheet-snap-points" caption="Sheet Snap Points" />
 
 Pass `snapPoints` to make a bottom sheet snap between heights. Values can be fractions of the viewport (`0`–`1`), pixel values (`>1` or `"148px"`), or `rem` strings.
 
-### Nested sheets
+### Nested Sheets
 
-<ComponentPreview name="sheet-nested" />
+<ComponentPreview name="sheet-nested" caption="Nest Sheets" />
 
-Sheets can be opened from inside another sheet — each layer manages its own focus and stacks correctly.
+Sheets nest cleanly — the parent visibly scales and slides back to peek behind the frontmost child while each layer manages its own focus.
+
+Nesting works from any side. A right-anchored sheet tucks its parent toward the edge as the child slides in.
+
+<ComponentPreview name="sheet-nested-side" caption="Nest Side Sheets" />
 
 ## API Reference
 

@@ -119,22 +119,38 @@ function SheetPopup({ className, ...props }: DrawerPrimitive.Popup.Props) {
         "data-[side=bottom]:w-full data-[side=bottom]:max-h-[80vh]",
         // Scrolling
         "overflow-y-auto overscroll-contain touch-auto",
-        // Swipe-driven transform (bottom adds snap-point offset)
-        "data-[side=right]:transform-[translateX(var(--drawer-swipe-movement-x))]",
-        "data-[side=left]:transform-[translateX(var(--drawer-swipe-movement-x))]",
-        "data-[side=top]:transform-[translateY(var(--drawer-swipe-movement-y))]",
-        "data-[side=bottom]:transform-[translateY(calc(var(--drawer-snap-point-offset,0px)+var(--drawer-swipe-movement-y)))]",
+        // Nested-drawer stacking variables (consumed by transform / height below)
+        "[--peek:1rem] [--stack-step:0.05]",
+        "[--stack-progress:clamp(0,var(--drawer-swipe-progress,0),1)]",
+        "[--stack-scale-base:max(0,calc(1_-_(var(--nested-drawers,0)_*_var(--stack-step))))]",
+        "[--stack-scale:calc(var(--stack-scale-base)_+_(var(--stack-step)_*_var(--stack-progress)))]",
+        "[--stack-shrink:calc(1_-_var(--stack-scale))]",
+        "[--stack-peek-offset:max(0px,calc((var(--nested-drawers,0)_-_var(--stack-progress))_*_var(--peek)))]",
+        "[--stack-height:max(0px,var(--drawer-frontmost-height,var(--drawer-height,0px)))]",
+        // Transform-origin per side (peek edge)
+        "data-[side=right]:[transform-origin:0%_50%]",
+        "data-[side=left]:[transform-origin:100%_50%]",
+        "data-[side=top]:[transform-origin:50%_0%]",
+        "data-[side=bottom]:[transform-origin:50%_100%]",
+        // Swipe-driven + stacking transform per side
+        "data-[side=right]:transform-[translateX(calc(var(--drawer-swipe-movement-x)_-_var(--stack-peek-offset)))_scale(var(--stack-scale))]",
+        "data-[side=left]:transform-[translateX(calc(var(--drawer-swipe-movement-x)_+_var(--stack-peek-offset)))_scale(var(--stack-scale))]",
+        "data-[side=top]:transform-[translateY(calc(var(--drawer-swipe-movement-y)_+_var(--stack-peek-offset)_+_(var(--stack-shrink)_*_var(--stack-height))))_scale(var(--stack-scale))]",
+        "data-[side=bottom]:transform-[translateY(calc(var(--drawer-snap-point-offset,0px)_+_var(--drawer-swipe-movement-y)_-_var(--stack-peek-offset)_-_(var(--stack-shrink)_*_var(--stack-height))))_scale(var(--stack-scale))]",
+        // Height clamp when nested (top/bottom — sides have fixed width)
+        "data-[side=bottom]:data-nested-drawer-open:[height:var(--drawer-frontmost-height,var(--drawer-height))]",
+        "data-[side=top]:data-nested-drawer-open:[height:var(--drawer-frontmost-height,var(--drawer-height))]",
+        "data-nested-drawer-open:overflow-hidden",
         // Transition
-        "transition-[transform,opacity] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform",
+        "transition-[transform,opacity,height] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform",
         "data-swiping:duration-0 data-swiping:select-none",
+        "data-nested-drawer-swiping:duration-0",
         "data-ending-style:duration-[calc(var(--drawer-swipe-strength,1)*400ms)]",
         // Starting/ending — slide off-screen
         "data-[side=right]:data-starting-style:transform-[translateX(100%)] data-[side=right]:data-ending-style:transform-[translateX(100%)]",
         "data-[side=left]:data-starting-style:transform-[translateX(-100%)] data-[side=left]:data-ending-style:transform-[translateX(-100%)]",
         "data-[side=top]:data-starting-style:transform-[translateY(-100%)] data-[side=top]:data-ending-style:transform-[translateY(-100%)]",
         "data-[side=bottom]:data-starting-style:transform-[translateY(100%)] data-[side=bottom]:data-ending-style:transform-[translateY(100%)]",
-        // Light nested-drawer affordance
-        "data-nested-drawer-open:opacity-90",
         className
       )}
       {...props}
@@ -149,6 +165,10 @@ function SheetHandle({ className, ...props }: React.ComponentProps<"div">) {
       aria-hidden
       className={cn(
         "mx-auto mt-2 h-1 w-12 shrink-0 rounded-full bg-surface-secondary",
+        // Fade out when a nested sheet is open; restore during a swipe gesture
+        "transition-opacity duration-200",
+        "group-data-[nested-drawer-open]/sheet:opacity-0",
+        "group-data-[nested-drawer-swiping]/sheet:opacity-100",
         className
       )}
       {...props}
@@ -203,6 +223,10 @@ function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
         "gap-1.5",
         // Pad right when the corner close button (a direct child of SheetPopup) is present
         "group-has-[>[data-slot=sheet-close]]/sheet:pr-14",
+        // Fade out when a nested sheet is open; restore during a swipe gesture
+        "transition-opacity duration-300",
+        "group-data-[nested-drawer-open]/sheet:opacity-0",
+        "group-data-[nested-drawer-swiping]/sheet:opacity-100",
         className
       )}
       {...props}
@@ -221,6 +245,10 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
         "mt-auto",
         // Sizing
         "gap-2 *:flex-1",
+        // Fade out when a nested sheet is open; restore during a swipe gesture
+        "transition-opacity duration-300",
+        "group-data-[nested-drawer-open]/sheet:opacity-0",
+        "group-data-[nested-drawer-swiping]/sheet:opacity-100",
         className
       )}
       {...props}

@@ -10,27 +10,26 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
-export default function SheetNested() {
+export default function SheetNestedSide() {
   return (
-    <Sheet side="bottom">
+    <Sheet side="right">
       <SheetTrigger render={<Button variant="outline" />}>
         Open account
       </SheetTrigger>
-      <SheetContent showCloseButton={false}>
-        <SheetHeader className="text-center">
+      <SheetContent>
+        <SheetHeader>
           <SheetTitle>Account</SheetTitle>
           <SheetDescription>
-            Nested sheets stack with a peek behind the frontmost layer. Each
-            layer manages its own focus.
+            Manage your profile. Open a nested sheet for security settings.
           </SheetDescription>
         </SheetHeader>
         <SheetFooter>
-          <Sheet side="bottom">
+          <Sheet side="right">
             <SheetTrigger render={<Button variant="outline" />}>
               Security settings
             </SheetTrigger>
-            <SheetContent showCloseButton={false}>
-              <SheetHeader className="text-center">
+            <SheetContent>
+              <SheetHeader>
                 <SheetTitle>Security</SheetTitle>
                 <SheetDescription>
                   Review sign-in activity and update your preferences.

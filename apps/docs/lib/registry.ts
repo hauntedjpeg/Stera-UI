@@ -840,6 +840,11 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/sheet-nested.tsx",
     slug: "sheet",
   },
+  "sheet-nested-side": {
+    component: dynamic(() => import("@/examples/sheet-nested-side")),
+    path: "examples/sheet-nested-side.tsx",
+    slug: "sheet",
+  },
   "alert-dialog-demo": {
     component: dynamic(() => import("@/examples/alert-dialog-demo")),
     path: "examples/alert-dialog-demo.tsx",
