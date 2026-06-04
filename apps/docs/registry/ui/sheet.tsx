@@ -164,7 +164,9 @@ function SheetHandle({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="sheet-handle"
       aria-hidden
       className={cn(
-        "mx-auto mt-2 h-1 w-12 shrink-0 rounded-full bg-surface-secondary",
+        // Generous grab zone that owns the touch gesture (so dragging snaps the
+        // sheet instead of being claimed as a native scroll on touch devices)
+        "flex w-full shrink-0 cursor-grab touch-none select-none justify-center py-2 active:cursor-grabbing",
         // Fade out when a nested sheet is open; restore during a swipe gesture
         "transition-opacity duration-200",
         "group-data-[nested-drawer-open]/sheet:opacity-0",
@@ -172,7 +174,9 @@ function SheetHandle({ className, ...props }: React.ComponentProps<"div">) {
         className
       )}
       {...props}
-    />
+    >
+      <div className="h-1 w-12 rounded-full bg-surface-secondary" />
+    </div>
   )
 }
 
