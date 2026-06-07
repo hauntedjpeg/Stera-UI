@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button"
 import {
   Sheet,
   SheetClose,
-  SheetContent,
   SheetDescription,
   SheetFooter,
   SheetHeader,
+  SheetPopup,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
@@ -16,7 +16,7 @@ export default function SheetBottom() {
       <SheetTrigger render={<Button variant="outline" />}>
         Open bottom sheet
       </SheetTrigger>
-      <SheetContent showCloseButton={false}>
+      <SheetPopup showCloseButton={false}>
         <SheetHeader className="text-center">
           <SheetTitle>Notifications</SheetTitle>
           <SheetDescription>
@@ -26,7 +26,7 @@ export default function SheetBottom() {
         <SheetFooter className="items-center">
           <SheetClose render={<Button variant="outline" />}>Close</SheetClose>
         </SheetFooter>
-      </SheetContent>
+      </SheetPopup>
     </Sheet>
   )
 }

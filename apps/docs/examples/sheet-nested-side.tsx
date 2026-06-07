@@ -6,6 +6,7 @@ import {
   SheetDescription,
   SheetFooter,
   SheetHeader,
+  SheetPopup,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
@@ -16,7 +17,7 @@ export default function SheetNestedSide() {
       <SheetTrigger render={<Button variant="outline" />}>
         Open account
       </SheetTrigger>
-      <SheetContent>
+      <SheetPopup>
         <SheetHeader>
           <SheetTitle>Account</SheetTitle>
           <SheetDescription>
@@ -28,28 +29,30 @@ export default function SheetNestedSide() {
             <SheetTrigger render={<Button variant="outline" />}>
               Security settings
             </SheetTrigger>
-            <SheetContent>
+            <SheetPopup>
               <SheetHeader>
                 <SheetTitle>Security</SheetTitle>
                 <SheetDescription>
                   Review sign-in activity and update your preferences.
                 </SheetDescription>
               </SheetHeader>
-              <ul className="list-disc px-8 text-sm text-text-subtle">
-                <li>Passkeys enabled</li>
-                <li>2FA via authenticator app</li>
-                <li>3 signed-in devices</li>
-              </ul>
+              <SheetContent className="px-8">
+                <ul className="list-disc text-sm text-text-subtle">
+                  <li>Passkeys enabled</li>
+                  <li>2FA via authenticator app</li>
+                  <li>3 signed-in devices</li>
+                </ul>
+              </SheetContent>
               <SheetFooter>
                 <SheetClose render={<Button variant="outline" />}>
                   Done
                 </SheetClose>
               </SheetFooter>
-            </SheetContent>
+            </SheetPopup>
           </Sheet>
           <SheetClose render={<Button variant="outline" />}>Close</SheetClose>
         </SheetFooter>
-      </SheetContent>
+      </SheetPopup>
     </Sheet>
   )
 }

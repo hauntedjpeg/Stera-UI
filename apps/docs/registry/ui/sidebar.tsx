@@ -12,9 +12,9 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import {
   Sheet,
-  SheetContent,
   SheetDescription,
   SheetHeader,
+  SheetPopup,
   SheetTitle,
 } from "@/components/ui/sheet"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -225,7 +225,7 @@ function Sidebar({
   if (mounted && isMobile) {
     return (
       <Sheet open={openMobile} onOpenChange={setOpenMobile} side={side}>
-        <SheetContent
+        <SheetPopup
           dir={dir}
           data-sidebar="sidebar"
           data-slot="sidebar"
@@ -248,7 +248,7 @@ function Sidebar({
           >
             {children}
           </div>
-        </SheetContent>
+        </SheetPopup>
       </Sheet>
     )
   }

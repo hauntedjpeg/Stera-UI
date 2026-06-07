@@ -11,6 +11,7 @@ import {
   SheetDescription,
   SheetFooter,
   SheetHeader,
+  SheetPopup,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
@@ -32,25 +33,25 @@ export default function SheetSnapPoints() {
       <SheetTrigger render={<Button variant="outline" />}>
         Open snap sheet
       </SheetTrigger>
-      <SheetContent showCloseButton={false}>
+      <SheetPopup showCloseButton={false}>
         <SheetHeader className="text-center">
           <SheetTitle>Snap points</SheetTitle>
           <SheetDescription>
             Drag the handle to snap between a peek and a full-height view.
           </SheetDescription>
         </SheetHeader>
-        <div className="grid gap-2 px-4 pb-4" aria-hidden>
+        <SheetContent className="grid auto-rows-min gap-2 px-4 pb-4" aria-hidden>
           {Array.from({ length: 16 }).map((_, i) => (
             <div
               key={i}
               className="h-10 rounded-md bg-surface-secondary"
             />
           ))}
-        </div>
+        </SheetContent>
         <SheetFooter className="items-center">
           <SheetClose render={<Button variant="outline" />}>Close</SheetClose>
         </SheetFooter>
-      </SheetContent>
+      </SheetPopup>
     </Sheet>
   )
 }

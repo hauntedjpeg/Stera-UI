@@ -850,6 +850,16 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/sheet-nested-side.tsx",
     slug: "sheet",
   },
+  "sheet-swipe-area": {
+    component: dynamic(() => import("@/examples/sheet-swipe-area")),
+    path: "examples/sheet-swipe-area.tsx",
+    slug: "sheet",
+  },
+  "sheet-indent": {
+    component: dynamic(() => import("@/examples/sheet-indent")),
+    path: "examples/sheet-indent.tsx",
+    slug: "sheet",
+  },
   "alert-dialog-demo": {
     component: dynamic(() => import("@/examples/alert-dialog-demo")),
     path: "examples/alert-dialog-demo.tsx",

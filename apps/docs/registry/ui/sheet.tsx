@@ -101,63 +101,6 @@ function SheetViewport({
   )
 }
 
-function SheetPopup({ className, ...props }: DrawerPrimitive.Popup.Props) {
-  const side = useSheetSide()
-  return (
-    <DrawerPrimitive.Popup
-      data-slot="sheet-popup"
-      data-side={side}
-      className={cn(
-        // Group
-        "group/sheet",
-        // Base
-        "relative flex flex-col bg-surface text-sm text-text ring-1 ring-border rounded-xl shadow-lg outline-none",
-        // Sizing per side
-        "data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:sm:max-w-sm",
-        "data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:sm:max-w-sm",
-        "data-[side=top]:w-full data-[side=top]:max-h-[80vh]",
-        "data-[side=bottom]:w-full data-[side=bottom]:max-h-[80vh]",
-        // Scrolling
-        "overflow-y-auto overscroll-contain touch-auto",
-        // Nested-drawer stacking variables (consumed by transform / height below)
-        "[--peek:1rem] [--stack-step:0.05]",
-        "[--stack-progress:clamp(0,var(--drawer-swipe-progress,0),1)]",
-        "[--stack-scale-base:max(0,calc(1_-_(var(--nested-drawers,0)_*_var(--stack-step))))]",
-        "[--stack-scale:calc(var(--stack-scale-base)_+_(var(--stack-step)_*_var(--stack-progress)))]",
-        "[--stack-shrink:calc(1_-_var(--stack-scale))]",
-        "[--stack-peek-offset:max(0px,calc((var(--nested-drawers,0)_-_var(--stack-progress))_*_var(--peek)))]",
-        "[--stack-height:max(0px,var(--drawer-frontmost-height,var(--drawer-height,0px)))]",
-        // Transform-origin per side (peek edge)
-        "data-[side=right]:[transform-origin:0%_50%]",
-        "data-[side=left]:[transform-origin:100%_50%]",
-        "data-[side=top]:[transform-origin:50%_0%]",
-        "data-[side=bottom]:[transform-origin:50%_100%]",
-        // Swipe-driven + stacking transform per side
-        "data-[side=right]:transform-[translateX(calc(var(--drawer-swipe-movement-x)_-_var(--stack-peek-offset)))_scale(var(--stack-scale))]",
-        "data-[side=left]:transform-[translateX(calc(var(--drawer-swipe-movement-x)_+_var(--stack-peek-offset)))_scale(var(--stack-scale))]",
-        "data-[side=top]:transform-[translateY(calc(var(--drawer-swipe-movement-y)_+_var(--stack-peek-offset)_+_(var(--stack-shrink)_*_var(--stack-height))))_scale(var(--stack-scale))]",
-        "data-[side=bottom]:transform-[translateY(calc(var(--drawer-snap-point-offset,0px)_+_var(--drawer-swipe-movement-y)_-_var(--stack-peek-offset)_-_(var(--stack-shrink)_*_var(--stack-height))))_scale(var(--stack-scale))]",
-        // Height clamp when nested (top/bottom — sides have fixed width)
-        "data-[side=bottom]:data-nested-drawer-open:[height:var(--drawer-frontmost-height,var(--drawer-height))]",
-        "data-[side=top]:data-nested-drawer-open:[height:var(--drawer-frontmost-height,var(--drawer-height))]",
-        "data-nested-drawer-open:overflow-hidden",
-        // Transition
-        "transition-[transform,opacity,height] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform",
-        "data-swiping:duration-0 data-swiping:select-none",
-        "data-nested-drawer-swiping:duration-0",
-        "data-ending-style:duration-[calc(var(--drawer-swipe-strength,1)*400ms)]",
-        // Starting/ending — slide off-screen
-        "data-[side=right]:data-starting-style:transform-[translateX(100%)] data-[side=right]:data-ending-style:transform-[translateX(100%)]",
-        "data-[side=left]:data-starting-style:transform-[translateX(-100%)] data-[side=left]:data-ending-style:transform-[translateX(-100%)]",
-        "data-[side=top]:data-starting-style:transform-[translateY(-100%)] data-[side=top]:data-ending-style:transform-[translateY(-100%)]",
-        "data-[side=bottom]:data-starting-style:transform-[translateY(100%)] data-[side=bottom]:data-ending-style:transform-[translateY(100%)]",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
 function SheetHandle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -169,8 +112,8 @@ function SheetHandle({ className, ...props }: React.ComponentProps<"div">) {
         "flex w-full shrink-0 cursor-grab touch-none select-none justify-center py-2 active:cursor-grabbing",
         // Fade out when a nested sheet is open; restore during a swipe gesture
         "transition-opacity duration-200",
-        "group-data-[nested-drawer-open]/sheet:opacity-0",
-        "group-data-[nested-drawer-swiping]/sheet:opacity-100",
+        "group-data-nested-drawer-open/sheet:opacity-0",
+        "group-data-nested-drawer-swiping/sheet:opacity-100",
         className
       )}
       {...props}
@@ -180,7 +123,10 @@ function SheetHandle({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function SheetContent({
+// The drawer panel, batteries included — Portal + Backdrop + Viewport + Popup,
+// plus the bottom-sheet handle and the corner close button. Mirrors the
+// `DialogPopup` composite in dialog.tsx.
+function SheetPopup({
   className,
   children,
   showCloseButton = true,
@@ -193,7 +139,55 @@ function SheetContent({
     <SheetPortal>
       <SheetBackdrop />
       <SheetViewport>
-        <SheetPopup className={className} {...props}>
+        <DrawerPrimitive.Popup
+          data-slot="sheet-popup"
+          data-side={side}
+          className={cn(
+            // Group
+            "group/sheet",
+            // Base — the popup is the drag/transform target and clips its
+            // contents; scrolling lives on SheetContent (Drawer.Content).
+            "relative flex flex-col overflow-hidden bg-surface text-sm text-text ring-1 ring-border rounded-xl shadow-lg outline-none",
+            // Sizing per side
+            "data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:sm:max-w-sm",
+            "data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:sm:max-w-sm",
+            "data-[side=top]:w-full data-[side=top]:max-h-[80vh]",
+            "data-[side=bottom]:w-full data-[side=bottom]:max-h-[80vh]",
+            // Nested-drawer stacking variables (consumed by transform / height below)
+            "[--peek:1rem] [--stack-step:0.05]",
+            "[--stack-progress:clamp(0,var(--drawer-swipe-progress,0),1)]",
+            "[--stack-scale-base:max(0,calc(1-(var(--nested-drawers,0)*var(--stack-step))))]",
+            "[--stack-scale:calc(var(--stack-scale-base)+(var(--stack-step)*var(--stack-progress)))]",
+            "[--stack-shrink:calc(1-var(--stack-scale))]",
+            "[--stack-peek-offset:max(0px,calc((var(--nested-drawers,0)-var(--stack-progress))*var(--peek)))]",
+            "[--stack-height:max(0px,var(--drawer-frontmost-height,var(--drawer-height,0px)))]",
+            // Transform-origin per side (peek edge)
+            "data-[side=right]:origin-[0%_50%]",
+            "data-[side=left]:origin-[100%_50%]",
+            "data-[side=top]:origin-[50%_0%]",
+            "data-[side=bottom]:origin-[50%_100%]",
+            // Swipe-driven + stacking transform per side
+            "data-[side=right]:transform-[translateX(calc(var(--drawer-swipe-movement-x)-var(--stack-peek-offset)))_scale(var(--stack-scale))]",
+            "data-[side=left]:transform-[translateX(calc(var(--drawer-swipe-movement-x)+var(--stack-peek-offset)))_scale(var(--stack-scale))]",
+            "data-[side=top]:transform-[translateY(calc(var(--drawer-swipe-movement-y)+var(--stack-peek-offset)+(var(--stack-shrink)*var(--stack-height))))_scale(var(--stack-scale))]",
+            "data-[side=bottom]:transform-[translateY(calc(var(--drawer-snap-point-offset,0px)+var(--drawer-swipe-movement-y)-var(--stack-peek-offset)-(var(--stack-shrink)*var(--stack-height))))_scale(var(--stack-scale))]",
+            // Height clamp when nested (top/bottom — sides have fixed width)
+            "data-[side=bottom]:data-nested-drawer-open:h-(--drawer-frontmost-height,var(--drawer-height))",
+            "data-[side=top]:data-nested-drawer-open:h-(--drawer-frontmost-height,var(--drawer-height))",
+            // Transition
+            "transition-[transform,opacity,height] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform",
+            "data-swiping:duration-0 data-swiping:select-none",
+            "data-nested-drawer-swiping:duration-0",
+            "data-ending-style:duration-[calc(var(--drawer-swipe-strength,1)*400ms)]",
+            // Starting/ending — slide off-screen
+            "data-[side=right]:data-starting-style:transform-[translateX(100%)] data-[side=right]:data-ending-style:transform-[translateX(100%)]",
+            "data-[side=left]:data-starting-style:transform-[translateX(-100%)] data-[side=left]:data-ending-style:transform-[translateX(-100%)]",
+            "data-[side=top]:data-starting-style:transform-[translateY(-100%)] data-[side=top]:data-ending-style:transform-[translateY(-100%)]",
+            "data-[side=bottom]:data-starting-style:transform-[translateY(100%)] data-[side=bottom]:data-ending-style:transform-[translateY(100%)]",
+            className
+          )}
+          {...props}
+        >
           {side === "bottom" && <SheetHandle />}
           {children}
           {showCloseButton && (
@@ -210,9 +204,25 @@ function SheetContent({
               <span className="sr-only">Close</span>
             </SheetClose>
           )}
-        </SheetPopup>
+        </DrawerPrimitive.Popup>
       </SheetViewport>
     </SheetPortal>
+  )
+}
+
+// The scrollable region between SheetHeader and SheetFooter. Renders Base UI's
+// Drawer.Content (`data-drawer-content`), which keeps the sheet draggable from
+// the scroll edge while its content scrolls. Mirrors `DialogContent`.
+function SheetContent({ className, ...props }: DrawerPrimitive.Content.Props) {
+  return (
+    <DrawerPrimitive.Content
+      data-slot="sheet-content"
+      className={cn(
+        "min-h-0 flex-1 overflow-y-auto overscroll-contain",
+        className
+      )}
+      {...props}
+    />
   )
 }
 
@@ -229,8 +239,8 @@ function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
         "group-has-[>[data-slot=sheet-close]]/sheet:pr-14",
         // Fade out when a nested sheet is open; restore during a swipe gesture
         "transition-opacity duration-300",
-        "group-data-[nested-drawer-open]/sheet:opacity-0",
-        "group-data-[nested-drawer-swiping]/sheet:opacity-100",
+        "group-data-nested-drawer-open/sheet:opacity-0",
+        "group-data-nested-drawer-swiping/sheet:opacity-100",
         className
       )}
       {...props}
@@ -251,8 +261,8 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
         "gap-2 *:flex-1",
         // Fade out when a nested sheet is open; restore during a swipe gesture
         "transition-opacity duration-300",
-        "group-data-[nested-drawer-open]/sheet:opacity-0",
-        "group-data-[nested-drawer-swiping]/sheet:opacity-100",
+        "group-data-nested-drawer-open/sheet:opacity-0",
+        "group-data-nested-drawer-swiping/sheet:opacity-100",
         className
       )}
       {...props}
@@ -291,6 +301,56 @@ function SheetDescription({
   )
 }
 
+// An invisible edge zone that opens the sheet when swiped from the screen edge.
+// Base UI sets its own `touch-action`; position it yourself (e.g. fixed inset-y-0).
+function SheetSwipeArea({
+  className,
+  ...props
+}: DrawerPrimitive.SwipeArea.Props) {
+  return (
+    <DrawerPrimitive.SwipeArea
+      data-slot="sheet-swipe-area"
+      className={cn(className)}
+      {...props}
+    />
+  )
+}
+
+// App-level coordination: wrap your app in SheetProvider, then SheetIndent /
+// SheetIndentBackground react (via `data-active` + swipe CSS vars) when any
+// sheet within the provider opens — enabling indent / parallax effects.
+function SheetProvider({ ...props }: DrawerPrimitive.Provider.Props) {
+  return <DrawerPrimitive.Provider {...props} />
+}
+
+function SheetIndent({ className, ...props }: DrawerPrimitive.Indent.Props) {
+  return (
+    <DrawerPrimitive.Indent
+      data-slot="sheet-indent"
+      className={cn(className)}
+      {...props}
+    />
+  )
+}
+
+function SheetIndentBackground({
+  className,
+  ...props
+}: DrawerPrimitive.IndentBackground.Props) {
+  return (
+    <DrawerPrimitive.IndentBackground
+      data-slot="sheet-indent-background"
+      className={cn(className)}
+      {...props}
+    />
+  )
+}
+
+// Imperative controller for detached triggers / programmatic open & close.
+// NOTE: this is Base UI's `Drawer.Handle` (a controller). It is NOT the visual
+// drag bar — that is the `SheetHandle` component above.
+const createSheetHandle = DrawerPrimitive.createHandle
+
 export {
   Sheet,
   SheetTrigger,
@@ -305,4 +365,9 @@ export {
   SheetFooter,
   SheetTitle,
   SheetDescription,
+  SheetSwipeArea,
+  SheetProvider,
+  SheetIndent,
+  SheetIndentBackground,
+  createSheetHandle,
 }

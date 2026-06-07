@@ -8,6 +8,7 @@ import {
   SheetDescription,
   SheetFooter,
   SheetHeader,
+  SheetPopup,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
@@ -16,7 +17,7 @@ export default function SheetDemo() {
   return (
     <Sheet side="right">
       <SheetTrigger render={<Button variant="outline" />}>Open</SheetTrigger>
-      <SheetContent showCloseButton={false}>
+      <SheetPopup showCloseButton={false}>
         <SheetHeader>
           <SheetTitle>Edit profile</SheetTitle>
           <SheetDescription>
@@ -24,7 +25,7 @@ export default function SheetDemo() {
             you&apos;re done.
           </SheetDescription>
         </SheetHeader>
-        <div className="grid flex-1 auto-rows-min gap-6 px-4">
+        <SheetContent className="grid auto-rows-min gap-6 px-4">
           <div className="grid gap-3">
             <Label htmlFor="sheet-name">Name</Label>
             <Input id="sheet-name" defaultValue="Chaz Giese" />
@@ -33,12 +34,12 @@ export default function SheetDemo() {
             <Label htmlFor="sheet-username">Username</Label>
             <Input id="sheet-username" defaultValue="@hauntedjpeg" />
           </div>
-        </div>
+        </SheetContent>
         <SheetFooter>
           <SheetClose render={<Button variant="outline" />}>Cancel</SheetClose>
           <Button variant="brand" type="submit">Save changes</Button>
         </SheetFooter>
-      </SheetContent>
+      </SheetPopup>
     </Sheet>
   )
 }

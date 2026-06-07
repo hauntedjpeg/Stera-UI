@@ -16,15 +16,14 @@ Use the following composition to build a `Sheet`:
 ```text
 Sheet
 ├── SheetTrigger
-└── SheetContent
+└── SheetPopup
     ├── SheetHeader
     │   ├── SheetTitle
     │   └── SheetDescription
+    ├── SheetContent       (scrollable region)
     └── SheetFooter
         └── SheetClose
 ```
-
-Pass `side` on `<Sheet>` to control both the position and the swipe-to-dismiss direction. `"right"` is the default.
 
 ## Examples
 
@@ -44,11 +43,21 @@ Pass `snapPoints` to make a bottom sheet snap between heights. Values can be fra
 
 <ComponentPreview name="sheet-nested" caption="Nest Sheets" />
 
-Sheets nest cleanly — the parent visibly scales and slides back to peek behind the frontmost child while each layer manages its own focus.
-
 Nesting works from any side. A right-anchored sheet tucks its parent toward the edge as the child slides in.
 
 <ComponentPreview name="sheet-nested-side" caption="Nest Side Sheets" />
+
+### Indent
+
+<ComponentPreview name="sheet-indent" caption="Sheet Indent" />
+
+Wrap your app in `SheetProvider` and place a `SheetIndentBackground` behind `SheetIndent`. When any sheet inside the provider opens, the indented content scales back to reveal the background — the iOS-style stacked effect. `SheetIndent` exposes `--drawer-swipe-progress` (0–1) for swipe-linked motion.
+
+### Swipe to open
+
+<ComponentPreview name="sheet-swipe-area" caption="Sheet Swipe Area" />
+
+Add a `SheetSwipeArea` — an invisible, fixed strip along the screen edge — so the sheet can be opened by swiping in from that edge on touch devices. Base UI manages the gesture and the strip's `touch-action`; you position it (e.g. `fixed inset-y-0 right-0 w-4`).
 
 ## API Reference
 
@@ -67,7 +76,7 @@ Built on Base UI's [Drawer](https://base-ui.com/react/components/drawer#api-refe
 | `onOpenChange` | `(open, details) => void` | – |
 | `modal` | `boolean \| "trap-focus"` | `true` |
 
-### SheetContent
+### SheetPopup
 
 | Prop | Type | Default |
 | --- | --- | --- |

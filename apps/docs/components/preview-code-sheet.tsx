@@ -8,6 +8,7 @@ import {
   Sheet,
   SheetContent,
   SheetHeader,
+  SheetPopup,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
@@ -36,7 +37,7 @@ export function PreviewCodeSheet({
             </Button>
           )}
         />
-        <SheetContent
+        <SheetPopup
           className="gap-0! bg-(--neutral-2) data-[side=right]:sm:w-full! data-[side=right]:sm:max-w-xl! rounded-xl"
           showCloseButton={false}
         >
@@ -47,10 +48,10 @@ export function PreviewCodeSheet({
               value={code}
             />
           </SheetHeader>
-          <div className="no-scrollbar flex flex-1 flex-col border border-border -m-px mt-0 -mb rounded-xl overflow-y-auto bg-black [&_figure]:overflow-visible [&_figure]:bg-black! [&_figure]:flex [&_figure]:flex-1 [&_pre]:overflow-visible [&_pre]:flex-1">
+          <SheetContent className="no-scrollbar flex flex-col border border-border -m-px mt-0 -mb rounded-xl bg-black [&_figure]:overflow-visible [&_figure]:bg-black! [&_figure]:flex [&_figure]:flex-1 [&_pre]:overflow-visible [&_pre]:flex-1">
             {source}
-          </div>
-        </SheetContent>
+          </SheetContent>
+        </SheetPopup>
       </Sheet>
     </div>
   )
