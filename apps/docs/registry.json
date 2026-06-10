@@ -278,7 +278,7 @@
     {
       "name": "menubar",
       "type": "registry:ui",
-      "dependencies": ["@base-ui/react", "stera-icons"],
+      "dependencies": ["@base-ui/react"],
       "registryDependencies": ["utils", "dropdown-menu"],
       "files": [{ "path": "registry/ui/menubar.tsx", "type": "registry:ui" }]
     },

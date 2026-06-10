@@ -1,0 +1,90 @@
+---
+title: Menubar
+description: A menu bar providing commands and options for your application.
+---
+
+<ComponentPreview name="menubar-demo" caption="Menubar" />
+
+## Installation
+
+<InstallSnippet slug="menubar" hideHeading />
+
+## Composition
+
+Use the following composition to build a `Menubar`:
+
+```text
+Menubar
+├── MenubarMenu
+│   ├── MenubarTrigger
+│   └── MenubarContent
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   ├── MenubarItem
+│       │   │   └── MenubarShortcut
+│       │   ├── MenubarCheckboxItem
+│       │   └── MenubarRadioGroup
+│       │       └── MenubarRadioItem
+│       ├── MenubarSeparator
+│       └── MenubarSub
+│           ├── MenubarSubTrigger
+│           └── MenubarSubContent
+│               └── MenubarItem
+└── MenubarMenu
+    ├── MenubarTrigger
+    └── MenubarContent
+```
+
+## Examples
+
+### Checkbox Items
+
+<ComponentPreview name="menubar-checkbox-items" caption="Checkbox Items" />
+
+### Radio Items
+
+<ComponentPreview name="menubar-radio-items" caption="Radio Items" />
+
+### Disabled Menu
+
+Pass `disabled` to a `MenubarMenu` to disable a single menu, or to the `Menubar` itself to disable the whole bar.
+
+<ComponentPreview name="menubar-disabled-menu" caption="Disabled Menu" />
+
+## API Reference
+
+Built on Base UI's [Menubar](https://base-ui.com/react/components/menubar#api-reference) and [Menu](https://base-ui.com/react/components/menu#api-reference) primitives — see the full API references there.
+
+### Menubar
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `loopFocus` | `boolean` | `true` |
+| `modal` | `boolean` | `true` |
+| `disabled` | `boolean` | `false` |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
+
+### MenubarItem
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "danger"` | `"default"` |
+| `disabled` | `boolean` | `false` |
+
+### Subcomponents
+
+| Component | Description |
+| --- | --- |
+| `MenubarMenu` | A single menu within the bar; accepts `disabled` to disable it |
+| `MenubarTrigger` | Button in the bar that opens its menu |
+| `MenubarContent` | Popup panel containing the menu items |
+| `MenubarGroup` | Groups related items |
+| `MenubarLabel` | Non-interactive section heading |
+| `MenubarSeparator` | Horizontal divider |
+| `MenubarShortcut` | Right-aligned keyboard shortcut label |
+| `MenubarCheckboxItem` | Checkbox-style toggle item |
+| `MenubarRadioGroup` | Radio-style selection group |
+| `MenubarRadioItem` | Individual radio item |
+| `MenubarSub` | Submenu container |
+| `MenubarSubTrigger` | Trigger that opens a submenu |
+| `MenubarSubContent` | Content panel for a submenu |

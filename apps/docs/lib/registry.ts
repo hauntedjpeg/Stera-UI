@@ -650,6 +650,26 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/select-invalid.tsx",
     slug: "select",
   },
+  "menubar-demo": {
+    component: dynamic(() => import("@/examples/menubar-demo")),
+    path: "examples/menubar-demo.tsx",
+    slug: "menubar",
+  },
+  "menubar-checkbox-items": {
+    component: dynamic(() => import("@/examples/menubar-checkbox-items")),
+    path: "examples/menubar-checkbox-items.tsx",
+    slug: "menubar",
+  },
+  "menubar-radio-items": {
+    component: dynamic(() => import("@/examples/menubar-radio-items")),
+    path: "examples/menubar-radio-items.tsx",
+    slug: "menubar",
+  },
+  "menubar-disabled-menu": {
+    component: dynamic(() => import("@/examples/menubar-disabled-menu")),
+    path: "examples/menubar-disabled-menu.tsx",
+    slug: "menubar",
+  },
   "native-select-demo": {
     component: dynamic(() => import("@/examples/native-select-demo")),
     path: "examples/native-select-demo.tsx",
