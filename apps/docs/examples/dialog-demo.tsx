@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
+  DialogClose,
   DialogDescription,
   DialogFooter,
   DialogHeader,
@@ -20,23 +21,24 @@ export default function DialogDemo() {
         <DialogHeader>
           <DialogTitle>Edit Profile</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
+            Make changes to your profile here
           </DialogDescription>
         </DialogHeader>
         <DialogContent>
           <div className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="dialog-name">Name</Label>
-              <Input id="dialog-name" defaultValue="Pedro Duarte" />
+              <Input id="dialog-name" defaultValue="Chaz Giese" />
             </div>
             <div className="grid gap-2">
               <Label htmlFor="dialog-username">Username</Label>
-              <Input id="dialog-username" defaultValue="@peduarte" />
+              <Input id="dialog-username" defaultValue="@hauntedjpeg" />
             </div>
           </div>
         </DialogContent>
-        <DialogFooter showCloseButton>
-          <Button>Save changes</Button>
+        <DialogFooter>
+          <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
+          <Button variant="brand">Save changes</Button>
         </DialogFooter>
       </DialogPopup>
     </Dialog>
