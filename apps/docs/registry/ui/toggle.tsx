@@ -20,9 +20,9 @@ const toggleVariants = cva(
     variants: {
       variant: {
         default:
-          "hover:bg-surface-hover hover:text-text aria-pressed:bg-surface-secondary",
+          "hover:bg-surface-hover hover:text-text aria-pressed:bg-surface-subtle",
         outline:
-          "border border-border bg-surface hover:bg-surface-hover aria-pressed:bg-surface-secondary",
+          "border border-border bg-surface hover:bg-surface-hover aria-pressed:bg-surface-subtle",
       },
       size: {
         xs: "h-6 gap-1.5 rounded-lg px-2 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 [&_svg:not([class*='size-'])]:size-3",

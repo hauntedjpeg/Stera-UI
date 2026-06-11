@@ -18,7 +18,7 @@
 
 /* ---------- 1. Inline code ---------- */
 :not(pre) > code {
-  background-color: var(--surface-tertiary);
+  background-color: var(--surface-subtle);
   color: var(--text);
   padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
@@ -35,7 +35,7 @@
   margin-bottom: 1rem;
   border-radius: 0.75rem;
   overflow: hidden;
-  background-color: var(--surface-secondary);
+  background-color: var(--surface-subtle);
 }
 
 [data-slot="sheet-content"] .st-code-block {

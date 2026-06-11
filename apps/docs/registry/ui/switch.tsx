@@ -23,7 +23,7 @@ function Switch({
         // Invalid
         "data-invalid:border-border-danger-strong data-invalid:ring-3 data-invalid:ring-ring-danger",
         // State
-        "data-checked:bg-surface-brand data-unchecked:bg-surface-tertiary data-disabled:cursor-not-allowed",
+        "data-checked:bg-surface-brand data-unchecked:bg-surface-muted data-disabled:cursor-not-allowed",
         // Size
         "data-[size=sm]:h-4 data-[size=sm]:w-6",
         "data-[size=md]:h-4 data-[size=md]:w-8",

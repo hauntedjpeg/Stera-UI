@@ -10,7 +10,7 @@ import { SiInfoCircle } from "stera-icons"
 
 function Callout({ children }: { type?: string; children: ReactNode }) {
   return (
-    <div className="my-4 flex gap-3 rounded-xl border border-border bg-surface-secondary p-4 st-body-md text-text-subtle [&_p]:mb-0 [&_p]:st-body-md [&_svg]:mt-0.5 [&_svg]:size-4 [&_svg]:shrink-0">
+    <div className="my-4 flex gap-3 rounded-xl border border-border bg-surface-subtle p-4 st-body-md text-text-subtle [&_p]:mb-0 [&_p]:st-body-md [&_svg]:mt-0.5 [&_svg]:size-4 [&_svg]:shrink-0">
       <SiInfoCircle />
       {children}
     </div>
@@ -78,7 +78,7 @@ const mdxDefaults: MDXComponents = {
   ),
   th: (props) => (
     <th
-      className="border-b border-border bg-surface-secondary px-4 py-2 st-body-sm-strong text-text"
+      className="border-b border-border bg-surface-subtle px-4 py-2 st-body-sm-strong text-text"
       {...props}
     />
   ),

@@ -153,7 +153,7 @@ function TreeNode({
                 return (
                   <SidebarMenuSubItem key={i}>
                     <SidebarMenuSubButton
-                      className="w-fit data-active:bg-surface-tertiary"
+                      className="w-fit data-active:bg-surface-muted"
                       isActive={pathname === child.url}
                       render={<Link href={child.url} />}
                     >

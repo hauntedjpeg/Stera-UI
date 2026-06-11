@@ -64,7 +64,7 @@ function SelectTrigger({
         // LG
         "data-[size=lg]:h-11 data-[size=lg]:py-3.5 data-[size=lg]:pr-3.5 data-[size=lg]:pl-4",
         // Other
-        "items-center justify-between text-sm whitespace-nowrap *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-surface-secondary/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "items-center justify-between text-sm whitespace-nowrap *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-surface-subtle/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}

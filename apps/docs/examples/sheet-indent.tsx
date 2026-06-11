@@ -58,7 +58,7 @@ export default function SheetIndentExample() {
             {["Inbox", "Drafts", "Archive", "Trash"].map((label) => (
               <div
                 key={label}
-                className="flex items-center rounded-xl bg-surface-secondary px-4 py-3 text-sm text-text"
+                className="flex items-center rounded-xl bg-surface-subtle px-4 py-3 text-sm text-text"
               >
                 {label}
               </div>

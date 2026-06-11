@@ -48,13 +48,13 @@ function AccordionTrigger({
           // Typography
           "text-left st-body-md-strong",
           // Surface
-          "bg-surface-secondary rounded-xl",
+          "bg-surface-subtle rounded-xl",
           // Child selectors
           "[&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
           // Transition
           "transition-all",
           // Hover
-          "hover:bg-surface-secondary-hover",
+          "hover:bg-surface-subtle-hover",
           // Focus
           "outline-none focus-visible:border-border focus-visible:ring-3 focus-visible:ring-ring",
           // Disabled

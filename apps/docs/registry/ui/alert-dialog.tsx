@@ -130,7 +130,7 @@ function AlertDialogMedia({
       data-slot="alert-dialog-media"
       className={cn(
         // Base
-        "inline-flex items-center justify-center rounded-lg bg-surface-secondary",
+        "inline-flex items-center justify-center rounded-lg bg-surface-subtle",
         // Sizing
         "size-10",
         // Variants

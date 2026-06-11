@@ -44,7 +44,7 @@ export function PreviewCodeSheet({
           <SheetHeader className="flex-row items-center gap-2 p-1 pl-4">
             <SheetTitle className="flex-1 st-body-md-compact">{title}</SheetTitle>
             <CopyButton
-              className="border-none bg-surface-secondary hover:bg-surface-secondary-hover"
+              className="border-none bg-surface-subtle hover:bg-surface-subtle-hover"
               value={code}
             />
           </SheetHeader>

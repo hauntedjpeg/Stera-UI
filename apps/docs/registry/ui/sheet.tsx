@@ -118,7 +118,7 @@ function SheetHandle({ className, ...props }: React.ComponentProps<"div">) {
       )}
       {...props}
     >
-      <div className="h-1 w-12 rounded-full bg-surface-secondary" />
+      <div className="h-1 w-12 rounded-full bg-surface-subtle" />
     </div>
   )
 }

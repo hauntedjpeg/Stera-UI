@@ -6,11 +6,13 @@
 @theme inline {
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
-  --color-surface-secondary: var(--surface-secondary);
-  --color-surface-secondary-hover: var(--surface-secondary-hover);
-  --color-surface-tertiary: var(--surface-tertiary);
-  --color-surface-tertiary-hover: var(--surface-tertiary-hover);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-surface-subtle-hover: var(--surface-subtle-hover);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-muted-hover: var(--surface-muted-hover);
+  --color-surface-strong: var(--surface-strong);
   --color-surface-brand: var(--surface-brand);
+  --color-surface-strong-hover: var(--surface-strong-hover);
   --color-surface-inverse: var(--surface-inverse);
   --color-surface-inverse-hover: var(--surface-inverse-hover);
   --color-surface-brand-hover: var(--surface-brand-hover);
@@ -34,14 +36,14 @@
   --color-surface-danger-strong-hover: var(--surface-danger-strong-hover);
   --color-surface-success-subtle: var(--surface-success-subtle);
   --color-surface-success-subtle-hover: var(--surface-success-subtle-hover);
-  --color-surface-warning: var(--surface-warning);
   --color-surface-success-strong: var(--surface-success-strong);
+  --color-surface-warning: var(--surface-warning);
   --color-surface-warning-hover: var(--surface-warning-hover);
   --color-surface-success-strong-hover: var(--surface-success-strong-hover);
   --color-surface-warning-subtle: var(--surface-warning-subtle);
   --color-surface-warning-subtle-hover: var(--surface-warning-subtle-hover);
-  --color-surface-disabled: var(--surface-disabled);
   --color-surface-warning-strong: var(--surface-warning-strong);
+  --color-surface-disabled: var(--surface-disabled);
   --color-surface-warning-strong-hover: var(--surface-warning-strong-hover);
   --color-surface-disabled-secondary: var(--surface-disabled-secondary);
   --color-text: var(--text);
@@ -109,6 +111,8 @@
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-backdrop: var(--backdrop);
 }
 
 :root {
@@ -223,6 +227,7 @@
 
   --font-heading: var(--font-geist-sans);
   --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
   --font-weight-subtle: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -262,11 +267,13 @@
 
   --surface: var(--neutral-1);
   --surface-hover: var(--neutral-2);
-  --surface-secondary: var(--neutral-2);
-  --surface-secondary-hover: var(--neutral-3);
-  --surface-tertiary: var(--neutral-3);
-  --surface-tertiary-hover: var(--neutral-4);
+  --surface-subtle: var(--neutral-2);
+  --surface-subtle-hover: var(--neutral-3);
+  --surface-muted: var(--neutral-3);
+  --surface-muted-hover: var(--neutral-4);
+  --surface-strong: var(--neutral-7);
   --surface-brand: var(--brand-9);
+  --surface-strong-hover: var(--neutral-8);
   --surface-inverse: var(--neutral-12);
   --surface-inverse-hover: var(--neutral-11);
   --surface-brand-hover: var(--brand-10);
@@ -290,19 +297,19 @@
   --surface-danger-strong-hover: var(--danger-12);
   --surface-success-subtle: var(--success-3);
   --surface-success-subtle-hover: var(--success-4);
-  --surface-warning: var(--warning-9);
   --surface-success-strong: var(--success-11);
+  --surface-warning: var(--warning-9);
   --surface-warning-hover: var(--warning-10);
   --surface-success-strong-hover: var(--success-12);
   --surface-warning-subtle: var(--warning-3);
   --surface-warning-subtle-hover: var(--warning-4);
-  --surface-disabled: var(--neutral-4);
   --surface-warning-strong: var(--warning-11);
+  --surface-disabled: var(--neutral-4);
   --surface-warning-strong-hover: var(--warning-12);
-  --surface-disabled-secondary: var(--neutral-6);
-  --text: var(--neutral-12);
-  --text-subtle: var(--neutral-11);
-  --text-subtlest: var(--neutral-9);
+  --surface-disabled-secondary: var(--neutral-7);
+  --text: var(--bw-11);
+  --text-subtle: var(--bw-9);
+  --text-subtlest: var(--bw-8);
   --text-oninverse: var(--neutral-1);
   --text-ondisabled: var(--neutral-1);
   --text-brand: var(--brand-9);
@@ -338,7 +345,7 @@
   --text-onwarning-subtlest: var(--warning-10);
   --border: var(--neutral-3);
   --border-strong: var(--neutral-5);
-  --border-strongest: var(--neutral-11);
+  --border-strongest: var(--neutral-8);
   --border-brand: var(--brand-6);
   --border-brand-strong: var(--brand-9);
   --border-onbrand: var(--brand-8);
@@ -365,11 +372,13 @@
   --chart-1: var(--brand-8);
   --chart-2: var(--brand-7);
   --chart-3: var(--brand-6);
+  --chart-4: var(--neutral-4);
+  --backdrop: var(--black-4);
 }
 
 .dark {
   --neutral-1: oklch(15.43% 0 0);
-  --neutral-2: oklch(0.1913 0 0);
+  --neutral-2: oklch(19.3% 0 0);
   --neutral-3: oklch(25.2% 0 0);
   --neutral-4: oklch(28.09% 0 0);
   --neutral-5: oklch(31.32% 0 0);
@@ -379,9 +388,9 @@
   --neutral-9: oklch(53.48% 0 0);
   --neutral-10: oklch(57.95% 0 0);
   --neutral-11: oklch(76.68% 0 0);
-  --neutral-12: oklch(94.91% 0 0);
+  --neutral-12: oklch(100% 0 0);
   --brand-1: oklch(15.43% 0 0);
-  --brand-2: oklch(20.9% 0 0);
+  --brand-2: oklch(18.15% 0 0);
   --brand-3: oklch(25.2% 0 0);
   --brand-4: oklch(28.09% 0 0);
   --brand-5: oklch(31.32% 0 0);
@@ -471,10 +480,10 @@
   --bw-5: oklch(100% 0 0 / 0.21);
   --bw-6: oklch(100% 0 0 / 0.28);
   --bw-7: oklch(100% 0 0 / 0.38);
-  --bw-8: oklch(100% 0 0 / 0.5);
+  --bw-8: oklch(100% 0 0 / 0.42);
   --bw-9: oklch(100% 0 0 / 0.65);
   --bw-10: oklch(100% 0 0 / 0.82);
-  --bw-11: oklch(100% 0 0 / 0.89);
+  --bw-11: oklch(100% 0 0 / 0.94);
   --bw-12: oklch(100% 0 0);
 }
 

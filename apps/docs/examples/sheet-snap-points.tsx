@@ -44,7 +44,7 @@ export default function SheetSnapPoints() {
           {Array.from({ length: 16 }).map((_, i) => (
             <div
               key={i}
-              className="h-10 rounded-md bg-surface-secondary"
+              className="h-10 rounded-md bg-surface-subtle"
             />
           ))}
         </SheetContent>

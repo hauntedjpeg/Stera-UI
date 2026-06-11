@@ -2,19 +2,23 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function TabsDisabled() {
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
+    <Tabs defaultValue="profile">
       <TabsList>
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password" disabled>
-          Password
-        </TabsTrigger>
-        <TabsTrigger value="settings">Settings</TabsTrigger>
+        <TabsTrigger value="profile">Profile</TabsTrigger>
+        <TabsTrigger value="notifications" disabled>Notifications</TabsTrigger>
+        <TabsTrigger value="security">Security</TabsTrigger>
       </TabsList>
-      <TabsContent value="account">
-        Make changes to your account here.
-      </TabsContent>
-      <TabsContent value="password">Change your password here.</TabsContent>
-      <TabsContent value="settings">Update your settings here.</TabsContent>
+      <div className="bg-surface-subtle rounded-xl p-4 w-100">
+        <TabsContent value="profile">
+          Profile details
+        </TabsContent>
+        <TabsContent value="notifications">
+          Notificaitons preferences
+        </TabsContent>
+        <TabsContent value="security">
+          Security options
+        </TabsContent>
+      </div>
     </Tabs>
   )
 }

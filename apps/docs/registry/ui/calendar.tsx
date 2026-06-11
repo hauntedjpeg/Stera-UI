@@ -31,7 +31,7 @@ function Calendar({
   )
 
   const rangeEdgeClass =
-    "relative isolate z-0 bg-surface-tertiary after:absolute after:inset-y-0 after:w-4 after:bg-surface-tertiary"
+    "relative isolate z-0 bg-surface-muted after:absolute after:inset-y-0 after:w-4 after:bg-surface-muted"
 
   return (
     <DayPicker
@@ -202,7 +202,7 @@ function CalendarDayButton({
         // Single selection
         "data-[selected-single=true]:bg-surface-brand data-[selected-single=true]:text-text-onbrand data-[selected-single=true]:hover:bg-surface-brand-strong! data-[selected-single=true]:hover:text-text-onbrand! data-[selected-single=true]:[&>span]:text-text-onbrand-subtle",
         // Range middle
-        "data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-surface-tertiary data-[range-middle=true]:text-text",
+        "data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-surface-muted data-[range-middle=true]:text-text",
         // Range endpoints (start/end share everything except which side rounds)
         "data-[range-end=true]:bg-surface-brand data-[range-start=true]:bg-surface-brand",
         "data-[range-end=true]:hover:bg-surface-brand-strong! data-[range-start=true]:hover:bg-surface-brand-strong!",

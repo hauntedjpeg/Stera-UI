@@ -640,7 +640,7 @@ const sidebarMenuButtonVariants = cva(
     // Variants — open state (e.g. expanded submenu)
     "data-open:hover:bg-surface-hover data-open:hover:text-text",
     // Variants — active state
-    "data-active:bg-surface-secondary data-active:st-body-md-strong data-active:text-text",
+    "data-active:bg-surface-subtle data-active:st-body-md-strong data-active:text-text",
     // Other
     "peer/menu-button group/menu-button disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&>span:last-child]:truncate",
   ],
@@ -889,7 +889,7 @@ function SidebarMenuSubButton({
       {
         className: cn(
           // Base
-          "flex items-center overflow-hidden rounded-md px-2 text-text ring-ring outline-hidden hover:bg-surface-hover hover:text-text focus-visible:ring-2 active:bg-surface-secondary-hover active:text-text",
+          "flex items-center overflow-hidden rounded-md px-2 text-text ring-ring outline-hidden hover:bg-surface-hover hover:text-text focus-visible:ring-2 active:bg-surface-subtle-hover active:text-text",
           // Position
           "-translate-x-px",
           // Sizing
