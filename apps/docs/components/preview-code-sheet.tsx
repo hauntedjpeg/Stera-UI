@@ -48,7 +48,7 @@ export function PreviewCodeSheet({
               value={code}
             />
           </SheetHeader>
-          <SheetContent className="no-scrollbar flex flex-col border border-border -m-px mt-0 -mb rounded-xl bg-black [&_figure]:overflow-visible [&_figure]:bg-black! [&_figure]:flex [&_figure]:flex-1 [&_pre]:overflow-visible [&_pre]:flex-1">
+          <SheetContent className="no-scrollbar flex flex-col border border-border -m-px mt-0 -mb rounded-xl [&_figure]:overflow-visible [&_figure]:bg-(--bw-12) [&_figure]:flex [&_figure]:flex-1 [&_pre]:overflow-visible [&_pre]:flex-1">
             {source}
           </SheetContent>
         </SheetPopup>
