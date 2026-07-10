@@ -4,7 +4,11 @@ import {
   findConfigPath,
   CONFIG_FILE,
 } from "../utils/resolve-config.js"
-import { resolveDependencies, getComponent } from "../registry/index.js"
+import {
+  resolveDependencies,
+  ComponentNotFoundError,
+  type RegistryItem,
+} from "../registry/index.js"
 import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
 import { applyTransforms } from "../utils/transform.js"
@@ -71,26 +75,17 @@ export async function add(
 
   const spinner = createSpinner("Fetching registry")
 
-  // Validate components exist
-  try {
-    for (const name of components) {
-      const item = await getComponent(name)
-      if (!item) {
-        spinner.fail(`Component "${name}" not found in registry.`)
-        console.error(`  Run "stera-ui list" to see available components.`)
-        process.exit(1)
-      }
-    }
-  } catch (err) {
-    spinner.fail("Failed to fetch registry")
-    throw err
-  }
-
-  // Resolve all dependencies
-  let resolved
+  // Resolve requested components and their dependencies. Missing names
+  // (requested or transitive) surface as a single ComponentNotFoundError.
+  let resolved: RegistryItem[]
   try {
     resolved = await resolveDependencies(components)
   } catch (err) {
+    if (err instanceof ComponentNotFoundError) {
+      spinner.fail(err.message)
+      console.error(`  Run "stera-ui list" to see available components.`)
+      process.exit(1)
+    }
     spinner.fail("Failed to fetch registry")
     throw err
   }
@@ -150,7 +145,8 @@ export async function add(
   }
 
   for (const file of skipped) {
-    console.log(`  ${dim(`·  ${file}  (unchanged)`)}`)
+    const label = file.reason === "unchanged" ? "(unchanged)" : "(skipped)"
+    console.log(`  ${dim(`·  ${file.path}  ${label}`)}`)
   }
 
   // Install npm dependencies

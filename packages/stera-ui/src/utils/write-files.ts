@@ -1,6 +1,6 @@
 import fs from "node:fs"
 import path from "node:path"
-import readline from "node:readline/promises"
+import { confirm } from "@inquirer/prompts"
 import type { SteraConfig } from "./resolve-config.js"
 import type { RegistryItem } from "../registry/index.js"
 import { resolveOutputPath } from "./resolve-paths.js"
@@ -9,9 +9,15 @@ export interface WriteOptions {
   overwrite?: boolean
 }
 
+export interface SkippedFile {
+  path: string
+  /** "unchanged" — identical content on disk; "declined" — user kept their version. */
+  reason: "unchanged" | "declined"
+}
+
 export interface WriteResult {
   written: string[]
-  skipped: string[]
+  skipped: SkippedFile[]
 }
 
 /**
@@ -26,15 +32,10 @@ async function confirmOverwrite(relativePath: string): Promise<boolean> {
     return false
   }
 
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
+  return confirm({
+    message: `${relativePath} already exists. Overwrite?`,
+    default: false,
   })
-  const answer = await rl.question(
-    `  ${relativePath} already exists. Overwrite? (y/N) `
-  )
-  rl.close()
-  return answer.toLowerCase() === "y"
 }
 
 /**
@@ -48,7 +49,7 @@ export async function writeComponentFiles(
   options: WriteOptions = {}
 ): Promise<WriteResult> {
   const written: string[] = []
-  const skipped: string[] = []
+  const skipped: SkippedFile[] = []
 
   for (const item of items) {
     for (const file of item.files ?? []) {
@@ -61,7 +62,7 @@ export async function writeComponentFiles(
 
         // Skip if content is identical
         if (existing === file.content) {
-          skipped.push(relativePath)
+          skipped.push({ path: relativePath, reason: "unchanged" })
           continue
         }
 
@@ -69,7 +70,7 @@ export async function writeComponentFiles(
         if (!options.overwrite) {
           const confirmed = await confirmOverwrite(relativePath)
           if (!confirmed) {
-            skipped.push(relativePath)
+            skipped.push({ path: relativePath, reason: "declined" })
             continue
           }
         }

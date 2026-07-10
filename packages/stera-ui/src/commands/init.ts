@@ -133,24 +133,19 @@ async function promptFontStrategy(
  */
 async function fetchDefaultFonts(): Promise<RegistryFontItem[]> {
   const spinner = createSpinner("Fetching fonts")
-  const fonts: RegistryFontItem[] = []
-  try {
-    for (const name of DEFAULT_FONT_NAMES) {
+  const results = await Promise.all(
+    DEFAULT_FONT_NAMES.map(async (name): Promise<RegistryFontItem | null> => {
       try {
         const item = await fetchRegistryItem(name)
-        if (item.type === "registry:font") {
-          fonts.push(item as RegistryFontItem)
-        }
+        return item.type === "registry:font" ? item : null
       } catch {
         // Font not found in registry — skip silently.
+        return null
       }
-    }
-  } catch (err) {
-    spinner.fail("Failed to fetch fonts")
-    throw err
-  }
+    })
+  )
   spinner.succeed("Fonts resolved")
-  return fonts
+  return results.filter((item) => item !== null)
 }
 
 /**

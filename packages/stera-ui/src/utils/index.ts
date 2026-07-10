@@ -23,6 +23,7 @@ export {
   writeComponentFiles,
   type WriteOptions,
   type WriteResult,
+  type SkippedFile,
 } from "./write-files.js"
 export { brand, dim, LOGO, CHECK, CROSS, WARN } from "./format.js"
 export { createSpinner } from "./spinner.js"

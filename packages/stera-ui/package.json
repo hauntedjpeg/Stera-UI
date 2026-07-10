@@ -18,7 +18,7 @@
   ],
   "homepage": "https://ui.stera.sh",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "bin": {
     "stera-ui": "./dist/cli.js"

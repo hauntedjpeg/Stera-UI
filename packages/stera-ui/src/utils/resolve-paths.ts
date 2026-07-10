@@ -10,6 +10,33 @@ const TYPE_TO_ALIAS: Record<string, keyof SteraConfig["aliases"]> = {
   "registry:component": "components",
 }
 
+interface TsConfigMatcher {
+  paths: Record<string, string[]>
+  match: ReturnType<typeof createMatchPath>
+}
+
+// resolveOutputPath runs once per file written — parse tsconfig once per
+// project root instead of on every call. `null` caches "no usable paths".
+const matcherCache = new Map<string, TsConfigMatcher | null>()
+
+function getTsConfigMatcher(projectRoot: string): TsConfigMatcher | null {
+  let matcher = matcherCache.get(projectRoot)
+  if (matcher !== undefined) return matcher
+
+  const tsConfig = loadConfig(projectRoot)
+  matcher =
+    tsConfig.resultType === "success" &&
+    Object.keys(tsConfig.paths).length > 0
+      ? {
+          paths: tsConfig.paths,
+          match: createMatchPath(tsConfig.absoluteBaseUrl, tsConfig.paths),
+        }
+      : null
+
+  matcherCache.set(projectRoot, matcher)
+  return matcher
+}
+
 /**
  * Resolve a config alias (e.g. "@/components/ui") to a filesystem directory
  * relative to the project root, using the project's tsconfig.json paths.
@@ -20,25 +47,24 @@ const TYPE_TO_ALIAS: Record<string, keyof SteraConfig["aliases"]> = {
  * surface it loudly rather than silently dropping files at the repo root.
  */
 function resolveAlias(alias: string, projectRoot: string): string {
-  const tsConfig = loadConfig(projectRoot)
+  const matcher = getTsConfigMatcher(projectRoot)
 
-  if (
-    tsConfig.resultType === "success" &&
-    Object.keys(tsConfig.paths).length > 0
-  ) {
+  if (matcher) {
     // `createMatchPath` with `fileExists = () => true` happily falls back to
     // joining `<baseUrl>/<alias>` when no path key matches (so e.g.
     // "#nowhere/components" resolves to "<root>/#nowhere/components").
     // Guard against that by confirming the alias actually starts with a
     // configured paths prefix before trusting the match result.
-    const hasMatchingPrefix = Object.keys(tsConfig.paths).some((key) => {
+    const hasMatchingPrefix = Object.keys(matcher.paths).some((key) => {
       const prefix = key.replace(/\/\*$/, "")
       return alias === prefix || alias.startsWith(`${prefix}/`)
     })
 
     if (hasMatchingPrefix) {
-      const match = createMatchPath(tsConfig.absoluteBaseUrl, tsConfig.paths)
-      const resolved = match(alias, undefined, () => true, [".ts", ".tsx"])
+      const resolved = matcher.match(alias, undefined, () => true, [
+        ".ts",
+        ".tsx",
+      ])
 
       if (resolved) {
         return path.relative(projectRoot, resolved)

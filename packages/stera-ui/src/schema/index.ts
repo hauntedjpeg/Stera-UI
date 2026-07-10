@@ -60,9 +60,20 @@ export type RegistryItem = z.infer<typeof registryItemSchema>
 // Helper type for registry:font items specifically.
 export type RegistryFontItem = Extract<RegistryItem, { type: "registry:font" }>
 
+// Entries in the registry index (`index.json`) carry no file contents —
+// just enough metadata to list components and walk the dependency graph.
+export const registryIndexEntrySchema = z.object({
+  name: z.string(),
+  type: z.string(),
+  dependencies: z.array(z.string()).optional(),
+  registryDependencies: z.array(z.string()).optional(),
+})
+
+export type RegistryIndexEntry = z.infer<typeof registryIndexEntrySchema>
+
 export const registryIndexSchema = z.object({
   name: z.string(),
-  items: z.array(registryItemSchema),
+  items: z.array(registryIndexEntrySchema),
 })
 
 export type RegistryIndex = z.infer<typeof registryIndexSchema>

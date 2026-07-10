@@ -16,10 +16,16 @@ export function patchCssVariables(
   const lines = content.split("\n")
   const patched: string[] = []
 
+  // Match lines like: "    --font-display: Geist;" — compiled once per
+  // property rather than per line.
+  const compiled = Object.entries(patches).map(([prop, newValue]) => ({
+    prop,
+    newValue,
+    regex: new RegExp(`(\\s*${escapeRegex(prop)}:\\s*).+?(;)`),
+  }))
+
   for (let i = 0; i < lines.length; i++) {
-    for (const [prop, newValue] of Object.entries(patches)) {
-      // Match lines like: "    --font-display: Geist;" or "    --font-body: Geist;"
-      const regex = new RegExp(`(\\s*${escapeRegex(prop)}:\\s*).+?(;)`)
+    for (const { prop, newValue, regex } of compiled) {
       if (regex.test(lines[i])) {
         lines[i] = lines[i].replace(regex, `$1${newValue}$2`)
         if (!patched.includes(prop)) patched.push(prop)

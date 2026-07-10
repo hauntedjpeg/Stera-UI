@@ -4,7 +4,7 @@ export default defineConfig([
   {
     entry: { cli: "src/cli.ts" },
     format: ["esm"],
-    target: "node18",
+    target: "node20",
     dts: false,
     clean: true,
     banner: { js: "#!/usr/bin/env node" },
@@ -17,7 +17,7 @@ export default defineConfig([
       "utils/index": "src/utils/index.ts",
     },
     format: ["esm"],
-    target: "node18",
+    target: "node20",
     dts: true,
     splitting: true,
   },
