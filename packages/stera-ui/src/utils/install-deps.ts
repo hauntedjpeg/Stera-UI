@@ -76,7 +76,7 @@ export async function installDependencies(
 
   try {
     await execa(cmd, args, { cwd })
-    spinner.succeed(`Installed with ${pm}`)
+    spinner.succeed(`Installed ${toInstall.join(", ")} with ${pm}`)
   } catch (error) {
     spinner.fail(`Install failed`)
 

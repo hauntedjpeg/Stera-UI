@@ -121,15 +121,6 @@ export async function add(
     }
   }
 
-  // Show what will be installed
-  const requested = new Set(components)
-
-  console.log("\n  Installing components\n")
-  for (const item of resolved) {
-    const tag = requested.has(item.name) ? "" : dim("  (dependency)")
-    console.log(`  → ${item.name}${tag}`)
-  }
-
   // Collect npm dependencies
   const allNpmDeps: string[] = []
   for (const item of resolved) {
@@ -138,15 +129,6 @@ export async function add(
     }
   }
   const uniqueNpmDeps = [...new Set(allNpmDeps)].sort()
-
-  if (uniqueNpmDeps.length > 0) {
-    console.log("\n  npm packages\n")
-    for (const dep of uniqueNpmDeps) {
-      console.log(`  → ${dep}`)
-    }
-  }
-
-  console.log("")
 
   // Write files (with overwrite detection)
   const { written, skipped } = await writeComponentFiles(
@@ -167,7 +149,6 @@ export async function add(
 
   // Install npm dependencies
   if (uniqueNpmDeps.length > 0) {
-    console.log("")
     await installDependencies(uniqueNpmDeps, projectRoot)
   }
 
