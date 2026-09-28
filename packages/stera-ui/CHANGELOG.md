@@ -1,5 +1,11 @@
 # stera-ui
 
+## 0.8.1
+
+### Patch Changes
+
+- [`39a848a`](https://github.com/hauntedjpeg/Stera-UI/commit/39a848abbb72bae14c69b4806b18075431d755b8) Thanks [@hauntedjpeg](https://github.com/hauntedjpeg)! - Quieter `add` output. The "Installing components" and "npm packages" preview lists are gone — `add` now prints the registry status followed by one line per file. When packages are installed, the install line names them (`Installed clsx, tailwind-merge with pnpm`), which also applies to `init`.
+
 ## 0.8.0
 
 ### Minor Changes
