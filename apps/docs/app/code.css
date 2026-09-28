@@ -38,7 +38,7 @@
   background-color: var(--surface-subtle);
 }
 
-[data-slot="sheet-content"] .st-code-block {
+[data-slot="drawer-content"] .st-code-block {
   background-color: var(--surface);
 }
 

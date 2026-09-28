@@ -7,57 +7,57 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { SiX } from "stera-icons"
 
-type SheetSide = "top" | "right" | "bottom" | "left"
+type DrawerSide = "top" | "right" | "bottom" | "left"
 
 const SIDE_TO_SWIPE_DIRECTION = {
   top: "up",
   right: "right",
   bottom: "down",
   left: "left",
-} as const satisfies Record<SheetSide, "up" | "right" | "down" | "left">
+} as const satisfies Record<DrawerSide, "up" | "right" | "down" | "left">
 
-const SheetContext = React.createContext<{ side: SheetSide }>({ side: "right" })
+const DrawerContext = React.createContext<{ side: DrawerSide }>({ side: "right" })
 
-function useSheetSide() {
-  return React.useContext(SheetContext).side
+function useDrawerSide() {
+  return React.useContext(DrawerContext).side
 }
 
-function Sheet({
+function Drawer({
   side = "right",
   swipeDirection,
   ...props
-}: DrawerPrimitive.Root.Props & { side?: SheetSide }) {
+}: DrawerPrimitive.Root.Props & { side?: DrawerSide }) {
   const value = React.useMemo(() => ({ side }), [side])
   return (
-    <SheetContext.Provider value={value}>
+    <DrawerContext.Provider value={value}>
       <DrawerPrimitive.Root
-        data-slot="sheet"
+        data-slot="drawer"
         swipeDirection={swipeDirection ?? SIDE_TO_SWIPE_DIRECTION[side]}
         {...props}
       />
-    </SheetContext.Provider>
+    </DrawerContext.Provider>
   )
 }
 
-function SheetTrigger({ ...props }: DrawerPrimitive.Trigger.Props) {
-  return <DrawerPrimitive.Trigger data-slot="sheet-trigger" {...props} />
+function DrawerTrigger({ ...props }: DrawerPrimitive.Trigger.Props) {
+  return <DrawerPrimitive.Trigger data-slot="drawer-trigger" {...props} />
 }
 
-function SheetClose({ ...props }: DrawerPrimitive.Close.Props) {
-  return <DrawerPrimitive.Close data-slot="sheet-close" {...props} />
+function DrawerClose({ ...props }: DrawerPrimitive.Close.Props) {
+  return <DrawerPrimitive.Close data-slot="drawer-close" {...props} />
 }
 
-function SheetPortal({ ...props }: DrawerPrimitive.Portal.Props) {
-  return <DrawerPrimitive.Portal data-slot="sheet-portal" {...props} />
+function DrawerPortal({ ...props }: DrawerPrimitive.Portal.Props) {
+  return <DrawerPrimitive.Portal data-slot="drawer-portal" {...props} />
 }
 
-function SheetBackdrop({
+function DrawerBackdrop({
   className,
   ...props
 }: DrawerPrimitive.Backdrop.Props) {
   return (
     <DrawerPrimitive.Backdrop
-      data-slot="sheet-backdrop"
+      data-slot="drawer-backdrop"
       className={cn(
         // Base
         "fixed inset-0 z-50 bg-black/20 dark:bg-black/60",
@@ -77,23 +77,25 @@ function SheetBackdrop({
   )
 }
 
-function SheetViewport({
+function DrawerViewport({
   className,
   ...props
 }: DrawerPrimitive.Viewport.Props) {
-  const side = useSheetSide()
+  const side = useDrawerSide()
   return (
     <DrawerPrimitive.Viewport
-      data-slot="sheet-viewport"
+      data-slot="drawer-viewport"
       data-side={side}
       className={cn(
         // Base
-        "fixed inset-0 z-50 flex p-2",
+        // Base — no padding here; the gutter lives on the popup container so
+        // the container sits flush against the screen edge.
+        "fixed inset-0 z-50 flex",
         // Position by side
         "data-[side=right]:items-stretch data-[side=right]:justify-end",
         "data-[side=left]:items-stretch data-[side=left]:justify-start",
-        "data-[side=top]:items-start data-[side=top]:justify-stretch",
-        "data-[side=bottom]:items-end data-[side=bottom]:justify-stretch",
+        "data-[side=top]:items-start",
+        "data-[side=bottom]:items-end",
         className
       )}
       {...props}
@@ -101,19 +103,19 @@ function SheetViewport({
   )
 }
 
-function SheetHandle({ className, ...props }: React.ComponentProps<"div">) {
+function DrawerHandle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      data-slot="sheet-handle"
+      data-slot="drawer-handle"
       aria-hidden
       className={cn(
         // Generous grab zone that owns the touch gesture (so dragging snaps the
-        // sheet instead of being claimed as a native scroll on touch devices)
+        // drawer instead of being claimed as a native scroll on touch devices)
         "flex w-full shrink-0 cursor-grab touch-none select-none justify-center py-2 active:cursor-grabbing",
-        // Fade out when a nested sheet is open; restore during a swipe gesture
+        // Fade out when a nested drawer is open; restore during a swipe gesture
         "transition-opacity duration-200",
-        "group-data-nested-drawer-open/sheet:opacity-0",
-        "group-data-nested-drawer-swiping/sheet:opacity-100",
+        "group-data-nested-drawer-open/drawer:opacity-0",
+        "group-data-nested-drawer-swiping/drawer:opacity-100",
         className
       )}
       {...props}
@@ -123,10 +125,26 @@ function SheetHandle({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-// The drawer panel, batteries included — Portal + Backdrop + Viewport + Popup,
-// plus the bottom-sheet handle and the corner close button. Mirrors the
+// Panel sizing per side. Unprefixed so a plain consumer class (w-*, max-h-*)
+// overrides it through tailwind-merge. The container hugs the panel, so sizes
+// along the slide axis must be fixed or viewport-based (w-96, w-[75vw]) — a
+// percentage has nothing definite to resolve against.
+const PANEL_SIZE = {
+  top: "max-h-[80vh] grow",
+  right: "h-full w-[min(75vw,24rem)]",
+  bottom: "max-h-[80vh] grow",
+  left: "h-full w-[min(75vw,24rem)]",
+} as const satisfies Record<DrawerSide, string>
+
+// The drawer, batteries included — Portal + Backdrop + Viewport + Popup, plus
+// the bottom-drawer handle and the corner close button. Mirrors the
 // `DialogPopup` composite in dialog.tsx.
-function SheetPopup({
+//
+// Two layers: Base UI's Popup is an invisible container that sits flush against
+// the screen edge and is the drag/transform target; the visible panel sits
+// inside it. `className` styles the panel, every other prop goes to the
+// container.
+function DrawerPopup({
   className,
   children,
   showCloseButton = true,
@@ -134,25 +152,28 @@ function SheetPopup({
 }: DrawerPrimitive.Popup.Props & {
   showCloseButton?: boolean
 }) {
-  const side = useSheetSide()
+  const side = useDrawerSide()
   return (
-    <SheetPortal>
-      <SheetBackdrop />
-      <SheetViewport>
+    <DrawerPortal>
+      <DrawerBackdrop />
+      <DrawerViewport>
         <DrawerPrimitive.Popup
-          data-slot="sheet-popup"
+          data-slot="drawer-popup"
           data-side={side}
           className={cn(
             // Group
-            "group/sheet",
-            // Base — the popup is the drag/transform target and clips its
-            // contents; scrolling lives on SheetContent (Drawer.Content).
-            "relative flex flex-col overflow-hidden bg-surface text-sm text-text ring-1 ring-border rounded-xl shadow-lg outline-none",
-            // Sizing per side
-            "data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:sm:max-w-sm",
-            "data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:sm:max-w-sm",
-            "data-[side=top]:w-full data-[side=top]:max-h-[80vh]",
-            "data-[side=bottom]:w-full data-[side=bottom]:max-h-[80vh]",
+            "group/drawer",
+            // Base — invisible; clicks in the gutter fall through to the
+            // viewport and dismiss like any outside press.
+            "pointer-events-none flex outline-none",
+            // Gutter — the space that floats the panel off the screen edge.
+            // Change it here; the animation doesn't need to know about it.
+            "p-2",
+            // Hug the panel along the slide axis, fill the other
+            "data-[side=right]:h-full data-[side=right]:max-w-full",
+            "data-[side=left]:h-full data-[side=left]:max-w-full",
+            "data-[side=top]:w-full data-[side=top]:max-h-full data-[side=top]:flex-col",
+            "data-[side=bottom]:w-full data-[side=bottom]:max-h-full data-[side=bottom]:flex-col",
             // Nested-drawer stacking variables (consumed by transform / height below)
             "[--peek:1rem] [--stack-step:0.05]",
             "[--stack-progress:clamp(0,var(--drawer-swipe-progress,0),1)]",
@@ -183,40 +204,54 @@ function SheetPopup({
             "data-[side=right]:data-starting-style:transform-[translateX(100%)] data-[side=right]:data-ending-style:transform-[translateX(100%)]",
             "data-[side=left]:data-starting-style:transform-[translateX(-100%)] data-[side=left]:data-ending-style:transform-[translateX(-100%)]",
             "data-[side=top]:data-starting-style:transform-[translateY(-100%)] data-[side=top]:data-ending-style:transform-[translateY(-100%)]",
-            "data-[side=bottom]:data-starting-style:transform-[translateY(100%)] data-[side=bottom]:data-ending-style:transform-[translateY(100%)]",
-            className
+            "data-[side=bottom]:data-starting-style:transform-[translateY(100%)] data-[side=bottom]:data-ending-style:transform-[translateY(100%)]"
           )}
           {...props}
         >
-          {side === "bottom" && <SheetHandle />}
-          {children}
-          {showCloseButton && (
-            <SheetClose
-              render={
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="absolute top-2.5 right-2.5 text-text-subtle"
-                />
-              }
-            >
-              <SiX />
-              <span className="sr-only">Close</span>
-            </SheetClose>
-          )}
+          <div
+            data-slot="drawer-panel"
+            data-side={side}
+            className={cn(
+              // Base — clips its contents; scrolling lives on DrawerContent
+              // (Drawer.Content).
+              "relative flex min-h-0 min-w-0 flex-col overflow-hidden rounded-xl bg-surface text-sm text-text shadow-lg ring-1 ring-border",
+              // Interactive only while open, so it goes inert during the exit
+              "group-data-open/drawer:pointer-events-auto",
+              // Sizing
+              PANEL_SIZE[side],
+              className
+            )}
+          >
+            {side === "bottom" && <DrawerHandle />}
+            {children}
+            {showCloseButton && (
+              <DrawerClose
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-2.5 right-2.5 text-text-subtle"
+                  />
+                }
+              >
+                <SiX />
+                <span className="sr-only">Close</span>
+              </DrawerClose>
+            )}
+          </div>
         </DrawerPrimitive.Popup>
-      </SheetViewport>
-    </SheetPortal>
+      </DrawerViewport>
+    </DrawerPortal>
   )
 }
 
-// The scrollable region between SheetHeader and SheetFooter. Renders Base UI's
-// Drawer.Content (`data-drawer-content`), which keeps the sheet draggable from
+// The scrollable region between DrawerHeader and DrawerFooter. Renders Base UI's
+// Drawer.Content (`data-drawer-content`), which keeps the drawer draggable from
 // the scroll edge while its content scrolls. Mirrors `DialogContent`.
-function SheetContent({ className, ...props }: DrawerPrimitive.Content.Props) {
+function DrawerContent({ className, ...props }: DrawerPrimitive.Content.Props) {
   return (
     <DrawerPrimitive.Content
-      data-slot="sheet-content"
+      data-slot="drawer-content"
       className={cn(
         "min-h-0 flex-1 overflow-y-auto overscroll-contain",
         className
@@ -226,21 +261,21 @@ function SheetContent({ className, ...props }: DrawerPrimitive.Content.Props) {
   )
 }
 
-function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
+function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      data-slot="sheet-header"
+      data-slot="drawer-header"
       className={cn(
         // Base
         "flex flex-col p-4",
         // Sizing
         "gap-1.5",
-        // Pad right when the corner close button (a direct child of SheetPopup) is present
-        "group-has-[>[data-slot=sheet-close]]/sheet:pr-14",
-        // Fade out when a nested sheet is open; restore during a swipe gesture
+        // Pad right when the corner close button (a direct child of the panel) is present
+        "group-has-[>[data-slot=drawer-panel]>[data-slot=drawer-close]]/drawer:pr-14",
+        // Fade out when a nested drawer is open; restore during a swipe gesture
         "transition-opacity duration-300",
-        "group-data-nested-drawer-open/sheet:opacity-0",
-        "group-data-nested-drawer-swiping/sheet:opacity-100",
+        "group-data-nested-drawer-open/drawer:opacity-0",
+        "group-data-nested-drawer-swiping/drawer:opacity-100",
         className
       )}
       {...props}
@@ -248,10 +283,10 @@ function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
+function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      data-slot="sheet-footer"
+      data-slot="drawer-footer"
       className={cn(
         // Base
         "flex p-4",
@@ -259,10 +294,10 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
         "mt-auto",
         // Sizing
         "gap-2 *:flex-1",
-        // Fade out when a nested sheet is open; restore during a swipe gesture
+        // Fade out when a nested drawer is open; restore during a swipe gesture
         "transition-opacity duration-300",
-        "group-data-nested-drawer-open/sheet:opacity-0",
-        "group-data-nested-drawer-swiping/sheet:opacity-100",
+        "group-data-nested-drawer-open/drawer:opacity-0",
+        "group-data-nested-drawer-swiping/drawer:opacity-100",
         className
       )}
       {...props}
@@ -270,10 +305,10 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function SheetTitle({ className, ...props }: DrawerPrimitive.Title.Props) {
+function DrawerTitle({ className, ...props }: DrawerPrimitive.Title.Props) {
   return (
     <DrawerPrimitive.Title
-      data-slot="sheet-title"
+      data-slot="drawer-title"
       className={cn(
         // Other
         "st-body-lg-strong text-text",
@@ -284,13 +319,13 @@ function SheetTitle({ className, ...props }: DrawerPrimitive.Title.Props) {
   )
 }
 
-function SheetDescription({
+function DrawerDescription({
   className,
   ...props
 }: DrawerPrimitive.Description.Props) {
   return (
     <DrawerPrimitive.Description
-      data-slot="sheet-description"
+      data-slot="drawer-description"
       className={cn(
         // Other
         "text-sm text-text-subtle",
@@ -301,45 +336,45 @@ function SheetDescription({
   )
 }
 
-// An invisible edge zone that opens the sheet when swiped from the screen edge.
+// An invisible edge zone that opens the drawer when swiped from the screen edge.
 // Base UI sets its own `touch-action`; position it yourself (e.g. fixed inset-y-0).
-function SheetSwipeArea({
+function DrawerSwipeArea({
   className,
   ...props
 }: DrawerPrimitive.SwipeArea.Props) {
   return (
     <DrawerPrimitive.SwipeArea
-      data-slot="sheet-swipe-area"
+      data-slot="drawer-swipe-area"
       className={cn(className)}
       {...props}
     />
   )
 }
 
-// App-level coordination: wrap your app in SheetProvider, then SheetIndent /
-// SheetIndentBackground react (via `data-active` + swipe CSS vars) when any
-// sheet within the provider opens — enabling indent / parallax effects.
-function SheetProvider({ ...props }: DrawerPrimitive.Provider.Props) {
+// App-level coordination: wrap your app in DrawerProvider, then DrawerIndent /
+// DrawerIndentBackground react (via `data-active` + swipe CSS vars) when any
+// drawer within the provider opens — enabling indent / parallax effects.
+function DrawerProvider({ ...props }: DrawerPrimitive.Provider.Props) {
   return <DrawerPrimitive.Provider {...props} />
 }
 
-function SheetIndent({ className, ...props }: DrawerPrimitive.Indent.Props) {
+function DrawerIndent({ className, ...props }: DrawerPrimitive.Indent.Props) {
   return (
     <DrawerPrimitive.Indent
-      data-slot="sheet-indent"
+      data-slot="drawer-indent"
       className={cn(className)}
       {...props}
     />
   )
 }
 
-function SheetIndentBackground({
+function DrawerIndentBackground({
   className,
   ...props
 }: DrawerPrimitive.IndentBackground.Props) {
   return (
     <DrawerPrimitive.IndentBackground
-      data-slot="sheet-indent-background"
+      data-slot="drawer-indent-background"
       className={cn(className)}
       {...props}
     />
@@ -348,26 +383,26 @@ function SheetIndentBackground({
 
 // Imperative controller for detached triggers / programmatic open & close.
 // NOTE: this is Base UI's `Drawer.Handle` (a controller). It is NOT the visual
-// drag bar — that is the `SheetHandle` component above.
-const createSheetHandle = DrawerPrimitive.createHandle
+// drag bar — that is the `DrawerHandle` component above.
+const createDrawerHandle = DrawerPrimitive.createHandle
 
 export {
-  Sheet,
-  SheetTrigger,
-  SheetClose,
-  SheetPortal,
-  SheetBackdrop,
-  SheetViewport,
-  SheetPopup,
-  SheetHandle,
-  SheetContent,
-  SheetHeader,
-  SheetFooter,
-  SheetTitle,
-  SheetDescription,
-  SheetSwipeArea,
-  SheetProvider,
-  SheetIndent,
-  SheetIndentBackground,
-  createSheetHandle,
+  Drawer,
+  DrawerTrigger,
+  DrawerClose,
+  DrawerPortal,
+  DrawerBackdrop,
+  DrawerViewport,
+  DrawerPopup,
+  DrawerHandle,
+  DrawerContent,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerSwipeArea,
+  DrawerProvider,
+  DrawerIndent,
+  DrawerIndentBackground,
+  createDrawerHandle,
 }

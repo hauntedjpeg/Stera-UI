@@ -1,6 +1,6 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { PreviewCodeSheet } from "./preview-code-sheet"
+import { PreviewCodeDrawer } from "./preview-code-drawer"
 
 export function ComponentPreviewFrame({
   component,
@@ -43,7 +43,7 @@ export function ComponentPreviewFrame({
         {component}
       </div>
       {!hideCode && (
-        <PreviewCodeSheet
+        <PreviewCodeDrawer
           source={source}
           code={code}
           caption={caption}

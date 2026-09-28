@@ -230,6 +230,13 @@
       "files": [{ "path": "registry/ui/dialog.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "drawer",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "stera-icons"],
+      "registryDependencies": ["utils", "button"],
+      "files": [{ "path": "registry/ui/drawer.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "dropdown-menu",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "stera-icons"],
@@ -374,13 +381,6 @@
       "files": [{ "path": "registry/ui/separator.tsx", "type": "registry:ui" }]
     },
     {
-      "name": "sheet",
-      "type": "registry:ui",
-      "dependencies": ["@base-ui/react", "stera-icons"],
-      "registryDependencies": ["utils", "button"],
-      "files": [{ "path": "registry/ui/sheet.tsx", "type": "registry:ui" }]
-    },
-    {
       "name": "sidebar",
       "type": "registry:ui",
       "dependencies": [
@@ -392,9 +392,9 @@
         "utils",
         "use-mobile",
         "button",
+        "drawer",
         "input",
         "separator",
-        "sheet",
         "skeleton",
         "tooltip"
       ],

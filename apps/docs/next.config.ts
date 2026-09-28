@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         destination: "/stera-config",
         permanent: true,
       },
+      {
+        source: "/components/sheet",
+        destination: "/components/drawer",
+        permanent: true,
+      },
     ]
   },
 }

@@ -11,12 +11,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import {
-  Sheet,
-  SheetDescription,
-  SheetHeader,
-  SheetPopup,
-  SheetTitle,
-} from "@/components/ui/sheet"
+  Drawer,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerPopup,
+  DrawerTitle,
+} from "@/components/ui/drawer"
 import { Skeleton } from "@/components/ui/skeleton"
 import {
   Tooltip,
@@ -182,7 +182,7 @@ function SidebarProvider({
   )
 }
 
-/** Renders the sidebar shell. Picks a Sheet on mobile, a fixed positioned container on desktop, or a static container when `collapsible="none"`. */
+/** Renders the sidebar shell. Picks a Drawer on mobile, a fixed positioned container on desktop, or a static container when `collapsible="none"`. */
 function Sidebar({
   side = "left",
   variant = "sidebar",
@@ -224,23 +224,24 @@ function Sidebar({
 
   if (mounted && isMobile) {
     return (
-      <Sheet open={openMobile} onOpenChange={setOpenMobile} side={side}>
-        <SheetPopup
+      <Drawer open={openMobile} onOpenChange={setOpenMobile} side={side}>
+        <DrawerPopup
           dir={dir}
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="w-(--sidebar-width) bg-surface p-0 text-text [&>button]:hidden"
+          className="w-(--sidebar-width)"
+          showCloseButton={false}
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
             } as React.CSSProperties
           }
         >
-          <SheetHeader className="sr-only">
-            <SheetTitle>Sidebar</SheetTitle>
-            <SheetDescription>Displays the mobile sidebar.</SheetDescription>
-          </SheetHeader>
+          <DrawerHeader className="sr-only">
+            <DrawerTitle>Sidebar</DrawerTitle>
+            <DrawerDescription>Displays the mobile sidebar.</DrawerDescription>
+          </DrawerHeader>
           {/* Consumer-supplied div props (className, style, onClick, ...) land here so they aren't silently dropped on mobile. */}
           <div
             className={cn("flex h-full w-full flex-col", className)}
@@ -248,8 +249,8 @@ function Sidebar({
           >
             {children}
           </div>
-        </SheetPopup>
-      </Sheet>
+        </DrawerPopup>
+      </Drawer>
     )
   }
 

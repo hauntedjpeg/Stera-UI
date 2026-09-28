@@ -845,40 +845,40 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/dialog-scrollable.tsx",
     slug: "dialog",
   },
-  "sheet-demo": {
-    component: dynamic(() => import("@/examples/sheet-demo")),
-    path: "examples/sheet-demo.tsx",
-    slug: "sheet",
+  "drawer-demo": {
+    component: dynamic(() => import("@/examples/drawer-demo")),
+    path: "examples/drawer-demo.tsx",
+    slug: "drawer",
   },
-  "sheet-bottom": {
-    component: dynamic(() => import("@/examples/sheet-bottom")),
-    path: "examples/sheet-bottom.tsx",
-    slug: "sheet",
+  "drawer-bottom": {
+    component: dynamic(() => import("@/examples/drawer-bottom")),
+    path: "examples/drawer-bottom.tsx",
+    slug: "drawer",
   },
-  "sheet-snap-points": {
-    component: dynamic(() => import("@/examples/sheet-snap-points")),
-    path: "examples/sheet-snap-points.tsx",
-    slug: "sheet",
+  "drawer-snap-points": {
+    component: dynamic(() => import("@/examples/drawer-snap-points")),
+    path: "examples/drawer-snap-points.tsx",
+    slug: "drawer",
   },
-  "sheet-nested": {
-    component: dynamic(() => import("@/examples/sheet-nested")),
-    path: "examples/sheet-nested.tsx",
-    slug: "sheet",
+  "drawer-nested": {
+    component: dynamic(() => import("@/examples/drawer-nested")),
+    path: "examples/drawer-nested.tsx",
+    slug: "drawer",
   },
-  "sheet-nested-side": {
-    component: dynamic(() => import("@/examples/sheet-nested-side")),
-    path: "examples/sheet-nested-side.tsx",
-    slug: "sheet",
+  "drawer-nested-side": {
+    component: dynamic(() => import("@/examples/drawer-nested-side")),
+    path: "examples/drawer-nested-side.tsx",
+    slug: "drawer",
   },
-  "sheet-swipe-area": {
-    component: dynamic(() => import("@/examples/sheet-swipe-area")),
-    path: "examples/sheet-swipe-area.tsx",
-    slug: "sheet",
+  "drawer-swipe-area": {
+    component: dynamic(() => import("@/examples/drawer-swipe-area")),
+    path: "examples/drawer-swipe-area.tsx",
+    slug: "drawer",
   },
-  "sheet-indent": {
-    component: dynamic(() => import("@/examples/sheet-indent")),
-    path: "examples/sheet-indent.tsx",
-    slug: "sheet",
+  "drawer-indent": {
+    component: dynamic(() => import("@/examples/drawer-indent")),
+    path: "examples/drawer-indent.tsx",
+    slug: "drawer",
   },
   "alert-dialog-demo": {
     component: dynamic(() => import("@/examples/alert-dialog-demo")),
