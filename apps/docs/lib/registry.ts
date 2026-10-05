@@ -1032,6 +1032,26 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/sidebar-variants.tsx",
     slug: "sidebar",
   },
+  "popover-demo": {
+    component: dynamic(() => import("@/examples/popover-demo")),
+    path: "examples/popover-demo.tsx",
+    slug: "popover",
+  },
+  "popover-sides": {
+    component: dynamic(() => import("@/examples/popover-sides")),
+    path: "examples/popover-sides.tsx",
+    slug: "popover",
+  },
+  "popover-align": {
+    component: dynamic(() => import("@/examples/popover-align")),
+    path: "examples/popover-align.tsx",
+    slug: "popover",
+  },
+  "popover-with-form": {
+    component: dynamic(() => import("@/examples/popover-with-form")),
+    path: "examples/popover-with-form.tsx",
+    slug: "popover",
+  },
   "preview-card-demo": {
     component: dynamic(() => import("@/examples/preview-card-demo")),
     path: "examples/preview-card-demo.tsx",

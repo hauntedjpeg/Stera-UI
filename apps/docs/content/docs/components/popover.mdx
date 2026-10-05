@@ -1,0 +1,79 @@
+---
+title: Popover
+description: Displays rich content in a floating panel anchored to a trigger, opened on click.
+---
+
+<ComponentPreview name="popover-demo" caption="Popover" />
+
+## Installation
+
+<InstallSnippet slug="popover" hideHeading />
+
+## Composition
+
+Use the following composition to build a `Popover`:
+
+```text
+Popover
+├── PopoverTrigger
+└── PopoverContent
+    └── PopoverHeader
+        ├── PopoverTitle
+        └── PopoverDescription
+```
+
+## Sides
+
+<ComponentPreview name="popover-sides" caption="Popover Sides" />
+
+| Side | Description |
+| --- | --- |
+| `top` | Above the trigger |
+| `right` | Right of the trigger |
+| `bottom` | Below the trigger (default) |
+| `left` | Left of the trigger |
+
+## Align
+
+<ComponentPreview name="popover-align" caption="Popover Align" />
+
+| Align | Description |
+| --- | --- |
+| `start` | Aligned to the start edge of the trigger |
+| `center` | Centered on the trigger (default) |
+| `end` | Aligned to the end edge of the trigger |
+
+## With Form
+
+<ComponentPreview name="popover-with-form" caption="Popover With Form" />
+
+Popovers can hold interactive content like form fields. Focus moves into the popover when it opens and returns to the trigger when it closes.
+
+## API Reference
+
+Built on Base UI's [Popover](https://base-ui.com/react/components/popover#api-reference) primitive — see the full API reference there.
+
+### Popover
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `defaultOpen` | `boolean` | `false` |
+| `open` | `boolean` | — |
+| `onOpenChange` | `(open: boolean) => void` | — |
+
+### PopoverTrigger
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `render` | `ReactElement` | — |
+
+Use `render` to compose the trigger with another component, such as a `Button`.
+
+### PopoverContent
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` |
+| `align` | `"start" \| "center" \| "end"` | `"center"` |
+| `sideOffset` | `number` | `4` |
+| `alignOffset` | `number` | `0` |
