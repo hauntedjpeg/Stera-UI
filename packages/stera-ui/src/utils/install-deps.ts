@@ -1,6 +1,6 @@
 import fs from "node:fs"
 import path from "node:path"
-import { detect } from "@antfu/ni"
+import { detect, getUserAgent } from "package-manager-detector/detect"
 import { execa } from "execa"
 import { createSpinner } from "./spinner.js"
 
@@ -9,21 +9,12 @@ type PackageManager = "pnpm" | "npm" | "yarn" | "bun"
 export async function detectPackageManager(
   cwd: string
 ): Promise<PackageManager> {
-  // Use @antfu/ni which walks up the directory tree to find lock files
-  // This handles monorepos where the lock file is at the root
-  const detected = await detect({ programmatic: true, cwd })
+  // Walks up the directory tree to find a lock file or packageManager field,
+  // which handles monorepos where the lock file is at the root. Falls back to
+  // npm_config_user_agent (set by pnpm dlx, npx, etc.).
+  const name = (await detect({ cwd }))?.name ?? getUserAgent()
 
-  if (detected === "pnpm@6" || detected === "pnpm") return "pnpm"
-  if (detected === "yarn@berry" || detected === "yarn") return "yarn"
-  if (detected === "bun") return "bun"
-  if (detected === "npm") return "npm"
-
-  // Fallback: check npm_config_user_agent (set by pnpm dlx, npx, etc.)
-  const userAgent = process.env.npm_config_user_agent || ""
-  if (userAgent.startsWith("pnpm")) return "pnpm"
-  if (userAgent.startsWith("yarn")) return "yarn"
-  if (userAgent.startsWith("bun")) return "bun"
-
+  if (name === "pnpm" || name === "yarn" || name === "bun") return name
   return "npm"
 }
 

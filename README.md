@@ -19,7 +19,7 @@ pnpm dlx stera-ui@latest add button
 | `stera-ui add <component> [...]` | Copies the requested components (and their dependencies) into your project, rewriting import paths to match your aliases and installing any missing npm packages. |
 | `stera-ui list`                  | Lists all available components grouped by type, with their registry dependencies.                                                                                 |
 
-All commands accept `--cwd <path>` and `--yes`. `add` also accepts `--overwrite`. See [`stera-ui --help`](https://ui.stera.sh/docs/cli) for the full reference.
+`init` and `add` accept `--cwd <path>` and `--yes` (never prompt; keep existing files). `add` leaves dependencies you already have untouched; pass `--overwrite` to replace existing files with the registry version. See [`stera-ui --help`](https://ui.stera.sh/docs/cli) for the full reference.
 
 ## Configuration
 

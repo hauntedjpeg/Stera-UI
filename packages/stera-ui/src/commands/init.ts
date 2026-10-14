@@ -93,7 +93,7 @@ async function promptFontStrategy(
     }
     if (detected.hasNextFont) sources.push("next/font")
     if (detected.hasGoogleFontsLink) sources.push("Google Fonts")
-    console.log(`  Detected existing fonts: ${sources.join(" via ")}\n`)
+    console.log(`Detected existing fonts: ${sources.join(" via ")}\n`)
   }
 
   type StrategyChoice = {
@@ -189,7 +189,7 @@ async function executeFontStrategy(
     })
 
     if (patched.length > 0) {
-      console.log(`  ${CHECK}  Updated font variables to use ${fontValue}`)
+      console.log(`${CHECK} Updated font variables to use ${fontValue}`)
     }
     return
   }
@@ -212,7 +212,7 @@ async function executeFontStrategy(
       await insertImportLine(typographyPath, importLine)
     }
     console.log(
-      `  ${CHECK}  Added font imports to ${path.relative(cwd, typographyPath)}`
+      `${CHECK} Added font imports to ${path.relative(cwd, typographyPath)}`
     )
   }
 
@@ -220,7 +220,7 @@ async function executeFontStrategy(
     const patched = patchCssVariables(typographyPath, fontTree.cssVars)
     if (patched.length > 0) {
       console.log(
-        `  ${CHECK}  Updated font variables in ${path.relative(cwd, typographyPath)}`
+        `${CHECK} Updated font variables in ${path.relative(cwd, typographyPath)}`
       )
     }
   }
@@ -232,14 +232,14 @@ async function executeFontStrategy(
 export async function init(options: { cwd?: string; yes?: boolean }) {
   const cwd = options.cwd ? path.resolve(options.cwd) : process.cwd()
 
-  console.log(`\n  ${LOGO}  Stera UI\n`)
+  console.log(`\n${LOGO} Stera UI\n`)
 
   // Check if config already exists
   const existing = findConfigPath(cwd)
   if (existing) {
     const existingName = path.basename(existing)
     if (existingName === LEGACY_CONFIG_FILE) {
-      console.log(`  Found legacy ${LEGACY_CONFIG_FILE} at ${existing}`)
+      console.log(`Found legacy ${LEGACY_CONFIG_FILE} at ${existing}`)
       const shouldRename = options.yes
         ? true
         : await confirm({
@@ -249,18 +249,18 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
       if (shouldRename) {
         const renamed = path.join(path.dirname(existing), CONFIG_FILE)
         fs.renameSync(existing, renamed)
-        console.log(`  ${CHECK}  Renamed to ${CONFIG_FILE}`)
-        console.log('  Run "stera-ui add <component>" to add components.\n')
+        console.log(`${CHECK} Renamed to ${CONFIG_FILE}`)
+        console.log('Run "stera-ui add <component>" to add components.\n')
       } else {
         console.log(
-          `  Keeping ${LEGACY_CONFIG_FILE} for now. Legacy filename support will be removed in a future release.\n`
+          `Keeping ${LEGACY_CONFIG_FILE} for now. Legacy filename support will be removed in a future release.\n`
         )
       }
       return
     }
 
-    console.log(`  ${CONFIG_FILE} already exists at ${existing}`)
-    console.log('  Run "stera-ui add <component>" to add components.\n')
+    console.log(`${CONFIG_FILE} already exists at ${existing}`)
+    console.log('Run "stera-ui add <component>" to add components.\n')
     return
   }
 
@@ -268,7 +268,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   const pkgPath = path.join(cwd, "package.json")
   if (!fs.existsSync(pkgPath)) {
     console.error(
-      "  Error: No package.json found. Please run this in a project directory."
+      "Error: No package.json found. Please run this in a project directory."
     )
     process.exit(1)
   }
@@ -281,12 +281,12 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   const aliasPrefix = detectAliasPrefix(cwd)
   if (!aliasPrefix) {
     console.error("")
-    console.error("  Error: No import alias found in your tsconfig.json file.")
+    console.error("Error: No import alias found in your tsconfig.json file.")
     console.error(
-      '  Stera UI requires a path alias (e.g. "@/*": ["./src/*"]) in compilerOptions.paths.'
+      'Stera UI requires a path alias (e.g. "@/*": ["./src/*"]) in compilerOptions.paths.'
     )
     console.error(
-      "  See https://ui.stera.sh/docs/installation for setup instructions per framework."
+      "See https://ui.stera.sh/docs/installation for setup instructions per framework."
     )
     console.error("")
     process.exit(1)
@@ -304,7 +304,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   if (frameworkName) parts.push(frameworkName)
   if (project.hasSrc) parts.push("src/ directory")
   if (parts.length > 0) {
-    console.log(`  Detected ${parts.join(" project with ")} project\n`)
+    console.log(`Detected ${parts.join(" project with ")} project\n`)
   }
 
   // Detect existing fonts
@@ -317,7 +317,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   if (fs.existsSync(uiDir) && fs.readdirSync(uiDir).length > 0) {
     const relativeUiDir = path.relative(cwd, uiDir)
     console.log("")
-    console.log(`  ${relativeUiDir} already exists and is not empty.`)
+    console.log(`${relativeUiDir} already exists and is not empty.`)
 
     const proceed =
       options.yes ||
@@ -330,7 +330,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
     if (!proceed) {
       console.log("")
       console.log(
-        `  Aborted. Move ${relativeUiDir} aside, or point "css" in ${CONFIG_FILE} at a different stylesheet, then run init again.`
+        `Aborted. Move ${relativeUiDir} aside, or point "css" in ${CONFIG_FILE} at a different stylesheet, then run init again.`
       )
       return
     }
@@ -345,23 +345,25 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   // Write config
   const configPath = path.join(cwd, CONFIG_FILE)
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n", "utf-8")
-  console.log(`  ${CHECK}  Created ${CONFIG_FILE}`)
+  console.log(`${CHECK} Created ${CONFIG_FILE}`)
 
   // Install base styles: write the ui/ partials, then ensure the user's
   // globals.css exists and imports the index. globals.css is user-owned from
   // this point forward — `add <component>` never touches any CSS.
-  const fetchSpinner = createSpinner("Fetching base styles")
+  const fetchSpinner = createSpinner("Downloading base styles")
   let stylesResult
   try {
     await migrateLegacyStyles(config, cwd)
-    stylesResult = await writeStyles(config, cwd)
+    stylesResult = await writeStyles(config, cwd, {
+      yes: options.yes,
+      onFetched: () => fetchSpinner.stop(),
+    })
   } catch (err) {
     fetchSpinner.fail("Failed to fetch base styles")
     throw err
   }
-  fetchSpinner.succeed("Base styles resolved")
   console.log(
-    `  ${CHECK}  Created ${path.relative(cwd, stylesResult.indexPath)}`
+    `${CHECK} Created ${path.relative(cwd, stylesResult.indexPath)}`
   )
 
   const globalsPath = project.existingCssFile
@@ -375,7 +377,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
     }
     await insertImportLine(globalsPath, '@import "./ui/index.css";')
     console.log(
-      `  ${CHECK}  Added @import to ${path.relative(cwd, globalsPath)}`
+      `${CHECK} Added @import to ${path.relative(cwd, globalsPath)}`
     )
   } else {
     // No globals.css — scaffold a minimal one. Tailwind directives live in
@@ -389,7 +391,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
         '@import "./ui/index.css";',
       ].join("\n") + "\n"
     await fsp.writeFile(globalsPath, scaffold, "utf-8")
-    console.log(`  ${CHECK}  Created ${path.relative(cwd, globalsPath)}`)
+    console.log(`${CHECK} Created ${path.relative(cwd, globalsPath)}`)
   }
 
   // Execute font strategy (patches ui/typography.css only)
@@ -405,13 +407,13 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
 
   // Next steps
   console.log("")
-  console.log("  Next steps:")
-  console.log("    stera-ui add <component>")
+  console.log("Next steps:")
+  console.log("  stera-ui add <component>")
 
   if (strategy === "skip") {
     console.log("")
     console.log(
-      `  ${dim("Font setup was skipped. See https://ui.stera.sh for font configuration docs.")}`
+      `${dim("Font setup was skipped. See https://ui.stera.sh for font configuration docs.")}`
     )
   }
 

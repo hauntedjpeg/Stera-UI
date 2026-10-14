@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { createRequire } from "node:module"
 import { Command } from "commander"
 import { CROSS } from "./utils/format.js"
@@ -31,8 +32,8 @@ program
   .description("Add components to your project.")
   .argument("<components...>", "Components to add")
   .option("-c, --cwd <path>", "Working directory", process.cwd())
-  .option("-y, --yes", "Skip confirmation prompts")
-  .option("-o, --overwrite", "Overwrite existing files without prompting")
+  .option("-y, --yes", "Never prompt; keep existing files that differ")
+  .option("-o, --overwrite", "Replace existing files, including dependencies")
   .action(async (components, options) => {
     const { add } = await import("./commands/add.js")
     await add(components, options)
@@ -52,6 +53,6 @@ program.parseAsync().catch((error: unknown) => {
     process.exit(130)
   }
   const message = error instanceof Error ? error.message : String(error)
-  console.error(`\n  ${CROSS}  ${message}\n`)
+  console.error(`\n${CROSS} ${message}\n`)
   process.exit(1)
 })

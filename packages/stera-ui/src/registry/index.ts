@@ -105,11 +105,14 @@ export async function getAllComponents(): Promise<RegistryIndexEntry[]> {
  * request), then all needed items are fetched in one parallel batch.
  * Order is preserved: requested components first, then dependencies.
  *
+ * `onPhase` fires once the graph is known, just before the items download.
+ *
  * @throws ComponentNotFoundError when any name (requested or transitive)
  *   is missing from the registry index.
  */
 export async function resolveDependencies(
-  names: string[]
+  names: string[],
+  onPhase?: (phase: "downloading", count: number) => void
 ): Promise<RegistryItem[]> {
   const index = await fetchRegistryIndex()
   const byName = new Map(index.map((entry) => [entry.name, entry]))
@@ -138,5 +141,6 @@ export async function resolveDependencies(
     throw new ComponentNotFoundError(missing)
   }
 
+  onPhase?.("downloading", needed.length)
   return Promise.all(needed.map((name) => fetchRegistryItem(name)))
 }

@@ -123,9 +123,16 @@ export async function migrateLegacyStyles(
 export async function writeStyles(
   config: SteraConfig,
   cwd: string,
-  options: { overwrite?: boolean } = {}
+  options: {
+    overwrite?: boolean
+    /** Never prompt — protected partials that differ are kept. */
+    yes?: boolean
+    /** Called once the registry fetch is done, before any prompt can appear. */
+    onFetched?: () => void
+  } = {}
 ): Promise<WriteStylesResult> {
   const item = await fetchRegistryItem("globals")
+  options.onFetched?.()
   const cssDir = path.dirname(path.resolve(cwd, config.css))
 
   const written: string[] = []
@@ -152,7 +159,10 @@ export async function writeStyles(
         continue
       }
 
-      if (!options.overwrite && !(await confirmOverwrite(target))) {
+      if (
+        !options.overwrite &&
+        (options.yes || !(await confirmOverwrite(target)))
+      ) {
         skipped.push({ path: target, reason: "declined" })
         continue
       }

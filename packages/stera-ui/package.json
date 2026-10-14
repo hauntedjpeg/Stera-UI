@@ -37,18 +37,16 @@
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {
-    "@antfu/ni": "^30.0.0",
+  "devDependencies": {
     "@inquirer/prompts": "^7.0.0",
+    "@types/node": "^25.1.0",
     "commander": "^13.1.0",
     "execa": "^9.6.1",
+    "package-manager-detector": "^1.9.0",
     "ts-morph": "^27.0.2",
     "tsconfig-paths": "^4.2.0",
-    "zod": "^3.24.0"
-  },
-  "devDependencies": {
-    "@types/node": "^25.1.0",
     "tsup": "^8.5.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "zod": "^3.24.0"
   }
 }

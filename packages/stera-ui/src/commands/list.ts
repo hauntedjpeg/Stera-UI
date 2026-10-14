@@ -3,7 +3,7 @@ import { LOGO, dim } from "../utils/format.js"
 import { createSpinner } from "../utils/spinner.js"
 
 export async function list() {
-  const spinner = createSpinner("Fetching registry")
+  const spinner = createSpinner("Resolving")
   let items
   try {
     items = await getAllComponents()
@@ -11,7 +11,7 @@ export async function list() {
     spinner.fail("Failed to fetch registry")
     throw err
   }
-  spinner.succeed("Registry resolved")
+  spinner.stop()
 
   // Group by type
   const groups = new Map<string, typeof items>()
@@ -21,18 +21,18 @@ export async function list() {
     groups.get(type)!.push(item)
   }
 
-  console.log(`\n  ${LOGO}  Available components\n`)
+  console.log(`\n${LOGO} Available components\n`)
 
   for (const [type, groupItems] of groups) {
-    console.log(`  ${type}`)
+    console.log(type)
     for (const item of groupItems) {
       const deps = item.registryDependencies?.length
         ? dim(`  (depends on: ${item.registryDependencies.join(", ")})`)
         : ""
-      console.log(`    ${item.name}${deps}`)
+      console.log(`  ${item.name}${deps}`)
     }
     console.log("")
   }
 
-  console.log(`  ${dim(`${items.length} components available`)}\n`)
+  console.log(`${dim(`${items.length} components available`)}\n`)
 }

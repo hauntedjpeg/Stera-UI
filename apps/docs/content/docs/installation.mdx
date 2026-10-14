@@ -29,12 +29,12 @@ Multiple at once:
 pnpm dlx stera-ui@latest add button dialog dropdown-menu
 ```
 
-Registry dependencies are resolved automatically — adding `dialog` also pulls in `button` and `utils` if missing.
+Registry dependencies are resolved automatically — adding `dialog` also pulls in `button` and `utils` if missing. Dependencies you already have are left untouched, even if you've edited them. You're only asked before replacing a component you named.
 
 ### Flags
 
-- `--yes` — skip prompts and accept defaults
-- `--overwrite` — replace existing files without asking
+- `--yes` — never prompt; existing files that differ are kept
+- `--overwrite` — replace existing files with the registry version, dependencies included
 
 ## Refresh design tokens
 

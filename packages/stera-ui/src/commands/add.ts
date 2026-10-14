@@ -19,6 +19,12 @@ import { createSpinner } from "../utils/spinner.js"
 
 const transforms = [transformImports]
 
+const SKIP_LABELS = {
+  unchanged: "unchanged",
+  declined: "skipped",
+  kept: "kept",
+} as const
+
 export async function add(
   components: string[],
   options: { cwd?: string; yes?: boolean; overwrite?: boolean }
@@ -29,14 +35,14 @@ export async function add(
   const configPath = findConfigPath(cwd)
   if (!configPath) {
     console.error(
-      `  ${CROSS}  ${CONFIG_FILE} not found. Run "stera-ui init" first.`
+      `${CROSS} ${CONFIG_FILE} not found. Run "stera-ui init" first.`
     )
     process.exit(1)
   }
 
   const config = loadConfig(cwd)
   if (!config) {
-    console.error(`  ${CROSS}  Failed to parse ${CONFIG_FILE}.`)
+    console.error(`${CROSS} Failed to parse ${CONFIG_FILE}.`)
     process.exit(1)
   }
 
@@ -48,10 +54,10 @@ export async function add(
   if (components.includes("globals")) {
     if (components.length > 1) {
       console.error(
-        `  ${CROSS}  "stera-ui add globals" refreshes design tokens and cannot be combined with other components.`
+        `${CROSS} "stera-ui add globals" refreshes design tokens and cannot be combined with other components.`
       )
       console.error(
-        `     Run "stera-ui add globals" and "stera-ui add ${components
+        `  Run "stera-ui add globals" and "stera-ui add ${components
           .filter((c) => c !== "globals")
           .join(" ")}" separately.`
       )
@@ -65,48 +71,53 @@ export async function add(
       migrated = await migrateLegacyStyles(config, projectRoot)
       result = await writeStyles(config, projectRoot, {
         overwrite: options.overwrite,
+        yes: options.yes,
+        onFetched: () => spinner.stop(),
       })
     } catch (err) {
       spinner.fail("Failed to refresh base styles")
       throw err
     }
-    spinner.succeed(`Refreshed ${result.written.length} style files`)
-
     if (migrated) {
       console.log(
-        `  ${CHECK}  Migrated ${path.relative(projectRoot, migrated)} to ui/`
+        `${CHECK} Migrated ${path.relative(projectRoot, migrated)} to ui/`
       )
     }
     for (const target of result.written) {
-      console.log(`  ${CHECK}  ${target}`)
+      console.log(`${CHECK} ${target}`)
     }
     for (const file of result.skipped) {
       const reason =
         file.reason === "unchanged" ? "unchanged" : "kept your version"
-      console.log(`  ${dim(`-  ${file.path} (${reason})`)}`)
+      console.log(`${dim(`· ${file.path}  (${reason})`)}`)
     }
     console.log("")
     return
   }
 
-  const spinner = createSpinner("Fetching registry")
+  const spinner = createSpinner("Resolving")
 
   // Resolve requested components and their dependencies. Missing names
   // (requested or transitive) surface as a single ComponentNotFoundError.
   let resolved: RegistryItem[]
   try {
-    resolved = await resolveDependencies(components)
+    resolved = await resolveDependencies(components, (_phase, count) => {
+      spinner.update(
+        `Downloading ${count} ${count === 1 ? "component" : "components"}`
+      )
+    })
   } catch (err) {
     if (err instanceof ComponentNotFoundError) {
       spinner.fail(err.message)
-      console.error(`  Run "stera-ui list" to see available components.`)
+      console.error(`Run "stera-ui list" to see available components.`)
       process.exit(1)
     }
     spinner.fail("Failed to fetch registry")
     throw err
   }
 
-  spinner.succeed("Registry resolved")
+  // Cleared before writing so no spinner is live under an overwrite prompt.
+  spinner.stop()
 
   // Apply transforms to file contents
   for (const item of resolved) {
@@ -135,16 +146,15 @@ export async function add(
     resolved,
     config,
     projectRoot,
-    { overwrite: options.overwrite }
+    { overwrite: options.overwrite, yes: options.yes, requested: components }
   )
 
   for (const file of written) {
-    console.log(`  ${CHECK}  ${file}`)
+    console.log(`${CHECK} ${file}`)
   }
 
   for (const file of skipped) {
-    const label = file.reason === "unchanged" ? "(unchanged)" : "(skipped)"
-    console.log(`  ${dim(`·  ${file.path}  ${label}`)}`)
+    console.log(dim(`· ${file.path}  (${SKIP_LABELS[file.reason]})`))
   }
 
   // Install npm dependencies
