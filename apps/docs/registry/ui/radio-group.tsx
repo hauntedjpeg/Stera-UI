@@ -29,7 +29,7 @@ function RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {
         // Disabled
         "disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:bg-surface-disabled",
         // Invalid
-        "aria-invalid:border-destructive aria-invalid:aria-checked:border-primary aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+        "aria-invalid:border-border-danger-strong aria-invalid:aria-checked:border-border-brand-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger",
         // Checked
         "data-checked:border-border-brand-strong data-checked:bg-surface-brand data-checked:text-text-onbrand",
         // Variants

@@ -48,7 +48,7 @@ function ItemSeparator({
 const itemVariants = cva(
   [
     // Base
-    "rounded-xl border transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring",
+    "rounded-xl border transition-colors duration-100 outline-none focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
     // Sizing
     "w-full",
     // Other

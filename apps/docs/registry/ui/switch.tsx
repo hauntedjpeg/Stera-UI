@@ -19,7 +19,7 @@ function Switch({
         // Base
         "relative inline-flex shrink-0 items-center rounded-full border-2 border-transparent shadow-xs transition-all outline-none after:absolute after:-inset-x-3 after:-inset-y-2",
         // Focus
-        "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring",
+        "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
         // Invalid
         "data-invalid:border-border-danger-strong data-invalid:ring-3 data-invalid:ring-ring-danger",
         // State

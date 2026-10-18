@@ -253,9 +253,9 @@ function ComboboxChips({
         // Typography
         "st-body-md-compact",
         // Focus
-        "focus-within:border-bg-brand focus-within:ring-3 focus-within:ring-ring-brand",
+        "focus-within:border-border-brand-strong focus-within:ring-3 focus-within:ring-ring-brand",
         // Invalid
-        "has-aria-invalid:border-border-danger has-aria-invalid:ring-3 has-aria-invalid:ring-ring-danger",
+        "has-aria-invalid:border-border-danger-strong has-aria-invalid:ring-3 has-aria-invalid:ring-ring-danger",
         // Variants
         "has-data-[slot=combobox-chip]:p-1",
         className

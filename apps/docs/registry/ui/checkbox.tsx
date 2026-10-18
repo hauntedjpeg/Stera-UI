@@ -19,7 +19,7 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         // Disabled
         "disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:bg-surface-disabled",
         // Invalid
-        "aria-invalid:border-destructive aria-invalid:aria-checked:border-primary aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+        "aria-invalid:border-border-danger-strong aria-invalid:aria-checked:border-surface-brand aria-invalid:ring-3 aria-invalid:ring-ring-danger",
         // Checked / Indeterminate
         "data-checked:border-surface-brand data-checked:bg-surface-brand data-checked:text-text-onbrand",
         "data-indeterminate:border-surface-brand data-indeterminate:bg-surface-brand data-indeterminate:text-text-onbrand",

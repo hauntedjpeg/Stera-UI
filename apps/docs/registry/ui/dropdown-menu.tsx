@@ -108,7 +108,7 @@ function DropdownMenuItem({
         // Focus
         "focus:bg-surface-hover",
         // Danger
-        "data-[variant=danger]:focus:text-danger not-data-[variant=danger]:focus:**:text-text data-[variant=danger]:text-text-danger data-[variant=danger]:focus:bg-surface-danger-subtle data-[variant=danger]:*:[svg]:text-text-danger",
+        "data-[variant=danger]:focus:text-text-danger not-data-[variant=danger]:focus:**:text-text data-[variant=danger]:text-text-danger data-[variant=danger]:focus:bg-surface-danger-subtle data-[variant=danger]:*:[svg]:text-text-danger",
         // Disabled
         "data-disabled:pointer-events-none data-disabled:text-text-subtlest",
         // Other
