@@ -15,15 +15,15 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
         // Group
         "group/input-group",
         // Base
-        "relative flex items-center rounded-xl border border-border shadow-xs transition-[color,box-shadow] outline-none",
-        // Sizing
-        "h-9 w-full min-w-0 has-[[data-slot=input-group-control][data-size=lg]]:h-11 has-[[data-slot=input-group-control][data-size=sm]]:h-8",
+        "relative flex items-center rounded-xl border border-border bg-surface shadow-xs transition-[color,box-shadow,border-color] outline-none",
+        // Sizing (driven by InputGroupInput's data-size; block layouts size to content)
+        "h-9 w-full min-w-0 has-[[data-slot=input-group-control][data-size=lg]]:not-has-[>[data-align^=block]]:h-11 has-[[data-slot=input-group-control][data-size=sm]]:not-has-[>[data-align^=block]]:h-8",
         // Focus
-        "has-[[data-slot=input-group-control]:focus-visible]:border-bg-brand in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-0 has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring-brand",
+        "has-[[data-slot=input-group-control]:focus-visible]:border-border-brand-strong has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring-brand",
         // Disabled
         "has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed has-[[data-slot=input-group-control]:disabled]:border-border-strong has-[[data-slot=input-group-control]:disabled]:bg-surface-disabled has-[[data-slot=input-group-control]:disabled]:text-text-subtlest",
         // Invalid
-        "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-destructive/20 [aria-invalid=true]:ring-destructive/40 has-[[data-slot][aria-invalid=true]]:ring-3",
+        "has-[[data-slot][aria-invalid=true]]:border-border-danger-strong has-[[data-slot][aria-invalid=true]]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-ring-danger",
         // Variants
         "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pr-2 has-[>[data-align=inline-start]]:[&>input]:pl-2",
         className
@@ -36,23 +36,23 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
 const inputGroupAddonVariants = cva(
   [
     // Base
-    "flex items-center justify-center py-1.5 st-body-md text-text select-none",
+    "flex items-center justify-center st-body-md text-text select-none",
     // Sizing
-    "h-auto gap-2",
+    "gap-2",
     // Other
-    "cursor-text group-has-[[data-slot=input-group-control]:disabled]/input-group:text-text-subtlest [&>svg]:text-text-subtle [&>svg:not([class*='size-'])]:size-4",
+    "cursor-text group-has-[[data-slot=input-group-control]:disabled]/input-group:opacity-50 [&>svg]:text-text-subtle [&>svg:not([class*='size-'])]:size-4",
   ],
   {
     variants: {
       align: {
         "inline-start":
-          "order-first py-2.5 pl-2.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:py-3.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:pl-3.5 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:py-2 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pl-2 has-[>button]:-ml-1 has-[>kbd]:ml-[-0.15rem]",
+          "order-first self-stretch pl-2.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:pl-3.5 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pl-2 has-[>button]:-ml-1 has-[>kbd]:ml-[-0.15rem]",
         "inline-end":
-          "order-last py-2.5 pr-2.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:py-3.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:pr-3.5 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:py-2 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pr-2 has-[>button]:-mr-1 has-[>kbd]:mr-[-0.15rem]",
+          "order-last self-stretch pr-2.5 group-has-[[data-slot=input-group-control][data-size=lg]]/input-group:pr-3.5 group-has-[[data-slot=input-group-control][data-size=sm]]/input-group:pr-2 has-[>button]:-mr-1 has-[>kbd]:mr-[-0.15rem]",
         "block-start":
-          "order-first w-full justify-start px-2.5 pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-2",
+          "order-first w-full justify-start px-2.5 pt-2 pb-1.5 [.border-b]:pb-2",
         "block-end":
-          "order-last w-full justify-start px-2.5 pb-2 group-has-[>input]/input-group:pb-2 [.border-t]:pt-2",
+          "order-last w-full justify-start px-2.5 pt-1.5 pb-2 [.border-t]:pt-2",
       },
     },
     defaultVariants: {
@@ -115,7 +115,7 @@ function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
     <span
       className={cn(
         // Base
-        "flex items-center st-body-md text-text-subtlest",
+        "flex items-center st-body-md text-text-subtle",
         // Sizing
         "gap-2",
         // Other

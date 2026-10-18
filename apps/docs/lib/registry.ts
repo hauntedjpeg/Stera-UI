@@ -750,6 +750,16 @@ const examples: Record<string, RegistryEntry> = {
     path: "examples/input-group-with-label.tsx",
     slug: "input-group",
   },
+  "input-group-states": {
+    component: dynamic(() => import("@/examples/input-group-states")),
+    path: "examples/input-group-states.tsx",
+    slug: "input-group",
+  },
+  "input-group-align": {
+    component: dynamic(() => import("@/examples/input-group-align")),
+    path: "examples/input-group-align.tsx",
+    slug: "input-group",
+  },
   "field-demo": {
     component: dynamic(() => import("@/examples/field-demo")),
     path: "examples/field-demo.tsx",

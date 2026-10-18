@@ -25,27 +25,21 @@ InputGroup
 
 Use the `align` prop on `InputGroupAddon` to position the addon relative to the input.
 
+<ComponentPreview name="input-group-align" />
+
+| Align | Description |
+| --- | --- |
+| `inline-start` | Before the input, on the same row. This is the default. |
+| `inline-end` | After the input, on the same row. |
+| `block-start` | Above the input. The group stacks vertically and sizes to its content. |
+| `block-end` | Below the input. The group stacks vertically and sizes to its content. |
+
 <Callout>
-  For proper focus management, `InputGroupAddon` should always be placed after
-  `InputGroupInput` or `InputGroupTextarea` in the DOM. Use the `align` prop to
-  visually position the addon.
+  Addons are positioned with CSS order, so their place in the DOM does not
+  affect the layout. Put addons in the DOM in the order you want them reached
+  by keyboard: an `inline-start` addon that contains a button should come
+  before the input, and an `inline-end` one after it.
 </Callout>
-
-### inline-start
-
-Use `align="inline-start"` to position the addon at the start of the input. This is the default.
-
-### inline-end
-
-Use `align="inline-end"` to position the addon at the end of the input.
-
-### block-start
-
-Use `align="block-start"` to position the addon above the input.
-
-### block-end
-
-Use `align="block-end"` to position the addon below the input.
 
 ## Examples
 
@@ -57,19 +51,29 @@ Use `align="block-end"` to position the addon below the input.
 
 <ComponentPreview name="input-group-with-button" />
 
+`InputGroupButton` defaults to `size="xs"`, which fits `sm` and `md` groups. In an `lg` group, use `size="sm"` or `size="icon-sm"` so the button fills the taller row.
+
 ### With Kbd
 
 <ComponentPreview name="input-group-with-kbd" />
 
 ### Sizes
 
+The `size` prop on `InputGroupInput` sets the height of the whole group and the padding of its addons.
+
 <ComponentPreview name="input-group-sizes" />
 
-| Size | Description |
-| --- | --- |
-| `sm` | Small |
-| `md` | Medium (default) |
-| `lg` | Large |
+| Size | Height | Description |
+| --- | --- | --- |
+| `sm` | 32px | Small |
+| `md` | 36px | Medium (default) |
+| `lg` | 44px | Large |
+
+### States
+
+Disabled and invalid states are read from the control. Set `disabled` or `aria-invalid` on `InputGroupInput` or `InputGroupTextarea` and the group's border, ring, and addons follow.
+
+<ComponentPreview name="input-group-states" />
 
 ### Textarea
 
@@ -91,7 +95,7 @@ Use `align="block-end"` to position the addon below the input.
 
 | Component | Description |
 | --- | --- |
-| `InputGroupInput` | The text input — accepts all `Input` props including `size` |
-| `InputGroupTextarea` | A textarea variant of the input control |
+| `InputGroupInput` | The text input — accepts all `Input` props. Its `size` drives the group height |
+| `InputGroupTextarea` | A textarea variant of the input control. The group sizes to its content |
 | `InputGroupText` | Plain text label inside an addon |
-| `InputGroupButton` | Button inside an addon — accepts all `Button` props |
+| `InputGroupButton` | Button inside an addon — accepts all `Button` props, defaults to `size="xs"` |
