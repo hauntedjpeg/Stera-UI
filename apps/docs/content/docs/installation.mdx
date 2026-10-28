@@ -9,13 +9,73 @@ description: How to install and configure Stera UI in your project.
 - Tailwind CSS v4
 - TypeScript (recommended)
 
+## Set up an import alias
+
+Stera UI writes components to `@/components/ui` and `cn()` to `@/lib/utils`, so your project needs a `@/*` path mapping. `init` reads it from your TypeScript config (following project references) and stops with instructions if it is missing. It never edits `tsconfig` or bundler config for you.
+
+`baseUrl` is not needed. TypeScript 7 removes it; `paths` targets resolve relative to the config file that defines them.
+
+### Next.js
+
+`create-next-app` already writes the alias:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+Use `["./*"]` if your project has no `src/` directory.
+
+### Vite
+
+`create-vite` scaffolds a solution-style config: `tsconfig.json` only lists references, and the compiler options live in `tsconfig.app.json`. Add the alias there, not in the root file:
+
+```json title="tsconfig.app.json"
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+Then let Vite resolve it. On Vite 8 or newer, turn on the built-in tsconfig paths resolver:
+
+```ts title="vite.config.ts"
+export default defineConfig({
+  resolve: { tsconfigPaths: true },
+})
+```
+
+On Vite 5 to 7, add a matching alias instead:
+
+```ts title="vite.config.ts"
+import { fileURLToPath } from "node:url"
+
+export default defineConfig({
+  resolve: {
+    alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
+  },
+})
+```
+
+### Other frameworks
+
+Add the same `paths` block to the `compilerOptions` of your `tsconfig.json` (or `jsconfig.json`), and make sure your bundler resolves it.
+
 ## Initialize
 
 ```bash
 pnpm dlx stera-ui@latest init
 ```
 
-`init` detects your project structure, writes `stera.config.json`, creates a `ui/` folder of style partials next to your `globals.css`, and installs `tw-animate-css`.
+`init` detects your project structure, writes `stera.config.json`, creates a `ui/` folder of style partials next to your Tailwind entry file (`globals.css`, or `src/index.css` on Vite), and installs `tw-animate-css`.
 
 ## Add components
 
@@ -61,28 +121,31 @@ After `init`:
 ```text
 your-project/
 ├── stera.config.json        # Stera UI configuration
-└── styles/
-    ├── globals.css          # Yours — imports ui/index.css + peer styles
-    └── ui/
-        ├── index.css        # Wires the partials together
-        ├── colors.css       # Color tokens, light + dark
-        ├── typography.css   # Type tokens + typography utilities
-        ├── scrollbar.css    # Scrollbar utilities
-        ├── scroll-fade.css  # Scroll-fade utilities
-        └── base.css         # Base layer defaults
+└── src/
+    └── styles/
+        ├── globals.css      # Yours — imports ui/index.css + peer styles
+        └── ui/
+            ├── index.css        # Wires the partials together
+            ├── colors.css       # Color tokens, light + dark
+            ├── typography.css   # Type tokens + typography utilities
+            ├── scrollbar.css    # Scrollbar utilities
+            ├── scroll-fade.css  # Scroll-fade utilities
+            └── base.css         # Base layer defaults
 ```
+
+Projects without a `src/` directory get the same layout at the root.
 
 ### What each file is for
 
-| File | Contents | Yours to edit? |
-| --- | --- | --- |
-| `globals.css` | Your own styles, plus the imports `init` added | Yes — never touched after `init` |
-| `ui/colors.css` | Color ramps, semantic color tokens, `.dark` overrides, and the Tailwind color mappings | Yes — this is the file to paste new colors into |
-| `ui/typography.css` | Font families, sizes, weights, letter spacing, line heights, and the `st-*` utilities | Yes — font variables are patched here |
-| `ui/scrollbar.css` | `scrollbar-hide` | Rarely |
-| `ui/scroll-fade.css` | The `scroll-fade` utilities | Rarely |
-| `ui/base.css` | Base layer element defaults | Rarely |
-| `ui/index.css` | Import manifest and the `dark` variant | No — a refresh rewrites it |
+| File                 | Contents                                                                               | Yours to edit?                                  |
+| -------------------- | -------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `globals.css`        | Your own styles, plus the imports `init` added                                         | Yes — never touched after `init`                |
+| `ui/colors.css`      | Color ramps, semantic color tokens, `.dark` overrides, and the Tailwind color mappings | Yes — this is the file to paste new colors into |
+| `ui/typography.css`  | Font families, sizes, weights, letter spacing, line heights, and the `st-*` utilities  | Yes — font variables are patched here           |
+| `ui/scrollbar.css`   | `scrollbar-hide`                                                                       | Rarely                                          |
+| `ui/scroll-fade.css` | The `scroll-fade` utilities                                                            | Rarely                                          |
+| `ui/base.css`        | Base layer element defaults                                                            | Rarely                                          |
+| `ui/index.css`       | Import manifest and the `dark` variant                                                 | No — a refresh rewrites it                      |
 
 Everything in `ui/` is plain CSS in your project. Rename it, split it further, or fold it into your own structure — the CLI only needs `globals.css` to keep importing whatever entry point you settle on.
 
@@ -91,12 +154,15 @@ After your first `stera-ui add`:
 ```text
 your-project/
 ├── stera.config.json
-├── components/
-│   └── ui/                  # Installed components
-│       └── button.tsx
-├── lib/
-│   └── utils.ts             # cn() utility
-└── styles/
-    ├── globals.css
-    └── ui/
+└── src/
+    ├── components/
+    │   └── ui/              # Installed components
+    │       └── button.tsx
+    ├── lib/
+    │   └── utils.ts         # cn() utility
+    └── styles/
+        ├── globals.css
+        └── ui/
 ```
+
+Components land wherever your `@/*` alias points: `src/components/ui/` when it maps to `./src/*`, `components/ui/` when it maps to `./*`.

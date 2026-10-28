@@ -16,6 +16,8 @@ import {
   detectAliasPrefix,
   type ProjectInfo,
 } from "../utils/detect-project.js"
+import { loadTsConfigPaths } from "../utils/tsconfig.js"
+import { formatAliasGuidance } from "../utils/alias-guidance.js"
 import { detectFonts, type DetectedFonts } from "../utils/detect-fonts.js"
 import { patchCssVariables } from "../utils/patch-css-vars.js"
 import { massageTreeForFonts, updateFonts } from "../utils/update-fonts.js"
@@ -276,22 +278,6 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   // Detect project structure
   const project = detectProject(cwd)
 
-  // Require a tsconfig path alias — otherwise generated stera.config.json
-  // aliases won't resolve and `add` would scatter files at the repo root.
-  const aliasPrefix = detectAliasPrefix(cwd)
-  if (!aliasPrefix) {
-    console.error("")
-    console.error("Error: No import alias found in your tsconfig.json file.")
-    console.error(
-      'Stera UI requires a path alias (e.g. "@/*": ["./src/*"]) in compilerOptions.paths.'
-    )
-    console.error(
-      "See https://ui.stera.sh/docs/installation for setup instructions per framework."
-    )
-    console.error("")
-    process.exit(1)
-  }
-
   // Log what was detected
   const frameworkName =
     project.framework === "next"
@@ -300,11 +286,20 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
         ? "Vite"
         : null
 
-  const parts: string[] = []
-  if (frameworkName) parts.push(frameworkName)
-  if (project.hasSrc) parts.push("src/ directory")
-  if (parts.length > 0) {
-    console.log(`Detected ${parts.join(" project with ")} project\n`)
+  if (frameworkName || project.hasSrc) {
+    const label = frameworkName ? `${frameworkName} project` : "project"
+    const suffix = project.hasSrc ? " with src/ directory" : ""
+    console.log(`Detected ${label}${suffix}\n`)
+  }
+
+  // Require a tsconfig path alias — otherwise generated stera.config.json
+  // aliases won't resolve and `add` would scatter files at the repo root.
+  // The CLI never edits tsconfig or bundler config itself; it explains the
+  // exact change for this framework and layout instead.
+  const aliasPrefix = detectAliasPrefix(cwd)
+  if (!aliasPrefix) {
+    console.error(formatAliasGuidance(cwd, project, loadTsConfigPaths(cwd)))
+    process.exit(1)
   }
 
   // Detect existing fonts
@@ -313,7 +308,10 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   // A project may already keep its own partials in a ui/ folder beside its
   // globals.css. Writing into it blind could clobber files that have nothing
   // to do with Stera, so ask first.
-  const uiDir = path.join(path.dirname(path.resolve(cwd, resolveCssPath(project))), "ui")
+  const uiDir = path.join(
+    path.dirname(path.resolve(cwd, resolveCssPath(project))),
+    "ui"
+  )
   if (fs.existsSync(uiDir) && fs.readdirSync(uiDir).length > 0) {
     const relativeUiDir = path.relative(cwd, uiDir)
     console.log("")
@@ -362,9 +360,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
     fetchSpinner.fail("Failed to fetch base styles")
     throw err
   }
-  console.log(
-    `${CHECK} Created ${path.relative(cwd, stylesResult.indexPath)}`
-  )
+  console.log(`${CHECK} Created ${path.relative(cwd, stylesResult.indexPath)}`)
 
   const globalsPath = project.existingCssFile
     ? path.resolve(cwd, project.existingCssFile)
@@ -376,9 +372,7 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
       await insertImportLine(globalsPath, imp)
     }
     await insertImportLine(globalsPath, '@import "./ui/index.css";')
-    console.log(
-      `${CHECK} Added @import to ${path.relative(cwd, globalsPath)}`
-    )
+    console.log(`${CHECK} Added @import to ${path.relative(cwd, globalsPath)}`)
   } else {
     // No globals.css — scaffold a minimal one. Tailwind directives live in
     // the ui/ partials (e.g. @custom-variant, @theme inline), so the scaffold

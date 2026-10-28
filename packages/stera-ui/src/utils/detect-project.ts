@@ -1,10 +1,12 @@
 import fs from "node:fs"
 import path from "node:path"
-import { loadConfig } from "tsconfig-paths"
+import { loadTsConfigPaths } from "./tsconfig.js"
 
 export interface ProjectInfo {
   hasSrc: boolean
   framework: "next" | "vite" | "other"
+  /** Major version of vite (Vite projects only); null when it can't be read. */
+  viteMajor: number | null
   rsc: boolean
   existingCssFile: string | null
   /** Path to the root layout file (layout.tsx for Next.js, index.html for Vite) */
@@ -66,10 +68,17 @@ export function detectProject(cwd: string): ProjectInfo {
   if (hasFile(cwd, ["next.config.ts", "next.config.js", "next.config.mjs"])) {
     framework = "next"
   } else if (
-    hasFile(cwd, ["vite.config.ts", "vite.config.js", "vite.config.mjs"])
+    hasFile(cwd, [
+      "vite.config.ts",
+      "vite.config.mts",
+      "vite.config.js",
+      "vite.config.mjs",
+    ])
   ) {
     framework = "vite"
   }
+
+  const viteMajor = framework === "vite" ? detectViteMajor(cwd) : null
 
   // RSC detection: Next.js with app/ directory
   let rsc = false
@@ -98,34 +107,56 @@ export function detectProject(cwd: string): ProjectInfo {
     }
   }
 
-  return { hasSrc, framework, rsc, existingCssFile, layoutFile }
+  return { hasSrc, framework, viteMajor, rsc, existingCssFile, layoutFile }
 }
 
-/**
- * Detect the alias prefix (e.g. "@" or "~") from the project's tsconfig.json
- * `compilerOptions.paths`. Mirrors shadcn's approach.
- *
- * Returns null when tsconfig can't be loaded or defines no path mappings —
- * `init` should surface a clear error in that case rather than templating
- * aliases that won't resolve.
- */
-export function detectAliasPrefix(cwd: string): string | null {
-  let tsConfig
+function readJson(filePath: string): Record<string, unknown> | null {
   try {
-    tsConfig = loadConfig(cwd)
+    return JSON.parse(fs.readFileSync(filePath, "utf-8")) as Record<
+      string,
+      unknown
+    >
   } catch {
     return null
   }
+}
 
-  if (
-    tsConfig.resultType !== "success" ||
-    Object.keys(tsConfig.paths).length === 0
-  ) {
-    return null
+/**
+ * Major version of the installed vite, falling back to the range declared in
+ * package.json. Decides which resolver setup to recommend: Vite 8 resolves
+ * tsconfig `paths` natively, older versions need `resolve.alias`.
+ */
+function detectViteMajor(cwd: string): number | null {
+  const installed = readJson(
+    path.join(cwd, "node_modules", "vite", "package.json")
+  )
+  const pkg = readJson(path.join(cwd, "package.json"))
+  const deps = (pkg?.dependencies ?? {}) as Record<string, unknown>
+  const devDeps = (pkg?.devDependencies ?? {}) as Record<string, unknown>
+
+  for (const spec of [installed?.version, deps.vite, devDeps.vite]) {
+    if (typeof spec !== "string") continue
+    const match = spec.replace(/^[\^~>=\s]+/, "").match(/^(\d+)\./)
+    if (match) return Number(match[1])
   }
+  return null
+}
+
+/**
+ * Detect the alias prefix (e.g. "@" or "~") from the project's tsconfig
+ * `compilerOptions.paths`, following project references so create-vite's
+ * tsconfig.app.json is found. Mirrors shadcn's prefix selection.
+ *
+ * Returns null when no config defines path mappings — `init` surfaces
+ * framework-specific guidance in that case rather than templating aliases
+ * that won't resolve.
+ */
+export function detectAliasPrefix(cwd: string): string | null {
+  const { result } = loadTsConfigPaths(cwd)
+  if (!result) return null
 
   // Prefer aliases whose target points at the project root, src/, or app/.
-  for (const [alias, targets] of Object.entries(tsConfig.paths)) {
+  for (const [alias, targets] of Object.entries(result.paths)) {
     if (
       targets.includes("./*") ||
       targets.includes("./src/*") ||
@@ -136,6 +167,6 @@ export function detectAliasPrefix(cwd: string): string | null {
   }
 
   // Fall back to the first defined alias key.
-  const first = Object.keys(tsConfig.paths)[0]
+  const first = Object.keys(result.paths)[0]
   return first ? first.replace(/\/\*$/, "") : null
 }

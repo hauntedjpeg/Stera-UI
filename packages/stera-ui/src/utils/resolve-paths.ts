@@ -1,6 +1,7 @@
 import path from "node:path"
-import { loadConfig, createMatchPath } from "tsconfig-paths"
+import { createMatchPath } from "tsconfig-paths"
 import type { SteraConfig } from "./resolve-config.js"
+import { loadTsConfigPaths } from "./tsconfig.js"
 
 // Map registry item types to the config alias that determines their output directory
 const TYPE_TO_ALIAS: Record<string, keyof SteraConfig["aliases"]> = {
@@ -11,11 +12,12 @@ const TYPE_TO_ALIAS: Record<string, keyof SteraConfig["aliases"]> = {
 }
 
 interface TsConfigMatcher {
+  configPath: string
   paths: Record<string, string[]>
   match: ReturnType<typeof createMatchPath>
 }
 
-// resolveOutputPath runs once per file written — parse tsconfig once per
+// resolveOutputPath runs once per file written — build the matcher once per
 // project root instead of on every call. `null` caches "no usable paths".
 const matcherCache = new Map<string, TsConfigMatcher | null>()
 
@@ -23,15 +25,14 @@ function getTsConfigMatcher(projectRoot: string): TsConfigMatcher | null {
   let matcher = matcherCache.get(projectRoot)
   if (matcher !== undefined) return matcher
 
-  const tsConfig = loadConfig(projectRoot)
-  matcher =
-    tsConfig.resultType === "success" &&
-    Object.keys(tsConfig.paths).length > 0
-      ? {
-          paths: tsConfig.paths,
-          match: createMatchPath(tsConfig.absoluteBaseUrl, tsConfig.paths),
-        }
-      : null
+  const { result } = loadTsConfigPaths(projectRoot)
+  matcher = result
+    ? {
+        configPath: result.configPath,
+        paths: result.paths,
+        match: createMatchPath(result.absoluteBaseUrl, result.paths),
+      }
+    : null
 
   matcherCache.set(projectRoot, matcher)
   return matcher
@@ -39,7 +40,8 @@ function getTsConfigMatcher(projectRoot: string): TsConfigMatcher | null {
 
 /**
  * Resolve a config alias (e.g. "@/components/ui") to a filesystem directory
- * relative to the project root, using the project's tsconfig.json paths.
+ * relative to the project root, using the project's tsconfig paths (following
+ * project references, so create-vite's tsconfig.app.json counts).
  *
  * Throws when the alias can't be resolved. `init` validates that tsconfig
  * defines paths before writing stera.config.json, so a failure here means the
@@ -72,8 +74,11 @@ function resolveAlias(alias: string, projectRoot: string): string {
     }
   }
 
+  const configName = matcher
+    ? path.relative(projectRoot, matcher.configPath)
+    : "tsconfig.json"
   throw new Error(
-    `Could not resolve alias "${alias}" from tsconfig.json. ` +
+    `Could not resolve alias "${alias}" from ${configName}. ` +
       `Ensure compilerOptions.paths defines a mapping for it (e.g. "${alias}/*"), ` +
       `then re-run. See https://ui.stera.sh/docs/installation.`
   )
