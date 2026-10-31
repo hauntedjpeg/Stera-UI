@@ -23,6 +23,7 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,mjs,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,mjs,json,css,md}\"",
     "changeset": "changeset",

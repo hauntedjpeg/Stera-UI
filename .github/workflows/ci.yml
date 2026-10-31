@@ -28,5 +28,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build, lint, typecheck, format
-        run: pnpm turbo run build lint typecheck format:check
+      - name: Build, lint, typecheck, test, format
+        run: pnpm turbo run build lint typecheck test format:check

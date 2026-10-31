@@ -51,6 +51,10 @@ pnpm dlx stera-ui@latest add button
 
 `init` walks you through font setup: Geist Sans + Geist Mono by default (via `next/font` for Next.js, `@fontsource-variable/*` otherwise), or keep your existing fonts. See [ui.stera.sh/docs/fonts](https://ui.stera.sh/docs/fonts).
 
+## Figma
+
+The tokens in `styles/ui/colors.css` and `typography.css` come from Figma variables, exported by the Stera UI Bridge plugin in [`apps/figma-bridge`](apps/figma-bridge). Use it to generate the same partials from your own Figma file.
+
 ## Dark Mode
 
 Dark mode is class-based and works with [next-themes](https://github.com/pacocoursey/next-themes):

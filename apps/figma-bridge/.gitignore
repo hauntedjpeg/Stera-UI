@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+figma.log
+.vite/
+coverage/
+.env
+.env.local
+variables.json
+docs/migration-bg-to-surface.md

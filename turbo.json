@@ -18,6 +18,7 @@
     "typecheck": {
       "dependsOn": ["^build"]
     },
+    "test": {},
     "format": {},
     "format:check": {}
   }
