@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import type { GenerateResult } from "../../core/css/generate.js"
 import type { PartialsResult } from "../../core/css/partials.js"
 import { generateRawJson } from "../../core/json/export.js"
@@ -22,7 +22,7 @@ type Props = {
 function sanitizeFileName(name: string): string {
   const trimmed = name.trim()
   if (!trimmed) return "figma"
-  return trimmed.replace(/[\/\\:*?"<>|]+/g, "-")
+  return trimmed.replace(/[/\\:*?"<>|]+/g, "-")
 }
 
 export function ExportView({ output, partials, raw, fileName }: Props) {
@@ -34,9 +34,11 @@ export function ExportView({ output, partials, raw, fileName }: Props) {
 
   const files = partials.files
   const fileKey = files.map((f) => f.name).join("|")
-  useEffect(() => {
+  const [prevFileKey, setPrevFileKey] = useState(fileKey)
+  if (fileKey !== prevFileKey) {
+    setPrevFileKey(fileKey)
     setActiveFile(0)
-  }, [fileKey])
+  }
 
   const selected = files[activeFile] ?? files[0]
   const cssBlocked = format !== "json" && output.errors.length > 0
