@@ -66,7 +66,9 @@ export default function DrawerIndentExample() {
           </div>
           <div className="p-5">
             <Drawer side="bottom">
-              <DrawerTrigger render={<Button variant="brand" className="w-full" />}>
+              <DrawerTrigger
+                render={<Button variant="brand" className="w-full" />}
+              >
                 Open drawer
               </DrawerTrigger>
               <DrawerPortal container={container}>
@@ -82,7 +84,7 @@ export default function DrawerIndentExample() {
                       "transform-[translateY(var(--drawer-swipe-movement-y,0px))]",
                       "transition-[transform,opacity] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)]",
                       "data-swiping:duration-0 data-swiping:select-none",
-                      "data-starting-style:transform-[translateY(100%)] data-ending-style:transform-[translateY(100%)]"
+                      "data-ending-style:transform-[translateY(100%)] data-starting-style:transform-[translateY(100%)]"
                     )}
                   >
                     <div

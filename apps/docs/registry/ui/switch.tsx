@@ -23,7 +23,7 @@ function Switch({
         // Invalid
         "data-invalid:border-border-danger-strong data-invalid:ring-3 data-invalid:ring-ring-danger",
         // State
-        "data-checked:bg-surface-brand data-unchecked:bg-surface-muted data-disabled:cursor-not-allowed",
+        "data-checked:bg-surface-brand data-disabled:cursor-not-allowed data-unchecked:bg-surface-muted",
         // Size
         "data-[size=sm]:h-4 data-[size=sm]:w-6",
         "data-[size=md]:h-4 data-[size=md]:w-8",
@@ -40,11 +40,11 @@ function Switch({
           // Disabled
           "data-disabled:bg-text-disabled",
           // Size — sm
-          "group-data-[size=sm]/switch:size-3 group-data-[size=sm]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-checked:translate-x-2",
+          "group-data-[size=sm]/switch:size-3 group-data-[size=sm]/switch:data-checked:translate-x-2 group-data-[size=sm]/switch:data-unchecked:translate-x-0",
           // Size — md
-          "group-data-[size=md]/switch:w-4.5 group-data-[size=md]/switch:h-3 group-data-[size=md]/switch:data-unchecked:translate-x-0 group-data-[size=md]/switch:data-checked:translate-x-2.5",
+          "group-data-[size=md]/switch:h-3 group-data-[size=md]/switch:w-4.5 group-data-[size=md]/switch:data-checked:translate-x-2.5 group-data-[size=md]/switch:data-unchecked:translate-x-0",
           // Size — lg
-          "group-data-[size=lg]/switch:w-9.5 group-data-[size=lg]/switch:h-6  group-data-[size=lg]/switch:data-unchecked:translate-x-0 group-data-[size=lg]/switch:data-checked:translate-x-5.5"
+          "group-data-[size=lg]/switch:h-6 group-data-[size=lg]/switch:w-9.5 group-data-[size=lg]/switch:data-checked:translate-x-5.5 group-data-[size=lg]/switch:data-unchecked:translate-x-0"
         )}
       />
     </SwitchPrimitive.Root>

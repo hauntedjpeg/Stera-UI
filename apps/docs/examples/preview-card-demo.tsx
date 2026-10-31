@@ -18,12 +18,15 @@ export default function PreviewCardDemo() {
       <PreviewCardContent>
         <div className="flex gap-3">
           <Avatar>
-            <AvatarImage src="https://github.com/hauntedjpeg.png" alt="@hauntedjpeg" />
+            <AvatarImage
+              src="https://github.com/hauntedjpeg.png"
+              alt="@hauntedjpeg"
+            />
             <AvatarFallback>CG</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
             <p className="st-body-md-strong">bootoo</p>
-            <p className="st-body-sm text-text-subtlest mb-2">@hauntedjpeg</p>
+            <p className="mb-2 st-body-sm text-text-subtlest">@hauntedjpeg</p>
             <p className="st-body-md-compact">
               Design for illuminated surfaces
             </p>

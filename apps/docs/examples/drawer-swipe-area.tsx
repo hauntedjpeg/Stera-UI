@@ -30,8 +30,8 @@ export default function DrawerSwipeAreaExample() {
         </DrawerHeader>
         <DrawerContent className="px-4 text-sm text-text-subtle">
           <p>
-            A <code>DrawerSwipeArea</code> is an invisible, fixed strip along the
-            screen edge. Base UI handles the swipe gesture and sets its own{" "}
+            A <code>DrawerSwipeArea</code> is an invisible, fixed strip along
+            the screen edge. Base UI handles the swipe gesture and sets its own{" "}
             <code>touch-action</code>; you position it.
           </p>
         </DrawerContent>

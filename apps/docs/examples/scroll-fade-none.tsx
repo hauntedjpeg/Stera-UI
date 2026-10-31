@@ -1,6 +1,12 @@
 const releases = Array.from({ length: 40 }, (_, i) => `v1.2.0-beta.${40 - i}`)
 
-function ReleaseList({ className, label }: { className: string; label: string }) {
+function ReleaseList({
+  className,
+  label,
+}: {
+  className: string
+  label: string
+}) {
   return (
     <div className="h-56 w-56 rounded-xl border border-border">
       <div className={className}>
@@ -21,7 +27,10 @@ function ReleaseList({ className, label }: { className: string; label: string })
 export default function ScrollFadeNone() {
   return (
     <div className="flex flex-wrap justify-center gap-4">
-      <ReleaseList className="h-full scroll-fade overflow-y-auto p-4" label="scroll-fade" />
+      <ReleaseList
+        className="h-full scroll-fade overflow-y-auto p-4"
+        label="scroll-fade"
+      />
       <ReleaseList
         className="h-full scroll-fade overflow-y-auto p-4 scroll-fade-none"
         label="scroll-fade-none"

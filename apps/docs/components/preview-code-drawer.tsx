@@ -42,13 +42,15 @@ export function PreviewCodeDrawer({
           showCloseButton={false}
         >
           <DrawerHeader className="flex-row items-center gap-2 p-1 pl-4">
-            <DrawerTitle className="flex-1 st-body-md-compact">{title}</DrawerTitle>
+            <DrawerTitle className="flex-1 st-body-md-compact">
+              {title}
+            </DrawerTitle>
             <CopyButton
               className="border-none bg-surface-subtle hover:bg-surface-subtle-hover"
               value={code}
             />
           </DrawerHeader>
-          <DrawerContent className="no-scrollbar flex flex-col border border-border -m-px mt-0 -mb rounded-xl [&_figure]:overflow-visible [&_figure]:bg-(--bw-12) [&_figure]:flex [&_figure]:flex-1 [&_pre]:overflow-visible [&_pre]:flex-1">
+          <DrawerContent className="no-scrollbar -mb -m-px mt-0 flex flex-col rounded-xl border border-border [&_figure]:flex [&_figure]:flex-1 [&_figure]:overflow-visible [&_figure]:bg-(--bw-12) [&_pre]:flex-1 [&_pre]:overflow-visible">
             {source}
           </DrawerContent>
         </DrawerPopup>

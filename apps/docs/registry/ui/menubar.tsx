@@ -101,7 +101,9 @@ function MenubarItem({
 function MenubarCheckboxItem({
   ...props
 }: React.ComponentProps<typeof DropdownMenuCheckboxItem>) {
-  return <DropdownMenuCheckboxItem data-slot="menubar-checkbox-item" {...props} />
+  return (
+    <DropdownMenuCheckboxItem data-slot="menubar-checkbox-item" {...props} />
+  )
 }
 
 function MenubarRadioGroup({

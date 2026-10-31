@@ -15,7 +15,7 @@ export function PreviewView({ doc, output, onAdvance }: Props) {
   return (
     <div className="flex flex-col gap-4 p-4">
       <section>
-        <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+        <div className="mb-2 text-[10px] font-semibold tracking-wide text-[var(--color-text-secondary)] uppercase">
           Detected
         </div>
         <div className="rounded border border-[var(--color-border)]">
@@ -31,7 +31,7 @@ export function PreviewView({ doc, output, onAdvance }: Props) {
       </section>
 
       <section>
-        <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+        <div className="mb-2 text-[10px] font-semibold tracking-wide text-[var(--color-text-secondary)] uppercase">
           Collections
         </div>
         <div className="flex flex-col gap-1">

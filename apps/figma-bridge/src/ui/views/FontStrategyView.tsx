@@ -39,7 +39,7 @@ export function FontStrategyView({
   return (
     <div className="flex flex-col gap-4 p-4">
       <section>
-        <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+        <div className="mb-2 text-[10px] font-semibold tracking-wide text-[var(--color-text-secondary)] uppercase">
           Strategy
         </div>
         <div className="flex flex-col gap-2">
@@ -72,7 +72,7 @@ export function FontStrategyView({
 
       {strategy === "next-font" && (
         <section>
-          <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+          <div className="mb-2 text-[10px] font-semibold tracking-wide text-[var(--color-text-secondary)] uppercase">
             Variable naming
           </div>
           <div className="flex flex-col gap-2">
@@ -116,7 +116,7 @@ export function FontStrategyView({
       )}
 
       <section>
-        <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+        <div className="mb-2 text-[10px] font-semibold tracking-wide text-[var(--color-text-secondary)] uppercase">
           Font assignments
         </div>
         <div className="rounded border border-[var(--color-border)]">

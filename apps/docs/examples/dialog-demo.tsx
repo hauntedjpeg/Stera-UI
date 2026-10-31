@@ -37,7 +37,9 @@ export default function DialogDemo() {
           </div>
         </DialogContent>
         <DialogFooter>
-          <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
+          <DialogClose render={<Button variant="outline" />}>
+            Cancel
+          </DialogClose>
           <Button variant="brand">Save changes</Button>
         </DialogFooter>
       </DialogPopup>

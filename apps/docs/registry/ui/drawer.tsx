@@ -16,7 +16,9 @@ const SIDE_TO_SWIPE_DIRECTION = {
   left: "left",
 } as const satisfies Record<DrawerSide, "up" | "right" | "down" | "left">
 
-const DrawerContext = React.createContext<{ side: DrawerSide }>({ side: "right" })
+const DrawerContext = React.createContext<{ side: DrawerSide }>({
+  side: "right",
+})
 
 function useDrawerSide() {
   return React.useContext(DrawerContext).side
@@ -67,7 +69,7 @@ function DrawerBackdrop({
         "opacity-[calc(1-var(--drawer-swipe-progress,0))]",
         // Open/close transition
         "transition-opacity duration-200 ease-out",
-        "data-starting-style:opacity-0 data-ending-style:opacity-0",
+        "data-ending-style:opacity-0 data-starting-style:opacity-0",
         "data-swiping:duration-0",
         "data-ending-style:duration-[calc(var(--drawer-swipe-strength,1)*400ms)]",
         className
@@ -111,7 +113,7 @@ function DrawerHandle({ className, ...props }: React.ComponentProps<"div">) {
       className={cn(
         // Generous grab zone that owns the touch gesture (so dragging snaps the
         // drawer instead of being claimed as a native scroll on touch devices)
-        "flex w-full shrink-0 cursor-grab touch-none select-none justify-center py-2 active:cursor-grabbing",
+        "flex w-full shrink-0 cursor-grab touch-none justify-center py-2 select-none active:cursor-grabbing",
         // Fade out when a nested drawer is open; restore during a swipe gesture
         "transition-opacity duration-200",
         "group-data-nested-drawer-open/drawer:opacity-0",
@@ -172,8 +174,8 @@ function DrawerPopup({
             // Hug the panel along the slide axis, fill the other
             "data-[side=right]:h-full data-[side=right]:max-w-full",
             "data-[side=left]:h-full data-[side=left]:max-w-full",
-            "data-[side=top]:w-full data-[side=top]:max-h-full data-[side=top]:flex-col",
-            "data-[side=bottom]:w-full data-[side=bottom]:max-h-full data-[side=bottom]:flex-col",
+            "data-[side=top]:max-h-full data-[side=top]:w-full data-[side=top]:flex-col",
+            "data-[side=bottom]:max-h-full data-[side=bottom]:w-full data-[side=bottom]:flex-col",
             // Nested-drawer stacking variables (consumed by transform / height below)
             "[--peek:1rem] [--stack-step:0.05]",
             "[--stack-progress:clamp(0,var(--drawer-swipe-progress,0),1)]",
@@ -201,10 +203,10 @@ function DrawerPopup({
             "data-nested-drawer-swiping:duration-0",
             "data-ending-style:duration-[calc(var(--drawer-swipe-strength,1)*400ms)]",
             // Starting/ending — slide off-screen
-            "data-[side=right]:data-starting-style:transform-[translateX(100%)] data-[side=right]:data-ending-style:transform-[translateX(100%)]",
-            "data-[side=left]:data-starting-style:transform-[translateX(-100%)] data-[side=left]:data-ending-style:transform-[translateX(-100%)]",
-            "data-[side=top]:data-starting-style:transform-[translateY(-100%)] data-[side=top]:data-ending-style:transform-[translateY(-100%)]",
-            "data-[side=bottom]:data-starting-style:transform-[translateY(100%)] data-[side=bottom]:data-ending-style:transform-[translateY(100%)]"
+            "data-[side=right]:data-ending-style:transform-[translateX(100%)] data-[side=right]:data-starting-style:transform-[translateX(100%)]",
+            "data-[side=left]:data-ending-style:transform-[translateX(-100%)] data-[side=left]:data-starting-style:transform-[translateX(-100%)]",
+            "data-[side=top]:data-ending-style:transform-[translateY(-100%)] data-[side=top]:data-starting-style:transform-[translateY(-100%)]",
+            "data-[side=bottom]:data-ending-style:transform-[translateY(100%)] data-[side=bottom]:data-starting-style:transform-[translateY(100%)]"
           )}
           {...props}
         >

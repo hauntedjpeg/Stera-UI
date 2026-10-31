@@ -13,11 +13,11 @@ pnpm dlx stera-ui@latest add button
 
 ## CLI
 
-| Command                          | Description                                                                                                                                                       |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Command                          | Description                                                                                                                                                                             |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `stera-ui init`                  | Scaffolds `stera.config.json`, writes a `ui/` folder of style partials (colors, typography, dark mode, utilities), wires it into your Tailwind entry, and walks you through font setup. |
-| `stera-ui add <component> [...]` | Copies the requested components (and their dependencies) into your project, rewriting import paths to match your aliases and installing any missing npm packages. |
-| `stera-ui list`                  | Lists all available components grouped by type, with their registry dependencies.                                                                                 |
+| `stera-ui add <component> [...]` | Copies the requested components (and their dependencies) into your project, rewriting import paths to match your aliases and installing any missing npm packages.                       |
+| `stera-ui list`                  | Lists all available components grouped by type, with their registry dependencies.                                                                                                       |
 
 `init` and `add` accept `--cwd <path>` and `--yes` (never prompt; keep existing files). `add` leaves dependencies you already have untouched; pass `--overwrite` to replace existing files with the registry version. See [`stera-ui --help`](https://ui.stera.sh/docs/cli) for the full reference.
 

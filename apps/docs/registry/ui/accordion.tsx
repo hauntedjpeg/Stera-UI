@@ -48,7 +48,7 @@ function AccordionTrigger({
           // Typography
           "text-left st-body-md-strong",
           // Surface
-          "bg-surface-subtle rounded-xl",
+          "rounded-xl bg-surface-subtle",
           // Child selectors
           "[&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
           // Transition
@@ -109,7 +109,7 @@ function AccordionContent({
         // Transition
         "transition-[height] duration-200 ease-out",
         // Data state — Base UI sets these on enter/exit so the transition has a 0 end-point
-        "data-starting-style:h-0 data-ending-style:h-0"
+        "data-ending-style:h-0 data-starting-style:h-0"
       )}
       {...props}
     >

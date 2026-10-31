@@ -28,14 +28,19 @@ const items = [
 
 export default function AccordionBorders() {
   return (
-    <Accordion className="rounded-xl border gap-0 overflow-clip" defaultValue={["billing"]}>
+    <Accordion
+      className="gap-0 overflow-clip rounded-xl border"
+      defaultValue={["billing"]}
+    >
       {items.map((item) => (
         <AccordionItem
           key={item.value}
           value={item.value}
           className="not-last:border-b"
         >
-          <AccordionTrigger className="rounded-none">{item.trigger}</AccordionTrigger>
+          <AccordionTrigger className="rounded-none">
+            {item.trigger}
+          </AccordionTrigger>
           <AccordionContent>{item.content}</AccordionContent>
         </AccordionItem>
       ))}

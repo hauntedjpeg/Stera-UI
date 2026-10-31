@@ -35,7 +35,7 @@ export function OptionsView({
   return (
     <div className="flex flex-col gap-4 p-4">
       <section>
-        <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+        <div className="mb-2 text-[10px] font-semibold tracking-wide text-[var(--color-text-secondary)] uppercase">
           CSS variable prefix
         </div>
         <input
@@ -51,7 +51,7 @@ export function OptionsView({
       </section>
 
       <section>
-        <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+        <div className="mb-2 text-[10px] font-semibold tracking-wide text-[var(--color-text-secondary)] uppercase">
           Number units
         </div>
         {numberCollections.length === 0 ? (
@@ -88,7 +88,7 @@ export function OptionsView({
       </section>
 
       <section>
-        <div className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+        <div className="mb-2 text-[10px] font-semibold tracking-wide text-[var(--color-text-secondary)] uppercase">
           Dark mode mapping
         </div>
         {colorCollections.map((c) => {

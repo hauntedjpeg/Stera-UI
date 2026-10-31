@@ -86,7 +86,7 @@ function TabsIndicator({ className, ...props }: TabsPrimitive.Indicator.Props) {
         // Base
         "pointer-events-none absolute top-0 left-0 z-0",
         // Animation — slide between tabs; snap on first paint and for reduced motion
-        "transition-[translate,width,height] duration-200 ease-out motion-reduce:transition-none data-[activation-direction=none]:transition-none",
+        "transition-[translate,width,height] duration-200 ease-out data-[activation-direction=none]:transition-none motion-reduce:transition-none",
         // Default variant — pill covering the active tab (orientation-agnostic)
         "group-data-[variant=default]/tabs-list:h-(--active-tab-height) group-data-[variant=default]/tabs-list:w-(--active-tab-width) group-data-[variant=default]/tabs-list:[translate:var(--active-tab-left)_var(--active-tab-top)] group-data-[variant=default]/tabs-list:rounded-[10px] group-data-[variant=default]/tabs-list:bg-surface group-data-[variant=default]/tabs-list:shadow-sm",
         // Line variant — sliding bar along the active edge
@@ -94,7 +94,7 @@ function TabsIndicator({ className, ...props }: TabsPrimitive.Indicator.Props) {
         // Line — horizontal: bar under the active tab
         "group-data-[orientation=horizontal]/tabs:group-data-[variant=line]/tabs-list:h-0.5 group-data-[orientation=horizontal]/tabs:group-data-[variant=line]/tabs-list:w-(--active-tab-width) group-data-[orientation=horizontal]/tabs:group-data-[variant=line]/tabs-list:[translate:var(--active-tab-left)_calc(var(--active-tab-top)+var(--active-tab-height)+3px)]",
         // Line — vertical: bar to the right of the active tab
-        "group-data-[orientation=vertical]/tabs:group-data-[variant=line]/tabs-list:w-0.5 group-data-[orientation=vertical]/tabs:group-data-[variant=line]/tabs-list:h-(--active-tab-height) group-data-[orientation=vertical]/tabs:group-data-[variant=line]/tabs-list:[translate:calc(var(--active-tab-left)+var(--active-tab-width)+2px)_var(--active-tab-top)]",
+        "group-data-[orientation=vertical]/tabs:group-data-[variant=line]/tabs-list:h-(--active-tab-height) group-data-[orientation=vertical]/tabs:group-data-[variant=line]/tabs-list:w-0.5 group-data-[orientation=vertical]/tabs:group-data-[variant=line]/tabs-list:[translate:calc(var(--active-tab-left)+var(--active-tab-width)+2px)_var(--active-tab-top)]",
         className
       )}
       {...props}

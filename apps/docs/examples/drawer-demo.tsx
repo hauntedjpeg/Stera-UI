@@ -36,8 +36,12 @@ export default function DrawerDemo() {
           </div>
         </DrawerContent>
         <DrawerFooter>
-          <DrawerClose render={<Button variant="outline" />}>Cancel</DrawerClose>
-          <Button variant="brand" type="submit">Save changes</Button>
+          <DrawerClose render={<Button variant="outline" />}>
+            Cancel
+          </DrawerClose>
+          <Button variant="brand" type="submit">
+            Save changes
+          </Button>
         </DrawerFooter>
       </DrawerPopup>
     </Drawer>

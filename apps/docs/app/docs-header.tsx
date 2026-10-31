@@ -9,16 +9,16 @@ import { DocsSearch, type PageTree } from "./docs-search"
 
 export function DocsHeader({ tree }: { tree: PageTree }) {
   return (
-    <header className="easing-fade sticky top-0 z-20 flex h-(--header-height) items-center gap-2 px-4 py-4 md:px-6">
+    <header className="sticky top-0 z-20 flex h-(--header-height) items-center gap-2 px-4 py-4 easing-fade md:px-6">
       <SidebarTrigger
         size="icon-lg"
-        className="glass-brand rounded-full backdrop-blur-md md:hidden"
+        className="rounded-full glass-brand backdrop-blur-md md:hidden"
       />
       <Link
         href="/"
         className={cn(
           buttonVariants({ variant: "ghost", size: "lg" }),
-          "glass-brand rounded-full backdrop-blur-md md:h-9 md:gap-2 md:px-3 md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5"
+          "rounded-full glass-brand backdrop-blur-md md:h-9 md:gap-2 md:px-3 md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5"
         )}
       >
         <SiAsteriskAlt data-icon="inline-start" />
@@ -29,7 +29,7 @@ export function DocsHeader({ tree }: { tree: PageTree }) {
         href="https://stera.sh/"
         className={cn(
           buttonVariants({ variant: "ghost", size: "lg" }),
-          "glass-brand ml-auto rounded-full backdrop-blur-md md:h-9 md:gap-2 md:px-3 md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5"
+          "ml-auto rounded-full glass-brand backdrop-blur-md md:h-9 md:gap-2 md:px-3 md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5"
         )}
       >
         Icons
@@ -41,7 +41,7 @@ export function DocsHeader({ tree }: { tree: PageTree }) {
         rel="noopener noreferrer"
         className={cn(
           buttonVariants({ variant: "ghost", size: "icon-lg" }),
-          "glass-brand rounded-full backdrop-blur-md md:size-9 md:[&_svg:not([class*='size-'])]:size-4"
+          "rounded-full glass-brand backdrop-blur-md md:size-9 md:[&_svg:not([class*='size-'])]:size-4"
         )}
       >
         <svg

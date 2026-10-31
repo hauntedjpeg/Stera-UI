@@ -19,9 +19,8 @@ import {
 const snapPoints: DrawerPrimitive.Root.SnapPoint[] = ["164px", 1]
 
 export default function DrawerSnapPoints() {
-  const [snapPoint, setSnapPoint] = React.useState<
-    DrawerPrimitive.Root.SnapPoint | null
-  >(snapPoints[0])
+  const [snapPoint, setSnapPoint] =
+    React.useState<DrawerPrimitive.Root.SnapPoint | null>(snapPoints[0])
 
   return (
     <Drawer
@@ -40,12 +39,12 @@ export default function DrawerSnapPoints() {
             Drag the handle to snap between a peek and a full-height view.
           </DrawerDescription>
         </DrawerHeader>
-        <DrawerContent className="grid auto-rows-min gap-2 px-4 pb-4" aria-hidden>
+        <DrawerContent
+          className="grid auto-rows-min gap-2 px-4 pb-4"
+          aria-hidden
+        >
           {Array.from({ length: 16 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-10 rounded-md bg-surface-subtle"
-            />
+            <div key={i} className="h-10 rounded-md bg-surface-subtle" />
           ))}
         </DrawerContent>
         <DrawerFooter className="items-center">

@@ -8,16 +8,12 @@ export default function TabsLine() {
         <TabsTrigger value="notifications">Notifications</TabsTrigger>
         <TabsTrigger value="security">Security</TabsTrigger>
       </TabsList>
-      <div className="bg-surface-subtle rounded-xl p-4 w-100 mt-3">
-        <TabsContent value="profile">
-          Profile details
-        </TabsContent>
+      <div className="mt-3 w-100 rounded-xl bg-surface-subtle p-4">
+        <TabsContent value="profile">Profile details</TabsContent>
         <TabsContent value="notifications">
           Notificaitons preferences
         </TabsContent>
-        <TabsContent value="security">
-          Security options
-        </TabsContent>
+        <TabsContent value="security">Security options</TabsContent>
       </div>
     </Tabs>
   )
