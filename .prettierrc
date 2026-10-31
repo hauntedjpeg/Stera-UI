@@ -6,6 +6,14 @@
   "trailingComma": "es5",
   "printWidth": 80,
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindStylesheet": "apps/docs/registry/styles/globals.css",
-  "tailwindFunctions": ["cn", "cva"]
+  "tailwindStylesheet": "apps/docs/app/globals.css",
+  "tailwindFunctions": ["cn", "cva"],
+  "overrides": [
+    {
+      "files": "apps/figma-bridge/**",
+      "options": {
+        "tailwindStylesheet": "apps/figma-bridge/src/ui/index.css"
+      }
+    }
+  ]
 }
