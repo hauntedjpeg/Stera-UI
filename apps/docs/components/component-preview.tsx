@@ -1,11 +1,7 @@
 import * as React from "react"
 
-import { readRegistryFile } from "../lib/read-file"
-import {
-  getRegistryComponent,
-  getRegistryComponentSlug,
-  getRegistrySourcePath,
-} from "../lib/registry"
+import { readExampleSource } from "../lib/read-file"
+import { getRegistryComponent, getRegistryComponentSlug } from "../lib/registry"
 import { ComponentPreviewFrame } from "./component-preview-frame"
 import { ComponentSource } from "./component-source"
 
@@ -39,8 +35,7 @@ export async function ComponentPreview({
   }
 
   const slug = getRegistryComponentSlug(name) ?? undefined
-  const relPath = getRegistrySourcePath(name)
-  const code = relPath ? await readRegistryFile(relPath) : ""
+  const code = await readExampleSource(name)
 
   return (
     <ComponentPreviewFrame

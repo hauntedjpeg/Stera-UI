@@ -2,8 +2,8 @@ import "server-only"
 
 import { highlight } from "fumadocs-core/highlight"
 
-import { readRegistryFile } from "../lib/read-file"
-import { getRegistrySourcePath } from "../lib/registry"
+import { readExampleSource } from "../lib/read-file"
+import { hasRegistryExample } from "../lib/registry"
 import { CodeBlock } from "./code-block"
 
 const transformerForceNoLineNumbers = {
@@ -28,9 +28,8 @@ export async function ComponentSource({
 }) {
   let source = code
   if (source === undefined) {
-    const relPath = getRegistrySourcePath(name)
-    if (!relPath) return null
-    source = await readRegistryFile(relPath)
+    if (!hasRegistryExample(name)) return null
+    source = await readExampleSource(name)
   }
 
   const rendered = await highlight(source, {

@@ -1,10 +1,9 @@
 import "server-only"
 
-import { promises as fs } from "node:fs"
-import path from "node:path"
 import type { InferPageType } from "fumadocs-core/source"
 
-import { getRegistrySourcePath } from "./registry"
+import { readExampleSource } from "./read-file"
+import { hasRegistryExample } from "./registry"
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./site"
 import { source } from "./source"
 
@@ -26,14 +25,9 @@ async function expandDocsTags(markdown: string): Promise<string> {
   const previews = await Promise.all(
     Array.from(markdown.matchAll(COMPONENT_PREVIEW), async (match) => {
       const name = attr(match[1], "name")
-      const relPath = name ? getRegistrySourcePath(name) : null
-      if (!relPath) return ""
-      // Scoped to examples/ so Turbopack doesn't trace the whole project.
-      const code = await fs.readFile(
-        path.join(process.cwd(), "examples", path.basename(relPath)),
-        "utf8"
-      )
-      return `\`\`\`tsx title="${relPath}"\n${code.trimEnd()}\n\`\`\``
+      if (!name || !hasRegistryExample(name)) return ""
+      const code = await readExampleSource(name)
+      return `\`\`\`tsx title="examples/${name}.tsx"\n${code.trimEnd()}\n\`\`\``
     })
   )
 
