@@ -85,7 +85,7 @@ export function getLLMIndex(): string {
 
 > ${SITE_DESCRIPTION}
 
-Stera UI is a copy-paste component registry, not an installable package. \`npx stera-ui@latest init\` writes a \`stera.config.json\` and a \`ui/\` folder of Tailwind CSS v4 style partials; \`npx stera-ui@latest add <component>\` copies component source into the project and rewrites its \`@/\` imports to the configured aliases. Components wrap Base UI primitives, compose classes with \`cn()\`, use \`stera-icons\`, and style with semantic tokens (\`text-text-*\`, \`bg-surface-*\`, \`border-border-*\`) and \`st-*\` typography utilities.
+Stera UI is a copy-paste component registry, not an installable package. \`npx stera-ui@latest init\` writes a \`stera.config.json\` and a \`ui/\` folder of Tailwind CSS v4 style partials; \`npx stera-ui@latest add <component>\` copies component source into the project and rewrites its \`@/\` imports to the configured aliases. Components wrap Base UI primitives, compose classes with \`cn()\`, use \`stera-icons\`, and style with semantic tokens (\`text-ink-*\`, \`bg-surface-*\`, \`border-border-*\`) and \`st-*\` typography utilities.
 
 Every page below is plain markdown. The full set is at ${SITE_URL}/llms-full.txt.
 

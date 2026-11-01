@@ -7,7 +7,7 @@ export default function ScrollFadeRtl() {
         {swatches.map((swatch) => (
           <div
             key={swatch}
-            className="flex size-20 shrink-0 items-center justify-center rounded-lg bg-surface-muted st-body-sm text-text-subtle"
+            className="flex size-20 shrink-0 items-center justify-center rounded-lg bg-surface-muted st-body-sm text-ink-subtler"
           >
             {swatch}
           </div>

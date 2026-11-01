@@ -115,6 +115,46 @@ describe("buildModel", () => {
     expect(css).not.toMatch(/--surface-brand-:/)
   })
 
+  it("groups ink tokens between surface and border regardless of Figma order", () => {
+    const alias = (targetId: string) => ({
+      light: { kind: "alias" as const, targetId },
+      dark: { kind: "alias" as const, targetId },
+    })
+    const theme: SerializedCollection = {
+      ...themeSemantic,
+      variables: [
+        {
+          id: "v-border",
+          name: "Border/-",
+          type: "COLOR",
+          valuesByMode: alias("v-neutral-light-1"),
+        },
+        {
+          id: "v-ink",
+          name: "Ink/-",
+          type: "COLOR",
+          valuesByMode: alias("v-black-11"),
+        },
+        {
+          id: "v-surface",
+          name: "Surface/-",
+          type: "COLOR",
+          valuesByMode: alias("v-neutral-light-1"),
+        },
+      ],
+    }
+    const { css } = generateCss({
+      ...baseOptions,
+      collections: [basePrimitives, theme, baseTypography],
+    })
+    const darkBody = css.match(/\.dark \{([\s\S]*?)\n\}/)![1]
+    expect(darkBody.match(/--[a-z0-9-]+(?=:)/g)).toEqual([
+      "--surface",
+      "--ink",
+      "--border",
+    ])
+  })
+
   it("excludes any collection prefixed Reference", () => {
     const { css } = generateCss({
       ...baseOptions,

@@ -13,11 +13,11 @@ const inputVariants = cva(
     // Focus
     "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
     // Disabled
-    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:border-border-strong disabled:bg-surface-disabled disabled:text-text-subtlest",
+    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:border-border-strong disabled:bg-surface-disabled disabled:text-ink-subtlest",
     // Invalid
     "aria-invalid:ring-3 aria-invalid:ring-ring-danger",
     // Other
-    "transition-[color,box-shadow] outline-none file:inline-flex file:font-medium file:text-text placeholder:text-text-subtlest",
+    "transition-[color,box-shadow] outline-none file:inline-flex file:font-medium file:text-ink placeholder:text-ink-subtlest",
   ],
   {
     variants: {

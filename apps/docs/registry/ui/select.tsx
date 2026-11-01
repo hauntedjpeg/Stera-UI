@@ -54,11 +54,11 @@ function SelectTrigger({
       data-size={size}
       className={cn(
         // Base
-        "flex h-9 rounded-xl border border-border bg-surface py-2.5 pr-2.5 pl-3 st-body-md-compact outline-none",
+        "flex h-9 rounded-xl border border-border bg-surface py-2.5 pr-2.5 pl-3 st-label-md outline-none",
         // Sizing
         "w-fit gap-1.5",
         // Animation
-        "transition-[color,box-shadow] focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger data-placeholder:text-text-subtlest",
+        "transition-[color,box-shadow] focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger data-placeholder:text-ink-subtlest",
         // SM
         "data-[size=sm]:h-8 data-[size=sm]:py-2 data-[size=sm]:pr-2 data-[size=sm]:pl-2.5",
         // LG
@@ -72,7 +72,7 @@ function SelectTrigger({
       {children}
       <SelectPrimitive.Icon
         aria-hidden
-        className="pointer-events-none flex size-4 items-center justify-center text-text-subtle"
+        className="pointer-events-none flex size-4 items-center justify-center text-ink-subtler"
       >
         <SiChevronDown />
       </SelectPrimitive.Icon>
@@ -117,7 +117,7 @@ function SelectContent({
             // Animation
             "duration-100 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
             // Other
-            "isolate z-50 text-text",
+            "isolate z-50 text-ink",
             className
           )}
           {...props}
@@ -142,7 +142,7 @@ function SelectLabel({
         // Base
         "p-2",
         // Other
-        "st-body-sm text-text-subtle",
+        "st-body-sm text-ink-subtler",
         className
       )}
       {...props}
@@ -164,9 +164,9 @@ function SelectItem({
         // Sizing
         "w-full gap-2",
         // Animation
-        "hover:bg-surface-hover focus:bg-surface-hover focus:text-text not-data-[variant=danger]:focus:**:text-text data-disabled:pointer-events-none data-disabled:text-text-disabled",
+        "hover:bg-surface-hover focus:bg-surface-hover focus:text-ink not-data-[variant=danger]:focus:**:text-ink data-disabled:pointer-events-none data-disabled:text-ink-disabled",
         // Other
-        "cursor-default items-center st-body-md-compact [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        "cursor-default items-center st-label-md [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
         className
       )}
       {...props}

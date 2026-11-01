@@ -46,7 +46,7 @@ function AccordionTrigger({
           // Box
           "gap-3 p-3",
           // Typography
-          "text-left st-body-md-strong",
+          "text-left st-label-md-medium",
           // Surface
           "rounded-xl bg-surface-subtle",
           // Child selectors
@@ -118,9 +118,9 @@ function AccordionContent({
           // Box
           "p-3",
           // Typography
-          "st-body-md text-text-subtle",
+          "st-body-md text-ink-subtler",
           // Child selectors
-          "[&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text [&_p:not(:last-child)]:mb-4",
+          "[&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-ink [&_p:not(:last-child)]:mb-4",
           className
         )}
       >

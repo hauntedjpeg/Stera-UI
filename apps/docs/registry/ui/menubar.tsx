@@ -59,7 +59,7 @@ function MenubarTrigger({
       data-slot="menubar-trigger"
       className={cn(
         // Base
-        "flex items-center rounded-lg px-2.5 py-1 st-body-md-compact text-text outline-hidden select-none",
+        "flex items-center rounded-lg px-2.5 py-1 st-label-md text-ink outline-hidden select-none",
         // Hover
         "hover:bg-surface-hover",
         // Open
@@ -67,7 +67,7 @@ function MenubarTrigger({
         // Focus
         "focus-visible:ring-3 focus-visible:ring-ring",
         // Disabled
-        "data-disabled:pointer-events-none data-disabled:text-text-disabled",
+        "data-disabled:pointer-events-none data-disabled:text-ink-disabled",
         className
       )}
       {...props}

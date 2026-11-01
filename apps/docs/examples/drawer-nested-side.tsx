@@ -37,7 +37,7 @@ export default function DrawerNestedSide() {
                 </DrawerDescription>
               </DrawerHeader>
               <DrawerContent className="px-8">
-                <ul className="list-disc text-sm text-text-subtle">
+                <ul className="list-disc text-sm text-ink-subtler">
                   <li>Passkeys enabled</li>
                   <li>2FA via authenticator app</li>
                   <li>3 signed-in devices</li>

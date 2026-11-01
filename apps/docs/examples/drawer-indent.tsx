@@ -51,14 +51,14 @@ export default function DrawerIndentExample() {
           )}
         >
           <div className="flex flex-col gap-1 p-5 pt-8">
-            <span className="st-heading-md text-text">Today</span>
-            <span className="text-sm text-text-subtle">Wednesday, June 5</span>
+            <span className="st-heading-md text-ink">Today</span>
+            <span className="text-sm text-ink-subtler">Wednesday, June 5</span>
           </div>
           <div className="flex flex-1 flex-col gap-2 px-5">
             {["Inbox", "Drafts", "Archive", "Trash"].map((label) => (
               <div
                 key={label}
-                className="flex items-center rounded-xl bg-surface-subtle px-4 py-3 text-sm text-text"
+                className="flex items-center rounded-xl bg-surface-subtle px-4 py-3 text-sm text-ink"
               >
                 {label}
               </div>
@@ -90,7 +90,7 @@ export default function DrawerIndentExample() {
                     <div
                       data-slot="drawer-panel"
                       data-side="bottom"
-                      className="relative flex min-h-0 grow flex-col overflow-hidden rounded-xl bg-surface text-sm text-text shadow-lg ring-1 ring-border group-data-open/drawer:pointer-events-auto"
+                      className="relative flex min-h-0 grow flex-col overflow-hidden rounded-xl bg-surface text-sm text-ink shadow-lg ring-1 ring-border group-data-open/drawer:pointer-events-auto"
                     >
                       <DrawerHandle />
                       <DrawerHeader className="text-center">

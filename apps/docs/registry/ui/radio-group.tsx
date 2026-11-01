@@ -31,9 +31,9 @@ function RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {
         // Invalid
         "aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:aria-checked:border-border-brand-strong",
         // Checked
-        "data-checked:border-border-brand-strong data-checked:bg-surface-brand data-checked:text-text-onbrand",
+        "data-checked:border-border-brand-strong data-checked:bg-surface-brand data-checked:text-ink-onbrand",
         // Variants
-        "group-has-disabled/field:text-text-disabled",
+        "group-has-disabled/field:text-ink-disabled",
         // Other
         "peer",
         className

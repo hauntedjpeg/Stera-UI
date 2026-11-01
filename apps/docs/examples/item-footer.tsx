@@ -21,7 +21,7 @@ export default function ItemDemo() {
         <ItemBody>
           <ItemMedia variant="icon">
             <Avatar size="lg" shape="square">
-              <AvatarIconFallback className="bg-surface-brand-subtle text-text-brand">
+              <AvatarIconFallback className="bg-surface-brand-subtle text-ink-brand">
                 <SiGlobe />
               </AvatarIconFallback>
             </Avatar>

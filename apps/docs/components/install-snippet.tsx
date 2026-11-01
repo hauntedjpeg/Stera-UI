@@ -52,7 +52,7 @@ export function InstallSnippet({
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       {!hideHeading && (
-        <h3 className="st-body-lg-strong text-text">Installation</h3>
+        <h3 className="st-label-lg-medium text-ink">Installation</h3>
       )}
       <Tabs
         value={value}
@@ -60,7 +60,7 @@ export function InstallSnippet({
         className="gap-0 overflow-hidden rounded-xl bg-surface-subtle"
       >
         <div className="flex items-center justify-between gap-2 border-b border-border px-3 py-2">
-          <div className="flex items-center gap-2 text-text-subtle">
+          <div className="flex items-center gap-2 text-ink-subtler">
             <span className="font-mono text-sm select-none" aria-hidden>
               {">_"}
             </span>
@@ -75,7 +75,7 @@ export function InstallSnippet({
           <Button
             variant="ghost"
             size="icon-sm"
-            className="text-text-subtle hover:bg-surface-subtle-hover"
+            className="text-ink-subtler hover:bg-surface-subtle-hover"
             aria-label={copied ? "Copied" : "Copy command"}
             onClick={async () => {
               await navigator.clipboard.writeText(activeCommand)
@@ -89,7 +89,7 @@ export function InstallSnippet({
           <TabsContent
             key={m.value}
             value={m.value}
-            className="px-4 py-4 font-mono text-sm text-text"
+            className="px-4 py-4 font-mono text-sm text-ink"
           >
             {m.command(slug)}
           </TabsContent>

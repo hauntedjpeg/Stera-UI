@@ -14,11 +14,11 @@ function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
         // Focus
         "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
         // Disabled
-        "disabled:cursor-not-allowed disabled:border-border-strong disabled:bg-surface-disabled disabled:text-text-subtlest",
+        "disabled:cursor-not-allowed disabled:border-border-strong disabled:bg-surface-disabled disabled:text-ink-subtlest",
         // Invalid
         "aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger",
         // Other
-        "field-sizing-content transition-[color,box-shadow] outline-none placeholder:text-text-subtlest",
+        "field-sizing-content transition-[color,box-shadow] outline-none placeholder:text-ink-subtlest",
         className
       )}
       {...props}

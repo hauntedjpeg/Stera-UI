@@ -34,7 +34,7 @@ function FieldLegend({
       data-variant={variant}
       className={cn(
         // Variants
-        "data-[variant=label]:st-body-md-strong data-[variant=legend]:st-body-lg-strong",
+        "data-[variant=label]:st-label-md-medium data-[variant=legend]:st-label-lg-medium",
         // Other
         "mb-3",
         className
@@ -71,7 +71,7 @@ const fieldVariants = cva(
     // Sizing
     "w-full gap-3",
     // Variants
-    "data-[invalid=true]:text-text-danger",
+    "data-[invalid=true]:text-ink-danger",
     // Other
     "group/field",
   ],
@@ -156,7 +156,7 @@ function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
         // Sizing
         "w-fit gap-2",
         // Other
-        "st-body-md-strong group-data-[disabled=true]/field:opacity-50",
+        "st-label-md-medium group-data-[disabled=true]/field:opacity-50",
         className
       )}
       {...props}
@@ -172,7 +172,7 @@ function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
         // Position
         "last:mt-0 nth-last-2:-mt-1 [[data-variant=legend]+&]:-mt-1.5",
         // Other
-        "text-left st-body-sm text-text-subtle group-has-data-horizontal/field:text-balance [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-text-brand",
+        "text-left st-body-sm text-ink-subtler group-has-data-horizontal/field:text-balance [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-ink-brand",
         className
       )}
       {...props}
@@ -205,7 +205,7 @@ function FieldSeparator({
       <Separator className="absolute inset-0 top-1/2" />
       {children && (
         <span
-          className="relative mx-auto block w-fit bg-surface px-2 text-text-subtle"
+          className="relative mx-auto block w-fit bg-surface px-2 text-ink-subtler"
           data-slot="field-separator-content"
         >
           {children}
@@ -260,7 +260,7 @@ function FieldError({
       data-slot="field-error"
       className={cn(
         // Other
-        "st-body-sm text-text-danger",
+        "st-body-sm text-ink-danger",
         className
       )}
       {...props}

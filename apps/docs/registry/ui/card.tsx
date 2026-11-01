@@ -13,7 +13,7 @@ function Card({
       data-size={size}
       className={cn(
         // Base
-        "flex flex-col overflow-hidden rounded-xl border border-border bg-surface py-6 st-body-md text-text shadow-sm",
+        "flex flex-col overflow-hidden rounded-xl border border-border bg-surface py-6 st-body-md text-ink shadow-sm",
         // Sizing
         "gap-6",
         // Variants
@@ -53,9 +53,9 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="card-title"
       className={cn(
         // Base
-        "st-body-lg-strong",
+        "st-label-lg-medium",
         // Variants
-        "group-data-[size=sm]/card:st-body-md-strong",
+        "group-data-[size=sm]/card:st-label-md-medium",
         className
       )}
       {...props}
@@ -69,7 +69,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="card-description"
       className={cn(
         // Base
-        "st-body-md text-text-subtle",
+        "st-body-md text-ink-subtler",
         className
       )}
       {...props}

@@ -122,7 +122,7 @@ function TreeNode({
     return (
       <SidebarMenuItem>
         <SidebarMenuButton
-          className="w-fit rounded-full px-3 data-active:bg-surface-inverse data-active:text-text-oninverse"
+          className="w-fit rounded-full px-3 data-active:bg-surface-inverse data-active:text-ink-oninverse"
           isActive={pathname === node.url}
           render={<Link href={node.url} />}
         >
@@ -137,7 +137,7 @@ function TreeNode({
       <SidebarMenuItem>
         {node.index ? (
           <SidebarMenuButton
-            className="w-fit data-active:bg-surface-inverse data-active:text-text-oninverse"
+            className="w-fit data-active:bg-surface-inverse data-active:text-ink-oninverse"
             isActive={pathname === node.index.url}
             render={<Link href={node.index.url} />}
           >

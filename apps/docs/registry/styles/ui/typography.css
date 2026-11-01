@@ -4,12 +4,12 @@
   --font-heading: var(--font-zalando-sans-semiexpanded, sans-serif);
   --font-sans: var(--font-zalando-sans, sans-serif);
   --font-mono: var(--font-geist-mono, ui-monospace, monospace);
-  --font-weight-subtle: 300;
+  --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
-  --font-weight-strong: 550;
-  --font-weight-heavy: 700;
-  --font-weight-ultra: 800;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+  --font-weight-black: 900;
   --font-size-body-sm: 0.75rem;
   --font-size-body-md: 0.875rem;
   --font-size-body-lg: 1rem;
@@ -45,35 +45,11 @@
   letter-spacing: var(--tracking-wide);
 }
 
-@utility st-body-sm-strong {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-body-sm);
-  line-height: var(--line-height-snug);
-  font-weight: var(--font-weight-strong);
-  letter-spacing: var(--tracking-wide);
-}
-
 @utility st-body-md {
   font-family: var(--font-sans);
   font-size: var(--font-size-body-md);
   line-height: var(--line-height-normal);
   font-weight: var(--font-weight-regular);
-  letter-spacing: var(--tracking-normal);
-}
-
-@utility st-body-md-compact {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-body-md);
-  line-height: var(--line-height-snug);
-  font-weight: var(--font-weight-regular);
-  letter-spacing: var(--tracking-normal);
-}
-
-@utility st-body-md-strong {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-body-md);
-  line-height: var(--line-height-snug);
-  font-weight: var(--font-weight-strong);
   letter-spacing: var(--tracking-normal);
 }
 
@@ -85,35 +61,27 @@
   letter-spacing: var(--tracking-normal);
 }
 
-@utility st-body-lg-strong {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-body-lg);
-  line-height: var(--line-height-relaxed);
-  font-weight: var(--font-weight-strong);
-  letter-spacing: var(--tracking-normal);
-}
-
 @utility st-heading-sm {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-size: var(--font-size-heading-sm);
   line-height: var(--line-height-28);
-  font-weight: var(--font-weight-strong);
+  font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-tight);
 }
 
 @utility st-heading-md {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-size: var(--font-size-heading-md);
   line-height: var(--line-height-32);
-  font-weight: var(--font-weight-strong);
+  font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-tight);
 }
 
 @utility st-heading-lg {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-size: var(--font-size-heading-lg);
   line-height: var(--line-height-40);
-  font-weight: var(--font-weight-strong);
+  font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-tight);
 }
 
@@ -171,6 +139,54 @@
   line-height: var(--line-height-120);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-tighter);
+}
+
+@utility st-label-sm {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility st-label-sm-medium {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility st-label-md {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-normal);
+}
+
+@utility st-label-md-medium {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-normal);
+}
+
+@utility st-label-lg {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-relaxed);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-normal);
+}
+
+@utility st-label-lg-medium {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-relaxed);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-normal);
 }
 
 @utility st-mono-sm {

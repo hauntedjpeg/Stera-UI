@@ -21,10 +21,10 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         // Invalid
         "aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:aria-checked:border-surface-brand",
         // Checked / Indeterminate
-        "data-checked:border-surface-brand data-checked:bg-surface-brand data-checked:text-text-onbrand",
-        "data-indeterminate:border-surface-brand data-indeterminate:bg-surface-brand data-indeterminate:text-text-onbrand",
+        "data-checked:border-surface-brand data-checked:bg-surface-brand data-checked:text-ink-onbrand",
+        "data-indeterminate:border-surface-brand data-indeterminate:bg-surface-brand data-indeterminate:text-ink-onbrand",
         // Variants
-        "group-has-disabled/field:text-text-disabled",
+        "group-has-disabled/field:text-ink-disabled",
         // Other
         "peer group/checkbox",
         className

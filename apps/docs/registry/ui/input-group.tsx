@@ -21,7 +21,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
         // Focus
         "has-[[data-slot=input-group-control]:focus-visible]:border-border-brand-strong has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring-brand",
         // Disabled
-        "has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed has-[[data-slot=input-group-control]:disabled]:border-border-strong has-[[data-slot=input-group-control]:disabled]:bg-surface-disabled has-[[data-slot=input-group-control]:disabled]:text-text-subtlest",
+        "has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed has-[[data-slot=input-group-control]:disabled]:border-border-strong has-[[data-slot=input-group-control]:disabled]:bg-surface-disabled has-[[data-slot=input-group-control]:disabled]:text-ink-subtlest",
         // Invalid
         "has-[[data-slot][aria-invalid=true]]:border-border-danger-strong has-[[data-slot][aria-invalid=true]]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-ring-danger",
         // Variants
@@ -36,11 +36,11 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
 const inputGroupAddonVariants = cva(
   [
     // Base
-    "flex items-center justify-center st-body-md text-text select-none",
+    "flex items-center justify-center st-body-md text-ink select-none",
     // Sizing
     "gap-2",
     // Other
-    "cursor-text group-has-[[data-slot=input-group-control]:disabled]/input-group:opacity-50 [&>svg]:text-text-subtle [&>svg:not([class*='size-'])]:size-4",
+    "cursor-text group-has-[[data-slot=input-group-control]:disabled]/input-group:opacity-50 [&>svg]:text-ink-subtler [&>svg:not([class*='size-'])]:size-4",
   ],
   {
     variants: {
@@ -115,7 +115,7 @@ function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
     <span
       className={cn(
         // Base
-        "flex items-center st-body-md text-text-subtle",
+        "flex items-center st-body-md text-ink-subtler",
         // Sizing
         "gap-2",
         // Other

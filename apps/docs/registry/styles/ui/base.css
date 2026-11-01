@@ -5,7 +5,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-surface text-text antialiased;
+    @apply bg-surface text-ink antialiased;
     font-feature-settings: "ss03";
   }
 }

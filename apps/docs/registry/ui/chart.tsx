@@ -60,7 +60,7 @@ function ChartContainer({
           // Sizing
           "aspect-video",
           // Other
-          "justify-center [&_.recharts-cartesian-axis-tick_text]:fill-text-subtle [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-surface-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-surface-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
+          "justify-center [&_.recharts-cartesian-axis-tick_text]:fill-ink-subtler [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-surface-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-surface-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
           className
         )}
         {...props}
@@ -219,7 +219,7 @@ function ChartTooltipContent({
                   // Sizing
                   "w-full gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
                   // Other
-                  "[&>svg]:text-text-subtle",
+                  "[&>svg]:text-ink-subtler",
                   indicator === "dot" && "items-center"
                 )}
               >
@@ -265,12 +265,12 @@ function ChartTooltipContent({
                     >
                       <div className="grid gap-1.5">
                         {nestLabel ? tooltipLabel : null}
-                        <span className="text-text-subtle">
+                        <span className="text-ink-subtler">
                           {itemConfig?.label || item.name}
                         </span>
                       </div>
                       {item.value && (
-                        <span className="font-mono font-medium text-text tabular-nums">
+                        <span className="font-mono font-medium text-ink tabular-nums">
                           {item.value.toLocaleString()}
                         </span>
                       )}
@@ -330,7 +330,7 @@ function ChartLegendContent({
                 // Sizing
                 "gap-1.5 [&>svg]:h-3 [&>svg]:w-3",
                 // Other
-                "[&>svg]:text-text-subtle"
+                "[&>svg]:text-ink-subtler"
               )}
             >
               {itemConfig?.icon && !hideIcon ? (

@@ -216,7 +216,7 @@ function DrawerPopup({
             className={cn(
               // Base — clips its contents; scrolling lives on DrawerContent
               // (Drawer.Content).
-              "relative flex min-h-0 min-w-0 flex-col overflow-hidden rounded-xl bg-surface text-sm text-text shadow-lg ring-1 ring-border",
+              "relative flex min-h-0 min-w-0 flex-col overflow-hidden rounded-xl bg-surface text-sm text-ink shadow-lg ring-1 ring-border",
               // Interactive only while open, so it goes inert during the exit
               "group-data-open/drawer:pointer-events-auto",
               // Sizing
@@ -232,7 +232,7 @@ function DrawerPopup({
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="absolute top-2.5 right-2.5 text-text-subtle"
+                    className="absolute top-2.5 right-2.5 text-ink-subtler"
                   />
                 }
               >
@@ -313,7 +313,7 @@ function DrawerTitle({ className, ...props }: DrawerPrimitive.Title.Props) {
       data-slot="drawer-title"
       className={cn(
         // Other
-        "st-body-lg-strong text-text",
+        "st-label-lg-medium text-ink",
         className
       )}
       {...props}
@@ -330,7 +330,7 @@ function DrawerDescription({
       data-slot="drawer-description"
       className={cn(
         // Other
-        "text-sm text-text-subtle",
+        "text-sm text-ink-subtler",
         className
       )}
       {...props}

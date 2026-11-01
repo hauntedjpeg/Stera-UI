@@ -24,7 +24,7 @@ export async function ComponentPreview({
 
   if (!Component) {
     return (
-      <p className="my-6 text-sm text-text-subtle">
+      <p className="my-6 text-sm text-ink-subtler">
         Example{" "}
         <code className="rounded bg-surface-subtle px-1.5 py-0.5 font-mono">
           {name}

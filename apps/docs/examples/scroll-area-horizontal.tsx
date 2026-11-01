@@ -9,7 +9,7 @@ export default function ScrollAreaHorizontal() {
         {swatches.map((swatch) => (
           <div
             key={swatch}
-            className="flex size-24 shrink-0 items-center justify-center rounded-lg bg-surface-subtle st-body-sm text-text-subtle"
+            className="flex size-24 shrink-0 items-center justify-center rounded-lg bg-surface-subtle st-body-sm text-ink-subtler"
           >
             {swatch}
           </div>

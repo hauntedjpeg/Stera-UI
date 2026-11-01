@@ -27,7 +27,7 @@ function Command({
       data-slot="command"
       className={cn(
         // Base
-        "flex flex-col overflow-hidden text-text",
+        "flex flex-col overflow-hidden text-ink",
         // Sizing
         "size-full",
         className
@@ -91,7 +91,7 @@ function CommandInput({
           data-slot="command-input"
           className={cn(
             // Base
-            "st-body-md-compact outline-hidden",
+            "st-label-md outline-hidden",
             // Sizing
             "w-full",
             // Other
@@ -155,9 +155,9 @@ function CommandGroup({
       data-slot="command-group"
       className={cn(
         // Base
-        "overflow-hidden p-2 text-text",
+        "overflow-hidden p-2 text-ink",
         // Other
-        "**:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-text-subtle",
+        "**:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-ink-subtler",
         className
       )}
       {...props}
@@ -196,11 +196,11 @@ function CommandItem({
         // Group
         "group/command-item",
         // Base
-        "relative flex cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 st-body-md-compact text-text outline-hidden select-none",
+        "relative flex cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 st-label-md text-ink outline-hidden select-none",
         // Selected
-        "data-[selected=true]:bg-surface-hover data-[selected=true]:text-text data-[selected=true]:**:text-text",
+        "data-[selected=true]:bg-surface-hover data-[selected=true]:text-ink data-[selected=true]:**:text-ink",
         // Disabled
-        "data-[disabled=true]:pointer-events-none data-[disabled=true]:text-text-subtlest",
+        "data-[disabled=true]:pointer-events-none data-[disabled=true]:text-ink-subtlest",
         // Other
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
@@ -222,9 +222,9 @@ function CommandShortcut({
       data-slot="command-shortcut"
       className={cn(
         // Base
-        "text-xs/4 text-text-subtlest",
+        "text-xs/4 text-ink-subtlest",
         // Other
-        "ml-auto tracking-wide group-data-[selected=true]/command-item:text-text",
+        "ml-auto tracking-wide group-data-[selected=true]/command-item:text-ink",
         className
       )}
       {...props}

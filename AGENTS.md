@@ -59,7 +59,7 @@ Stack used inside components:
 - **Variants:** `class-variance-authority` (CVA).
 - **Class merging:** `cn()` from `apps/docs/registry/lib/utils.ts` (clsx + tailwind-merge). Always use `cn()` when composing classes.
 - **Icons:** `stera-icons` package.
-- **Design tokens:** Tailwind classes built on CSS variables — `text-text-*`, `bg-surface-*`, `border-border-*`, `ring-ring-*`, plus typography utilities like `st-display-sm`, `st-heading-md`, `st-body-lg` (defined in `apps/docs/registry/styles/`). Prefer these tokens over raw Tailwind colors.
+- **Design tokens:** Tailwind classes built on CSS variables — `text-ink-*`, `bg-surface-*`, `border-border-*`, `ring-ring-*`, plus typography utilities like `st-display-sm`, `st-heading-md`, `st-body-lg` (defined in `apps/docs/registry/styles/`). Prefer these tokens over raw Tailwind colors.
 
 TS path aliases inside `apps/docs` (see `apps/docs/tsconfig.json`):
 

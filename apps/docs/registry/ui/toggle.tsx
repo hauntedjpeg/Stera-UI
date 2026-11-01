@@ -20,7 +20,7 @@ const toggleVariants = cva(
     variants: {
       variant: {
         default:
-          "hover:bg-surface-hover hover:text-text aria-pressed:bg-surface-subtle",
+          "hover:bg-surface-hover hover:text-ink aria-pressed:bg-surface-subtle",
         outline:
           "border border-border bg-surface hover:bg-surface-hover aria-pressed:bg-surface-subtle",
       },

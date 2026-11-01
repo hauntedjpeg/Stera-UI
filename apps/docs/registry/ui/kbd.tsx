@@ -7,9 +7,9 @@ const kbdVariants = cva(
     // Base
     "inline-flex w-fit items-center justify-center gap-1 rounded-md bg-surface-muted px-1",
     // Variants
-    "in-data-[slot=tooltip-content]:bg-surface-muted in-data-[slot=tooltip-content]:text-text",
+    "in-data-[slot=tooltip-content]:bg-surface-muted in-data-[slot=tooltip-content]:text-ink",
     // Other
-    "pointer-events-none font-sans text-xs/4 text-text-subtle select-none",
+    "pointer-events-none font-sans text-xs/4 text-ink-subtler select-none",
   ],
   {
     variants: {

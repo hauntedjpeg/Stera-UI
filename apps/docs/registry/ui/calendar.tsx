@@ -63,11 +63,11 @@ function Calendar({
         button_previous: cn(navButtonClass, defaultClassNames.button_previous),
         button_next: cn(navButtonClass, defaultClassNames.button_next),
         month_caption: cn(
-          "flex h-(--cell-size) w-full items-center justify-center px-(--cell-size) st-body-sm-strong",
+          "flex h-(--cell-size) w-full items-center justify-center px-(--cell-size) st-label-sm-medium",
           defaultClassNames.month_caption
         ),
         dropdowns: cn(
-          "flex h-(--cell-size) w-full items-center justify-center gap-1.5 st-body-md-compact font-medium",
+          "flex h-(--cell-size) w-full items-center justify-center gap-1.5 st-label-md font-medium",
           defaultClassNames.dropdowns
         ),
         dropdown_root: cn(
@@ -89,7 +89,7 @@ function Calendar({
         table: "w-full border-collapse",
         weekdays: cn("flex", defaultClassNames.weekdays),
         weekday: cn(
-          "min-w-(--cell-size) flex-1 rounded-(--cell-radius) st-body-md-strong text-text-subtle select-none",
+          "min-w-(--cell-size) flex-1 rounded-(--cell-radius) st-label-md-medium text-ink-subtler select-none",
           defaultClassNames.weekday
         ),
         week: cn("mt-2 flex w-full", defaultClassNames.week),
@@ -98,7 +98,7 @@ function Calendar({
           defaultClassNames.week_number_header
         ),
         week_number: cn(
-          "st-body-md-compact text-text-subtle select-none",
+          "st-label-md text-ink-subtler select-none",
           defaultClassNames.week_number
         ),
         day: cn(
@@ -122,14 +122,14 @@ function Calendar({
           defaultClassNames.range_end
         ),
         today: cn(
-          "rounded-(--cell-radius) bg-surface-brand-subtle text-text-brand",
+          "rounded-(--cell-radius) bg-surface-brand-subtle text-ink-brand",
           defaultClassNames.today
         ),
         outside: cn(
-          "text-text-subtlest aria-selected:text-text-subtlest",
+          "text-ink-subtlest aria-selected:text-ink-subtlest",
           defaultClassNames.outside
         ),
-        disabled: cn("text-text-subtlest", defaultClassNames.disabled),
+        disabled: cn("text-ink-subtlest", defaultClassNames.disabled),
         hidden: cn("invisible", defaultClassNames.hidden),
         ...classNames,
       }}
@@ -196,19 +196,19 @@ function CalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        "relative isolate z-10 flex size-full flex-col items-center justify-center gap-1 rounded-(--cell-radius) border-0 p-0 st-body-md-compact",
+        "relative isolate z-10 flex size-full flex-col items-center justify-center gap-1 rounded-(--cell-radius) border-0 p-0 st-label-md",
         "group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10",
-        "[&>span]:st-body-sm [&>span]:text-text-subtlest",
+        "[&>span]:st-body-sm [&>span]:text-ink-subtlest",
         // Single selection
-        "data-[selected-single=true]:bg-surface-brand data-[selected-single=true]:text-text-onbrand data-[selected-single=true]:hover:bg-surface-brand-strong! data-[selected-single=true]:hover:text-text-onbrand! data-[selected-single=true]:[&>span]:text-text-onbrand-subtle",
+        "data-[selected-single=true]:bg-surface-brand data-[selected-single=true]:text-ink-onbrand data-[selected-single=true]:hover:bg-surface-brand-bold! data-[selected-single=true]:hover:text-ink-onbrand! data-[selected-single=true]:[&>span]:text-ink-onbrand-subtle",
         // Range middle
-        "data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-surface-muted data-[range-middle=true]:text-text",
+        "data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-surface-muted data-[range-middle=true]:text-ink",
         // Range endpoints (start/end share everything except which side rounds)
         "data-[range-end=true]:bg-surface-brand data-[range-start=true]:bg-surface-brand",
-        "data-[range-end=true]:hover:bg-surface-brand-strong! data-[range-start=true]:hover:bg-surface-brand-strong!",
-        "data-[range-end=true]:text-text-onbrand data-[range-start=true]:text-text-onbrand",
-        "data-[range-end=true]:hover:text-text-onbrand! data-[range-start=true]:hover:text-text-onbrand!",
-        "data-[range-end=true]:[&>span]:text-text-onbrand-subtle data-[range-start=true]:[&>span]:text-text-onbrand-subtle",
+        "data-[range-end=true]:hover:bg-surface-brand-bold! data-[range-start=true]:hover:bg-surface-brand-bold!",
+        "data-[range-end=true]:text-ink-onbrand data-[range-start=true]:text-ink-onbrand",
+        "data-[range-end=true]:hover:text-ink-onbrand! data-[range-start=true]:hover:text-ink-onbrand!",
+        "data-[range-end=true]:[&>span]:text-ink-onbrand-subtle data-[range-start=true]:[&>span]:text-ink-onbrand-subtle",
         "data-[range-end=true]:rounded-r-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius)",
         defaultClassNames.day_button,
         className

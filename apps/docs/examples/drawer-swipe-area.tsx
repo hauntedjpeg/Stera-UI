@@ -28,7 +28,7 @@ export default function DrawerSwipeAreaExample() {
             this drawer without tapping the trigger.
           </DrawerDescription>
         </DrawerHeader>
-        <DrawerContent className="px-4 text-sm text-text-subtle">
+        <DrawerContent className="px-4 text-sm text-ink-subtler">
           <p>
             A <code>DrawerSwipeArea</code> is an invisible, fixed strip along
             the screen edge. Base UI handles the swipe gesture and sets its own{" "}

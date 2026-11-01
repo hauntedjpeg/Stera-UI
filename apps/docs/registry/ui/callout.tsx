@@ -15,17 +15,17 @@ const calloutVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-surface text-text [&>svg]:text-current",
+        default: "bg-surface text-ink [&>svg]:text-current",
         brand:
-          "border-border-brand bg-surface-brand-subtle [&>svg]:text-text-brand",
+          "border-border-brand bg-surface-brand-subtle [&>svg]:text-ink-brand",
         accent:
-          "border-border-accent bg-surface-accent-subtle [&>svg]:text-text-accent",
+          "border-border-accent bg-surface-accent-subtle [&>svg]:text-ink-accent",
         danger:
-          "border-border-danger bg-surface-danger-subtle [&>svg]:text-text-danger",
+          "border-border-danger bg-surface-danger-subtle [&>svg]:text-ink-danger",
         success:
-          "border-border-success bg-surface-success-subtle [&>svg]:text-text-success",
+          "border-border-success bg-surface-success-subtle [&>svg]:text-ink-success",
         warning:
-          "border-border-warning bg-surface-warning-subtle [&>svg]:text-text-warning-subtle",
+          "border-border-warning bg-surface-warning-subtle [&>svg]:text-ink-warning-subtle",
       },
     },
     defaultVariants: {
@@ -64,7 +64,7 @@ function CalloutTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="callout-title"
       className={cn(
-        "st-body-md-strong [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text-brand",
+        "st-label-md-medium [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-ink-brand",
         className
       )}
       {...props}
@@ -80,7 +80,7 @@ function CalloutDescription({
     <div
       data-slot="callout-description"
       className={cn(
-        "st-body-md text-balance text-text-subtle md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-text-brand",
+        "st-body-md text-balance text-ink-subtler md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-ink-brand",
         className
       )}
       {...props}

@@ -25,11 +25,9 @@ export default function PreviewCardDemo() {
             <AvatarFallback>CG</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
-            <p className="st-body-md-strong">bootoo</p>
-            <p className="mb-2 st-body-sm text-text-subtlest">@hauntedjpeg</p>
-            <p className="st-body-md-compact">
-              Design for illuminated surfaces
-            </p>
+            <p className="st-label-md-medium">bootoo</p>
+            <p className="mb-2 st-body-sm text-ink-subtlest">@hauntedjpeg</p>
+            <p className="st-label-md">Design for illuminated surfaces</p>
           </div>
         </div>
       </PreviewCardContent>

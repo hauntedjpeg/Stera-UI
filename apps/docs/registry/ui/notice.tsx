@@ -75,7 +75,7 @@ function NoticeRoot({
         // Layout
         "absolute right-0 left-auto mr-0 ml-auto box-border w-full cursor-default p-4 select-none",
         // Visual chrome
-        "rounded-xl bg-surface bg-clip-padding text-text shadow-md ring-1 ring-border",
+        "rounded-xl bg-surface bg-clip-padding text-ink shadow-md ring-1 ring-border",
         // Transition
         "[transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s]",
         // Z-index based on stack position
@@ -136,7 +136,7 @@ function NoticeTitle({ className, ...props }: ToastPrimitive.Title.Props) {
   return (
     <ToastPrimitive.Title
       data-slot="notice-title"
-      className={cn("mb-0 st-body-md-strong", className)}
+      className={cn("mb-0 st-label-md-medium", className)}
       {...props}
     />
   )
@@ -149,7 +149,7 @@ function NoticeDescription({
   return (
     <ToastPrimitive.Description
       data-slot="notice-description"
-      className={cn("m-0 st-body-md text-text-subtle", className)}
+      className={cn("m-0 st-body-md text-ink-subtler", className)}
       {...props}
     />
   )
@@ -187,10 +187,10 @@ function NoticeClose({ className, ...props }: ToastPrimitive.Close.Props) {
 }
 
 const NOTICE_TYPE_ICONS: Record<string, React.ReactNode> = {
-  success: <SiCheckCircleFill className="size-4 text-text-success" />,
-  info: <SiInfoCircleFill className="size-4 text-text-subtle" />,
-  warning: <SiAlertTriangleFill className="size-4 text-text-warning" />,
-  error: <SiAlertOctagonFill className="size-4 text-text-danger" />,
+  success: <SiCheckCircleFill className="size-4 text-ink-success" />,
+  info: <SiInfoCircleFill className="size-4 text-ink-subtler" />,
+  warning: <SiAlertTriangleFill className="size-4 text-ink-warning" />,
+  error: <SiAlertOctagonFill className="size-4 text-ink-danger" />,
   loading: <SiCircleNotch className="size-4 animate-spin" />,
 }
 

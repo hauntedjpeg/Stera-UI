@@ -402,6 +402,7 @@ function collectionDecls(
 
 function semanticGroupKey(head: string): number {
   if (head === "surface" || head.startsWith("surface-")) return 0
+  if (head === "ink" || head.startsWith("ink-")) return 1
   if (head === "text" || head.startsWith("text-")) return 1
   if (head === "border" || head.startsWith("border-")) return 2
   if (head === "ring" || head.startsWith("ring-")) return 3

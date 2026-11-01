@@ -38,7 +38,7 @@ function Switch({
           // Base
           "pointer-events-none block rounded-full bg-surface ring-0 transition-transform",
           // Disabled
-          "data-disabled:bg-text-disabled",
+          "data-disabled:bg-ink-disabled",
           // Size — sm
           "group-data-[size=sm]/switch:size-3 group-data-[size=sm]/switch:data-checked:translate-x-2 group-data-[size=sm]/switch:data-unchecked:translate-x-0",
           // Size — md

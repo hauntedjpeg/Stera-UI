@@ -52,7 +52,7 @@ export function DocsToc({ toc }: { toc: TableOfContents }) {
   if (items.length === 0) return null
 
   return (
-    <nav aria-label="Content outline" className="text-text-subtle">
+    <nav aria-label="Content outline" className="text-ink-subtler">
       <ScrollArea className="max-h-[calc(100vh-var(--header-height)-4rem)]">
         <ul className="space-y-1.5">
           {items.map((item) => {
@@ -63,9 +63,9 @@ export function DocsToc({ toc }: { toc: TableOfContents }) {
                 <a
                   href={item.url}
                   className={cn(
-                    "block st-body-md-compact transition-colors hover:text-text",
+                    "block st-label-md transition-colors hover:text-ink",
                     item.depth === 3 && "pl-4",
-                    isActive ? "text-text" : "text-text-subtlest"
+                    isActive ? "text-ink" : "text-ink-subtlest"
                   )}
                 >
                   {item.title}

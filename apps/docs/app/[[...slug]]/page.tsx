@@ -20,9 +20,9 @@ export default async function Page(props: {
       <div className="flex min-w-0 flex-1 justify-center">
         <article className="w-full max-w-3xl min-w-0 px-4 py-10">
           <header className="mb-8">
-            <h1 className="st-display-sm text-text">{page.data.title}</h1>
+            <h1 className="st-display-sm text-ink">{page.data.title}</h1>
             {page.data.description && (
-              <p className="mt-2 st-body-lg text-text-subtle">
+              <p className="mt-2 st-body-lg text-ink-subtler">
                 {page.data.description}
               </p>
             )}

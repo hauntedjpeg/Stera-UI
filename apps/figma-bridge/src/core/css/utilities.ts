@@ -12,35 +12,11 @@ export const STERA_UTILITIES = `@utility st-body-sm {
   letter-spacing: var(--tracking-wide);
 }
 
-@utility st-body-sm-strong {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-body-sm);
-  line-height: var(--line-height-snug);
-  font-weight: var(--font-weight-strong);
-  letter-spacing: var(--tracking-wide);
-}
-
 @utility st-body-md {
   font-family: var(--font-sans);
   font-size: var(--font-size-body-md);
   line-height: var(--line-height-normal);
   font-weight: var(--font-weight-regular);
-  letter-spacing: var(--tracking-normal);
-}
-
-@utility st-body-md-compact {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-body-md);
-  line-height: var(--line-height-snug);
-  font-weight: var(--font-weight-regular);
-  letter-spacing: var(--tracking-normal);
-}
-
-@utility st-body-md-strong {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-body-md);
-  line-height: var(--line-height-snug);
-  font-weight: var(--font-weight-strong);
   letter-spacing: var(--tracking-normal);
 }
 
@@ -52,35 +28,27 @@ export const STERA_UTILITIES = `@utility st-body-sm {
   letter-spacing: var(--tracking-normal);
 }
 
-@utility st-body-lg-strong {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-body-lg);
-  line-height: var(--line-height-relaxed);
-  font-weight: var(--font-weight-strong);
-  letter-spacing: var(--tracking-normal);
-}
-
 @utility st-heading-sm {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-size: var(--font-size-heading-sm);
   line-height: var(--line-height-28);
-  font-weight: var(--font-weight-strong);
+  font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-tight);
 }
 
 @utility st-heading-md {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-size: var(--font-size-heading-md);
   line-height: var(--line-height-32);
-  font-weight: var(--font-weight-strong);
+  font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-tight);
 }
 
 @utility st-heading-lg {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-size: var(--font-size-heading-lg);
   line-height: var(--line-height-40);
-  font-weight: var(--font-weight-strong);
+  font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-tight);
 }
 
@@ -138,6 +106,54 @@ export const STERA_UTILITIES = `@utility st-body-sm {
   line-height: var(--line-height-120);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-tighter);
+}
+
+@utility st-label-sm {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility st-label-sm-medium {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility st-label-md {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-normal);
+}
+
+@utility st-label-md-medium {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-normal);
+}
+
+@utility st-label-lg {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-relaxed);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-normal);
+}
+
+@utility st-label-lg-medium {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-relaxed);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-normal);
 }
 
 @utility st-mono-sm {

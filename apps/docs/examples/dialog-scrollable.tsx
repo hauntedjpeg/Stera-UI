@@ -26,7 +26,7 @@ export default function DialogScrollable() {
         </DialogHeader>
         <DialogContent scroll>
           {Array.from({ length: 6 }).map((_, i) => (
-            <p key={i} className="mb-4 text-sm text-text-subtle">
+            <p key={i} className="mb-4 text-sm text-ink-subtler">
               {loremParagraph}
             </p>
           ))}

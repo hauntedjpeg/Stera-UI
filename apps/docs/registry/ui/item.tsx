@@ -185,7 +185,7 @@ function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="item-title"
       className={cn(
         // Base
-        "flex st-body-md-strong underline-offset-4",
+        "flex st-label-md-medium underline-offset-4",
         // Sizing
         "w-fit gap-2",
         // Other
@@ -203,11 +203,11 @@ function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
       data-slot="item-description"
       className={cn(
         // Base
-        "st-body-md text-text-subtle",
+        "st-body-md text-ink-subtler",
         // Variants
         "group-data-[size=sm]/item:st-body-sm",
         // Other
-        "line-clamp-2 [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-text-brand",
+        "line-clamp-2 [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-ink-brand",
         className
       )}
       {...props}
@@ -239,7 +239,7 @@ function ItemHeader({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="item-header"
       className={cn(
         // Base
-        "flex st-body-md-compact",
+        "flex st-label-md",
         // Sizing
         "basis-full gap-2",
         // Other
@@ -263,7 +263,7 @@ function ItemFooter({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="item-footer"
       className={cn(
         // Base
-        "flex st-body-md-compact",
+        "flex st-label-md",
         // Sizing
         "basis-full gap-2",
         // Other

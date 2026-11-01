@@ -104,7 +104,7 @@ export function DocsSearch({ tree }: { tree: PageTree }) {
       >
         <SiSearch data-icon="inline-start" />
         <span className="hidden sm:inline">Search docs</span>
-        <kbd className="hidden text-xs/4 tracking-wide text-text-subtlest md:inline">
+        <kbd className="hidden text-xs/4 tracking-wide text-ink-subtlest md:inline">
           ⌘K
         </kbd>
       </Button>

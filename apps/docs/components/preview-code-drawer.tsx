@@ -28,7 +28,7 @@ export function PreviewCodeDrawer({
 
   return (
     <div className="flex items-center justify-between gap-2 border-t border-border bg-surface px-4 py-2">
-      <span className="text-sm text-text-subtle">{caption}</span>
+      <span className="text-sm text-ink-subtler">{caption}</span>
       <Drawer>
         <DrawerTrigger
           render={(props) => (
@@ -42,9 +42,7 @@ export function PreviewCodeDrawer({
           showCloseButton={false}
         >
           <DrawerHeader className="flex-row items-center gap-2 p-1 pl-4">
-            <DrawerTitle className="flex-1 st-body-md-compact">
-              {title}
-            </DrawerTitle>
+            <DrawerTitle className="flex-1 st-label-md">{title}</DrawerTitle>
             <CopyButton
               className="border-none bg-surface-subtle hover:bg-surface-subtle-hover"
               value={code}
