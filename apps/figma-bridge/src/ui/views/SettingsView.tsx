@@ -121,7 +121,7 @@ export function SettingsView({ prefs, onPrefsChange, onBack }: Props) {
 
         <Row
           label="About"
-          description="Export your Figma variables and text styles as CSS for Stera UI. If you're not using a forked version of Stera UI this plugin will not work properly."
+          description="Export your Figma variables and text styles as CSS. Works with files built on the Stera UI Figma file, such as forks of it or design systems that share its variable structure."
         >
           <Button variant="secondary" onClick={() => openUrl(STERA_UI_URL)}>
             Stera UI
