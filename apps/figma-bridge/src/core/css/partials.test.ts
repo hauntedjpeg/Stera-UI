@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest"
 import { generatePartials } from "./partials.js"
-import { generateGlobalsCss } from "./generate.js"
 import { rgbaToOklchCss } from "../color/oklch.js"
 import {
   basePrimitives,
@@ -141,19 +140,13 @@ describe("generatePartials", () => {
     )
   })
 
-  it("returns no files and the same error text on a hard failure", () => {
+  it("returns no files on a hard failure", () => {
     const { files, errors } = generatePartials({
       ...baseOptions,
       collections: [themeSemantic, baseTypography],
     })
     expect(files).toEqual([])
     expect(errors[0]).toMatch(/"Color"/)
-    expect(errors).toEqual(
-      generateGlobalsCss({
-        ...baseOptions,
-        collections: [themeSemantic, baseTypography],
-      }).errors
-    )
   })
 
   it("never emits a @theme radius block for a Reference Radii group", () => {
@@ -165,25 +158,6 @@ describe("generatePartials", () => {
       expect(file.contents).not.toMatch(/@theme \{/)
       expect(file.contents).not.toContain("--radius-")
       expect(file.contents).not.toContain("--spacing-4")
-    }
-  })
-
-  it("covers every declaration the single-file output emits", () => {
-    const options = {
-      ...baseOptions,
-      collections,
-      textStyles: [headingSmStyle],
-    }
-    const { css } = generateGlobalsCss(options)
-    const { files } = generatePartials(options)
-    const combined = files.map((f) => f.contents).join("\n")
-
-    const declared = new Set(
-      css.match(/^\s*(--[a-z0-9-]+):/gm)?.map((m) => m.trim())
-    )
-    expect(declared.size).toBeGreaterThan(0)
-    for (const decl of declared) {
-      expect(combined).toContain(decl)
     }
   })
 

@@ -1,16 +1,26 @@
 @import "tailwindcss";
 
+/* Figma injects --figma-color-* when the plugin opens with themeColors: true.
+   The fallbacks are its light theme, for previewing the built HTML elsewhere. */
 @theme {
   --color-surface: var(--figma-color-bg, #ffffff);
   --color-surface-secondary: var(--figma-color-bg-secondary, #f5f5f5);
-  --color-border: var(--figma-color-border, #e5e5e5);
-  --color-border-strong: var(--figma-color-border-strong, #cccccc);
-  --color-text: var(--figma-color-text, #1a1a1a);
-  --color-text-secondary: var(--figma-color-text-secondary, #666666);
+  --color-surface-hover: var(--figma-color-bg-hover, #f5f5f5);
+  --color-border: var(--figma-color-border, #e6e6e6);
+  --color-text: var(--figma-color-text, #000000e5);
+  --color-text-secondary: var(--figma-color-text-secondary, #00000080);
+  --color-text-tertiary: var(--figma-color-text-tertiary, #0000004d);
+  --color-icon-secondary: var(--figma-color-icon-secondary, #00000080);
   --color-brand: var(--figma-color-bg-brand, #0d99ff);
+  --color-brand-hover: var(--figma-color-bg-brand-hover, #007be5);
   --color-brand-text: var(--figma-color-text-onbrand, #ffffff);
-  --color-danger: var(--figma-color-bg-danger, #f24822);
-  --color-warning: var(--figma-color-bg-warning, #f5a623);
+  --color-warning: var(--figma-color-icon-warning, #f3c11b);
+
+  --font-sans:
+    Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono:
+    "SF Mono", ui-monospace, Menlo, Monaco, "Roboto Mono", Consolas, monospace;
 }
 
 html,
@@ -18,13 +28,16 @@ body,
 #root {
   height: 100%;
   margin: 0;
+}
+
+/* On body, not html: the root size has to stay 16px for Tailwind's rem scale. */
+body {
   background: var(--color-surface);
   color: var(--color-text);
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: 11px;
-  line-height: 1.4;
+  line-height: 16px;
+  -webkit-font-smoothing: antialiased;
 }
 
 * {

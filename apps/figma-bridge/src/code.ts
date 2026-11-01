@@ -1,8 +1,4 @@
 import type {
-  RawVariable,
-  RawVariableCollection,
-  RawVariableValue,
-  RawVariablesPayload,
   SerializedCollection,
   SerializedTextStyle,
   SerializedValue,
@@ -44,83 +40,6 @@ function serializeValue(raw: VariableValue): SerializedValue {
     }
   }
   return { kind: "string", value: String(raw) }
-}
-
-function rawValue(raw: VariableValue): RawVariableValue {
-  if (typeof raw === "number") return raw
-  if (typeof raw === "string") return raw
-  if (typeof raw === "boolean") return raw
-  if (
-    raw &&
-    typeof raw === "object" &&
-    "type" in raw &&
-    (raw as VariableAlias).type === "VARIABLE_ALIAS"
-  ) {
-    return { type: "VARIABLE_ALIAS", id: (raw as VariableAlias).id }
-  }
-  if (
-    raw &&
-    typeof raw === "object" &&
-    "r" in raw &&
-    "g" in raw &&
-    "b" in raw
-  ) {
-    const c = raw as RGB | RGBA
-    return {
-      r: c.r,
-      g: c.g,
-      b: c.b,
-      a: "a" in c ? c.a : 1,
-    }
-  }
-  return String(raw)
-}
-
-async function extractRawVariables(): Promise<RawVariablesPayload> {
-  const collections = await figma.variables.getLocalVariableCollectionsAsync()
-  const variables: Record<string, RawVariable> = {}
-  const variableCollections: Record<string, RawVariableCollection> = {}
-
-  for (const col of collections) {
-    variableCollections[col.id] = {
-      id: col.id,
-      name: col.name,
-      key: col.key,
-      modes: col.modes.map((m) => ({ modeId: m.modeId, name: m.name })),
-      defaultModeId: col.defaultModeId,
-      remote: col.remote,
-      hiddenFromPublishing: col.hiddenFromPublishing,
-      variableIds: [...col.variableIds],
-    }
-
-    for (const varId of col.variableIds) {
-      const v = await figma.variables.getVariableByIdAsync(varId)
-      if (!v) continue
-      const valuesByMode: Record<string, RawVariableValue> = {}
-      for (const modeId of Object.keys(v.valuesByMode)) {
-        valuesByMode[modeId] = rawValue(v.valuesByMode[modeId])
-      }
-      variables[v.id] = {
-        id: v.id,
-        name: v.name,
-        key: v.key,
-        variableCollectionId: v.variableCollectionId,
-        resolvedType: v.resolvedType,
-        valuesByMode,
-        remote: v.remote,
-        description: v.description,
-        hiddenFromPublishing: v.hiddenFromPublishing,
-        scopes: [...v.scopes],
-        codeSyntax: { ...v.codeSyntax },
-      }
-    }
-  }
-
-  return {
-    status: 200,
-    error: false,
-    meta: { variables, variableCollections },
-  }
 }
 
 async function extractDoc(): Promise<SerializedCollection[]> {
@@ -215,14 +134,16 @@ async function loadPrefs(): Promise<StoredPrefs> {
   try {
     // Keep only current keys, so options a newer build dropped don't linger
     // in storage and get written back on every save.
-    const stored = raw as Partial<StoredPrefs>
+    const stored = raw as Partial<StoredPrefs> & {
+      // Per-collection units from before the single Units setting.
+      unitByCollectionName?: Record<string, StoredPrefs["unit"]>
+    }
     return {
       strategy: stored.strategy ?? DEFAULT_PREFS.strategy,
-      unitByCollectionName:
-        stored.unitByCollectionName ?? DEFAULT_PREFS.unitByCollectionName,
-      darkModeIdByCollectionId:
-        stored.darkModeIdByCollectionId ??
-        DEFAULT_PREFS.darkModeIdByCollectionId,
+      unit:
+        stored.unit ??
+        stored.unitByCollectionName?.Typography ??
+        DEFAULT_PREFS.unit,
       ...(stored.prefix ? { prefix: stored.prefix } : {}),
     }
   } catch {
@@ -238,29 +159,30 @@ function post(message: SandboxToUi): void {
   figma.ui.postMessage(message)
 }
 
-figma.showUI(__html__, { width: 440, height: 620, themeColors: true })
+figma.showUI(__html__, { width: 440, height: 600, themeColors: true })
 
 figma.ui.onmessage = async (msg: UiToSandbox) => {
   try {
     if (msg.type === "load-variables") {
-      const [collections, textStyles, raw, prefs] = await Promise.all([
+      const [collections, textStyles, prefs] = await Promise.all([
         extractDoc(),
         extractTextStyles(),
-        extractRawVariables(),
         loadPrefs(),
       ])
       post({
         type: "variables-loaded",
         doc: { collections, textStyles },
-        raw,
         prefs,
-        fileName: figma.root.name,
       })
       return
     }
     if (msg.type === "save-prefs") {
       await savePrefs(msg.prefs)
       post({ type: "prefs-saved" })
+      return
+    }
+    if (msg.type === "open-url") {
+      figma.openExternal(msg.url)
       return
     }
     if (msg.type === "close") {

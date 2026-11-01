@@ -1,97 +1,51 @@
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import {
   DEFAULT_PREFS,
   postToSandbox,
-  type FontStrategy,
-  type RawVariablesPayload,
   type SandboxToUi,
   type StoredPrefs,
-  type UnitChoice,
   type VariableDoc,
 } from "../shared/messages.js"
 import { useFigmaMessages } from "./hooks/useFigmaMessages.js"
-import { generateGlobalsCss } from "../core/css/generate.js"
 import { generatePartials } from "../core/css/partials.js"
-import {
-  deriveFontAssignments,
-  isDefaultFontAssignments,
-} from "../core/css/model.js"
-import { PreviewView } from "./views/PreviewView.js"
-import { FontStrategyView } from "./views/FontStrategyView.js"
-import { OptionsView } from "./views/OptionsView.js"
-import { ExportView } from "./views/ExportView.js"
-
-type Step = "preview" | "fonts" | "options" | "export"
-
-const STEPS: { id: Step; label: string }[] = [
-  { id: "preview", label: "Preview" },
-  { id: "fonts", label: "Fonts" },
-  { id: "options", label: "Options" },
-  { id: "export", label: "Export" },
-]
+import { deriveFontAssignments } from "../core/css/model.js"
+import { FilesView } from "./views/FilesView.js"
+import { SettingsView } from "./views/SettingsView.js"
+import { UnsupportedView } from "./views/UnsupportedView.js"
 
 export function App() {
   const [doc, setDoc] = useState<VariableDoc | null>(null)
-  const [raw, setRaw] = useState<RawVariablesPayload | null>(null)
-  const [fileName, setFileName] = useState<string>("")
   const [prefs, setPrefs] = useState<StoredPrefs>(DEFAULT_PREFS)
-  const [step, setStep] = useState<Step>("preview")
-  const [errorMsg, setErrorMsg] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [view, setView] = useState<"files" | "settings">("files")
+  const [activeFile, setActiveFile] = useState("index.css")
+  const [loadError, setLoadError] = useState<string | null>(null)
 
   const onMessage = useCallback((msg: SandboxToUi) => {
     if (msg.type === "variables-loaded") {
       setDoc(msg.doc)
-      setRaw(msg.raw)
-      setFileName(msg.fileName)
       setPrefs(msg.prefs)
-      setLoading(false)
     } else if (msg.type === "error") {
-      setErrorMsg(msg.message)
-      setLoading(false)
+      setLoadError(msg.message)
     }
   }, [])
 
   useFigmaMessages(onMessage)
 
-  useMemo(() => {
+  useEffect(() => {
     postToSandbox({ type: "load-variables" })
   }, [])
 
-  const fontAssignments = useMemo(
-    () => (doc ? deriveFontAssignments(doc.collections, prefs.prefix) : []),
-    [doc, prefs.prefix]
-  )
-
-  const generateOptions = useMemo(() => {
+  const partials = useMemo(() => {
     if (!doc) return null
-    return {
+    return generatePartials({
       collections: doc.collections,
       textStyles: doc.textStyles,
       strategy: prefs.strategy,
-      unitByCollectionName: prefs.unitByCollectionName,
+      unit: prefs.unit,
       prefix: prefs.prefix,
-      darkModeIdByCollectionId: prefs.darkModeIdByCollectionId,
-      fontAssignments,
-    }
-  }, [doc, prefs, fontAssignments])
-
-  const output = useMemo(
-    () => (generateOptions ? generateGlobalsCss(generateOptions) : null),
-    [generateOptions]
-  )
-  const partials = useMemo(
-    () => (generateOptions ? generatePartials(generateOptions) : null),
-    [generateOptions]
-  )
-
-  // Partials is the default export mode, so Preview surfaces its warning set —
-  // a superset of the single-file one.
-  const previewOutput = useMemo(
-    () =>
-      output && partials ? { ...output, warnings: partials.warnings } : output,
-    [output, partials]
-  )
+      fontAssignments: deriveFontAssignments(doc.collections, prefs.prefix),
+    })
+  }, [doc, prefs])
 
   const updatePrefs = (patch: Partial<StoredPrefs>) => {
     setPrefs((prev) => {
@@ -101,104 +55,37 @@ export function App() {
     })
   }
 
-  const setStrategy = (strategy: FontStrategy) => updatePrefs({ strategy })
-  const setUnit = (collectionName: string, unit: UnitChoice) =>
-    updatePrefs({
-      unitByCollectionName: {
-        ...prefs.unitByCollectionName,
-        [collectionName]: unit,
-      },
-    })
-  const setDarkMode = (collectionId: string, modeId: string) =>
-    updatePrefs({
-      darkModeIdByCollectionId: {
-        ...prefs.darkModeIdByCollectionId,
-        [collectionId]: modeId,
-      },
-    })
-  const setPrefix = (prefix: string) =>
-    updatePrefs({ prefix: prefix.trim() || undefined })
+  if (loadError) return <UnsupportedView cause={loadError} readFailed />
 
-  if (loading) {
+  if (!partials) {
     return (
       <div className="flex h-full items-center justify-center text-text-secondary">
-        Loading Figma variables…
+        Loading variables…
       </div>
     )
   }
 
-  if (errorMsg) {
+  if (partials.errors.length > 0) {
+    return <UnsupportedView cause={partials.errors[0]} />
+  }
+
+  if (view === "settings") {
     return (
-      <div className="flex h-full flex-col gap-2 p-4">
-        <div className="font-semibold text-danger">Error</div>
-        <div className="text-text-secondary">{errorMsg}</div>
-      </div>
+      <SettingsView
+        prefs={prefs}
+        onPrefsChange={updatePrefs}
+        onBack={() => setView("files")}
+      />
     )
   }
 
   return (
-    <div className="flex h-full flex-col">
-      <header className="flex items-center justify-between border-b border-border px-4 py-3">
-        <div>
-          <div className="font-semibold">Stera UI Bridge</div>
-          <div className="text-[10px] text-text-secondary">
-            {fileName || "Untitled file"}
-          </div>
-        </div>
-      </header>
-
-      <nav className="flex border-b border-border">
-        {STEPS.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => setStep(s.id)}
-            className={`flex-1 border-b-2 px-3 py-2 text-[11px] transition-colors ${
-              step === s.id
-                ? "border-brand font-semibold text-text"
-                : "border-transparent text-text-secondary hover:text-text"
-            }`}
-          >
-            {s.label}
-          </button>
-        ))}
-      </nav>
-
-      <main className="flex-1 overflow-auto">
-        {step === "preview" && doc && (
-          <PreviewView
-            doc={doc}
-            output={previewOutput}
-            onAdvance={() => setStep("fonts")}
-          />
-        )}
-        {step === "fonts" && doc && (
-          <FontStrategyView
-            strategy={prefs.strategy}
-            onStrategyChange={setStrategy}
-            fontAssignments={fontAssignments}
-            usingDefaults={isDefaultFontAssignments(fontAssignments)}
-          />
-        )}
-        {step === "options" && doc && (
-          <OptionsView
-            doc={doc}
-            unitByCollectionName={prefs.unitByCollectionName}
-            darkModeIdByCollectionId={prefs.darkModeIdByCollectionId}
-            prefix={prefs.prefix ?? ""}
-            onUnitChange={setUnit}
-            onDarkModeChange={setDarkMode}
-            onPrefixChange={setPrefix}
-          />
-        )}
-        {step === "export" && output && partials && (
-          <ExportView
-            output={output}
-            partials={partials}
-            raw={raw}
-            fileName={fileName}
-          />
-        )}
-      </main>
-    </div>
+    <FilesView
+      files={partials.files}
+      activeName={activeFile}
+      onActiveChange={setActiveFile}
+      warnings={partials.warnings}
+      onOpenSettings={() => setView("settings")}
+    />
   )
 }

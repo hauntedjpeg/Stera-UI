@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest"
 import type { SerializedCollection } from "../../shared/messages.js"
-import { deriveFontAssignments, isDefaultFontAssignments } from "./model.js"
+import { deriveFontAssignments } from "./model.js"
 import { generatePartials } from "./partials.js"
 import {
   basePrimitives,
@@ -109,7 +109,7 @@ describe("deriveFontAssignments", () => {
     ])
   })
 
-  it("falls back to the Stera defaults, and says so, when Figma has no font variables", () => {
+  it("falls back to the Stera defaults when Figma has no font variables", () => {
     const assignments = deriveFontAssignments(
       [typography([str("a", "Label/Copy", "Hello")])],
       undefined
@@ -119,12 +119,6 @@ describe("deriveFontAssignments", () => {
       "Geist Mono",
       "Zalando Sans SemiExpanded",
     ])
-    expect(isDefaultFontAssignments(assignments)).toBe(true)
-    expect(
-      isDefaultFontAssignments(
-        deriveFontAssignments([baseTypography], undefined)
-      )
-    ).toBe(false)
   })
 })
 

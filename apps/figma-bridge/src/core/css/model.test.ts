@@ -1,11 +1,11 @@
 import { describe, it, expect } from "vitest"
-import { generateGlobalsCss } from "./generate.js"
+import { generatePartials } from "./partials.js"
 import type {
   SerializedCollection,
   SerializedValue,
 } from "../../shared/messages.js"
 import { rgbaToOklchCss } from "../color/oklch.js"
-import { selectExportedCollections } from "./model.js"
+import { selectExportedCollections, type GenerateOptions } from "./model.js"
 import {
   basePrimitives,
   themeSemantic,
@@ -16,13 +16,30 @@ import {
   headingSmStyle,
 } from "./fixtures.js"
 
-describe("generateGlobalsCss", () => {
+// Model behavior, asserted on every partial joined together.
+function generateCss(options: GenerateOptions) {
+  const { files, warnings, errors } = generatePartials(options)
+  return {
+    css: files.map((f) => f.contents).join("\n"),
+    warnings,
+    errors,
+  }
+}
+
+// The partials split :root between colors.css and typography.css.
+function rootOf(css: string) {
+  return [...css.matchAll(/:root \{([\s\S]*?)\n\}/g)]
+    .map((m) => m[1])
+    .join("\n")
+}
+
+describe("buildModel", () => {
   it("hard-fails when no collections exist", () => {
-    const { errors, css } = generateGlobalsCss({
+    const { errors, css } = generateCss({
       ...baseOptions,
       collections: [],
     })
-    expect(errors[0]).toMatch(/No variable collections/)
+    expect(errors[0]).toMatch(/no variable collections/i)
     expect(css).toBe("")
   })
 
@@ -35,7 +52,7 @@ describe("generateGlobalsCss", () => {
         valuesByMode: { light: v.valuesByMode.light },
       })),
     }
-    const { errors } = generateGlobalsCss({
+    const { errors } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, noDark, baseTypography],
     })
@@ -43,7 +60,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("hard-fails when Color is missing entirely", () => {
-    const { errors } = generateGlobalsCss({
+    const { errors } = generateCss({
       ...baseOptions,
       collections: [themeSemantic, baseTypography],
     })
@@ -51,7 +68,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("hard-fails when Theme is missing entirely", () => {
-    const { errors, css } = generateGlobalsCss({
+    const { errors, css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, baseTypography],
     })
@@ -66,7 +83,7 @@ describe("generateGlobalsCss", () => {
         (v) => !/\/Dark\//.test(v.name)
       ),
     }
-    const { warnings } = generateGlobalsCss({
+    const { warnings } = generateCss({
       ...baseOptions,
       collections: [lightOnly, themeSemantic, baseTypography],
     })
@@ -74,7 +91,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("emits expected top-level structure", () => {
-    const { css, errors } = generateGlobalsCss({
+    const { css, errors } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
@@ -87,7 +104,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("strips trailing /- segment from semantic paths", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
@@ -99,7 +116,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("excludes any collection prefixed Reference", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [
         basePrimitives,
@@ -112,7 +129,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("no longer emits a @theme radius block for a Reference Radii group", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [
         basePrimitives,
@@ -127,11 +144,11 @@ describe("generateGlobalsCss", () => {
   })
 
   it("drops the Light segment from ramp names but keeps Dark", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
-    const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
+    const rootBody = rootOf(css)
     expect(rootBody).toMatch(/--neutral-1:\s*oklch\(/)
     expect(rootBody).toMatch(/--neutral-dark-1:\s*oklch\(/)
     expect(rootBody).toMatch(/--brand-9:\s*oklch\(/)
@@ -147,11 +164,11 @@ describe("generateGlobalsCss", () => {
       ...basePrimitives,
       variables: [...basePrimitives.variables].reverse(),
     }
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [shuffled, themeSemantic, baseTypography],
     })
-    const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
+    const rootBody = rootOf(css)
     expect(rootBody.indexOf("--neutral-1:")).toBeLessThan(
       rootBody.indexOf("--neutral-dark-1:")
     )
@@ -161,7 +178,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it(".dark holds only semantic tokens — ramps are never redeclared", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
@@ -175,11 +192,11 @@ describe("generateGlobalsCss", () => {
   })
 
   it("switches semantic tokens per mode, including across ramps and steps", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
-    const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
+    const rootBody = rootOf(css)
     const darkBody = css.match(/\.dark \{([\s\S]*?)\n\}/)![1]
 
     // Different step of the same ramp.
@@ -197,7 +214,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("mirrors every semantic token into .dark", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
@@ -215,7 +232,7 @@ describe("generateGlobalsCss", () => {
           : v
       ),
     }
-    const { warnings } = generateGlobalsCss({
+    const { warnings } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, partial, baseTypography],
     })
@@ -252,7 +269,7 @@ describe("generateGlobalsCss", () => {
         },
       ],
     }
-    const { warnings } = generateGlobalsCss({
+    const { warnings } = generateCss({
       ...baseOptions,
       collections: [color, theme, baseTypography],
     })
@@ -278,7 +295,7 @@ describe("generateGlobalsCss", () => {
         },
       ],
     }
-    const { warnings } = generateGlobalsCss({
+    const { warnings } = generateCss({
       ...baseOptions,
       collections: [color, themeSemantic, baseTypography],
     })
@@ -290,7 +307,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("Theme aliases resolve to var(--primitive) references", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
@@ -299,7 +316,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("dynamically generates @theme inline from Theme only", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
@@ -319,7 +336,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("prefixes typography tokens with font-size / font-weight / line-height / letter-spacing", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
@@ -334,11 +351,11 @@ describe("generateGlobalsCss", () => {
   })
 
   it("emits letter-spacing in rem (not px) by default", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
-    const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
+    const rootBody = rootOf(css)
     const lsLine = rootBody.match(/--letter-spacing-tight:\s*([^;]+);/)
     expect(lsLine).not.toBeNull()
     expect(lsLine![1]).toMatch(/rem$/)
@@ -346,7 +363,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("utility blocks reference the renamed font-size/font-weight vars", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
@@ -357,7 +374,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("builds utilities from text styles, using their bound weight", () => {
-    const { css, warnings } = generateGlobalsCss({
+    const { css, warnings } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
       textStyles: [headingSmStyle],
@@ -370,7 +387,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("maps raw letter spacing to Tailwind tracking without warnings", () => {
-    const { css, warnings } = generateGlobalsCss({
+    const { css, warnings } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
       textStyles: [
@@ -390,19 +407,17 @@ describe("generateGlobalsCss", () => {
     expect(warnings).toEqual([])
   })
 
-  it("keeps the base utilities and drops the built-in typography blocks", () => {
-    const { css } = generateGlobalsCss({
+  it("drops the built-in typography blocks when the file has text styles", () => {
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
       textStyles: [headingSmStyle],
     })
-    expect(css).toContain("@utility scrollbar-hide")
-    expect(css).toContain("@layer base {")
     expect(css).not.toContain("@utility st-hero-xl")
   })
 
   it("falls back to the built-in utilities and warns when there are no text styles", () => {
-    const { css, warnings } = generateGlobalsCss({
+    const { css, warnings } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
       textStyles: [],
@@ -414,7 +429,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("warns when a utility references a variable the export does not emit", () => {
-    const { warnings } = generateGlobalsCss({
+    const { warnings } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
       textStyles: [],
@@ -428,7 +443,7 @@ describe("generateGlobalsCss", () => {
   })
 
   it("Typography font roles emit without fontAssignments", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
     })
@@ -448,7 +463,7 @@ describe("generateGlobalsCss", () => {
   }
 
   it("next-font strategy overrides raw Typography font roles", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       strategy: "next-font",
       collections: [basePrimitives, themeSemantic, baseTypographyPlain],
@@ -457,7 +472,7 @@ describe("generateGlobalsCss", () => {
         { role: "--font-heading", family: "Geist" },
       ],
     })
-    const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
+    const rootBody = rootOf(css)
     const fontSansLines = rootBody.match(/^\s*--font-sans:[^\n]*$/gm) ?? []
     expect(fontSansLines.length).toBe(1)
     expect(fontSansLines[0]).toContain("var(--font-geist-sans, sans-serif")
@@ -468,38 +483,38 @@ describe("generateGlobalsCss", () => {
   })
 
   it("fontsource-variable strategy overrides raw Typography and emits the @import", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       strategy: "fontsource-variable",
       collections: [basePrimitives, themeSemantic, baseTypographyPlain],
       fontAssignments: [{ role: "--font-sans", family: "Geist" }],
     })
-    const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
+    const rootBody = rootOf(css)
     expect(rootBody).toMatch(/--font-sans:\s*'Geist Variable', sans-serif;/)
     expect(rootBody).not.toMatch(/--font-sans:\s*Geist;/)
     expect(css).toMatch(/@import "@fontsource-variable\/geist";/)
   })
 
   it("raw strategy emits the fallback stack instead of the bare Typography value", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       strategy: "raw",
       collections: [basePrimitives, themeSemantic, baseTypographyPlain],
       fontAssignments: [{ role: "--font-sans", family: "Geist" }],
     })
-    const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
+    const rootBody = rootOf(css)
     const fontSansLines = rootBody.match(/^\s*--font-sans:[^\n]*$/gm) ?? []
     expect(fontSansLines.length).toBe(1)
     expect(fontSansLines[0]).toMatch(/'Geist',\s*sans-serif/)
   })
 
   it("fontAssignments fills roles missing from Typography", () => {
-    const { css } = generateGlobalsCss({
+    const { css } = generateCss({
       ...baseOptions,
       collections: [basePrimitives, themeSemantic, baseTypography],
       fontAssignments: [{ role: "--font-mono", family: "JetBrains Mono" }],
     })
-    const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
+    const rootBody = rootOf(css)
     expect(rootBody).toMatch(/--font-sans:\s*'Geist';/)
     expect(rootBody).toMatch(
       /--font-mono:\s*var\(--font-jetbrains-mono, ui-monospace, monospace\);/
@@ -544,11 +559,11 @@ describe("generateGlobalsCss", () => {
     })
 
     it("contributes nothing from a Figma-only collection", () => {
-      const base = generateGlobalsCss({
+      const base = generateCss({
         ...baseOptions,
         collections: [basePrimitives, themeSemantic, baseTypography],
       })
-      const withExtra = generateGlobalsCss({
+      const withExtra = generateCss({
         ...baseOptions,
         collections: [
           basePrimitives,
@@ -563,7 +578,7 @@ describe("generateGlobalsCss", () => {
     })
 
     it("inlines a Theme alias into an ignored collection, per mode", () => {
-      const { css, warnings } = generateGlobalsCss({
+      const { css, warnings } = generateCss({
         ...baseOptions,
         collections: [
           basePrimitives,
@@ -574,7 +589,7 @@ describe("generateGlobalsCss", () => {
       })
       const red = rgbaToOklchCss({ r: 1, g: 0, b: 0, a: 1 })
       const blue = rgbaToOklchCss({ r: 0, g: 0, b: 1, a: 1 })
-      const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
+      const rootBody = rootOf(css)
       const darkBody = css.match(/\.dark \{([\s\S]*?)\n\}/)![1]
       expect(rootBody).toContain(`--surface-note: ${red};`)
       expect(darkBody).toContain(`--surface-note: ${blue};`)
@@ -595,7 +610,7 @@ describe("generateGlobalsCss", () => {
           },
         ],
       }
-      const { css } = generateGlobalsCss({
+      const { css } = generateCss({
         ...baseOptions,
         collections: [
           basePrimitives,
@@ -608,7 +623,7 @@ describe("generateGlobalsCss", () => {
     })
 
     it("stops at the first exported variable in an alias chain", () => {
-      const { css } = generateGlobalsCss({
+      const { css } = generateCss({
         ...baseOptions,
         collections: [
           basePrimitives,
@@ -617,7 +632,7 @@ describe("generateGlobalsCss", () => {
           figmaOnlyLayout,
         ],
       })
-      const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
+      const rootBody = rootOf(css)
       const darkBody = css.match(/\.dark \{([\s\S]*?)\n\}/)![1]
       expect(rootBody).toMatch(/--surface-note:\s*var\(--neutral-1\);/)
       expect(darkBody).toMatch(/--surface-note:\s*var\(--neutral-dark-1\);/)
@@ -656,14 +671,14 @@ describe("generateGlobalsCss", () => {
         "Utilities/Outline"
       )
 
-      const { css, warnings } = generateGlobalsCss({
+      const { css, warnings } = generateCss({
         ...baseOptions,
         collections: [basePrimitives, withUtilities, baseTypography],
       })
       expect(css).not.toContain("--utilities-")
       expect(css).not.toContain("unresolved alias")
       expect(warnings.join("\n")).not.toMatch(/could not be resolved/)
-      const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
+      const rootBody = rootOf(css)
       const darkBody = css.match(/\.dark \{([\s\S]*?)\n\}/)![1]
       expect(rootBody).toContain(
         `--surface-note: ${rgbaToOklchCss({ r: 1, g: 0, b: 0, a: 1 })};`
@@ -689,7 +704,7 @@ describe("generateGlobalsCss", () => {
           },
         ],
       }
-      const { css } = generateGlobalsCss({
+      const { css } = generateCss({
         ...baseOptions,
         collections: [basePrimitives, theme, baseTypography],
       })
@@ -697,7 +712,7 @@ describe("generateGlobalsCss", () => {
     })
 
     it("still flags an alias to a variable that does not exist", () => {
-      const { css, warnings } = generateGlobalsCss({
+      const { css, warnings } = generateCss({
         ...baseOptions,
         collections: [
           basePrimitives,

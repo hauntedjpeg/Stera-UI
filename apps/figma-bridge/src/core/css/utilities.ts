@@ -163,22 +163,3 @@ export const STERA_UTILITIES = `@utility st-body-sm {
   font-weight: var(--font-weight-regular);
   letter-spacing: var(--tracking-normal);
 }`
-
-/**
- * Not derivable from text styles — always appended after the generated
- * `st-*` utilities.
- */
-export const STERA_BASE_UTILITIES = `@utility scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-surface text-text antialiased;
-    font-feature-settings: "ss03";
-  }
-}`

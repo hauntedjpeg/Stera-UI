@@ -50,49 +50,6 @@ export type VariableDoc = {
   textStyles: SerializedTextStyle[]
 }
 
-export type RawColorValue = { r: number; g: number; b: number; a: number }
-export type RawAliasValue = { type: "VARIABLE_ALIAS"; id: string }
-export type RawVariableValue =
-  | RawColorValue
-  | RawAliasValue
-  | number
-  | string
-  | boolean
-
-export type RawVariable = {
-  id: string
-  name: string
-  key: string
-  variableCollectionId: string
-  resolvedType: string
-  valuesByMode: Record<string, RawVariableValue>
-  remote: boolean
-  description: string
-  hiddenFromPublishing: boolean
-  scopes: string[]
-  codeSyntax: Record<string, string>
-}
-
-export type RawVariableCollection = {
-  id: string
-  name: string
-  key: string
-  modes: Array<{ modeId: string; name: string }>
-  defaultModeId: string
-  remote: boolean
-  hiddenFromPublishing: boolean
-  variableIds: string[]
-}
-
-export type RawVariablesPayload = {
-  status: number
-  error: boolean
-  meta: {
-    variables: Record<string, RawVariable>
-    variableCollections: Record<string, RawVariableCollection>
-  }
-}
-
 import type { FontStrategy } from "../core/fonts/strategy.js"
 
 export type { FontStrategy }
@@ -100,24 +57,20 @@ export type UnitChoice = "rem" | "px"
 
 export type StoredPrefs = {
   strategy: FontStrategy
-  unitByCollectionName: Record<string, UnitChoice>
+  unit: UnitChoice
   prefix?: string
-  darkModeIdByCollectionId: Record<string, string>
 }
 
 export const DEFAULT_PREFS: StoredPrefs = {
   strategy: "next-font",
-  unitByCollectionName: {},
-  darkModeIdByCollectionId: {},
+  unit: "rem",
 }
 
 export type SandboxToUi =
   | {
       type: "variables-loaded"
       doc: VariableDoc
-      raw: RawVariablesPayload
       prefs: StoredPrefs
-      fileName: string
     }
   | { type: "prefs-saved" }
   | { type: "error"; message: string }
@@ -125,6 +78,7 @@ export type SandboxToUi =
 export type UiToSandbox =
   | { type: "load-variables" }
   | { type: "save-prefs"; prefs: StoredPrefs }
+  | { type: "open-url"; url: string }
   | { type: "close" }
 
 export function postToSandbox(message: UiToSandbox): void {

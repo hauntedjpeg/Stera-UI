@@ -24,9 +24,9 @@ export type GenerateOptions = {
   collections: SerializedCollection[]
   textStyles?: SerializedTextStyle[]
   strategy: FontStrategy
-  unitByCollectionName: Record<string, UnitChoice>
+  /** Unit for every non-weight number: font sizes, spacing and radius. */
+  unit: UnitChoice
   prefix?: string
-  darkModeIdByCollectionId: Record<string, string>
   fontAssignments: FontAssignment[]
 }
 
@@ -58,9 +58,8 @@ type NameMap = Map<string, string>
 export type Decl = { name: string; head: string; value: string }
 
 /**
- * The parsed, sorted, framework-agnostic shape of an export. Both the flat
- * `globals.css` renderer and the Stera-UI partials renderer consume this, so the
- * two output shapes can never drift on naming, units, or ordering.
+ * The parsed, sorted, framework-agnostic shape of an export, rendered into the
+ * Stera-UI partials by `generatePartials`.
  *
  * Light/dark lives entirely in the semantic layer: `colorRamps` holds every
  * primitive exactly once (the Figma `Color` collection is mode-less), and
@@ -261,11 +260,6 @@ export function deriveFontAssignments(
   return assignments.length > 0 ? assignments : DEFAULT_FONT_ASSIGNMENTS
 }
 
-/** True when `deriveFontAssignments` found no font variables in Figma. */
-export function isDefaultFontAssignments(assignments: FontAssignment[]) {
-  return assignments === DEFAULT_FONT_ASSIGNMENTS
-}
-
 function findColorPrimitiveCollection(
   collections: SerializedCollection[]
 ): SerializedCollection | undefined {
@@ -285,11 +279,8 @@ function findTypographyCollection(
 }
 
 function detectDarkModeId(
-  collection: SerializedCollection,
-  override?: string
+  collection: SerializedCollection
 ): string | undefined {
-  if (override && collection.modes.some((m) => m.id === override))
-    return override
   return collection.modes.find((m) => /dark/i.test(m.name))?.id
 }
 
@@ -353,13 +344,6 @@ function renderValue(
   }
 }
 
-function chooseUnit(
-  collectionName: string,
-  unitByCollectionName: Record<string, UnitChoice>
-): UnitChoice {
-  return unitByCollectionName[collectionName] ?? "rem"
-}
-
 function headFromName(name: string, prefix: string | undefined): string {
   const noDash = name.replace(/^--/, "")
   if (prefix && noDash.startsWith(`${prefix}-`))
@@ -382,12 +366,11 @@ function collectionDecls(
   modeId: string,
   nameMap: NameMap,
   prefix: string | undefined,
-  unitByCollectionName: Record<string, UnitChoice>,
+  unit: UnitChoice,
   unresolved: { count: number },
   byId: VariableIndex
 ): Decl[] {
   const decls: Decl[] = []
-  const unit = chooseUnit(collection.name, unitByCollectionName)
   const modeName = collection.modes.find((m) => m.id === modeId)?.name ?? ""
   for (const v of collection.variables) {
     const name = nameMap.get(v.id)
@@ -484,23 +467,20 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
     collections,
     textStyles = [],
     strategy,
-    unitByCollectionName,
+    unit,
     prefix,
-    darkModeIdByCollectionId,
     fontAssignments,
   } = options
 
   if (collections.length === 0) {
-    errors.push(
-      "No variable collections found in this Figma file. Create a Color collection of primitive ramps and a Theme collection with Light and Dark modes, then try again."
-    )
+    errors.push("This file has no variable collections.")
     return { model: null, warnings, errors }
   }
 
   const scoped = selectExportedCollections(collections)
   if (scoped.length === 0) {
     errors.push(
-      `No matching variable collections found. Expected at least one of: ${Array.from(INCLUDED_COLLECTIONS).join(", ")}.`
+      `None of this file's collections are named ${Array.from(INCLUDED_COLLECTIONS).join(", ")}.`
     )
     return { model: null, warnings, errors }
   }
@@ -508,7 +488,7 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
   const colorCollection = findColorPrimitiveCollection(scoped)
   if (!colorCollection) {
     errors.push(
-      `No "${COLOR_PRIMITIVE_COLLECTION}" collection detected. Stera UI Bridge requires a primitive color collection whose ramps are grouped into Light and Dark subgroups.`
+      `Missing a "${COLOR_PRIMITIVE_COLLECTION}" collection of primitive ramps.`
     )
     return { model: null, warnings, errors }
   }
@@ -518,20 +498,13 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
   // to put under `.dark` at all.
   const themeCollection = findSemanticColorCollection(scoped)
   if (!themeCollection) {
-    errors.push(
-      `No "${SEMANTIC_COLOR_COLLECTION}" collection detected. Stera UI Bridge reads light and dark from the ${SEMANTIC_COLOR_COLLECTION} collection's modes, so it is required.`
-    )
+    errors.push(`Missing a "${SEMANTIC_COLOR_COLLECTION}" collection.`)
     return { model: null, warnings, errors }
   }
 
-  const darkModeId = detectDarkModeId(
-    themeCollection,
-    darkModeIdByCollectionId[themeCollection.id]
-  )
+  const darkModeId = detectDarkModeId(themeCollection)
   if (!darkModeId) {
-    errors.push(
-      `${SEMANTIC_COLOR_COLLECTION} collection "${themeCollection.name}" has no dark mode. Add a mode named "Dark" (or manually map one in the plugin) before exporting.`
-    )
+    errors.push(`The "${themeCollection.name}" collection has no Dark mode.`)
     return { model: null, warnings, errors }
   }
   const lightModeId = detectLightModeId(themeCollection, darkModeId)
@@ -578,7 +551,7 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
     colorCollection.modes[0].id,
     nameMap,
     prefix,
-    unitByCollectionName,
+    unit,
     unresolved,
     byId
   )
@@ -588,7 +561,7 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
         typoCollection.modes[0].id,
         nameMap,
         prefix,
-        unitByCollectionName,
+        unit,
         unresolved,
         byId
       )
@@ -598,7 +571,7 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
     lightModeId,
     nameMap,
     prefix,
-    unitByCollectionName,
+    unit,
     unresolved,
     byId
   )
@@ -607,7 +580,7 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
     darkModeId,
     nameMap,
     prefix,
-    unitByCollectionName,
+    unit,
     unresolved,
     byId
   )
@@ -681,7 +654,7 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
     const built = buildUtilities({
       textStyles,
       nameMap,
-      unit: chooseUnit(TYPOGRAPHY_COLLECTION, unitByCollectionName),
+      unit,
       familyRoles,
     })
     utilitiesCss = built.css
