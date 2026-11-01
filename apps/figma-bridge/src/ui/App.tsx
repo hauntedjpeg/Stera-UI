@@ -55,7 +55,7 @@ export function App() {
     })
   }
 
-  if (loadError) return <UnsupportedView cause={loadError} readFailed />
+  if (loadError) return <UnsupportedView />
 
   if (!partials) {
     return (
@@ -66,7 +66,7 @@ export function App() {
   }
 
   if (partials.errors.length > 0) {
-    return <UnsupportedView cause={partials.errors[0]} />
+    return <UnsupportedView />
   }
 
   if (view === "settings") {

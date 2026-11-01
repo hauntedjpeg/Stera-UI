@@ -8,14 +8,23 @@ import {
 } from "../../shared/messages.js"
 import { Button, IconButton } from "../components/Button.js"
 import { Select } from "../components/Select.js"
-
-const FONTS_DOCS_URL = "https://ui.stera.sh/fonts"
-const STERA_UI_URL = "https://ui.stera.sh"
+import {
+  DOCS_URL,
+  FONTS_DOCS_URL,
+  GITHUB_URL,
+  STERA_UI_FIGMA_URL,
+} from "../links.js"
 
 const STRATEGIES: { value: FontStrategy; label: string }[] = [
   { value: "next-font", label: "Next.js" },
   { value: "fontsource-variable", label: "Fontsource" },
   { value: "raw", label: "Family name" },
+]
+
+const ABOUT_LINKS = [
+  { label: "Docs", url: DOCS_URL },
+  { label: "GitHub", url: GITHUB_URL },
+  { label: "Figma", url: STERA_UI_FIGMA_URL },
 ]
 
 const UNITS: { value: UnitChoice; label: string }[] = [
@@ -119,15 +128,26 @@ export function SettingsView({ prefs, onPrefsChange, onBack }: Props) {
           />
         </Row>
 
-        <Row
-          label="About"
-          description="Export your Figma variables and text styles as CSS. Works with files built on the Stera UI Figma file, such as forks of it or design systems that share its variable structure."
-        >
-          <Button variant="secondary" onClick={() => openUrl(STERA_UI_URL)}>
-            Stera UI
-            <SiExternalLink size={12} className="text-icon-secondary" />
-          </Button>
-        </Row>
+        <div className="py-4">
+          <div className="text-[13px] leading-5 font-medium">About</div>
+          <p className="m-0 mt-1 text-[10px] leading-4 text-text-secondary">
+            Stera UI Bridge lets you apply theme and typography styles directly
+            into the codebase. This plugin is only designed to work with Figma
+            variables using the Stera UI pattern.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {ABOUT_LINKS.map(({ label, url }) => (
+              <Button
+                key={label}
+                variant="secondary"
+                onClick={() => openUrl(url)}
+              >
+                {label}
+                <SiExternalLink size={12} className="text-icon-secondary" />
+              </Button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
