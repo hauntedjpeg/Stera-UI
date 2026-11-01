@@ -1,5 +1,6 @@
 import type { SerializedTextStyle } from "../../shared/messages.js"
 import { toKebabName } from "../naming/kebab.js"
+import { fallbackStack } from "../fonts/registry.js"
 
 export type UtilityUnit = "rem" | "px"
 
@@ -9,6 +10,12 @@ export type BuildUtilitiesOptions = {
   nameMap: Map<string, string>
   /** Unit chosen for the Typography collection, applied to unbound literals. */
   unit: UtilityUnit
+  /**
+   * Lowercased family → the font role carrying it (`zalando sans` →
+   * `--font-sans`). An unbound family that matches a role uses that role, so
+   * it follows the font strategy instead of naming a family nothing loads.
+   */
+  familyRoles?: Map<string, string>
 }
 
 export type BuildUtilitiesResult = {
@@ -121,7 +128,7 @@ const FIELD_LABELS: Record<FieldName, string> = {
 export function buildUtilities(
   options: BuildUtilitiesOptions
 ): BuildUtilitiesResult {
-  const { textStyles, nameMap, unit } = options
+  const { textStyles, nameMap, unit, familyRoles } = options
   const warnings: string[] = []
 
   const resolve = (
@@ -156,9 +163,12 @@ export function buildUtilities(
       continue
     }
 
-    const fontFamily = resolve(style, "fontFamily", () =>
-      style.fontFamily ? `"${style.fontFamily}"` : null
-    )
+    const fontFamily = resolve(style, "fontFamily", () => {
+      if (!style.fontFamily) return null
+      const role = familyRoles?.get(style.fontFamily.trim().toLowerCase())
+      if (role) return `var(${role})`
+      return `'${style.fontFamily}', ${fallbackStack(style.fontFamily)}`
+    })
     const fontSize = resolve(style, "fontSize", () =>
       lengthValue(style.fontSize, unit)
     )

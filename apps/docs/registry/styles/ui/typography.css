@@ -1,9 +1,9 @@
-/* Type tokens and typography utilities. Font variables are patched here on init. */
+/* Type tokens and typography utilities. Generated from Figma. Point the --font-* roles at other fonts here. */
 
 :root {
-  --font-heading: var(--font-zalando-sans-semiexpanded);
-  --font-sans: var(--font-zalando-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-zalando-sans-semiexpanded, sans-serif);
+  --font-sans: var(--font-zalando-sans, sans-serif);
+  --font-mono: var(--font-geist-mono, ui-monospace, monospace);
   --font-weight-subtle: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;

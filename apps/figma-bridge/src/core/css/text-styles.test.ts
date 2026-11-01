@@ -129,6 +129,29 @@ describe("buildUtilities", () => {
     expect(warnings.some((w) => /letter spacing/.test(w))).toBe(false)
   })
 
+  it("maps an unbound family to the font role that carries it", () => {
+    const unbound = style({
+      boundVariables: { ...style().boundVariables, fontFamily: undefined },
+    })
+    const { css } = buildUtilities({
+      textStyles: [unbound],
+      ...opts,
+      familyRoles: new Map([["geist", "--font-sans"]]),
+    })
+    expect(css).toContain("font-family: var(--font-sans);")
+  })
+
+  it("quotes an unbound family no role carries and adds a fallback stack", () => {
+    const unbound = style({
+      fontFamily: "Obscurity Mono",
+      boundVariables: { ...style().boundVariables, fontFamily: undefined },
+    })
+    const { css } = buildUtilities({ textStyles: [unbound], ...opts })
+    expect(css).toContain(
+      "font-family: 'Obscurity Mono', ui-monospace, monospace;"
+    )
+  })
+
   it("falls back and warns when a bound variable is outside the export", () => {
     const { css, warnings } = buildUtilities({
       textStyles: [

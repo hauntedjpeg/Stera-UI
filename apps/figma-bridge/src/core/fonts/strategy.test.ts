@@ -17,8 +17,8 @@ describe("emitFontDeclarations — next-font", () => {
       "next-font"
     )
     expect(declarations).toEqual([
-      "  --font-sans: var(--font-geist-sans);",
-      "  --font-mono: var(--font-geist-mono);",
+      "  --font-sans: var(--font-geist-sans, sans-serif);",
+      "  --font-mono: var(--font-geist-mono, ui-monospace, monospace);",
     ])
     expect(warnings).toEqual([])
   })
@@ -29,7 +29,7 @@ describe("emitFontDeclarations — next-font", () => {
       "next-font"
     )
     expect(declarations).toEqual([
-      "  --font-display: var(--font-obscurity-pro);",
+      "  --font-display: var(--font-obscurity-pro, sans-serif);",
     ])
     expect(warnings).toEqual([])
   })
@@ -40,9 +40,9 @@ describe("emitFontDeclarations — next-font", () => {
       "next-font"
     )
     expect(declarations).toEqual([
-      "  --font-heading: var(--font-zalando-sans-semiexpanded);",
-      "  --font-sans: var(--font-zalando-sans);",
-      "  --font-mono: var(--font-geist-mono);",
+      "  --font-heading: var(--font-zalando-sans-semiexpanded, sans-serif);",
+      "  --font-sans: var(--font-zalando-sans, sans-serif);",
+      "  --font-mono: var(--font-geist-mono, ui-monospace, monospace);",
     ])
   })
 })
@@ -83,8 +83,8 @@ describe("emitFontDeclarations — raw", () => {
   it("emits literal family names with stack", () => {
     const { declarations } = emitFontDeclarations([geistSans, geistMono], "raw")
     expect(declarations).toEqual([
-      "  --font-sans: Geist, sans-serif;",
-      "  --font-mono: Geist Mono, monospace;",
+      "  --font-sans: 'Geist', sans-serif;",
+      "  --font-mono: 'Geist Mono', ui-monospace, monospace;",
     ])
   })
 })

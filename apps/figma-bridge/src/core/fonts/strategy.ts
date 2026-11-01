@@ -1,5 +1,5 @@
 import { kebab } from "../naming/kebab.js"
-import { KNOWN_FAMILIES, guessStack, lookupFont } from "./registry.js"
+import { fallbackStack, lookupFont } from "./registry.js"
 
 export type FontStrategy = "next-font" | "fontsource-variable" | "raw"
 
@@ -29,9 +29,12 @@ export function emitFontDeclarations(
       // next/font lets the project pick any variable name, and the kebab-cased
       // family is the obvious one, so it is the default rather than a guess
       // worth warning about. The registry only supplies exceptions, like Geist's
-      // `--font-geist-sans` from the geist package / create-next-app.
+      // `--font-geist-sans` from the geist package / create-next-app. The
+      // fallback keeps text in a sensible family when no font is loaded.
       const nextVar = lookupFont(trimmed)?.nextVar ?? `--font-${kebab(trimmed)}`
-      declarations.push(`  ${role}: var(${nextVar});`)
+      declarations.push(
+        `  ${role}: var(${nextVar}, ${fallbackStack(trimmed)});`
+      )
       continue
     }
 
@@ -40,7 +43,7 @@ export function emitFontDeclarations(
       if (known) {
         declarations.push(`  ${role}: ${known.fontsourceFamily};`)
       } else {
-        const stack = guessStack(trimmed)
+        const stack = fallbackStack(trimmed)
         declarations.push(`  ${role}: '${trimmed}', ${stack};`)
         // Unlike next/font, this can genuinely break: the package to import and
         // the family name it registers can't be derived from the Figma name.
@@ -55,8 +58,7 @@ export function emitFontDeclarations(
       continue
     }
 
-    const stack = guessStack(trimmed)
-    declarations.push(`  ${role}: ${trimmed}, ${stack};`)
+    declarations.push(`  ${role}: '${trimmed}', ${fallbackStack(trimmed)};`)
   }
 
   return { declarations, warnings }
@@ -73,14 +75,4 @@ export function fontsourceImports(
     if (known) pkgs.add(known.fontsourcePackage)
   }
   return [...pkgs].sort().map((p) => `@import "${p}";`)
-}
-
-export const FONT_ROLE_DEFAULTS = [
-  "--font-sans",
-  "--font-mono",
-  "--font-heading",
-] as const
-
-export function knownFamilyNames(): string[] {
-  return Object.keys(KNOWN_FAMILIES)
 }

@@ -37,8 +37,14 @@ function renderIndex(model: CssModel): string {
   return `${imports.join("\n")}\n\n@custom-variant dark (&:is(.dark *));\n`
 }
 
+// The registry ships these headers; emitting them keeps a fresh paste identical.
+const COLORS_HEADER =
+  "/* Color tokens. Generated from Figma — safe to paste over wholesale. */"
+const TYPOGRAPHY_HEADER =
+  "/* Type tokens and typography utilities. Generated from Figma. Point the --font-* roles at other fonts here. */"
+
 function renderColors(model: CssModel): string {
-  const parts: string[] = []
+  const parts: string[] = [COLORS_HEADER]
   const themeInline = buildThemeInline(model.semanticLight)
   if (themeInline) parts.push(themeInline)
 
@@ -56,7 +62,7 @@ function renderColors(model: CssModel): string {
 }
 
 function renderTypography(model: CssModel): string {
-  const parts: string[] = []
+  const parts: string[] = [TYPOGRAPHY_HEADER]
   if (model.typography.length > 0) {
     parts.push(`:root {\n${formatDecls(model.typography, "  ")}\n}`)
   }

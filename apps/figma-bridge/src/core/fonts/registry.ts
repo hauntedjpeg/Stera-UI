@@ -60,6 +60,22 @@ export function lookupFont(family: string): KnownFont | undefined {
   return KNOWN_FAMILIES[family.trim().toLowerCase()]
 }
 
+/**
+ * What a font role falls back to while the font loads, or if it never does.
+ * Short, so exported lines stay within Prettier's width and a paste matches
+ * the formatted registry file. Never a lone `monospace`: browsers shrink text
+ * set in just that keyword.
+ */
+const FALLBACK_STACKS: Record<"sans-serif" | "serif" | "monospace", string> = {
+  "sans-serif": "sans-serif",
+  serif: "serif",
+  monospace: "ui-monospace, monospace",
+}
+
+export function fallbackStack(family: string): string {
+  return FALLBACK_STACKS[guessStack(family)]
+}
+
 export function guessStack(
   family: string
 ): "sans-serif" | "serif" | "monospace" {

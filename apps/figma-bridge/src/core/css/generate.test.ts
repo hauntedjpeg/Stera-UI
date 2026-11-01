@@ -460,9 +460,11 @@ describe("generateGlobalsCss", () => {
     const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
     const fontSansLines = rootBody.match(/^\s*--font-sans:[^\n]*$/gm) ?? []
     expect(fontSansLines.length).toBe(1)
-    expect(fontSansLines[0]).toContain("var(--font-geist-sans)")
+    expect(fontSansLines[0]).toContain("var(--font-geist-sans, sans-serif")
     expect(rootBody).not.toMatch(/--font-sans:\s*Geist;/)
-    expect(rootBody).toMatch(/--font-heading:\s*var\(--font-geist-sans\);/)
+    expect(rootBody).toMatch(
+      /--font-heading:\s*var\(--font-geist-sans, sans-serif\);/
+    )
   })
 
   it("fontsource-variable strategy overrides raw Typography and emits the @import", () => {
@@ -488,7 +490,7 @@ describe("generateGlobalsCss", () => {
     const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
     const fontSansLines = rootBody.match(/^\s*--font-sans:[^\n]*$/gm) ?? []
     expect(fontSansLines.length).toBe(1)
-    expect(fontSansLines[0]).toMatch(/Geist,\s*sans-serif/)
+    expect(fontSansLines[0]).toMatch(/'Geist',\s*sans-serif/)
   })
 
   it("fontAssignments fills roles missing from Typography", () => {
@@ -499,7 +501,9 @@ describe("generateGlobalsCss", () => {
     })
     const rootBody = css.match(/:root \{([\s\S]*?)\n\}/)![1]
     expect(rootBody).toMatch(/--font-sans:\s*'Geist';/)
-    expect(rootBody).toMatch(/--font-mono:\s*var\(--font-jetbrains-mono\);/)
+    expect(rootBody).toMatch(
+      /--font-mono:\s*var\(--font-jetbrains-mono, ui-monospace, monospace\);/
+    )
   })
 
   describe("ignored collections", () => {

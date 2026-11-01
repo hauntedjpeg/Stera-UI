@@ -5,6 +5,8 @@ type Props = {
   strategy: FontStrategy
   onStrategyChange: (s: FontStrategy) => void
   fontAssignments: FontAssignment[]
+  /** No font variables in Figma, so the Stera defaults apply. */
+  usingDefaults: boolean
 }
 
 const STRATEGIES: { id: FontStrategy; label: string; blurb: string }[] = [
@@ -12,7 +14,7 @@ const STRATEGIES: { id: FontStrategy; label: string; blurb: string }[] = [
     id: "next-font",
     label: "Next.js (next/font)",
     blurb:
-      "Emits var() references. Works with next/font/google and the geist package.",
+      "Emits var(--font-<family>) references with a fallback, the variables stera-ui init loads with next/font.",
   },
   {
     id: "fontsource-variable",
@@ -31,6 +33,7 @@ export function FontStrategyView({
   strategy,
   onStrategyChange,
   fontAssignments,
+  usingDefaults,
 }: Props) {
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -71,9 +74,10 @@ export function FontStrategyView({
           Font assignments
         </div>
         <div className="rounded border border-[var(--color-border)]">
-          {fontAssignments.length === 0 && (
-            <div className="px-3 py-2 text-[var(--color-text-secondary)]">
-              No font variables detected in Figma.
+          {usingDefaults && (
+            <div className="border-b border-[var(--color-border)] px-3 py-2 text-[var(--color-text-secondary)]">
+              No font variables in Figma, so the Stera defaults apply. Add
+              STRING variables under Font/ in Typography to choose your own.
             </div>
           )}
           {fontAssignments.map((a, i) => (

@@ -261,6 +261,11 @@ export function deriveFontAssignments(
   return assignments.length > 0 ? assignments : DEFAULT_FONT_ASSIGNMENTS
 }
 
+/** True when `deriveFontAssignments` found no font variables in Figma. */
+export function isDefaultFontAssignments(assignments: FontAssignment[]) {
+  return assignments === DEFAULT_FONT_ASSIGNMENTS
+}
+
 function findColorPrimitiveCollection(
   collections: SerializedCollection[]
 ): SerializedCollection | undefined {
@@ -417,11 +422,11 @@ function semanticGroupKey(head: string): number {
 }
 
 function primitiveGroupKey(head: string): number {
-  if (head === "font" || head.startsWith("font-sans")) return 0
-  if (head.startsWith("font-mono") || head.startsWith("font-heading")) return 0
   if (head === "font-weight" || head.startsWith("font-weight-")) return 1
-  if (head === "letter-spacing" || head.startsWith("letter-spacing-")) return 2
   if (head === "font-size" || head.startsWith("font-size-")) return 3
+  // Every other --font-* is a family role, custom ones like --font-display too.
+  if (FONT_FAMILY_HEAD.test(head)) return 0
+  if (head === "letter-spacing" || head.startsWith("letter-spacing-")) return 2
   if (head === "line-height" || head.startsWith("line-height-")) return 4
   return 5
 }
@@ -630,7 +635,7 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
 
   const fontDecls: Decl[] = fontResult.declarations
     .map((line) => {
-      const match = line.match(/^\s*(--[a-z0-9-]+):\s*(.+?);?\s*$/)
+      const match = line.match(/^\s*(--[\w-]+):\s*(.+?);?\s*$/)
       if (!match) return null
       const name = match[1]
       const value = match[2]
@@ -668,10 +673,16 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
       "No local text styles found, so the built-in typography utilities were used. These are not derived from your Figma file — if your text styles live in a published library, export from the library file to keep them in sync."
     )
   } else {
+    const familyRoles = new Map<string, string>()
+    for (const { role, family } of fontAssignments) {
+      const key = family.trim().toLowerCase()
+      if (!familyRoles.has(key)) familyRoles.set(key, role)
+    }
     const built = buildUtilities({
       textStyles,
       nameMap,
       unit: chooseUnit(TYPOGRAPHY_COLLECTION, unitByCollectionName),
+      familyRoles,
     })
     utilitiesCss = built.css
     warnings.push(...built.warnings)

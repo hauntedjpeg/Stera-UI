@@ -213,7 +213,18 @@ async function loadPrefs(): Promise<StoredPrefs> {
   const raw = await figma.clientStorage.getAsync(prefsKey())
   if (!raw) return { ...DEFAULT_PREFS }
   try {
-    return { ...DEFAULT_PREFS, ...(raw as Partial<StoredPrefs>) }
+    // Keep only current keys, so options a newer build dropped don't linger
+    // in storage and get written back on every save.
+    const stored = raw as Partial<StoredPrefs>
+    return {
+      strategy: stored.strategy ?? DEFAULT_PREFS.strategy,
+      unitByCollectionName:
+        stored.unitByCollectionName ?? DEFAULT_PREFS.unitByCollectionName,
+      darkModeIdByCollectionId:
+        stored.darkModeIdByCollectionId ??
+        DEFAULT_PREFS.darkModeIdByCollectionId,
+      ...(stored.prefix ? { prefix: stored.prefix } : {}),
+    }
   } catch {
     return { ...DEFAULT_PREFS }
   }

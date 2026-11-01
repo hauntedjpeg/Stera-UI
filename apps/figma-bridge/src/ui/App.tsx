@@ -12,7 +12,10 @@ import {
 import { useFigmaMessages } from "./hooks/useFigmaMessages.js"
 import { generateGlobalsCss } from "../core/css/generate.js"
 import { generatePartials } from "../core/css/partials.js"
-import { deriveFontAssignments } from "../core/css/model.js"
+import {
+  deriveFontAssignments,
+  isDefaultFontAssignments,
+} from "../core/css/model.js"
 import { PreviewView } from "./views/PreviewView.js"
 import { FontStrategyView } from "./views/FontStrategyView.js"
 import { OptionsView } from "./views/OptionsView.js"
@@ -173,6 +176,7 @@ export function App() {
             strategy={prefs.strategy}
             onStrategyChange={setStrategy}
             fontAssignments={fontAssignments}
+            usingDefaults={isDefaultFontAssignments(fontAssignments)}
           />
         )}
         {step === "options" && doc && (

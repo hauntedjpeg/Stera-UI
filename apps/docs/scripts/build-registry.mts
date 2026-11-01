@@ -37,6 +37,36 @@ interface Registry {
   items: RegistryItem[]
 }
 
+/**
+ * `stera-ui init` installs the fonts `ui/typography.css` references by name:
+ * the role `--font-sans: var(--font-zalando-sans, …)` makes it fetch the
+ * `font-zalando-sans` item. Fail the build when a Figma export points a role
+ * at a family no such item provides.
+ */
+function checkTypographyFonts(registry: Registry): string[] {
+  const css = fs.readFileSync(
+    path.join(ROOT, "registry/styles/ui/typography.css"),
+    "utf-8"
+  )
+  const pattern = /^\s*--font-[\w-]+\s*:\s*var\(\s*(--font-[\w-]+)\s*[,)]/gm
+  const errors: string[] = []
+
+  for (const [, variable] of css.matchAll(pattern)) {
+    const name = `font-${variable.replace(/^--font-/, "")}`
+    const item = registry.items.find((entry) => entry.name === name)
+    if (!item || item.type !== "registry:font") {
+      errors.push(
+        `[typography.css] references ${variable}, but there is no "${name}" registry:font item`
+      )
+    } else if (item.font?.variable !== variable) {
+      errors.push(
+        `[${name}] font.variable is "${item.font?.variable}", but typography.css references ${variable}`
+      )
+    }
+  }
+  return errors
+}
+
 function buildRegistry() {
   const registry: Registry = JSON.parse(
     fs.readFileSync(REGISTRY_PATH, "utf-8")
@@ -132,6 +162,8 @@ function buildRegistry() {
       }),
     })
   }
+
+  errors.push(...checkTypographyFonts(registry))
 
   if (errors.length > 0) {
     console.error("Registry build errors:")

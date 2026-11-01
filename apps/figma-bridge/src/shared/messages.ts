@@ -93,7 +93,9 @@ export type RawVariablesPayload = {
   }
 }
 
-export type FontStrategy = "next-font" | "fontsource-variable" | "raw"
+import type { FontStrategy } from "../core/fonts/strategy.js"
+
+export type { FontStrategy }
 export type UnitChoice = "rem" | "px"
 
 export type StoredPrefs = {
