@@ -47,6 +47,10 @@ pnpm dlx stera-ui@latest add button
 
 50+ components ship today — accordion, button, calendar, chart, combobox, command, dialog, sidebar, table, and the rest. Browse the full catalog with live examples at [ui.stera.sh/docs/components](https://ui.stera.sh/docs/components), or run `stera-ui list` locally.
 
+## AI Agents
+
+The docs are published as plain markdown for coding agents: [ui.stera.sh/llms.txt](https://ui.stera.sh/llms.txt) indexes every page, [llms-full.txt](https://ui.stera.sh/llms-full.txt) has them all in one file, and any page works with `.md` appended.
+
 ## Fonts
 
 `init` walks you through font setup: Geist Sans + Geist Mono by default (via `next/font` for Next.js, `@fontsource-variable/*` otherwise), or keep your existing fonts. See [ui.stera.sh/docs/fonts](https://ui.stera.sh/docs/fonts).

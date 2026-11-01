@@ -42,4 +42,18 @@ export default defineConfig({
 
 export const docs = defineDocs({
   dir: "content/docs",
+  docs: {
+    // Exposes page.data.getText("processed") for the llms.txt routes.
+    postprocess: {
+      includeProcessedMarkdown: {
+        handlers: {
+          // The default handler drops the `#` markers and appends `[#id]`.
+          heading(node, _parent, state, info) {
+            const text = state.containerPhrasing(node, info)
+            return `${"#".repeat(node.depth)} ${text}`
+          },
+        },
+      },
+    },
+  },
 })
