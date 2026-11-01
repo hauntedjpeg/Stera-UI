@@ -1,8 +1,10 @@
 {
   "name": "Stera UI Bridge",
-  "id": "stera-ui-bridge",
+  "id": "1698711662850015979",
   "api": "1.0.0",
   "main": "dist/code.js",
   "ui": "dist/index.html",
+  "documentAccess": "dynamic-page",
+  "networkAccess": { "allowedDomains": ["none"] },
   "editorType": ["figma"]
 }
