@@ -1,13 +1,13 @@
-import { SiLinkOff } from "stera-icons"
+import { SiAlertDiamondFill } from "stera-icons"
 import { postToSandbox } from "../../shared/messages.js"
 import { Button } from "../components/Button.js"
 import { STERA_UI_FIGMA_URL } from "../links.js"
 
 export function UnsupportedView() {
   return (
-    <div className="flex h-full flex-col items-center px-6 pt-6 text-center">
+    <div className="flex h-full flex-col items-center px-6 pt-16 text-center">
       <div className="flex size-10 items-center justify-center rounded-lg bg-surface-secondary text-icon-secondary">
-        <SiLinkOff size={20} />
+        <SiAlertDiamondFill size={20} />
       </div>
       <h1 className="m-0 mt-4 text-[13px] leading-5 font-medium">
         Unsupported variable structure

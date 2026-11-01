@@ -82,7 +82,7 @@ export function FilesView({
                 className={`h-6 rounded-[5px] px-2 transition-colors ${
                   active
                     ? "bg-surface-secondary font-medium text-text"
-                    : "text-text-secondary hover:text-text"
+                    : "text-text-secondary hover:bg-surface-secondary"
                 }`}
               >
                 {tabLabel(f.name)}
