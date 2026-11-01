@@ -20,7 +20,7 @@ const ROOT_FONT_VARIABLES = new Set([
 // ─── Types ───────────────────────────────────────────────────────────
 
 export interface FontTreeResult {
-  /** CSS variables to set in @theme inline */
+  /** Font variable → literal family, substituted for `var(<variable>)` (fontsource) */
   cssVars: Record<string, string>
   /** npm dependencies to install */
   dependencies: string[]
@@ -34,10 +34,14 @@ export interface FontTreeResult {
  * Process font items and return CSS variables, dependencies, and imports
  * based on the detected framework.
  *
- * - **Next.js**: Sets CSS vars to self-referencing `var(--font-sans)`.
- *   The actual font loading is handled by next/font in the layout file.
+ * `ui/typography.css` points each role at a family-named variable
+ * (`--font-sans: var(--font-zalando-sans)`), the same name the font item
+ * declares, so the two always agree.
+ *
+ * - **Next.js**: No CSS changes. next/font defines the family-named variable
+ *   on <html> via the layout file.
  * - **Other frameworks**: Installs @fontsource-variable/* packages and
- *   adds @import lines to CSS. Sets CSS vars to the font family string.
+ *   adds @import lines to CSS. Replaces `var(<variable>)` with the family.
  */
 export function massageTreeForFonts(
   fonts: RegistryFontItem[],
@@ -53,21 +57,17 @@ export function massageTreeForFonts(
 
   const isNext = project.framework === "next"
 
+  // Next.js defines the variables itself via next/font on <html>.
+  if (isNext) return result
+
+  // Other frameworks use fontsource.
   for (const font of fonts) {
-    if (isNext) {
-      // Next.js sets the CSS variable via next/font on the <html> element.
-      // We set the theme variable to reference itself so it resolves to
-      // the value injected by next/font on <html>.
-      result.cssVars[font.font.variable] = `var(${font.font.variable})`
-    } else {
-      // Other frameworks use fontsource.
-      const fontName = font.name.replace(/^font-/, "")
-      const fontSourceDep =
-        font.font.dependency ?? `@fontsource-variable/${fontName}`
-      result.dependencies.push(fontSourceDep)
-      result.cssImports.push(`@import "${fontSourceDep}";`)
-      result.cssVars[font.font.variable] = font.font.family
-    }
+    const fontName = font.name.replace(/^font-/, "")
+    const fontSourceDep =
+      font.font.dependency ?? `@fontsource-variable/${fontName}`
+    result.dependencies.push(fontSourceDep)
+    result.cssImports.push(`@import "${fontSourceDep}";`)
+    result.cssVars[font.font.variable] = font.font.family
   }
 
   return result
@@ -252,8 +252,18 @@ function shouldApplyFontUtilityToHtml(font: RegistryFontItem) {
 
 function getFontVariableName(importName: string, variable: string) {
   const baseName = toCamelCase(importName)
-  if (isRootFontVariable(variable)) return baseName
+  // Family-named variables already say which font they are:
+  // Zalando_Sans + --font-zalando-sans → zalandoSans.
+  if (
+    isRootFontVariable(variable) ||
+    variable === `--font-${kebab(importName)}`
+  )
+    return baseName
   return `${baseName}${toPascalCase(variable.replace(/^--font-/, ""))}`
+}
+
+function kebab(str: string) {
+  return str.replace(/_/g, "-").toLowerCase()
 }
 
 function toCamelCase(str: string) {

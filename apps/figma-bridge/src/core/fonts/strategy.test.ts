@@ -4,13 +4,17 @@ import { emitFontDeclarations, fontsourceImports } from "./strategy.js"
 const geistSans = { role: "--font-sans", family: "Geist" }
 const geistMono = { role: "--font-mono", family: "Geist Mono" }
 const unknown = { role: "--font-display", family: "Obscurity Pro" }
+const zalandoSans = { role: "--font-sans", family: "Zalando Sans" }
+const zalandoHeading = {
+  role: "--font-heading",
+  family: "Zalando Sans SemiExpanded",
+}
 
-describe("emitFontDeclarations — next-font / family-named", () => {
+describe("emitFontDeclarations — next-font", () => {
   it("emits known family CSS-var references", () => {
     const { declarations, warnings } = emitFontDeclarations(
       [geistSans, geistMono],
-      "next-font",
-      "family-named"
+      "next-font"
     )
     expect(declarations).toEqual([
       "  --font-sans: var(--font-geist-sans);",
@@ -22,26 +26,23 @@ describe("emitFontDeclarations — next-font / family-named", () => {
   it("derives the variable from the family name for unknown fonts, without warning", () => {
     const { declarations, warnings } = emitFontDeclarations(
       [unknown],
-      "next-font",
-      "family-named"
+      "next-font"
     )
     expect(declarations).toEqual([
       "  --font-display: var(--font-obscurity-pro);",
     ])
     expect(warnings).toEqual([])
   })
-})
 
-describe("emitFontDeclarations — next-font / match-init", () => {
-  it("emits self-referential var refs", () => {
+  it("matches the variables stera-ui init loads for the default fonts", () => {
     const { declarations } = emitFontDeclarations(
-      [geistSans, geistMono],
-      "next-font",
-      "match-init"
+      [zalandoHeading, zalandoSans, geistMono],
+      "next-font"
     )
     expect(declarations).toEqual([
-      "  --font-sans: var(--font-sans);",
-      "  --font-mono: var(--font-mono);",
+      "  --font-heading: var(--font-zalando-sans-semiexpanded);",
+      "  --font-sans: var(--font-zalando-sans);",
+      "  --font-mono: var(--font-geist-mono);",
     ])
   })
 })

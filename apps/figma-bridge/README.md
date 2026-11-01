@@ -30,7 +30,7 @@ Slash paths become kebab names: `surface/brand/hover` → `--surface-brand-hover
 
 ## Font strategies
 
-Pick the one matching how your app loads fonts: **`next/font`** — `--font-sans: var(--font-geist-sans)`, or `var(--font-sans)` to match `stera-ui init`; **`@fontsource-variable`** — adds `@import` lines plus literal families; **raw** — the family name as-is. Geist, Geist Mono, Inter, JetBrains Mono, Roboto, and Roboto Mono are mapped by name; other families export with a warning.
+Pick the one matching how your app loads fonts: **`next/font`** — a family-named variable, e.g. `--font-sans: var(--font-zalando-sans)`, the same name `stera-ui init` loads the font under; **`@fontsource-variable`** — adds `@import` lines plus literal families; **raw** — the family name as-is. Zalando Sans, Zalando Sans SemiExpanded, Geist, Geist Mono, Inter, JetBrains Mono, Roboto, and Roboto Mono are mapped by name; other families export with a warning.
 
 ## Development
 

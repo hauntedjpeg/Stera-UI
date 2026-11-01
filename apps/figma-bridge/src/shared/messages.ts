@@ -94,13 +94,10 @@ export type RawVariablesPayload = {
 }
 
 export type FontStrategy = "next-font" | "fontsource-variable" | "raw"
-export type NextFontConvention = "family-named" | "match-init"
-
 export type UnitChoice = "rem" | "px"
 
 export type StoredPrefs = {
   strategy: FontStrategy
-  nextConvention: NextFontConvention
   unitByCollectionName: Record<string, UnitChoice>
   prefix?: string
   darkModeIdByCollectionId: Record<string, string>
@@ -108,7 +105,6 @@ export type StoredPrefs = {
 
 export const DEFAULT_PREFS: StoredPrefs = {
   strategy: "next-font",
-  nextConvention: "family-named",
   unitByCollectionName: {},
   darkModeIdByCollectionId: {},
 }

@@ -1,11 +1,9 @@
-import type { FontStrategy, NextFontConvention } from "../../shared/messages.js"
+import type { FontStrategy } from "../../shared/messages.js"
 import type { FontAssignment } from "../../core/fonts/strategy.js"
 
 type Props = {
   strategy: FontStrategy
-  nextConvention: NextFontConvention
   onStrategyChange: (s: FontStrategy) => void
-  onConventionChange: (c: NextFontConvention) => void
   fontAssignments: FontAssignment[]
 }
 
@@ -31,9 +29,7 @@ const STRATEGIES: { id: FontStrategy; label: string; blurb: string }[] = [
 
 export function FontStrategyView({
   strategy,
-  nextConvention,
   onStrategyChange,
-  onConventionChange,
   fontAssignments,
 }: Props) {
   return (
@@ -69,51 +65,6 @@ export function FontStrategyView({
           ))}
         </div>
       </section>
-
-      {strategy === "next-font" && (
-        <section>
-          <div className="mb-2 text-[10px] font-semibold tracking-wide text-[var(--color-text-secondary)] uppercase">
-            Variable naming
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="flex cursor-pointer items-start gap-3 rounded border border-[var(--color-border)] px-3 py-2">
-              <input
-                type="radio"
-                name="convention"
-                checked={nextConvention === "family-named"}
-                onChange={() => onConventionChange("family-named")}
-                className="mt-0.5"
-              />
-              <div>
-                <div className="font-medium">Family-named (recommended)</div>
-                <div className="text-[10px] text-[var(--color-text-secondary)]">
-                  <code>--font-sans: var(--font-geist-sans)</code>. Set{" "}
-                  <code>
-                    Geist(&#123; variable: '--font-geist-sans' &#125;)
-                  </code>{" "}
-                  in layout.tsx.
-                </div>
-              </div>
-            </label>
-            <label className="flex cursor-pointer items-start gap-3 rounded border border-[var(--color-border)] px-3 py-2">
-              <input
-                type="radio"
-                name="convention"
-                checked={nextConvention === "match-init"}
-                onChange={() => onConventionChange("match-init")}
-                className="mt-0.5"
-              />
-              <div>
-                <div className="font-medium">Match stera-ui init</div>
-                <div className="text-[10px] text-[var(--color-text-secondary)]">
-                  <code>--font-sans: var(--font-sans)</code>. Drop-in for
-                  projects that ran <code>stera-ui init</code>.
-                </div>
-              </div>
-            </label>
-          </div>
-        </section>
-      )}
 
       <section>
         <div className="mb-2 text-[10px] font-semibold tracking-wide text-[var(--color-text-secondary)] uppercase">

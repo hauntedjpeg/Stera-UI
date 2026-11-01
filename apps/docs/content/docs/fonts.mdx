@@ -7,19 +7,31 @@ During `init`, the CLI scans for existing fonts (`next/font` imports, `@font-fac
 
 | Strategy | Behavior |
 | --- | --- |
-| `stera-default` | Installs Geist Sans + Geist Mono. Uses `geist` on Next.js, `@fontsource-variable/geist*` elsewhere. |
+| `stera-default` | Installs Zalando Sans SemiExpanded (headings), Zalando Sans (body) and Geist Mono. Uses `next/font/google` on Next.js, `@fontsource-variable/*` elsewhere. |
 | `keep-existing` | Leaves your fonts alone. Wires the Stera tokens to whatever font variables you already expose. |
 | `skip` | No font work. Configure manually. |
 
 ## How fonts plug into Stera UI
 
-All Stera typography reads from two CSS variables defined in `ui/typography.css`:
+All Stera typography reads from three CSS variables defined in `ui/typography.css`:
 
 ```css title="styles/ui/typography.css"
 :root {
-  --font-heading: var(--font-geist-sans);
-  --font-sans: var(--font-geist-sans);
+  --font-heading: var(--font-zalando-sans-semiexpanded);
+  --font-sans: var(--font-zalando-sans);
+  --font-mono: var(--font-geist-mono);
 }
 ```
 
-To use a different font, point these variables at it. Edit `ui/typography.css` directly, or override in `globals.css` after the `@import "./ui/index.css"` line. Installing the font itself (via `next/font`, fontsource, `@font-face`, etc.) is a regular framework task — Stera UI only cares about the two variables.
+Each one points at a variable named after the font family. On Next.js, `init` loads the fonts with `next/font/google` under those names in your root layout:
+
+```tsx title="app/layout.tsx"
+const zalandoSans = Zalando_Sans({
+  subsets: ["latin"],
+  variable: "--font-zalando-sans",
+})
+```
+
+On other frameworks, `init` replaces the `var()` references with the families registered by the `@fontsource-variable/*` packages.
+
+To use a different font, point these variables at it. Edit `ui/typography.css` directly, or override in `globals.css` after the `@import "./ui/index.css"` line. Installing the font itself (via `next/font`, fontsource, `@font-face`, etc.) is a regular framework task — Stera UI only cares about the three variables.

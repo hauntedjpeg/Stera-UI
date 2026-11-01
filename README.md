@@ -53,7 +53,7 @@ The docs are published as plain markdown for coding agents: [ui.stera.sh/llms.tx
 
 ## Fonts
 
-`init` walks you through font setup: Geist Sans + Geist Mono by default (via `next/font` for Next.js, `@fontsource-variable/*` otherwise), or keep your existing fonts. See [ui.stera.sh/docs/fonts](https://ui.stera.sh/docs/fonts).
+`init` walks you through font setup: Zalando Sans SemiExpanded, Zalando Sans and Geist Mono by default (via `next/font` for Next.js, `@fontsource-variable/*` otherwise), or keep your existing fonts. See [ui.stera.sh/docs/fonts](https://ui.stera.sh/docs/fonts).
 
 ## Figma
 

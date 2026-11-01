@@ -3,7 +3,6 @@ import {
   DEFAULT_PREFS,
   postToSandbox,
   type FontStrategy,
-  type NextFontConvention,
   type RawVariablesPayload,
   type SandboxToUi,
   type StoredPrefs,
@@ -67,7 +66,6 @@ export function App() {
       collections: doc.collections,
       textStyles: doc.textStyles,
       strategy: prefs.strategy,
-      nextConvention: prefs.nextConvention,
       unitByCollectionName: prefs.unitByCollectionName,
       prefix: prefs.prefix,
       darkModeIdByCollectionId: prefs.darkModeIdByCollectionId,
@@ -101,8 +99,6 @@ export function App() {
   }
 
   const setStrategy = (strategy: FontStrategy) => updatePrefs({ strategy })
-  const setNextConvention = (nextConvention: NextFontConvention) =>
-    updatePrefs({ nextConvention })
   const setUnit = (collectionName: string, unit: UnitChoice) =>
     updatePrefs({
       unitByCollectionName: {
@@ -175,9 +171,7 @@ export function App() {
         {step === "fonts" && doc && (
           <FontStrategyView
             strategy={prefs.strategy}
-            nextConvention={prefs.nextConvention}
             onStrategyChange={setStrategy}
-            onConventionChange={setNextConvention}
             fontAssignments={fontAssignments}
           />
         )}

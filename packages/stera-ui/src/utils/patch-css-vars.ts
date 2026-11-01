@@ -41,6 +41,33 @@ export function patchCssVariables(
 }
 
 /**
+ * Replace `var(--name)` references in a CSS file with literal values, e.g.
+ * `--font-sans: var(--font-zalando-sans);` → `--font-sans: 'Zalando Sans Variable', sans-serif;`.
+ *
+ * @returns List of variable names whose references were replaced
+ */
+export function replaceCssVarReferences(
+  filePath: string,
+  replacements: Record<string, string>
+): string[] {
+  let content = fs.readFileSync(filePath, "utf-8")
+  const replaced: string[] = []
+
+  for (const [name, value] of Object.entries(replacements)) {
+    const pattern = new RegExp(`var\\(\\s*${escapeRegex(name)}\\s*\\)`, "g")
+    if (!pattern.test(content)) continue
+    content = content.replace(pattern, value)
+    replaced.push(name)
+  }
+
+  if (replaced.length > 0) {
+    fs.writeFileSync(filePath, content, "utf-8")
+  }
+
+  return replaced
+}
+
+/**
  * Remove an @import line from a CSS file.
  */
 export function removeCssImport(filePath: string, importPath: string): boolean {

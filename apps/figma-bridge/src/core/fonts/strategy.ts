@@ -2,7 +2,6 @@ import { kebab } from "../naming/kebab.js"
 import { KNOWN_FAMILIES, guessStack, lookupFont } from "./registry.js"
 
 export type FontStrategy = "next-font" | "fontsource-variable" | "raw"
-export type NextFontConvention = "family-named" | "match-init"
 
 export type FontAssignment = {
   role: string
@@ -16,8 +15,7 @@ export type FontEmitResult = {
 
 export function emitFontDeclarations(
   assignments: FontAssignment[],
-  strategy: FontStrategy,
-  nextConvention: NextFontConvention = "family-named"
+  strategy: FontStrategy
 ): FontEmitResult {
   const declarations: string[] = []
   const warnings: string[] = []
@@ -28,10 +26,6 @@ export function emitFontDeclarations(
     if (!trimmed) continue
 
     if (strategy === "next-font") {
-      if (nextConvention === "match-init") {
-        declarations.push(`  ${role}: var(${role});`)
-        continue
-      }
       // next/font lets the project pick any variable name, and the kebab-cased
       // family is the obvious one, so it is the default rather than a guess
       // worth warning about. The registry only supplies exceptions, like Geist's

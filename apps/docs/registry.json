@@ -45,13 +45,37 @@
       ]
     },
     {
+      "name": "font-zalando-sans",
+      "type": "registry:font",
+      "font": {
+        "family": "'Zalando Sans Variable', sans-serif",
+        "provider": "google",
+        "import": "Zalando_Sans",
+        "variable": "--font-zalando-sans",
+        "subsets": ["latin"],
+        "dependency": "@fontsource-variable/zalando-sans"
+      }
+    },
+    {
+      "name": "font-zalando-sans-semiexpanded",
+      "type": "registry:font",
+      "font": {
+        "family": "'Zalando Sans SemiExpanded Variable', sans-serif",
+        "provider": "google",
+        "import": "Zalando_Sans_SemiExpanded",
+        "variable": "--font-zalando-sans-semiexpanded",
+        "subsets": ["latin"],
+        "dependency": "@fontsource-variable/zalando-sans-semiexpanded"
+      }
+    },
+    {
       "name": "font-geist",
       "type": "registry:font",
       "font": {
         "family": "'Geist Variable', sans-serif",
         "provider": "google",
         "import": "Geist",
-        "variable": "--font-sans",
+        "variable": "--font-geist-sans",
         "subsets": ["latin"],
         "dependency": "@fontsource-variable/geist"
       }
@@ -63,7 +87,7 @@
         "family": "'Geist Mono Variable', monospace",
         "provider": "google",
         "import": "Geist_Mono",
-        "variable": "--font-mono",
+        "variable": "--font-geist-mono",
         "subsets": ["latin"],
         "dependency": "@fontsource-variable/geist-mono"
       }
@@ -75,7 +99,7 @@
         "family": "'Inter Variable', sans-serif",
         "provider": "google",
         "import": "Inter",
-        "variable": "--font-sans",
+        "variable": "--font-inter",
         "subsets": ["latin"],
         "dependency": "@fontsource-variable/inter"
       }

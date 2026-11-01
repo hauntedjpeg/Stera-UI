@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import type { CSSProperties, ReactNode } from "react"
-import { GeistSans } from "geist/font/sans"
+import { Zalando_Sans, Zalando_Sans_SemiExpanded } from "next/font/google"
 import { GeistMono } from "geist/font/mono"
 import { ThemeProvider } from "@/registry/components/theme-provider"
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
@@ -9,6 +9,16 @@ import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "../lib/site"
 import { DocsSidebar } from "./docs-sidebar"
 import { DocsHeader } from "./docs-header"
 import "./globals.css"
+
+const zalandoSans = Zalando_Sans({
+  subsets: ["latin"],
+  variable: "--font-zalando-sans",
+})
+
+const zalandoSansSemiExpanded = Zalando_Sans_SemiExpanded({
+  subsets: ["latin"],
+  variable: "--font-zalando-sans-semiexpanded",
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -44,7 +54,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${zalandoSans.variable} ${zalandoSansSemiExpanded.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
       <body>

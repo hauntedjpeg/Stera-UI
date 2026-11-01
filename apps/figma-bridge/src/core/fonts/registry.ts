@@ -42,6 +42,18 @@ export const KNOWN_FAMILIES: Record<string, KnownFont> = {
     fontsourceFamily: "'Roboto Mono', monospace",
     stack: "monospace",
   },
+  "zalando sans": {
+    nextVar: "--font-zalando-sans",
+    fontsourcePackage: "@fontsource-variable/zalando-sans",
+    fontsourceFamily: "'Zalando Sans Variable', sans-serif",
+    stack: "sans-serif",
+  },
+  "zalando sans semiexpanded": {
+    nextVar: "--font-zalando-sans-semiexpanded",
+    fontsourcePackage: "@fontsource-variable/zalando-sans-semiexpanded",
+    fontsourceFamily: "'Zalando Sans SemiExpanded Variable', sans-serif",
+    stack: "sans-serif",
+  },
 }
 
 export function lookupFont(family: string): KnownFont | undefined {

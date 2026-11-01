@@ -257,7 +257,6 @@ export const figmaOnlyLayout: SerializedCollection = {
 
 export const baseOptions = {
   strategy: "next-font" as const,
-  nextConvention: "family-named" as const,
   unitByCollectionName: {},
   darkModeIdByCollectionId: {},
   fontAssignments: [],

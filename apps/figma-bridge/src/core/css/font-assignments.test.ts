@@ -94,12 +94,12 @@ describe("deriveFontAssignments", () => {
     ])
   })
 
-  it("falls back to the Geist defaults when the file has no font variables", () => {
+  it("falls back to the Stera defaults when the file has no font variables", () => {
     const assignments = deriveFontAssignments([typography([])], undefined)
     expect(assignments.map((a) => a.family)).toEqual([
-      "Geist",
+      "Zalando Sans",
       "Geist Mono",
-      "Geist",
+      "Zalando Sans SemiExpanded",
     ])
   })
 })

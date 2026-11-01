@@ -4,7 +4,6 @@ import type {
   SerializedValue,
   SerializedVariable,
   FontStrategy,
-  NextFontConvention,
   UnitChoice,
 } from "../../shared/messages.js"
 import { rgbaToOklchCss } from "../color/oklch.js"
@@ -25,7 +24,6 @@ export type GenerateOptions = {
   collections: SerializedCollection[]
   textStyles?: SerializedTextStyle[]
   strategy: FontStrategy
-  nextConvention: NextFontConvention
   unitByCollectionName: Record<string, UnitChoice>
   prefix?: string
   darkModeIdByCollectionId: Record<string, string>
@@ -217,9 +215,9 @@ function findNameCollisions(
 
 const FONT_FAMILY_HEAD = /^font(-|$)/
 const DEFAULT_FONT_ASSIGNMENTS: FontAssignment[] = [
-  { role: "--font-sans", family: "Geist" },
+  { role: "--font-sans", family: "Zalando Sans" },
   { role: "--font-mono", family: "Geist Mono" },
-  { role: "--font-heading", family: "Geist" },
+  { role: "--font-heading", family: "Zalando Sans SemiExpanded" },
 ]
 
 /**
@@ -228,7 +226,7 @@ const DEFAULT_FONT_ASSIGNMENTS: FontAssignment[] = [
  * `--font-*` count, and each one's role *is* that exported name — the same name
  * its `:root` decl and every text-style utility bound to it use — so two
  * variables can never collapse onto one role. A file with no such variables
- * gets the Geist defaults Stera-UI ships with.
+ * gets the defaults Stera-UI ships with.
  */
 export function deriveFontAssignments(
   collections: SerializedCollection[],
@@ -481,7 +479,6 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
     collections,
     textStyles = [],
     strategy,
-    nextConvention,
     unitByCollectionName,
     prefix,
     darkModeIdByCollectionId,
@@ -628,11 +625,7 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
     )
   }
 
-  const fontResult = emitFontDeclarations(
-    fontAssignments,
-    strategy,
-    nextConvention
-  )
+  const fontResult = emitFontDeclarations(fontAssignments, strategy)
   warnings.push(...fontResult.warnings)
 
   const fontDecls: Decl[] = fontResult.declarations

@@ -19,7 +19,10 @@ import {
 import { loadTsConfigPaths } from "../utils/tsconfig.js"
 import { formatAliasGuidance } from "../utils/alias-guidance.js"
 import { detectFonts, type DetectedFonts } from "../utils/detect-fonts.js"
-import { patchCssVariables } from "../utils/patch-css-vars.js"
+import {
+  patchCssVariables,
+  replaceCssVarReferences,
+} from "../utils/patch-css-vars.js"
 import { massageTreeForFonts, updateFonts } from "../utils/update-fonts.js"
 import {
   writeStyles,
@@ -33,7 +36,11 @@ import { createSpinner } from "../utils/spinner.js"
 type FontStrategy = "stera-default" | "keep-existing" | "skip"
 
 /** Default font registry items to fetch for the "stera-default" strategy. */
-const DEFAULT_FONT_NAMES = ["font-geist", "font-geist-mono"]
+const DEFAULT_FONT_NAMES = [
+  "font-zalando-sans",
+  "font-zalando-sans-semiexpanded",
+  "font-geist-mono",
+]
 
 /**
  * Build a SteraConfig based on detected project structure.
@@ -115,7 +122,7 @@ async function promptFontStrategy(
 
   choices.push({
     value: "stera-default",
-    name: "Use Stera UI default fonts (Geist Sans + Geist Mono)",
+    name: "Use Stera UI default fonts (Zalando Sans + Geist Mono)",
     description: "Optimized variable fonts via next/font or fontsource",
   })
 
@@ -219,7 +226,7 @@ async function executeFontStrategy(
   }
 
   if (Object.keys(fontTree.cssVars).length > 0) {
-    const patched = patchCssVariables(typographyPath, fontTree.cssVars)
+    const patched = replaceCssVarReferences(typographyPath, fontTree.cssVars)
     if (patched.length > 0) {
       console.log(
         `${CHECK} Updated font variables in ${path.relative(cwd, typographyPath)}`

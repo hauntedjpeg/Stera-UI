@@ -1,8 +1,8 @@
 /* Type tokens and typography utilities. Font variables are patched here on init. */
 
 :root {
-  --font-heading: var(--font-host-grotesk);
-  --font-sans: var(--font-host-grotesk);
+  --font-heading: var(--font-zalando-sans-semiexpanded);
+  --font-sans: var(--font-zalando-sans);
   --font-mono: var(--font-geist-mono);
   --font-weight-subtle: 300;
   --font-weight-regular: 400;
