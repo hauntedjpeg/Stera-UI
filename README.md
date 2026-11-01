@@ -57,7 +57,7 @@ The docs are published as plain markdown for coding agents: [ui.stera.sh/llms.tx
 
 ## Figma
 
-The tokens in `styles/ui/colors.css` and `typography.css` come from Figma variables, exported by the Stera UI Bridge plugin in [`apps/figma-bridge`](apps/figma-bridge). Use it to generate the same partials from your own Figma file.
+The tokens in `styles/ui/colors.css` and `typography.css` come from Figma variables, exported by the Stera UI Bridge plugin in [`apps/figma-bridge`](apps/figma-bridge). Use it to generate the same partials from your own Figma file. The color ramps themselves are generated in Figma by the Stera UI Colors plugin in [`apps/figma-colors`](apps/figma-colors), which writes them in the layout the Bridge expects.
 
 ## Dark Mode
 

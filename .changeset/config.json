@@ -10,6 +10,10 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@stera-ui/docs", "@stera-ui/figma-bridge"],
+  "ignore": [
+    "@stera-ui/docs",
+    "@stera-ui/figma-bridge",
+    "@stera-ui/figma-colors"
+  ],
   "privatePackages": { "version": false, "tag": false }
 }

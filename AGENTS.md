@@ -6,12 +6,13 @@ Guidance for AI coding agents working in this repository. Claude Code loads it t
 
 Stera-UI is a **shadcn-style component registry** (copy-paste, not an installable component library) plus the CLI that distributes it. Consumers run `npx stera-ui add button`, which fetches a JSON manifest from the registry host (default `https://ui.stera.sh/r`) and writes the source files into their project.
 
-Three workspaces matter:
+Four workspaces matter:
 
 - **`packages/stera-ui`** — the published CLI (`stera-ui` on npm). Built with `tsup`. Entry: `src/cli.ts` (Commander). Commands in `src/commands/` (`init`, `add`, `list`). Registry fetching/resolution lives in `src/registry/`; file transforms (import-path rewriting in `transform-imports.ts`, font setup in `font-setup.ts`, Next.js layout patching via `ts-morph` in `update-fonts.ts`) live in `src/utils/`. `ts-morph` bundles all of TypeScript, so only import `update-fonts.ts` dynamically, from code paths that need it.
 - **`apps/docs`** — Next.js 16 / React 19 / Fumadocs MDX site that **doubles as the registry host**. The component source files under `apps/docs/registry/` are the canonical components; `scripts/build-registry.mts` reads `apps/docs/registry.json` and emits `apps/docs/public/r/*.json` files that the CLI fetches at runtime.
 
 - **`apps/figma-bridge`** — private Figma plugin ("Stera UI Bridge") that exports Figma variables and text styles as Tailwind 4 CSS. It generates `apps/docs/registry/styles/ui/colors.css` and `typography.css`. Has its own `AGENTS.md`.
+- **`apps/figma-colors`** — private Figma plugin ("Stera UI Colors", published) that generates Radix-style 12-step color ramps and writes them as Figma variables. It writes the `Color` collection as `Family/Light/N` and `Family/Dark/N`, which is what the Bridge reads, and a vitest test checks that contract against the Bridge's model. Has its own `AGENTS.md`.
 
 When a user says "add a component" or "fix the Button," the work almost always happens in `apps/docs/registry/ui/` — not in `packages/stera-ui/`.
 
@@ -32,7 +33,7 @@ Workspace-scoped:
 - `pnpm --filter stera-ui dev` — watch-build the CLI
 - `pnpm --filter docs build:registry` — regenerate `apps/docs/public/r/*.json` only (run this after editing anything under `apps/docs/registry/` or `apps/docs/registry.json` if you want to test the CLI against your local changes)
 
-`apps/figma-bridge` (covering `src/core/`) and `packages/stera-ui` (covering the font tooling in `src/utils/`) have vitest tests: `pnpm test` from the root runs them through turbo. vitest is a devDependency only, so it never ships with the CLI. Don't add a test runner to the other workspaces unless asked.
+`apps/figma-bridge` and `apps/figma-colors` (each covering `src/core/`) and `packages/stera-ui` (covering the font tooling in `src/utils/`) have vitest tests: `pnpm test` from the root runs them through turbo. vitest is a devDependency only, so it never ships with the CLI. Don't add a test runner to the other workspaces unless asked.
 
 ### Before you finish
 
@@ -40,7 +41,7 @@ CI runs `pnpm turbo run build lint typecheck test format:check` on every PR. Bef
 
 - `pnpm typecheck` and `pnpm lint`
 - `pnpm format:check` (or `pnpm format` to fix). Prettier covers `ts`, `tsx`, `mjs`, `json`, `css` and `md`.
-- `pnpm test` if you touched `apps/figma-bridge` or `packages/stera-ui`
+- `pnpm test` if you touched `apps/figma-bridge`, `apps/figma-colors` or `packages/stera-ui`
 - `pnpm --filter docs build:registry` if you touched `apps/docs/registry/` or `apps/docs/registry.json`
 
 A user-facing change to `packages/stera-ui` needs a changeset: run `pnpm changeset` and commit the generated file in `.changeset/`.

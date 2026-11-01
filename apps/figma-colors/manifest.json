@@ -1,0 +1,11 @@
+{
+  "name": "Stera UI Colors",
+  "id": "1620140337218073124",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/index.html",
+  "documentAccess": "dynamic-page",
+  "networkAccess": { "allowedDomains": ["none"] },
+  "editorType": ["figma"],
+  "permissions": []
+}

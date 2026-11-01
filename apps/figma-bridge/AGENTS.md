@@ -40,6 +40,8 @@ The exporter is opinionated about Figma collection names — it only includes co
 
 **Light/dark lives in the semantic layer, not the primitives.** `Color` is a mode-less collection of ramps grouped `Family/Light/N` and `Family/Dark/N` (`Black`/`White` alpha ramps have no subgroup); `Theme` carries the `Light` and `Dark` modes and aliases into those ramps per mode. So every primitive is declared exactly once in `:root` and `.dark` overrides only semantic tokens. That is what keeps a token like `Ink/Onwarning` — which points at `Warning/Light/12` in _both_ modes — lossless: because no ramp is ever redeclared, `var(--warning-12)` means the same thing inside `.dark` as outside. Two hard errors: a missing `Color` collection, and a missing `Theme` collection or one without a mode whose name contains "Dark". Error texts are short causes, since the UI shows them as the one-line reason under its own explanation.
 
+`apps/figma-colors` (Stera UI Colors) is the plugin that writes those ramps, and its `src/core/bridge-contract.test.ts` runs a generated ramp through `buildModel()`, so a change to the ramp layout or naming here has to land in both plugins.
+
 In the `Color` collection a non-leading `Light` segment is dropped during naming, so the light ramp keeps the unqualified name downstream code has always used and only dark is namespaced: `Neutral/Light/1` → `--neutral-1`, `Neutral/Dark/1` → `--neutral-dark-1`.
 
 `buildModel()` in `src/core/css/model.ts` does all the work — validation, name normalization, decl building, sorting, utility generation — and returns a framework-agnostic `CssModel`, which `generatePartials()` renders.
