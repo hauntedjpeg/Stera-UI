@@ -69,6 +69,23 @@ describe("buildUtilities", () => {
     expect(css).toContain("font-weight: var(--font-weight-medium);")
   })
 
+  it("reads a text weight variable, which Figma binds to fontStyle", () => {
+    const { css, warnings } = buildUtilities({
+      textStyles: [
+        style({
+          boundVariables: {
+            ...style().boundVariables,
+            fontWeight: undefined,
+            fontStyle: "v-weight-medium",
+          },
+        }),
+      ],
+      ...opts,
+    })
+    expect(css).toContain("font-weight: var(--font-weight-medium);")
+    expect(warnings).toEqual([])
+  })
+
   it("derives the utility name from the full Figma style path", () => {
     const { css } = buildUtilities({
       textStyles: [

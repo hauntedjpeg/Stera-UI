@@ -19,6 +19,7 @@ import {
   findUnresolvedReferences,
   TAILWIND_THEME_VARS,
 } from "./text-styles.js"
+import { isWeightHead, weightFromStyleName } from "./weights.js"
 
 export type GenerateOptions = {
   collections: SerializedCollection[]
@@ -225,7 +226,8 @@ const DEFAULT_FONT_ASSIGNMENTS: FontAssignment[] = [
  * `--font-*` count, and each one's role *is* that exported name — the same name
  * its `:root` decl and every text-style utility bound to it use — so two
  * variables can never collapse onto one role. A file with no such variables
- * gets the defaults Stera-UI ships with.
+ * gets the defaults Stera-UI ships with. Text-type weights (`--font-weight-*`)
+ * also match the pattern, so they are skipped explicitly.
  */
 export function deriveFontAssignments(
   collections: SerializedCollection[],
@@ -241,7 +243,8 @@ export function deriveFontAssignments(
   for (const v of typo?.variables ?? []) {
     if (v.type !== "STRING") continue
     const role = normalizeName(v.name, TYPOGRAPHY_COLLECTION, prefix)
-    if (!FONT_FAMILY_HEAD.test(headFromName(role, prefix))) continue
+    const head = headFromName(role, prefix)
+    if (isWeightHead(head) || !FONT_FAMILY_HEAD.test(head)) continue
 
     // Follow aliases (e.g. into a Reference collection) to the literal family.
     let value: SerializedValue | undefined = v.valuesByMode[typo!.modes[0].id]
@@ -313,6 +316,10 @@ function renderValue(
       return `${rounded}rem`
     }
     case "string":
+      // Only weights are unitless. A text weight variable holds a style name
+      // ("SemiBold"), which CSS needs as a number.
+      if (unit === "unitless")
+        return String(weightFromStyleName(value.value) ?? value.value)
       return value.value
     case "boolean":
       return String(value.value)
@@ -355,9 +362,7 @@ function resolveNumberUnit(
   head: string,
   collectionUnit: UnitChoice
 ): NumberUnit {
-  if (head === "font-weight" || head.startsWith("font-weight-"))
-    return "unitless"
-  if (head === "weight" || head.startsWith("weight-")) return "unitless"
+  if (isWeightHead(head)) return "unitless"
   return collectionUnit
 }
 
@@ -405,7 +410,7 @@ function semanticGroupKey(head: string): number {
 }
 
 function primitiveGroupKey(head: string): number {
-  if (head === "font-weight" || head.startsWith("font-weight-")) return 1
+  if (isWeightHead(head)) return 1
   if (head === "font-size" || head.startsWith("font-size-")) return 3
   // Every other --font-* is a family role, custom ones like --font-display too.
   if (FONT_FAMILY_HEAD.test(head)) return 0
@@ -584,6 +589,25 @@ export function buildModel(options: GenerateOptions): BuildModelResult {
     unresolved,
     byId
   )
+
+  // Figma only applies a text weight variable whose value is a style name, so
+  // a numeric string ("550") is flagged too, though it would be valid CSS.
+  const invalidWeights = (typoCollection?.variables ?? []).filter((v) => {
+    const name = nameMap.get(v.id)
+    const value = v.valuesByMode[typoCollection!.modes[0].id]
+    return (
+      name !== undefined &&
+      isWeightHead(headFromName(name, prefix)) &&
+      value?.kind === "string" &&
+      weightFromStyleName(value.value) === null
+    )
+  })
+  if (invalidWeights.length > 0) {
+    const list = invalidWeights.map((v) => `"${v.name}"`).join(", ")
+    warnings.push(
+      `${invalidWeights.length} text weight variable${invalidWeights.length === 1 ? " is" : "s are"} not a weight style name: ${list}. Figma only applies names like "Regular" or "SemiBold", and the export emitted the value as-is.`
+    )
+  }
 
   // `collectionDecls` drops a variable that has no value in the requested mode,
   // which would otherwise silently leave a token stuck on its light value.

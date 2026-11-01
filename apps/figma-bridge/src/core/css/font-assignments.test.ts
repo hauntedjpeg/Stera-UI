@@ -67,6 +67,19 @@ describe("deriveFontAssignments", () => {
     expect(assignments).toEqual([{ role: "--font-sans", family: "Inter" }])
   })
 
+  it("ignores text-type weight variables even though they export as --font-weight-*", () => {
+    const assignments = deriveFontAssignments(
+      [
+        typography([
+          str("a", "Font/Sans", "Inter"),
+          str("b", "Weight/Regular", "Regular"),
+        ]),
+      ],
+      undefined
+    )
+    expect(assignments).toEqual([{ role: "--font-sans", family: "Inter" }])
+  })
+
   it("follows aliases to the literal family", () => {
     const reference: SerializedCollection = {
       id: "col-ref",

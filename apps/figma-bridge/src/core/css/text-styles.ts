@@ -1,6 +1,7 @@
 import type { SerializedTextStyle } from "../../shared/messages.js"
 import { toKebabName } from "../naming/kebab.js"
 import { fallbackStack } from "../fonts/registry.js"
+import { weightFromStyleName } from "./weights.js"
 
 export type UtilityUnit = "rem" | "px"
 
@@ -21,28 +22,6 @@ export type BuildUtilitiesOptions = {
 export type BuildUtilitiesResult = {
   css: string
   warnings: string[]
-}
-
-/**
- * Figma exposes a style's weight as a font-style name unless it's bound to a
- * variable. Only used as a fallback — bound styles resolve by variable id.
- */
-const STYLE_NAME_WEIGHTS: Record<string, number> = {
-  thin: 100,
-  extralight: 200,
-  ultralight: 200,
-  light: 300,
-  regular: 400,
-  normal: 400,
-  book: 400,
-  medium: 500,
-  semibold: 600,
-  demibold: 600,
-  bold: 700,
-  extrabold: 800,
-  ultrabold: 800,
-  black: 900,
-  heavy: 900,
 }
 
 const CATEGORY_ORDER = ["body", "heading", "display", "hero"]
@@ -95,11 +74,6 @@ function categoryKey(name: string): number {
   return index === -1 ? CATEGORY_ORDER.length : index
 }
 
-function weightFromStyleName(fontStyle: string): number | null {
-  const key = fontStyle.toLowerCase().replace(/[^a-z]/g, "")
-  return STYLE_NAME_WEIGHTS[key] ?? null
-}
-
 type FieldName =
   | "fontFamily"
   | "fontWeight"
@@ -117,7 +91,8 @@ const FIELD_LABELS: Record<FieldName, string> = {
 
 /**
  * Emits `@utility st-*` blocks from Figma text styles. Every field prefers the
- * bound variable — `Weight/Medium` and `Weight/Strong` can share a numeric
+ * bound variable (for weight, a number variable on `fontWeight` or a text one
+ * on `fontStyle`) — `Weight/Medium` and `Weight/Strong` can share a numeric
  * value, so resolving by variable id is the only lossless route. Unbound (or
  * unresolvable) fields fall back to a literal and raise a warning naming the
  * style and field, so the drift is visible rather than silent.
@@ -137,7 +112,11 @@ export function buildUtilities(
     literal: () => string | null,
     { warnIfUnbound = true }: { warnIfUnbound?: boolean } = {}
   ): string | null => {
-    const boundId = style.boundVariables[field]
+    // Figma binds a text variable on weight to `fontStyle`, never `fontWeight`.
+    const boundId =
+      field === "fontWeight"
+        ? (style.boundVariables.fontWeight ?? style.boundVariables.fontStyle)
+        : style.boundVariables[field]
     if (boundId) {
       const name = nameMap.get(boundId)
       if (name) return `var(${name})`

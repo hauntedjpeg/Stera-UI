@@ -386,6 +386,74 @@ describe("buildModel", () => {
     expect(warnings).toEqual([])
   })
 
+  it("emits text weight variables as numbers and resolves fontStyle bindings", () => {
+    const textWeights: SerializedCollection = {
+      ...baseTypography,
+      variables: baseTypography.variables.map((v) =>
+        v.id === "v-weight-strong"
+          ? {
+              ...v,
+              type: "STRING" as const,
+              valuesByMode: {
+                default: { kind: "string" as const, value: "SemiBold" },
+              },
+            }
+          : v
+      ),
+    }
+    const { css, warnings } = generateCss({
+      ...baseOptions,
+      collections: [basePrimitives, themeSemantic, textWeights],
+      textStyles: [
+        {
+          ...headingSmStyle,
+          boundVariables: {
+            ...headingSmStyle.boundVariables,
+            fontWeight: undefined,
+            fontStyle: "v-weight-strong",
+          },
+        },
+      ],
+    })
+    expect(rootOf(css)).toContain("--font-weight-strong: 600;")
+    expect(css).toMatch(
+      /@utility st-heading-sm \{[^}]*font-weight: var\(--font-weight-strong\);/
+    )
+    expect(warnings).toEqual([])
+  })
+
+  it("warns when a text weight variable is not a style name Figma applies", () => {
+    const str = (id: string, name: string, value: string) => ({
+      id,
+      name,
+      type: "STRING" as const,
+      valuesByMode: { default: { kind: "string" as const, value } },
+    })
+    const { css, warnings } = generateCss({
+      ...baseOptions,
+      collections: [
+        basePrimitives,
+        themeSemantic,
+        {
+          ...baseTypography,
+          variables: [
+            str("w1", "Weight/Strong", "550"),
+            str("w2", "Weight/Odd", "Chunky"),
+          ],
+        },
+      ],
+    })
+    expect(rootOf(css)).toContain("--font-weight-strong: 550;")
+    expect(
+      warnings.some(
+        (w) =>
+          /2 text weight variables/.test(w) &&
+          w.includes('"Weight/Strong"') &&
+          w.includes('"Weight/Odd"')
+      )
+    ).toBe(true)
+  })
+
   it("maps raw letter spacing to Tailwind tracking without warnings", () => {
     const { css, warnings } = generateCss({
       ...baseOptions,
