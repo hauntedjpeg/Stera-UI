@@ -8,7 +8,7 @@ Stera-UI is a **shadcn-style component registry** (copy-paste, not an installabl
 
 Three workspaces matter:
 
-- **`packages/stera-ui`** — the published CLI (`stera-ui` on npm). Built with `tsup`. Entry: `src/cli.ts` (Commander). Commands in `src/commands/` (`init`, `add`, `list`). Registry fetching/resolution lives in `src/registry/`; file transforms (import-path rewriting in `transform-imports.ts`, font setup via `ts-morph` in `update-fonts.ts`) live in `src/utils/`.
+- **`packages/stera-ui`** — the published CLI (`stera-ui` on npm). Built with `tsup`. Entry: `src/cli.ts` (Commander). Commands in `src/commands/` (`init`, `add`, `list`). Registry fetching/resolution lives in `src/registry/`; file transforms (import-path rewriting in `transform-imports.ts`, font setup in `font-setup.ts`, Next.js layout patching via `ts-morph` in `update-fonts.ts`) live in `src/utils/`. `ts-morph` bundles all of TypeScript, so only import `update-fonts.ts` dynamically, from code paths that need it.
 - **`apps/docs`** — Next.js 16 / React 19 / Fumadocs MDX site that **doubles as the registry host**. The component source files under `apps/docs/registry/` are the canonical components; `scripts/build-registry.mts` reads `apps/docs/registry.json` and emits `apps/docs/public/r/*.json` files that the CLI fetches at runtime.
 
 - **`apps/figma-bridge`** — private Figma plugin ("Stera UI Bridge") that exports Figma variables and text styles as Tailwind 4 CSS. It generates `apps/docs/registry/styles/ui/colors.css` and `typography.css`. Has its own `AGENTS.md`.
@@ -32,7 +32,7 @@ Workspace-scoped:
 - `pnpm --filter stera-ui dev` — watch-build the CLI
 - `pnpm --filter docs build:registry` — regenerate `apps/docs/public/r/*.json` only (run this after editing anything under `apps/docs/registry/` or `apps/docs/registry.json` if you want to test the CLI against your local changes)
 
-Only `apps/figma-bridge` has tests (vitest, covering `src/core/`): `pnpm test` from the root runs them through turbo. Don't add a test runner to the other workspaces unless asked.
+`apps/figma-bridge` (covering `src/core/`) and `packages/stera-ui` (covering the font tooling in `src/utils/`) have vitest tests: `pnpm test` from the root runs them through turbo. vitest is a devDependency only, so it never ships with the CLI. Don't add a test runner to the other workspaces unless asked.
 
 ### Before you finish
 
@@ -40,7 +40,7 @@ CI runs `pnpm turbo run build lint typecheck test format:check` on every PR. Bef
 
 - `pnpm typecheck` and `pnpm lint`
 - `pnpm format:check` (or `pnpm format` to fix). Prettier covers `ts`, `tsx`, `mjs`, `json`, `css` and `md`.
-- `pnpm test` if you touched `apps/figma-bridge`
+- `pnpm test` if you touched `apps/figma-bridge` or `packages/stera-ui`
 - `pnpm --filter docs build:registry` if you touched `apps/docs/registry/` or `apps/docs/registry.json`
 
 A user-facing change to `packages/stera-ui` needs a changeset: run `pnpm changeset` and commit the generated file in `.changeset/`.
@@ -86,3 +86,4 @@ A component will not be installable via the CLI until step 2 is done — `regist
 - The **docs app hosts the registry**. Editing components in `apps/docs/registry/` is editing the published library; this isn't a docs-only sandbox.
 - The CLI rewrites import paths when copying files into a consumer project, via a string-based alias transform (`src/utils/transform-imports.ts`) that maps the default `@/lib`, `@/components/ui`, `@/hooks` aliases to the user's configured ones. Registry components must author imports with those default `@/` aliases — imports the transform can't recognize (dynamic imports, relative paths to sibling registry files) won't be rewritten.
 - `apps/docs/registry/styles/ui/colors.css` and `typography.css` are **generated** by `apps/figma-bridge` and pasted in. To change token values, change them in Figma and re-export. To change the _shape_ of the generated CSS, edit `apps/figma-bridge/src/core/css/`. The static partials (`base.css`, `scrollbar.css`, `scroll-fade.css`) are hand-written, but the plugin hardcodes their names (`STATIC_PARTIALS`) and inlines `base.css` + `scrollbar.css` for its single-file export (`STERA_BASE_UTILITIES`), so update both places together.
+- **Fonts are decided by `ui/typography.css`.** Each font role points at a family-named variable (`--font-sans: var(--font-zalando-sans, sans-serif)`), and `stera-ui init` installs the `font-<family>` registry item for each one it finds. Changing fonts means changing them in Figma and re-exporting; `build:registry` fails if `typography.css` references a font with no matching `registry:font` item. On Next.js the CLI patches the root layout; elsewhere it writes `ui/fonts.css` (fontsource imports + family variables). It never edits `typography.css`.

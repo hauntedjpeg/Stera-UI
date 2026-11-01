@@ -128,6 +128,7 @@ your-project/
             ├── index.css        # Wires the partials together
             ├── colors.css       # Color tokens, light + dark
             ├── typography.css   # Type tokens + typography utilities
+            ├── fonts.css        # Font files (non-Next.js projects only)
             ├── scrollbar.css    # Scrollbar utilities
             ├── scroll-fade.css  # Scroll-fade utilities
             └── base.css         # Base layer defaults
@@ -141,7 +142,8 @@ Projects without a `src/` directory get the same layout at the root.
 | -------------------- | -------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | `globals.css`        | Your own styles, plus the imports `init` added                                         | Yes — never touched after `init`                |
 | `ui/colors.css`      | Color ramps, semantic color tokens, `.dark` overrides, and the Tailwind color mappings | Yes — this is the file to paste new colors into |
-| `ui/typography.css`  | Font families, sizes, weights, letter spacing, line heights, and the `st-*` utilities  | Yes — font variables are patched here           |
+| `ui/typography.css`  | Font roles, sizes, weights, letter spacing, line heights, and the `st-*` utilities     | Yes — point the font roles at your fonts here   |
+| `ui/fonts.css`       | Fontsource imports and family variables (not on Next.js, which uses `next/font`)       | Rarely — `add font-*` appends to it             |
 | `ui/scrollbar.css`   | `scrollbar-hide`                                                                       | Rarely                                          |
 | `ui/scroll-fade.css` | The `scroll-fade` utilities                                                            | Rarely                                          |
 | `ui/base.css`        | Base layer element defaults                                                            | Rarely                                          |

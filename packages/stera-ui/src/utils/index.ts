@@ -33,4 +33,11 @@ export {
 } from "./write-files.js"
 export { brand, dim, LOGO, CHECK, CROSS, WARN } from "./format.js"
 export { createSpinner } from "./spinner.js"
-export { massageTreeForFonts, updateFonts } from "./update-fonts.js"
+export { updateFonts } from "./update-fonts.js"
+export {
+  massageTreeForFonts,
+  readFontVariables,
+  setupFonts,
+  FONTS_TARGET,
+  type FontTreeResult,
+} from "./font-setup.js"

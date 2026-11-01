@@ -35,7 +35,9 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@inquirer/prompts": "^7.0.0",
@@ -47,6 +49,7 @@
     "tsconfig-paths": "^4.2.0",
     "tsup": "^8.5.0",
     "typescript": "^5.9.3",
+    "vitest": "^3.2.7",
     "zod": "^3.24.0"
   }
 }

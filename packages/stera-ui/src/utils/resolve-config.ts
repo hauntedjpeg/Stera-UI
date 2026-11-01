@@ -13,8 +13,8 @@ export interface SteraConfig {
     hooks: string
   }
   fonts?: {
+    /** "keep-existing" is no longer offered; older configs may still carry it. */
     strategy: "stera-default" | "keep-existing" | "skip"
-    nextFont?: boolean
   }
 }
 

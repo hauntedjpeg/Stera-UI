@@ -3,35 +3,91 @@ title: Fonts
 description: How the CLI sets up fonts and how to change them.
 ---
 
-During `init`, the CLI scans for existing fonts (`next/font` imports, `@font-face` rules, Google Fonts links) and prompts for one of three strategies. The choice is saved to `stera.config.json` under `fonts.strategy`.
-
-| Strategy | Behavior |
-| --- | --- |
-| `stera-default` | Installs Zalando Sans SemiExpanded (headings), Zalando Sans (body) and Geist Mono. Uses `next/font/google` on Next.js, `@fontsource-variable/*` elsewhere. |
-| `keep-existing` | Leaves your fonts alone. Wires the Stera tokens to whatever font variables you already expose. |
-| `skip` | No font work. Configure manually. |
-
-## How fonts plug into Stera UI
-
-All Stera typography reads from three CSS variables defined in `ui/typography.css`:
+Stera UI reads three font roles from `ui/typography.css`. That file is exported from the Stera UI Figma file, so the fonts it points at are the source of truth for which fonts get installed.
 
 ```css title="styles/ui/typography.css"
 :root {
-  --font-heading: var(--font-zalando-sans-semiexpanded);
-  --font-sans: var(--font-zalando-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-zalando-sans-semiexpanded, sans-serif);
+  --font-sans: var(--font-zalando-sans, sans-serif);
+  --font-mono: var(--font-geist-mono, ui-monospace, monospace);
 }
 ```
 
-Each one points at a variable named after the font family. On Next.js, `init` loads the fonts with `next/font/google` under those names in your root layout:
+Each role points at a variable named after a font family, with a fallback for when no font is loaded. `--font-sans` is body text and Tailwind's `font-sans`, `--font-heading` is for headings, and `--font-mono` is for code and Tailwind's `font-mono`. Each `st-*` utility uses the role its Figma text style is bound to.
+
+## What `init` does
+
+`init` asks whether to install the Stera UI fonts, and records the answer in `stera.config.json` under `fonts.strategy`. With `--yes` it installs them.
+
+| Choice          | Behavior                                                                                                                                                              |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `stera-default` | Installs every font `ui/typography.css` references (today Zalando Sans SemiExpanded, Zalando Sans and Geist Mono). Your existing fonts stay loaded for your own code. |
+| `skip`          | No font work. `init` prints the role lines to edit and any `next/font` variables your layout already loads.                                                           |
+
+`init` finds each font by its variable: `--font-zalando-sans` is the `font-zalando-sans` item in the registry.
+
+### Next.js
+
+`init` loads the fonts with `next/font/google` in your root layout and puts their variables on `<html>`:
 
 ```tsx title="app/layout.tsx"
 const zalandoSans = Zalando_Sans({
-  subsets: ["latin"],
   variable: "--font-zalando-sans",
+  subsets: ["latin"],
 })
+
+// …
+<html className={`${zalandoSans.variable} ${geistMono.variable}`}>
 ```
 
-On other frameworks, `init` replaces the `var()` references with the families registered by the `@fontsource-variable/*` packages.
+Fonts your layout already declares under the same variable are reused as they are. If there is no `app/layout` (the Pages Router) or no `<html>` element, `init` prints the code to add yourself.
 
-To use a different font, point these variables at it. Edit `ui/typography.css` directly, or override in `globals.css` after the `@import "./ui/index.css"` line. Installing the font itself (via `next/font`, fontsource, `@font-face`, etc.) is a regular framework task — Stera UI only cares about the three variables.
+### Other frameworks
+
+`init` installs the `@fontsource-variable/*` packages and writes `ui/fonts.css`, which imports them and defines the family variables. Your `globals.css` imports it next to `ui/index.css`:
+
+```css title="styles/ui/fonts.css"
+@import "@fontsource-variable/zalando-sans";
+
+:root {
+  --font-zalando-sans: "Zalando Sans Variable", sans-serif;
+}
+```
+
+`ui/typography.css` is never edited, so refreshing it with `stera-ui add globals` keeps your fonts working.
+
+### Styles that override the fonts
+
+Some starter templates set fonts in `globals.css` that win over Stera UI's. create-next-app ships both of these:
+
+```css title="app/globals.css"
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+```
+
+`init` warns about `--font-*` entries in `@theme inline` and `font-family` on `html`, `body` or `:root`, with their line numbers. It doesn't edit `globals.css`. Remove the lines to use the Stera UI fonts everywhere.
+
+## Adding another font
+
+Fonts in the registry install with `add`, the same way `init` loads them:
+
+```bash
+npx stera-ui add font-inter
+```
+
+Then point a role at its variable in `ui/typography.css`:
+
+```css
+--font-sans: var(--font-inter, sans-serif);
+```
+
+Run `stera-ui list` to see the available fonts.
+
+## Using your own fonts
+
+Skip font setup, load your fonts however your framework does it (`next/font`, fontsource, `@font-face`), and point the three roles at them. Stera UI only reads the roles.

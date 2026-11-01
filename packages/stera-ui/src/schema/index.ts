@@ -91,8 +91,8 @@ export const configSchema = z.object({
   }),
   fonts: z
     .object({
+      // "keep-existing" is no longer offered; older configs may still carry it.
       strategy: z.enum(["stera-default", "keep-existing", "skip"]),
-      nextFont: z.boolean().optional(),
     })
     .optional(),
 })

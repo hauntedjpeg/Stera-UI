@@ -11,8 +11,8 @@ export interface DetectedFonts {
   hasGoogleFontsLink: boolean
   /** Extracted font-family names from CSS */
   fontFamilies: string[]
-  /** CSS variable name from next/font (e.g. "--font-inter") */
-  nextFontVariable: string | null
+  /** CSS variables declared through next/font (e.g. "--font-inter") */
+  nextFontVariables: string[]
 }
 
 /**
@@ -31,21 +31,21 @@ function readIfExists(filePath: string): string | null {
  */
 function detectNextFont(layoutContent: string): {
   hasNextFont: boolean
-  nextFontVariable: string | null
+  nextFontVariables: string[]
 } {
+  // [^;]* rather than .* so multi-line (formatted) imports match too.
   const hasNextFont =
-    /import.*from\s+['"]next\/font/.test(layoutContent) ||
-    /import.*from\s+['"]@next\/font/.test(layoutContent) ||
-    /import.*from\s+['"]geist\/font/.test(layoutContent)
+    /import[^;]*?from\s+['"](next\/font|@next\/font|geist\/font)/.test(
+      layoutContent
+    )
 
-  let nextFontVariable: string | null = null
   // Match patterns like: variable: '--font-inter' or variable: "--font-inter"
-  const varMatch = layoutContent.match(/variable:\s*['"](--.+?)['"]/)
-  if (varMatch) {
-    nextFontVariable = varMatch[1]
+  const nextFontVariables: string[] = []
+  for (const match of layoutContent.matchAll(/variable:\s*['"](--.+?)['"]/g)) {
+    if (!nextFontVariables.includes(match[1])) nextFontVariables.push(match[1])
   }
 
-  return { hasNextFont, nextFontVariable }
+  return { hasNextFont, nextFontVariables }
 }
 
 /**
@@ -89,7 +89,7 @@ export function detectFonts(cwd: string, project: ProjectInfo): DetectedFonts {
     hasFontFace: false,
     hasGoogleFontsLink: false,
     fontFamilies: [],
-    nextFontVariable: null,
+    nextFontVariables: [],
   }
 
   // Check layout file for next/font and Google Fonts
@@ -98,7 +98,7 @@ export function detectFonts(cwd: string, project: ProjectInfo): DetectedFonts {
     if (layoutContent) {
       const nextFontResult = detectNextFont(layoutContent)
       result.hasNextFont = nextFontResult.hasNextFont
-      result.nextFontVariable = nextFontResult.nextFontVariable
+      result.nextFontVariables = nextFontResult.nextFontVariables
 
       if (detectGoogleFonts(layoutContent)) {
         result.hasGoogleFontsLink = true
@@ -151,4 +151,75 @@ export function detectFonts(cwd: string, project: ProjectInfo): DetectedFonts {
   }
 
   return result
+}
+
+export interface FontOverride {
+  line: number
+  /** The declaration as written, e.g. `font-family: Arial, sans-serif` */
+  declaration: string
+  /** Where it sits: `@theme inline` or the rule's selector. */
+  context: string
+}
+
+/**
+ * Rules in the user's own stylesheet that win over the Stera font tokens:
+ *
+ * - `--font-sans` and friends inside `@theme inline`. Inline theme values are
+ *   baked into Tailwind's `font-sans` utility and the page's default font, so
+ *   those skip the `--font-sans` variable Stera defines.
+ * - `font-family` on `html`, `body` or `:root`, which plain text inherits.
+ *
+ * create-next-app ships both. A plain `@theme` block is harmless: its
+ * variables live in a cascade layer that Stera's unlayered ones override.
+ */
+export function findFontOverrides(css: string): FontOverride[] {
+  // Blank out comments, keeping newlines so line numbers stay right.
+  const src = css.replace(/\/\*[\s\S]*?\*\//g, (comment) =>
+    comment.replace(/[^\n]/g, " ")
+  )
+
+  const overrides: FontOverride[] = []
+  const contexts: string[] = []
+  let buffer = ""
+  let bufferLine = 1
+  let line = 1
+
+  const check = () => {
+    const match = buffer.trim().match(/^([\w-]+)\s*:\s*([\s\S]+)$/)
+    buffer = ""
+    if (!match) return
+    const [, property, value] = match
+    const context = contexts[contexts.length - 1] ?? ""
+    const isInlineTheme = /^@theme\b[^{]*\binline\b/.test(context)
+    const isRootRule =
+      !context.startsWith("@") &&
+      /(^|[\s,>+~])(html|body|:root)(?![\w-])/.test(context)
+
+    if (
+      (isInlineTheme && /^--font-(sans|serif|mono|heading)$/.test(property)) ||
+      (isRootRule && property === "font-family")
+    ) {
+      overrides.push({
+        line: bufferLine,
+        declaration: `${property}: ${value.trim().replace(/\s+/g, " ")}`,
+        context: isInlineTheme ? "@theme inline" : context,
+      })
+    }
+  }
+
+  for (const char of src) {
+    if (char === "{") {
+      contexts.push(buffer.trim().replace(/\s+/g, " "))
+      buffer = ""
+    } else if (char === ";" || char === "}") {
+      check()
+      if (char === "}") contexts.pop()
+    } else {
+      if (!buffer.trim() && char.trim()) bufferLine = line
+      buffer += char
+    }
+    if (char === "\n") line++
+  }
+
+  return overrides
 }

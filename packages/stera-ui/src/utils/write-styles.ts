@@ -10,7 +10,7 @@ import type { SteraConfig } from "./resolve-config.js"
 /** Entry point the user's globals.css imports; owns the partial wiring. */
 export const INDEX_TARGET = "ui/index.css"
 
-/** Partial that owns the font variables patched during init. */
+/** Partial that holds the type tokens, including the font roles. */
 export const TYPOGRAPHY_TARGET = "ui/typography.css"
 
 /**
@@ -27,7 +27,7 @@ const LEGACY_IMPORT = "./stera-ui.css"
 export interface WriteStylesResult {
   /** Absolute path to the written `ui/index.css`. */
   indexPath: string
-  /** Absolute path to `ui/typography.css`, where font variables are patched. */
+  /** Absolute path to `ui/typography.css`, whose font roles decide the fonts. */
   typographyPath: string
   /**
    * Non-relative `@import` statements lifted out of the index (e.g.

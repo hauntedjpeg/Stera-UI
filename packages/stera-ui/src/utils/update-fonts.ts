@@ -3,121 +3,92 @@ import path from "node:path"
 import type { RegistryFontItem } from "../schema/index.js"
 import type { ProjectInfo } from "./detect-project.js"
 import { createSpinner } from "./spinner.js"
+import { WARN } from "./format.js"
 import {
-  CallExpression,
+  type JsxOpeningElement,
+  type SourceFile,
+  type VariableDeclaration,
+  Node,
   Project,
   ScriptKind,
   SyntaxKind,
-  VariableDeclarationKind,
 } from "ts-morph"
-
-const ROOT_FONT_VARIABLES = new Set([
-  "--font-sans",
-  "--font-serif",
-  "--font-mono",
-])
 
 // ─── Types ───────────────────────────────────────────────────────────
 
-export interface FontTreeResult {
-  /** Font variable → literal family, substituted for `var(<variable>)` (fontsource) */
-  cssVars: Record<string, string>
-  /** npm dependencies to install */
-  dependencies: string[]
-  /** CSS @import lines to add (fontsource) */
-  cssImports: string[]
-}
-
-// ─── massageTreeForFonts ─────────────────────────────────────────────
-
-/**
- * Process font items and return CSS variables, dependencies, and imports
- * based on the detected framework.
- *
- * `ui/typography.css` points each role at a family-named variable
- * (`--font-sans: var(--font-zalando-sans)`), the same name the font item
- * declares, so the two always agree.
- *
- * - **Next.js**: No CSS changes. next/font defines the family-named variable
- *   on <html> via the layout file.
- * - **Other frameworks**: Installs @fontsource-variable/* packages and
- *   adds @import lines to CSS. Replaces `var(<variable>)` with the family.
- */
-export function massageTreeForFonts(
-  fonts: RegistryFontItem[],
-  project: ProjectInfo
-): FontTreeResult {
-  const result: FontTreeResult = {
-    cssVars: {},
-    dependencies: [],
-    cssImports: [],
-  }
-
-  if (fonts.length === 0) return result
-
-  const isNext = project.framework === "next"
-
-  // Next.js defines the variables itself via next/font on <html>.
-  if (isNext) return result
-
-  // Other frameworks use fontsource.
-  for (const font of fonts) {
-    const fontName = font.name.replace(/^font-/, "")
-    const fontSourceDep =
-      font.font.dependency ?? `@fontsource-variable/${fontName}`
-    result.dependencies.push(fontSourceDep)
-    result.cssImports.push(`@import "${fontSourceDep}";`)
-    result.cssVars[font.font.variable] = font.font.family
-  }
-
-  return result
+export interface TransformLayoutResult {
+  content: string
+  /** False when the layout has no `<html>` element to carry the variables. */
+  appliedToHtml: boolean
 }
 
 // ─── updateFonts (Next.js layout patching) ───────────────────────────
 
 /**
- * For Next.js projects: patch the layout file with next/font/google imports
- * and update the <html> className using AST manipulation.
+ * For Next.js projects: load the fonts with next/font/google in the root
+ * layout and put their variables on <html>.
+ *
+ * Prints what to do by hand when the layout can't be patched (Pages Router,
+ * no `<html>` element, a parse failure).
+ *
+ * @returns Whether the layout now loads every font.
  */
 export async function updateFonts(
   fonts: RegistryFontItem[],
   project: ProjectInfo,
-  cwd: string,
-  options: { silent?: boolean } = {}
-): Promise<void> {
-  if (fonts.length === 0) return
-  if (project.framework !== "next") return
+  cwd: string
+): Promise<boolean> {
+  if (fonts.length === 0) return false
+  if (project.framework !== "next") return false
 
   const layoutPath = findLayoutFile(project, cwd)
-  if (!layoutPath) return
-
-  if (options.silent) {
-    // Silent mode: just do the work without spinners.
-    try {
-      const layoutContent = await fs.readFile(layoutPath, "utf-8")
-      const updatedContent = transformLayoutFonts(layoutContent, fonts)
-      if (updatedContent !== layoutContent) {
-        await fs.writeFile(layoutPath, updatedContent, "utf-8")
-      }
-    } catch {
-      // Silently fail.
-    }
-    return
+  if (!layoutPath) {
+    const appDir = project.hasSrc ? "src/app" : "app"
+    console.log(
+      `${WARN} No ${appDir}/layout.tsx found, so the fonts were not added. (Pages Router projects need this step by hand.)`
+    )
+    printManualFontSteps(fonts)
+    return false
   }
 
+  const relativePath = path.relative(cwd, layoutPath)
   const spinner = createSpinner("Updating fonts")
 
   try {
     const layoutContent = await fs.readFile(layoutPath, "utf-8")
-    const updatedContent = transformLayoutFonts(layoutContent, fonts)
+    const result = transformLayoutFonts(layoutContent, fonts)
 
-    if (updatedContent !== layoutContent) {
-      await fs.writeFile(layoutPath, updatedContent, "utf-8")
+    if (!result.appliedToHtml) {
+      spinner.fail(`No <html> element in ${relativePath}; fonts not added`)
+      printManualFontSteps(fonts)
+      return false
     }
-    spinner.succeed("Updated layout with font imports")
-  } catch {
-    spinner.fail("Failed to update fonts")
+
+    if (result.content === layoutContent) {
+      spinner.succeed(`Fonts already loaded in ${relativePath}`)
+    } else {
+      await fs.writeFile(layoutPath, result.content, "utf-8")
+      spinner.succeed(`Added fonts to ${relativePath}`)
+    }
+    return true
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    spinner.fail(`Failed to update ${relativePath}: ${message}`)
+    printManualFontSteps(fonts)
+    return false
   }
+}
+
+function printManualFontSteps(fonts: RegistryFontItem[]) {
+  const names = fonts.map((font) => font.font.import)
+  console.log("  Load them with next/font and put their variables on <html>:")
+  console.log(`    import { ${names.join(", ")} } from "next/font/google"`)
+  for (const font of fonts) {
+    console.log(
+      `    const ${getFontVariableName(font.font.import, font.font.variable)} = ${font.font.import}(${buildFontOptions(font, "")})`
+    )
+  }
+  console.log("  See https://ui.stera.sh/docs/fonts")
 }
 
 // ─── Layout file helpers ─────────────────────────────────────────────
@@ -128,138 +99,99 @@ function findLayoutFile(project: ProjectInfo, cwd: string): string | null {
   return existsSync(fullPath) ? fullPath : null
 }
 
+/**
+ * Add next/font/google declarations for `fonts` to a root layout and apply
+ * their `.variable` classes to `<html>`.
+ *
+ * A font the layout already loads under the same CSS variable is reused as
+ * is — its options and name are the user's. Running this twice changes
+ * nothing the second time.
+ */
 export function transformLayoutFonts(
   input: string,
   fonts: RegistryFontItem[]
-): string {
+): TransformLayoutResult {
   const project = new Project({ compilerOptions: {} })
   const sourceFile = project.createSourceFile("layout.tsx", input, {
     scriptKind: ScriptKind.TSX,
   })
 
-  // Only process Google fonts for now.
+  const html = sourceFile
+    .getDescendantsOfKind(SyntaxKind.JsxOpeningElement)
+    .find((element) => element.getTagNameNode().getText() === "html")
+  if (!html) return { content: input, appliedToHtml: false }
+
+  // Only Google fonts are loaded through next/font for now.
   const googleFonts = fonts.filter((f) => f.font.provider === "google")
 
-  const fontVariableNames: string[] = []
-  const fontUtilityClasses: string[] = []
+  const variableNames: string[] = []
+  const toDeclare: { font: RegistryFontItem; name: string }[] = []
 
   for (const font of googleFonts) {
-    const importName = font.font.import
-    if (!importName) continue
-
-    // Add or merge import from "next/font/google".
-    const existingImport = sourceFile.getImportDeclaration(
-      (decl) => decl.getModuleSpecifierValue() === "next/font/google"
-    )
-    let hasExistingImport = false
-
-    if (existingImport) {
-      const namedImports = existingImport.getNamedImports()
-      hasExistingImport = namedImports.some(
-        (imp) => imp.getName() === importName
-      )
-      if (!hasExistingImport) {
-        existingImport.addNamedImport(importName)
-      }
-    } else {
-      sourceFile.addImportDeclaration({
-        moduleSpecifier: "next/font/google",
-        namedImports: [importName],
-      })
-    }
-
-    const varName = getFontVariableName(importName, font.font.variable)
-    const fontOptions = buildFontOptions(font)
-
-    // Check if variable declaration already exists with same CSS variable.
-    const existingVarDecl = findFontVariableDeclaration(
-      sourceFile,
-      font.font.variable
-    )
-
-    if (
-      hasExistingImport &&
-      !existingVarDecl &&
-      isRootFontVariable(font.font.variable)
-    ) {
+    const existing = findFontDeclaration(sourceFile, font.font.variable)
+    if (existing) {
+      variableNames.push(existing.getName())
       continue
     }
 
-    if (existingVarDecl) {
-      existingVarDecl.setInitializer(`${importName}(${fontOptions})`)
-      if (existingVarDecl.getName() !== varName) {
-        existingVarDecl.rename(varName)
-      }
-    } else {
-      const insertPosition = findInsertPosition(sourceFile)
-      const statement = sourceFile.insertVariableStatement(insertPosition, {
-        declarationKind: VariableDeclarationKind.Const,
-        declarations: [
-          {
-            name: varName,
-            initializer: `${importName}(${fontOptions})`,
-          },
-        ],
-      })
-      statement.appendWhitespace("\n")
-    }
-
-    fontVariableNames.push(varName)
-    if (shouldApplyFontUtilityToHtml(font)) {
-      fontUtilityClasses.push(font.font.variable.replace("--", ""))
-    }
+    ensureNamedImport(sourceFile, font.font.import)
+    const name = uniqueName(
+      sourceFile,
+      getFontVariableName(font.font.import, font.font.variable),
+      toDeclare.map((d) => d.name)
+    )
+    toDeclare.push({ font, name })
+    variableNames.push(name)
   }
 
-  // Only keep one font-family class on <html>.
-  const fontFamilyClasses = new Set(["font-sans", "font-serif", "font-mono"])
-  const lastFontFamilyClass = [...fontUtilityClasses]
-    .reverse()
-    .find((cls) => fontFamilyClasses.has(cls))
-  const filteredUtilityClasses = fontUtilityClasses.filter(
-    (cls) => !fontFamilyClasses.has(cls)
-  )
-  if (lastFontFamilyClass) {
-    filteredUtilityClasses.unshift(lastFontFamilyClass)
+  // Declarations go after the last import, in registry order. Inserted as
+  // text so ts-morph doesn't re-indent the multi-line options.
+  if (toDeclare.length > 0) {
+    sourceFile.insertStatements(
+      findInsertPosition(sourceFile),
+      toDeclare
+        .map(
+          ({ font, name }) =>
+            `\nconst ${name} = ${font.font.import}(${buildFontOptions(font, "\n")});`
+        )
+        .join("\n")
+    )
   }
 
-  if (fontVariableNames.length > 0) {
-    updateHtmlClassName(sourceFile, fontVariableNames, filteredUtilityClasses)
-  }
+  addHtmlClassNames(html, variableNames)
 
-  return sourceFile.getFullText()
+  return { content: sourceFile.getFullText(), appliedToHtml: true }
 }
 
 // ─── Internal helpers ────────────────────────────────────────────────
 
-function buildFontOptions(font: RegistryFontItem) {
-  const options: Record<string, unknown> = {}
-  if (font.font.subsets?.length) options.subsets = font.font.subsets
-  if (font.font.weight?.length) options.weight = font.font.weight
-  options.variable = font.font.variable
+/**
+ * next/font options as an object literal, multi-line when `newline` is set.
+ */
+function buildFontOptions(font: RegistryFontItem, newline: "\n" | "") {
+  const entries: [string, unknown][] = [["variable", font.font.variable]]
+  if (font.font.subsets?.length) entries.push(["subsets", font.font.subsets])
+  if (font.font.weight?.length) entries.push(["weight", font.font.weight])
 
-  return JSON.stringify(options)
-    .replace(/"([^"]+)":/g, "$1:") // Remove quotes from keys.
-    .replace(/"/g, "'") // Use single quotes for strings.
-}
-
-function isRootFontVariable(variable: string) {
-  return ROOT_FONT_VARIABLES.has(variable)
-}
-
-function shouldApplyFontUtilityToHtml(font: RegistryFontItem) {
-  return !font.font.selector && isRootFontVariable(font.font.variable)
+  const body = entries.map(
+    ([key, value]) => `${key}: ${JSON.stringify(value).replace(/,/g, ", ")}`
+  )
+  return newline
+    ? `{\n${body.map((line) => `  ${line},`).join("\n")}\n}`
+    : `{ ${body.join(", ")} }`
 }
 
 function getFontVariableName(importName: string, variable: string) {
   const baseName = toCamelCase(importName)
+  const suffix = variable.replace(/^--font-/, "")
   // Family-named variables already say which font they are:
-  // Zalando_Sans + --font-zalando-sans → zalandoSans.
-  if (
-    isRootFontVariable(variable) ||
-    variable === `--font-${kebab(importName)}`
-  )
-    return baseName
-  return `${baseName}${toPascalCase(variable.replace(/^--font-/, ""))}`
+  // Zalando_Sans + --font-zalando-sans → zalandoSans, and
+  // Geist + --font-geist-sans → geistSans.
+  if (suffix === kebab(importName)) return baseName
+  if (suffix.startsWith(`${kebab(importName)}-`)) {
+    return toCamelCase(suffix.replace(/-/g, "_"))
+  }
+  return `${baseName}${toPascalCase(suffix)}`
 }
 
 function kebab(str: string) {
@@ -284,31 +216,68 @@ function toPascalCase(str: string) {
     .join("")
 }
 
-function findFontVariableDeclaration(
-  sourceFile: ReturnType<Project["createSourceFile"]>,
+/** `name`, or `name2`, `name3`… when the layout already uses it. */
+function uniqueName(sourceFile: SourceFile, name: string, taken: string[]) {
+  const used = new Set([
+    ...taken,
+    ...sourceFile
+      .getDescendantsOfKind(SyntaxKind.Identifier)
+      .map((id) => id.getText()),
+  ])
+  if (!used.has(name)) return name
+  let n = 2
+  while (used.has(`${name}${n}`)) n++
+  return `${name}${n}`
+}
+
+/**
+ * The `const x = Font({ variable: "<variable>" })` declaration whose
+ * `variable` option is exactly `variable`.
+ */
+function findFontDeclaration(
+  sourceFile: SourceFile,
   variable: string
-) {
-  for (const statement of sourceFile.getVariableStatements()) {
-    for (const declaration of statement.getDeclarations()) {
-      const initializer = declaration.getInitializer()
-      if (!initializer || initializer.getKind() !== SyntaxKind.CallExpression)
-        continue
+): VariableDeclaration | null {
+  for (const declaration of sourceFile.getVariableDeclarations()) {
+    const initializer = declaration.getInitializer()
+    if (!initializer || !Node.isCallExpression(initializer)) continue
 
-      const args = (initializer as CallExpression).getArguments()
-      if (args.length === 0) continue
+    const options = initializer.getArguments()[0]
+    if (!options || !Node.isObjectLiteralExpression(options)) continue
 
-      const argText = args[0].getText()
-      if (argText.includes("variable:") && argText.includes(variable)) {
-        return declaration
-      }
+    const property = options.getProperty("variable")
+    if (!property || !Node.isPropertyAssignment(property)) continue
+
+    const value = property.getInitializer()
+    if (
+      value &&
+      Node.isStringLiteral(value) &&
+      value.getLiteralValue() === variable
+    ) {
+      return declaration
     }
   }
   return null
 }
 
-function findInsertPosition(
-  sourceFile: ReturnType<Project["createSourceFile"]>
-) {
+function ensureNamedImport(sourceFile: SourceFile, importName: string) {
+  const existingImport = sourceFile.getImportDeclaration(
+    (decl) => decl.getModuleSpecifierValue() === "next/font/google"
+  )
+  if (!existingImport) {
+    sourceFile.addImportDeclaration({
+      moduleSpecifier: "next/font/google",
+      namedImports: [importName],
+    })
+    return
+  }
+  const hasImport = existingImport
+    .getNamedImports()
+    .some((imp) => imp.getName() === importName)
+  if (!hasImport) existingImport.addNamedImport(importName)
+}
+
+function findInsertPosition(sourceFile: SourceFile) {
   const imports = sourceFile.getImportDeclarations()
   if (imports.length > 0) {
     return imports[imports.length - 1].getChildIndex() + 1
@@ -316,143 +285,66 @@ function findInsertPosition(
   return 0
 }
 
-function updateHtmlClassName(
-  sourceFile: ReturnType<Project["createSourceFile"]>,
-  fontVariableNames: string[],
-  fontUtilityClasses: string[]
-) {
-  const jsxElements = sourceFile.getDescendantsOfKind(
-    SyntaxKind.JsxOpeningElement
-  )
-
-  for (const element of jsxElements) {
-    if (element.getTagNameNode().getText() !== "html") continue
-
-    const newUtilityClasses = fontUtilityClasses.map((cls) => `"${cls}"`)
-    const newVarExpressions = fontVariableNames.map(
-      (name) => `${name}.variable`
+/**
+ * Add `${name}.variable` for each name to `<html className>`, keeping whatever
+ * is already there. No helper like `cn()` is needed: a string or template
+ * becomes a template literal, and an existing call gets extra arguments.
+ */
+function addHtmlClassNames(html: JsxOpeningElement, names: string[]) {
+  const attribute = html.getAttribute("className")
+  const currentText = attribute?.getText() ?? ""
+  const missing = names
+    .map((name) => `${name}.variable`)
+    .filter(
+      (expr) =>
+        !new RegExp(`\\b${expr.replace(".", "\\.")}\\b`).test(currentText)
     )
-    const allNewArgs = [...newUtilityClasses, ...newVarExpressions]
+  if (missing.length === 0) return
 
-    const classNameAttr = element.getAttribute("className")
-    if (!classNameAttr) {
-      element.addAttribute({
-        name: "className",
-        initializer: `{cn(${allNewArgs.join(", ")})}`,
-      })
-      ensureCnImport(sourceFile)
-      return
-    }
+  const prefix = missing.map((expr) => `\${${expr}}`).join(" ")
 
-    if (classNameAttr.getKind() !== SyntaxKind.JsxAttribute) return
+  if (!attribute || !Node.isJsxAttribute(attribute)) {
+    html.addAttribute({ name: "className", initializer: `{\`${prefix}\`}` })
+    return
+  }
 
-    const jsxAttr = classNameAttr.asKindOrThrow(SyntaxKind.JsxAttribute)
-    const initializer = jsxAttr.getInitializer()
-    if (!initializer) return
+  const initializer = attribute.getInitializer()
+  if (!initializer) {
+    attribute.setInitializer(`{\`${prefix}\`}`)
+    return
+  }
 
-    if (initializer.getKind() === SyntaxKind.StringLiteral) {
-      const currentValue = initializer.getText().slice(1, -1)
-      ensureCnImport(sourceFile)
-      jsxAttr.setInitializer(
-        `{cn("${currentValue}", ${allNewArgs.join(", ")})}`
-      )
-    } else if (initializer.getKind() === SyntaxKind.JsxExpression) {
-      const jsxExpr = initializer.asKindOrThrow(SyntaxKind.JsxExpression)
-      const expr = jsxExpr.getExpression()
-      if (!expr) return
+  if (Node.isStringLiteral(initializer)) {
+    attribute.setInitializer(
+      `{\`${prefix} ${escapeTemplate(initializer.getLiteralValue())}\`}`
+    )
+    return
+  }
 
-      const exprText = expr.getText()
+  if (!Node.isJsxExpression(initializer)) return
+  const expression = initializer.getExpression()
+  if (!expression) {
+    attribute.setInitializer(`{\`${prefix}\`}`)
+    return
+  }
 
-      if (exprText.startsWith("cn(")) {
-        // Already using cn() -- check if we need to add new args.
-        const hasAllFontVars = newVarExpressions.every((v) =>
-          exprText.includes(v)
-        )
-        const hasAllUtilityClasses = fontUtilityClasses.every((cls) =>
-          exprText.includes(`"${cls}"`)
-        )
-        if (hasAllFontVars && hasAllUtilityClasses) continue
-
-        // Remove existing font variables, add new ones at the end.
-        let cleanedExpr = exprText
-        for (const varExpr of newVarExpressions) {
-          cleanedExpr = cleanedExpr.replace(
-            new RegExp(`,?\\s*${varExpr.replace(".", "\\.")}`, "g"),
-            ""
-          )
-        }
-        cleanedExpr = cleanedExpr.replace(/cn\(\s*,/, "cn(")
-        const newExpr = cleanedExpr.replace(
-          /\)$/,
-          `, ${allNewArgs.join(", ")})`
-        )
-        jsxExpr.replaceWithText(`{${newExpr}}`)
-      } else if (/^\w+\.variable$/.test(exprText)) {
-        ensureCnImport(sourceFile)
-        jsxExpr.replaceWithText(`{cn(${allNewArgs.join(", ")})}`)
-      } else if (exprText.startsWith("`") && exprText.endsWith("`")) {
-        const cnArgs = parseTemplateLiteralToCnArgs(exprText)
-        ensureCnImport(sourceFile)
-        const allNewArgsSet = new Set(allNewArgs)
-        const fontFamilyLiterals = new Set(
-          ["font-sans", "font-serif", "font-mono"].map((c) => `"${c}"`)
-        )
-        const cleanedCnArgs = cnArgs.filter(
-          (arg) => !allNewArgsSet.has(arg) && !fontFamilyLiterals.has(arg)
-        )
-        jsxExpr.replaceWithText(
-          `{cn(${[...cleanedCnArgs, ...allNewArgs].join(", ")})}`
-        )
-      } else {
-        ensureCnImport(sourceFile)
-        jsxExpr.replaceWithText(`{cn(${exprText}, ${allNewArgs.join(", ")})}`)
-      }
-    }
+  if (
+    Node.isNoSubstitutionTemplateLiteral(expression) ||
+    Node.isTemplateExpression(expression)
+  ) {
+    expression.replaceWithText(`\`${prefix} ${expression.getText().slice(1)}`)
+  } else if (Node.isStringLiteral(expression)) {
+    expression.replaceWithText(
+      `\`${prefix} ${escapeTemplate(expression.getLiteralValue())}\``
+    )
+  } else if (Node.isCallExpression(expression)) {
+    // cn(), clsx() and friends all accept extra class arguments.
+    expression.addArguments(missing)
+  } else {
+    expression.replaceWithText(`\`${prefix} \${${expression.getText()}}\``)
   }
 }
 
-function ensureCnImport(sourceFile: ReturnType<Project["createSourceFile"]>) {
-  const existingImport = sourceFile.getImportDeclaration((decl) =>
-    decl.getNamedImports().some((imp) => imp.getName() === "cn")
-  )
-
-  if (!existingImport) {
-    const utilsImport = sourceFile.getImportDeclaration((decl) =>
-      decl.getModuleSpecifierValue().includes("/lib/utils")
-    )
-
-    if (utilsImport) {
-      const namedImports = utilsImport.getNamedImports()
-      if (!namedImports.some((imp) => imp.getName() === "cn")) {
-        utilsImport.addNamedImport("cn")
-      }
-    } else {
-      sourceFile.addImportDeclaration({
-        moduleSpecifier: "@/lib/utils",
-        namedImports: ["cn"],
-      })
-    }
-  }
-}
-
-function parseTemplateLiteralToCnArgs(templateLiteral: string) {
-  const staticArgs: string[] = []
-  const variableArgs: string[] = []
-  const content = templateLiteral.slice(1, -1)
-  const parts = content.split(/(\$\{[^}]+\})/)
-
-  for (const part of parts) {
-    if (!part) continue
-    if (part.startsWith("${") && part.endsWith("}")) {
-      const expr = part.slice(2, -1).trim()
-      if (expr) variableArgs.push(expr)
-    } else {
-      const staticParts = part.trim().split(/\s+/).filter(Boolean)
-      for (const staticPart of staticParts) {
-        staticArgs.push(`"${staticPart}"`)
-      }
-    }
-  }
-
-  return [...staticArgs, ...variableArgs]
+function escapeTemplate(value: string) {
+  return value.replace(/[`\\]/g, "\\$&").replace(/\$\{/g, "\\${")
 }

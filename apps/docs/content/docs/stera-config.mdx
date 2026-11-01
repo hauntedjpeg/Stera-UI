@@ -6,7 +6,9 @@ description: Configuration reference for your Stera UI project.
 `stera.config.json` is created by `stera-ui init` and tells the CLI where to put files and how to rewrite import paths.
 
 <Callout type="info">
-  Projects that ran `init` on an earlier release will have `components.json`. The CLI still reads that filename for now and prints a deprecation warning — run `stera-ui init` again or rename the file to silence it.
+  Projects that ran `init` on an earlier release will have `components.json`.
+  The CLI still reads that filename for now and prints a deprecation warning —
+  run `stera-ui init` again or rename the file to silence it.
 </Callout>
 
 ## Schema
@@ -39,23 +41,23 @@ Path to your main CSS file. The `ui/` folder of style partials is created next t
 
 Path aliases used when components are written to disk. Must match your TypeScript `paths` — in `tsconfig.json`, or `tsconfig.app.json` on Vite projects. See [Set up an import alias](/docs/installation#set-up-an-import-alias).
 
-| Alias | Default | Description |
-| --- | --- | --- |
-| `components` | `@/components` | General components directory |
-| `utils` | `@/lib/utils` | Path to the `cn()` utility |
-| `ui` | `@/components/ui` | Where UI components are installed |
-| `lib` | `@/lib` | Library directory |
-| `hooks` | `@/hooks` | Custom React hooks |
+| Alias        | Default           | Description                       |
+| ------------ | ----------------- | --------------------------------- |
+| `components` | `@/components`    | General components directory      |
+| `utils`      | `@/lib/utils`     | Path to the `cn()` utility        |
+| `ui`         | `@/components/ui` | Where UI components are installed |
+| `lib`        | `@/lib`           | Library directory                 |
+| `hooks`      | `@/hooks`         | Custom React hooks                |
 
 ### `fonts`
 
-Records the font choice made during `init`. The CLI reads this on subsequent runs.
+Records the font choice made during `init`, for your reference. The CLI doesn't read it again. See [Fonts](/docs/fonts).
 
-| Field | Values | Description |
-| --- | --- | --- |
-| `strategy` | `stera-default` \| `keep-existing` \| `skip` | How fonts were configured |
-| `nextFont` | `boolean` | Whether `next/font` was wired up (Next.js only) |
+| Field      | Values                    | Description                                                                                                                |
+| ---------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `strategy` | `stera-default` \| `skip` | Whether `init` installed the Stera UI fonts. Configs from older versions may say `keep-existing`, which is still accepted. |
 
 <Callout type="info">
-Imports inside component source are rewritten to match these aliases when you run `stera-ui add`.
+  Imports inside component source are rewritten to match these aliases when you
+  run `stera-ui add`.
 </Callout>

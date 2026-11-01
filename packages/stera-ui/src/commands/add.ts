@@ -1,3 +1,4 @@
+import fs from "node:fs"
 import path from "node:path"
 import {
   loadConfig,
@@ -13,7 +14,14 @@ import { writeComponentFiles } from "../utils/write-files.js"
 import { installDependencies } from "../utils/install-deps.js"
 import { applyTransforms } from "../utils/transform.js"
 import { transformImports } from "../utils/transform-imports.js"
-import { writeStyles, migrateLegacyStyles } from "../utils/write-styles.js"
+import {
+  writeStyles,
+  migrateLegacyStyles,
+  TYPOGRAPHY_TARGET,
+} from "../utils/write-styles.js"
+import { detectProject } from "../utils/detect-project.js"
+import { setupFonts, FONTS_TARGET } from "../utils/font-setup.js"
+import type { RegistryFontItem } from "../schema/index.js"
 import { CHECK, CROSS, dim } from "../utils/format.js"
 import { createSpinner } from "../utils/spinner.js"
 
@@ -162,5 +170,51 @@ export async function add(
     await installDependencies(uniqueNpmDeps, projectRoot)
   }
 
+  const fonts = resolved.filter(
+    (item): item is RegistryFontItem => item.type === "registry:font"
+  )
+  if (fonts.length > 0) {
+    await addFonts(fonts, config.css, projectRoot)
+  }
+
   console.log("")
+}
+
+/**
+ * Load font items the way init does, then say how to use them: a font only
+ * shows up once a role in ui/typography.css points at its variable.
+ */
+async function addFonts(
+  fonts: RegistryFontItem[],
+  cssPath: string,
+  projectRoot: string
+) {
+  const project = detectProject(projectRoot)
+  const cssDir = path.dirname(path.resolve(projectRoot, cssPath))
+  const result = await setupFonts(fonts, project, cssDir, projectRoot)
+
+  // globals.css is the user's after init, so a new fonts.css is wired in by
+  // hand rather than by editing it.
+  if (result?.created) {
+    console.log(
+      `  Import it from ${cssPath}: ${dim(`@import "./${FONTS_TARGET}";`)}`
+    )
+  }
+
+  let typography = ""
+  try {
+    typography = fs.readFileSync(path.join(cssDir, TYPOGRAPHY_TARGET), "utf-8")
+  } catch {
+    // No typography partial — the hint below still applies.
+  }
+  for (const font of fonts) {
+    const variable = font.font.variable
+    if (typography.includes(`var(${variable}`)) continue
+    const stack = /monospace/.test(font.font.family)
+      ? "ui-monospace, monospace"
+      : "sans-serif"
+    console.log(
+      `  To use it, point a font role in ${TYPOGRAPHY_TARGET} at it: ${dim(`--font-sans: var(${variable}, ${stack});`)}`
+    )
+  }
 }

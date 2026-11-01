@@ -8,8 +8,6 @@ import {
   LEGACY_CONFIG_FILE,
   type SteraConfig,
 } from "../utils/resolve-config.js"
-import { fetchRegistryItem } from "../registry/index.js"
-import type { RegistryFontItem } from "../schema/index.js"
 import { installDependencies } from "../utils/install-deps.js"
 import {
   detectProject,
@@ -18,29 +16,26 @@ import {
 } from "../utils/detect-project.js"
 import { loadTsConfigPaths } from "../utils/tsconfig.js"
 import { formatAliasGuidance } from "../utils/alias-guidance.js"
-import { detectFonts, type DetectedFonts } from "../utils/detect-fonts.js"
 import {
-  patchCssVariables,
-  replaceCssVarReferences,
-} from "../utils/patch-css-vars.js"
-import { massageTreeForFonts, updateFonts } from "../utils/update-fonts.js"
+  detectFonts,
+  findFontOverrides,
+  type DetectedFonts,
+} from "../utils/detect-fonts.js"
 import {
-  writeStyles,
-  migrateLegacyStyles,
-  TYPOGRAPHY_TARGET,
-} from "../utils/write-styles.js"
+  fetchFontItems,
+  readFontVariables,
+  setupFonts,
+  warnMissingFonts,
+  FONTS_TARGET,
+} from "../utils/font-setup.js"
+import { writeStyles, migrateLegacyStyles } from "../utils/write-styles.js"
 import { insertImportLine } from "../utils/css-imports.js"
-import { LOGO, CHECK, dim } from "../utils/format.js"
+import { LOGO, CHECK, WARN, dim } from "../utils/format.js"
 import { createSpinner } from "../utils/spinner.js"
 
-type FontStrategy = "stera-default" | "keep-existing" | "skip"
+type FontStrategy = "stera-default" | "skip"
 
-/** Default font registry items to fetch for the "stera-default" strategy. */
-const DEFAULT_FONT_NAMES = [
-  "font-zalando-sans",
-  "font-zalando-sans-semiexpanded",
-  "font-geist-mono",
-]
+const FONTS_DOCS = "https://ui.stera.sh/docs/fonts"
 
 /**
  * Build a SteraConfig based on detected project structure.
@@ -79,22 +74,18 @@ function buildConfig(
 }
 
 /**
- * Prompt user for font strategy. Skipped when --yes is passed.
+ * Prompt user for font strategy. Skipped when --yes is passed, which always
+ * installs the Stera fonts.
  */
 async function promptFontStrategy(
   detected: DetectedFonts,
   skipPrompts: boolean
 ): Promise<FontStrategy> {
+  if (skipPrompts) return "stera-default"
+
   const hasExistingFonts =
     detected.hasNextFont || detected.hasFontFace || detected.hasGoogleFontsLink
 
-  const defaultStrategy: FontStrategy = hasExistingFonts
-    ? "keep-existing"
-    : "stera-default"
-
-  if (skipPrompts) return defaultStrategy
-
-  // Show detected fonts
   if (hasExistingFonts) {
     const sources: string[] = []
     if (detected.fontFamilies.length > 0) {
@@ -105,37 +96,24 @@ async function promptFontStrategy(
     console.log(`Detected existing fonts: ${sources.join(" via ")}\n`)
   }
 
-  type StrategyChoice = {
-    value: FontStrategy
-    name: string
-    description: string
-  }
-  const choices: StrategyChoice[] = []
-
-  if (hasExistingFonts) {
-    choices.push({
-      value: "keep-existing",
-      name: "Keep my current fonts",
-      description: "Update CSS variables to use your existing fonts",
-    })
-  }
-
-  choices.push({
-    value: "stera-default",
-    name: "Use Stera UI default fonts (Zalando Sans + Geist Mono)",
-    description: "Optimized variable fonts via next/font or fontsource",
-  })
-
-  choices.push({
-    value: "skip",
-    name: "Skip font setup",
-    description: "Configure fonts manually later",
-  })
-
   const strategy = await select<FontStrategy>({
     message: "How would you like to set up fonts?",
-    choices,
-    default: defaultStrategy,
+    choices: [
+      {
+        value: "stera-default",
+        name: "Install the Stera UI fonts",
+        description: hasExistingFonts
+          ? "Loads the fonts ui/typography.css uses. Your current fonts stay loaded for your own code."
+          : "Loads the fonts ui/typography.css uses, via next/font or fontsource",
+      },
+      {
+        value: "skip",
+        name: "Skip font setup",
+        description:
+          "Point the font roles in ui/typography.css at your own fonts",
+      },
+    ],
+    default: "stera-default",
   })
 
   console.log("")
@@ -143,99 +121,82 @@ async function promptFontStrategy(
 }
 
 /**
- * Fetch font registry items for the default Stera fonts.
+ * Load the fonts `ui/typography.css` references.
+ *
+ * The font list comes from the stylesheet itself — whatever family variables
+ * the Figma export points the roles at — so a font change in Figma needs no
+ * CLI change. Each `--font-<family>` maps to the `font-<family>` registry item.
  */
-async function fetchDefaultFonts(): Promise<RegistryFontItem[]> {
+async function installStyleFonts(
+  project: ProjectInfo,
+  cssDir: string,
+  typographyPath: string,
+  globalsPath: string,
+  cwd: string
+): Promise<void> {
+  const css = fs.readFileSync(typographyPath, "utf-8")
+  const variables = readFontVariables(css)
+  if (variables.length === 0) return
+
   const spinner = createSpinner("Fetching fonts")
-  const results = await Promise.all(
-    DEFAULT_FONT_NAMES.map(async (name): Promise<RegistryFontItem | null> => {
-      try {
-        const item = await fetchRegistryItem(name)
-        return item.type === "registry:font" ? item : null
-      } catch {
-        // Font not found in registry — skip silently.
-        return null
-      }
-    })
-  )
-  spinner.succeed("Fonts resolved")
-  return results.filter((item) => item !== null)
+  const { fonts, missing } = await fetchFontItems(variables)
+  if (fonts.length > 0) {
+    spinner.succeed(
+      `Resolved ${fonts.map((font) => font.name.replace(/^font-/, "")).join(", ")}`
+    )
+  } else {
+    spinner.fail("No fonts resolved")
+  }
+  warnMissingFonts(missing, typographyPath)
+
+  const result = await setupFonts(fonts, project, cssDir, cwd)
+  if (result) {
+    await insertImportLine(globalsPath, `@import "./${FONTS_TARGET}";`)
+  }
 }
 
 /**
- * Execute the chosen font strategy using the registry-driven approach.
- *
- * - **stera-default**: Fetches font items from registry, then:
- *   - Next.js: patches layout with next/font/google imports via AST
- *   - Other: installs @fontsource-variable/* packages + adds CSS @import
- * - **keep-existing**: Patches CSS variables to reference user's existing fonts
- * - **skip**: Does nothing
+ * On skip, show where the font roles live and which fonts the project
+ * already exposes, so pointing the roles at them is a three-line edit.
  */
-async function executeFontStrategy(
-  strategy: FontStrategy,
-  project: ProjectInfo,
+function printSkipHint(
   detected: DetectedFonts,
-  config: SteraConfig,
+  typographyPath: string,
   cwd: string
-): Promise<void> {
-  if (strategy === "skip") return
-
-  const cssDir = path.dirname(path.resolve(cwd, config.css))
-  // Font variables and font-face imports live with the type tokens, in a
-  // partial a styles refresh will not silently replace.
-  const typographyPath = path.join(cssDir, TYPOGRAPHY_TARGET)
-
-  if (strategy === "keep-existing") {
-    const fontFamily =
-      detected.fontFamilies.length > 0 ? detected.fontFamilies[0] : null
-    const fontValue = detected.nextFontVariable
-      ? `var(${detected.nextFontVariable})`
-      : (fontFamily ?? "Geist")
-
-    const patched = patchCssVariables(typographyPath, {
-      "--font-heading": fontValue,
-      "--font-sans": fontValue,
-    })
-
-    if (patched.length > 0) {
-      console.log(`${CHECK} Updated font variables to use ${fontValue}`)
-    }
-    return
-  }
-
-  // strategy === "stera-default"
-  const fonts = await fetchDefaultFonts()
-  if (fonts.length === 0) return
-
-  const fontTree = massageTreeForFonts(fonts, project)
-
-  if (fontTree.dependencies.length > 0) {
-    await installDependencies(fontTree.dependencies, cwd)
-  }
-
-  // Add CSS @import lines for fontsource (non-Next.js). Fonts belong with the
-  // type tokens in ui/typography.css — we never add imports to the user's
-  // globals.css after the initial scaffold.
-  if (fontTree.cssImports.length > 0) {
-    for (const importLine of fontTree.cssImports) {
-      await insertImportLine(typographyPath, importLine)
-    }
+) {
+  const relative = path.relative(cwd, typographyPath)
+  const example = detected.nextFontVariables[0] ?? "--font-your-font"
+  console.log("")
+  console.log(
+    `${dim(`Font setup was skipped. Point the font roles in ${relative} at your fonts, e.g.`)}`
+  )
+  console.log(`${dim(`  --font-sans: var(${example}, sans-serif);`)}`)
+  if (detected.nextFontVariables.length > 0) {
     console.log(
-      `${CHECK} Added font imports to ${path.relative(cwd, typographyPath)}`
+      `${dim(`Your layout loads: ${detected.nextFontVariables.join(", ")}`)}`
     )
   }
+  console.log(`${dim(FONTS_DOCS)}`)
+}
 
-  if (Object.keys(fontTree.cssVars).length > 0) {
-    const patched = replaceCssVarReferences(typographyPath, fontTree.cssVars)
-    if (patched.length > 0) {
-      console.log(
-        `${CHECK} Updated font variables in ${path.relative(cwd, typographyPath)}`
-      )
-    }
+/**
+ * Warn about rules in the user's stylesheet that win over the Stera font
+ * tokens (create-next-app ships some). Never edits the file: globals.css is
+ * the user's.
+ */
+function warnFontOverrides(globalsPath: string, cwd: string) {
+  const overrides = findFontOverrides(fs.readFileSync(globalsPath, "utf-8"))
+  if (overrides.length === 0) return
+
+  const relative = path.relative(cwd, globalsPath)
+  console.log("")
+  console.log(`${WARN} ${relative} overrides the Stera UI fonts:`)
+  for (const override of overrides) {
+    console.log(
+      `    line ${override.line}  ${override.declaration}  ${dim(`(${override.context})`)}`
+    )
   }
-
-  // For Next.js: patch layout file with next/font imports
-  await updateFonts(fonts, project, cwd)
+  console.log("  Remove these to use the Stera UI fonts everywhere.")
 }
 
 export async function init(options: { cwd?: string; yes?: boolean }) {
@@ -344,13 +305,10 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
   // Prompt for font strategy
   const strategy = await promptFontStrategy(detectedFonts, options.yes ?? false)
 
-  // Build config from detection
+  // Build config from detection. It is written last: init refuses to run
+  // where a config exists, so writing it first would leave a half-finished
+  // setup (say, a failed font install) impossible to retry.
   const config = buildConfig(project, strategy, aliasPrefix)
-
-  // Write config
-  const configPath = path.join(cwd, CONFIG_FILE)
-  fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n", "utf-8")
-  console.log(`${CHECK} Created ${CONFIG_FILE}`)
 
   // Install base styles: write the ui/ partials, then ensure the user's
   // globals.css exists and imports the index. globals.css is user-owned from
@@ -395,8 +353,15 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
     console.log(`${CHECK} Created ${path.relative(cwd, globalsPath)}`)
   }
 
-  // Execute font strategy (patches ui/typography.css only)
-  await executeFontStrategy(strategy, project, detectedFonts, config, cwd)
+  if (strategy === "stera-default") {
+    await installStyleFonts(
+      project,
+      path.dirname(path.resolve(cwd, config.css)),
+      stylesResult.typographyPath,
+      globalsPath,
+      cwd
+    )
+  }
 
   // Install npm dependencies declared by the globals registry item
   // (e.g. tw-animate-css).
@@ -406,17 +371,19 @@ export async function init(options: { cwd?: string; yes?: boolean }) {
     await installDependencies(deps, cwd)
   }
 
+  const configPath = path.join(cwd, CONFIG_FILE)
+  fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n", "utf-8")
+  console.log(`${CHECK} Created ${CONFIG_FILE}`)
+
+  if (strategy === "stera-default") {
+    warnFontOverrides(globalsPath, cwd)
+  } else {
+    printSkipHint(detectedFonts, stylesResult.typographyPath, cwd)
+  }
+
   // Next steps
   console.log("")
   console.log("Next steps:")
   console.log("  stera-ui add <component>")
-
-  if (strategy === "skip") {
-    console.log("")
-    console.log(
-      `${dim("Font setup was skipped. See https://ui.stera.sh for font configuration docs.")}`
-    )
-  }
-
   console.log("")
 }
