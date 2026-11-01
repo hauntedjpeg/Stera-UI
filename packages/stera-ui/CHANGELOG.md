@@ -1,5 +1,13 @@
 # stera-ui
 
+## 0.11.0
+
+### Minor Changes
+
+- [`974e667`](https://github.com/hauntedjpeg/Stera-UI/commit/974e6672bf778f81f33c0e337c0aa60a0bdc4247) Thanks [@hauntedjpeg](https://github.com/hauntedjpeg)! - Default fonts are now Zalando Sans SemiExpanded (headings), Zalando Sans (body) and Geist Mono.
+  - Font variables are named after the family (`--font-zalando-sans`), matching what `ui/typography.css` references, so `--font-heading` no longer points at an undefined variable after `init`.
+  - On Next.js, `init` no longer rewrites `ui/typography.css` to a self-referencing `--font-sans: var(--font-sans)`, which broke fonts when the `next/font` stylesheet loaded first.
+
 ## 0.10.0
 
 ### Minor Changes
