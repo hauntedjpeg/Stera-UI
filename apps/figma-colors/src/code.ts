@@ -9,8 +9,8 @@ import type { ScaleEntry } from "./core/scale/bi-modal.js"
 import { hexToRgb } from "./core/color/hex.js"
 import {
   DEFAULT_COLLECTION_NAME,
-  flatVariableName,
   hasLegacyStepNames,
+  legacyRampNames,
   listRampGroups,
   rampVariableName,
 } from "./core/naming/variable-names.js"
@@ -75,20 +75,22 @@ async function collectionVariables(
 }
 
 /**
- * Upsert `byName[name]`, or adopt the variable at `legacyName` by renaming it.
+ * Upsert `byName[name]`, or adopt the first variable found under one of the
+ * `legacyNames` by renaming it, which keeps its id so bound layers stay bound.
  * The map is mutated so later steps see renames and creations.
  */
 function resolveVariable(
   byName: Map<string, Variable>,
   collection: VariableCollection,
   name: string,
-  legacyName?: string
+  legacyNames: string[]
 ): Variable {
   const found = byName.get(name)
   if (found) return found
 
-  const legacy = legacyName ? byName.get(legacyName) : undefined
-  if (legacyName && legacy) {
+  for (const legacyName of legacyNames) {
+    const legacy = byName.get(legacyName)
+    if (!legacy) continue
     legacy.name = name
     byName.delete(legacyName)
     byName.set(name, legacy)
@@ -103,8 +105,8 @@ function resolveVariable(
 /**
  * Write the scale as `Name/Light/N` and `Name/Dark/N`. Modes are never added
  * or changed: light/dark lives in the names, so every existing mode gets the
- * same value. Only the light variant may claim a pre-subgroup `Name/N`
- * variable; dark is always create-or-update.
+ * same value. Variables from older step schemes (`Name/Light/1..12`, and for
+ * light only the flat `Name/1..12`) are renamed in place, index for index.
  */
 function writeScale(
   byName: Map<string, Variable>,
@@ -113,23 +115,24 @@ function writeScale(
   scale: ScaleEntry[]
 ): void {
   const modeIds = collection.modes.map((m) => m.modeId)
-  for (const entry of scale) {
+  scale.forEach((entry, i) => {
     const light = resolveVariable(
       byName,
       collection,
       rampVariableName(colorName, "Light", entry.step),
-      flatVariableName(colorName, entry.step)
+      legacyRampNames(colorName, "Light", i)
     )
     const dark = resolveVariable(
       byName,
       collection,
-      rampVariableName(colorName, "Dark", entry.step)
+      rampVariableName(colorName, "Dark", entry.step),
+      legacyRampNames(colorName, "Dark", i)
     )
     for (const modeId of modeIds) {
       light.setValueForMode(modeId, hexToRgb(entry.light))
       dark.setValueForMode(modeId, hexToRgb(entry.dark))
     }
-  }
+  })
 }
 
 async function loadPrefs(): Promise<StoredPrefs> {
@@ -179,7 +182,7 @@ figma.ui.onmessage = async (msg: UiToSandbox) => {
       }
       writeScale(byName, collection, msg.colorName, msg.scale)
       figma.notify(
-        `Added ${msg.scale.length * 2} "${msg.colorName}" color variables`
+        `Wrote ${msg.scale.length * 2} "${msg.colorName}" color variables (layers bound to them take the new values)`
       )
       // A write can create the collection and new groups, so send fresh
       // pickers rather than waiting for a reopen.

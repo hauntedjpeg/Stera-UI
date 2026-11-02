@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 import {
   flatVariableName,
   hasLegacyStepNames,
+  legacyRampNames,
   listRampGroups,
   rampVariableName,
   stripVariantSegment,
@@ -57,5 +58,22 @@ describe("hasLegacyStepNames", () => {
   it("detects 50-950 steps under the color", () => {
     expect(hasLegacyStepNames(["Blue/500"], "Blue")).toBe(true)
     expect(hasLegacyStepNames(["Blue/Light/5", "Red/500"], "Blue")).toBe(false)
+  })
+})
+
+describe("legacyRampNames", () => {
+  it("maps a ramp index onto the older step schemes", () => {
+    expect(legacyRampNames("Blue", "Light", 0)).toEqual([
+      "Blue/Light/1",
+      "Blue/1",
+    ])
+    expect(legacyRampNames("Blue", "Light", 11)).toEqual([
+      "Blue/Light/12",
+      "Blue/12",
+    ])
+  })
+
+  it("never lets the dark variant claim a flat variable", () => {
+    expect(legacyRampNames("Blue", "Dark", 0)).toEqual(["Blue/Dark/1"])
   })
 })

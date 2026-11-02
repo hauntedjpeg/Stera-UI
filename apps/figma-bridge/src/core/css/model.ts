@@ -106,8 +106,8 @@ function normalizeName(
   if (collectionName === COLOR_PRIMITIVE_COLLECTION) {
     // Ramps are grouped `Family/Light/N` and `Family/Dark/N`. The light ramp is
     // the unqualified one downstream code has always referenced, so its segment
-    // is dropped (`Neutral/Light/1` -> `--neutral-1`) while dark keeps its own
-    // namespace (`Neutral/Dark/1` -> `--neutral-dark-1`). Only a non-leading
+    // is dropped (`Neutral/Light/25` -> `--neutral-25`) while dark keeps its own
+    // namespace (`Neutral/Dark/25` -> `--neutral-dark-25`). Only a non-leading
     // segment is stripped, so a family literally named `Light` survives.
     path = path
       .split("/")

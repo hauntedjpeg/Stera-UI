@@ -15,7 +15,7 @@ export default defineConfig([
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ["src/ui/**/*.{ts,tsx}"],
+    files: ["src/ui/**/*.{ts,tsx}", "tune/**/*.{ts,tsx}"],
     extends: [reactHooks.configs.flat.recommended],
     languageOptions: {
       globals: globals.browser,

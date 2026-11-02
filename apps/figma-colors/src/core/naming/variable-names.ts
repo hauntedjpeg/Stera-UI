@@ -1,8 +1,8 @@
 /**
  * Figma variable naming for generated ramps. This is the contract with Stera UI
  * Bridge (`apps/figma-bridge`): ramps live in a mode-less `Color` collection,
- * grouped `Family/Light/N` and `Family/Dark/N`, and the Bridge exports them as
- * `--family-N` and `--family-dark-N`.
+ * grouped `Family/Light/N` and `Family/Dark/N` with N in 25..950, and the
+ * Bridge exports them as `--family-N` and `--family-dark-N`.
  */
 
 export const DEFAULT_COLLECTION_NAME = "Color"
@@ -10,7 +10,7 @@ export const DEFAULT_COLLECTION_NAME = "Color"
 export const VARIANTS = ["Light", "Dark"] as const
 export type Variant = (typeof VARIANTS)[number]
 
-/** Tailwind-style steps an older scheme used; never mixed with 1..12. */
+/** The flat scheme an older build wrote, without Light/Dark subgroups. */
 const LEGACY_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
 export function rampVariableName(
@@ -68,8 +68,26 @@ export function listRampGroups(
 }
 
 /**
- * Whether the names already use 50-950 steps under `colorName`. Writing 1..12
- * next to them would silently leave both schemes in one group.
+ * The names an older build gave the variable at `index` (0-based) of a ramp:
+ * `Name/Light/1..12` from when steps were numbered 1..12, and the flat
+ * `Name/1..12` from before light and dark became subgroups. Only the light
+ * variant may claim a flat variable, so one is never adopted twice.
+ */
+export function legacyRampNames(
+  colorName: string,
+  variant: Variant,
+  index: number
+): string[] {
+  const step = index + 1
+  const names = [rampVariableName(colorName, variant, step)]
+  if (variant === "Light") names.push(flatVariableName(colorName, step))
+  return names
+}
+
+/**
+ * Whether the names already use flat `Name/50`...`Name/950` under `colorName`.
+ * The Bridge drops the `Light` segment, so `Name/Light/50` next to a flat
+ * `Name/50` would export as the same `--name-50` twice.
  */
 export function hasLegacyStepNames(
   names: string[],

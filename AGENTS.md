@@ -12,7 +12,7 @@ Four workspaces matter:
 - **`apps/docs`** — Next.js 16 / React 19 / Fumadocs MDX site that **doubles as the registry host**. The component source files under `apps/docs/registry/` are the canonical components; `scripts/build-registry.mts` reads `apps/docs/registry.json` and emits `apps/docs/public/r/*.json` files that the CLI fetches at runtime.
 
 - **`apps/figma-bridge`** — private Figma plugin ("Stera UI Bridge") that exports Figma variables and text styles as Tailwind 4 CSS. It generates `apps/docs/registry/styles/ui/colors.css` and `typography.css`. Has its own `AGENTS.md`.
-- **`apps/figma-colors`** — private Figma plugin ("Stera UI Colors", published) that generates Radix-style 12-step color ramps and writes them as Figma variables. It writes the `Color` collection as `Family/Light/N` and `Family/Dark/N`, which is what the Bridge reads, and a vitest test checks that contract against the Bridge's model. Has its own `AGENTS.md`.
+- **`apps/figma-colors`** — private Figma plugin ("Stera UI Colors", published) that generates 12-step color ramps (steps 25–950) and writes them as Figma variables. It writes the `Color` collection as `Family/Light/N` and `Family/Dark/N`, which is what the Bridge reads, and a vitest test checks that contract against the Bridge's model. Has its own `AGENTS.md`.
 
 When a user says "add a component" or "fix the Button," the work almost always happens in `apps/docs/registry/ui/` — not in `packages/stera-ui/`.
 

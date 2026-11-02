@@ -1,15 +1,18 @@
 import { useEffect, useRef, useState } from "react"
 import type { ScaleEntry } from "../../core/scale/bi-modal.js"
 import { displayHex, isLightColor } from "../../core/color/hex.js"
+import { STEP_ROLES } from "../../core/scale/roles.js"
 import { copyText } from "../utils/clipboard.js"
 
 const COPIED_FEEDBACK_MS = 1200
 
 type Props = {
   scale: ScaleEntry[]
+  /** Tuned ramps follow the role table; Standard ones do not. */
+  tuned: boolean
 }
 
-export function ScalePreview({ scale }: Props) {
+export function ScalePreview({ scale, tuned }: Props) {
   return (
     <div className="flex h-full flex-col gap-2">
       <div className="grid grid-cols-2 gap-2 text-[9px]/3.5 font-medium tracking-wide text-text-secondary">
@@ -17,8 +20,8 @@ export function ScalePreview({ scale }: Props) {
         <div>Dark</div>
       </div>
       <div className="grid flex-1 grid-cols-2 gap-2">
-        <Column entries={scale} pick={(e) => e.light} />
-        <Column entries={scale} pick={(e) => e.dark} />
+        <Column entries={scale} pick={(e) => e.light} tuned={tuned} />
+        <Column entries={scale} pick={(e) => e.dark} tuned={tuned} />
       </div>
     </div>
   )
@@ -27,9 +30,10 @@ export function ScalePreview({ scale }: Props) {
 type ColumnProps = {
   entries: ScaleEntry[]
   pick: (entry: ScaleEntry) => string
+  tuned: boolean
 }
 
-function Column({ entries, pick }: ColumnProps) {
+function Column({ entries, pick, tuned }: ColumnProps) {
   const [copiedStep, setCopiedStep] = useState<number | null>(null)
   const timeoutRef = useRef<number | null>(null)
 
@@ -62,6 +66,7 @@ function Column({ entries, pick }: ColumnProps) {
             key={entry.step}
             type="button"
             aria-label={`Copy ${label} (step ${entry.step})`}
+            title={tuned ? STEP_ROLES[entry.step] : undefined}
             onClick={() => handleCopy(entry.step, label)}
             className="group relative flex flex-1 cursor-pointer items-center justify-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-border-selected"
             style={{ backgroundColor: label }}

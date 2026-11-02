@@ -1,16 +1,12 @@
 import Color from "colorjs.io"
 import { generateRadixColors } from "../radix/generate-radix-colors.js"
+import { SCALE_STEPS, type ScaleEntry } from "./steps.js"
+import { generateTunedScale } from "./tuned.js"
 
-export const SCALE_STEPS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as const
-export type ScaleStep = (typeof SCALE_STEPS)[number]
+export { SCALE_STEPS, type ScaleEntry, type ScaleStep } from "./steps.js"
 
+/** "accent" is shown as Tuned, "gray" as Standard. */
 export type ScaleType = "accent" | "gray"
-
-export type ScaleEntry = {
-  step: ScaleStep
-  light: string
-  dark: string
-}
 
 export type GenerationOptions = {
   hex: string
@@ -19,29 +15,31 @@ export type GenerationOptions = {
   darkBackground: string
 }
 
-// When generating an accent scale, Radix's algorithm still requires a `gray` arg.
-// The gray output is computed but discarded; `getButtonHoverColor` only searches
-// the accent scale, so this constant has no effect on the returned accent.
-const UNUSED_GRAY = "#8B8D98"
+export type GenerationResult = {
+  entries: ScaleEntry[]
+  /** Tuned only: warnings worth showing next to the preview. */
+  notes: string[]
+}
 
-// Symmetric: when generating a gray scale, the accent input is required but the
-// accent output is discarded.
+// Radix's gray generator still requires an accent input; its accent output
+// is discarded.
 const UNUSED_ACCENT = "#3B82F6"
 
-// Ratio by which each successive lightness gap grows across steps 1..8 of the
-// light gray scale. Tunable: higher values keep steps 2-3 closer to white and
-// push more of the total drop toward steps 6-8.
+// Ratio by which each successive lightness gap grows across the first eight
+// steps of the light gray scale. Tunable: higher values keep steps 50 and 100
+// closer to white and push more of the total drop toward steps 300-400.
 const TOP_GAP_GROWTH = 1.3
 
 /**
- * Re-space the lightness of steps 2..7 of a light-mode gray scale.
+ * Re-space the lightness of the second through seventh steps of a light-mode
+ * gray scale.
  *
- * In Radix's reference gray scales the step 1->2 lightness gap is roughly a
- * third of the 2->3 gap, so step 2 reads as a duplicate of step 1 and step 3
- * looks like a jump. Steps 1 and 8 are kept fixed; steps 2..7 are placed
- * between them so each gap is `TOP_GAP_GROWTH` times the previous one. Only
- * lightness changes: chroma and hue of every step are preserved, and steps
- * 8..12 are returned untouched.
+ * In Radix's reference gray scales the first lightness gap is roughly a third
+ * of the second, so the second step reads as a duplicate of the first and the
+ * third looks like a jump. The first and eighth steps are kept fixed; the
+ * steps between are placed so each gap is `TOP_GAP_GROWTH` times the previous
+ * one. Only lightness changes: chroma and hue of every step are preserved, and
+ * the remaining steps are returned untouched.
  */
 function smoothLightGrayTop(hexes: string[]): string[] {
   const colors = hexes.map((hex) => new Color(hex).to("oklch"))
@@ -67,40 +65,42 @@ function smoothLightGrayTop(hexes: string[]): string[] {
 }
 
 /**
- * Run the Radix generator once per appearance and pair the results step by
- * step. Only the 12 solid steps are kept; the generator's alpha, contrast and
- * surface outputs are discarded.
+ * Standard: the Radix gray scale, run once per appearance, with the light
+ * top re-spaced. Radix's twelve steps map onto the step names in order.
  */
-export function generateBiModalScale(options: GenerationOptions): ScaleEntry[] {
-  const accent = options.scaleType === "accent" ? options.hex : UNUSED_ACCENT
-  const gray = options.scaleType === "gray" ? options.hex : UNUSED_GRAY
-
-  const lightResult = generateRadixColors({
+function generateStandardScale(options: GenerationOptions): GenerationResult {
+  const light = generateRadixColors({
     appearance: "light",
-    accent,
-    gray,
+    accent: UNUSED_ACCENT,
+    gray: options.hex,
     background: options.lightBackground,
   })
-
-  const darkResult = generateRadixColors({
+  const dark = generateRadixColors({
     appearance: "dark",
-    accent,
-    gray,
+    accent: UNUSED_ACCENT,
+    gray: options.hex,
     background: options.darkBackground,
   })
+  const lightScale = smoothLightGrayTop(light.grayScale)
+  const darkScale: string[] = dark.grayScale
+  return {
+    entries: SCALE_STEPS.map((step, i) => ({
+      step,
+      light: lightScale[i],
+      dark: darkScale[i],
+    })),
+    notes: [],
+  }
+}
 
-  const lightScale: string[] =
-    options.scaleType === "accent"
-      ? lightResult.accentScale
-      : smoothLightGrayTop(lightResult.grayScale)
-  const darkScale: string[] =
-    options.scaleType === "accent"
-      ? darkResult.accentScale
-      : darkResult.grayScale
-
-  return SCALE_STEPS.map((step, i) => ({
-    step,
-    light: lightScale[i],
-    dark: darkScale[i],
-  }))
+/** Generate both appearances of a ramp, paired step by step. */
+export function generateBiModalScale(
+  options: GenerationOptions
+): GenerationResult {
+  if (options.scaleType === "gray") return generateStandardScale(options)
+  return generateTunedScale({
+    hex: options.hex,
+    lightBackground: options.lightBackground,
+    darkBackground: options.darkBackground,
+  })
 }

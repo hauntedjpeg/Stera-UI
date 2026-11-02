@@ -23,13 +23,13 @@ function colorCollection(): SerializedCollection {
     { name: "Neutral", hex: "#8b8d98", scaleType: "gray" as const },
   ]
   for (const ramp of ramps) {
-    const scale = generateBiModalScale({
+    const { entries } = generateBiModalScale({
       hex: ramp.hex,
       scaleType: ramp.scaleType,
       lightBackground: "#ffffff",
       darkBackground: "#111111",
     })
-    for (const entry of scale) {
+    for (const entry of entries) {
       for (const variant of VARIANTS) {
         const name = rampVariableName(ramp.name, variant, entry.step)
         const hex = variant === "Light" ? entry.light : entry.dark
@@ -63,8 +63,8 @@ const theme: SerializedCollection = {
       name: "Surface/-",
       type: "COLOR",
       valuesByMode: {
-        light: { kind: "alias", targetId: "Neutral/Light/1" },
-        dark: { kind: "alias", targetId: "Neutral/Dark/1" },
+        light: { kind: "alias", targetId: "Neutral/Light/25" },
+        dark: { kind: "alias", targetId: "Neutral/Dark/25" },
       },
     },
   ],
@@ -81,10 +81,10 @@ describe("Stera UI Bridge contract", () => {
     expect(warnings.filter((w) => /dark ramps|collision/i.test(w))).toEqual([])
 
     const names = model?.colorRamps.map((d) => d.name) ?? []
-    expect(names).toContain("--blue-1")
-    expect(names).toContain("--blue-dark-12")
-    expect(names).toContain("--neutral-12")
-    expect(names).toContain("--neutral-dark-1")
+    expect(names).toContain("--blue-25")
+    expect(names).toContain("--blue-dark-950")
+    expect(names).toContain("--neutral-950")
+    expect(names).toContain("--neutral-dark-25")
     expect(names).toHaveLength(48)
   })
 })

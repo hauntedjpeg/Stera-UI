@@ -1,7 +1,7 @@
 {
   "name": "@stera-ui/figma-colors",
   "version": "0.1.0",
-  "description": "Figma plugin that generates Radix-style 12-step color ramps as Figma variables for Stera-UI files.",
+  "description": "Figma plugin that generates 12-step color ramps as Figma variables for Stera-UI files.",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,7 +12,8 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.ui.json",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "tune": "vite --config vite.tune.config.ts --port 4322 --strictPort"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

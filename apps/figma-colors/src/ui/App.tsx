@@ -6,7 +6,12 @@ import {
   type StoredPrefs,
   type TargetMode,
 } from "../shared/messages.js"
-import { generateBiModalScale, type ScaleType } from "../core/scale/bi-modal.js"
+import {
+  generateBiModalScale,
+  type GenerationResult,
+  type ScaleType,
+} from "../core/scale/bi-modal.js"
+import { backgroundError } from "../core/scale/tuned.js"
 import { suggestColorName } from "../core/naming/color-name.js"
 import { useFigmaMessages } from "./hooks/useFigmaMessages.js"
 import { Button } from "./components/Button.js"
@@ -27,6 +32,8 @@ const MODE_OPTIONS: { value: TargetMode; label: string }[] = [
   { value: "update", label: "Update" },
 ]
 
+const EMPTY_RESULT: GenerationResult = { entries: [], notes: [] }
+
 export function App() {
   const [prefs, setPrefs] = useState<StoredPrefs | null>(null)
   const [collections, setCollections] = useState<CollectionSummary[]>([])
@@ -45,7 +52,7 @@ export function App() {
       setCollections(msg.collections)
     } else if (msg.type === "legacy-naming") {
       setErrorMessage(
-        `"${msg.collectionName}" already uses the legacy 50–950 step naming under this color. Switch to a different collection or pick the default.`
+        `"${msg.collectionName}" already uses flat 50–950 names under this color. Switch to a different collection or pick the default.`
       )
     } else if (msg.type === "error") {
       setErrorMessage(msg.message)
@@ -58,18 +65,24 @@ export function App() {
     postToSandbox({ type: "load" })
   }, [])
 
-  const scale = useMemo(
+  const backgroundMessage = useMemo(
     () =>
       prefs
-        ? generateBiModalScale({
-            hex: prefs.hex,
-            scaleType: prefs.scaleType,
-            lightBackground: prefs.lightBackground,
-            darkBackground: prefs.darkBackground,
-          })
-        : [],
+        ? backgroundError(prefs.lightBackground, prefs.darkBackground)
+        : null,
     [prefs]
   )
+
+  const result = useMemo<GenerationResult>(() => {
+    if (!prefs || backgroundMessage) return EMPTY_RESULT
+    return generateBiModalScale({
+      hex: prefs.hex,
+      scaleType: prefs.scaleType,
+      lightBackground: prefs.lightBackground,
+      darkBackground: prefs.darkBackground,
+    })
+  }, [prefs, backgroundMessage])
+  const scale = result.entries
   const suggestedName = useMemo(
     () => (prefs ? suggestColorName(prefs.hex) : ""),
     [prefs]
@@ -89,6 +102,8 @@ export function App() {
       </div>
     )
   }
+
+  const tuned = prefs.scaleType === "accent"
 
   const updatePrefs = (patch: Partial<StoredPrefs>) => {
     const next = { ...prefs, ...patch }
@@ -121,6 +136,9 @@ export function App() {
       })
     }
   }
+
+  const canSubmit =
+    scale.length > 0 && (prefs.mode !== "update" || Boolean(activeTarget))
 
   return (
     <div className="flex h-full">
@@ -198,14 +216,16 @@ export function App() {
           )}
         </div>
 
-        {errorMessage && (
-          <div className="px-4 pb-2 text-danger">{errorMessage}</div>
+        {(backgroundMessage || errorMessage) && (
+          <div className="px-4 pb-2 text-danger">
+            {backgroundMessage ?? errorMessage}
+          </div>
         )}
 
         <div className="mt-auto flex flex-col gap-3 p-4">
           <Button
             onClick={handleSubmit}
-            disabled={prefs.mode === "update" && !activeTarget}
+            disabled={!canSubmit}
             className="w-full justify-center"
           >
             {prefs.mode === "update" ? "Update Variables" : "Add Variables"}
@@ -213,8 +233,15 @@ export function App() {
         </div>
       </div>
 
-      <div className="w-full border-l border-border p-4">
-        <ScalePreview scale={scale} />
+      <div className="flex w-full flex-col gap-2 border-l border-border p-4">
+        <ScalePreview scale={scale} tuned={tuned} />
+        {result.notes.length > 0 && (
+          <ul className="flex flex-col gap-1 text-[9px]/3.5 text-text-secondary">
+            {result.notes.map((note) => (
+              <li key={note}>{note}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   )
