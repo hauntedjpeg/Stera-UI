@@ -5,6 +5,35 @@ description: A transient notification that reports the result of an action, then
 
 <ComponentPreview name="toast-demo" caption="Toast" />
 
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Feedback on an action the user just took, where the outcome is worth confirming but not worth interrupting for: "Changes saved", "Event created", "Export failed".
+- An outcome that arrives while the user's attention is elsewhere, such as a background job finishing.
+- A result the user may want to act on straight away, with one follow-up such as Undo or Retry.
+
+### When not to use
+
+- Anything the user must acknowledge before continuing, or whose consequence is serious enough to stop them. Use an [Alert Dialog](/components/alert-dialog).
+- A condition that stays true until something changes, such as an unverified email or an expiring plan. A toast leaves and takes the message with it. Use a [Callout](/components/callout).
+- Validation messages tied to a particular input. Use the error treatment on [Field](/components/field).
+
+### Guidelines
+
+- Keep it to a short title and at most one line of supporting detail. A message that needs more than that needs somewhere the user can read at their own pace.
+- Match the type to the outcome: `success` for a completed action, `error` for one that failed, `warning` for something worth knowing before continuing, `info` for neutral detail, and `loading` for work still running. Put the meaning in the copy as well, so it never rests on the icon or its color alone.
+- Resolve a `loading` toast into `success` or `error` rather than adding a second toast. One outcome, one message.
+- Give a toast at most one action, and only one the user would plausibly take right then: Undo, Retry, View. Anything they can return to later belongs elsewhere.
+- Never make a toast the only record of something that matters. It goes away on its own, and anyone looking elsewhere misses it.
+- Your call: where toasts are anchored, and how many stack before the oldest retires. Pick a position clear of primary content and navigation, and use it everywhere so people learn where to look.
+
+See also: [Theming](/design/theming).
+
+</DesignGuidelines>
+
 ## Installation
 
 <InstallSnippet slug="toast" hideHeading />
