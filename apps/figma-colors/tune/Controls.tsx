@@ -186,6 +186,14 @@ export function Controls({
               onChange({ ...targets, stateDelta: [targets.stateDelta[0], v] })
             }
           />
+          <Num
+            label="Min contrast"
+            value={targets.stateMinContrast}
+            min={1}
+            max={1.4}
+            step={0.01}
+            onChange={(v) => onChange({ ...targets, stateMinContrast: v })}
+          />
         </fieldset>
         <fieldset>
           <legend>Rules</legend>

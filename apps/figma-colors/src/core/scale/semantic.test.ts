@@ -39,6 +39,8 @@ const VIVID = [
 const MUTED = ["#1e3a8a", "#0d9488"]
 const ACHROMATIC = ["#808080", "#000000", "#ffffff", LIVE.nearBlack]
 const ALL = [...VIVID, ...MUTED, ...ACHROMATIC]
+/** Seeds just above light 950, where darker states would sink into black. */
+const DARK = ["#222222", "#1a1a2e", "#0b1f4d", "#3b0a0a"]
 const MODES: Mode[] = ["light", "dark"]
 const PAGES = [
   { lightBackground: "#ffffff", darkBackground: "#000000" },
@@ -177,31 +179,34 @@ describe("generateSemanticScale", () => {
     }
   })
 
-  it("orders the seed band away from the page, or back when the seed is past 950", () => {
+  it("steps the seed band one way, each state visibly apart from the last", () => {
+    const floor = DEFAULT_TARGETS.stateMinContrast - 0.01
     for (const page of PAGES) {
-      for (const hex of ALL) {
+      for (const hex of [...ALL, ...DARK]) {
         const result = generateSemanticScale(options({ hex, ...page }))
         for (const mode of MODES) {
-          const solid = L(result, 500, mode)
-          const bold = L(result, 950, mode)
-          const roomAway = mode === "light" ? solid : 1 - solid
-          const reversed =
-            (mode === "light" ? solid < bold : solid > bold) ||
-            roomAway < DEFAULT_TARGETS.stateDelta[1]
-          // +1 when the states get lighter, -1 when they get darker.
-          const direction = (mode === "light") === reversed ? 1 : -1
-          const room = direction > 0 ? 1 - solid : solid
-          // Pure black and white have no room either way (less 8-bit rounding).
-          const gap = Math.min(0.02, room / 2) - 0.004
           const label = `${hex} ${mode} on ${page[`${mode}Background`]}`
+          const [solid, hover, pressed] = ([500, 600, 700] as const).map(
+            (step) => hexAt(result, step, mode)
+          )
+          expect(wcag(solid, hover), label).toBeGreaterThanOrEqual(floor)
+          expect(wcag(hover, pressed), label).toBeGreaterThanOrEqual(floor)
+          // +1 when the states get lighter, -1 when they get darker.
+          const direction = Math.sign(
+            L(result, 600, mode) - L(result, 500, mode)
+          )
+          expect(direction, label).not.toBe(0)
           expect(
-            (L(result, 600, mode) - solid) * direction,
+            Math.sign(L(result, 700, mode) - L(result, 600, mode)),
             label
-          ).toBeGreaterThanOrEqual(gap)
-          expect(
-            (L(result, 700, mode) - L(result, 600, mode)) * direction,
-            label
-          ).toBeGreaterThanOrEqual(gap)
+          ).toBe(direction)
+          // Toward the page: lighter in light mode, darker in dark mode.
+          const reversed = (mode === "light") === direction > 0
+          const pastBold =
+            mode === "light"
+              ? L(result, 500, mode) < L(result, 950, mode)
+              : L(result, 500, mode) > L(result, 950, mode)
+          if (pastBold) expect(reversed, label).toBe(true)
           const word = mode === "light" ? "Light" : "Dark"
           expect(
             result.notes.some((n) => n.startsWith(`${word} solid has no room`)),
@@ -213,6 +218,24 @@ describe("generateSemanticScale", () => {
         expect(L(result, 950, "dark")).toBeGreaterThan(L(result, 900, "dark"))
         expect(L(result, 900, "dark")).toBeGreaterThan(L(result, 800, "dark"))
       }
+    }
+  })
+
+  it("lightens the states of very dark seeds instead of crushing them to black", () => {
+    // OKLCH lightness barely moves near black, so plain offsets would leave
+    // 600 and 700 looking like 500.
+    for (const hex of ["#000000", ...DARK]) {
+      const result = generateSemanticScale(options({ hex }))
+      expect(L(result, 600, "light"), hex).toBeGreaterThan(
+        L(result, 500, "light")
+      )
+      expect(L(result, 700, "light"), hex).toBeGreaterThan(
+        L(result, 600, "light")
+      )
+      expect(
+        wcag(hexAt(result, 700, "light"), hexAt(result, 500, "light")),
+        hex
+      ).toBeGreaterThan(1.3)
     }
   })
 

@@ -22,9 +22,10 @@ import {
  *   tint in different hues. Only the seed's hue and vividness flow in.
  * - 500–700, the solid: 500 is the seed verbatim, 600 and 700 are the hover
  *   and pressed states with one and two notches more contrast against the
- *   page (darker in light mode, lighter in dark mode). A seed with no room
- *   that way, past the bold step or within the pressed offset of the end of
- *   the range, has its states step back toward the page instead.
+ *   page (darker in light mode, lighter in dark mode). Each state keeps at
+ *   least `stateMinContrast` against the step before it. A seed with no room
+ *   for that, past the bold step or too near black or white, has its states
+ *   step back toward the page instead.
  * - 800–950, the bold surface: fixed again. 800 is the bold surface and 900
  *   and 950 are its hover and pressed states, moving further from the page;
  *   950 is the darkest step in light mode and the lightest tinted surface in
@@ -51,6 +52,7 @@ const ACHROMATIC_C = 0.005
 /** `ink-x` aliases the seed; below this against the page it gets a note. */
 const INK_MIN_CONTRAST = 4.5
 const LIFT_ITERATIONS = 24
+const STATE_ITERATIONS = 24
 
 type Ramp = Record<ScaleStep, Oklch>
 type Hexes = Record<ScaleStep, string>
@@ -148,10 +150,11 @@ function fixedRamp(
 
 /**
  * Fill 500–700 from the solid: the solid itself, then two states that move
- * away from the page. A solid past the bold step, or too near the end of the
- * range for the pressed offset, has no room that way, so its states move
- * toward the page instead; returns true when that happens. Pure black and
- * white have no room either way, so the offsets also compress to fit.
+ * away from the page by `stateDelta`, each pushed further when it has less
+ * than `stateMinContrast` against the step before (OKLCH lightness barely
+ * changes the color near black). A solid past the bold step, or with no room
+ * for two such states away from the page, moves toward the page instead;
+ * returns true when that happens.
  */
 function seedBand(
   ramp: Ramp,
@@ -159,24 +162,101 @@ function seedBand(
   mode: Mode,
   targets: Targets
 ): boolean {
-  const bold = ramp[950].L
-  const [d1, d2] = targets.stateDelta
-  const roomAway = mode === "light" ? solid.L : 1 - solid.L
-  const reversed =
-    (mode === "light" ? solid.L < bold : solid.L > bold) || roomAway < d2
   const towardPage = mode === "light" ? 1 : -1
-  const away = reversed ? towardPage : -towardPage
-  const available = away < 0 ? solid.L : 1 - solid.L
-  const deltas = [0, Math.min(d1, available / 2), Math.min(d2, available)]
-  const steps: ScaleStep[] = [500, 600, 700]
-  steps.forEach((step, i) => {
-    const L = clamp01(solid.L + away * deltas[i])
-    const gray = solid.C < ACHROMATIC_C
-    const H = gray ? 0 : shiftedHue(solid.H, L, targets.hueShift)
-    const C = gray ? 0 : Math.min(solid.C, cmaxSrgb(L, H))
-    ramp[step] = { L, C, H }
-  })
-  return reversed
+  const pastBold =
+    mode === "light" ? solid.L < ramp[950].L : solid.L > ramp[950].L
+  const preferred = pastBold ? towardPage : -towardPage
+  const base = stateColor(solid, solid.L, targets)
+  let direction = preferred
+  let states = stateSteps(solid, base, direction, targets)
+  if (!states) {
+    direction = -preferred
+    states = stateSteps(solid, base, direction, targets)
+  }
+  if (!states) {
+    direction = preferred
+    states = compressedSteps(solid, direction, targets)
+  }
+  ramp[500] = base
+  ramp[600] = states[0]
+  ramp[700] = states[1]
+  return direction === towardPage
+}
+
+/** 600 and 700 moving `direction` (+1 lighter), or null when they don't fit. */
+function stateSteps(
+  solid: Oklch,
+  base: Oklch,
+  direction: number,
+  targets: Targets
+): [Oklch, Oklch] | null {
+  const [d1, d2] = targets.stateDelta
+  const hover = stateStep(
+    solid,
+    base,
+    base.L + direction * d1,
+    direction,
+    targets
+  )
+  if (!hover) return null
+  const pressed = stateStep(
+    solid,
+    hover,
+    hover.L + direction * (d2 - d1),
+    direction,
+    targets
+  )
+  return pressed ? [hover, pressed] : null
+}
+
+/**
+ * The state at lightness `L`, or further along `direction` until it has
+ * `stateMinContrast` against `previous`. Null when even the end of the range
+ * falls short.
+ */
+function stateStep(
+  solid: Oklch,
+  previous: Oklch,
+  L: number,
+  direction: number,
+  targets: Targets
+): Oklch | null {
+  const from = toHex(previous)
+  const contrastAt = (lightness: number) =>
+    wcag(from, toHex(stateColor(solid, lightness, targets)))
+  const floor = targets.stateMinContrast
+  const start = clamp01(L)
+  if (contrastAt(start) >= floor) return stateColor(solid, start, targets)
+  const end = direction > 0 ? 1 : 0
+  if (contrastAt(end) < floor) return null
+  let near = start
+  let far = end
+  for (let i = 0; i < STATE_ITERATIONS; i++) {
+    const mid = (near + far) / 2
+    if (contrastAt(mid) < floor) near = mid
+    else far = mid
+  }
+  return stateColor(solid, far, targets)
+}
+
+/** The plain offsets, squeezed into whatever room is left. A last resort. */
+function compressedSteps(
+  solid: Oklch,
+  direction: number,
+  targets: Targets
+): [Oklch, Oklch] {
+  const [d1, d2] = targets.stateDelta
+  const available = direction < 0 ? solid.L : 1 - solid.L
+  const at = (delta: number) =>
+    stateColor(solid, clamp01(solid.L + direction * delta), targets)
+  return [at(Math.min(d1, available / 2)), at(Math.min(d2, available))]
+}
+
+/** The solid's hue and chroma at lightness `L`, within the gamut. */
+function stateColor(solid: Oklch, L: number, targets: Targets): Oklch {
+  if (solid.C < ACHROMATIC_C) return { L, C: 0, H: 0 }
+  const H = shiftedHue(solid.H, L, targets.hueShift)
+  return { L, C: Math.min(solid.C, cmaxSrgb(L, H)), H }
 }
 
 /**
@@ -260,11 +340,12 @@ function vividness(
 
 function toHexes(ramp: Ramp): Hexes {
   const out = {} as Hexes
-  for (const step of SCALE_STEPS) {
-    const { L, C, H } = ramp[step]
-    out[step] = oklchToHex(L, C, H)
-  }
+  for (const step of SCALE_STEPS) out[step] = toHex(ramp[step])
   return out
+}
+
+function toHex({ L, C, H }: Oklch): string {
+  return oklchToHex(L, C, H)
 }
 
 function clamp01(value: number): number {

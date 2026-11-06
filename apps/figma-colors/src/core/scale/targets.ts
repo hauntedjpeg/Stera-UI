@@ -56,6 +56,13 @@ export type Targets = {
   minGap: number
   /** Lightness offsets of 600 and 700 from the seed: darker in light, lighter in dark. */
   stateDelta: [number, number]
+  /**
+   * Minimum WCAG contrast from 500 to 600 and from 600 to 700. OKLCH
+   * lightness has no toe, so near black the `stateDelta` offsets barely
+   * change the color; a state that falls short moves further until it
+   * reaches this, and a seed with no room for that turns back toward the page.
+   */
+  stateMinContrast: number
   /** Below this ratio against the dark page, the dark solid is lifted. */
   darkSolidMinContrast: number
   hueShift: HueShift
@@ -117,6 +124,7 @@ export const DEFAULT_TARGETS: Targets = {
   },
   minGap: 0.03,
   stateDelta: [0.06, 0.12],
+  stateMinContrast: 1.15,
   darkSolidMinContrast: 3,
   // Yellows and ambers go olive as they darken, so dark steps of hues in
   // `range` rotate toward orange. The weight depends on the step's lightness,
