@@ -82,7 +82,6 @@ Where a Figma name differs from the code, the docs use the code name.
 | ------------------------ | -------------------------------------------------------------------------------- |
 | Primary Button           | `brand` variant of Button                                                        |
 | Field (single-line text) | Input. The code's Field is the layout that pairs a label, an input and an error. |
-| Toast, Ping              | Notice, until it's renamed Toast                                                 |
 
 ## Check before publishing
 

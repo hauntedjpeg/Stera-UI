@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-type NoticePosition =
+type ToastPosition =
   | "top-left"
   | "top-center"
   | "top-right"
@@ -22,26 +22,26 @@ type NoticePosition =
   | "bottom-center"
   | "bottom-right"
 
-const createNoticeManager = ToastPrimitive.createToastManager
-const noticeManager = createNoticeManager()
-const useNoticeManager = ToastPrimitive.useToastManager
+const createToastManager = ToastPrimitive.createToastManager
+const toastManager = createToastManager()
+const useToastManager = ToastPrimitive.useToastManager
 
-function NoticeProvider({ ...props }: ToastPrimitive.Provider.Props) {
+function ToastProvider({ ...props }: ToastPrimitive.Provider.Props) {
   return <ToastPrimitive.Provider {...props} />
 }
 
-function NoticePortal({ ...props }: ToastPrimitive.Portal.Props) {
+function ToastPortal({ ...props }: ToastPrimitive.Portal.Props) {
   return <ToastPrimitive.Portal {...props} />
 }
 
-function NoticeViewport({
+function ToastViewport({
   className,
   position = "bottom-right",
   ...props
-}: ToastPrimitive.Viewport.Props & { position?: NoticePosition }) {
+}: ToastPrimitive.Viewport.Props & { position?: ToastPosition }) {
   return (
     <ToastPrimitive.Viewport
-      data-slot="notice-viewport"
+      data-slot="toast-viewport"
       data-position={position}
       className={cn(
         "fixed z-50 mx-auto flex w-[20rem] outline-none",
@@ -60,15 +60,15 @@ function NoticeViewport({
   )
 }
 
-function NoticeRoot({
+function ToastRoot({
   className,
   position = "bottom-right",
   ...props
-}: ToastPrimitive.Root.Props & { position?: NoticePosition }) {
+}: ToastPrimitive.Root.Props & { position?: ToastPosition }) {
   const isTop = position.startsWith("top")
   return (
     <ToastPrimitive.Root
-      data-slot="notice-root"
+      data-slot="toast-root"
       data-position={position}
       swipeDirection={isTop ? "up" : "down"}
       className={cn(
@@ -118,10 +118,10 @@ function NoticeRoot({
   )
 }
 
-function NoticeContent({ className, ...props }: ToastPrimitive.Content.Props) {
+function ToastContent({ className, ...props }: ToastPrimitive.Content.Props) {
   return (
     <ToastPrimitive.Content
-      data-slot="notice-content"
+      data-slot="toast-content"
       className={cn(
         "overflow-hidden transition-opacity duration-250",
         "data-behind:opacity-0 data-expanded:opacity-100",
@@ -132,33 +132,33 @@ function NoticeContent({ className, ...props }: ToastPrimitive.Content.Props) {
   )
 }
 
-function NoticeTitle({ className, ...props }: ToastPrimitive.Title.Props) {
+function ToastTitle({ className, ...props }: ToastPrimitive.Title.Props) {
   return (
     <ToastPrimitive.Title
-      data-slot="notice-title"
+      data-slot="toast-title"
       className={cn("mb-0 st-label-md-medium", className)}
       {...props}
     />
   )
 }
 
-function NoticeDescription({
+function ToastDescription({
   className,
   ...props
 }: ToastPrimitive.Description.Props) {
   return (
     <ToastPrimitive.Description
-      data-slot="notice-description"
+      data-slot="toast-description"
       className={cn("m-0 st-body-md text-ink-subtler", className)}
       {...props}
     />
   )
 }
 
-function NoticeAction({ className, ...props }: ToastPrimitive.Action.Props) {
+function ToastAction({ className, ...props }: ToastPrimitive.Action.Props) {
   return (
     <ToastPrimitive.Action
-      data-slot="notice-action"
+      data-slot="toast-action"
       render={
         <Button variant="outline" size="sm" className={cn("mt-2", className)} />
       }
@@ -167,10 +167,10 @@ function NoticeAction({ className, ...props }: ToastPrimitive.Action.Props) {
   )
 }
 
-function NoticeClose({ className, ...props }: ToastPrimitive.Close.Props) {
+function ToastClose({ className, ...props }: ToastPrimitive.Close.Props) {
   return (
     <ToastPrimitive.Close
-      data-slot="notice-close"
+      data-slot="toast-close"
       aria-label="Close"
       render={
         <Button
@@ -186,7 +186,7 @@ function NoticeClose({ className, ...props }: ToastPrimitive.Close.Props) {
   )
 }
 
-const NOTICE_TYPE_ICONS: Record<string, React.ReactNode> = {
+const TOAST_TYPE_ICONS: Record<string, React.ReactNode> = {
   success: <SiCheckCircleFill className="size-4 text-ink-success" />,
   info: <SiInfoCircleFill className="size-4 text-ink-subtler" />,
   warning: <SiAlertTriangleFill className="size-4 text-ink-warning" />,
@@ -194,69 +194,69 @@ const NOTICE_TYPE_ICONS: Record<string, React.ReactNode> = {
   loading: <SiCircleNotch className="size-4 animate-spin" />,
 }
 
-interface NoticeProps {
-  position?: NoticePosition
+interface ToastProps {
+  position?: ToastPosition
   limit?: ToastPrimitive.Provider.Props["limit"]
   timeout?: ToastPrimitive.Provider.Props["timeout"]
   toastManager?: ToastPrimitive.Provider.Props["toastManager"]
 }
 
-function NoticeList({ position }: { position: NoticePosition }) {
-  const { toasts } = useNoticeManager()
+function ToastList({ position }: { position: ToastPosition }) {
+  const { toasts } = useToastManager()
   return (
     <>
       {toasts.map((toast) => {
-        const icon = toast.type ? NOTICE_TYPE_ICONS[toast.type] : null
+        const icon = toast.type ? TOAST_TYPE_ICONS[toast.type] : null
         return (
-          <NoticeRoot key={toast.id} toast={toast} position={position}>
-            <NoticeContent>
+          <ToastRoot key={toast.id} toast={toast} position={position}>
+            <ToastContent>
               <div className={cn("flex items-start", icon && "gap-2")}>
                 {icon && <div className="shrink-0">{icon}</div>}
                 <div className="min-w-0 flex-1 pr-4">
-                  <NoticeTitle />
-                  <NoticeDescription />
-                  {toast.actionProps && <NoticeAction />}
+                  <ToastTitle />
+                  <ToastDescription />
+                  {toast.actionProps && <ToastAction />}
                 </div>
               </div>
-              <NoticeClose />
-            </NoticeContent>
-          </NoticeRoot>
+              <ToastClose />
+            </ToastContent>
+          </ToastRoot>
         )
       })}
     </>
   )
 }
 
-function Notice({
+function Toast({
   position = "bottom-right",
   limit,
   timeout,
-  toastManager = noticeManager,
-}: NoticeProps) {
+  toastManager: manager = toastManager,
+}: ToastProps) {
   return (
-    <NoticeProvider toastManager={toastManager} limit={limit} timeout={timeout}>
-      <NoticePortal>
-        <NoticeViewport position={position}>
-          <NoticeList position={position} />
-        </NoticeViewport>
-      </NoticePortal>
-    </NoticeProvider>
+    <ToastProvider toastManager={manager} limit={limit} timeout={timeout}>
+      <ToastPortal>
+        <ToastViewport position={position}>
+          <ToastList position={position} />
+        </ToastViewport>
+      </ToastPortal>
+    </ToastProvider>
   )
 }
 
 export {
-  createNoticeManager,
-  Notice,
-  NoticeAction,
-  NoticeClose,
-  NoticeContent,
-  NoticeDescription,
-  noticeManager,
-  NoticePortal,
-  NoticeProvider,
-  NoticeRoot,
-  NoticeTitle,
-  NoticeViewport,
-  useNoticeManager,
+  createToastManager,
+  Toast,
+  ToastAction,
+  ToastClose,
+  ToastContent,
+  ToastDescription,
+  toastManager,
+  ToastPortal,
+  ToastProvider,
+  ToastRoot,
+  ToastTitle,
+  ToastViewport,
+  useToastManager,
 }
-export type { NoticePosition, NoticeProps }
+export type { ToastPosition, ToastProps }

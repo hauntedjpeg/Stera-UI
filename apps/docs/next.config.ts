@@ -20,6 +20,16 @@ const nextConfig: NextConfig = {
         destination: "/components/drawer",
         permanent: true,
       },
+      {
+        source: "/components/notice",
+        destination: "/components/toast",
+        permanent: true,
+      },
+      {
+        source: "/components/notice.md",
+        destination: "/components/toast.md",
+        permanent: true,
+      },
     ]
   },
 }

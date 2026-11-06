@@ -27,7 +27,6 @@
     "label",
     "menubar",
     "native-select",
-    "notice",
     "pagination",
     "popover",
     "preview-card",
@@ -43,6 +42,7 @@
     "table",
     "tabs",
     "textarea",
+    "toast",
     "toggle",
     "toggle-group",
     "tooltip"

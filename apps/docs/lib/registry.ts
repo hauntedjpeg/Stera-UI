@@ -267,13 +267,13 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/callout-variants")),
     slug: "callout",
   },
-  "notice-demo": {
-    component: dynamic(() => import("@/examples/notice-demo")),
-    slug: "notice",
+  "toast-demo": {
+    component: dynamic(() => import("@/examples/toast-demo")),
+    slug: "toast",
   },
-  "notice-types": {
-    component: dynamic(() => import("@/examples/notice-types")),
-    slug: "notice",
+  "toast-types": {
+    component: dynamic(() => import("@/examples/toast-types")),
+    slug: "toast",
   },
   "empty-demo": {
     component: dynamic(() => import("@/examples/empty-demo")),

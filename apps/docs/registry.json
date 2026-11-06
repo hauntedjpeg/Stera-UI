@@ -438,13 +438,6 @@
       "files": [{ "path": "registry/ui/slider.tsx", "type": "registry:ui" }]
     },
     {
-      "name": "notice",
-      "type": "registry:ui",
-      "dependencies": ["@base-ui/react", "stera-icons"],
-      "registryDependencies": ["utils"],
-      "files": [{ "path": "registry/ui/notice.tsx", "type": "registry:ui" }]
-    },
-    {
       "name": "spinner",
       "type": "registry:ui",
       "dependencies": ["stera-icons"],
@@ -476,6 +469,13 @@
       "type": "registry:ui",
       "registryDependencies": ["utils"],
       "files": [{ "path": "registry/ui/textarea.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "stera-icons"],
+      "registryDependencies": ["utils", "button"],
+      "files": [{ "path": "registry/ui/toast.tsx", "type": "registry:ui" }]
     },
     {
       "name": "toggle",

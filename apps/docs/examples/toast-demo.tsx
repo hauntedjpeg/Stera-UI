@@ -1,16 +1,16 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Notice, noticeManager } from "@/components/ui/notice"
+import { Toast, toastManager } from "@/components/ui/toast"
 
-export default function NoticeDemo() {
+export default function ToastDemo() {
   return (
     <>
-      <Notice />
+      <Toast />
       <Button
         variant="outline"
         onClick={() =>
-          noticeManager.add({
+          toastManager.add({
             title: "Event has been created",
             description: "Sunday, December 03, 2023 at 9:00 AM",
             actionProps: {
@@ -20,7 +20,7 @@ export default function NoticeDemo() {
           })
         }
       >
-        Notice
+        Toast
       </Button>
     </>
   )

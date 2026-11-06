@@ -1,14 +1,14 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { createNoticeManager, Notice } from "@/components/ui/notice"
+import { createToastManager, Toast } from "@/components/ui/toast"
 
-const typesManager = createNoticeManager()
+const typesManager = createToastManager()
 
-export default function NoticeTypes() {
+export default function ToastTypes() {
   return (
     <>
-      <Notice toastManager={typesManager} />
+      <Toast toastManager={typesManager} />
       <div className="flex flex-wrap gap-2">
         <Button
           variant="outline"
