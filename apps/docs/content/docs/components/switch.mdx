@@ -1,9 +1,31 @@
 ---
 title: Switch
-description: A toggle control for switching between two states, like on and off.
+description: A control that turns a setting on or off. The change takes effect immediately, with no separate confirmation step.
 ---
 
 <ComponentPreview name="switch-demo" caption="Switch" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Turning a standalone feature or setting on or off where the change applies right away, such as notifications or dark mode.
+- When on and off describe the choice more clearly than checked and unchecked.
+
+### When not to use
+
+- A choice that only takes effect after a form is submitted or further steps. Use a [Checkbox](/components/checkbox).
+- An on/off control in a toolbar or editing surface, such as bold. Use a [Toggle](/components/toggle).
+
+### Guidelines
+
+- Always pair a switch with a visible label that names the setting, not the switch's state: "Airplane mode," not "On."
+
+See also: [Selection](/design/selection) and [Theming](/design/theming).
+
+</DesignGuidelines>
 
 ## Installation
 

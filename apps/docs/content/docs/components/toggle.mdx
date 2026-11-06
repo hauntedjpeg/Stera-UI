@@ -1,9 +1,32 @@
 ---
 title: Toggle
-description: A two-state button that can be pressed or unpressed, commonly used for formatting controls.
+description: A two-state button that stays pressed while its state is active, for turning something on or off within the current view.
 ---
 
 <ComponentPreview name="toggle-demo" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A self-contained on/off control that takes effect immediately, such as bold formatting, muting audio, or showing a panel.
+- A compact, button-like control that sits with other actions in a toolbar or editing surface.
+
+### When not to use
+
+- A persistent setting in a form or settings list. Use a [Switch](/components/switch).
+- Several related options, such as text alignment or bold, italic and underline. Use a [Toggle Group](/components/toggle-group).
+- An action that doesn't leave anything on or off, such as Save. Use a [Button](/components/button).
+
+### Guidelines
+
+- Give an icon-only toggle an accessible label and a [Tooltip](/components/tooltip). An icon alone rarely says both what the toggle does and whether it's on.
+
+See also: [Selection](/design/selection) and [Theming](/design/theming).
+
+</DesignGuidelines>
 
 ## Installation
 

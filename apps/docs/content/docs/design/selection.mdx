@@ -1,0 +1,29 @@
+---
+title: Selection
+description: Choosing between Checkbox, Radio Group, Switch, Toggle and Toggle Group.
+---
+
+| Use                                      | For                                              | Selected at once   |
+| ---------------------------------------- | ------------------------------------------------ | ------------------ |
+| [Checkbox](/components/checkbox)         | A yes-or-no choice, or picking items from a list | Any number         |
+| [Radio Group](/components/radio-group)   | One option from a small set, all shown at once   | Exactly one        |
+| [Switch](/components/switch)             | A setting that takes effect immediately          | On or off          |
+| [Toggle](/components/toggle)             | Turning something on or off in the current view  | On or off          |
+| [Toggle Group](/components/toggle-group) | A few related view or formatting options         | One, or any number |
+
+## Deciding
+
+Work down the list and stop at the first yes.
+
+1. Is it a set of related options that change the current view or content, such as layout or text formatting? Use a Toggle Group.
+2. Is it a single on/off control for the current view, such as bold or mute? Use a Toggle.
+3. Is it a setting that takes effect the moment it changes? Use a Switch.
+4. Must the user pick exactly one option from a small set? Use a Radio Group.
+5. Otherwise, use a Checkbox: a single yes-or-no choice, or any number of items from a list.
+
+Moving between destinations or sections isn't selection. Use [Tabs](/components/tabs). For one option from a long list, use a [Select](/components/select).
+
+## Shared rules
+
+- **Always a visible label.** Every checkbox and switch gets its own. A Radio Group, a Toggle Group and a group of checkboxes also get a label for the whole set.
+- **Toggle and Toggle Group hold state, not commands.** For an action, use a [Button](/components/button).
