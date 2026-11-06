@@ -1,9 +1,32 @@
 ---
 title: Badge
-description: A small label for status, category, or count indicators.
+description: A small, non-interactive label for the status or attributes of an item.
 ---
 
 <ComponentPreview name="badge-demo" caption="Badge" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Showing the status of an item, such as New, Beta or Active.
+- Showing a categorical attribute of an item.
+
+### When not to use
+
+- Actions, or anything the user is expected to interact with. Use a [Chip](/components/chip).
+
+### Guidelines
+
+- Keep labels as short as possible. A single word is ideal.
+- Choose the tone for its meaning, so it reinforces the label: `danger` for a destructive or failed status, `success` for a positive one, `warning` for one that needs attention, and `default` for neutral attributes. Your call: what `brand` and `accent` badges mean, and when a badge uses its `-outline` or `-solid` form. Pick one and use it consistently.
+- Pair a badge with the thing it describes, such as an [Item](/components/item), an [Avatar](/components/avatar) or an icon. On its own, its meaning is unclear.
+
+See also: [Theming](/design/theming).
+
+</DesignGuidelines>
 
 ## Installation
 

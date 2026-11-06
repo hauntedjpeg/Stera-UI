@@ -1,9 +1,27 @@
 ---
 title: Avatar
-description: A user avatar component with image, fallback, badge, and group support.
+description: Represents a person or entity, with their profile image, or their initials or an icon when there's no image.
 ---
 
 <ComponentPreview name="avatar-demo" caption="Avatar" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Representing a specific user, account or entity next to their name or other identifying information, such as in an [Item](/components/item), a comment thread or a navigation header.
+- Representing a set of people, such as team members or conversation participants, as a group.
+
+### Guidelines
+
+- Use an avatar only to stand for a person or entity, never as decoration.
+- Always provide a fallback: the person's initials, or a generic person icon if there are no initials to show, so an avatar never renders empty or broken.
+- **Status badge:** shows presence or state, such as online, away or busy. Use it sparingly, only where presence is genuinely useful to the user. Your call: which badge variant marks which status. Pick one and use it consistently.
+- **Groups:** for shared ownership or participation, such as the members of a project, a task or a conversation. Keep the visible avatars to a few, typically three to five, and add an overflow count of the members not shown. A group is a summary, not a member list: when the full list matters, link to it or show it alongside.
+
+</DesignGuidelines>
 
 ## Installation
 

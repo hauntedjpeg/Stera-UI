@@ -9,11 +9,13 @@ Stera UI is a starting point, so you'll change its colors. The component design 
 
 - Button labels must meet WCAG AA contrast (4.5:1) against their background: `ink-onbrand` on `surface-brand` for `brand`, `ink-onaccent` on `surface-accent` for `accent`, and `ink` on `surface-subtle` for `subtle`.
 - The `outline` border should be subtle, but distinct enough to meet accessibility contrast requirements against the page background.
+- Badge labels must meet WCAG AA contrast (4.5:1) against their background in every tone and form: `ink-<tone>-strong` on `surface-<tone>-subtle` for the plain forms, `ink-on<tone>` on `surface-<tone>` for the `-solid` forms, and `ink-<tone>` on `surface` for the `-outline` forms. Watch `warning-outline`, whose label uses the lighter `ink-warning-subtle`.
 
 ## Distinct roles
 
 - Keep `accent` visibly distinct from both `brand` and `danger`, so a strong button never leaves users unsure whether an action is the main one or a destructive one.
 - Keep the `subtle` fill light enough that it doesn't compete with the primary action, and distinct enough that the button still reads as interactive.
+- Keep the Badge tones `danger`, `success` and `warning` (`surface-danger`, `surface-success`, `surface-warning` and their `-subtle` fills) distinct from each other and from `brand` and `accent`, so a badge's tone reads as its meaning.
 
 ## Interactive states
 
@@ -23,3 +25,6 @@ Stera UI is a starting point, so you'll change its colors. The component design 
 - Keep the Slider's filled range (`surface-brand`) clearly distinct from the rest of its track (`surface-disabled`), so the selected value or range reads at a glance.
 - A Sidebar's active item (`surface-subtle`) must be clearly distinct from its hover fill (`surface-hover`), so the user's current location reads at a glance.
 - Keep a Command's highlighted item (`surface-hover`) clearly distinct from the rest of the list, so keyboard users can track where they are.
+- A Chip's active state (`border-border-strongest`) must be clearly distinct from its hover fill (`surface-muted-hover` for `subtle`, `surface-hover` for `outline`) and its focus ring (`ring`). A `subtle` chip keeps its resting fill when active, so the border alone carries the selected state.
+- A Table's selected row (`surface-subtle`) must be clearly distinct from its hover fill (`surface-hover`) and from unselected rows, so the selection stays visible as users scroll.
+- A Calendar's selected date (`surface-brand`) must read unambiguously against unselected dates and against today (`surface-brand-subtle`). In a range, keep the in-range fill (`surface-muted`) distinct from both the start and end dates and the unselected dates, so the range reads as one continuous band.

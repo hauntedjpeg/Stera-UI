@@ -1,9 +1,32 @@
 ---
 title: Table
-description: A semantic HTML table component for displaying structured data in rows and columns.
+description: Shows records that share a structure in rows and columns, so users can scan, compare and act on them.
 ---
 
 <ComponentPreview name="table-demo" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Records that share a structure, such as payments, users, orders or assets, that users scan, compare or act on.
+
+### When not to use
+
+- A simple list where each record is a title and a description. Use an [Item](/components/item).
+
+### Guidelines
+
+- Always design the empty state. When no rows match or there's no data yet, say so in the table body, with an [Empty](/components/empty), instead of hiding the table.
+- **Pagination:** when there are too many rows to show at once, add a [Pagination](/components/pagination) and a row count, such as "Showing 1–20 of 184," so users know the total and where they are. If the rows fit comfortably, let the table scroll instead. A rows-per-page choice, if you offer one, needs only a few options, such as 10, 20 and 50.
+- **Row selection:** add a [Checkbox](/components/checkbox) to each row only when there's a bulk action to apply to the selection, such as delete, export or reassign. Checkboxes with nothing to act on confuse people. A checkbox in the header selects or clears every visible row, and shows a mixed state when only some are selected. While rows are selected, show how many alongside the bulk actions.
+- **Row actions:** group a record's actions, such as Edit, View details or Delete, in a [Dropdown Menu](/components/dropdown-menu) instead of several buttons in the row. Confirm destructive ones with an [Alert Dialog](/components/alert-dialog) before they run.
+
+See also: [Theming](/design/theming).
+
+</DesignGuidelines>
 
 ## Installation
 
