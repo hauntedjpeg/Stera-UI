@@ -1,9 +1,31 @@
 ---
 title: Popover
-description: Displays rich content in a floating panel anchored to a trigger, opened on click.
+description: A floating panel, opened by a click, that shows rich, interactive content in context.
 ---
 
 <ComponentPreview name="popover-demo" caption="Popover" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Supplementary content or actions too rich for a [Tooltip](/components/tooltip) but too light for a [Dialog](/components/dialog): filter controls, a short form, a contextual detail view.
+- Panels that need interaction, such as buttons, fields or links. For read-only content shown on hover, use a [Preview Card](/components/preview-card).
+
+### When not to use
+
+- Confirmations, or critical decisions that need the user's full attention. Use an [Alert Dialog](/components/alert-dialog).
+- Long or complex workflows. Use a [Drawer](/components/drawer) or a [Dialog](/components/dialog).
+
+### Guidelines
+
+- Keep the content focused and short. A popover supplements its trigger; it isn't a place for a workflow.
+
+See also: [Overlays](/design/overlays).
+
+</DesignGuidelines>
 
 ## Installation
 

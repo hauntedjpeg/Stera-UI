@@ -76,9 +76,10 @@ TS path aliases inside `apps/docs` (see `apps/docs/tsconfig.json`):
 1. Edit/create the `.tsx` under `apps/docs/registry/ui/`.
 2. Add or update its entry in `apps/docs/registry.json` — declare npm `dependencies` and any `registryDependencies` (other registry items it imports).
 3. If adding a new component, add demo files under `apps/docs/examples/` and an MDX page under the docs content tree so it appears in the site nav.
-4. Run `pnpm --filter docs build:registry` to regenerate the JSON manifests under `apps/docs/public/r/`.
+4. Write or update the page's design guidance, the `<DesignGuidelines>` block, following [`apps/docs/content/writing-design-docs.md`](apps/docs/content/writing-design-docs.md). Read it before changing how a component looks or behaves, too.
+5. Run `pnpm --filter docs build:registry` to regenerate the JSON manifests under `apps/docs/public/r/`.
 
-The docs site also serves every page as plain markdown for consumers' agents: `/llms.txt`, `/llms-full.txt`, and `/<page>.md` (built in `apps/docs/lib/llms.ts`). It swaps `<ComponentPreview>` and `<InstallSnippet>` for the example source and the install command. If you add a new docs-only MDX tag that hides content, teach `expandDocsTags` about it.
+The docs site also serves every page as plain markdown for consumers' agents: `/llms.txt`, `/llms-full.txt`, and `/<page>.md` (built in `apps/docs/lib/llms.ts`). It swaps `<ComponentPreview>` and `<InstallSnippet>` for the example source and the install command, and also serves each `<DesignGuidelines>` block on its own at `/<page>/design.md`. If you add a new docs-only MDX tag that hides content, teach `expandDocsTags` about it.
 
 A component will not be installable via the CLI until step 2 is done — `registry.json` is the source of truth for what exists.
 

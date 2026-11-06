@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 
-import { getLLMText } from "../../../lib/llms"
+import { getDesignPages, getDesignText, getLLMText } from "../../../lib/llms"
 import { source } from "../../../lib/source"
 
 export const revalidate = false
@@ -12,13 +12,26 @@ export async function GET(
 ) {
   const { slug } = await params
   const page = source.getPage(slug?.join("/") === "index" ? [] : slug)
-  if (!page) notFound()
+  const text = page ? await getLLMText(page) : await getDesignTextFor(slug)
+  if (!text) notFound()
 
-  return new Response(await getLLMText(page), {
+  return new Response(text, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
   })
 }
 
-export function generateStaticParams() {
-  return [{ slug: ["index"] }, ...source.generateParams()]
+// /<page>/design.md serves only that page's <DesignGuidelines> block.
+async function getDesignTextFor(slug: string[] | undefined) {
+  if (slug?.at(-1) !== "design") return undefined
+  const page = source.getPage(slug.slice(0, -1))
+  return page ? getDesignText(page) : undefined
+}
+
+export async function generateStaticParams() {
+  const designPages = await getDesignPages()
+  return [
+    { slug: ["index"] },
+    ...source.generateParams(),
+    ...designPages.map((page) => ({ slug: [...page.slugs, "design"] })),
+  ]
 }

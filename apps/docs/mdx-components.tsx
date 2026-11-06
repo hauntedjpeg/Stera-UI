@@ -6,6 +6,7 @@ import { Preview } from "@/components/preview"
 import { ComponentPreview } from "@/components/component-preview"
 import { CodeBlock } from "@/components/code-block"
 import { InstallSnippet } from "@/components/install-snippet"
+import { DesignGuidelines } from "@/components/design-guidelines"
 import { SiInfoCircle } from "stera-icons"
 
 function Callout({ children }: { type?: string; children: ReactNode }) {
@@ -128,6 +129,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Preview,
     ComponentPreview,
     InstallSnippet,
+    DesignGuidelines,
     ...components,
   }
 }

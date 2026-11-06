@@ -1,0 +1,20 @@
+---
+title: Theming
+description: Rules to keep when you change Stera UI's color tokens.
+---
+
+Stera UI is a starting point, so you'll change its colors. The component design guidelines assume these rules still hold after you do. Whoever places a component can't affect them; whoever edits the tokens can.
+
+## Contrast
+
+- Button labels must meet WCAG AA contrast (4.5:1) against their background: `ink-onbrand` on `surface-brand` for `brand`, `ink-onaccent` on `surface-accent` for `accent`, and `ink` on `surface-subtle` for `subtle`.
+- The `outline` border should be subtle, but distinct enough to meet accessibility contrast requirements against the page background.
+
+## Distinct roles
+
+- Keep `accent` visibly distinct from both `brand` and `danger`, so a strong button never leaves users unsure whether an action is the main one or a destructive one.
+- Keep the `subtle` fill light enough that it doesn't compete with the primary action, and distinct enough that the button still reads as interactive.
+
+## Interactive states
+
+- `subtle` and `ghost` buttons have little or no resting background, so their hover, focus and pressed states (`surface-subtle-hover`, `surface-hover`) carry most of the signal that they're interactive. Keep those states clear enough to tell the buttons apart from static text.

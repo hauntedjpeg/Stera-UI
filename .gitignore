@@ -50,3 +50,6 @@ pnpm-debug.log*
 
 # typescript
 *.tsbuildinfo
+
+# temporary Figma design-doc exports, being migrated into the docs
+stera-ui-docs/

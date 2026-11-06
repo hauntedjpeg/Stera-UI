@@ -1,9 +1,31 @@
 ---
 title: Preview Card
-description: For sighted users to preview content available behind a link.
+description: A floating panel, shown on hover, that previews the person, document or entity a trigger refers to.
 ---
 
 <ComponentPreview name="preview-card-demo" caption="Preview Card" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A richer preview of a linked person, document or entity, such as a user's profile when hovering their name in a list or comment thread.
+- Context that helps users decide whether to navigate, without committing to a full page visit.
+
+### When not to use
+
+- Content that needs an action or response. Use a [Popover](/components/popover) or a [Dialog](/components/dialog).
+
+### Guidelines
+
+- Keep it brief and scannable: a summary, not a detail view. A title, a short supporting detail and optional metadata is usually enough.
+- Never put interactive controls, like buttons or forms, inside it. Use a Popover instead.
+
+See also: [Overlays](/design/overlays).
+
+</DesignGuidelines>
 
 ## Installation
 

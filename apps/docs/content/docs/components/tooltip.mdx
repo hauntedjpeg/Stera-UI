@@ -1,9 +1,31 @@
 ---
 title: Tooltip
-description: A floating label that appears on hover or focus to provide contextual information.
+description: A small floating label, shown on hover or keyboard focus, that gives brief supplementary information about an element.
 ---
 
 <ComponentPreview name="tooltip-demo" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Short context for elements without a visible label, such as icon buttons or truncated text.
+- Keyboard shortcuts next to an action, so users learn them over time. Show them with [Kbd](/components/kbd).
+
+### When not to use
+
+- Information needed to complete a task. Put it inline, or in a component that stays on screen.
+- Anything interactive, like links or buttons. Use a [Popover](/components/popover).
+
+### Guidelines
+
+- One short phrase or sentence. A tooltip isn't documentation or a long explanation.
+
+See also: [Overlays](/design/overlays).
+
+</DesignGuidelines>
 
 ## Installation
 
