@@ -1,9 +1,34 @@
 ---
 title: Dropdown Menu
-description: A menu that appears on trigger, offering a list of actions, links, or selections.
+description: A panel of actions or options that opens from a trigger, keeping secondary actions out of the way until they're needed.
 ---
 
 <ComponentPreview name="dropdown-menu-demo" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A set of related actions or navigation options behind one trigger, when showing them inline would clutter the interface.
+- Actions tied to one item, such as Edit, Duplicate or Delete on a row in a table or list.
+
+### When not to use
+
+- A choice that's part of a form. Use a [Select](/components/select) or a [Combobox](/components/combobox).
+- Searching across every action and destination in the product. Use a [Command](/components/command).
+
+### Guidelines
+
+- Keep item labels short and action-oriented: two to four words, starting with a verb.
+- Group related items together, and separate distinct clusters sparingly.
+- Give destructive items, such as Delete or Remove, the `danger` variant, and confirm them with an [Alert Dialog](/components/alert-dialog) before they run.
+- Your call: where destructive items sit in the menu. Pick one and use it consistently.
+
+See also: [Menus and navigation](/design/navigation).
+
+</DesignGuidelines>
 
 ## Installation
 
