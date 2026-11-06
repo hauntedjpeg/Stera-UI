@@ -28,6 +28,19 @@ function dedent(text: string): string {
   return lines.map((line) => line.slice(min)).join("\n")
 }
 
+/**
+ * Site-relative markdown links become absolute, so an agent reading a .md
+ * file can follow them. Code fences are left alone.
+ */
+function absoluteLinks(markdown: string): string {
+  return markdown
+    .split(/(^```[\s\S]*?^```)/m)
+    .map((part, i) =>
+      i % 2 ? part : part.replace(/\]\(\//g, `](${SITE_URL}/`)
+    )
+    .join("")
+}
+
 function designBlock(markdown: string): string | undefined {
   const match = markdown.match(DESIGN_GUIDELINES)
   return match ? dedent(match[1]).trim() : undefined
@@ -71,11 +84,10 @@ export async function getDesignText(page: Page): Promise<string | undefined> {
   const block = designBlock(await page.data.getText("processed"))
   if (!block) return undefined
 
-  // The block's h3s become h2s on their own page, and site-relative links
-  // become absolute so an agent can follow them.
-  const body = block
-    .replace(/^(#{3,6}) /gm, (_, hashes: string) => `${hashes.slice(1)} `)
-    .replace(/\]\(\//g, `](${SITE_URL}/`)
+  // The block's h3s become h2s on their own page.
+  const body = absoluteLinks(
+    block.replace(/^(#{3,6}) /gm, (_, hashes: string) => `${hashes.slice(1)} `)
+  )
   const description = page.data.description
     ? `\n\n${page.data.description}`
     : ""
@@ -94,7 +106,7 @@ export async function getDesignPages(): Promise<Page[]> {
 
 export async function getLLMText(page: Page): Promise<string> {
   const processed = await page.data.getText("processed")
-  const body = await expandDocsTags(processed)
+  const body = absoluteLinks(await expandDocsTags(processed))
   const description = page.data.description
     ? `\n\n${page.data.description}`
     : ""
