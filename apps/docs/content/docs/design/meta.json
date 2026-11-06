@@ -1,4 +1,11 @@
 {
   "title": "Design",
-  "pages": ["forms", "navigation", "overlays", "selection", "theming"]
+  "pages": [
+    "forms",
+    "loading",
+    "navigation",
+    "overlays",
+    "selection",
+    "theming"
+  ]
 }

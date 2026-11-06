@@ -1,9 +1,30 @@
 ---
 title: Progress
-description: A progress bar for displaying task completion or upload status.
+description: Shows how far a task or process has advanced toward completion.
 ---
 
 <ComponentPreview name="progress-demo" caption="Progress" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A process you can measure, such as a file upload, a multi-step form or a background task, where a percentage or value can be tracked over time.
+
+### When not to use
+
+- Waits whose completion can't be measured. Use a [Skeleton](/components/skeleton) or a Spinner.
+- Letting users set a value in a range. Progress is read-only. Use a [Slider](/components/slider).
+
+### Guidelines
+
+- Give a progress bar a visible label and value whenever the context doesn't make clear what it measures, such as when several appear on the same surface.
+
+See also: [Loading and empty states](/design/loading) and [Theming](/design/theming).
+
+</DesignGuidelines>
 
 ## Installation
 

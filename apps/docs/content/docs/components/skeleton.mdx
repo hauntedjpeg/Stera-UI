@@ -1,9 +1,30 @@
 ---
 title: Skeleton
-description: A placeholder loading state that mimics the shape of content while it loads.
+description: A placeholder that stands in for content while it loads, so users see the layout before the data arrives.
 ---
 
 <ComponentPreview name="skeleton-demo" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Content that's being fetched, such as text, avatars, cards or table rows, to make the wait feel shorter.
+
+### When not to use
+
+- Processes with no predictable end, such as a background sync. Use a Spinner.
+
+### Guidelines
+
+- Mirror the content that's coming. Compose several skeletons so they match its structure as closely as you can, such as one for an avatar and one for each line of text.
+- Avoid mixing loaded and still-loading content on the same surface where you can.
+
+See also: [Loading and empty states](/design/loading) and [Theming](/design/theming).
+
+</DesignGuidelines>
 
 ## Installation
 
