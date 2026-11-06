@@ -1,9 +1,31 @@
 ---
 title: Slider
-description: An input for selecting a numeric value within a range by dragging a thumb.
+description: A control for picking a numeric value or a range by dragging along a track, where the position in the range matters more than the exact value.
 ---
 
 <ComponentPreview name="slider-demo" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Setting a value between a defined minimum and maximum, such as volume, price or opacity.
+- A range, with two thumbs, when users need both a lower and an upper bound, such as a price filter or a date window.
+
+### When not to use
+
+- When the exact value matters. Pair the slider with a numeric [Input](/components/input), or use the input alone.
+
+### Guidelines
+
+- Always show the current value, so users know what they've picked.
+- Your call: whether the value shows as a persistent label or a tooltip on the thumb. Pick one and use it consistently.
+
+See also: [Forms](/design/forms) and [Theming](/design/theming).
+
+</DesignGuidelines>
 
 ## Installation
 
