@@ -25,21 +25,22 @@ import {
  *   page (darker in light mode, lighter in dark mode). A seed with no room
  *   that way, past the bold step or within the pressed offset of the end of
  *   the range, has its states step back toward the page instead.
- * - 800–950, the bold surface: fixed again. 950 is the darkest step in light
- *   mode and the lightest tinted surface in dark mode; 900 and 800 are its
- *   hover and pressed states, stepping back toward the seed.
+ * - 800–950, the bold surface: fixed again. 800 is the bold surface and 900
+ *   and 950 are its hover and pressed states, moving further from the page;
+ *   950 is the darkest step in light mode and the lightest tinted surface in
+ *   dark mode.
  *
  * Dark mode has no seed of its own. Dark 500 is the seed when it has enough
  * contrast against the dark page, otherwise it is lifted so it has the same
  * contrast against the dark page that the seed has against the light page.
  */
-export type TunedOptions = {
+export type SemanticOptions = {
   hex: string
   lightBackground: string
   darkBackground: string
 }
 
-export type TunedResult = {
+export type SemanticResult = {
   entries: ScaleEntry[]
   /** Warnings worth showing next to the preview. */
   notes: string[]
@@ -73,10 +74,10 @@ export function backgroundError(
   return null
 }
 
-export function generateTunedScale(
-  options: TunedOptions,
+export function generateSemanticScale(
+  options: SemanticOptions,
   targets: Targets = DEFAULT_TARGETS
-): TunedResult {
+): SemanticResult {
   const error = backgroundError(options.lightBackground, options.darkBackground)
   if (error) throw new Error(error)
   const hex = normalizeHex(options.hex)

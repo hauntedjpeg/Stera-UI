@@ -1,10 +1,10 @@
 import type { ScaleStep } from "./steps.js"
 
 /**
- * What each step of a Tuned ramp is for, the same in every family and in
+ * What each step of a Semantic ramp is for, the same in every family and in
  * both modes. This is the table the Theme aliases follow; the plugin only
- * shows it. 500 is the seed; 600 and 700 move away from the page; 950 is the
- * bold surface and 900 and 800 its states, stepping back toward the seed.
+ * shows it. 500 is the seed; 600 and 700 move away from the page. 800 is the
+ * bold surface and 900 and 950 are its states, moving further from the page.
  */
 export const STEP_ROLES: Record<ScaleStep, string> = {
   25: "surface-subtle",
@@ -16,7 +16,24 @@ export const STEP_ROLES: Record<ScaleStep, string> = {
   500: "surface, ink (the seed)",
   600: "surface-hover",
   700: "surface-pressed",
-  800: "surface-bold-pressed",
+  800: "surface-bold, ink-bold",
   900: "surface-bold-hover",
-  950: "surface-bold, ink-bold",
+  950: "surface-bold-pressed",
 }
+
+export type RoleBand = {
+  name: string
+  /** Base, hover, pressed, in that order. */
+  steps: readonly [ScaleStep, ScaleStep, ScaleStep]
+}
+
+/**
+ * The four role bands of a Semantic ramp. Every band reads base, hover,
+ * pressed, each one further from the page than the last.
+ */
+export const ROLE_BANDS: readonly RoleBand[] = [
+  { name: "subtle", steps: [25, 50, 100] },
+  { name: "muted", steps: [200, 300, 400] },
+  { name: "solid", steps: [500, 600, 700] },
+  { name: "bold", steps: [800, 900, 950] },
+]

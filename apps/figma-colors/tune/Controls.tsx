@@ -1,3 +1,4 @@
+import { ROLE_BANDS } from "../src/core/scale/roles.js"
 import {
   FIXED_STEPS,
   type FixedStep,
@@ -47,11 +48,12 @@ function Num({ label, value, min, max, step, onChange }: NumProps) {
   )
 }
 
-const BANDS: { title: string; steps: FixedStep[] }[] = [
-  { title: "Subtle", steps: [25, 50, 100] },
-  { title: "Muted", steps: [200, 300, 400] },
-  { title: "Bold", steps: [800, 900, 950] },
-]
+// The seed band has no fixed targets, so it gets its own section below.
+const BANDS: { title: string; steps: readonly FixedStep[] }[] =
+  ROLE_BANDS.filter((band) => band.name !== "solid").map((band) => ({
+    title: band.name[0].toUpperCase() + band.name.slice(1),
+    steps: band.steps as readonly FixedStep[],
+  }))
 
 export function Controls({ targets, onChange }: Props) {
   const setMode = (mode: Mode, patch: Partial<Targets[Mode]>) =>

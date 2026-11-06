@@ -2,7 +2,10 @@ import { useEffect, useMemo, useState } from "react"
 import { normalizeHex } from "../src/core/color/hex.js"
 import { generateBiModalScale } from "../src/core/scale/bi-modal.js"
 import { DEFAULT_TARGETS, type Mode } from "../src/core/scale/targets.js"
-import { backgroundError, generateTunedScale } from "../src/core/scale/tuned.js"
+import {
+  backgroundError,
+  generateSemanticScale,
+} from "../src/core/scale/semantic.js"
 import { Controls } from "./Controls.js"
 import { Demos } from "./Demos.js"
 import { Grid, type Row } from "./Grid.js"
@@ -41,10 +44,10 @@ export function App() {
       lightBackground: state.pages.light,
       darkBackground: state.pages.dark,
     })
-    const tuned = state.seeds
+    const semantic = state.seeds
       .filter((seed) => normalizeHex(seed.hex))
       .map((seed) => {
-        const result = generateTunedScale(
+        const result = generateSemanticScale(
           {
             hex: seed.hex,
             lightBackground: state.pages.light,
@@ -52,11 +55,11 @@ export function App() {
           },
           state.targets
         )
-        return { name: seed.name, ...result, tuned: true }
+        return { name: seed.name, ...result, semantic: true }
       })
     return [
-      { name: "Neutral", entries: neutral.entries, notes: [], tuned: false },
-      ...tuned,
+      { name: "Neutral", entries: neutral.entries, notes: [], semantic: false },
+      ...semantic,
     ]
   }, [state.seeds, state.neutral, state.pages, state.targets, pageError])
 
@@ -218,7 +221,7 @@ export function App() {
               />
               <div className="demos">
                 {rows
-                  .filter((row) => row.tuned)
+                  .filter((row) => row.semantic)
                   .map((row) => (
                     <Demos
                       key={row.name}

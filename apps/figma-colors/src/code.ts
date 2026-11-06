@@ -154,7 +154,7 @@ function post(message: SandboxToUi): void {
   figma.ui.postMessage(message)
 }
 
-figma.showUI(__html__, { width: 480, height: 480, themeColors: true })
+figma.showUI(__html__, { width: 480, height: 504, themeColors: true })
 
 figma.ui.onmessage = async (msg: UiToSandbox) => {
   try {

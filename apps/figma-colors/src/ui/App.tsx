@@ -11,7 +11,7 @@ import {
   type GenerationResult,
   type ScaleType,
 } from "../core/scale/bi-modal.js"
-import { backgroundError } from "../core/scale/tuned.js"
+import { backgroundError } from "../core/scale/semantic.js"
 import { suggestColorName } from "../core/naming/color-name.js"
 import { useFigmaMessages } from "./hooks/useFigmaMessages.js"
 import { Button } from "./components/Button.js"
@@ -20,10 +20,11 @@ import { Field } from "./components/Field.js"
 import { GroupSelect } from "./components/GroupSelect.js"
 import { HexField } from "./components/HexField.js"
 import { ScalePreview } from "./components/ScalePreview.js"
+import { Section } from "./components/Section.js"
 import { SegmentedControl } from "./components/SegmentedControl.js"
 
 const SCALE_TYPE_OPTIONS: { value: ScaleType; label: string }[] = [
-  { value: "accent", label: "Tuned" },
+  { value: "accent", label: "Semantic" },
   { value: "gray", label: "Standard" },
 ]
 
@@ -103,7 +104,7 @@ export function App() {
     )
   }
 
-  const tuned = prefs.scaleType === "accent"
+  const semantic = prefs.scaleType === "accent"
 
   const updatePrefs = (patch: Partial<StoredPrefs>) => {
     const next = { ...prefs, ...patch }
@@ -143,14 +144,30 @@ export function App() {
   return (
     <div className="flex h-full">
       <div className="flex w-full flex-col">
-        <div className="flex flex-col gap-3 border-b border-border p-4">
-          <Field label="Color">
+        <Section title="Configure" className="border-b border-border p-4 pt-0">
+          <Field label="Base color">
             <HexField
-              label="Color"
+              label="Base color"
               value={prefs.hex}
               onChange={handleHexChange}
             />
           </Field>
+          <div className="flex gap-2">
+            <Field label="Light BG" className="flex-1">
+              <HexField
+                label="Light background"
+                value={prefs.lightBackground}
+                onChange={(lightBackground) => updatePrefs({ lightBackground })}
+              />
+            </Field>
+            <Field label="Dark BG" className="flex-1">
+              <HexField
+                label="Dark background"
+                value={prefs.darkBackground}
+                onChange={(darkBackground) => updatePrefs({ darkBackground })}
+              />
+            </Field>
+          </div>
           <Field label="Scale type">
             <SegmentedControl
               label="Scale type"
@@ -159,31 +176,17 @@ export function App() {
               onChange={(scaleType) => updatePrefs({ scaleType })}
             />
           </Field>
-          <Field label="Background">
-            <div className="flex gap-2">
-              <HexField
-                label="Light background"
-                placeholder="Light"
-                value={prefs.lightBackground}
-                onChange={(lightBackground) => updatePrefs({ lightBackground })}
-              />
-              <HexField
-                label="Dark background"
-                placeholder="Dark"
-                value={prefs.darkBackground}
-                onChange={(darkBackground) => updatePrefs({ darkBackground })}
-              />
-            </div>
-          </Field>
-        </div>
+        </Section>
 
-        <div className="flex flex-col gap-3 p-4">
-          <SegmentedControl
-            label="Target"
-            value={prefs.mode}
-            options={MODE_OPTIONS}
-            onChange={(mode) => updatePrefs({ mode })}
-          />
+        <Section title="Export" className="p-4 pt-0">
+          <Field label="Variables">
+            <SegmentedControl
+              label="Variables"
+              value={prefs.mode}
+              options={MODE_OPTIONS}
+              onChange={(mode) => updatePrefs({ mode })}
+            />
+          </Field>
 
           {prefs.mode === "add" ? (
             <>
@@ -214,7 +217,7 @@ export function App() {
               />
             </Field>
           )}
-        </div>
+        </Section>
 
         {(backgroundMessage || errorMessage) && (
           <div className="px-4 pb-2 text-danger">
@@ -228,20 +231,16 @@ export function App() {
             disabled={!canSubmit}
             className="w-full justify-center"
           >
-            {prefs.mode === "update" ? "Update Variables" : "Add Variables"}
+            {prefs.mode === "update" ? "Update variables" : "Add variables"}
           </Button>
         </div>
       </div>
 
-      <div className="flex w-full flex-col gap-2 border-l border-border p-4">
-        <ScalePreview scale={scale} tuned={tuned} />
-        {result.notes.length > 0 && (
-          <ul className="flex flex-col gap-1 text-[9px]/3.5 text-text-secondary">
-            {result.notes.map((note) => (
-              <li key={note}>{note}</li>
-            ))}
-          </ul>
-        )}
+      <div className="flex w-full flex-col border-l border-border">
+        {/* `result.notes` — the contrast and dark-solid warnings — is still
+            generated but not shown. The old list was a sloppy fit under the
+            preview; it comes back once the alerts have a design. */}
+        <ScalePreview scale={scale} semantic={semantic} />
       </div>
     </div>
   )

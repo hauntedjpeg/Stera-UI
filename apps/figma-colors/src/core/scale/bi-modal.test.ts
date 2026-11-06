@@ -40,9 +40,9 @@ describe("generateBiModalScale", () => {
     expect(a).toEqual(b)
   })
 
-  it("writes the seed at light 500 for Tuned and has no notes for Standard", () => {
-    const tuned = generateBiModalScale(options({}))
-    expect(tuned.entries[6]).toMatchObject({ step: 500, light: "#3b82f6" })
+  it("writes the seed at light 500 for Semantic and has no notes for Standard", () => {
+    const semantic = generateBiModalScale(options({}))
+    expect(semantic.entries[6]).toMatchObject({ step: 500, light: "#3b82f6" })
     const standard = generateBiModalScale(options({ scaleType: "gray" }))
     expect(standard.notes).toEqual([])
   })

@@ -12,9 +12,9 @@ import {
 } from "./targets.js"
 import {
   backgroundError,
-  generateTunedScale,
-  type TunedOptions,
-} from "./tuned.js"
+  generateSemanticScale,
+  type SemanticOptions,
+} from "./semantic.js"
 
 const HEX_6 = /^#[0-9a-f]{6}$/
 
@@ -47,7 +47,7 @@ const PAGES = [
 /** Hues outside the yellow range, whose shades keep the seed hue. */
 const YELLOW_RANGE = DEFAULT_TARGETS.hueShift.range
 
-function options(patch: Partial<TunedOptions>): TunedOptions {
+function options(patch: Partial<SemanticOptions>): SemanticOptions {
   return {
     hex: "#3b82f6",
     lightBackground: "#ffffff",
@@ -56,7 +56,7 @@ function options(patch: Partial<TunedOptions>): TunedOptions {
   }
 }
 
-type Result = ReturnType<typeof generateTunedScale>
+type Result = ReturnType<typeof generateSemanticScale>
 
 function hexAt(result: Result, step: ScaleStep, mode: Mode): string {
   const entry = result.entries.find((e) => e.step === step)
@@ -78,11 +78,11 @@ function hueDistance(a: number, b: number): number {
   return d > 180 ? 360 - d : d
 }
 
-describe("generateTunedScale", () => {
+describe("generateSemanticScale", () => {
   it("returns 24 six-digit hexes in step order and is deterministic", () => {
     for (const hex of ALL) {
-      const a = generateTunedScale(options({ hex }))
-      const b = generateTunedScale(options({ hex }))
+      const a = generateSemanticScale(options({ hex }))
+      const b = generateSemanticScale(options({ hex }))
       expect(a).toEqual(b)
       expect(a.entries.map((e) => e.step)).toEqual([...SCALE_STEPS])
       for (const entry of a.entries) {
@@ -99,7 +99,7 @@ describe("generateTunedScale", () => {
           mode === "light" ? page.lightBackground : page.darkBackground
         const targets = ladder(mode, hexToOklch(background).L, DEFAULT_TARGETS)
         for (const hex of ALL) {
-          const result = generateTunedScale(options({ hex, ...page }))
+          const result = generateSemanticScale(options({ hex, ...page }))
           for (const step of FIXED_STEPS) {
             expect(
               Math.abs(L(result, step, mode) - targets[step]),
@@ -118,7 +118,7 @@ describe("generateTunedScale", () => {
     const clamped: FixedStep[] = [300, 400, 800]
     for (const mode of MODES) {
       for (const hex of VIVID) {
-        const result = generateTunedScale(options({ hex }))
+        const result = generateSemanticScale(options({ hex }))
         for (const step of exact) {
           const { C } = hexToOklch(hexAt(result, step, mode))
           const k = DEFAULT_TARGETS[mode].K[step]
@@ -136,7 +136,7 @@ describe("generateTunedScale", () => {
   it("writes the seed verbatim at light 500", () => {
     for (const page of PAGES) {
       for (const hex of ALL) {
-        const result = generateTunedScale(options({ hex, ...page }))
+        const result = generateSemanticScale(options({ hex, ...page }))
         expect(hexAt(result, 500, "light")).toBe(normalizeHex(hex))
       }
     }
@@ -150,7 +150,7 @@ describe("generateTunedScale", () => {
       LIVE.red,
       "#3b82f6",
     ]) {
-      const result = generateTunedScale(options({ hex }))
+      const result = generateSemanticScale(options({ hex }))
       expect(wcag(hex, "#000000")).toBeGreaterThanOrEqual(
         DEFAULT_TARGETS.darkSolidMinContrast
       )
@@ -162,7 +162,7 @@ describe("generateTunedScale", () => {
   it("lifts a dim dark solid to the seed's light-page contrast, with a note", () => {
     for (const page of PAGES) {
       for (const hex of [LIVE.nearBlack, "#1e3a8a"]) {
-        const result = generateTunedScale(options({ hex, ...page }))
+        const result = generateSemanticScale(options({ hex, ...page }))
         expect(wcag(hex, page.darkBackground)).toBeLessThan(
           DEFAULT_TARGETS.darkSolidMinContrast
         )
@@ -180,7 +180,7 @@ describe("generateTunedScale", () => {
   it("orders the seed band away from the page, or back when the seed is past 950", () => {
     for (const page of PAGES) {
       for (const hex of ALL) {
-        const result = generateTunedScale(options({ hex, ...page }))
+        const result = generateSemanticScale(options({ hex, ...page }))
         for (const mode of MODES) {
           const solid = L(result, 500, mode)
           const bold = L(result, 950, mode)
@@ -218,17 +218,17 @@ describe("generateTunedScale", () => {
 
   it("reverses the states for seeds with no room away from the page", () => {
     // Near-black is past light 950; lime is within the pressed offset of white.
-    const brand = generateTunedScale(options({ hex: LIVE.nearBlack }))
+    const brand = generateSemanticScale(options({ hex: LIVE.nearBlack }))
     expect(L(brand, 600, "light")).toBeGreaterThan(L(brand, 500, "light"))
     expect(brand.notes.some((n) => /Light solid has no room/.test(n))).toBe(
       true
     )
-    const lime = generateTunedScale(options({ hex: LIVE.lime }))
+    const lime = generateSemanticScale(options({ hex: LIVE.lime }))
     expect(L(lime, 600, "dark")).toBeLessThan(L(lime, 500, "dark"))
     expect(L(lime, 700, "dark")).toBeLessThan(L(lime, 600, "dark"))
     expect(lime.notes.some((n) => /Dark solid has no room/.test(n))).toBe(true)
     // A mid blue keeps the normal direction in both modes.
-    const blue = generateTunedScale(options({ hex: "#3b82f6" }))
+    const blue = generateSemanticScale(options({ hex: "#3b82f6" }))
     expect(L(blue, 600, "light")).toBeLessThan(L(blue, 500, "light"))
     expect(L(blue, 600, "dark")).toBeGreaterThan(L(blue, 500, "dark"))
     expect(blue.notes.some((n) => /has no room/.test(n))).toBe(false)
@@ -238,7 +238,7 @@ describe("generateTunedScale", () => {
     const steps: ScaleStep[] = [600, 700, 800, 900, 950]
     for (const hex of [...VIVID, ...MUTED].filter((h) => !isYellow(h))) {
       const seedHue = hexToOklch(hex).H
-      const result = generateTunedScale(options({ hex }))
+      const result = generateSemanticScale(options({ hex }))
       for (const mode of MODES) {
         for (const step of steps) {
           const { C, H } = hexToOklch(hexAt(result, step, mode))
@@ -258,7 +258,7 @@ describe("generateTunedScale", () => {
     const yellow = LIVE.yellow
     const seedHue = hexToOklch(yellow).H
     expect(isYellow(yellow)).toBe(true)
-    const result = generateTunedScale(options({ hex: yellow }))
+    const result = generateSemanticScale(options({ hex: yellow }))
     const shades: ScaleStep[] = [800, 900, 950]
     let previous = seedHue
     for (const step of shades) {
@@ -273,7 +273,7 @@ describe("generateTunedScale", () => {
 
   it("keeps gray seeds gray with no NaN anywhere", () => {
     for (const hex of ACHROMATIC) {
-      const result = generateTunedScale(options({ hex }))
+      const result = generateSemanticScale(options({ hex }))
       for (const entry of result.entries) {
         for (const mode of MODES) {
           const { L, C, H } = hexToOklch(entry[mode])
@@ -286,12 +286,12 @@ describe("generateTunedScale", () => {
 
   it("notes a seed too faint to be ink", () => {
     expect(
-      generateTunedScale(options({ hex: LIVE.yellow })).notes.some((n) =>
+      generateSemanticScale(options({ hex: LIVE.yellow })).notes.some((n) =>
         /Ink at 500/.test(n)
       )
     ).toBe(true)
     expect(
-      generateTunedScale(options({ hex: "#1e3a8a" })).notes.some((n) =>
+      generateSemanticScale(options({ hex: "#1e3a8a" })).notes.some((n) =>
         /Ink at 500/.test(n)
       )
     ).toBe(false)
@@ -306,7 +306,7 @@ describe("generateTunedScale", () => {
       },
       stateDelta: [0.1, 0.2],
     }
-    const result = generateTunedScale(options({}), custom)
+    const result = generateSemanticScale(options({}), custom)
     expect(Math.abs(L(result, 25, "light") - 0.9)).toBeLessThan(0.005)
     const seedL = hexToOklch("#3b82f6").L
     expect(Math.abs(seedL - 0.1 - L(result, 600, "light"))).toBeLessThan(0.01)
@@ -319,7 +319,7 @@ describe("generateTunedScale", () => {
     expect(backgroundError("#ffffff", "#777777")).toMatch(/too light/)
     expect(backgroundError("nope", "#000000")).toMatch(/hex/)
     expect(() =>
-      generateTunedScale(options({ lightBackground: "#cccccc" }))
+      generateSemanticScale(options({ lightBackground: "#cccccc" }))
     ).toThrow(/too dark/)
   })
 })

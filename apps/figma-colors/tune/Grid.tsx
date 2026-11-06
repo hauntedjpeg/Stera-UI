@@ -13,7 +13,7 @@ export type Row = {
   entries: ScaleEntry[]
   notes: string[]
   /** Standard ramps do not follow the role table. */
-  tuned: boolean
+  semantic: boolean
 }
 
 type Props = {
@@ -59,7 +59,7 @@ export function Grid({ rows, mode, page, numbers }: Props) {
                 key={step}
                 type="button"
                 className={`cell ${isLightColor(hex) ? "on-light" : "on-dark"} ${
-                  row.tuned && step === 500 ? "cell-seed" : ""
+                  row.semantic && step === 500 ? "cell-seed" : ""
                 }`}
                 style={{ background: hex }}
                 title={`${displayHex(hex)} · L ${(L * 100).toFixed(0)} · C ${C.toFixed(3)} · ${ratio.toFixed(1)}:1 vs page`}

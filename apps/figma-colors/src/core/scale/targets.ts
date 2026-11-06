@@ -1,8 +1,8 @@
 import type { ScaleStep } from "./steps.js"
 
 /**
- * Tuning data for the Tuned ramp generator. Everything a designer might want
- * to adjust lives in `DEFAULT_TARGETS`; `tuned.ts` only applies the numbers.
+ * Tuning data for the Semantic ramp generator. Everything a designer might want
+ * to adjust lives in `DEFAULT_TARGETS`; `semantic.ts` only applies the numbers.
  * The tests check the contract (fixed steps on target, seed at 500, band
  * order, hue-equal tints), not the exact values, so these can be changed with
  * the playground (`pnpm tune`) and pasted back here.

@@ -1,11 +1,11 @@
 import Color from "colorjs.io"
 import { generateRadixColors } from "../radix/generate-radix-colors.js"
 import { SCALE_STEPS, type ScaleEntry } from "./steps.js"
-import { generateTunedScale } from "./tuned.js"
+import { generateSemanticScale } from "./semantic.js"
 
 export { SCALE_STEPS, type ScaleEntry, type ScaleStep } from "./steps.js"
 
-/** "accent" is shown as Tuned, "gray" as Standard. */
+/** "accent" is shown as Semantic, "gray" as Standard. */
 export type ScaleType = "accent" | "gray"
 
 export type GenerationOptions = {
@@ -17,7 +17,7 @@ export type GenerationOptions = {
 
 export type GenerationResult = {
   entries: ScaleEntry[]
-  /** Tuned only: warnings worth showing next to the preview. */
+  /** Semantic only: warnings worth showing next to the preview. */
   notes: string[]
 }
 
@@ -98,7 +98,7 @@ export function generateBiModalScale(
   options: GenerationOptions
 ): GenerationResult {
   if (options.scaleType === "gray") return generateStandardScale(options)
-  return generateTunedScale({
+  return generateSemanticScale({
     hex: options.hex,
     lightBackground: options.lightBackground,
     darkBackground: options.darkBackground,
