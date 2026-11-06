@@ -66,9 +66,12 @@ export function App() {
     postToSandbox({ type: "load" })
   }, [])
 
+  // Only Semantic reads the page: its tints are anchored to the background, so
+  // a page outside the usable range has to block generation. Standard ramps are
+  // absolute and ignore the backgrounds entirely.
   const backgroundMessage = useMemo(
     () =>
-      prefs
+      prefs && prefs.scaleType === "accent"
         ? backgroundError(prefs.lightBackground, prefs.darkBackground)
         : null,
     [prefs]
@@ -152,22 +155,26 @@ export function App() {
               onChange={handleHexChange}
             />
           </Field>
-          <div className="flex gap-2">
-            <Field label="Light BG" className="flex-1">
-              <HexField
-                label="Light background"
-                value={prefs.lightBackground}
-                onChange={(lightBackground) => updatePrefs({ lightBackground })}
-              />
-            </Field>
-            <Field label="Dark BG" className="flex-1">
-              <HexField
-                label="Dark background"
-                value={prefs.darkBackground}
-                onChange={(darkBackground) => updatePrefs({ darkBackground })}
-              />
-            </Field>
-          </div>
+          {semantic && (
+            <div className="flex gap-2">
+              <Field label="Light BG" className="flex-1">
+                <HexField
+                  label="Light background"
+                  value={prefs.lightBackground}
+                  onChange={(lightBackground) =>
+                    updatePrefs({ lightBackground })
+                  }
+                />
+              </Field>
+              <Field label="Dark BG" className="flex-1">
+                <HexField
+                  label="Dark background"
+                  value={prefs.darkBackground}
+                  onChange={(darkBackground) => updatePrefs({ darkBackground })}
+                />
+              </Field>
+            </div>
+          )}
           <Field label="Scale type">
             <SegmentedControl
               label="Scale type"

@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react"
 import { normalizeHex } from "../src/core/color/hex.js"
-import { generateBiModalScale } from "../src/core/scale/bi-modal.js"
-import { DEFAULT_TARGETS, type Mode } from "../src/core/scale/targets.js"
 import {
   backgroundError,
   generateSemanticScale,
 } from "../src/core/scale/semantic.js"
+import { generateStandardScale } from "../src/core/scale/standard.js"
+import { DEFAULT_STANDARD_TARGETS } from "../src/core/scale/standard-targets.js"
+import { DEFAULT_TARGETS, type Mode } from "../src/core/scale/targets.js"
 import { Controls } from "./Controls.js"
 import { Demos } from "./Demos.js"
 import { Grid, type Row } from "./Grid.js"
@@ -13,13 +14,18 @@ import {
   DEFAULT_SEEDS,
   loadState,
   saveState,
+  serializeStandardTargets,
   serializeTargets,
   type TuneState,
 } from "./state.js"
 
 declare global {
   interface Window {
-    __tune?: { state: TuneState; targetsTs: string }
+    __tune?: {
+      state: TuneState
+      targetsTs: string
+      standardTargetsTs: string
+    }
   }
 }
 
@@ -31,19 +37,21 @@ export function App() {
 
   useEffect(() => {
     saveState(state)
-    window.__tune = { state, targetsTs: serializeTargets(state.targets) }
+    window.__tune = {
+      state,
+      targetsTs: serializeTargets(state.targets),
+      standardTargetsTs: serializeStandardTargets(state.standardTargets),
+    }
   }, [state])
 
   const pageError = backgroundError(state.pages.light, state.pages.dark)
 
   const rows = useMemo<Row[]>(() => {
     if (pageError) return []
-    const neutral = generateBiModalScale({
-      hex: state.neutral,
-      scaleType: "gray",
-      lightBackground: state.pages.light,
-      darkBackground: state.pages.dark,
-    })
+    const neutral = generateStandardScale(
+      { hex: state.neutral },
+      state.standardTargets
+    )
     const semantic = state.seeds
       .filter((seed) => normalizeHex(seed.hex))
       .map((seed) => {
@@ -61,7 +69,14 @@ export function App() {
       { name: "Neutral", entries: neutral.entries, notes: [], semantic: false },
       ...semantic,
     ]
-  }, [state.seeds, state.neutral, state.pages, state.targets, pageError])
+  }, [
+    state.seeds,
+    state.neutral,
+    state.pages,
+    state.targets,
+    state.standardTargets,
+    pageError,
+  ])
 
   const update = (patch: Partial<TuneState>) =>
     setState((s) => ({ ...s, ...patch }))
@@ -85,13 +100,26 @@ export function App() {
           </button>
           <button
             type="button"
+            onClick={() =>
+              copy("standard", serializeStandardTargets(state.standardTargets))
+            }
+          >
+            {copied === "standard" ? "Copied" : "Copy standard-targets.ts"}
+          </button>
+          <button
+            type="button"
             onClick={() => copy("link", window.location.href)}
           >
             {copied === "link" ? "Copied" : "Copy link"}
           </button>
           <button
             type="button"
-            onClick={() => update({ targets: DEFAULT_TARGETS })}
+            onClick={() =>
+              update({
+                targets: DEFAULT_TARGETS,
+                standardTargets: DEFAULT_STANDARD_TARGETS,
+              })
+            }
           >
             Reset targets
           </button>
@@ -199,6 +227,8 @@ export function App() {
         <Controls
           targets={state.targets}
           onChange={(targets) => update({ targets })}
+          standardTargets={state.standardTargets}
+          onStandardChange={(standardTargets) => update({ standardTargets })}
         />
       </aside>
 

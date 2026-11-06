@@ -1,4 +1,6 @@
 import { ROLE_BANDS } from "../src/core/scale/roles.js"
+import type { StandardTargets } from "../src/core/scale/standard-targets.js"
+import { SCALE_STEPS, type ScaleStep } from "../src/core/scale/steps.js"
 import {
   FIXED_STEPS,
   type FixedStep,
@@ -9,6 +11,8 @@ import {
 type Props = {
   targets: Targets
   onChange: (targets: Targets) => void
+  standardTargets: StandardTargets
+  onStandardChange: (targets: StandardTargets) => void
 }
 
 type NumProps = {
@@ -55,7 +59,28 @@ const BANDS: { title: string; steps: readonly FixedStep[] }[] =
     steps: band.steps as readonly FixedStep[],
   }))
 
-export function Controls({ targets, onChange }: Props) {
+export function Controls({
+  targets,
+  onChange,
+  standardTargets,
+  onStandardChange,
+}: Props) {
+  // Standard has no role bands: every one of the twelve steps is fixed, so the
+  // sliders are a plain loop rather than the banded layout Semantic uses.
+  const setStandard = (
+    mode: Mode,
+    key: "L" | "K",
+    step: ScaleStep,
+    v: number
+  ) =>
+    onStandardChange({
+      ...standardTargets,
+      [mode]: {
+        ...standardTargets[mode],
+        [key]: { ...standardTargets[mode][key], [step]: v },
+      },
+    })
+
   const setMode = (mode: Mode, patch: Partial<Targets[Mode]>) =>
     onChange({ ...targets, [mode]: { ...targets[mode], ...patch } })
   const setL = (mode: Mode, step: FixedStep, value: number) =>
@@ -266,6 +291,38 @@ export function Controls({ targets, onChange }: Props) {
           />
         </fieldset>
       </details>
+      {(["light", "dark"] as const).map((mode) => (
+        <details key={`standard-${mode}`}>
+          <summary>
+            Standard · {mode === "light" ? "light" : "dark"} steps
+          </summary>
+          <fieldset>
+            <legend>
+              All twelve steps are fixed; gaps grow from 25 to 950
+            </legend>
+            {SCALE_STEPS.map((step) => (
+              <div key={step} className="step-controls">
+                <Num
+                  label={`${step} L`}
+                  value={standardTargets[mode].L[step]}
+                  min={0}
+                  max={1}
+                  step={0.005}
+                  onChange={(v) => setStandard(mode, "L", step, v)}
+                />
+                <Num
+                  label={`${step} C`}
+                  value={standardTargets[mode].K[step]}
+                  min={0}
+                  max={0.3}
+                  step={0.001}
+                  onChange={(v) => setStandard(mode, "K", step, v)}
+                />
+              </div>
+            ))}
+          </fieldset>
+        </details>
+      ))}
     </div>
   )
 }

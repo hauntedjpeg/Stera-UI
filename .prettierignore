@@ -5,4 +5,3 @@ node_modules/
 coverage/
 pnpm-lock.yaml
 .pnpm-store/
-apps/figma-colors/src/core/radix/generate-radix-colors.ts

@@ -18,12 +18,10 @@
   "devDependencies": {
     "@eslint/js": "^9.39.4",
     "@figma/plugin-typings": "^1.123.0",
-    "@radix-ui/colors": "^3.0.0",
     "@tailwindcss/vite": "^4.2.1",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.4",
-    "bezier-easing": "^3.0.0",
     "color-name-list": "^14.36.0",
     "colorjs.io": "^0.6.1",
     "concurrently": "^9.2.1",

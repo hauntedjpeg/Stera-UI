@@ -5,13 +5,7 @@ import globals from "globals"
 import tseslint from "typescript-eslint"
 
 export default defineConfig([
-  globalIgnores([
-    "node_modules/**",
-    "dist/**",
-    ".turbo/**",
-    // Vendored verbatim from radix-ui/website; see src/core/radix/__vendor__.md.
-    "src/core/radix/generate-radix-colors.ts",
-  ]),
+  globalIgnores(["node_modules/**", "dist/**", ".turbo/**"]),
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

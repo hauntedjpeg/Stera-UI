@@ -34,11 +34,13 @@ describe("generateBiModalScale", () => {
     })
   }
 
-  it("is deterministic", () => {
-    const a = generateBiModalScale(options({ hex: "#859991" }))
-    const b = generateBiModalScale(options({ hex: "#859991" }))
-    expect(a).toEqual(b)
-  })
+  for (const scaleType of ["accent", "gray"] as const) {
+    it(`is deterministic for ${scaleType}`, () => {
+      const a = generateBiModalScale(options({ hex: "#859991", scaleType }))
+      const b = generateBiModalScale(options({ hex: "#859991", scaleType }))
+      expect(a).toEqual(b)
+    })
+  }
 
   it("writes the seed at light 500 for Semantic and has no notes for Standard", () => {
     const semantic = generateBiModalScale(options({}))
@@ -47,14 +49,34 @@ describe("generateBiModalScale", () => {
     expect(standard.notes).toEqual([])
   })
 
-  it("darkens the first eight light gray steps monotonically after smoothing", () => {
+  it("darkens every light Standard step monotonically", () => {
     const { entries } = generateBiModalScale(
       options({ hex: "#8b8d98", scaleType: "gray" })
     )
-    const top = entries.slice(0, 8).map((e) => lightness(e.light))
-    for (let i = 1; i < top.length; i++) {
-      expect(top[i]).toBeLessThan(top[i - 1])
+    const light = entries.map((e) => lightness(e.light))
+    for (let i = 1; i < light.length; i++) {
+      expect(light[i]).toBeLessThan(light[i - 1])
     }
+  })
+
+  it("ignores the backgrounds for Standard but not for Semantic", () => {
+    const pages = {
+      lightBackground: "#faf7f2",
+      darkBackground: "#0a0a0a",
+    }
+    const standard = generateBiModalScale(
+      options({ hex: "#8b8d98", scaleType: "gray" })
+    )
+    const movedStandard = generateBiModalScale(
+      options({ hex: "#8b8d98", scaleType: "gray", ...pages })
+    )
+    expect(movedStandard).toEqual(standard)
+
+    const semantic = generateBiModalScale(options({ hex: "#8b8d98" }))
+    const movedSemantic = generateBiModalScale(
+      options({ hex: "#8b8d98", ...pages })
+    )
+    expect(movedSemantic).not.toEqual(semantic)
   })
 
   it("darkens light and lightens dark from 25 to 950", () => {

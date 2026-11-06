@@ -1,9 +1,14 @@
+import {
+  DEFAULT_STANDARD_TARGETS,
+  type StandardTargets,
+} from "../src/core/scale/standard-targets.js"
 import { DEFAULT_TARGETS, type Targets } from "../src/core/scale/targets.js"
 
 export type Seed = { name: string; hex: string }
 
 export type TuneState = {
   targets: Targets
+  standardTargets: StandardTargets
   seeds: Seed[]
   pages: { light: string; dark: string }
   /** The Standard (neutral) ramp shown as a reference row. */
@@ -25,6 +30,7 @@ export const DEFAULT_SEEDS: Seed[] = [
 
 export const DEFAULT_STATE: TuneState = {
   targets: DEFAULT_TARGETS,
+  standardTargets: DEFAULT_STANDARD_TARGETS,
   seeds: DEFAULT_SEEDS,
   pages: { light: "#ffffff", dark: "#000000" },
   neutral: "#8b8d98",
@@ -42,6 +48,14 @@ function merge(stored: Partial<TuneState> | null): TuneState {
   const base = clone(DEFAULT_STATE)
   if (!stored || typeof stored !== "object") return base
   const t = stored.targets
+  const st = stored.standardTargets
+  const mergeStandardMode = (mode: "light" | "dark") => {
+    const fallback = base.standardTargets[mode]
+    const next = st?.[mode]
+    return next
+      ? { L: { ...fallback.L, ...next.L }, K: { ...fallback.K, ...next.K } }
+      : fallback
+  }
   return {
     targets: t
       ? {
@@ -52,6 +66,9 @@ function merge(stored: Partial<TuneState> | null): TuneState {
           hueShift: { ...base.targets.hueShift, ...t.hueShift },
         }
       : base.targets,
+    standardTargets: st
+      ? { light: mergeStandardMode("light"), dark: mergeStandardMode("dark") }
+      : base.standardTargets,
     seeds: Array.isArray(stored.seeds) ? stored.seeds : base.seeds,
     pages: { ...base.pages, ...stored.pages },
     neutral: stored.neutral ?? base.neutral,
@@ -90,12 +107,22 @@ export function saveState(state: TuneState): void {
   window.history.replaceState(null, "", `#${encodeURIComponent(json)}`)
 }
 
-/** The current targets as a `DEFAULT_TARGETS` literal, ready to paste into `targets.ts`. */
-export function serializeTargets(targets: Targets): string {
-  const json = JSON.stringify(targets, null, 2)
+/** One target set as a pasteable `export const NAME: Type = { … }` literal. */
+function serialize(name: string, type: string, value: unknown): string {
+  const json = JSON.stringify(value, null, 2)
     .replace(/"(\d+|[a-zA-Z_]\w*)":/g, "$1:")
     .replace(/\[\s+([\d.,\s-]+?)\s+\]/g, (_, inner: string) => {
       return `[${inner.replace(/\s+/g, " ").trim()}]`
     })
-  return `export const DEFAULT_TARGETS: Targets = ${json}\n`
+  return `export const ${name}: ${type} = ${json}\n`
+}
+
+/** The Semantic targets, ready to paste into `targets.ts`. */
+export function serializeTargets(targets: Targets): string {
+  return serialize("DEFAULT_TARGETS", "Targets", targets)
+}
+
+/** The Standard targets, ready to paste into `standard-targets.ts`. */
+export function serializeStandardTargets(targets: StandardTargets): string {
+  return serialize("DEFAULT_STANDARD_TARGETS", "StandardTargets", targets)
 }
