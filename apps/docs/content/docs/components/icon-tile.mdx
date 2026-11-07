@@ -1,0 +1,100 @@
+---
+title: Icon Tile
+description: A small container with an icon that reinforces the tone of a message or the category of an item.
+---
+
+<ComponentPreview name="icon-tile-demo" caption="Icon Tile" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Reinforcing the tone of a message with a semantic color, such as a success, warning or danger state in a [Toast](/components/toast).
+- Leading media in an [Item](/components/item) or an [Empty](/components/empty) state, where a plain icon needs more weight to anchor the row or surface.
+
+### When not to use
+
+- Representing a person, account or entity. Use an [Avatar](/components/avatar).
+
+### Guidelines
+
+- An icon tile is decorative and carries no meaning on its own. The title or description next to it must carry the message, so the tile is never the only signal of state.
+- Choose the color for its meaning, so it reinforces the message: `success` for a successful outcome, `danger` for an error or a destructive outcome, `warning` for something that needs attention, and `default` for neutral categories. Keep each color mapped to the same meaning across the product. Your call: what `brand` and `accent` tiles mean, and when a tile uses its `-solid` or `-outline` form. Pick one and use it consistently.
+- Keep icon tiles easy to tell apart from avatars: use the `square` shape wherever an [Avatar](/components/avatar) may sit nearby.
+- Use one shape and one size for every tile in a group, such as the items in a list.
+
+See also: [Theming](/design/theming).
+
+</DesignGuidelines>
+
+## Installation
+
+<InstallSnippet slug="icon-tile" hideHeading />
+
+## Examples
+
+### Variant
+
+Use the `variant` prop to change the style of the tile.
+
+<ComponentPreview name="icon-tile-variants" caption="Icon Tile Variants" />
+
+| Variant | Description |
+| --- | --- |
+| `default` | Subtle neutral background (default) |
+| `solid` | Strong neutral inverse background |
+| `outline` | Bordered, no background |
+
+### Colors
+
+Each color comes in the same three styles: the plain name for the subtle style, plus `-solid` and `-outline`, such as `success`, `success-solid` and `success-outline`.
+
+<ComponentPreview name="icon-tile-colors" caption="Icon Tile Colors" />
+
+| Variant | Description |
+| --- | --- |
+| `default` | Neutral |
+| `brand` | Primary brand color |
+| `accent` | Accent brand color |
+| `success` | Green |
+| `warning` | Yellow |
+| `danger` | Red |
+
+### Sizes
+
+Use the `size` prop to select between `xs`, `sm`, `md` and `lg` (default). The icon scales with the tile unless you give it a `size-*` class.
+
+<ComponentPreview name="icon-tile-sizes" caption="Icon Tile Sizes" />
+
+| Size | Description |
+| --- | --- |
+| `xs` | 16px tile, 12px icon |
+| `sm` | 24px tile, 16px icon |
+| `md` | 32px tile, 20px icon |
+| `lg` | 40px tile, 24px icon (default) |
+
+### Shapes
+
+<ComponentPreview name="icon-tile-shapes" caption="Icon Tile Shapes" />
+
+| Shape | Description |
+| --- | --- |
+| `square` | Rounded square (default) |
+| `circle` | Circular |
+
+### With Item
+
+<ComponentPreview name="icon-tile-with-item" caption="With Item" />
+
+## API Reference
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default"` `"outline"` `"solid"` `"brand"` `"brand-outline"` `"brand-solid"` `"accent"` `"accent-outline"` `"accent-solid"` `"danger"` `"danger-outline"` `"danger-solid"` `"success"` `"success-outline"` `"success-solid"` `"warning"` `"warning-outline"` `"warning-solid"` | `"default"` |
+| `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"lg"` |
+| `shape` | `"square" \| "circle"` | `"square"` |
+| `render` | `React.ReactElement` | — |
+
+Accepts all standard `<span>` props. Supports `render` prop for polymorphic rendering via Base UI's `useRender`.

@@ -311,6 +311,30 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/breadcrumb-link")),
     slug: "breadcrumb",
   },
+  "icon-tile-demo": {
+    component: dynamic(() => import("@/examples/icon-tile-demo")),
+    slug: "icon-tile",
+  },
+  "icon-tile-variants": {
+    component: dynamic(() => import("@/examples/icon-tile-variants")),
+    slug: "icon-tile",
+  },
+  "icon-tile-colors": {
+    component: dynamic(() => import("@/examples/icon-tile-colors")),
+    slug: "icon-tile",
+  },
+  "icon-tile-sizes": {
+    component: dynamic(() => import("@/examples/icon-tile-sizes")),
+    slug: "icon-tile",
+  },
+  "icon-tile-shapes": {
+    component: dynamic(() => import("@/examples/icon-tile-shapes")),
+    slug: "icon-tile",
+  },
+  "icon-tile-with-item": {
+    component: dynamic(() => import("@/examples/icon-tile-with-item")),
+    slug: "icon-tile",
+  },
   "item-demo": {
     component: dynamic(() => import("@/examples/item-demo")),
     slug: "item",

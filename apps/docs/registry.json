@@ -293,6 +293,13 @@
       ]
     },
     {
+      "name": "icon-tile",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["utils"],
+      "files": [{ "path": "registry/ui/icon-tile.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "class-variance-authority"],
