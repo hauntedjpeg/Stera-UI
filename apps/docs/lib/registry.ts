@@ -437,6 +437,34 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/input-invalid")),
     slug: "input",
   },
+  "input-otp-demo": {
+    component: dynamic(() => import("@/examples/input-otp-demo")),
+    slug: "input-otp",
+  },
+  "input-otp-sizes": {
+    component: dynamic(() => import("@/examples/input-otp-sizes")),
+    slug: "input-otp",
+  },
+  "input-otp-alphanumeric": {
+    component: dynamic(() => import("@/examples/input-otp-alphanumeric")),
+    slug: "input-otp",
+  },
+  "input-otp-masked": {
+    component: dynamic(() => import("@/examples/input-otp-masked")),
+    slug: "input-otp",
+  },
+  "input-otp-controlled": {
+    component: dynamic(() => import("@/examples/input-otp-controlled")),
+    slug: "input-otp",
+  },
+  "input-otp-disabled": {
+    component: dynamic(() => import("@/examples/input-otp-disabled")),
+    slug: "input-otp",
+  },
+  "input-otp-invalid": {
+    component: dynamic(() => import("@/examples/input-otp-invalid")),
+    slug: "input-otp",
+  },
   "textarea-demo": {
     component: dynamic(() => import("@/examples/textarea-demo")),
     slug: "textarea",

@@ -1,86 +1,155 @@
 "use client"
 
 import * as React from "react"
-import { OTPInput, OTPInputContext } from "input-otp"
+import { OTPField as OTPFieldPrimitive } from "@base-ui/react/otp-field"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { SiMinus } from "stera-icons"
 
+type InputOTPSize = "sm" | "md" | "lg"
+
+const InputOTPContext = React.createContext<{
+  size: InputOTPSize
+  invalid: boolean
+}>({ size: "md", invalid: false })
+
+const inputOTPGapVariants = cva("flex items-center", {
+  variants: {
+    size: {
+      sm: "gap-1.5",
+      md: "gap-2",
+      lg: "gap-2.5",
+    },
+  },
+  defaultVariants: { size: "md" },
+})
+
+const inputOTPSlotVariants = cva(
+  [
+    // Base
+    "rounded-xl border border-border bg-surface text-center text-ink tabular-nums caret-ink",
+    // Sizing
+    "shrink-0 p-0",
+    // Focus
+    "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
+    // Disabled
+    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:border-border-strong disabled:bg-surface-disabled disabled:text-ink-subtlest",
+    // Invalid
+    "aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+    // Other
+    "transition-[color,box-shadow] outline-none",
+  ],
+  {
+    variants: {
+      size: {
+        sm: "size-8 st-body-md",
+        md: "size-9 st-body-md",
+        lg: "size-11 st-body-lg",
+      },
+    },
+    defaultVariants: { size: "md" },
+  }
+)
+
 function InputOTP({
   className,
-  containerClassName,
+  size = "md",
+  "aria-invalid": ariaInvalid,
   ...props
-}: React.ComponentProps<typeof OTPInput> & {
-  containerClassName?: string
-}) {
+}: OTPFieldPrimitive.Root.Props &
+  VariantProps<typeof inputOTPSlotVariants> & {
+    "aria-invalid"?: React.AriaAttributes["aria-invalid"]
+  }) {
+  const resolvedSize = size ?? "md"
+  const invalid = ariaInvalid === true || ariaInvalid === "true"
+  const context = React.useMemo(
+    () => ({ size: resolvedSize, invalid }),
+    [resolvedSize, invalid]
+  )
+
   return (
-    <OTPInput
-      data-slot="input-otp"
-      containerClassName={cn(
-        "cn-input-otp flex items-center has-disabled:opacity-50",
-        containerClassName
-      )}
-      spellCheck={false}
-      className={cn("disabled:cursor-not-allowed", className)}
-      {...props}
-    />
+    <InputOTPContext.Provider value={context}>
+      <OTPFieldPrimitive.Root
+        data-slot="input-otp"
+        data-size={resolvedSize}
+        className={cn(inputOTPGapVariants({ size: resolvedSize }), className)}
+        {...props}
+      />
+    </InputOTPContext.Provider>
   )
 }
 
 function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
+  const { size } = React.useContext(InputOTPContext)
+
   return (
     <div
       data-slot="input-otp-group"
-      className={cn(
-        "flex items-center rounded-md has-aria-invalid:border-border-danger-strong has-aria-invalid:ring-3 has-aria-invalid:ring-ring-danger",
-        className
-      )}
+      className={cn(inputOTPGapVariants({ size }), className)}
       {...props}
     />
   )
 }
 
 function InputOTPSlot({
-  index,
   className,
+  render,
   ...props
-}: React.ComponentProps<"div"> & {
-  index: number
-}) {
-  const inputOTPContext = React.useContext(OTPInputContext)
-  const { char, hasFakeCaret, isActive } = inputOTPContext?.slots[index] ?? {}
+}: OTPFieldPrimitive.Input.Props) {
+  const { size, invalid } = React.useContext(InputOTPContext)
 
   return (
-    <div
+    <OTPFieldPrimitive.Input
       data-slot="input-otp-slot"
-      data-active={isActive}
+      data-size={size}
+      aria-invalid={invalid || undefined}
+      className={cn(inputOTPSlotVariants({ size }), className)}
+      render={
+        render ??
+        ((inputProps, state) => {
+          // Base UI names the first slot through its label. Every slot after
+          // it needs its own name, so give each one its position.
+          if (state.index === 0 || inputProps["aria-label"] != null) {
+            return <input {...inputProps} />
+          }
+          return (
+            <input
+              {...inputProps}
+              aria-labelledby={undefined}
+              aria-label={`Character ${state.index + 1} of ${state.length}`}
+            />
+          )
+        })
+      }
+      {...props}
+    />
+  )
+}
+
+function InputOTPSeparator({
+  className,
+  children,
+  ...props
+}: OTPFieldPrimitive.Separator.Props) {
+  return (
+    <OTPFieldPrimitive.Separator
+      data-slot="input-otp-separator"
       className={cn(
-        "relative flex size-9 items-center justify-center border-y border-r border-border text-sm shadow-xs transition-all outline-none first:rounded-l-md first:border-l last:rounded-r-md aria-invalid:border-border-danger-strong data-[active=true]:z-10 data-[active=true]:border-border-brand-strong data-[active=true]:ring-3 data-[active=true]:ring-ring-brand data-[active=true]:aria-invalid:border-border-danger-strong data-[active=true]:aria-invalid:ring-ring-danger dark:bg-surface-subtle/30",
+        "flex items-center text-ink-subtler [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
     >
-      {char}
-      {hasFakeCaret && (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="h-4 w-px animate-caret-blink bg-ink duration-1000" />
-        </div>
-      )}
-    </div>
+      {children ?? <SiMinus />}
+    </OTPFieldPrimitive.Separator>
   )
 }
 
-function InputOTPSeparator({ ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="input-otp-separator"
-      className="flex items-center [&_svg:not([class*='size-'])]:size-4"
-      role="separator"
-      {...props}
-    >
-      <SiMinus />
-    </div>
-  )
+export {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+  InputOTPSeparator,
+  inputOTPSlotVariants,
 }
-
-export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }

@@ -1,0 +1,103 @@
+---
+title: Input OTP
+description: A row of single-character slots for entering a fixed-length code, such as a one-time password.
+---
+
+<ComponentPreview name="input-otp-demo" caption="Input OTP" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A fixed-length code the user receives somewhere else, such as a sign-in code sent by text message or email, or a code from an authenticator app.
+- A short PIN or recovery code of a known length.
+
+### When not to use
+
+- Text of variable length, or anything the user makes up. Use an [Input](/components/input).
+- A password the user chose. Use an [Input](/components/input).
+
+### Guidelines
+
+- Always pair the code with a visible label, and say where the code was sent.
+- Offer a way to get a new code next to the field, such as a Resend button.
+- **Groups:** match the grouping to how the code appears in the message or app the user is copying from. Don't split a code the source shows as one block.
+- **Separator:** use one only between groups.
+
+See also: [Forms](/design/forms).
+
+</DesignGuidelines>
+
+## Installation
+
+<InstallSnippet slug="input-otp" hideHeading />
+
+## Examples
+
+### Sizes
+
+<ComponentPreview name="input-otp-sizes" caption="Input OTP Sizes" />
+
+| Size | Description |
+| --- | --- |
+| `sm` | Small |
+| `md` | Medium (default) |
+| `lg` | Large |
+
+### Alphanumeric
+
+Accepts digits only by default. Set `validationType` to `"alphanumeric"`, `"alpha"` or `"none"` to change what slots accept, and use `normalizeValue` to transform input, such as uppercasing a recovery code.
+
+<ComponentPreview name="input-otp-alphanumeric" caption="Input OTP Alphanumeric" />
+
+### Masked
+
+Use `mask` to hide each character as it's entered.
+
+<ComponentPreview name="input-otp-masked" caption="Input OTP Masked" />
+
+### Controlled
+
+Use `value` and `onValueChange` to control the value. `onValueComplete` fires once every slot is filled.
+
+<ComponentPreview name="input-otp-controlled" caption="Input OTP Controlled" />
+
+### Disabled
+
+<ComponentPreview name="input-otp-disabled" caption="Input OTP Disabled" />
+
+### Invalid
+
+Set `aria-invalid` on `InputOTP` to mark every slot invalid, and pair it with a `FieldError`.
+
+<ComponentPreview name="input-otp-invalid" caption="Input OTP Invalid" />
+
+## API Reference
+
+Built on Base UI's [OTP Field](https://base-ui.com/react/components/otp-field#api-reference) primitive. See the full API reference there.
+
+### InputOTP
+
+Wraps `OTPField.Root`. Accepts all of its props, including `length`, `value`, `defaultValue`, `onValueChange`, `onValueComplete`, `validationType`, `normalizeValue`, `mask`, `name` and `autoSubmit`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `length` | `number` | required |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `aria-invalid` | `boolean \| "true" \| "false"` | — |
+
+Pass `id` and pair it with a `FieldLabel htmlFor` to label the first slot. Every later slot is labeled with its position, such as "Character 2 of 6".
+
+### InputOTPSlot
+
+Wraps `OTPField.Input`. Renders one `<input>`. Slots are ordered as they appear, so there's no index to pass.
+
+### InputOTPGroup
+
+A `<div>` that groups slots visually.
+
+### InputOTPSeparator
+
+Wraps `OTPField.Separator`. Renders a minus icon by default; pass children to replace it.

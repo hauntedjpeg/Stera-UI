@@ -325,7 +325,11 @@
     {
       "name": "input-otp",
       "type": "registry:ui",
-      "dependencies": ["input-otp", "stera-icons"],
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "stera-icons"
+      ],
       "registryDependencies": ["utils"],
       "files": [{ "path": "registry/ui/input-otp.tsx", "type": "registry:ui" }]
     },
