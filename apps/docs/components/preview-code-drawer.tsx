@@ -38,7 +38,7 @@ export function PreviewCodeDrawer({
           )}
         />
         <DrawerPopup
-          className="w-[75vw] bg-(--neutral-2) sm:w-xl"
+          className="w-[75vw] bg-surface sm:w-xl"
           showCloseButton={false}
         >
           <DrawerHeader className="flex-row items-center gap-2 p-1 pl-4">
