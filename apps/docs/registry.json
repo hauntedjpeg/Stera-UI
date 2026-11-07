@@ -225,6 +225,13 @@
       "files": [{ "path": "registry/ui/chip.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "code",
+      "type": "registry:ui",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["utils"],
+      "files": [{ "path": "registry/ui/code.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "collapsible",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react"],

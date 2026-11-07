@@ -1,0 +1,51 @@
+---
+title: Code
+description: Marks a short piece of code, such as a package name, file path or command, within a line of text.
+---
+
+<ComponentPreview name="code-demo" caption="Code" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Showing a short technical string within text, such as a package name, a file path, a variable or a command, where the reader needs to type or find it exactly.
+
+### When not to use
+
+- Keys or shortcuts the user presses. Use [Kbd](/components/kbd).
+- A value the user needs to copy, such as an install command or an API key. Use a read-only [Input Group](/components/input-group) with a copy button.
+- Multi-line code or long snippets. Use a code block.
+
+### Guidelines
+
+- Code is text, never a control. Don't make it a link or a button.
+- Write the content exactly as the reader should type or find it. Keep sentence punctuation outside it.
+- Use one size for all the code in the same block of text.
+
+</DesignGuidelines>
+
+## Installation
+
+<InstallSnippet slug="code" hideHeading />
+
+## Examples
+
+### Sizes
+
+<ComponentPreview name="code-sizes" caption="Code Sizes" />
+
+| Size | Description |
+| --- | --- |
+| `sm` | Compact, with tighter padding and corners |
+| `md` | Default |
+
+## API Reference
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"sm" \| "md"` | `"md"` |
+
+Renders a `<code>` element. Accepts all standard `<code>` props.

@@ -17,13 +17,16 @@
  * ============================================================ */
 
 /* ---------- 1. Inline code ---------- */
-:not(pre) > code {
-  background-color: var(--surface-subtle);
-  color: var(--ink);
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+/* In the base layer so the Code component's utilities win in previews. */
+@layer base {
+  :not(pre) > code {
+    background-color: var(--surface-subtle);
+    color: var(--ink);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
 }
 
 /* ---------- 2. Block container (figure wrapper) ---------- */
