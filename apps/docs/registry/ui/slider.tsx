@@ -69,7 +69,7 @@ function Slider<Value extends number | readonly number[]>({
               // Size — 24×16, swapped when vertical
               "data-[orientation=horizontal]:h-4 data-[orientation=horizontal]:w-6 data-[orientation=vertical]:h-6 data-[orientation=vertical]:w-4",
               // Hit area
-              "after:absolute after:-inset-1",
+              "after:absolute after:-inset-2",
               // Drag — grows to 32×20, swapped when vertical
               "data-dragging:border-alpha-3 data-dragging:bg-alpha-5",
               "data-dragging:data-[orientation=horizontal]:h-5 data-dragging:data-[orientation=horizontal]:w-8 data-dragging:data-[orientation=vertical]:h-8 data-dragging:data-[orientation=vertical]:w-5",
