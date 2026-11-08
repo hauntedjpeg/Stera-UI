@@ -13,14 +13,20 @@ import { DocsSidebar } from "./docs-sidebar"
 import { DocsHeader } from "./docs-header"
 import "./globals.css"
 
+// next/font has no size metrics for Zalando Sans, so it can't build an
+// adjusted fallback. Fall back to the generic family instead.
 const zalandoSans = Zalando_Sans({
   subsets: ["latin"],
   variable: "--font-zalando-sans",
+  fallback: ["sans-serif"],
+  adjustFontFallback: false,
 })
 
 const zalandoSansSemiExpanded = Zalando_Sans_SemiExpanded({
   subsets: ["latin"],
   variable: "--font-zalando-sans-semiexpanded",
+  fallback: ["sans-serif"],
+  adjustFontFallback: false,
 })
 
 const geistMono = Geist_Mono({

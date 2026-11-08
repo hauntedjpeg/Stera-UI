@@ -30,6 +30,10 @@ export const registryItemFontSchema = z.object({
   subsets: z.array(z.string()).optional(),
   selector: z.string().optional(),
   dependency: z.string().optional(),
+  // Passed to next/font as is. Set both for families next/font has no size
+  // metrics for, so the variable still ends in a generic family.
+  fallback: z.array(z.string()).optional(),
+  adjustFontFallback: z.boolean().optional(),
 })
 
 export type RegistryItemFont = z.infer<typeof registryItemFontSchema>

@@ -1,14 +1,15 @@
 import { describe, expect, it } from "vitest"
 import ts from "typescript"
-import type { RegistryFontItem } from "../schema/index.js"
+import { registryItemSchema, type RegistryFontItem } from "../schema/index.js"
 import { massageTreeForFonts } from "./font-setup.js"
-import { transformLayoutFonts } from "./update-fonts.js"
+import { buildFontOptions, transformLayoutFonts } from "./update-fonts.js"
 
 function font(
   name: string,
   importName: string,
   variable: string,
-  family: string
+  family: string,
+  extra: Partial<RegistryFontItem["font"]> = {}
 ): RegistryFontItem {
   return {
     name,
@@ -20,6 +21,7 @@ function font(
       variable,
       subsets: ["latin"],
       dependency: `@fontsource-variable/${name.replace(/^font-/, "")}`,
+      ...extra,
     },
   }
 }
@@ -274,5 +276,49 @@ describe("massageTreeForFonts", () => {
       dependencies: ["@fontsource-variable/zalando-sans"],
       cssImports: ['@import "@fontsource-variable/zalando-sans";'],
     })
+  })
+})
+
+describe("buildFontOptions", () => {
+  // next/font has no size metrics for Zalando Sans.
+  const zalando = font(
+    "font-zalando-sans",
+    "Zalando_Sans",
+    "--font-zalando-sans",
+    "'Zalando Sans Variable', sans-serif",
+    { fallback: ["sans-serif"], adjustFontFallback: false }
+  )
+
+  it("passes fallback and adjustFontFallback through to next/font", () => {
+    expect(buildFontOptions(zalando, "\n")).toBe(
+      '{\n  variable: "--font-zalando-sans",\n  subsets: ["latin"],\n  fallback: ["sans-serif"],\n  adjustFontFallback: false,\n}'
+    )
+  })
+
+  it("writes them on one line for the manual steps", () => {
+    expect(buildFontOptions(zalando, "")).toBe(
+      '{ variable: "--font-zalando-sans", subsets: ["latin"], fallback: ["sans-serif"], adjustFontFallback: false }'
+    )
+  })
+
+  it("leaves them out when the item doesn't set them", () => {
+    expect(buildFontOptions(FONTS[2], "")).toBe(
+      '{ variable: "--font-geist-mono", subsets: ["latin"] }'
+    )
+  })
+
+  it("separates array entries without touching commas inside them", () => {
+    const stack = font("font-x", "X", "--font-x", "'X', sans-serif", {
+      fallback: ["Helvetica Neue, Arial", "sans-serif"],
+    })
+    expect(buildFontOptions(stack, "")).toContain(
+      'fallback: ["Helvetica Neue, Arial", "sans-serif"]'
+    )
+  })
+
+  it("survives schema parsing, which strips unknown keys", () => {
+    const parsed = registryItemSchema.parse(zalando) as RegistryFontItem
+    expect(parsed.font.fallback).toEqual(["sans-serif"])
+    expect(parsed.font.adjustFontFallback).toBe(false)
   })
 })

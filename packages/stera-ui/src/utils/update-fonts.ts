@@ -168,17 +168,26 @@ export function transformLayoutFonts(
 /**
  * next/font options as an object literal, multi-line when `newline` is set.
  */
-function buildFontOptions(font: RegistryFontItem, newline: "\n" | "") {
+export function buildFontOptions(font: RegistryFontItem, newline: "\n" | "") {
   const entries: [string, unknown][] = [["variable", font.font.variable]]
   if (font.font.subsets?.length) entries.push(["subsets", font.font.subsets])
   if (font.font.weight?.length) entries.push(["weight", font.font.weight])
+  if (font.font.fallback?.length) entries.push(["fallback", font.font.fallback])
+  if (typeof font.font.adjustFontFallback === "boolean") {
+    entries.push(["adjustFontFallback", font.font.adjustFontFallback])
+  }
 
-  const body = entries.map(
-    ([key, value]) => `${key}: ${JSON.stringify(value).replace(/,/g, ", ")}`
-  )
+  const body = entries.map(([key, value]) => `${key}: ${formatValue(value)}`)
   return newline
     ? `{\n${body.map((line) => `  ${line},`).join("\n")}\n}`
     : `{ ${body.join(", ")} }`
+}
+
+/** A JSON value as source, with a space after each array comma. */
+function formatValue(value: unknown): string {
+  return Array.isArray(value)
+    ? `[${value.map((entry) => JSON.stringify(entry)).join(", ")}]`
+    : JSON.stringify(value)
 }
 
 function getFontVariableName(importName: string, variable: string) {

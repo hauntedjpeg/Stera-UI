@@ -53,6 +53,8 @@
         "import": "Zalando_Sans",
         "variable": "--font-zalando-sans",
         "subsets": ["latin"],
+        "fallback": ["sans-serif"],
+        "adjustFontFallback": false,
         "dependency": "@fontsource-variable/zalando-sans"
       }
     },
@@ -65,6 +67,8 @@
         "import": "Zalando_Sans_SemiExpanded",
         "variable": "--font-zalando-sans-semiexpanded",
         "subsets": ["latin"],
+        "fallback": ["sans-serif"],
+        "adjustFontFallback": false,
         "dependency": "@fontsource-variable/zalando-sans-semiexpanded"
       }
     },

@@ -1,4 +1,5 @@
 import fs from "node:fs"
+import { createRequire } from "node:module"
 import path from "node:path"
 
 const ROOT = path.resolve(import.meta.dirname, "..")
@@ -21,6 +22,8 @@ interface RegistryFontMeta {
   subsets?: string[]
   selector?: string
   dependency?: string
+  fallback?: string[]
+  adjustFontFallback?: boolean
 }
 
 interface RegistryItem {
@@ -61,6 +64,55 @@ function checkTypographyFonts(registry: Registry): string[] {
     } else if (item.font?.variable !== variable) {
       errors.push(
         `[${name}] font.variable is "${item.font?.variable}", but typography.css references ${variable}`
+      )
+    }
+  }
+  return errors
+}
+
+/**
+ * next/font builds a size-matched fallback from its own metrics table. For a
+ * family that table lacks, the item sets `adjustFontFallback: false` (plus a
+ * generic `fallback`), or every Next.js project logs a warning. Once Next
+ * adds the metrics, the flag only turns off the better fallback. Fail the
+ * build in either case so the item tracks the installed Next.
+ */
+function checkNextFontMetrics(registry: Registry): string[] {
+  let calculateSizeAdjustValues: (family: string) => unknown
+  try {
+    ;({ calculateSizeAdjustValues } = createRequire(import.meta.url)(
+      "next/dist/server/font-utils"
+    ))
+  } catch {
+    console.warn(
+      "Skipping the next/font metrics check: next/dist/server/font-utils did not load."
+    )
+    return []
+  }
+
+  const hasMetrics = (family: string) => {
+    try {
+      return Boolean(calculateSizeAdjustValues(family))
+    } catch {
+      return false
+    }
+  }
+
+  const errors: string[] = []
+  for (const item of registry.items) {
+    if (item.type !== "registry:font" || !item.font) continue
+    // next/font names its functions after the family: Zalando_Sans.
+    const family = item.font.import.replace(/_/g, " ")
+    const optedOut = item.font.adjustFontFallback === false
+    const metrics = hasMetrics(family)
+
+    if (metrics && optedOut) {
+      errors.push(
+        `[${item.name}] next/font now has size metrics for "${family}". Remove adjustFontFallback from registry.json to get the adjusted fallback.`
+      )
+    } else if (!metrics && !optedOut) {
+      errors.push(
+        `[${item.name}] next/font has no size metrics for "${family}". Set "adjustFontFallback": false and a generic "fallback" in registry.json.`
       )
     }
   }
@@ -164,6 +216,7 @@ function buildRegistry() {
   }
 
   errors.push(...checkTypographyFonts(registry))
+  errors.push(...checkNextFontMetrics(registry))
 
   if (errors.length > 0) {
     console.error("Registry build errors:")

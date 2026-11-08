@@ -34,13 +34,17 @@ Each role points at a variable named after a font family, with a fallback for wh
 const zalandoSans = Zalando_Sans({
   variable: "--font-zalando-sans",
   subsets: ["latin"],
+  fallback: ["sans-serif"],
+  adjustFontFallback: false,
 })
 
 // …
 <html className={`${zalandoSans.variable} ${geistMono.variable}`}>
 ```
 
-Fonts your layout already declares under the same variable are reused as they are. If there is no `app/layout` (the Pages Router) or no `<html>` element, `init` prints the code to add yourself.
+`next/font` normally adds a fallback font sized to match the real one, so text doesn't jump when it loads. It has no size data for Zalando Sans, so the registry turns that off and falls back to plain `sans-serif` instead. Without these two options, Next.js logs `Failed to find font override values` and text shows in the browser's default serif until the font loads.
+
+Fonts your layout already declares under the same variable are reused as they are. If `init` wrote your layout before these options existed, add the two lines yourself. If there is no `app/layout` (the Pages Router) or no `<html>` element, `init` prints the code to add yourself.
 
 ### Other frameworks
 
@@ -50,7 +54,7 @@ Fonts your layout already declares under the same variable are reused as they ar
 @import "@fontsource-variable/zalando-sans";
 
 :root {
-  --font-zalando-sans: "Zalando Sans Variable", sans-serif;
+  --font-zalando-sans: 'Zalando Sans Variable', sans-serif;
 }
 ```
 
