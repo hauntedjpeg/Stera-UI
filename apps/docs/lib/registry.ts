@@ -653,6 +653,10 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/slider-demo")),
     slug: "slider",
   },
+  "slider-label": {
+    component: dynamic(() => import("@/examples/slider-label")),
+    slug: "slider",
+  },
   "slider-range": {
     component: dynamic(() => import("@/examples/slider-range")),
     slug: "slider",

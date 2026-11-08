@@ -31,9 +31,15 @@ See also: [Forms](/design/forms) and [Theming](/design/theming).
 
 </DesignGuidelines>
 
+## Label and value
+
+Point `aria-labelledby` at a visible label, and show the current value next to it.
+
+<ComponentPreview name="slider-label" />
+
 ## Range
 
-Pass two values in `defaultValue` to create a range slider with two thumbs.
+Pass an array to `defaultValue` or `value` for one thumb per value. Name each thumb with `getAriaLabel`.
 
 <ComponentPreview name="slider-range" />
 
@@ -51,12 +57,17 @@ Built on Base UI's [Slider](https://base-ui.com/react/components/slider#api-refe
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `value` | `number[]` | — |
-| `defaultValue` | `number[]` | — |
-| `onValueChange` | `(value: number[]) => void` | — |
-| `onValueCommit` | `(value: number[]) => void` | — |
+| `value` | `number \| number[]` | — |
+| `defaultValue` | `number \| number[]` | — |
+| `onValueChange` | `(value: number \| number[]) => void` | — |
+| `onValueCommitted` | `(value: number \| number[]) => void` | — |
 | `min` | `number` | `0` |
 | `max` | `number` | `100` |
 | `step` | `number` | `1` |
+| `minStepsBetweenValues` | `number` | `0` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `disabled` | `boolean` | `false` |
+| `aria-label` | `string` | — |
+| `getAriaLabel` | `(index: number) => string` | — |
+
+`aria-label` and `getAriaLabel` are passed to each thumb's input, which is what screen readers announce. The callbacks receive a `number` when the value is a number and an array when it's an array.

@@ -1,5 +1,5 @@
 import { Slider } from "@/components/ui/slider"
 
 export default function SliderDemo() {
-  return <Slider defaultValue={[75]} max={100} step={1} className="w-80" />
+  return <Slider defaultValue={75} aria-label="Volume" className="w-80" />
 }
