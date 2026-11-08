@@ -9,7 +9,10 @@ import { DocsSearch, type PageTree } from "./docs-search"
 
 export function DocsHeader({ tree }: { tree: PageTree }) {
   return (
-    <header className="sticky top-0 z-20 flex h-(--header-height) items-center gap-2 px-4 py-4 easing-fade md:px-6">
+    // The ::before gradient fades page content as it scrolls under the header.
+    // It sits at a negative z-index inside the sticky header's stacking context, so it
+    // stays behind the header's controls but above the page.
+    <header className="sticky top-0 z-20 flex h-(--header-height) items-center gap-2 px-4 py-4 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:bg-linear-to-b before:from-surface-app before:to-transparent md:px-6">
       <SidebarTrigger
         size="icon-lg"
         className="rounded-full glass-brand backdrop-blur-md md:hidden"

@@ -5,6 +5,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-surface text-ink antialiased;
+    @apply bg-surface-app text-ink antialiased;
   }
 }
