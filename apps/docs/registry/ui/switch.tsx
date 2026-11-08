@@ -14,20 +14,23 @@ function Switch({
       data-slot="switch"
       data-size={size}
       className={cn(
-        // Group hooks
-        "peer group/switch",
         // Base
-        "relative inline-flex shrink-0 items-center rounded-full border-2 border-transparent shadow-xs transition-all outline-none after:absolute after:-inset-x-3 after:-inset-y-2",
+        "relative inline-flex h-(--switch-h) w-(--switch-w) shrink-0 items-center rounded-full border-2 border-transparent outline-none",
+        "transition-[background-color,border-color,box-shadow,opacity] duration-120 ease-out",
+        // Size — track width, track height, thumb width
+        "data-[size=sm]:[--switch-h:--spacing(4)] data-[size=sm]:[--switch-w:--spacing(6)] data-[size=sm]:[--thumb-w:--spacing(3)]",
+        "data-[size=md]:[--switch-h:--spacing(4)] data-[size=md]:[--switch-w:--spacing(8)] data-[size=md]:[--thumb-w:--spacing(4.5)]",
+        "data-[size=lg]:[--switch-h:--spacing(7)] data-[size=lg]:[--switch-w:--spacing(16)] data-[size=lg]:[--thumb-w:--spacing(9.5)]",
+        // Hit area
+        "after:absolute after:-inset-x-3 after:-inset-y-2",
+        // State
+        "data-checked:bg-surface-brand data-unchecked:bg-surface-muted",
         // Focus
         "focus-visible:border-border-brand focus-visible:ring-3 focus-visible:ring-ring-brand",
         // Invalid
         "data-invalid:border-border-danger data-invalid:ring-3 data-invalid:ring-ring-danger",
-        // State
-        "data-checked:bg-surface-brand data-disabled:cursor-not-allowed data-unchecked:bg-surface-muted",
-        // Size
-        "data-[size=sm]:h-4 data-[size=sm]:w-6",
-        "data-[size=md]:h-4 data-[size=md]:w-8",
-        "data-[size=lg]:h-7 data-[size=lg]:w-16",
+        // Disabled / Read-only
+        "data-disabled:cursor-not-allowed data-disabled:opacity-50 data-readonly:cursor-default",
         className
       )}
       {...props}
@@ -36,15 +39,10 @@ function Switch({
         data-slot="switch-thumb"
         className={cn(
           // Base
-          "pointer-events-none block rounded-full bg-surface ring-0 transition-transform",
-          // Disabled
-          "data-disabled:bg-ink-disabled",
-          // Size — sm
-          "group-data-[size=sm]/switch:size-3 group-data-[size=sm]/switch:data-checked:translate-x-2 group-data-[size=sm]/switch:data-unchecked:translate-x-0",
-          // Size — md
-          "group-data-[size=md]/switch:h-3 group-data-[size=md]/switch:w-4.5 group-data-[size=md]/switch:data-checked:translate-x-2.5 group-data-[size=md]/switch:data-unchecked:translate-x-0",
-          // Size — lg
-          "group-data-[size=lg]/switch:h-6 group-data-[size=lg]/switch:w-9.5 group-data-[size=lg]/switch:data-checked:translate-x-5.5 group-data-[size=lg]/switch:data-unchecked:translate-x-0"
+          "pointer-events-none block h-full w-(--thumb-w) rounded-full bg-surface",
+          "transition-transform duration-120 ease-out motion-reduce:transition-none",
+          // Checked — travel the track's inner width (2px border each side)
+          "data-checked:translate-x-[calc(var(--switch-w)-var(--thumb-w)-4px)]"
         )}
       />
     </SwitchPrimitive.Root>
