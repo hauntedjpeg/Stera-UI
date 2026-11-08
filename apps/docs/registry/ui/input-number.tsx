@@ -20,14 +20,10 @@ const inputNumberGroupVariants = cva(
     "flex items-stretch overflow-hidden rounded-xl border border-border bg-surface text-ink",
     // Sizing
     "w-full min-w-0",
-    // Focus
-    "has-[[data-slot=input-number-control]:focus-visible]:border-border-brand has-[[data-slot=input-number-control]:focus-visible]:ring-3 has-[[data-slot=input-number-control]:focus-visible]:ring-ring-brand",
     // Disabled
     "data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:border-border-subtle data-disabled:bg-surface-disabled data-disabled:text-ink-subtlest",
-    // Invalid
-    "has-[[data-slot=input-number-control][aria-invalid=true]]:border-border-danger has-[[data-slot=input-number-control][aria-invalid=true]]:ring-3 has-[[data-slot=input-number-control][aria-invalid=true]]:ring-ring-danger",
     // Other
-    "transition-[color,box-shadow,border-color] outline-none",
+    "transition-[color,border-color] outline-none",
   ],
   {
     variants: {
@@ -47,10 +43,16 @@ const inputNumberControlVariants = cva(
     "bg-transparent text-center st-body-md text-inherit tabular-nums placeholder:text-ink-subtlest",
     // Sizing
     "w-full min-w-0 flex-1",
+    // Without a stepper beside it, follow the group's inner corner so the inset ring isn't clipped
+    "first:rounded-l-[calc(var(--radius-xl)-1px)] last:rounded-r-[calc(var(--radius-xl)-1px)]",
+    // Focus: a 1px border with the ring inside it, kept within the editable area
+    "focus-visible:inset-shadow-[0_0_0_1px_var(--color-border-brand)] focus-visible:inset-ring-4 focus-visible:inset-ring-ring-brand",
     // Disabled
     "disabled:cursor-not-allowed",
+    // Invalid
+    "aria-invalid:inset-shadow-[0_0_0_1px_var(--color-border-danger)] aria-invalid:inset-ring-4 aria-invalid:inset-ring-ring-danger",
     // Other
-    "outline-none",
+    "transition-[box-shadow] outline-none",
   ],
   {
     variants: {
