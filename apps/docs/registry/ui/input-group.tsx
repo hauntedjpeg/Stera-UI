@@ -19,11 +19,11 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
         // Sizing (driven by InputGroupInput's data-size; block layouts size to content)
         "h-9 w-full min-w-0 has-[[data-slot=input-group-control][data-size=lg]]:not-has-[>[data-align^=block]]:h-11 has-[[data-slot=input-group-control][data-size=sm]]:not-has-[>[data-align^=block]]:h-8",
         // Focus
-        "has-[[data-slot=input-group-control]:focus-visible]:border-border-brand-strong has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring-brand",
+        "has-[[data-slot=input-group-control]:focus-visible]:border-border-brand has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring-brand",
         // Disabled
-        "has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed has-[[data-slot=input-group-control]:disabled]:border-border-strong has-[[data-slot=input-group-control]:disabled]:bg-surface-disabled has-[[data-slot=input-group-control]:disabled]:text-ink-subtlest",
+        "has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed has-[[data-slot=input-group-control]:disabled]:border-border-subtle has-[[data-slot=input-group-control]:disabled]:bg-surface-disabled has-[[data-slot=input-group-control]:disabled]:text-ink-subtlest",
         // Invalid
-        "has-[[data-slot][aria-invalid=true]]:border-border-danger-strong has-[[data-slot][aria-invalid=true]]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-ring-danger",
+        "has-[[data-slot][aria-invalid=true]]:border-border-danger has-[[data-slot][aria-invalid=true]]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-ring-danger",
         // Variants
         "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pr-2 has-[>[data-align=inline-start]]:[&>input]:pl-2",
         className

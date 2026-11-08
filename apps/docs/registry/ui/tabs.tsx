@@ -121,7 +121,7 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
         // Active — only the text color changes on the trigger itself
         "data-active:text-ink",
         // Other
-        "hover:text-ink focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "hover:text-ink focus-visible:border-border-brand focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className
       )}
       {...props}

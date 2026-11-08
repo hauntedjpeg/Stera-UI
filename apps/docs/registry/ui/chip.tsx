@@ -12,7 +12,7 @@ const chipVariants = cva(
     // Text
     "st-label-md-medium whitespace-nowrap",
     // Focus
-    "focus-visible:border-border-strongest focus-visible:ring-3 focus-visible:ring-ring",
+    "focus-visible:border-border-bold focus-visible:ring-3 focus-visible:ring-ring",
     // Disabled
     "disabled:pointer-events-none disabled:opacity-50",
     // Icons
@@ -24,9 +24,9 @@ const chipVariants = cva(
     variants: {
       variant: {
         subtle:
-          "bg-surface-muted text-ink hover:bg-surface-muted-hover data-[active]:border-[1.5px] data-[active]:border-border-strongest data-[active]:bg-surface-muted",
+          "bg-surface-muted text-ink hover:bg-surface-muted-hover data-[active]:border-[1.5px] data-[active]:border-border-bold data-[active]:bg-surface-muted",
         outline:
-          "border-border bg-surface text-ink hover:bg-surface-hover data-[active]:border-[1.5px] data-[active]:border-border-strongest data-[active]:bg-surface-subtle",
+          "border-border bg-surface text-ink hover:bg-surface-hover data-[active]:border-[1.5px] data-[active]:border-border-bold data-[active]:bg-surface-subtle",
       },
       size: {
         xs: "h-6 px-2 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1",

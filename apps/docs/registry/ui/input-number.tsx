@@ -21,11 +21,11 @@ const inputNumberGroupVariants = cva(
     // Sizing
     "w-full min-w-0",
     // Focus
-    "has-[[data-slot=input-number-control]:focus-visible]:border-border-brand-strong has-[[data-slot=input-number-control]:focus-visible]:ring-3 has-[[data-slot=input-number-control]:focus-visible]:ring-ring-brand",
+    "has-[[data-slot=input-number-control]:focus-visible]:border-border-brand has-[[data-slot=input-number-control]:focus-visible]:ring-3 has-[[data-slot=input-number-control]:focus-visible]:ring-ring-brand",
     // Disabled
-    "data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:border-border-strong data-disabled:bg-surface-disabled data-disabled:text-ink-subtlest",
+    "data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:border-border-subtle data-disabled:bg-surface-disabled data-disabled:text-ink-subtlest",
     // Invalid
-    "has-[[data-slot=input-number-control][aria-invalid=true]]:border-border-danger-strong has-[[data-slot=input-number-control][aria-invalid=true]]:ring-3 has-[[data-slot=input-number-control][aria-invalid=true]]:ring-ring-danger",
+    "has-[[data-slot=input-number-control][aria-invalid=true]]:border-border-danger has-[[data-slot=input-number-control][aria-invalid=true]]:ring-3 has-[[data-slot=input-number-control][aria-invalid=true]]:ring-ring-danger",
     // Other
     "transition-[color,box-shadow,border-color] outline-none",
   ],

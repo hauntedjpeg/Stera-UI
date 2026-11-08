@@ -19,9 +19,9 @@ function Switch({
         // Base
         "relative inline-flex shrink-0 items-center rounded-full border-2 border-transparent shadow-xs transition-all outline-none after:absolute after:-inset-x-3 after:-inset-y-2",
         // Focus
-        "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
+        "focus-visible:border-border-brand focus-visible:ring-3 focus-visible:ring-ring-brand",
         // Invalid
-        "data-invalid:border-border-danger-strong data-invalid:ring-3 data-invalid:ring-ring-danger",
+        "data-invalid:border-border-danger data-invalid:ring-3 data-invalid:ring-ring-danger",
         // State
         "data-checked:bg-surface-brand data-disabled:cursor-not-allowed data-unchecked:bg-surface-muted",
         // Size

@@ -9,11 +9,11 @@ const nativeSelectVariants = cva(
     // Base
     "w-full min-w-0 appearance-none rounded-xl border border-border bg-surface transition-[color,box-shadow] outline-none select-none",
     // Focus
-    "focus-visible:border-border-brand-strong focus-visible:ring-3 focus-visible:ring-ring-brand",
+    "focus-visible:border-border-brand focus-visible:ring-3 focus-visible:ring-ring-brand",
     // Disabled
-    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:border-border-strong disabled:bg-surface-disabled disabled:text-ink-subtlest",
+    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:border-border-subtle disabled:bg-surface-disabled disabled:text-ink-subtlest",
     // Invalid
-    "aria-invalid:border-border-danger-strong aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+    "aria-invalid:border-border-danger aria-invalid:ring-3 aria-invalid:ring-ring-danger",
   ],
   {
     variants: {
