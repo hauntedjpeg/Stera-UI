@@ -50,10 +50,10 @@ function Switch({
         data-slot="switch-thumb"
         className={cn(
           // Base
-          "pointer-events-none h-full w-(--thumb-w) rounded-full bg-ink-onbrand",
+          "pointer-events-none h-full w-(--thumb-w) rounded-full bg-(--white-12)",
           "transition-transform duration-120 ease-out motion-reduce:transition-none",
-          // Checked — slide across the track's inner width
-          "data-checked:translate-x-[calc(100cqw-100%)]"
+          // Checked
+          "data-checked:bg-ink-onbrand data-checked:translate-x-[calc(100cqw-100%)]"
         )}
       />
     </SwitchPrimitive.Root>
