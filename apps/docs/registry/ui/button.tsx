@@ -11,8 +11,7 @@ const buttonVariants = cva(
   [
     // Group
     "group/button",
-    // Base. Every variant keeps a transparent border so all variants share
-    // one box size; only `outline` gives it a color.
+    // Base
     "inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent transition outline-none select-none",
     // Text
     "st-label-md-medium whitespace-nowrap",
@@ -23,7 +22,7 @@ const buttonVariants = cva(
     // Invalid
     "aria-invalid:ring-3 aria-invalid:ring-ring-danger",
     // Other
-    "active:translate-y-px [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   ],
   {
     variants: {
