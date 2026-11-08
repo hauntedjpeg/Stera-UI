@@ -46,9 +46,9 @@ See also: [Theming](/design/theming).
 | --- | --- |
 | `brand` | Primary brand-colored button |
 | `accent` | Accent-colored button |
-| `outline` | Bordered button with transparent background |
+| `outline` | Bordered button on the base surface (default) |
 | `subtle` | Subtle background, no border |
-| `ghost` | No background or border |
+| `ghost` | No background until hovered |
 | `danger` | Destructive action button |
 | `link` | Styled as a link |
 
@@ -83,6 +83,6 @@ The `Button` component extends the native `<button>` element with additional pro
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `variant` | `"brand" \| "accent" \| "outline" \| "subtle" \| "ghost" \| "danger" \| "link"` | `"brand"` |
+| `variant` | `"brand" \| "accent" \| "outline" \| "subtle" \| "ghost" \| "danger" \| "link"` | `"outline"` |
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"md"` |
-| `asChild` | `boolean` | `false` |
+| `render` | `ReactElement` | Render as another element, such as a link |

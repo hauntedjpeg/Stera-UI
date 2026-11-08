@@ -2,7 +2,7 @@ import { clsx, type ClassValue } from "clsx"
 import { extendTailwindMerge } from "tailwind-merge"
 
 const isTypography = (value: string) =>
-  /^(body|heading|display|hero|mono)-/.test(value)
+  /^(body|label|heading|display|hero|mono)-/.test(value)
 
 const twMerge = extendTailwindMerge<"st-typography">({
   extend: {
