@@ -1,5 +1,11 @@
 # stera-ui
 
+## 0.13.1
+
+### Patch Changes
+
+- [`5886aa1`](https://github.com/hauntedjpeg/Stera-UI/commit/5886aa1b39a923a7426858d74f7028b831b06573) Thanks [@hauntedjpeg](https://github.com/hauntedjpeg)! - Next.js font setup now passes `fallback` and `adjustFontFallback` from the registry to `next/font`. Fonts `next/font` has no size data for, like Zalando Sans, get a `sans-serif` fallback instead of a build warning and a flash of serif text. Layouts `init` already set up are not rewritten. Add `fallback: ["sans-serif"]` and `adjustFontFallback: false` to the Zalando Sans calls yourself.
+
 ## 0.13.0
 
 ### Minor Changes
