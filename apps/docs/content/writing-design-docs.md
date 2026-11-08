@@ -8,7 +8,7 @@ Only components in the registry. Figma docs for components that don't exist in c
 
 ## Where they go
 
-- **One component:** a `<DesignGuidelines>` block under `## Design`, right after the page's first `<ComponentPreview>` and before `## Installation`. The site renders it as a panel. `apps/docs/lib/llms.ts` also serves it on its own at `/components/<name>/design.md` and lists it in `/llms.txt`.
+- **One component:** a `<DesignGuidelines>` block under `## Design`, right after `## Installation`, which follows the page's first `<ComponentPreview>`. The site renders it as a panel. `apps/docs/lib/llms.ts` also serves it on its own at `/components/<name>/design.md` and lists it in `/llms.txt`.
 - **Choosing between similar components, or rules they share:** a group page in `content/docs/design/`, such as [Overlays](docs/design/overlays.mdx). Component blocks link to it instead of repeating it.
 - **Color token rules** (contrast, keeping roles distinct, visible states): [Theming](docs/design/theming.mdx). Whoever places a component can't change these; whoever edits the tokens can.
 - **The summary** is the page's frontmatter `description`: one sentence saying what the component is.
