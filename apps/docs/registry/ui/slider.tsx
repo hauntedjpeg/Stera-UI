@@ -49,7 +49,7 @@ function Slider<Value extends number | readonly number[]>({
             data-slot="slider-range"
             className={cn(
               // Base
-              "bg-surface-brand",
+              "rounded-full bg-surface-brand",
               // Orientation
               "data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full"
             )}
@@ -64,11 +64,15 @@ function Slider<Value extends number | readonly number[]>({
             getAriaLabel={getAriaLabel}
             className={cn(
               // Base
-              "block size-4 shrink-0 rounded-full border border-border-subtle bg-surface shadow-sm transition-shadow outline-none",
-              // Hit area (24px)
+              "block shrink-0 rounded-full border-[0.5px] border-alpha-4 bg-(--white-12) shadow-md backdrop-blur-[2px] outline-none",
+              "transition-[width,height,background-color,border-color,box-shadow] duration-120 ease-out",
+              // Size — 24×16, swapped when vertical
+              "data-[orientation=horizontal]:h-4 data-[orientation=horizontal]:w-6 data-[orientation=vertical]:h-6 data-[orientation=vertical]:w-4",
+              // Hit area
               "after:absolute after:-inset-1",
-              // Hover / Drag
-              "ring-ring hover:ring-3 data-dragging:ring-3",
+              // Drag — grows to 32×20, swapped when vertical
+              "data-dragging:border-alpha-3 data-dragging:bg-alpha-5",
+              "data-dragging:data-[orientation=horizontal]:h-5 data-dragging:data-[orientation=horizontal]:w-8 data-dragging:data-[orientation=vertical]:h-8 data-dragging:data-[orientation=vertical]:w-5",
               // Focus — keyboard focus lands on the nested <input>
               "has-focus-visible:border-border-brand has-focus-visible:ring-3 has-focus-visible:ring-ring-brand",
               // Invalid
