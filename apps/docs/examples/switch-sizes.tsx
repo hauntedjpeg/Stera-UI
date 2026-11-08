@@ -5,16 +5,16 @@ export default function SwitchSizes() {
   return (
     <div className="flex flex-col gap-4">
       <Field orientation="horizontal">
-        <Switch id="size-sm" size="sm" />
-        <FieldLabel htmlFor="size-sm">Small</FieldLabel>
+        <Switch size="sm" />
+        <FieldLabel>Small</FieldLabel>
       </Field>
       <Field orientation="horizontal">
-        <Switch id="size-md" size="md" />
-        <FieldLabel htmlFor="size-md">Medium</FieldLabel>
+        <Switch size="md" />
+        <FieldLabel>Medium</FieldLabel>
       </Field>
       <Field orientation="horizontal">
-        <Switch id="size-lg" size="lg" />
-        <FieldLabel htmlFor="size-lg">Large</FieldLabel>
+        <Switch size="lg" />
+        <FieldLabel>Large</FieldLabel>
       </Field>
     </div>
   )

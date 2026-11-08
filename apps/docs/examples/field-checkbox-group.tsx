@@ -17,22 +17,16 @@ export default function FieldCheckboxGroup() {
       </FieldDescription>
       <FieldGroup className="gap-3">
         <Field orientation="horizontal">
-          <Checkbox id="fp-notif-email" name="fp-notif-email" defaultChecked />
-          <FieldLabel htmlFor="fp-notif-email" className="font-normal">
-            Email notifications
-          </FieldLabel>
+          <Checkbox name="fp-notif-email" defaultChecked />
+          <FieldLabel className="st-label-md">Email notifications</FieldLabel>
         </Field>
         <Field orientation="horizontal">
-          <Checkbox id="fp-notif-sms" name="fp-notif-sms" />
-          <FieldLabel htmlFor="fp-notif-sms" className="font-normal">
-            SMS notifications
-          </FieldLabel>
+          <Checkbox name="fp-notif-sms" />
+          <FieldLabel className="st-label-md">SMS notifications</FieldLabel>
         </Field>
         <Field orientation="horizontal">
-          <Checkbox id="fp-notif-push" name="fp-notif-push" defaultChecked />
-          <FieldLabel htmlFor="fp-notif-push" className="font-normal">
-            Push notifications
-          </FieldLabel>
+          <Checkbox name="fp-notif-push" defaultChecked />
+          <FieldLabel className="st-label-md">Push notifications</FieldLabel>
         </Field>
       </FieldGroup>
     </FieldSet>

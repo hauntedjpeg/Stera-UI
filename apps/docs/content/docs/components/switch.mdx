@@ -41,7 +41,7 @@ Place `FieldContent` between the label and switch to add a description.
 
 ### Choice Card
 
-Wrap a `Field` inside `FieldLabel` to make the entire card clickable. The card highlights automatically when the switch is checked.
+Wrap a `Field` inside `FieldLabel` to make the entire card clickable. The card labels its switch by containment, so it needs no `htmlFor`. It highlights when checked, shows a focus ring when the switch has keyboard focus, and dims when its `Field` is `disabled`.
 
 <ComponentPreview name="switch-choice-card" caption="Choice Card" />
 

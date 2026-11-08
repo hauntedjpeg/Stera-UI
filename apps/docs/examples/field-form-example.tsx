@@ -6,7 +6,6 @@ import {
   FieldGroup,
   FieldLabel,
   FieldSeparator,
-  FieldTitle,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import {
@@ -24,23 +23,18 @@ export default function FieldFormExample() {
   return (
     <FieldGroup className="w-full max-w-lg">
       <Field>
-        <FieldLabel htmlFor="fp-form-name">Full name</FieldLabel>
-        <Input id="fp-form-name" placeholder="Jane Doe" />
+        <FieldLabel>Full name</FieldLabel>
+        <Input placeholder="Jane Doe" />
       </Field>
-      <Field data-invalid="true">
-        <FieldLabel htmlFor="fp-form-email">Email address</FieldLabel>
-        <Input
-          id="fp-form-email"
-          type="email"
-          aria-invalid="true"
-          defaultValue="invalid-email"
-        />
+      <Field invalid>
+        <FieldLabel>Email address</FieldLabel>
+        <Input type="email" defaultValue="invalid-email" />
         <FieldError>Please enter a valid email address.</FieldError>
       </Field>
       <Field>
-        <FieldLabel htmlFor="fp-form-role">Role</FieldLabel>
+        <FieldLabel nativeLabel={false}>Role</FieldLabel>
         <Select defaultValue="Editor">
-          <SelectTrigger id="fp-form-role" className="w-full">
+          <SelectTrigger>
             <SelectValue placeholder="Select a role" />
           </SelectTrigger>
           <SelectContent>
@@ -53,14 +47,14 @@ export default function FieldFormExample() {
         </Select>
       </Field>
       <Field>
-        <FieldLabel htmlFor="fp-form-bio">Bio</FieldLabel>
-        <Textarea id="fp-form-bio" placeholder="Tell us about yourself..." />
+        <FieldLabel>Bio</FieldLabel>
+        <Textarea placeholder="Tell us about yourself..." />
         <FieldDescription>Brief description for your profile.</FieldDescription>
       </Field>
       <FieldSeparator />
       <Field orientation="horizontal">
         <FieldContent>
-          <FieldTitle>Marketing emails</FieldTitle>
+          <FieldLabel>Marketing emails</FieldLabel>
           <FieldDescription>
             Receive emails about new products and features.
           </FieldDescription>

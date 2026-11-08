@@ -8,8 +8,8 @@ import { Field, FieldLabel } from "@/components/ui/field"
 export default function NativeSelectWithOptGroup() {
   return (
     <Field className="w-sm">
-      <FieldLabel htmlFor="country">Country</FieldLabel>
-      <NativeSelect id="country" className="w-full">
+      <FieldLabel>Country</FieldLabel>
+      <NativeSelect className="w-full">
         <NativeSelectOption value="">Select a country</NativeSelectOption>
         <NativeSelectOptGroup label="North America">
           <NativeSelectOption value="us">United States</NativeSelectOption>

@@ -104,7 +104,7 @@ Use `value` and `onValueChange` to control the value. The value is `null` when t
 
 ### Invalid
 
-Set `aria-invalid` on `InputNumber` to mark it invalid, and pair it with a `FieldError`.
+Set `invalid` on the surrounding `Field` to mark it invalid, and pair it with a `FieldError`. Outside a `Field`, set `aria-invalid` on `InputNumber`.
 
 <ComponentPreview name="input-number-invalid" caption="Input Number Invalid" />
 
@@ -129,7 +129,7 @@ Wraps `NumberField.Root`. Accepts all of its props, including `locale`, `smallSt
 | `size`          | `"sm" \| "md" \| "lg"`            | `"md"`  |
 | `aria-invalid`  | `boolean \| "true" \| "false"`    | —       |
 
-Pass `id` and pair it with a `FieldLabel htmlFor` to label the input.
+Inside a `Field`, `FieldLabel` labels the input automatically. Outside one, pass `id` and pair it with a `<label htmlFor>`.
 
 ### InputNumberGroup
 

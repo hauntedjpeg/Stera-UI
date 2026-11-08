@@ -41,24 +41,20 @@ export default function CheckboxIndeterminate() {
     <FieldGroup className="w-56">
       <Field orientation="horizontal">
         <Checkbox
-          id="indet-parent"
           checked={allChecked}
           indeterminate={someChecked}
           onCheckedChange={handleParentChange}
         />
-        <FieldLabel htmlFor="indet-parent">Show on desktop</FieldLabel>
+        <FieldLabel>Show on desktop</FieldLabel>
       </Field>
       <FieldGroup className="gap-3 pl-6">
         {items.map((item) => (
           <Field key={item.id} orientation="horizontal">
             <Checkbox
-              id={item.id}
               checked={selected.has(item.id)}
               onCheckedChange={(checked) => handleItemChange(item.id, checked)}
             />
-            <FieldLabel htmlFor={item.id} className="font-normal">
-              {item.label}
-            </FieldLabel>
+            <FieldLabel className="st-label-md">{item.label}</FieldLabel>
           </Field>
         ))}
       </FieldGroup>

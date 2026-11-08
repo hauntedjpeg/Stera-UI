@@ -18,14 +18,8 @@ export default function InputNumberControlled() {
 
   return (
     <Field className="w-48">
-      <FieldLabel htmlFor="input-number-controlled">Seats</FieldLabel>
-      <InputNumber
-        id="input-number-controlled"
-        min={1}
-        max={50}
-        value={seats}
-        onValueChange={setSeats}
-      >
+      <FieldLabel>Seats</FieldLabel>
+      <InputNumber min={1} max={50} value={seats} onValueChange={setSeats}>
         <InputNumberGroup>
           <InputNumberDecrement />
           <InputNumberControl />

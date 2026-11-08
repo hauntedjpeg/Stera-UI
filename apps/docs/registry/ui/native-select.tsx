@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Field as FieldPrimitive } from "@base-ui/react/field"
 import { cva, type VariantProps } from "class-variance-authority"
 import { SiChevronDown } from "stera-icons"
 
@@ -43,10 +44,13 @@ function NativeSelect({ className, size, ...props }: NativeSelectProps) {
       data-slot="native-select-wrapper"
       data-size={size}
     >
-      <select
+      {/* Field.Control wires the id, label, description and invalid state from a Field */}
+      <FieldPrimitive.Control
+        render={<select />}
         data-slot="native-select"
         className={cn(nativeSelectVariants({ size }))}
-        {...props}
+        // Field.Control is typed for <input>; the handlers it adds also suit a <select>
+        {...(props as unknown as FieldPrimitive.Control.Props)}
       />
       <SiChevronDown
         className="pointer-events-none absolute top-1/2 right-2.5 size-4 -translate-y-1/2 text-ink-subtlest select-none"

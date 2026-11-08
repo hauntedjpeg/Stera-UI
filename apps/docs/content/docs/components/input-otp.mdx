@@ -70,7 +70,7 @@ Use `value` and `onValueChange` to control the value. `onValueComplete` fires on
 
 ### Invalid
 
-Set `aria-invalid` on `InputOTP` to mark every slot invalid, and pair it with a `FieldError`.
+Set `invalid` on the surrounding `Field` to mark every slot invalid, and pair it with a `FieldError`. Outside a `Field`, set `aria-invalid` on `InputOTP`.
 
 <ComponentPreview name="input-otp-invalid" caption="Input OTP Invalid" />
 
@@ -88,7 +88,7 @@ Wraps `OTPField.Root`. Accepts all of its props, including `length`, `value`, `d
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `aria-invalid` | `boolean \| "true" \| "false"` | — |
 
-Pass `id` and pair it with a `FieldLabel htmlFor` to label the first slot. Every later slot is labeled with its position, such as "Character 2 of 6".
+Inside a `Field`, `FieldLabel` labels the first slot automatically. Outside one, pass `id` and pair it with a `<label htmlFor>`. Every later slot is labeled with its position, such as "Character 2 of 6".
 
 ### InputOTPSlot
 

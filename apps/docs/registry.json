@@ -290,8 +290,8 @@
     {
       "name": "field",
       "type": "registry:ui",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": ["utils", "label", "separator"],
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["utils", "separator"],
       "files": [{ "path": "registry/ui/field.tsx", "type": "registry:ui" }]
     },
     {
@@ -380,7 +380,7 @@
     {
       "name": "native-select",
       "type": "registry:ui",
-      "dependencies": ["stera-icons"],
+      "dependencies": ["@base-ui/react", "stera-icons"],
       "registryDependencies": ["utils"],
       "files": [
         { "path": "registry/ui/native-select.tsx", "type": "registry:ui" }
@@ -502,6 +502,7 @@
     {
       "name": "textarea",
       "type": "registry:ui",
+      "dependencies": ["@base-ui/react"],
       "registryDependencies": ["utils"],
       "files": [{ "path": "registry/ui/textarea.tsx", "type": "registry:ui" }]
     },

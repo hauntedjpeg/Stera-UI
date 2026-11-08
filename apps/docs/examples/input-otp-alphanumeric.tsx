@@ -11,9 +11,8 @@ import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
 export default function InputOTPAlphanumeric() {
   return (
     <Field className="w-fit">
-      <FieldLabel htmlFor="otp-recovery">Recovery code</FieldLabel>
+      <FieldLabel>Recovery code</FieldLabel>
       <InputOTP
-        id="otp-recovery"
         length={8}
         validationType="alphanumeric"
         normalizeValue={(value) => value.toUpperCase()}

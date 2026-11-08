@@ -27,12 +27,12 @@ export default function PopoverWithForm() {
         </PopoverHeader>
         <FieldGroup>
           <Field>
-            <FieldLabel htmlFor="popover-width">Width</FieldLabel>
-            <Input id="popover-width" defaultValue="100%" />
+            <FieldLabel>Width</FieldLabel>
+            <Input defaultValue="100%" />
           </Field>
           <Field>
-            <FieldLabel htmlFor="popover-height">Height</FieldLabel>
-            <Input id="popover-height" defaultValue="25px" />
+            <FieldLabel>Height</FieldLabel>
+            <Input defaultValue="25px" />
           </Field>
         </FieldGroup>
       </PopoverContent>

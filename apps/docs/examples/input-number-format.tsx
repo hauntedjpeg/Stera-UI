@@ -48,8 +48,8 @@ export default function InputNumberFormat() {
     <div className="flex w-48 flex-col gap-4">
       {fields.map(({ id, label, ...props }) => (
         <Field key={id}>
-          <FieldLabel htmlFor={id}>{label}</FieldLabel>
-          <InputNumber id={id} {...props}>
+          <FieldLabel>{label}</FieldLabel>
+          <InputNumber {...props}>
             <InputNumberGroup>
               <InputNumberDecrement />
               <InputNumberControl />

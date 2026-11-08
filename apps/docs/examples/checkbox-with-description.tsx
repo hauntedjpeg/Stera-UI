@@ -9,11 +9,9 @@ import {
 export default function CheckboxWithDescription() {
   return (
     <Field orientation="horizontal">
-      <Checkbox id="terms-checkbox" />
+      <Checkbox />
       <FieldContent>
-        <FieldLabel htmlFor="terms-checkbox">
-          Accept terms and conditions
-        </FieldLabel>
+        <FieldLabel>Accept terms and conditions</FieldLabel>
         <FieldDescription>
           By clicking this checkbox, you agree to the terms and conditions.
         </FieldDescription>

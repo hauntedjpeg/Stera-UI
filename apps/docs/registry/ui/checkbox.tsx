@@ -24,7 +24,7 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         "data-checked:border-surface-brand data-checked:bg-surface-brand data-checked:text-ink-onbrand",
         "data-indeterminate:border-surface-brand data-indeterminate:bg-surface-brand data-indeterminate:text-ink-onbrand",
         // Variants
-        "group-has-disabled/field:text-ink-disabled",
+        "data-disabled:text-ink-disabled",
         // Other
         "peer group/checkbox",
         className

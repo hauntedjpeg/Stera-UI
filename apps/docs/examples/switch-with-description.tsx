@@ -10,12 +10,12 @@ export default function SwitchWithDescription() {
   return (
     <Field orientation="horizontal" className="max-w-sm">
       <FieldContent>
-        <FieldLabel htmlFor="marketing-switch">Marketing emails</FieldLabel>
+        <FieldLabel>Marketing emails</FieldLabel>
         <FieldDescription>
           Receive emails about new products, features, and more.
         </FieldDescription>
       </FieldContent>
-      <Switch id="marketing-switch" />
+      <Switch />
     </Field>
   )
 }

@@ -9,6 +9,30 @@ description: A form field layout system that pairs labels, inputs, descriptions,
 
 <InstallSnippet slug="field" hideHeading />
 
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Any form control that needs a label, help text or an error message.
+- A set of related controls under one heading, such as notification preferences.
+
+### When not to use
+
+- A label for something that isn't a form field. Use a [Label](/components/label).
+
+### Guidelines
+
+- **Descriptions:** say what the field is for or what format it expects. Don't repeat the label.
+- **Errors:** say what went wrong and how to fix it, such as "Enter an email address like name@example.com" rather than "Invalid input."
+- **Choice cards:** for options that each need a sentence of explanation, such as plans. Options with short labels read better as plain rows.
+- Your call: when errors appear, on blur or on submit. Pick one and use it consistently.
+
+See also: [Forms](/design/forms).
+
+</DesignGuidelines>
+
 ## Composition
 
 ### Field
@@ -61,18 +85,18 @@ FieldSet
 
 ## Anatomy
 
-The `Field` family is designed for composing accessible forms. A typical field is structured as follows:
+The `Field` family is built on Base UI's [Field](https://base-ui.com/react/components/field) and [Fieldset](https://base-ui.com/react/components/fieldset). A typical field is structured as follows:
 
 ```tsx showLineNumbers
 <Field>
-  <FieldLabel htmlFor="input-id">Label</FieldLabel>
+  <FieldLabel>Label</FieldLabel>
   {/* Input, Select, Switch, etc. */}
   <FieldDescription>Optional helper text.</FieldDescription>
   <FieldError>Validation message.</FieldError>
 </Field>
 ```
 
-- `Field` is the core wrapper for a single field.
+- `Field` is the core wrapper for a single field. It links the label, description and error to the control, so you don't need `id` or `htmlFor`.
 - `FieldContent` is a flex column that groups label and description. Not required if you have no description.
 - Wrap related fields with `FieldGroup`, and use `FieldSet` with `FieldLegend` for semantic grouping.
 
@@ -88,23 +112,25 @@ Use `orientation="horizontal"` to place label/description on the left and the co
 
 <ComponentPreview name="field-with-error" />
 
-Add `data-invalid="true"` to `Field` and `aria-invalid="true"` to the input to trigger error styles.
+Set `invalid` on `Field`. The control, label and error pick up the invalid state, and the control gets `aria-invalid`.
 
 ### Multiple Errors
 
 <ComponentPreview name="field-multiple-errors" />
 
-Pass an `errors` array to `FieldError` to list multiple validation messages.
+Pass an `errors` array to `FieldError` to list multiple validation messages. It accepts strings or `{ message }` objects, the shape most form libraries return.
 
 ### Disabled
 
 <ComponentPreview name="field-disabled" />
 
+Set `disabled` on `Field` to disable its control and dim its label. Set it on `FieldSet` to disable every field inside.
+
 ### Checkbox Group
 
 <ComponentPreview name="field-checkbox-group" />
 
-Use `FieldSet` and `FieldLegend` to group related checkboxes or radio buttons with a shared label.
+Use `FieldSet` and `FieldLegend` to group related checkboxes or radio buttons with a shared label. Give each option its own `Field`.
 
 ### Full Form Example
 
@@ -112,42 +138,69 @@ Use `FieldSet` and `FieldLegend` to group related checkboxes or radio buttons wi
 
 ## Accessibility
 
-- `FieldSet` and `FieldLegend` keep related controls grouped for keyboard and assistive tech users.
-- `Field` outputs `role="group"` so nested controls inherit labeling from `FieldLabel` and `FieldLegend` when combined.
-- Apply `FieldSeparator` sparingly to ensure screen readers encounter clear section boundaries.
+- `Field` links `FieldLabel` to the control and adds `FieldDescription` and `FieldError` to its `aria-describedby`.
+- `FieldSet` and `FieldLegend` render a native `<fieldset>` and `<legend>`, so related controls are announced together.
+- `FieldError` is a live region, so screen readers announce new errors.
+- For a Select or Combobox trigger, set `nativeLabel={false}` on `FieldLabel`. A native `<label>` can't label a button.
+- Native `<textarea>` and `<select>` elements need the registry's `Textarea` and `NativeSelect` to pick up the label and states automatically.
 
 ## API Reference
 
 ### Field
 
+Wraps `Field.Root`. Accepts all of its props, including `name`, `validate`, `validationMode`, `dirty` and `touched`.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `orientation` | `"vertical" \| "horizontal" \| "responsive"` | `"vertical"` |
-| `data-invalid` | `"true"` | — |
-| `data-disabled` | `"true"` | — |
+| `invalid` | `boolean` | — |
+| `disabled` | `boolean` | `false` |
 
-### FieldError
+`responsive` stacks the field and switches to horizontal when its `FieldGroup` is wide enough.
+
+### FieldLabel
+
+Wraps `Field.Label` inside a `Field`, and renders a plain `<label>` outside one.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `errors` | `Array<{ message: string }>` | — |
+| `nativeLabel` | `boolean` | `true` |
+
+### FieldError
+
+Wraps `Field.Error`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `errors` | `Array<string \| { message?: string }>` | — |
+| `match` | `boolean \| keyof ValidityState` | — |
+
+With children or `errors`, the error always shows. Without them, it shows the native validation message when the control fails validation.
+
+### FieldSet
+
+Wraps `Fieldset.Root`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `disabled` | `boolean` | `false` |
 
 ### FieldLegend
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `variant` | `"default" \| "label"` | `"default"` |
+| `variant` | `"legend" \| "label"` | `"legend"` |
 
 ### Subcomponents
 
 | Component | Description |
 | --- | --- |
-| `FieldLabel` | `<label>` element styled for the design system |
-| `FieldDescription` | Supporting helper text |
+| `FieldLabel` | Label linked to the field's control |
+| `FieldDescription` | Supporting helper text, wraps `Field.Description` |
 | `FieldError` | Error message(s) displayed when invalid |
 | `FieldGroup` | Vertical stack of multiple `Field` components |
 | `FieldSet` | Fieldset wrapper for grouped controls |
 | `FieldLegend` | Legend/heading for a `FieldSet` |
-| `FieldContent` | Column of `FieldTitle` + `FieldDescription` for horizontal layouts |
-| `FieldTitle` | Bold title inside `FieldContent` |
+| `FieldContent` | Column of label or title plus `FieldDescription` for horizontal layouts |
+| `FieldTitle` | Title inside a choice card, where the wrapping `FieldLabel` labels the control |
 | `FieldSeparator` | Horizontal divider between field groups, with optional label |

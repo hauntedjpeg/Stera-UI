@@ -3,14 +3,9 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 
 export default function InputOTPInvalid() {
   return (
-    <Field data-invalid="true" className="w-fit">
-      <FieldLabel htmlFor="otp-invalid">Verification code</FieldLabel>
-      <InputOTP
-        id="otp-invalid"
-        length={6}
-        defaultValue="123456"
-        aria-invalid="true"
-      >
+    <Field invalid className="w-fit">
+      <FieldLabel>Verification code</FieldLabel>
+      <InputOTP length={6} defaultValue="123456">
         {Array.from({ length: 6 }, (_, index) => (
           <InputOTPSlot key={index} />
         ))}

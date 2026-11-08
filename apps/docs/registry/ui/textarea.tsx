@@ -1,10 +1,13 @@
 import * as React from "react"
+import { Field as FieldPrimitive } from "@base-ui/react/field"
 
 import { cn } from "@/lib/utils"
 
 function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
   return (
-    <textarea
+    // Field.Control wires the id, label, description and invalid state from a Field
+    <FieldPrimitive.Control
+      render={<textarea />}
       data-slot="textarea"
       className={cn(
         // Base
@@ -21,7 +24,8 @@ function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
         "field-sizing-content transition-[color,box-shadow] outline-none placeholder:text-ink-subtlest",
         className
       )}
-      {...props}
+      // Field.Control is typed for <input>; the handlers it adds also suit a <textarea>
+      {...(props as unknown as FieldPrimitive.Control.Props)}
     />
   )
 }

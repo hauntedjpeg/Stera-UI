@@ -1,21 +1,26 @@
 "use client"
 
-import { useMemo } from "react"
+import * as React from "react"
+import { Field as FieldPrimitive } from "@base-ui/react/field"
+import { Fieldset as FieldsetPrimitive } from "@base-ui/react/fieldset"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 
-function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
+// Base UI's Field parts throw outside Field.Root, so labels, descriptions and
+// errors fall back to plain elements when no Field is above them
+const FieldScopeContext = React.createContext(false)
+
+function FieldSet({ className, ...props }: FieldsetPrimitive.Root.Props) {
   return (
-    <fieldset
+    <FieldsetPrimitive.Root
       data-slot="field-set"
       className={cn(
         // Base
         "flex flex-col",
         // Sizing
-        "gap-6 has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",
+        "gap-6 has-[>[data-slot=radio-group]]:gap-3",
         className
       )}
       {...props}
@@ -27,16 +32,18 @@ function FieldLegend({
   className,
   variant = "legend",
   ...props
-}: React.ComponentProps<"legend"> & { variant?: "legend" | "label" }) {
+}: FieldsetPrimitive.Legend.Props & { variant?: "legend" | "label" }) {
   return (
-    <legend
+    <FieldsetPrimitive.Legend
+      // A native legend sits outside the fieldset's flex layout
+      render={<legend />}
       data-slot="field-legend"
       data-variant={variant}
       className={cn(
+        // Base
+        "mb-3",
         // Variants
         "data-[variant=label]:st-label-md-medium data-[variant=legend]:st-label-lg-medium",
-        // Other
-        "mb-3",
         className
       )}
       {...props}
@@ -50,13 +57,11 @@ function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="field-group"
       className={cn(
         // Base
-        "flex flex-col",
+        "@container/field-group flex flex-col",
         // Sizing
         "w-full gap-7",
-        // Variants
-        "data-[slot=checkbox-group]:gap-3 *:data-[slot=field-group]:gap-4",
-        // Other
-        "group/field-group @container/field-group",
+        // Nested groups
+        "*:data-[slot=field-group]:gap-4",
         className
       )}
       {...props}
@@ -67,26 +72,24 @@ function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
 const fieldVariants = cva(
   [
     // Base
-    "flex",
+    "group/field flex",
     // Sizing
     "w-full gap-3",
-    // Variants
-    "data-[invalid=true]:text-ink-danger",
-    // Other
-    "group/field",
+    // Invalid
+    "data-invalid:text-ink-danger",
   ],
   {
     variants: {
       orientation: {
         vertical: "flex-col *:w-full [&>.sr-only]:w-auto",
         horizontal:
-          "flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto",
+          "flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto *:data-[slot=field-title]:flex-auto",
         responsive:
-          "flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto",
+          "flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto @md/field-group:*:data-[slot=field-title]:flex-auto [&>.sr-only]:w-auto",
       },
     },
     defaultVariants: {
-      orientation: "horizontal",
+      orientation: "vertical",
     },
   }
 )
@@ -95,15 +98,16 @@ function Field({
   className,
   orientation = "vertical",
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
+}: FieldPrimitive.Root.Props & VariantProps<typeof fieldVariants>) {
   return (
-    <div
-      role="group"
-      data-slot="field"
-      data-orientation={orientation}
-      className={cn(fieldVariants({ orientation }), className)}
-      {...props}
-    />
+    <FieldScopeContext.Provider value={true}>
+      <FieldPrimitive.Root
+        data-slot="field"
+        data-orientation={orientation}
+        className={cn(fieldVariants({ orientation }), className)}
+        {...props}
+      />
+    </FieldScopeContext.Provider>
   )
 }
 
@@ -116,8 +120,6 @@ function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
         "flex flex-col",
         // Sizing
         "flex-1 gap-1",
-        // Other
-        "group/field-content leading-snug",
         className
       )}
       {...props}
@@ -127,20 +129,39 @@ function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
 
 function FieldLabel({
   className,
+  nativeLabel,
   ...props
-}: React.ComponentProps<typeof Label>) {
+}: React.ComponentProps<"label"> & {
+  /** Set to `false` when the control is a button, like a Select trigger. */
+  nativeLabel?: boolean
+}) {
+  const inField = React.useContext(FieldScopeContext)
+  const classes = cn(
+    // Base
+    "flex w-fit items-center gap-2 st-label-md-medium select-none",
+    // Disabled
+    "group-data-disabled/field:opacity-50",
+    // Choice card: a FieldLabel that wraps a Field
+    "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border has-[>[data-slot=field]]:transition-[background-color,border-color,box-shadow] *:data-[slot=field]:p-3",
+    // Choice card: checked
+    "has-[>[data-slot=field]]:has-data-checked:border-border-brand-subtle has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-subtle",
+    // Choice card: focus
+    "has-[>[data-slot=field]]:has-focus-visible:border-border-brand has-[>[data-slot=field]]:has-focus-visible:ring-3 has-[>[data-slot=field]]:has-focus-visible:ring-ring-brand",
+    // Choice card: disabled
+    "has-[>[data-slot=field][data-disabled]]:cursor-not-allowed has-[>[data-slot=field][data-disabled]]:border-border-subtle has-[>[data-slot=field][data-disabled]]:bg-surface-disabled",
+    className
+  )
+
+  if (!inField) {
+    return <label data-slot="field-label" className={classes} {...props} />
+  }
+
   return (
-    <Label
+    <FieldPrimitive.Label
       data-slot="field-label"
-      className={cn(
-        // Base
-        "flex has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border has-[>[data-slot=field]]:has-data-checked:border-border-brand has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-subtle *:data-[slot=field]:p-3",
-        // Sizing
-        "w-fit gap-2 has-[>[data-slot=field]]:w-full",
-        // Other
-        "group/field-label peer/field-label group-data-[disabled=true]/field:opacity-50",
-        className
-      )}
+      nativeLabel={nativeLabel}
+      render={nativeLabel === false ? <div /> : undefined}
+      className={classes}
       {...props}
     />
   )
@@ -149,14 +170,12 @@ function FieldLabel({
 function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      data-slot="field-label"
+      data-slot="field-title"
       className={cn(
         // Base
-        "flex items-center",
-        // Sizing
-        "w-fit gap-2",
-        // Other
-        "st-label-md-medium group-data-[disabled=true]/field:opacity-50",
+        "flex w-fit items-center gap-2 st-label-md-medium",
+        // Disabled
+        "group-data-disabled/field:opacity-50",
         className
       )}
       {...props}
@@ -165,16 +184,25 @@ function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
+  const inField = React.useContext(FieldScopeContext)
+  const classes = cn(
+    // Base
+    "st-body-sm text-ink-subtler",
+    // Position: tuck up under a legend
+    "[[data-variant=legend]+&]:-mt-1.5",
+    // Links
+    "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-ink-brand",
+    className
+  )
+
+  if (!inField) {
+    return <p data-slot="field-description" className={classes} {...props} />
+  }
+
   return (
-    <p
+    <FieldPrimitive.Description
       data-slot="field-description"
-      className={cn(
-        // Position
-        "last:mt-0 nth-last-2:-mt-1 [[data-variant=legend]+&]:-mt-1.5",
-        // Other
-        "text-left st-body-sm text-ink-subtler group-has-data-horizontal/field:text-balance [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-ink-brand",
-        className
-      )}
+      className={classes}
       {...props}
     />
   )
@@ -184,32 +212,27 @@ function FieldSeparator({
   children,
   className,
   ...props
-}: React.ComponentProps<"div"> & {
-  children?: React.ReactNode
-}) {
+}: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="field-separator"
-      data-content={!!children}
       className={cn(
         // Base
-        "relative",
+        "flex items-center gap-2 st-body-sm text-ink-subtler",
         // Sizing
-        "h-4",
-        // Other
-        "-my-2 st-body-sm group-data-[variant=outline]/field-group:-mb-2",
+        "-my-2 h-4",
         className
       )}
       {...props}
     >
-      <Separator className="absolute inset-0 top-1/2" />
+      <Separator className="flex-1" />
       {children && (
-        <span
-          className="relative mx-auto block w-fit bg-surface px-2 text-ink-subtler"
-          data-slot="field-separator-content"
-        >
-          {children}
-        </span>
+        <>
+          <span data-slot="field-separator-content" className="shrink-0">
+            {children}
+          </span>
+          <Separator className="flex-1" aria-hidden />
+        </>
       )}
     </div>
   )
@@ -219,54 +242,60 @@ function FieldError({
   className,
   children,
   errors,
+  match,
   ...props
 }: React.ComponentProps<"div"> & {
-  errors?: Array<{ message?: string } | undefined>
+  /** Messages to show. Accepts strings or `{ message }` objects from form libraries. */
+  errors?: Array<string | { message?: string } | undefined>
+  /** When to show the error. Defaults to always when there's content, otherwise on native validity. */
+  match?: FieldPrimitive.Error.Props["match"]
 }) {
-  const content = useMemo(() => {
-    if (children) {
-      return children
-    }
+  const inField = React.useContext(FieldScopeContext)
 
-    if (!errors?.length) {
+  const messages = [
+    ...new Set(
+      (errors ?? [])
+        .map((error) => (typeof error === "string" ? error : error?.message))
+        .filter((message): message is string => Boolean(message))
+    ),
+  ]
+
+  const content =
+    children ??
+    (messages.length > 1 ? (
+      <ul className="ml-4 flex list-disc flex-col gap-1">
+        {messages.map((message) => (
+          <li key={message}>{message}</li>
+        ))}
+      </ul>
+    ) : (
+      messages[0]
+    ))
+
+  const classes = cn("st-body-sm text-ink-danger", className)
+
+  if (!inField) {
+    if (!content) {
       return null
     }
 
-    const uniqueErrors = [
-      ...new Map(errors.map((error) => [error?.message, error])).values(),
-    ]
-
-    if (uniqueErrors?.length == 1) {
-      return uniqueErrors[0]?.message
-    }
-
     return (
-      <ul className="ml-4 flex list-disc flex-col gap-1">
-        {uniqueErrors.map(
-          (error, index) =>
-            error?.message && <li key={index}>{error.message}</li>
-        )}
-      </ul>
+      <div role="alert" data-slot="field-error" className={classes} {...props}>
+        {content}
+      </div>
     )
-  }, [children, errors])
-
-  if (!content) {
-    return null
   }
 
   return (
-    <div
+    <FieldPrimitive.Error
       role="alert"
       data-slot="field-error"
-      className={cn(
-        // Other
-        "st-body-sm text-ink-danger",
-        className
-      )}
+      match={match ?? (content ? true : undefined)}
+      className={classes}
       {...props}
-    >
-      {content}
-    </div>
+      // Without content, Base UI shows the native validation message
+      {...(content ? { children: content } : {})}
+    />
   )
 }
 

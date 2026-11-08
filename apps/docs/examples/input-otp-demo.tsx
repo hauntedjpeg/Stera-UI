@@ -9,8 +9,8 @@ import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
 export default function InputOTPDemo() {
   return (
     <Field className="w-fit">
-      <FieldLabel htmlFor="otp-demo">Verification code</FieldLabel>
-      <InputOTP id="otp-demo" length={6}>
+      <FieldLabel>Verification code</FieldLabel>
+      <InputOTP length={6}>
         <InputOTPGroup>
           <InputOTPSlot />
           <InputOTPSlot />

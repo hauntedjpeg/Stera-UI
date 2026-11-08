@@ -11,9 +11,8 @@ export default function InputOTPControlled() {
 
   return (
     <Field className="w-fit">
-      <FieldLabel htmlFor="otp-controlled">Verification code</FieldLabel>
+      <FieldLabel>Verification code</FieldLabel>
       <InputOTP
-        id="otp-controlled"
         length={6}
         value={value}
         onValueChange={(next) => {

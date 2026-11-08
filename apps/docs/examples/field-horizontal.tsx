@@ -2,7 +2,7 @@ import {
   Field,
   FieldContent,
   FieldDescription,
-  FieldTitle,
+  FieldLabel,
 } from "@/components/ui/field"
 import { Switch } from "@/components/ui/switch"
 
@@ -10,7 +10,7 @@ export default function FieldHorizontal() {
   return (
     <Field orientation="horizontal" className="w-full max-w-md">
       <FieldContent>
-        <FieldTitle>Marketing emails</FieldTitle>
+        <FieldLabel>Marketing emails</FieldLabel>
         <FieldDescription>
           Receive emails about new products, features, and more.
         </FieldDescription>

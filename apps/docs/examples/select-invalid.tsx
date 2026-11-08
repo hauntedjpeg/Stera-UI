@@ -10,10 +10,10 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 
 export default function SelectInvalid() {
   return (
-    <Field data-invalid className="w-48">
-      <FieldLabel>Fruit</FieldLabel>
+    <Field invalid className="w-48">
+      <FieldLabel nativeLabel={false}>Fruit</FieldLabel>
       <Select>
-        <SelectTrigger aria-invalid>
+        <SelectTrigger>
           <SelectValue placeholder="Select a fruit" />
         </SelectTrigger>
         <SelectContent>

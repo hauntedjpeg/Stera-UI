@@ -3,13 +3,9 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 
 export default function InputInvalid() {
   return (
-    <Field data-invalid="true" className="w-sm">
-      <FieldLabel htmlFor="invalid-input">Email</FieldLabel>
-      <Input
-        id="invalid-input"
-        aria-invalid="true"
-        defaultValue="not-an-email"
-      />
+    <Field invalid className="w-sm">
+      <FieldLabel>Email</FieldLabel>
+      <Input defaultValue="not-an-email" />
       <FieldError>Please enter a valid email address.</FieldError>
     </Field>
   )

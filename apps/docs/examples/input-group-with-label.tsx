@@ -13,21 +13,21 @@ export default function InputGroupWithLabel() {
   return (
     <div className="flex w-80 flex-col gap-4">
       <Field>
-        <FieldLabel htmlFor="ig-email">Email address</FieldLabel>
+        <FieldLabel>Email address</FieldLabel>
         <InputGroup>
           <InputGroupAddon align="inline-start">
             <SiMail />
           </InputGroupAddon>
-          <InputGroupInput id="ig-email" placeholder="you@example.com" />
+          <InputGroupInput placeholder="you@example.com" />
         </InputGroup>
       </Field>
       <Field>
-        <FieldLabel htmlFor="ig-website">Website</FieldLabel>
+        <FieldLabel>Website</FieldLabel>
         <InputGroup>
           <InputGroupAddon align="inline-start">
             <InputGroupText>https://</InputGroupText>
           </InputGroupAddon>
-          <InputGroupInput id="ig-website" placeholder="example.com" />
+          <InputGroupInput placeholder="example.com" />
         </InputGroup>
         <FieldDescription>Your public-facing URL.</FieldDescription>
       </Field>

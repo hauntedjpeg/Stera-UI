@@ -27,16 +27,13 @@ const frameworks: Framework[] = [
 export default function ComboboxInvalid() {
   return (
     <div className="w-64">
-      <Field data-invalid="true">
+      <Field invalid>
         <FieldLabel>Framework</FieldLabel>
         <Combobox
           items={frameworks}
           itemToStringLabel={(fw: Framework) => fw.label}
         >
-          <ComboboxInput
-            aria-invalid="true"
-            placeholder="Select framework..."
-          />
+          <ComboboxInput placeholder="Select framework..." />
           <ComboboxContent>
             <ComboboxEmpty>No framework found.</ComboboxEmpty>
             <ComboboxList>

@@ -49,7 +49,7 @@ RadioGroup
 
 ### Choice Card
 
-Wrap an entire `Field` in `FieldLabel` to render each option as a clickable card. The selected card highlights automatically via `FieldLabel`'s built-in checked-state styling.
+Wrap an entire `Field` in `FieldLabel` to render each option as a clickable card. The card labels its radio by containment, so it needs no `htmlFor`. It highlights when checked, shows a focus ring when its radio has keyboard focus, and dims when its `Field` is `disabled`.
 
 <ComponentPreview name="radio-group-choice-card" caption="Radio Choice Card" />
 

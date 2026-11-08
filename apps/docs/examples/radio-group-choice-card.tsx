@@ -10,7 +10,7 @@ import {
 export default function RadioGroupChoiceCard() {
   return (
     <RadioGroup defaultValue="plus" className="w-full max-w-sm">
-      <FieldLabel htmlFor="plan-plus">
+      <FieldLabel>
         <Field orientation="horizontal">
           <FieldContent>
             <FieldTitle>Plus</FieldTitle>
@@ -18,19 +18,19 @@ export default function RadioGroupChoiceCard() {
               For individuals and small teams.
             </FieldDescription>
           </FieldContent>
-          <RadioGroupItem value="plus" id="plan-plus" />
+          <RadioGroupItem value="plus" />
         </Field>
       </FieldLabel>
-      <FieldLabel htmlFor="plan-pro">
+      <FieldLabel>
         <Field orientation="horizontal">
           <FieldContent>
             <FieldTitle>Pro</FieldTitle>
             <FieldDescription>For growing businesses.</FieldDescription>
           </FieldContent>
-          <RadioGroupItem value="pro" id="plan-pro" />
+          <RadioGroupItem value="pro" />
         </Field>
       </FieldLabel>
-      <FieldLabel htmlFor="plan-enterprise">
+      <FieldLabel>
         <Field orientation="horizontal">
           <FieldContent>
             <FieldTitle>Enterprise</FieldTitle>
@@ -38,7 +38,7 @@ export default function RadioGroupChoiceCard() {
               For large teams and enterprises.
             </FieldDescription>
           </FieldContent>
-          <RadioGroupItem value="enterprise" id="plan-enterprise" />
+          <RadioGroupItem value="enterprise" />
         </Field>
       </FieldLabel>
     </RadioGroup>

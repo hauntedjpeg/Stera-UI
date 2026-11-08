@@ -10,8 +10,8 @@ import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
 export default function InputNumberDemo() {
   return (
     <Field className="w-48">
-      <FieldLabel htmlFor="input-number-demo">Quantity</FieldLabel>
-      <InputNumber id="input-number-demo" defaultValue={1} min={1} max={99}>
+      <FieldLabel>Quantity</FieldLabel>
+      <InputNumber defaultValue={1} min={1} max={99}>
         <InputNumberGroup>
           <InputNumberDecrement />
           <InputNumberControl />

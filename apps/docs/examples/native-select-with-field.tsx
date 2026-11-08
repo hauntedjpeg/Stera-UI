@@ -4,8 +4,8 @@ import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
 export default function NativeSelectWithField() {
   return (
     <Field className="w-sm">
-      <FieldLabel htmlFor="fruit">Fruit</FieldLabel>
-      <NativeSelect id="fruit" className="w-full">
+      <FieldLabel>Fruit</FieldLabel>
+      <NativeSelect className="w-full">
         <NativeSelectOption value="">Select a fruit</NativeSelectOption>
         <NativeSelectOption value="apple">Apple</NativeSelectOption>
         <NativeSelectOption value="banana">Banana</NativeSelectOption>

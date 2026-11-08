@@ -16,22 +16,16 @@ export default function RadioGroupFieldset() {
       </FieldDescription>
       <RadioGroup defaultValue="monthly">
         <Field orientation="horizontal">
-          <RadioGroupItem value="monthly" id="plan-monthly" />
-          <FieldLabel htmlFor="plan-monthly" className="font-normal">
-            Monthly ($9.99/month)
-          </FieldLabel>
+          <RadioGroupItem value="monthly" />
+          <FieldLabel className="st-label-md">Monthly ($9.99/month)</FieldLabel>
         </Field>
         <Field orientation="horizontal">
-          <RadioGroupItem value="yearly" id="plan-yearly" />
-          <FieldLabel htmlFor="plan-yearly" className="font-normal">
-            Yearly ($99.99/year)
-          </FieldLabel>
+          <RadioGroupItem value="yearly" />
+          <FieldLabel className="st-label-md">Yearly ($99.99/year)</FieldLabel>
         </Field>
         <Field orientation="horizontal">
-          <RadioGroupItem value="lifetime" id="plan-lifetime" />
-          <FieldLabel htmlFor="plan-lifetime" className="font-normal">
-            Lifetime ($299.99)
-          </FieldLabel>
+          <RadioGroupItem value="lifetime" />
+          <FieldLabel className="st-label-md">Lifetime ($299.99)</FieldLabel>
         </Field>
       </RadioGroup>
     </FieldSet>

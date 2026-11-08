@@ -9,9 +9,9 @@ import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
 
 export default function InputNumberDisabled() {
   return (
-    <Field data-disabled="true" className="w-48">
-      <FieldLabel htmlFor="input-number-disabled">Quantity</FieldLabel>
-      <InputNumber id="input-number-disabled" defaultValue={3} disabled>
+    <Field disabled className="w-48">
+      <FieldLabel>Quantity</FieldLabel>
+      <InputNumber defaultValue={3}>
         <InputNumberGroup>
           <InputNumberDecrement />
           <InputNumberControl />

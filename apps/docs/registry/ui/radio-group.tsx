@@ -33,7 +33,7 @@ function RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {
         // Checked
         "data-checked:border-border-brand data-checked:bg-surface-brand data-checked:text-ink-onbrand",
         // Variants
-        "group-has-disabled/field:text-ink-disabled",
+        "data-disabled:text-ink-disabled",
         // Other
         "peer",
         className

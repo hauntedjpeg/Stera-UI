@@ -104,7 +104,8 @@ function InputGroupButton({
       type={type}
       variant={variant}
       size={size}
-      className={cn("shadow-none", className)}
+      // The group draws the invalid ring; a Field also marks addon buttons invalid
+      className={cn("shadow-none aria-invalid:ring-0", className)}
       {...props}
     />
   )

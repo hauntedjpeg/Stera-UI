@@ -11,12 +11,8 @@ export default function CheckboxControlled() {
   return (
     <FieldGroup className="w-56">
       <Field orientation="horizontal">
-        <Checkbox
-          id="controlled-checkbox"
-          checked={checked}
-          onCheckedChange={setChecked}
-        />
-        <FieldLabel htmlFor="controlled-checkbox">
+        <Checkbox checked={checked} onCheckedChange={setChecked} />
+        <FieldLabel>
           {checked ? "Subscribed" : "Subscribe to updates"}
         </FieldLabel>
       </Field>

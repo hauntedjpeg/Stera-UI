@@ -142,7 +142,8 @@ function InputNumberControl({
     <NumberFieldPrimitive.Input
       data-slot="input-number-control"
       data-size={size}
-      aria-invalid={invalid || undefined}
+      // A Field sets aria-invalid too; an undefined here would overwrite it
+      {...(invalid && { "aria-invalid": true })}
       className={cn(inputNumberControlVariants({ size }), className)}
       {...props}
     />

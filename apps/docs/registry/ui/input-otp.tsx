@@ -103,7 +103,8 @@ function InputOTPSlot({
     <OTPFieldPrimitive.Input
       data-slot="input-otp-slot"
       data-size={size}
-      aria-invalid={invalid || undefined}
+      // A Field sets aria-invalid too; an undefined here would overwrite it
+      {...(invalid && { "aria-invalid": true })}
       className={cn(inputOTPSlotVariants({ size }), className)}
       render={
         render ??

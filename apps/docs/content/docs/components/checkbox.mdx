@@ -81,7 +81,7 @@ Pass the `indeterminate` prop to render the mixed state — useful for "select a
 
 ## Invalid State
 
-Set `aria-invalid` on the checkbox and `data-invalid="true"` on the surrounding `Field` to show invalid styles.
+Set `invalid` on the surrounding `Field` to show invalid styles. The checkbox gets `aria-invalid` from the `Field`.
 
 <ComponentPreview name="checkbox-invalid" caption="Invalid" />
 
@@ -101,7 +101,7 @@ Use `FieldContent` and `FieldDescription` for helper text alongside the label.
 
 ### Disabled
 
-Add the `disabled` prop to the checkbox and `data-disabled="true"` on the `Field` to apply disabled styles to the label as well.
+Set `disabled` on the `Field` to disable the checkbox and dim its label.
 
 <ComponentPreview name="checkbox-disabled" caption="Disabled" />
 

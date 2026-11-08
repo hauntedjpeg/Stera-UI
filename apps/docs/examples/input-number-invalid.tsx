@@ -9,14 +9,9 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 
 export default function InputNumberInvalid() {
   return (
-    <Field data-invalid="true" className="w-48">
-      <FieldLabel htmlFor="input-number-invalid">Quantity</FieldLabel>
-      <InputNumber
-        id="input-number-invalid"
-        defaultValue={0}
-        min={0}
-        aria-invalid="true"
-      >
+    <Field invalid className="w-48">
+      <FieldLabel>Quantity</FieldLabel>
+      <InputNumber defaultValue={0} min={0}>
         <InputNumberGroup>
           <InputNumberDecrement />
           <InputNumberControl />

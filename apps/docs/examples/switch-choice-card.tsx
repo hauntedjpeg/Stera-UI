@@ -10,7 +10,7 @@ import {
 export default function SwitchChoiceCard() {
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
-      <FieldLabel htmlFor="choice-notifications">
+      <FieldLabel>
         <Field orientation="horizontal">
           <FieldContent>
             <FieldTitle>Push notifications</FieldTitle>
@@ -18,10 +18,10 @@ export default function SwitchChoiceCard() {
               Get notified when something needs your attention.
             </FieldDescription>
           </FieldContent>
-          <Switch id="choice-notifications" defaultChecked />
+          <Switch defaultChecked />
         </Field>
       </FieldLabel>
-      <FieldLabel htmlFor="choice-newsletter">
+      <FieldLabel>
         <Field orientation="horizontal">
           <FieldContent>
             <FieldTitle>Weekly newsletter</FieldTitle>
@@ -29,7 +29,7 @@ export default function SwitchChoiceCard() {
               A roundup of product news and tips every Monday.
             </FieldDescription>
           </FieldContent>
-          <Switch id="choice-newsletter" />
+          <Switch />
         </Field>
       </FieldLabel>
     </div>

@@ -53,7 +53,7 @@ function Switch({
           "pointer-events-none h-full w-(--thumb-w) rounded-full bg-(--white-12)",
           "transition-transform duration-120 ease-out motion-reduce:transition-none",
           // Checked
-          "data-checked:bg-ink-onbrand data-checked:translate-x-[calc(100cqw-100%)]"
+          "data-checked:translate-x-[calc(100cqw-100%)] data-checked:bg-ink-onbrand"
         )}
       />
     </SwitchPrimitive.Root>
