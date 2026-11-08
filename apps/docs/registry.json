@@ -482,7 +482,7 @@
     {
       "name": "switch",
       "type": "registry:ui",
-      "dependencies": ["@base-ui/react"],
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
       "registryDependencies": ["utils"],
       "files": [{ "path": "registry/ui/switch.tsx", "type": "registry:ui" }]
     },
