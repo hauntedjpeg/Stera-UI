@@ -1,0 +1,156 @@
+---
+title: Input Number
+description: A text field for entering an exact number, with buttons to step it up or down.
+---
+
+<ComponentPreview name="input-number-demo" caption="Input Number" />
+
+## Installation
+
+<InstallSnippet slug="input-number" hideHeading />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- An exact number, such as a quantity, a count or a measurement.
+- Small adjustments to a current value, such as a font size or a number of guests.
+
+### When not to use
+
+- A number in a range, where the position matters more than the exact value. Use a [Slider](/components/slider).
+- Digits that aren't a quantity, such as a phone number, ZIP code or card number. Use an [Input](/components/input).
+- A fixed-length code sent to the user. Use an [Input OTP](/components/input-otp).
+
+### Guidelines
+
+- Always pair it with a visible label.
+- Make the unit visible, either in the label or in the value's format.
+- Set bounds whenever the value has real limits, so the controls stop there instead of failing on submit.
+- **Scrub area:** use it only where people already expect to drag a label to change a value, such as a property panel in a design tool. Never make it the only way to change the value.
+- Your call: how much each step changes the value. Pick steps that match how people actually change it, and use them consistently.
+
+See also: [Forms](/design/forms).
+
+</DesignGuidelines>
+
+## Composition
+
+Use the following composition to build an `InputNumber`:
+
+```text
+InputNumber
+├── InputNumberScrubArea
+│   └── InputNumberScrubAreaCursor
+└── InputNumberGroup
+    ├── InputNumberDecrement
+    ├── InputNumberControl
+    └── InputNumberIncrement
+```
+
+## Examples
+
+### Sizes
+
+<ComponentPreview name="input-number-sizes" caption="Input Number Sizes" />
+
+| Size | Description      |
+| ---- | ---------------- |
+| `sm` | Small            |
+| `md` | Medium (default) |
+| `lg` | Large            |
+
+### Min, Max and Step
+
+Use `min` and `max` to bound the value. The buttons stop at each bound. `step` sets how far each press or arrow key moves the value. Hold Shift to move by `largeStep`, or Alt to move by `smallStep`.
+
+<ComponentPreview
+  name="input-number-range"
+  caption="Input Number Min, Max and Step"
+/>
+
+### Format
+
+Pass `Intl.NumberFormatOptions` to `format` to show currency, percentages or units. The value stays a plain number.
+
+<ComponentPreview name="input-number-format" caption="Input Number Format" />
+
+### Scrub Area
+
+Wrap the label in `InputNumberScrubArea` to change the value by dragging across it. `InputNumberScrubAreaCursor` replaces the pointer while dragging. Safari doesn't support the custom cursor, so it shows the native one there.
+
+<ComponentPreview
+  name="input-number-scrub-area"
+  caption="Input Number Scrub Area"
+/>
+
+### Controlled
+
+Use `value` and `onValueChange` to control the value. The value is `null` when the field is empty.
+
+<ComponentPreview
+  name="input-number-controlled"
+  caption="Input Number Controlled"
+/>
+
+### Disabled
+
+<ComponentPreview
+  name="input-number-disabled"
+  caption="Input Number Disabled"
+/>
+
+### Invalid
+
+Set `aria-invalid` on `InputNumber` to mark it invalid, and pair it with a `FieldError`.
+
+<ComponentPreview name="input-number-invalid" caption="Input Number Invalid" />
+
+## API Reference
+
+Built on Base UI's [Number Field](https://base-ui.com/react/components/number-field#api-reference) primitive. See the full API reference there.
+
+### InputNumber
+
+Wraps `NumberField.Root`. Accepts all of its props, including `locale`, `smallStep`, `largeStep`, `snapOnStep`, `allowWheelScrub`, `onValueCommitted`, `name`, `required` and `readOnly`.
+
+| Prop            | Type                              | Default |
+| --------------- | --------------------------------- | ------- |
+| `value`         | `number \| null`                  | —       |
+| `defaultValue`  | `number`                          | —       |
+| `onValueChange` | `(value: number \| null) => void` | —       |
+| `min`           | `number`                          | —       |
+| `max`           | `number`                          | —       |
+| `step`          | `number \| "any"`                 | `1`     |
+| `format`        | `Intl.NumberFormatOptions`        | —       |
+| `disabled`      | `boolean`                         | `false` |
+| `size`          | `"sm" \| "md" \| "lg"`            | `"md"`  |
+| `aria-invalid`  | `boolean \| "true" \| "false"`    | —       |
+
+Pass `id` and pair it with a `FieldLabel htmlFor` to label the input.
+
+### InputNumberGroup
+
+Wraps `NumberField.Group`. Renders the bordered `<div>` that holds the buttons and the input.
+
+### InputNumberControl
+
+Wraps `NumberField.Input`. Renders the `<input>`.
+
+### InputNumberDecrement
+
+Wraps `NumberField.Decrement`. Renders a `<button>` with a minus icon by default; pass children to replace it.
+
+### InputNumberIncrement
+
+Wraps `NumberField.Increment`. Renders a `<button>` with a plus icon by default; pass children to replace it.
+
+### InputNumberScrubArea
+
+Wraps `NumberField.ScrubArea`. Renders a `<span>` that changes the value as the pointer drags across it. Accepts `direction`, `pixelSensitivity` and `teleportDistance`.
+
+### InputNumberScrubAreaCursor
+
+Wraps `NumberField.ScrubAreaCursor`. Renders a left-right arrow icon in place of the pointer while scrubbing; pass children to replace it.

@@ -437,6 +437,38 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/input-invalid")),
     slug: "input",
   },
+  "input-number-demo": {
+    component: dynamic(() => import("@/examples/input-number-demo")),
+    slug: "input-number",
+  },
+  "input-number-sizes": {
+    component: dynamic(() => import("@/examples/input-number-sizes")),
+    slug: "input-number",
+  },
+  "input-number-range": {
+    component: dynamic(() => import("@/examples/input-number-range")),
+    slug: "input-number",
+  },
+  "input-number-format": {
+    component: dynamic(() => import("@/examples/input-number-format")),
+    slug: "input-number",
+  },
+  "input-number-scrub-area": {
+    component: dynamic(() => import("@/examples/input-number-scrub-area")),
+    slug: "input-number",
+  },
+  "input-number-controlled": {
+    component: dynamic(() => import("@/examples/input-number-controlled")),
+    slug: "input-number",
+  },
+  "input-number-disabled": {
+    component: dynamic(() => import("@/examples/input-number-disabled")),
+    slug: "input-number",
+  },
+  "input-number-invalid": {
+    component: dynamic(() => import("@/examples/input-number-invalid")),
+    slug: "input-number",
+  },
   "input-otp-demo": {
     component: dynamic(() => import("@/examples/input-otp-demo")),
     slug: "input-otp",

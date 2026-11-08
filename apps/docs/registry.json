@@ -323,6 +323,19 @@
       ]
     },
     {
+      "name": "input-number",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "stera-icons"
+      ],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "registry/ui/input-number.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
       "name": "input-otp",
       "type": "registry:ui",
       "dependencies": [
