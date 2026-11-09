@@ -20,7 +20,7 @@ function colorCollection(): SerializedCollection {
   const variables: SerializedVariable[] = []
   const ramps = [
     { name: "Blue", hex: "#3b82f6", scaleType: "accent" as const },
-    { name: "Neutral", hex: "#8b8d98", scaleType: "gray" as const },
+    { name: "Neutral", hex: "#8b8d98", scaleType: "neutral" as const },
   ]
   for (const ramp of ramps) {
     const { entries } = generateBiModalScale({

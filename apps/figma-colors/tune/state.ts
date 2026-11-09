@@ -1,4 +1,8 @@
 import {
+  DEFAULT_NEUTRAL_TARGETS,
+  type NeutralTargets,
+} from "../src/core/scale/neutral-targets.js"
+import {
   DEFAULT_STANDARD_TARGETS,
   type StandardTargets,
 } from "../src/core/scale/standard-targets.js"
@@ -8,10 +12,11 @@ export type Seed = { name: string; hex: string }
 
 export type TuneState = {
   targets: Targets
+  neutralTargets: NeutralTargets
   standardTargets: StandardTargets
   seeds: Seed[]
   pages: { light: string; dark: string }
-  /** The Standard (neutral) ramp shown as a reference row. */
+  /** The seed of the Neutral and Standard reference rows. */
   neutral: string
   numbers: boolean
 }
@@ -30,6 +35,7 @@ export const DEFAULT_SEEDS: Seed[] = [
 
 export const DEFAULT_STATE: TuneState = {
   targets: DEFAULT_TARGETS,
+  neutralTargets: DEFAULT_NEUTRAL_TARGETS,
   standardTargets: DEFAULT_STANDARD_TARGETS,
   seeds: DEFAULT_SEEDS,
   pages: { light: "#ffffff", dark: "#000000" },
@@ -48,7 +54,19 @@ function merge(stored: Partial<TuneState> | null): TuneState {
   const base = clone(DEFAULT_STATE)
   if (!stored || typeof stored !== "object") return base
   const t = stored.targets
+  const nt = stored.neutralTargets
   const st = stored.standardTargets
+  const mergeNeutralMode = (mode: "light" | "dark") => {
+    const fallback = base.neutralTargets[mode]
+    const next = nt?.[mode]
+    return next
+      ? {
+          L: { ...fallback.L, ...next.L },
+          K: { ...fallback.K, ...next.K },
+          offsets: { ...fallback.offsets, ...next.offsets },
+        }
+      : fallback
+  }
   const mergeStandardMode = (mode: "light" | "dark") => {
     const fallback = base.standardTargets[mode]
     const next = st?.[mode]
@@ -66,6 +84,13 @@ function merge(stored: Partial<TuneState> | null): TuneState {
           hueShift: { ...base.targets.hueShift, ...t.hueShift },
         }
       : base.targets,
+    neutralTargets: nt
+      ? {
+          light: mergeNeutralMode("light"),
+          dark: mergeNeutralMode("dark"),
+          minGap: nt.minGap ?? base.neutralTargets.minGap,
+        }
+      : base.neutralTargets,
     standardTargets: st
       ? { light: mergeStandardMode("light"), dark: mergeStandardMode("dark") }
       : base.standardTargets,
@@ -120,6 +145,11 @@ function serialize(name: string, type: string, value: unknown): string {
 /** The Semantic targets, ready to paste into `targets.ts`. */
 export function serializeTargets(targets: Targets): string {
   return serialize("DEFAULT_TARGETS", "Targets", targets)
+}
+
+/** The Neutral targets, ready to paste into `neutral-targets.ts`. */
+export function serializeNeutralTargets(targets: NeutralTargets): string {
+  return serialize("DEFAULT_NEUTRAL_TARGETS", "NeutralTargets", targets)
 }
 
 /** The Standard targets, ready to paste into `standard-targets.ts`. */

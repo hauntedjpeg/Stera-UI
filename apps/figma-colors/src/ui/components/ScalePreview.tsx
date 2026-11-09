@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react"
-import type { ScaleEntry, ScaleStep } from "../../core/scale/bi-modal.js"
+import type {
+  ScaleEntry,
+  ScaleStep,
+  ScaleType,
+} from "../../core/scale/bi-modal.js"
 import { displayHex, isLightColor } from "../../core/color/hex.js"
 import { ROLE_BANDS, STEP_ROLES } from "../../core/scale/roles.js"
 import { Tabs } from "./Tabs.js"
@@ -16,12 +20,13 @@ const PREVIEW_MODE_OPTIONS: { value: PreviewMode; label: string }[] = [
 
 type Props = {
   scale: ScaleEntry[]
-  /** Semantic ramps are role bands and follow the role table; Standard ones
-   *  are a flat ladder. */
-  semantic: boolean
+  /** Semantic and Neutral ramps are role bands and follow the role table;
+   *  Standard ones are a flat ladder. */
+  scaleType: ScaleType
 }
 
-export function ScalePreview({ scale, semantic }: Props) {
+export function ScalePreview({ scale, scaleType }: Props) {
+  const banded = scaleType !== "gray"
   const [mode, setMode] = useState<PreviewMode>("light")
   const [copiedStep, setCopiedStep] = useState<number | null>(null)
   const timeoutRef = useRef<number | null>(null)
@@ -58,7 +63,7 @@ export function ScalePreview({ scale, semantic }: Props) {
         key={step}
         step={step}
         hex={hex}
-        role={semantic ? STEP_ROLES[step] : undefined}
+        role={banded ? STEP_ROLES[step] : undefined}
         copied={copiedStep === step}
         onCopy={handleCopy}
         className={className}
@@ -82,7 +87,7 @@ export function ScalePreview({ scale, semantic }: Props) {
         <div className="flex flex-1 p-4 pt-1">
           <div className="flex-1 rounded-md border border-dashed border-border" />
         </div>
-      ) : semantic ? (
+      ) : banded ? (
         <div className="flex flex-1 flex-col gap-2 p-4 pt-1">
           {ROLE_BANDS.map((band) => (
             <div

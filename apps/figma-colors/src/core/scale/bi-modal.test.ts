@@ -23,7 +23,7 @@ function lightness(hex: string): number {
 }
 
 describe("generateBiModalScale", () => {
-  for (const scaleType of ["accent", "gray"] as const) {
+  for (const scaleType of ["accent", "neutral", "gray"] as const) {
     it(`returns the 12 named steps per appearance for ${scaleType}`, () => {
       const { entries } = generateBiModalScale(options({ scaleType }))
       expect(entries.map((e) => e.step)).toEqual([...SCALE_STEPS])
@@ -34,7 +34,7 @@ describe("generateBiModalScale", () => {
     })
   }
 
-  for (const scaleType of ["accent", "gray"] as const) {
+  for (const scaleType of ["accent", "neutral", "gray"] as const) {
     it(`is deterministic for ${scaleType}`, () => {
       const a = generateBiModalScale(options({ hex: "#859991", scaleType }))
       const b = generateBiModalScale(options({ hex: "#859991", scaleType }))
@@ -59,6 +59,53 @@ describe("generateBiModalScale", () => {
     }
   })
 
+  it("orders every Neutral step: darker in light, lighter in dark", () => {
+    const { entries } = generateBiModalScale(
+      options({ hex: "#8b8d98", scaleType: "neutral" })
+    )
+    const light = entries.map((e) => lightness(e.light))
+    const dark = entries.map((e) => lightness(e.dark))
+    for (let i = 1; i < light.length; i++) {
+      expect(light[i]).toBeLessThan(light[i - 1])
+      expect(dark[i]).toBeGreaterThan(dark[i - 1])
+    }
+  })
+
+  it("reads the backgrounds for Neutral", () => {
+    const neutral = generateBiModalScale(
+      options({ hex: "#8b8d98", scaleType: "neutral" })
+    )
+    const moved = generateBiModalScale(
+      options({
+        hex: "#8b8d98",
+        scaleType: "neutral",
+        lightBackground: "#faf7f2",
+        darkBackground: "#0a0a0a",
+      })
+    )
+    expect(moved).not.toEqual(neutral)
+    expect(neutral.notes).toEqual([])
+  })
+
+  it("ignores the backgrounds for Neutral when neutralAnchored is false", () => {
+    const absolute = generateBiModalScale(
+      options({ hex: "#8b8d98", scaleType: "neutral", neutralAnchored: false })
+    )
+    const moved = generateBiModalScale(
+      options({
+        hex: "#8b8d98",
+        scaleType: "neutral",
+        neutralAnchored: false,
+        lightBackground: "#faf7f2",
+        darkBackground: "#0a0a0a",
+      })
+    )
+    expect(moved).toEqual(absolute)
+    // The flag is Neutral's alone: Semantic keeps reading the page.
+    const semantic = generateBiModalScale(options({ neutralAnchored: false }))
+    expect(semantic).toEqual(generateBiModalScale(options({})))
+  })
+
   it("ignores the backgrounds for Standard but not for Semantic", () => {
     const pages = {
       lightBackground: "#faf7f2",
@@ -80,7 +127,7 @@ describe("generateBiModalScale", () => {
   })
 
   it("darkens light and lightens dark from 25 to 950", () => {
-    for (const scaleType of ["accent", "gray"] as const) {
+    for (const scaleType of ["accent", "neutral", "gray"] as const) {
       const { entries } = generateBiModalScale(options({ scaleType }))
       expect(lightness(entries[11].light)).toBeLessThan(
         lightness(entries[0].light)

@@ -14,6 +14,8 @@ export type StoredPrefs = {
   scaleType: ScaleType
   lightBackground: string
   darkBackground: string
+  /** Neutral only: whether the ramp follows the backgrounds. */
+  neutralAnchored: boolean
   mode: TargetMode
 }
 
@@ -22,6 +24,7 @@ export const DEFAULT_PREFS: StoredPrefs = {
   scaleType: "accent",
   lightBackground: "#ffffff",
   darkBackground: "#000000",
+  neutralAnchored: true,
   mode: "add",
 }
 

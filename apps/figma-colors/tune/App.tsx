@@ -4,6 +4,8 @@ import {
   backgroundError,
   generateSemanticScale,
 } from "../src/core/scale/semantic.js"
+import { generateNeutralScale } from "../src/core/scale/neutral.js"
+import { DEFAULT_NEUTRAL_TARGETS } from "../src/core/scale/neutral-targets.js"
 import { generateStandardScale } from "../src/core/scale/standard.js"
 import { DEFAULT_STANDARD_TARGETS } from "../src/core/scale/standard-targets.js"
 import { DEFAULT_TARGETS, type Mode } from "../src/core/scale/targets.js"
@@ -14,6 +16,7 @@ import {
   DEFAULT_SEEDS,
   loadState,
   saveState,
+  serializeNeutralTargets,
   serializeStandardTargets,
   serializeTargets,
   type TuneState,
@@ -24,6 +27,7 @@ declare global {
     __tune?: {
       state: TuneState
       targetsTs: string
+      neutralTargetsTs: string
       standardTargetsTs: string
     }
   }
@@ -40,6 +44,7 @@ export function App() {
     window.__tune = {
       state,
       targetsTs: serializeTargets(state.targets),
+      neutralTargetsTs: serializeNeutralTargets(state.neutralTargets),
       standardTargetsTs: serializeStandardTargets(state.standardTargets),
     }
   }, [state])
@@ -48,7 +53,17 @@ export function App() {
 
   const rows = useMemo<Row[]>(() => {
     if (pageError) return []
-    const neutral = generateStandardScale(
+    // Both reference rows share one seed. Neither follows the demo strips,
+    // which compose from the families' role steps.
+    const neutral = generateNeutralScale(
+      {
+        hex: state.neutral,
+        lightBackground: state.pages.light,
+        darkBackground: state.pages.dark,
+      },
+      state.neutralTargets
+    )
+    const standard = generateStandardScale(
       { hex: state.neutral },
       state.standardTargets
     )
@@ -67,6 +82,12 @@ export function App() {
       })
     return [
       { name: "Neutral", entries: neutral.entries, notes: [], semantic: false },
+      {
+        name: "Standard",
+        entries: standard.entries,
+        notes: [],
+        semantic: false,
+      },
       ...semantic,
     ]
   }, [
@@ -74,6 +95,7 @@ export function App() {
     state.neutral,
     state.pages,
     state.targets,
+    state.neutralTargets,
     state.standardTargets,
     pageError,
   ])
@@ -101,6 +123,14 @@ export function App() {
           <button
             type="button"
             onClick={() =>
+              copy("neutral", serializeNeutralTargets(state.neutralTargets))
+            }
+          >
+            {copied === "neutral" ? "Copied" : "Copy neutral-targets.ts"}
+          </button>
+          <button
+            type="button"
+            onClick={() =>
               copy("standard", serializeStandardTargets(state.standardTargets))
             }
           >
@@ -117,6 +147,7 @@ export function App() {
             onClick={() =>
               update({
                 targets: DEFAULT_TARGETS,
+                neutralTargets: DEFAULT_NEUTRAL_TARGETS,
                 standardTargets: DEFAULT_STANDARD_TARGETS,
               })
             }
@@ -227,6 +258,8 @@ export function App() {
         <Controls
           targets={state.targets}
           onChange={(targets) => update({ targets })}
+          neutralTargets={state.neutralTargets}
+          onNeutralChange={(neutralTargets) => update({ neutralTargets })}
           standardTargets={state.standardTargets}
           onStandardChange={(standardTargets) => update({ standardTargets })}
         />

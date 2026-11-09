@@ -25,6 +25,7 @@ import { SegmentedControl } from "./components/SegmentedControl.js"
 
 const SCALE_TYPE_OPTIONS: { value: ScaleType; label: string }[] = [
   { value: "accent", label: "Semantic" },
+  { value: "neutral", label: "Neutral" },
   { value: "gray", label: "Standard" },
 ]
 
@@ -34,6 +35,12 @@ const MODE_OPTIONS: { value: TargetMode; label: string }[] = [
 ]
 
 const EMPTY_RESULT: GenerationResult = { entries: [], notes: [] }
+
+// The engine and `prefs.neutralAnchored` can make a Neutral ramp absolute,
+// and `components/Checkbox.tsx` is the control for it, but that option is not
+// ready to ship: until it is, Neutral is always anchored and the stored pref
+// is ignored.
+const NEUTRAL_ANCHORED = true
 
 export function App() {
   const [prefs, setPrefs] = useState<StoredPrefs | null>(null)
@@ -66,15 +73,16 @@ export function App() {
     postToSandbox({ type: "load" })
   }, [])
 
-  // Only Semantic reads the page: its tints are anchored to the background, so
-  // a page outside the usable range has to block generation. Standard ramps are
-  // absolute and ignore the backgrounds entirely.
+  // Semantic and Neutral read the page: their tints are anchored to the
+  // background, so a page outside the usable range has to block generation.
+  // Standard ramps are absolute and ignore the backgrounds entirely.
+  const usesPage = prefs !== null && prefs.scaleType !== "gray"
   const backgroundMessage = useMemo(
     () =>
-      prefs && prefs.scaleType === "accent"
+      prefs && usesPage
         ? backgroundError(prefs.lightBackground, prefs.darkBackground)
         : null,
-    [prefs]
+    [prefs, usesPage]
   )
 
   const result = useMemo<GenerationResult>(() => {
@@ -84,6 +92,7 @@ export function App() {
       scaleType: prefs.scaleType,
       lightBackground: prefs.lightBackground,
       darkBackground: prefs.darkBackground,
+      neutralAnchored: NEUTRAL_ANCHORED,
     })
   }, [prefs, backgroundMessage])
   const scale = result.entries
@@ -106,8 +115,6 @@ export function App() {
       </div>
     )
   }
-
-  const semantic = prefs.scaleType === "accent"
 
   const updatePrefs = (patch: Partial<StoredPrefs>) => {
     const next = { ...prefs, ...patch }
@@ -155,7 +162,15 @@ export function App() {
               onChange={handleHexChange}
             />
           </Field>
-          {semantic && (
+          <Field label="Scale type">
+            <SegmentedControl
+              label="Scale type"
+              value={prefs.scaleType}
+              options={SCALE_TYPE_OPTIONS}
+              onChange={(scaleType) => updatePrefs({ scaleType })}
+            />
+          </Field>
+          {usesPage && (
             <div className="flex gap-2">
               <Field label="Light BG" className="flex-1">
                 <HexField
@@ -175,14 +190,6 @@ export function App() {
               </Field>
             </div>
           )}
-          <Field label="Scale type">
-            <SegmentedControl
-              label="Scale type"
-              value={prefs.scaleType}
-              options={SCALE_TYPE_OPTIONS}
-              onChange={(scaleType) => updatePrefs({ scaleType })}
-            />
-          </Field>
         </Section>
 
         <Section title="Export" className="p-4 pt-0">
@@ -247,7 +254,7 @@ export function App() {
         {/* `result.notes` — the contrast and dark-solid warnings — is still
             generated but not shown. The old list was a sloppy fit under the
             preview; it comes back once the alerts have a design. */}
-        <ScalePreview scale={scale} semantic={semantic} />
+        <ScalePreview scale={scale} scaleType={prefs.scaleType} />
       </div>
     </div>
   )

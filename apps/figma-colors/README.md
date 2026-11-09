@@ -5,7 +5,7 @@ A Figma plugin that generates 12-step color ramps and writes them as Figma varia
 ## How it works
 
 1. Enter a hex color.
-2. Choose **Semantic** (role bands for families like brand, accent, success, …) or **Standard** (a traditional Tailwind-like ramp) as the scale type. Standard ignores the backgrounds, so those two fields are hidden for it.
+2. Choose **Semantic** (role bands for families like brand, accent, success, …), **Neutral** (the same roles for the gray family behind your surfaces) or **Standard** (a traditional Tailwind-like ramp) as the scale type. Standard ignores the backgrounds, so those two fields are hidden for it.
 3. Optionally adjust the light and dark backgrounds the scale will sit on.
 4. Name the color and choose a collection. The default is `Color`, which is created if the file has none.
 5. Click **Add variables**.
@@ -39,6 +39,8 @@ The Theme collection aliases the steps like this, in every family and both modes
 
 Because 500 is the seed, `ink-x` has whatever contrast your color has; the preview notes when that is under 4.5:1.
 
+Neutral ramps have the same roles and the same page anchoring as Semantic ones, but no seed band. All twelve steps sit on fixed target lightnesses and are strictly ordered: each step is darker than the last in light mode and lighter in dark mode, so the ramp works as a set of backgrounds. Your seed sets the hue and how tinted the ramp is, not where it sits; a pure gray seed gives a pure gray ramp, and the seed hex itself need not appear in it.
+
 Standard ramps have no roles. All twelve steps sit on fixed target lightnesses, so every family shares one ladder and contrast stays predictable when a token is re-pointed from one family to another. The steps are close together at the low end, where a UI needs several barely-separated surfaces, and step harder from 600 up. Your seed sets the hue and how vivid the ramp is, not where it sits: a Standard ramp is the same in every project, whatever the page color, and the seed hex itself does not appear in the ramp.
 
 ## Variables
@@ -71,4 +73,4 @@ pnpm typecheck  # sandbox + UI
 pnpm tune       # tuning playground on http://localhost:4322
 ```
 
-Sandbox in `src/code.ts`, UI in `src/ui/`, generation and naming logic in `src/core/`. The Semantic generator's numbers (lightness and chroma of the fixed steps, state offsets, the dark-solid rule, the yellow hue shift) live in `DEFAULT_TARGETS` in `src/core/scale/targets.ts`; the Standard generator's (lightness and chroma of all twelve steps) in `DEFAULT_STANDARD_TARGETS` in `src/core/scale/standard-targets.ts`. `pnpm tune` opens a playground (`tune/`, dev only, never built) that shows every family in both modes with demo components and a slider for each number; **Copy targets.ts** and **Copy standard-targets.ts** give you the literals to paste back. See [CLAUDE.md](CLAUDE.md).
+Sandbox in `src/code.ts`, UI in `src/ui/`, generation and naming logic in `src/core/`. The Semantic generator's numbers (lightness and chroma of the fixed steps, state offsets, the dark-solid rule, the yellow hue shift) live in `DEFAULT_TARGETS` in `src/core/scale/targets.ts`; the Neutral generator's (lightness, chroma and page offsets of all twelve steps) in `DEFAULT_NEUTRAL_TARGETS` in `src/core/scale/neutral-targets.ts`; the Standard generator's (lightness and chroma of all twelve steps) in `DEFAULT_STANDARD_TARGETS` in `src/core/scale/standard-targets.ts`. `pnpm tune` opens a playground (`tune/`, dev only, never built) that shows every family in both modes with demo components and a slider for each number; **Copy targets.ts**, **Copy neutral-targets.ts** and **Copy standard-targets.ts** give you the literals to paste back. See [CLAUDE.md](CLAUDE.md).

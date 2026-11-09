@@ -1,3 +1,4 @@
+import type { NeutralTargets } from "../src/core/scale/neutral-targets.js"
 import { ROLE_BANDS } from "../src/core/scale/roles.js"
 import type { StandardTargets } from "../src/core/scale/standard-targets.js"
 import { SCALE_STEPS, type ScaleStep } from "../src/core/scale/steps.js"
@@ -11,6 +12,8 @@ import {
 type Props = {
   targets: Targets
   onChange: (targets: Targets) => void
+  neutralTargets: NeutralTargets
+  onNeutralChange: (targets: NeutralTargets) => void
   standardTargets: StandardTargets
   onStandardChange: (targets: StandardTargets) => void
 }
@@ -62,9 +65,27 @@ const BANDS: { title: string; steps: readonly FixedStep[] }[] =
 export function Controls({
   targets,
   onChange,
+  neutralTargets,
+  onNeutralChange,
   standardTargets,
   onStandardChange,
 }: Props) {
+  // Neutral follows the role bands like Semantic, but every one of its twelve
+  // steps is fixed, so the solid band gets sliders too.
+  const setNeutral = (
+    mode: Mode,
+    key: "L" | "K" | "offsets",
+    step: ScaleStep,
+    v: number
+  ) =>
+    onNeutralChange({
+      ...neutralTargets,
+      [mode]: {
+        ...neutralTargets[mode],
+        [key]: { ...neutralTargets[mode][key], [step]: v },
+      },
+    })
+
   // Standard has no role bands: every one of the twelve steps is fixed, so the
   // sliders are a plain loop rather than the banded layout Semantic uses.
   const setStandard = (
@@ -296,6 +317,68 @@ export function Controls({
                 hueShift: { ...targets.hueShift, max: v },
               })
             }
+          />
+        </fieldset>
+      </details>
+      {(["light", "dark"] as const).map((mode) => (
+        <details key={`neutral-${mode}`}>
+          <summary>
+            Neutral · {mode === "light" ? "light" : "dark"} steps
+          </summary>
+          {ROLE_BANDS.map((band) => (
+            <fieldset key={band.name}>
+              <legend>{band.name[0].toUpperCase() + band.name.slice(1)}</legend>
+              {band.steps.map((step) => (
+                <div key={step} className="step-controls">
+                  <Num
+                    label={`${step} L`}
+                    value={neutralTargets[mode].L[step]}
+                    min={0}
+                    max={1}
+                    step={0.005}
+                    onChange={(v) => setNeutral(mode, "L", step, v)}
+                  />
+                  <Num
+                    label={`${step} C`}
+                    value={neutralTargets[mode].K[step]}
+                    min={0}
+                    max={0.2}
+                    step={0.001}
+                    onChange={(v) => setNeutral(mode, "K", step, v)}
+                  />
+                </div>
+              ))}
+            </fieldset>
+          ))}
+          <fieldset>
+            <legend>Page offsets (min distance from the background)</legend>
+            {SCALE_STEPS.filter(
+              (s) => neutralTargets[mode].offsets[s] !== undefined
+            ).map((step) => (
+              <Num
+                key={step}
+                label={`${step}`}
+                value={neutralTargets[mode].offsets[step] ?? 0}
+                min={0}
+                max={0.3}
+                step={0.005}
+                onChange={(v) => setNeutral(mode, "offsets", step, v)}
+              />
+            ))}
+          </fieldset>
+        </details>
+      ))}
+      <details>
+        <summary>Neutral · rules</summary>
+        <fieldset>
+          <legend>Rules</legend>
+          <Num
+            label="Min gap"
+            value={neutralTargets.minGap}
+            min={0}
+            max={0.1}
+            step={0.005}
+            onChange={(v) => onNeutralChange({ ...neutralTargets, minGap: v })}
           />
         </fieldset>
       </details>
