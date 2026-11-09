@@ -36,12 +36,6 @@ const MODE_OPTIONS: { value: TargetMode; label: string }[] = [
 
 const EMPTY_RESULT: GenerationResult = { entries: [], notes: [] }
 
-// The engine and `prefs.neutralAnchored` can make a Neutral ramp absolute,
-// and `components/Checkbox.tsx` is the control for it, but that option is not
-// ready to ship: until it is, Neutral is always anchored and the stored pref
-// is ignored.
-const NEUTRAL_ANCHORED = true
-
 export function App() {
   const [prefs, setPrefs] = useState<StoredPrefs | null>(null)
   const [collections, setCollections] = useState<CollectionSummary[]>([])
@@ -92,7 +86,6 @@ export function App() {
       scaleType: prefs.scaleType,
       lightBackground: prefs.lightBackground,
       darkBackground: prefs.darkBackground,
-      neutralAnchored: NEUTRAL_ANCHORED,
     })
   }, [prefs, backgroundMessage])
   const scale = result.entries

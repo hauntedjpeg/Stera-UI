@@ -14,8 +14,6 @@ export type GenerationOptions = {
   /** Semantic and Neutral only: Standard ramps are absolute and ignore the page. */
   lightBackground: string
   darkBackground: string
-  /** Neutral only: false makes the ramp absolute, ignoring the backgrounds. Default true. */
-  neutralAnchored?: boolean
 }
 
 export type GenerationResult = {
@@ -36,7 +34,6 @@ export function generateBiModalScale(
       hex: options.hex,
       lightBackground: options.lightBackground,
       darkBackground: options.darkBackground,
-      anchored: options.neutralAnchored ?? true,
     })
   }
   return generateSemanticScale({

@@ -146,7 +146,6 @@ async function loadPrefs(): Promise<StoredPrefs> {
     scaleType: stored.scaleType ?? DEFAULT_PREFS.scaleType,
     lightBackground: stored.lightBackground ?? DEFAULT_PREFS.lightBackground,
     darkBackground: stored.darkBackground ?? DEFAULT_PREFS.darkBackground,
-    neutralAnchored: stored.neutralAnchored ?? DEFAULT_PREFS.neutralAnchored,
     mode: stored.mode ?? DEFAULT_PREFS.mode,
   }
 }

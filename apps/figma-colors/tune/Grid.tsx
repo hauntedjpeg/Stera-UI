@@ -12,8 +12,10 @@ export type Row = {
   name: string
   entries: ScaleEntry[]
   notes: string[]
-  /** Standard ramps do not follow the role table. */
+  /** Standard and Neutral ramps do not drive the demo strips. */
   semantic: boolean
+  /** Rows the active generator produces; the rest are dimmed for context. */
+  active: boolean
 }
 
 type Props = {
@@ -21,6 +23,8 @@ type Props = {
   mode: Mode
   page: string
   numbers: boolean
+  selectedStep: ScaleStep
+  onSelectStep: (step: ScaleStep) => void
 }
 
 export function hexOf(entries: ScaleEntry[], step: ScaleStep, mode: Mode) {
@@ -28,42 +32,73 @@ export function hexOf(entries: ScaleEntry[], step: ScaleStep, mode: Mode) {
   return entry ? entry[mode] : "#ff00ff"
 }
 
-export function Grid({ rows, mode, page, numbers }: Props) {
+/** The first role of a step, for the column header; the full list is the tooltip. */
+function shortRole(step: ScaleStep): string {
+  return STEP_ROLES[step].split(",")[0]
+}
+
+export function Grid({
+  rows,
+  mode,
+  page,
+  numbers,
+  selectedStep,
+  onSelectStep,
+}: Props) {
   return (
     <div className="grid">
       <div className="grid-row grid-head">
         <div className="grid-name" />
         {SCALE_STEPS.map((step) => (
-          <div key={step} className="grid-step" title={STEP_ROLES[step]}>
+          <button
+            key={step}
+            type="button"
+            className={`grid-step ${step === selectedStep ? "is-selected" : ""}`}
+            title={STEP_ROLES[step]}
+            aria-pressed={step === selectedStep}
+            onClick={() => onSelectStep(step)}
+          >
             <strong>{step}</strong>
-            <span>{STEP_ROLES[step]}</span>
-          </div>
+            <span>{shortRole(step)}</span>
+          </button>
         ))}
       </div>
       {rows.map((row) => (
-        <div key={row.name} className="grid-row">
+        <div
+          key={row.name}
+          className={`grid-row ${row.active ? "" : "is-inactive"}`}
+        >
           <div className="grid-name">
             <strong>{row.name}</strong>
-            {row.notes.map((note) => (
-              <span key={note} className="note">
-                {note}
+            {row.notes.length > 0 && (
+              <span
+                className="row-note"
+                title={row.notes.join("\n\n")}
+                aria-label={`${row.notes.length} notes`}
+              >
+                {row.notes.length}
               </span>
-            ))}
+            )}
           </div>
           {SCALE_STEPS.map((step) => {
             const hex = hexOf(row.entries, step, mode)
             const { L, C } = hexToOklch(hex)
             const ratio = wcag(hex, page)
+            const classes = [
+              "cell",
+              isLightColor(hex) ? "on-light" : "on-dark",
+              row.semantic && step === 500 ? "cell-seed" : "",
+              step === selectedStep ? "is-selected" : "",
+            ]
             return (
               <button
                 key={step}
                 type="button"
-                className={`cell ${isLightColor(hex) ? "on-light" : "on-dark"} ${
-                  row.semantic && step === 500 ? "cell-seed" : ""
-                }`}
+                className={classes.join(" ")}
                 style={{ background: hex }}
-                title={`${displayHex(hex)} · L ${(L * 100).toFixed(0)} · C ${C.toFixed(3)} · ${ratio.toFixed(1)}:1 vs page`}
-                onClick={() =>
+                title={`${displayHex(hex)} · L ${(L * 100).toFixed(0)} · C ${C.toFixed(3)} · ${ratio.toFixed(1)}:1 vs page. Click to select, double-click to copy.`}
+                onClick={() => onSelectStep(step)}
+                onDoubleClick={() =>
                   void navigator.clipboard?.writeText(displayHex(hex))
                 }
               >

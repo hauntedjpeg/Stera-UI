@@ -6,9 +6,38 @@ import {
   DEFAULT_STANDARD_TARGETS,
   type StandardTargets,
 } from "../src/core/scale/standard-targets.js"
-import { DEFAULT_TARGETS, type Targets } from "../src/core/scale/targets.js"
+import { SCALE_STEPS, type ScaleStep } from "../src/core/scale/steps.js"
+import {
+  DEFAULT_TARGETS,
+  type Mode,
+  type Targets,
+} from "../src/core/scale/targets.js"
 
 export type Seed = { name: string; hex: string }
+
+/** Which generator the panel edits and the toolbar copies or resets. */
+export type Generator = "semantic" | "neutral" | "standard"
+/** Which appearance the grid shows; "both" stacks them. */
+export type ModeView = Mode | "both"
+export type Panel = "step" | "rules" | "seeds"
+
+/** Selection and view options. Kept apart from the targets, so a shared link carries numbers, not someone's open tab. */
+export type UiState = {
+  generator: Generator
+  mode: ModeView
+  step: ScaleStep
+  panel: Panel
+  /** Show L, C and contrast in the cells instead of the hex. */
+  numbers: boolean
+}
+
+export const DEFAULT_UI: UiState = {
+  generator: "semantic",
+  mode: "light",
+  step: 500,
+  panel: "step",
+  numbers: false,
+}
 
 export type TuneState = {
   targets: Targets
@@ -18,7 +47,6 @@ export type TuneState = {
   pages: { light: string; dark: string }
   /** The seed of the Neutral and Standard reference rows. */
   neutral: string
-  numbers: boolean
 }
 
 export const DEFAULT_SEEDS: Seed[] = [
@@ -40,10 +68,10 @@ export const DEFAULT_STATE: TuneState = {
   seeds: DEFAULT_SEEDS,
   pages: { light: "#ffffff", dark: "#000000" },
   neutral: "#8b8d98",
-  numbers: false,
 }
 
 const STORAGE_KEY = "stera-ui-colors:tune"
+const UI_STORAGE_KEY = "stera-ui-colors:tune:ui"
 
 function clone<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T
@@ -97,7 +125,6 @@ function merge(stored: Partial<TuneState> | null): TuneState {
     seeds: Array.isArray(stored.seeds) ? stored.seeds : base.seeds,
     pages: { ...base.pages, ...stored.pages },
     neutral: stored.neutral ?? base.neutral,
-    numbers: stored.numbers ?? base.numbers,
   }
 }
 
@@ -130,6 +157,78 @@ export function saveState(state: TuneState): void {
     // Storage can be unavailable; the hash still carries the state.
   }
   window.history.replaceState(null, "", `#${encodeURIComponent(json)}`)
+}
+
+export function loadUi(): UiState {
+  try {
+    const stored = decode(
+      window.localStorage.getItem(UI_STORAGE_KEY)
+    ) as Partial<UiState> | null
+    if (!stored) return { ...DEFAULT_UI }
+    return {
+      generator: isOneOf(stored.generator, ["semantic", "neutral", "standard"])
+        ? stored.generator
+        : DEFAULT_UI.generator,
+      mode: isOneOf(stored.mode, ["light", "dark", "both"])
+        ? stored.mode
+        : DEFAULT_UI.mode,
+      step: (SCALE_STEPS as readonly number[]).includes(stored.step as number)
+        ? (stored.step as ScaleStep)
+        : DEFAULT_UI.step,
+      panel: isOneOf(stored.panel, ["step", "rules", "seeds"])
+        ? stored.panel
+        : DEFAULT_UI.panel,
+      numbers: stored.numbers ?? DEFAULT_UI.numbers,
+    }
+  } catch {
+    return { ...DEFAULT_UI }
+  }
+}
+
+export function saveUi(ui: UiState): void {
+  try {
+    window.localStorage.setItem(UI_STORAGE_KEY, JSON.stringify(ui))
+  } catch {
+    // Selection is a convenience; losing it is fine.
+  }
+}
+
+function isOneOf<T extends string>(
+  value: unknown,
+  options: readonly T[]
+): value is T {
+  return (
+    typeof value === "string" && (options as readonly string[]).includes(value)
+  )
+}
+
+/**
+ * How many numbers in `value` differ from `reference`, leaf by leaf. Drives
+ * the modified badges on the generator tabs and the per-generator Reset.
+ */
+export function countChanges(value: unknown, reference: unknown): number {
+  if (Array.isArray(value) && Array.isArray(reference)) {
+    let n = 0
+    for (let i = 0; i < Math.max(value.length, reference.length); i++) {
+      n += countChanges(value[i], reference[i])
+    }
+    return n
+  }
+  if (
+    value !== null &&
+    reference !== null &&
+    typeof value === "object" &&
+    typeof reference === "object"
+  ) {
+    const a = value as Record<string, unknown>
+    const b = reference as Record<string, unknown>
+    let n = 0
+    for (const key of new Set([...Object.keys(a), ...Object.keys(b)])) {
+      n += countChanges(a[key], b[key])
+    }
+    return n
+  }
+  return value === reference ? 0 : 1
 }
 
 /** One target set as a pasteable `export const NAME: Type = { … }` literal. */

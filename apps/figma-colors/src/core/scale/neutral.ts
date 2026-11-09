@@ -12,8 +12,9 @@ import { SCALE_STEPS, type ScaleEntry, type ScaleStep } from "./steps.js"
 
 /**
  * The Neutral ramp: the gray family behind a UI's surfaces. It has the
- * Semantic role layout (subtle, muted, solid, bold) and, unless `anchored` is
- * false, the same page anchoring, but no seed band: every one of the twelve steps sits on a fixed
+ * Semantic role layout (subtle, muted, solid, bold) and starts at the page:
+ * 25 is the background itself and the next steps keep a small distance from
+ * it. There is no seed band: every one of the twelve steps sits on a fixed
  * target lightness, strictly darker as the steps rise in light mode and
  * strictly lighter in dark mode. The seed only donates its hue and how vivid
  * it is; its lightness is dropped, so the seed hex need not appear in its own
@@ -26,12 +27,6 @@ export type NeutralOptions = {
   hex: string
   lightBackground: string
   darkBackground: string
-  /**
-   * Whether the first steps follow the backgrounds. Default true. When false
-   * the ramp is absolute, like a Standard one: the backgrounds are neither
-   * read nor validated, and every step sits on its target.
-   */
-  anchored?: boolean
 }
 
 export type NeutralResult = {
@@ -78,7 +73,7 @@ function relativeChroma(seed: Oklch, mode: NeutralModeTargets): number {
 /** One appearance of the ramp: anchored lightness, curve chroma scaled by `s`. */
 function ramp(
   mode: Mode,
-  backgroundL: number | null,
+  backgroundL: number,
   H: number,
   s: number,
   targets: NeutralTargets
@@ -98,18 +93,12 @@ export function generateNeutralScale(
   options: NeutralOptions,
   targets: NeutralTargets = DEFAULT_NEUTRAL_TARGETS
 ): NeutralResult {
-  const anchored = options.anchored ?? true
-  if (anchored) {
-    const error = backgroundError(
-      options.lightBackground,
-      options.darkBackground
-    )
-    if (error) throw new Error(error)
-  }
+  const error = backgroundError(options.lightBackground, options.darkBackground)
+  if (error) throw new Error(error)
   const hex = normalizeHex(options.hex)
   if (!hex) throw new Error(`Invalid hex color: ${options.hex}`)
-  const pageL = (background: string): number | null =>
-    anchored ? hexToOklch(normalizeHex(background) as string).L : null
+  const pageL = (background: string): number =>
+    hexToOklch(normalizeHex(background) as string).L
 
   const seed = hexToOklch(hex)
   const gray = seed.C < ACHROMATIC_C

@@ -87,25 +87,6 @@ describe("generateBiModalScale", () => {
     expect(neutral.notes).toEqual([])
   })
 
-  it("ignores the backgrounds for Neutral when neutralAnchored is false", () => {
-    const absolute = generateBiModalScale(
-      options({ hex: "#8b8d98", scaleType: "neutral", neutralAnchored: false })
-    )
-    const moved = generateBiModalScale(
-      options({
-        hex: "#8b8d98",
-        scaleType: "neutral",
-        neutralAnchored: false,
-        lightBackground: "#faf7f2",
-        darkBackground: "#0a0a0a",
-      })
-    )
-    expect(moved).toEqual(absolute)
-    // The flag is Neutral's alone: Semantic keeps reading the page.
-    const semantic = generateBiModalScale(options({ neutralAnchored: false }))
-    expect(semantic).toEqual(generateBiModalScale(options({})))
-  })
-
   it("ignores the backgrounds for Standard but not for Semantic", () => {
     const pages = {
       lightBackground: "#faf7f2",
