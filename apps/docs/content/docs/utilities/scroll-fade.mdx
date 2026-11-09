@@ -3,7 +3,7 @@ title: scroll-fade
 description: Utilities for adding a fade effect to the edges of a scroll container.
 ---
 
-<ComponentPreview name="scroll-fade-demo" caption="Scroll Fade" />
+<ComponentPreview name="scroll-fade-demo" />
 
 ## Installation
 
@@ -64,13 +64,13 @@ The [Scroll Area](/components/scroll-area) component can use `scroll-fade` on it
 
 If the content does not overflow, no fade is shown. You can apply `scroll-fade` to any list without checking whether it scrolls.
 
-<ComponentPreview name="scroll-fade-overflow" caption="No overflow, no fade" />
+<ComponentPreview name="scroll-fade-overflow" />
 
 ## Horizontal Scrolling
 
 Use `scroll-fade-x` on containers that scroll horizontally, i.e. the element that has `overflow-x-auto`.
 
-<ComponentPreview name="scroll-fade-horizontal" caption="Horizontal scroll fade" />
+<ComponentPreview name="scroll-fade-horizontal" />
 
 ```tsx
 <div className="flex scroll-fade-x overflow-x-auto">{/* ... */}</div>
@@ -82,7 +82,7 @@ The horizontal fade is direction-aware. In RTL layouts, the crisp edge and the f
 
 Use edge utilities when only one edge should track the scroll position.
 
-<ComponentPreview name="scroll-fade-edge" caption="Bottom edge fade" />
+<ComponentPreview name="scroll-fade-edge" />
 
 ```tsx
 <div className="scroll-fade-b overflow-y-auto">{/* ... */}</div>
@@ -94,7 +94,7 @@ The edge utilities are scroll-aware. Start edges fade in after you scroll away f
 
 The fade depth defaults to `12%` of the container, capped at `40px` so tall scrollers stay subtle. Use `scroll-fade-<number>` to set a fixed size on the spacing scale instead, the same way `scroll-mt-<number>` works.
 
-<ComponentPreview name="scroll-fade-size" caption="Custom fade size" />
+<ComponentPreview name="scroll-fade-size" />
 
 ```tsx
 <div className="scroll-fade overflow-y-auto scroll-fade-24">{/* ... */}</div>
@@ -134,13 +134,13 @@ Use `scroll-fade-none` to remove the fade. It works in any class order, so the t
 </div>
 ```
 
-<ComponentPreview name="scroll-fade-none" caption="Disabling the fade" />
+<ComponentPreview name="scroll-fade-none" />
 
 ## RTL
 
 `scroll-fade-x` follows the reading direction. At rest, the start edge is crisp and the end edge fades. In RTL layouts that means a crisp right edge and a fade on the left, mirrored from LTR.
 
-<ComponentPreview name="scroll-fade-rtl" caption="RTL scroll fade" />
+<ComponentPreview name="scroll-fade-rtl" />
 
 ## Fallback
 

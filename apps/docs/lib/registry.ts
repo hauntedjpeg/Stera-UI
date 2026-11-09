@@ -1004,7 +1004,3 @@ export function getRegistryComponent(name: string): ComponentType | null {
 export function hasRegistryExample(name: string): boolean {
   return name in examples
 }
-
-export function getRegistryComponentSlug(name: string): string | null {
-  return examples[name]?.slug ?? null
-}

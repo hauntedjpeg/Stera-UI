@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import { readExampleSource } from "../lib/read-file"
-import { getRegistryComponent, getRegistryComponentSlug } from "../lib/registry"
+import { getRegistryComponent } from "../lib/registry"
 import { ComponentPreviewFrame } from "./component-preview-frame"
 import { ComponentSource } from "./component-source"
 
@@ -10,14 +10,12 @@ export async function ComponentPreview({
   align = "center",
   previewClassName,
   hideCode = false,
-  caption,
   className,
 }: {
   name: string
   align?: "center" | "start" | "end"
   previewClassName?: string
   hideCode?: boolean
-  caption?: string
   className?: string
 }) {
   const Component = getRegistryComponent(name)
@@ -34,7 +32,6 @@ export async function ComponentPreview({
     )
   }
 
-  const slug = getRegistryComponentSlug(name) ?? undefined
   const code = await readExampleSource(name)
 
   return (
@@ -43,8 +40,6 @@ export async function ComponentPreview({
       previewClassName={previewClassName}
       align={align}
       hideCode={hideCode}
-      caption={caption}
-      slug={slug}
       code={code}
       component={React.createElement(Component)}
       source={<ComponentSource name={name} code={code} hideCopyButton />}

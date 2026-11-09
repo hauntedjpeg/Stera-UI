@@ -1,13 +1,11 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { PreviewCodeDrawer } from "./preview-code-drawer"
+import { PreviewCode } from "./preview-code"
 
 export function ComponentPreviewFrame({
   component,
   source,
   code,
-  caption,
-  slug,
   previewClassName,
   align = "center",
   hideCode = false,
@@ -16,8 +14,6 @@ export function ComponentPreviewFrame({
   component: React.ReactNode
   source: React.ReactNode
   code: string
-  caption?: string
-  slug?: string
   previewClassName?: string
   align?: "center" | "start" | "end"
   hideCode?: boolean
@@ -27,7 +23,9 @@ export function ComponentPreviewFrame({
     <div
       data-slot="component-preview"
       className={cn(
-        "not-prose relative my-6 flex flex-col overflow-hidden rounded-xl border border-border",
+        // overflow-clip, not overflow-hidden: it rounds the corners without
+        // becoming a scroll container, so the sticky "Hide code" pill works.
+        "not-prose relative my-6 flex flex-col overflow-clip rounded-xl border border-border",
         className
       )}
     >
@@ -42,14 +40,7 @@ export function ComponentPreviewFrame({
       >
         {component}
       </div>
-      {!hideCode && (
-        <PreviewCodeDrawer
-          source={source}
-          code={code}
-          caption={caption}
-          slug={slug}
-        />
-      )}
+      {!hideCode && <PreviewCode code={code}>{source}</PreviewCode>}
     </div>
   )
 }

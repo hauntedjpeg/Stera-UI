@@ -3,7 +3,7 @@ title: Input Number
 description: A text field for entering an exact number, with buttons to step it up or down.
 ---
 
-<ComponentPreview name="input-number-demo" caption="Input Number" />
+<ComponentPreview name="input-number-demo" />
 
 ## Installation
 
@@ -54,7 +54,7 @@ InputNumber
 
 ### Sizes
 
-<ComponentPreview name="input-number-sizes" caption="Input Number Sizes" />
+<ComponentPreview name="input-number-sizes" />
 
 | Size | Description      |
 | ---- | ---------------- |
@@ -66,47 +66,35 @@ InputNumber
 
 Use `min` and `max` to bound the value. The buttons stop at each bound. `step` sets how far each press or arrow key moves the value. Hold Shift to move by `largeStep`, or Alt to move by `smallStep`.
 
-<ComponentPreview
-  name="input-number-range"
-  caption="Input Number Min, Max and Step"
-/>
+<ComponentPreview name="input-number-range" />
 
 ### Format
 
 Pass `Intl.NumberFormatOptions` to `format` to show currency, percentages or units. The value stays a plain number.
 
-<ComponentPreview name="input-number-format" caption="Input Number Format" />
+<ComponentPreview name="input-number-format" />
 
 ### Scrub Area
 
 Wrap the label in `InputNumberScrubArea` to change the value by dragging across it. `InputNumberScrubAreaCursor` replaces the pointer while dragging. Safari doesn't support the custom cursor, so it shows the native one there.
 
-<ComponentPreview
-  name="input-number-scrub-area"
-  caption="Input Number Scrub Area"
-/>
+<ComponentPreview name="input-number-scrub-area" />
 
 ### Controlled
 
 Use `value` and `onValueChange` to control the value. The value is `null` when the field is empty.
 
-<ComponentPreview
-  name="input-number-controlled"
-  caption="Input Number Controlled"
-/>
+<ComponentPreview name="input-number-controlled" />
 
 ### Disabled
 
-<ComponentPreview
-  name="input-number-disabled"
-  caption="Input Number Disabled"
-/>
+<ComponentPreview name="input-number-disabled" />
 
 ### Invalid
 
 Set `invalid` on the surrounding `Field` to mark it invalid, and pair it with a `FieldError`. Outside a `Field`, set `aria-invalid` on `InputNumber`.
 
-<ComponentPreview name="input-number-invalid" caption="Input Number Invalid" />
+<ComponentPreview name="input-number-invalid" />
 
 ## API Reference
 
