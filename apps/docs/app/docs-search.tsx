@@ -95,16 +95,22 @@ export function DocsSearch({ tree }: { tree: PageTree }) {
 
   return (
     <>
+      {/* Styled like the search pill on the Stera Icons site; opens the command dialog */}
       <Button
         type="button"
         variant="ghost"
         size="lg"
         onClick={() => setOpen(true)}
-        className="w-11 rounded-full px-3! glass-brand backdrop-blur-md sm:w-auto md:h-9 md:gap-2 md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5"
+        className="w-full justify-start gap-0 rounded-full glass bg-alpha-2 px-0 shadow-none hover:bg-alpha-3 active:bg-alpha-3 aria-expanded:bg-alpha-3 sm:w-72"
       >
-        <SiSearch data-icon="inline-start" />
-        <span className="hidden sm:inline">Search docs</span>
-        <kbd className="hidden text-xs/4 tracking-wide text-ink-subtlest md:inline">
+        {/* Fixed-width slot so the icon lines up with the Icons site's pill */}
+        <span className="flex w-11 shrink-0 justify-center text-ink">
+          <SiSearch />
+        </span>
+        <span className="min-w-0 flex-1 truncate text-left st-body-md text-ink-subtlest">
+          Search docs
+        </span>
+        <kbd className="hidden pr-4 text-xs/4 tracking-wide text-ink-subtlest md:inline">
           ⌘K
         </kbd>
       </Button>
@@ -113,7 +119,7 @@ export function DocsSearch({ tree }: { tree: PageTree }) {
         onOpenChange={setOpen}
         title="Search docs"
         description="Find pages in the documentation"
-        className="rounded-3xl glass-brand **:data-[slot='command-input-wrapper']:pb-2 [&_.group\/input-group]:border-none [&_.group\/input-group]:bg-transparent"
+        className="rounded-3xl glass **:data-[slot='command-input-wrapper']:pb-2 [&_.group\/input-group]:border-none [&_.group\/input-group]:bg-transparent"
       >
         <Command>
           <CommandInput placeholder="Search docs" />

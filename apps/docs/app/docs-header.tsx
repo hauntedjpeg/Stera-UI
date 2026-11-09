@@ -6,56 +6,67 @@ import { buttonVariants } from "@/registry/ui/button"
 import { cn } from "@/lib/utils"
 import { SiAsteriskAlt } from "stera-icons"
 import { DocsSearch, type PageTree } from "./docs-search"
+import { NAV_LINKS, navGhost } from "./nav-links"
+import { NavMenu } from "./nav-menu"
 
 export function DocsHeader({ tree }: { tree: PageTree }) {
   return (
     // The ::before gradient fades page content as it scrolls under the header.
     // It sits at a negative z-index inside the sticky header's stacking context, so it
     // stays behind the header's controls but above the page.
-    <header className="sticky top-0 z-20 flex h-(--header-height) items-center gap-2 px-4 py-4 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:bg-linear-to-b before:from-surface-app before:to-transparent md:px-6">
-      <SidebarTrigger
-        size="icon-lg"
-        className="rounded-full glass-brand backdrop-blur-md md:hidden"
-      />
-      <Link
-        href="/"
-        className={cn(
-          buttonVariants({ variant: "ghost", size: "lg" }),
-          "rounded-full glass-brand backdrop-blur-md md:h-9 md:gap-2 md:px-3 md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5"
-        )}
-      >
-        <SiAsteriskAlt data-icon="inline-start" />
-        UI
-      </Link>
-      <DocsSearch tree={tree} />
-      <Link
-        href="https://stera.sh/"
-        className={cn(
-          buttonVariants({ variant: "ghost", size: "lg" }),
-          "ml-auto rounded-full glass-brand backdrop-blur-md md:h-9 md:gap-2 md:px-3 md:has-data-[icon=inline-end]:pr-2.5 md:has-data-[icon=inline-start]:pl-2.5 md:has-data-[kbd=inline-end]:pr-2.5 md:has-data-[kbd=inline-start]:pl-2.5"
-        )}
-      >
-        Icons
-      </Link>
+    <header className="sticky top-0 z-20 h-(--header-height) before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:bg-linear-to-b before:from-surface-app before:to-transparent">
+      {/* From sm up, three columns keep the search pill centered regardless of the
+          outer groups' widths. Below sm the pill takes the leftover space instead. */}
+      <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 p-4 sm:grid-cols-[1fr_auto_1fr]">
+        <div className="flex gap-2 justify-self-start">
+          <SidebarTrigger
+            size="icon-lg"
+            className={cn(navGhost, "md:hidden")}
+          />
+          <HomeLink />
+        </div>
 
-      <Link
-        href="https://github.com/hauntedjpeg/Stera-UI"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={cn(
-          buttonVariants({ variant: "ghost", size: "icon-lg" }),
-          "rounded-full glass-brand backdrop-blur-md md:size-9 md:[&_svg:not([class*='size-'])]:size-4"
-        )}
-      >
-        <svg
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-        </svg>
-      </Link>
+        <DocsSearch tree={tree} />
+
+        <div className="flex justify-self-end max-sm:hidden">
+          {NAV_LINKS.map(({ label, href, icon: Icon }) => (
+            <a
+              key={href}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "icon-lg" }),
+                navGhost
+              )}
+            >
+              <Icon />
+            </a>
+          ))}
+        </div>
+
+        <div className="justify-self-end sm:hidden">
+          <NavMenu />
+        </div>
+      </div>
     </header>
+  )
+}
+
+// Hidden on phones, where the sidebar drawer's trigger takes its place
+function HomeLink() {
+  return (
+    <Link
+      href="/"
+      className={cn(
+        buttonVariants({ variant: "ghost", size: "lg" }),
+        navGhost,
+        "gap-3 max-sm:hidden [&_svg:not([class*='size-'])]:size-5"
+      )}
+    >
+      <SiAsteriskAlt data-icon="inline-start" />
+      Stera UI
+    </Link>
   )
 }

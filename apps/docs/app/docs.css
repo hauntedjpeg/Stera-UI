@@ -1,12 +1,7 @@
-@utility glass-brand {
-  box-shadow:
-    0.5px 0.5px 0 0 var(--black-8) inset,
-    0 0 0 0.5px var(--black-5) inset,
-    -0.5px -0.5px 0 0 var(--black-6) inset;
-
-  @variant dark {
-    box-shadow:
-      0.5px 0.5px 0 0 var(--white-5) inset,
-      -0.5px -0.5px 0 0 var(--white-4) inset;
-  }
+/* Frosted fill shared with the Stera Icons site (stera.sh). The shadows go through
+   Tailwind's inset-shadow and inset-ring so they share its box-shadow stack and survive
+   ring-* utilities such as the focus ring. Pair `hover:glass` with `hover:bg-alpha-2` on a
+   registry Button so tailwind-merge drops the variant's own hover background. */
+@utility glass {
+  @apply bg-alpha-2 inset-shadow-[0_4px_0_-3px_var(--color-alpha-5),0_-32px_14px_-26px_var(--color-alpha-3)] inset-ring inset-ring-alpha-1 backdrop-blur-sm;
 }

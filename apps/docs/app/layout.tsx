@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ThemeProvider>
           <SidebarProvider
             className="flex-col"
-            style={{ "--header-height": "4.5rem" } as CSSProperties}
+            style={{ "--header-height": "4.75rem" } as CSSProperties}
           >
             <DocsHeader tree={source.pageTree} />
             <div className="flex flex-1">

@@ -17,7 +17,6 @@ import {
   SidebarMenuSubButton,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { cn } from "@/lib/utils"
 
 interface PageTreeRoot {
   name: ReactNode
@@ -46,6 +45,11 @@ interface PageTreeFolder {
   defaultOpen?: boolean
 }
 
+// Full-width pill rows as on the Stera Icons site: hover only brightens the text, the
+// current page gets a subtle fill. The bg-* overrides replace the registry hovers.
+const rowClassName =
+  "h-8 w-full gap-3 rounded-full p-3 st-label-md text-ink-subtle hover:bg-surface-hover hover:text-ink active:bg-transparent active:text-ink data-active:bg-surface-pressed data-active:st-label-md data-active:text-ink"
+
 export function DocsSidebar({ tree }: { tree: PageTreeRoot }) {
   const pathname = usePathname()
   const { isMobile, setOpenMobile } = useSidebar()
@@ -55,8 +59,10 @@ export function DocsSidebar({ tree }: { tree: PageTreeRoot }) {
   }, [pathname, isMobile, setOpenMobile])
 
   return (
-    <Sidebar className={cn("group-data-[side=left]:border-r-0 md:pl-4")}>
-      <SidebarContent className="pb-16 scrollbar-hide md:pt-24">
+    // Transparent and full height, so the list scrolls under the header and its
+    // gradient fades the top edge, like the Stera Icons category sidebar
+    <Sidebar className="bg-transparent group-data-[side=left]:border-r-0">
+      <SidebarContent className="scroll-fade-b pt-4 pb-12 scrollbar-hide md:scroll-pt-(--header-height) md:pt-(--header-height)">
         <TreeNodes nodes={tree.children} pathname={pathname} />
       </SidebarContent>
     </Sidebar>
@@ -92,9 +98,9 @@ function TreeNodes({
   return (
     <>
       {groups.map((group, i) => (
-        <SidebarGroup key={i}>
+        <SidebarGroup key={i} className="px-4 py-2">
           {group.separator?.name && (
-            <SidebarGroupLabel className="px-3">
+            <SidebarGroupLabel className="h-auto p-3 pb-4 st-label-sm text-ink-subtlest">
               {group.separator.name}
             </SidebarGroupLabel>
           )}
@@ -122,7 +128,7 @@ function TreeNode({
     return (
       <SidebarMenuItem>
         <SidebarMenuButton
-          className="w-fit rounded-full px-3 data-active:bg-surface-inverse data-active:text-ink-oninverse"
+          className={rowClassName}
           isActive={pathname === node.url}
           render={<Link href={node.url} />}
         >
@@ -137,14 +143,14 @@ function TreeNode({
       <SidebarMenuItem>
         {node.index ? (
           <SidebarMenuButton
-            className="w-fit data-active:bg-surface-inverse data-active:text-ink-oninverse"
+            className={rowClassName}
             isActive={pathname === node.index.url}
             render={<Link href={node.index.url} />}
           >
             {node.name}
           </SidebarMenuButton>
         ) : (
-          <SidebarMenuButton className="w-fit" isActive={false}>
+          <SidebarMenuButton className={rowClassName} isActive={false}>
             {node.name}
           </SidebarMenuButton>
         )}
@@ -155,7 +161,7 @@ function TreeNode({
                 return (
                   <SidebarMenuSubItem key={i}>
                     <SidebarMenuSubButton
-                      className="w-fit data-active:bg-surface-muted"
+                      className={rowClassName}
                       isActive={pathname === child.url}
                       render={<Link href={child.url} />}
                     >
