@@ -2,29 +2,21 @@ import "server-only"
 
 import { highlight } from "fumadocs-core/highlight"
 
+import { codeThemeOptions } from "../lib/code-theme"
 import { readExampleSource } from "../lib/read-file"
 import { hasRegistryExample } from "../lib/registry"
-import { CodeBlock } from "./code-block"
-
-const transformerForceNoLineNumbers = {
-  name: "stera:force-no-line-numbers",
-  pre(node: { properties: Record<string, unknown> }) {
-    node.properties["data-line-numbers"] = "false"
-  },
-}
+import { CodeBlock, CodeBlockPre } from "./code-block"
 
 export async function ComponentSource({
   name,
   code,
   className,
   hideCopyButton,
-  hideLineNumbers,
 }: {
   name: string
   code?: string
   className?: string
   hideCopyButton?: boolean
-  hideLineNumbers?: boolean
 }) {
   let source = code
   if (source === undefined) {
@@ -34,12 +26,8 @@ export async function ComponentSource({
 
   const rendered = await highlight(source, {
     lang: "tsx",
-    themes: {
-      light: "github-light-default",
-      dark: "github-dark",
-    },
-    defaultColor: false,
-    transformers: hideLineNumbers ? [transformerForceNoLineNumbers] : undefined,
+    ...codeThemeOptions,
+    components: { pre: CodeBlockPre },
   })
 
   return (

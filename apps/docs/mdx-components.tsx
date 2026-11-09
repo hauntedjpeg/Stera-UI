@@ -4,7 +4,8 @@ import Link from "next/link"
 import Image, { type ImageProps } from "next/image"
 import { Preview } from "@/components/preview"
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlock } from "@/components/code-block"
+import { CodeBlock, CodeBlockPre } from "@/components/code-block"
+import { Code } from "@/components/ui/code"
 import { InstallSnippet } from "@/components/install-snippet"
 import { DesignGuidelines } from "@/components/design-guidelines"
 import { SiInfoCircle } from "stera-icons"
@@ -89,8 +90,21 @@ const mdxDefaults: MDXComponents = {
       {...props}
     />
   ),
-  code: (props) => <code {...props} />,
-  pre: (props) => <CodeBlock>{<pre {...props} />}</CodeBlock>,
+  // Inline code has plain-string children; Shiki's <code> inside a <pre> has
+  // line <span>s and is styled by CodeBlockPre + app/code.css instead.
+  code: (props) =>
+    typeof props.children === "string" ? (
+      <Code {...props} />
+    ) : (
+      <code {...props} />
+    ),
+  // Fumadocs puts a fence's `title="…"` meta on the <pre>. Lift it into the
+  // CodeBlock caption so it doesn't become a hover tooltip.
+  pre: ({ title, ...props }) => (
+    <CodeBlock title={title}>
+      <CodeBlockPre {...props} />
+    </CodeBlock>
+  ),
   ul: (props) => (
     <ul
       className="my-4 ml-6 list-disc st-body-lg text-ink-subtler [&>li]:mt-1"

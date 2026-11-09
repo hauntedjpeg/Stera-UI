@@ -1,5 +1,22 @@
+import { utimesSync, watch } from "node:fs"
 import { createMDX } from "fumadocs-mdx/next"
 import type { NextConfig } from "next"
+
+// The Fumadocs dev watcher reloads the MDX config only when source.config.ts
+// itself changes, not the modules it imports. Touch it when the syntax theme
+// changes so MDX code blocks pick up the new pair. The env flag runs this once
+// per dev session (Next loads this file in several processes), like Fumadocs'
+// own `_FUMADOCS_MDX` guard.
+if (
+  process.env.NODE_ENV === "development" &&
+  process.env._STERA_CODE_THEME_WATCH !== "1"
+) {
+  process.env._STERA_CODE_THEME_WATCH = "1"
+  watch("lib/code-theme.ts", () => {
+    const now = new Date()
+    utimesSync("source.config.ts", now, now)
+  }).unref()
+}
 
 const nextConfig: NextConfig = {
   async rewrites() {

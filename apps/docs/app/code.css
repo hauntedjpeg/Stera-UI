@@ -1,98 +1,45 @@
 /* ============================================================
- * Code & syntax styling — single source of truth
+ * Shiki output
  *
- * Pipeline recap:
- *   MDX fence         → fumadocs-core rehypeCode → <pre class="shiki">
- *   <ComponentSource> → fumadocs-core highlight  → <pre class="shiki">
- *   Both paths wrap the <pre> in <CodeBlock> (figure.st-code-block)
- *   so all visuals below apply uniformly.
+ * Only what Shiki emits lives here: its CSS variables and class names.
+ * Everything else is Tailwind in the components:
+ *   - Frame, title, copy button → <CodeBlock>    (components/code-block.tsx)
+ *   - <pre> layout + typography → <CodeBlockPre> (same file)
+ *   - Inline code               → registry <Code> (mdx-components.tsx)
  *
- * Sections:
- *   1. Inline code
- *   2. Block container (figure wrapper)
- *   3. Shiki <pre>            (typography + layout — applies anywhere)
- *   4. Dual-theme color resolution
- *   5. Line numbers (auto, multi-line only)
- *   6. Notation transformers (highlight + diff)
+ * Both highlight paths (MDX fences via source.config.ts, example source via
+ * components/component-source.tsx) read the theme pair from lib/code-theme.ts.
  * ============================================================ */
 
-/* ---------- 1. Inline code ---------- */
-/* In the base layer so the Code component's utilities win in previews. */
-@layer base {
-  :not(pre) > code {
-    background-color: var(--surface-subtle);
-    color: var(--ink);
-    padding: 0.125rem 0.375rem;
-    border-radius: 0.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-  }
-}
-
-/* ---------- 2. Block container (figure wrapper) ---------- */
-.st-code-block {
-  position: relative;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  background-color: var(--surface-subtle);
-}
-
-[data-slot="drawer-content"] .st-code-block {
-  background-color: var(--surface);
-}
-
-.st-code-block__title {
-  padding: 0.5rem 0.875rem;
-  border-bottom: 1px solid var(--border);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--ink-subtler);
-  background-color: var(--surface);
-}
-
-/* When a CodeBlock is embedded (e.g. below a ComponentPreview) the outer
- * container already supplies border + radius, so the figure is plain. */
-.st-code-block[data-embedded] {
-  margin: 0;
-  border: 0;
-  border-radius: 0.75rem;
-  overflow: auto;
-}
-
-/* ---------- 3. Shiki <pre> ---------- */
+/* Blocks sit on Stera surface tokens whatever the theme. To use the theme's
+ * own background instead, swap this for var(--shiki-light-bg) and
+ * var(--shiki-dark-bg) under .dark. */
 .shiki {
-  margin: 0;
-  padding: 1rem;
-  overflow: auto;
-  font-size: 0.75rem;
-  line-height: 1.5em;
-  background-color: transparent !important; /* override Shiki's inline bg */
-  font-family: var(--font-mono);
+  background-color: transparent !important;
 }
 
-.shiki code {
-  display: block;
-  min-width: max-content;
-  background: transparent;
-  padding: 0;
-}
-
-/* ---------- 4. Dual-theme color resolution ---------- */
+/* ---------- Token styles ----------
+ * `defaultColor: false` emits only variables, so pick one set per color mode.
+ * A token without a style variable falls back to its inherited value. */
 .shiki,
 .shiki span {
   color: var(--shiki-light);
+  font-style: var(--shiki-light-font-style);
+  font-weight: var(--shiki-light-font-weight);
+  text-decoration: var(--shiki-light-text-decoration);
 }
 
 .dark .shiki,
 .dark .shiki span {
   color: var(--shiki-dark);
+  font-style: var(--shiki-dark-font-style);
+  font-weight: var(--shiki-dark-font-weight);
+  text-decoration: var(--shiki-dark-text-decoration);
 }
 
-/* ---------- 5. Line numbers (opt-in) ----------
- * Off by default. Opt in on a fence with `showLineNumbers` meta — the shiki
- * transformer in source.config.ts tags the <pre> with data-line-numbers="true". */
+/* ---------- Line numbers (opt-in) ----------
+ * Add `lineNumbers` to a fence's meta; Fumadocs tags the <pre> with
+ * data-line-numbers="true". */
 .shiki[data-line-numbers="true"] {
   counter-reset: line;
 }
@@ -113,7 +60,8 @@
   display: none;
 }
 
-/* ---------- 6. Notation transformers (highlight + diff) ---------- */
+/* ---------- Notation transformers ----------
+ * `// [!code highlight]`, `// [!code ++]` and `// [!code --]` in a fence. */
 .shiki .highlighted {
   display: inline-block;
   width: 100%;

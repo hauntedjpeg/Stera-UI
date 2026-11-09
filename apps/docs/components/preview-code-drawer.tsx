@@ -48,7 +48,7 @@ export function PreviewCodeDrawer({
               value={code}
             />
           </DrawerHeader>
-          <DrawerContent className="no-scrollbar -mb -m-px mt-0 flex flex-col rounded-xl border border-border [&_figure]:flex [&_figure]:flex-1 [&_figure]:overflow-visible [&_figure]:bg-(--bw-12) [&_pre]:flex-1 [&_pre]:overflow-visible">
+          <DrawerContent className="no-scrollbar -mb -m-px mt-0 flex flex-col rounded-xl border border-border [&_figure]:flex [&_figure]:flex-1 [&_figure]:bg-surface [&_pre]:flex-1">
             {source}
           </DrawerContent>
         </DrawerPopup>

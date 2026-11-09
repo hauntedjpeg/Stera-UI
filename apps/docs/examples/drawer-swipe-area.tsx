@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { Code } from "@/components/ui/code"
 import {
   Drawer,
   DrawerClose,
@@ -30,9 +31,9 @@ export default function DrawerSwipeAreaExample() {
         </DrawerHeader>
         <DrawerContent className="px-4 text-sm text-ink-subtler">
           <p>
-            A <code>DrawerSwipeArea</code> is an invisible, fixed strip along
+            A <Code>DrawerSwipeArea</Code> is an invisible, fixed strip along
             the screen edge. Base UI handles the swipe gesture and sets its own{" "}
-            <code>touch-action</code>; you position it.
+            <Code>touch-action</Code>; you position it.
           </p>
         </DrawerContent>
         <DrawerFooter>

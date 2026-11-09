@@ -47,14 +47,7 @@ export async function ComponentPreview({
       slug={slug}
       code={code}
       component={React.createElement(Component)}
-      source={
-        <ComponentSource
-          name={name}
-          code={code}
-          hideCopyButton
-          hideLineNumbers
-        />
-      }
+      source={<ComponentSource name={name} code={code} hideCopyButton />}
     />
   )
 }
