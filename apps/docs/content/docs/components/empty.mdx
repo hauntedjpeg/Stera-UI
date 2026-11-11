@@ -9,29 +9,6 @@ description: Shows that a list, table or other surface has nothing in it, says w
 
 <InstallSnippet slug="empty" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- A list, [Table](/components/table) or container with no records, because none exist yet or because a filter or search returned nothing.
-- Guiding users to a next action, such as creating their first record or clearing a filter, instead of leaving a blank surface.
-
-### When not to use
-
-- Content that's still loading. Use a [Skeleton](/components/skeleton) or a Spinner.
-
-### Guidelines
-
-- Every empty state needs a title and a short description that together say what's missing and why. An icon, an [Icon Tile](/components/icon-tile), an illustration or an [Avatar](/components/avatar) can reinforce the message, but never replaces it.
-- Match the action to the cause. After a filter or search, help the user recover, such as Clear filters. For a dataset that's genuinely empty, prompt them to create something, such as Add project.
-- Keep the tone helpful and direct, never negative or apologetic. An empty state orients the user; it doesn't report a failure.
-
-See also: [Loading and empty states](/design/loading).
-
-</DesignGuidelines>
-
 ## Composition
 
 Use the following composition to build an `Empty` state:
@@ -54,6 +31,29 @@ Empty
 ### No Results
 
 <ComponentPreview name="empty-no-results" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A list, [Table](/components/table) or container with no records, because none exist yet or because a filter or search returned nothing.
+- Guiding users to a next action, such as creating their first record or clearing a filter, instead of leaving a blank surface.
+
+### When not to use
+
+- Content that's still loading. Use a [Skeleton](/components/skeleton) or a Spinner.
+
+### Guidelines
+
+- Every empty state needs a title and a short description that together say what's missing and why. An icon, an [Icon Tile](/components/icon-tile), an illustration or an [Avatar](/components/avatar) can reinforce the message, but never replaces it.
+- Match the action to the cause. After a filter or search, help the user recover, such as Clear filters. For a dataset that's genuinely empty, prompt them to create something, such as Add project.
+- Keep the tone helpful and direct, never negative or apologetic. An empty state orients the user; it doesn't report a failure.
+
+See also: [Loading and empty states](/design/loading).
+
+</DesignGuidelines>
 
 ## API Reference
 

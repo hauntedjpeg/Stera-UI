@@ -9,29 +9,6 @@ description: A modal overlay that interrupts the current task to ask for explici
 
 <InstallSnippet slug="alert-dialog" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- Any action that needs explicit confirmation before it goes ahead: deleting a record, revoking access, publishing, canceling a subscription.
-- Actions where an accidental confirmation would lose data or leave a state that's hard to reverse.
-
-### When not to use
-
-- Informational messages, or feedback after an action. Use a [Toast](/components/toast).
-
-### Guidelines
-
-- Always include a title, a short description of the consequence, and two actions: confirm and cancel. Never a single action on its own.
-- Confirm a destructive action with a `danger` button, to reinforce the risk. Give cancel a lower-weight variant, such as `outline` or `ghost`.
-- Keep the description to one or two sentences. Don't restate the title or pad it with context.
-
-See also: [Overlays](/design/overlays).
-
-</DesignGuidelines>
-
 ## Composition
 
 Use the following composition to build an `AlertDialog`:
@@ -66,6 +43,29 @@ Use `AlertDialogMedia` to display an icon above the title for additional visual 
 <ComponentPreview name="alert-dialog-destructive" />
 
 Pass `variant="danger"` to `AlertDialogAction` for destructive confirmations.
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Any action that needs explicit confirmation before it goes ahead: deleting a record, revoking access, publishing, canceling a subscription.
+- Actions where an accidental confirmation would lose data or leave a state that's hard to reverse.
+
+### When not to use
+
+- Informational messages, or feedback after an action. Use a [Toast](/components/toast).
+
+### Guidelines
+
+- Always include a title, a short description of the consequence, and two actions: confirm and cancel. Never a single action on its own.
+- Confirm a destructive action with a `danger` button, to reinforce the risk. Give cancel a lower-weight variant, such as `outline` or `ghost`.
+- Keep the description to one or two sentences. Don't restate the title or pad it with context.
+
+See also: [Overlays](/design/overlays).
+
+</DesignGuidelines>
 
 ## API Reference
 

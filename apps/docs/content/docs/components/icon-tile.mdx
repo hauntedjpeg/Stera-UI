@@ -10,30 +10,6 @@ description: A small container with an icon that reinforces the tone of a messag
 <InstallSnippet slug="icon-tile" hideHeading />
 
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- Reinforcing the tone of a message with a semantic color, such as a success, warning or danger state in a [Toast](/components/toast).
-- Leading media in an [Item](/components/item) or an [Empty](/components/empty) state, where a plain icon needs more weight to anchor the row or surface.
-
-### When not to use
-
-- Representing a person, account or entity. Use an [Avatar](/components/avatar).
-
-### Guidelines
-
-- An icon tile is decorative and carries no meaning on its own. The title or description next to it must carry the message, so the tile is never the only signal of state.
-- Choose the color for its meaning, so it reinforces the message: `success` for a successful outcome, `danger` for an error or a destructive outcome, `warning` for something that needs attention, and `default` for neutral categories. Keep each color mapped to the same meaning across the product. Your call: what `brand` and `accent` tiles mean, and when a tile uses its `-solid` or `-outline` form. Pick one and use it consistently.
-- Keep icon tiles easy to tell apart from avatars: use the `square` shape wherever an [Avatar](/components/avatar) may sit nearby.
-- Use one shape and one size for every tile in a group, such as the items in a list.
-
-See also: [Theming](/design/theming).
-
-</DesignGuidelines>
-
 ## Examples
 
 ### Variant
@@ -88,6 +64,30 @@ Use the `size` prop to select between `xs`, `sm`, `md` and `lg` (default). The i
 ### With Item
 
 <ComponentPreview name="icon-tile-with-item" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Reinforcing the tone of a message with a semantic color, such as a success, warning or danger state in a [Toast](/components/toast).
+- Leading media in an [Item](/components/item) or an [Empty](/components/empty) state, where a plain icon needs more weight to anchor the row or surface.
+
+### When not to use
+
+- Representing a person, account or entity. Use an [Avatar](/components/avatar).
+
+### Guidelines
+
+- An icon tile is decorative and carries no meaning on its own. The title or description next to it must carry the message, so the tile is never the only signal of state.
+- Choose the color for its meaning, so it reinforces the message: `success` for a successful outcome, `danger` for an error or a destructive outcome, `warning` for something that needs attention, and `default` for neutral categories. Keep each color mapped to the same meaning across the product. Your call: what `brand` and `accent` tiles mean, and when a tile uses its `-solid` or `-outline` form. Pick one and use it consistently.
+- Keep icon tiles easy to tell apart from avatars: use the `square` shape wherever an [Avatar](/components/avatar) may sit nearby.
+- Use one shape and one size for every tile in a group, such as the items in a list.
+
+See also: [Theming](/design/theming).
+
+</DesignGuidelines>
 
 ## API Reference
 

@@ -9,29 +9,6 @@ description: A trail of links showing where the current page sits in a hierarchy
 
 <InstallSnippet slug="breadcrumb" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- Pages two or more levels deep in a hierarchy, such as a settings subpage or a detail view inside a section.
-- When users are likely to go back to a parent, such as after opening a record from a list.
-
-### When not to use
-
-- Top-level pages, or flat structures with no real hierarchy. The primary navigation, such as a [Sidebar](/components/sidebar), already covers them.
-
-### Guidelines
-
-- End the trail with the current page, and don't make it a link, so users can tell where they are from where they've been.
-- When the trail is too long to show in full, collapse the middle steps behind an ellipsis. Always keep the first and last items.
-- Breadcrumbs back up the primary navigation; they don't replace it. They should reflect the same structure the sidebar or navigation shows.
-
-See also: [Menus and navigation](/design/navigation).
-
-</DesignGuidelines>
-
 ## Composition
 
 Use the following composition to build a `Breadcrumb`:
@@ -78,6 +55,29 @@ Use `BreadcrumbEllipsis` to represent hidden middle items in long paths.
 Use the `render` prop on `BreadcrumbLink` to swap the underlying anchor for a routing-library link such as Next.js `Link`.
 
 <ComponentPreview name="breadcrumb-link" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Pages two or more levels deep in a hierarchy, such as a settings subpage or a detail view inside a section.
+- When users are likely to go back to a parent, such as after opening a record from a list.
+
+### When not to use
+
+- Top-level pages, or flat structures with no real hierarchy. The primary navigation, such as a [Sidebar](/components/sidebar), already covers them.
+
+### Guidelines
+
+- End the trail with the current page, and don't make it a link, so users can tell where they are from where they've been.
+- When the trail is too long to show in full, collapse the middle steps behind an ellipsis. Always keep the first and last items.
+- Breadcrumbs back up the primary navigation; they don't replace it. They should reflect the same structure the sidebar or navigation shows.
+
+See also: [Menus and navigation](/design/navigation).
+
+</DesignGuidelines>
 
 ## API Reference
 

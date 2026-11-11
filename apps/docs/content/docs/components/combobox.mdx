@@ -9,28 +9,6 @@ description: An input that combines a text field with a dropdown list, so the us
 
 <InstallSnippet slug="combobox" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- Choosing from a large set of predefined options where typing to filter helps, such as a city, a language or a product category.
-- Lists too long for a [Select](/components/select) to stay easy to scan.
-
-### When not to use
-
-- Short lists that are easy to scan. Use a [Select](/components/select).
-
-### Guidelines
-
-- Write a message for when nothing matches the search, such as "No framework found," rather than leaving the list empty.
-- Make clear whether the user can only pick from the list or can also enter their own value. If they can't, say so in the placeholder or the description.
-
-See also: [Forms](/design/forms).
-
-</DesignGuidelines>
-
 ## Composition
 
 ### Simple
@@ -122,6 +100,28 @@ Pass `showClear` to `ComboboxInput` to render a clear button that resets the val
 ### Invalid State
 
 <ComponentPreview name="combobox-invalid" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Choosing from a large set of predefined options where typing to filter helps, such as a city, a language or a product category.
+- Lists too long for a [Select](/components/select) to stay easy to scan.
+
+### When not to use
+
+- Short lists that are easy to scan. Use a [Select](/components/select).
+
+### Guidelines
+
+- Write a message for when nothing matches the search, such as "No framework found," rather than leaving the list empty.
+- Make clear whether the user can only pick from the list or can also enter their own value. If they can't, say so in the placeholder or the description.
+
+See also: [Forms](/design/forms).
+
+</DesignGuidelines>
 
 ## API Reference
 

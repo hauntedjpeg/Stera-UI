@@ -9,28 +9,6 @@ description: A panel that slides in from the edge of the screen to surface focus
 
 <InstallSnippet slug="drawer" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- Secondary tasks or detail views that complement the main content without replacing it: editing a record, reviewing settings, a contextual detail panel.
-- Content longer than a dialog comfortably holds, or easier to follow with the underlying content still in view.
-
-### When not to use
-
-- Confirmations, or critical decisions that need the user's full attention. Use an [Alert Dialog](/components/alert-dialog).
-
-### Guidelines
-
-- A drawer can open from any edge: right (the default), left, top or bottom. Pick the edge that matches where the trigger sits, and use the same edge for the same kind of task across the product.
-- Always include a header with a title and a visible close control, so the drawer's purpose and the way out are clear at once.
-
-See also: [Overlays](/design/overlays).
-
-</DesignGuidelines>
-
 ## Composition
 
 Use the following composition to build a `Drawer`:
@@ -95,6 +73,28 @@ Wrap your app in `DrawerProvider` and place a `DrawerIndentBackground` behind `D
 <ComponentPreview name="drawer-swipe-area" />
 
 Add a `DrawerSwipeArea` — an invisible, fixed strip along the screen edge — so the drawer can be opened by swiping in from that edge on touch devices. Base UI manages the gesture and the strip's `touch-action`; you position it (e.g. `fixed inset-y-0 right-0 w-4`).
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Secondary tasks or detail views that complement the main content without replacing it: editing a record, reviewing settings, a contextual detail panel.
+- Content longer than a dialog comfortably holds, or easier to follow with the underlying content still in view.
+
+### When not to use
+
+- Confirmations, or critical decisions that need the user's full attention. Use an [Alert Dialog](/components/alert-dialog).
+
+### Guidelines
+
+- A drawer can open from any edge: right (the default), left, top or bottom. Pick the edge that matches where the trigger sits, and use the same edge for the same kind of task across the product.
+- Always include a header with a title and a visible close control, so the drawer's purpose and the way out are clear at once.
+
+See also: [Overlays](/design/overlays).
+
+</DesignGuidelines>
 
 ## API Reference
 

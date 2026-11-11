@@ -9,30 +9,6 @@ description: A form field layout system that pairs labels, inputs, descriptions,
 
 <InstallSnippet slug="field" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- Any form control that needs a label, help text or an error message.
-- A set of related controls under one heading, such as notification preferences.
-
-### When not to use
-
-- A label for something that isn't a form field. Use a [Label](/components/label).
-
-### Guidelines
-
-- **Descriptions:** say what the field is for or what format it expects. Don't repeat the label.
-- **Errors:** say what went wrong and how to fix it, such as "Enter an email address like name@example.com" rather than "Invalid input."
-- **Choice cards:** for options that each need a sentence of explanation, such as plans. Options with short labels read better as plain rows.
-- Your call: when errors appear, on blur or on submit. Pick one and use it consistently.
-
-See also: [Forms](/design/forms).
-
-</DesignGuidelines>
-
 ## Composition
 
 ### Field
@@ -143,6 +119,30 @@ Use `FieldSet` and `FieldLegend` to group related checkboxes or radio buttons wi
 - `FieldError` is a live region, so screen readers announce new errors.
 - For a Select or Combobox trigger, set `nativeLabel={false}` on `FieldLabel`. A native `<label>` can't label a button.
 - Native `<textarea>` and `<select>` elements need the registry's `Textarea` and `NativeSelect` to pick up the label and states automatically.
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Any form control that needs a label, help text or an error message.
+- A set of related controls under one heading, such as notification preferences.
+
+### When not to use
+
+- A label for something that isn't a form field. Use a [Label](/components/label).
+
+### Guidelines
+
+- **Descriptions:** say what the field is for or what format it expects. Don't repeat the label.
+- **Errors:** say what went wrong and how to fix it, such as "Enter an email address like name@example.com" rather than "Invalid input."
+- **Choice cards:** for options that each need a sentence of explanation, such as plans. Options with short labels read better as plain rows.
+- Your call: when errors appear, on blur or on submit. Pick one and use it consistently.
+
+See also: [Forms](/design/forms).
+
+</DesignGuidelines>
 
 ## API Reference
 

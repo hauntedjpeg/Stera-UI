@@ -9,28 +9,6 @@ description: A set of mutually exclusive options, all visible at once, where the
 
 <InstallSnippet slug="radio-group" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- Selecting exactly one option from a defined set, such as a payment method or a notification preference.
-- Sets small enough to show every option at once, typically two to five.
-
-### When not to use
-
-- Independent choices, where more than one can be selected. Use a [Checkbox](/components/checkbox).
-- Long lists of options. Use a [Select](/components/select).
-
-### Guidelines
-
-- Always give the group a visible label that says what the user is choosing. A single radio on its own doesn't explain itself.
-
-See also: [Selection](/design/selection).
-
-</DesignGuidelines>
-
 ## Composition
 
 Use the following composition to build a `RadioGroup`:
@@ -62,6 +40,28 @@ Use `FieldSet` and `FieldLegend` to group radio items with an accessible legend.
 ### Disabled
 
 <ComponentPreview name="radio-group-disabled" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Selecting exactly one option from a defined set, such as a payment method or a notification preference.
+- Sets small enough to show every option at once, typically two to five.
+
+### When not to use
+
+- Independent choices, where more than one can be selected. Use a [Checkbox](/components/checkbox).
+- Long lists of options. Use a [Select](/components/select).
+
+### Guidelines
+
+- Always give the group a visible label that says what the user is choosing. A single radio on its own doesn't explain itself.
+
+See also: [Selection](/design/selection).
+
+</DesignGuidelines>
 
 ## API Reference
 

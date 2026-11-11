@@ -9,29 +9,6 @@ description: A search input with a filterable list of actions, destinations and 
 
 <InstallSnippet slug="command" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- A palette opened by a keyboard shortcut, for searching across destinations, actions and settings from anywhere in the product.
-- Products with enough commands or destinations that finding them through regular navigation would be slow.
-
-### When not to use
-
-- Actions tied to one item, or in place of inline controls. Use a [Dropdown Menu](/components/dropdown-menu).
-
-### Guidelines
-
-- Show the shortcut that opens it, such as ⌘K, on its trigger so users learn it, and make it work from every screen.
-- Write a message for when nothing matches the search, such as "No results found," rather than leaving the list empty.
-- **Groups:** cluster related items under a heading, such as Navigation, Settings or Recent, once the list runs past six to eight items. Keep headings to one or two words in sentence case. Don't make a group for a single item: fold it into a neighboring group, or drop the heading.
-
-See also: [Menus and navigation](/design/navigation) and [Theming](/design/theming).
-
-</DesignGuidelines>
-
 ## Composition
 
 Use the following composition to build a `Command`:
@@ -63,6 +40,29 @@ Use `CommandDialog` and `CommandDialogTrigger` to open the command palette in a 
 <ComponentPreview name="command-title-description" />
 
 Use `CommandItemContent`, `CommandItemTitle`, and `CommandItemDescription` for richer item layouts.
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A palette opened by a keyboard shortcut, for searching across destinations, actions and settings from anywhere in the product.
+- Products with enough commands or destinations that finding them through regular navigation would be slow.
+
+### When not to use
+
+- Actions tied to one item, or in place of inline controls. Use a [Dropdown Menu](/components/dropdown-menu).
+
+### Guidelines
+
+- Show the shortcut that opens it, such as ⌘K, on its trigger so users learn it, and make it work from every screen.
+- Write a message for when nothing matches the search, such as "No results found," rather than leaving the list empty.
+- **Groups:** cluster related items under a heading, such as Navigation, Settings or Recent, once the list runs past six to eight items. Keep headings to one or two words in sentence case. Don't make a group for a single item: fold it into a neighboring group, or drop the heading.
+
+See also: [Menus and navigation](/design/navigation) and [Theming](/design/theming).
+
+</DesignGuidelines>
 
 ## API Reference
 

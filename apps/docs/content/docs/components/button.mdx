@@ -9,33 +9,6 @@ description: An interactive element that triggers an action or navigates within 
 
 <InstallSnippet slug="button" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### Variants
-
-| Variant   | Emphasis | Use for                                                                                                                                        | Not for                                                                                           |
-| --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `brand`   | Highest  | The primary action on a screen or in a section: Submit, Save, Get started.                                                                     | Destructive actions. Use `danger`.                                                                |
-| `accent`  | High     | A significant action that needs a strong button where `brand` would feel out of place or overused: dark surfaces, neutral sections, next to `brand`. | Standing in for `brand`. Keep each to its own role across the product.                            |
-| `danger`  | High     | Destructive, irreversible or high-risk actions: Delete, Remove, Permanently cancel.                                                            | Actions that are only negative in tone. Form errors: use validation states or inline messages.    |
-| `outline` | Medium   | Secondary actions that matter but shouldn't compete with the primary action.                                                                   | The primary action.                                                                               |
-| `subtle`  | Low      | Secondary or supporting actions in dense interfaces or sidebars, where a little containment helps.                                             | High-stakes or primary actions.                                                                   |
-| `ghost`   | Lowest   | Tertiary actions, such as Learn more or Dismiss, in toolbars, inline, or next to more prominent buttons.                                       | The only action in a context, where users might not recognize it as interactive.                  |
-
-### Guidelines
-
-- Use one `brand` button per view or logical group. Several compete for attention and dilute each other.
-- When showing several actions together, give the primary action the most weight and the others lower-weight variants (`outline`, `subtle`, `ghost`), so the hierarchy stays clear.
-- Write labels that say what will happen. Keep them short and action-oriented, three or four words at most.
-- Use `ghost` sparingly, next to more prominent elements that anchor attention. Too many make an interface feel unresponsive and hard to scan.
-- Use `danger` sparingly. Consider an [Alert Dialog](/components/alert-dialog) so users can cancel before a destructive action is committed. Several `danger` buttons in one place means the destructive actions aren't gated well; revisit the design.
-
-See also: [Theming](/design/theming).
-
-</DesignGuidelines>
-
 ## Examples
 
 ### Variants
@@ -74,6 +47,33 @@ See also: [Theming](/design/theming).
 ### Disabled
 
 <ComponentPreview name="button-disabled" />
+
+## Design
+
+<DesignGuidelines>
+
+### Variants
+
+| Variant   | Emphasis | Use for                                                                                                                                        | Not for                                                                                           |
+| --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `brand`   | Highest  | The primary action on a screen or in a section: Submit, Save, Get started.                                                                     | Destructive actions. Use `danger`.                                                                |
+| `accent`  | High     | A significant action that needs a strong button where `brand` would feel out of place or overused: dark surfaces, neutral sections, next to `brand`. | Standing in for `brand`. Keep each to its own role across the product.                            |
+| `danger`  | High     | Destructive, irreversible or high-risk actions: Delete, Remove, Permanently cancel.                                                            | Actions that are only negative in tone. Form errors: use validation states or inline messages.    |
+| `outline` | Medium   | Secondary actions that matter but shouldn't compete with the primary action.                                                                   | The primary action.                                                                               |
+| `subtle`  | Low      | Secondary or supporting actions in dense interfaces or sidebars, where a little containment helps.                                             | High-stakes or primary actions.                                                                   |
+| `ghost`   | Lowest   | Tertiary actions, such as Learn more or Dismiss, in toolbars, inline, or next to more prominent buttons.                                       | The only action in a context, where users might not recognize it as interactive.                  |
+
+### Guidelines
+
+- Use one `brand` button per view or logical group. Several compete for attention and dilute each other.
+- When showing several actions together, give the primary action the most weight and the others lower-weight variants (`outline`, `subtle`, `ghost`), so the hierarchy stays clear.
+- Write labels that say what will happen. Keep them short and action-oriented, three or four words at most.
+- Use `ghost` sparingly, next to more prominent elements that anchor attention. Too many make an interface feel unresponsive and hard to scan.
+- Use `danger` sparingly. Consider an [Alert Dialog](/components/alert-dialog) so users can cancel before a destructive action is committed. Several `danger` buttons in one place means the destructive actions aren't gated well; revisit the design.
+
+See also: [Theming](/design/theming).
+
+</DesignGuidelines>
 
 ## API Reference
 

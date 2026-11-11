@@ -9,31 +9,6 @@ description: A row of single-character slots for entering a fixed-length code, s
 
 <InstallSnippet slug="input-otp" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- A fixed-length code the user receives somewhere else, such as a sign-in code sent by text message or email, or a code from an authenticator app.
-- A short PIN or recovery code of a known length.
-
-### When not to use
-
-- Text of variable length, or anything the user makes up. Use an [Input](/components/input).
-- A password the user chose. Use an [Input](/components/input).
-
-### Guidelines
-
-- Always pair the code with a visible label, and say where the code was sent.
-- Offer a way to get a new code next to the field, such as a Resend button.
-- **Groups:** match the grouping to how the code appears in the message or app the user is copying from. Don't split a code the source shows as one block.
-- **Separator:** use one only between groups.
-
-See also: [Forms](/design/forms).
-
-</DesignGuidelines>
-
 ## Examples
 
 ### Sizes
@@ -73,6 +48,31 @@ Use `value` and `onValueChange` to control the value. `onValueComplete` fires on
 Set `invalid` on the surrounding `Field` to mark every slot invalid, and pair it with a `FieldError`. Outside a `Field`, set `aria-invalid` on `InputOTP`.
 
 <ComponentPreview name="input-otp-invalid" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A fixed-length code the user receives somewhere else, such as a sign-in code sent by text message or email, or a code from an authenticator app.
+- A short PIN or recovery code of a known length.
+
+### When not to use
+
+- Text of variable length, or anything the user makes up. Use an [Input](/components/input).
+- A password the user chose. Use an [Input](/components/input).
+
+### Guidelines
+
+- Always pair the code with a visible label, and say where the code was sent.
+- Offer a way to get a new code next to the field, such as a Resend button.
+- **Groups:** match the grouping to how the code appears in the message or app the user is copying from. Don't split a code the source shows as one block.
+- **Separator:** use one only between groups.
+
+See also: [Forms](/design/forms).
+
+</DesignGuidelines>
 
 ## API Reference
 

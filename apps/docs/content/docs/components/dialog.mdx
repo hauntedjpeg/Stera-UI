@@ -9,30 +9,6 @@ description: A modal overlay for focused content or a contained task, without na
 
 <InstallSnippet slug="dialog" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- Focused, self-contained tasks: creating a record, editing details, reviewing supplementary information.
-- Tasks short enough to finish without much scrolling.
-
-### When not to use
-
-- Confirmations. Use an [Alert Dialog](/components/alert-dialog).
-- Long or complex content. Use a [Drawer](/components/drawer) or a dedicated page.
-
-### Guidelines
-
-- Give every dialog a clear title and a visible close control, so users never feel trapped.
-- Keep footer actions to two at most. If no action is needed, a single close button is enough.
-- Your call: where the primary action sits in the footer (left, right, full width). Pick one and use it in every dialog.
-
-See also: [Overlays](/design/overlays).
-
-</DesignGuidelines>
-
 ## Composition
 
 Use the following composition to build a `Dialog`:
@@ -60,6 +36,30 @@ Use `DialogClose` with a custom button to create cancel/confirm action pairs.
 <ComponentPreview name="dialog-scrollable" />
 
 Set `scroll="content"` on `DialogPopup` and `scroll` on `DialogContent` to let the body scroll while the header and footer remain sticky.
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Focused, self-contained tasks: creating a record, editing details, reviewing supplementary information.
+- Tasks short enough to finish without much scrolling.
+
+### When not to use
+
+- Confirmations. Use an [Alert Dialog](/components/alert-dialog).
+- Long or complex content. Use a [Drawer](/components/drawer) or a dedicated page.
+
+### Guidelines
+
+- Give every dialog a clear title and a visible close control, so users never feel trapped.
+- Keep footer actions to two at most. If no action is needed, a single close button is enough.
+- Your call: where the primary action sits in the footer (left, right, full width). Pick one and use it in every dialog.
+
+See also: [Overlays](/design/overlays).
+
+</DesignGuidelines>
 
 ## API Reference
 

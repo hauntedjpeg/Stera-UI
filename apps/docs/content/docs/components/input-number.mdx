@@ -9,33 +9,6 @@ description: A text field for entering an exact number, with buttons to step it 
 
 <InstallSnippet slug="input-number" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- An exact number, such as a quantity, a count or a measurement.
-- Small adjustments to a current value, such as a font size or a number of guests.
-
-### When not to use
-
-- A number in a range, where the position matters more than the exact value. Use a [Slider](/components/slider).
-- Digits that aren't a quantity, such as a phone number, ZIP code or card number. Use an [Input](/components/input).
-- A fixed-length code sent to the user. Use an [Input OTP](/components/input-otp).
-
-### Guidelines
-
-- Always pair it with a visible label.
-- Make the unit visible, either in the label or in the value's format.
-- Set bounds whenever the value has real limits, so the controls stop there instead of failing on submit.
-- **Scrub area:** use it only where people already expect to drag a label to change a value, such as a property panel in a design tool. Never make it the only way to change the value.
-- Your call: how much each step changes the value. Pick steps that match how people actually change it, and use them consistently.
-
-See also: [Forms](/design/forms).
-
-</DesignGuidelines>
-
 ## Composition
 
 Use the following composition to build an `InputNumber`:
@@ -95,6 +68,33 @@ Use `value` and `onValueChange` to control the value. The value is `null` when t
 Set `invalid` on the surrounding `Field` to mark it invalid, and pair it with a `FieldError`. Outside a `Field`, set `aria-invalid` on `InputNumber`.
 
 <ComponentPreview name="input-number-invalid" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- An exact number, such as a quantity, a count or a measurement.
+- Small adjustments to a current value, such as a font size or a number of guests.
+
+### When not to use
+
+- A number in a range, where the position matters more than the exact value. Use a [Slider](/components/slider).
+- Digits that aren't a quantity, such as a phone number, ZIP code or card number. Use an [Input](/components/input).
+- A fixed-length code sent to the user. Use an [Input OTP](/components/input-otp).
+
+### Guidelines
+
+- Always pair it with a visible label.
+- Make the unit visible, either in the label or in the value's format.
+- Set bounds whenever the value has real limits, so the controls stop there instead of failing on submit.
+- **Scrub area:** use it only where people already expect to drag a label to change a value, such as a property panel in a design tool. Never make it the only way to change the value.
+- Your call: how much each step changes the value. Pick steps that match how people actually change it, and use them consistently.
+
+See also: [Forms](/design/forms).
+
+</DesignGuidelines>
 
 ## API Reference
 

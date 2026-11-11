@@ -9,33 +9,6 @@ description: A persistent navigation panel for moving between a product's top-le
 
 <InstallSnippet slug="sidebar" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- The primary navigation in an application layout where users move between several top-level sections, such as a dashboard, an admin panel or a tool.
-- Products with enough navigation depth to need a persistent structure, rather than a top navigation bar or inline links.
-
-### When not to use
-
-- A secondary panel for actions tied to specific content. Use a [Drawer](/components/drawer).
-
-### Guidelines
-
-- Keep the same structure in every view: the header for identity and context, the content for navigation, the footer for account and utility controls.
-- Your call: whether the sidebar collapses to icons, hides entirely, or stays open. Pick one and use it consistently. If it collapses to icons, give every item a meaningful icon.
-- **Header:** the product's logo, or a workspace or account switcher when users move between organizations. Not navigation items. A switcher opens a [Popover](/components/popover) or [Dropdown Menu](/components/dropdown-menu) instead of navigating away.
-- **Groups:** gather related destinations under a short label, such as Workspace, Settings or Reports, once the list is long enough to be hard to scan. Keep labels to one or two words in sentence case. Don't make a group for a single item: fold it into a neighboring group, or drop the label. Keep the order of groups the same in every view.
-- **Menu items:** one per destination, with an icon and a label of one to three words. If a destination needs a longer label, revisit the information architecture. Mark the user's current location as active, one item at a time. Nest a sub-menu when a destination has child pages worth reaching directly. Menu items aren't for actions such as New project or Invite member: put those in the header, the footer, or a [Button](/components/button) in the relevant view.
-- **Footer:** the signed-in user and account actions, such as profile settings or sign out, plus global controls people rarely need, such as help. Not primary navigation. Account actions open a [Dropdown Menu](/components/dropdown-menu) or [Popover](/components/popover) instead of navigating away.
-- **Trigger:** always keep a visible way to collapse and expand the sidebar. Your call: where the trigger sits. Pick one and keep it in the same place on every screen.
-
-See also: [Menus and navigation](/design/navigation) and [Theming](/design/theming).
-
-</DesignGuidelines>
-
 ## Usage
 
 Wrap your layout with `SidebarProvider` and use `SidebarInset` for the main content area.
@@ -128,6 +101,33 @@ Use `SidebarMenuBadge` to display a count or status indicator next to a menu ite
 <ComponentPreview name="sidebar-variants" />
 
 The `variant` prop controls the sidebar's visual style. Use `"floating"` for a detached sidebar with rounded corners and a shadow.
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- The primary navigation in an application layout where users move between several top-level sections, such as a dashboard, an admin panel or a tool.
+- Products with enough navigation depth to need a persistent structure, rather than a top navigation bar or inline links.
+
+### When not to use
+
+- A secondary panel for actions tied to specific content. Use a [Drawer](/components/drawer).
+
+### Guidelines
+
+- Keep the same structure in every view: the header for identity and context, the content for navigation, the footer for account and utility controls.
+- Your call: whether the sidebar collapses to icons, hides entirely, or stays open. Pick one and use it consistently. If it collapses to icons, give every item a meaningful icon.
+- **Header:** the product's logo, or a workspace or account switcher when users move between organizations. Not navigation items. A switcher opens a [Popover](/components/popover) or [Dropdown Menu](/components/dropdown-menu) instead of navigating away.
+- **Groups:** gather related destinations under a short label, such as Workspace, Settings or Reports, once the list is long enough to be hard to scan. Keep labels to one or two words in sentence case. Don't make a group for a single item: fold it into a neighboring group, or drop the label. Keep the order of groups the same in every view.
+- **Menu items:** one per destination, with an icon and a label of one to three words. If a destination needs a longer label, revisit the information architecture. Mark the user's current location as active, one item at a time. Nest a sub-menu when a destination has child pages worth reaching directly. Menu items aren't for actions such as New project or Invite member: put those in the header, the footer, or a [Button](/components/button) in the relevant view.
+- **Footer:** the signed-in user and account actions, such as profile settings or sign out, plus global controls people rarely need, such as help. Not primary navigation. Account actions open a [Dropdown Menu](/components/dropdown-menu) or [Popover](/components/popover) instead of navigating away.
+- **Trigger:** always keep a visible way to collapse and expand the sidebar. Your call: where the trigger sits. Pick one and keep it in the same place on every screen.
+
+See also: [Menus and navigation](/design/navigation) and [Theming](/design/theming).
+
+</DesignGuidelines>
 
 ## API Reference
 

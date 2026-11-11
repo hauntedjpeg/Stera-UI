@@ -9,30 +9,6 @@ description: A control that toggles between checked and unchecked, for a yes-or-
 
 <InstallSnippet slug="checkbox" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- A yes-or-no choice, such as accepting terms, opting into a feature, or enabling a setting that's saved with a form.
-- In a group, selecting any number of items from a list, such as filters or preferences.
-
-### When not to use
-
-- Mutually exclusive options, where only one can be selected. Use a [Radio Group](/components/radio-group).
-- A setting that takes effect the moment it changes. Use a [Switch](/components/switch).
-
-### Guidelines
-
-- Always pair a checkbox with a visible label. Add a description when the label alone doesn't explain the choice.
-- Give a group of checkboxes a label that says what the set is for.
-- Use the indeterminate state only for a parent checkbox whose children are partly selected.
-
-See also: [Selection](/design/selection).
-
-</DesignGuidelines>
-
 ## Composition
 
 Use the following composition to pair a `Checkbox` with a label:
@@ -116,6 +92,30 @@ Use `FieldSet` and `FieldLegend` to semantically group related checkboxes.
 Use checkboxes inside a `Table` for row selection. Apply `data-state="selected"` to the `TableRow` to style selected rows.
 
 <ComponentPreview name="checkbox-in-table" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A yes-or-no choice, such as accepting terms, opting into a feature, or enabling a setting that's saved with a form.
+- In a group, selecting any number of items from a list, such as filters or preferences.
+
+### When not to use
+
+- Mutually exclusive options, where only one can be selected. Use a [Radio Group](/components/radio-group).
+- A setting that takes effect the moment it changes. Use a [Switch](/components/switch).
+
+### Guidelines
+
+- Always pair a checkbox with a visible label. Add a description when the label alone doesn't explain the choice.
+- Give a group of checkboxes a label that says what the set is for.
+- Use the indeterminate state only for a parent checkbox whose children are partly selected.
+
+See also: [Selection](/design/selection).
+
+</DesignGuidelines>
 
 ## API Reference
 

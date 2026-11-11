@@ -9,27 +9,6 @@ description: Shows a keyboard key or shortcut, so users can discover and learn t
 
 <InstallSnippet slug="kbd" hideHeading />
 
-## Design
-
-<DesignGuidelines>
-
-### When to use
-
-- Showing a key or shortcut next to the action it triggers, such as in a [Tooltip](/components/tooltip), a [Button](/components/button) or an [Input Group](/components/input-group), or in instructional copy.
-
-### When not to use
-
-- Shortcuts in a [Dropdown Menu](/components/dropdown-menu), [Menubar](/components/menubar) or [Command](/components/command) item. Those have their own shortcut label.
-
-### Guidelines
-
-- Use Kbd only for keys the user presses, never for decoration or [code](/components/code).
-- Show a shortcut the same way everywhere it appears. If ⌘ K opens the command palette in one place, write it as ⌘ K everywhere it's mentioned.
-- Your call: symbols for modifier keys (⌘, ⇧, ⌥, ⌃) or their names (Ctrl, Alt, Shift). Symbols suit audiences who know them; names are clearer for everyone else. Pick one and use it consistently.
-- **Key combinations:** group the keys of one shortcut together, whether they're pressed at once or in sequence, such as ⌘ K or Ctrl B.
-
-</DesignGuidelines>
-
 ## Composition
 
 Use the following composition to build `Kbd` and `KbdGroup`:
@@ -67,6 +46,27 @@ Use `data-kbd="inline-end"` to position a `Kbd` at the trailing edge of a button
 ### Inside an Input
 
 <ComponentPreview name="kbd-with-input" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Showing a key or shortcut next to the action it triggers, such as in a [Tooltip](/components/tooltip), a [Button](/components/button) or an [Input Group](/components/input-group), or in instructional copy.
+
+### When not to use
+
+- Shortcuts in a [Dropdown Menu](/components/dropdown-menu), [Menubar](/components/menubar) or [Command](/components/command) item. Those have their own shortcut label.
+
+### Guidelines
+
+- Use Kbd only for keys the user presses, never for decoration or [code](/components/code).
+- Show a shortcut the same way everywhere it appears. If ⌘ K opens the command palette in one place, write it as ⌘ K everywhere it's mentioned.
+- Your call: symbols for modifier keys (⌘, ⇧, ⌥, ⌃) or their names (Ctrl, Alt, Shift). Symbols suit audiences who know them; names are clearer for everyone else. Pick one and use it consistently.
+- **Key combinations:** group the keys of one shortcut together, whether they're pressed at once or in sequence, such as ⌘ K or Ctrl B.
+
+</DesignGuidelines>
 
 ## API Reference
 
