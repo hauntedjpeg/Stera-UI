@@ -5,3 +5,5 @@ export const SITE_NAME = "Stera UI"
 
 export const SITE_DESCRIPTION =
   "A component registry for React, built on Base UI and Tailwind CSS."
+
+export const GITHUB_REPO_URL = "https://github.com/hauntedjpeg/Stera-UI"

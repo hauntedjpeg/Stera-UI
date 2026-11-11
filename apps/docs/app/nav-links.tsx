@@ -1,5 +1,6 @@
 import type { ComponentProps, ComponentType } from "react"
 import { SiShapes } from "stera-icons"
+import { GITHUB_REPO_URL } from "../lib/site"
 
 // Top bar controls match the Stera Icons site: bare ghost buttons that only take the
 // glass fill on hover. The bg-* overrides replace the registry ghost variant's own
@@ -7,7 +8,7 @@ import { SiShapes } from "stera-icons"
 export const navGhost =
   "rounded-full hover:bg-alpha-2 hover:glass active:bg-alpha-3 aria-expanded:bg-alpha-3"
 
-function GitHubIcon(props: ComponentProps<"svg">) {
+export function GitHubIcon(props: ComponentProps<"svg">) {
   return (
     <svg
       width="24"
@@ -37,7 +38,7 @@ export const NAV_LINKS: NavLink[] = [
   { label: "Stera Icons", href: "https://stera.sh/", icon: SiShapes },
   {
     label: "GitHub",
-    href: "https://github.com/hauntedjpeg/Stera-UI",
+    href: GITHUB_REPO_URL,
     icon: GitHubIcon,
   },
 ]
