@@ -75,7 +75,7 @@ function ToastRoot({
         // Layout
         "absolute right-0 left-auto mr-0 ml-auto box-border w-full cursor-default p-4 select-none",
         // Visual chrome
-        "rounded-xl bg-surface bg-clip-padding text-ink shadow-md ring-1 ring-border",
+        "rounded-xl bg-surface bg-clip-padding text-ink shadow-md inset-ring inset-ring-border forced-stroke",
         // Transition
         "[transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s]",
         // Z-index based on stack position

@@ -9,7 +9,7 @@ const badgeVariants = cva(
     // Group
     "group/badge",
     // Base
-    "inline-flex items-center justify-center rounded-full border border-transparent",
+    "inline-flex items-center justify-center rounded-full forced-stroke",
     // Sizing
     "w-fit shrink-0 gap-1",
     // Variants
@@ -21,23 +21,27 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default: "bg-surface-muted text-ink",
-        outline: "border-border bg-surface text-ink",
+        outline: "bg-surface text-ink inset-ring inset-ring-border",
         solid: "bg-surface-inverse text-ink-oninverse",
         brand: "bg-surface-brand-subtle text-ink-brand-bold",
-        "brand-outline": "border-border-brand bg-surface text-ink-brand",
+        "brand-outline":
+          "bg-surface text-ink-brand inset-ring inset-ring-border-brand",
         "brand-solid": "bg-surface-brand text-ink-onbrand",
         accent: "bg-surface-accent-subtle text-ink-accent-bold",
-        "accent-outline": "border-border-accent bg-surface text-ink-accent",
+        "accent-outline":
+          "bg-surface text-ink-accent inset-ring inset-ring-border-accent",
         "accent-solid": "bg-surface-accent text-ink-onaccent",
         danger: "bg-surface-danger-subtle text-ink-danger-bold",
-        "danger-outline": "border-border-danger bg-surface text-ink-danger",
+        "danger-outline":
+          "bg-surface text-ink-danger inset-ring inset-ring-border-danger",
         "danger-solid": "bg-surface-danger text-ink-ondanger",
         success: "bg-surface-success-subtle text-ink-success-bold",
-        "success-outline": "border-border-success bg-surface text-ink-success",
+        "success-outline":
+          "bg-surface text-ink-success inset-ring inset-ring-border-success",
         "success-solid": "bg-surface-success text-ink-onsuccess",
         warning: "bg-surface-warning-subtle text-ink-warning-bold",
         "warning-outline":
-          "border-border-warning bg-surface text-ink-warning-subtle",
+          "bg-surface text-ink-warning-subtle inset-ring inset-ring-border-warning",
         "warning-solid": "bg-surface-warning text-ink-onwarning",
       },
       size: {

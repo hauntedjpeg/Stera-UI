@@ -142,13 +142,13 @@ function FieldLabel({
     // Disabled
     "group-data-disabled/field:opacity-50",
     // Choice card: a FieldLabel that wraps a Field
-    "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border has-[>[data-slot=field]]:transition-[background-color,border-color,box-shadow] *:data-[slot=field]:p-3",
+    "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:inset-ring has-[>[data-slot=field]]:inset-ring-border has-[>[data-slot=field]]:forced-stroke has-[>[data-slot=field]]:transition-[background-color,box-shadow] *:data-[slot=field]:p-3",
     // Choice card: checked
-    "has-[>[data-slot=field]]:has-data-checked:border-border-brand-subtle has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-subtle",
+    "has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-subtle has-[>[data-slot=field]]:has-data-checked:inset-ring-border-brand-subtle",
     // Choice card: focus
-    "has-[>[data-slot=field]]:has-focus-visible:border-border-brand has-[>[data-slot=field]]:has-focus-visible:ring-3 has-[>[data-slot=field]]:has-focus-visible:ring-ring-brand",
+    "has-[>[data-slot=field]]:has-focus-visible:ring-3 has-[>[data-slot=field]]:has-focus-visible:ring-ring-brand has-[>[data-slot=field]]:has-focus-visible:inset-ring-border-brand has-[>[data-slot=field]]:has-focus-visible:[--forced-stroke-width:2px]",
     // Choice card: disabled
-    "has-[>[data-slot=field][data-disabled]]:cursor-not-allowed has-[>[data-slot=field][data-disabled]]:border-border-subtle has-[>[data-slot=field][data-disabled]]:bg-surface-disabled",
+    "has-[>[data-slot=field][data-disabled]]:cursor-not-allowed has-[>[data-slot=field][data-disabled]]:bg-surface-disabled has-[>[data-slot=field][data-disabled]]:inset-ring-border-subtle",
     className
   )
 

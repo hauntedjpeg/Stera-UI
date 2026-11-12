@@ -28,15 +28,15 @@ const inputOTPGapVariants = cva("flex items-center", {
 const inputOTPSlotVariants = cva(
   [
     // Base
-    "rounded-xl border border-border bg-surface text-center text-ink tabular-nums caret-ink",
+    "rounded-xl bg-surface text-center text-ink tabular-nums caret-ink inset-ring inset-ring-border forced-focus forced-stroke",
     // Sizing
     "shrink-0 p-0",
     // Focus
-    "focus-visible:border-border-brand focus-visible:ring-3 focus-visible:ring-ring-brand",
+    "focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:inset-ring-border-brand",
     // Disabled
-    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:border-border-subtle disabled:bg-surface-disabled disabled:text-ink-subtlest",
+    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:text-ink-subtlest disabled:inset-ring-border-subtle",
     // Invalid
-    "aria-invalid:border-border-danger aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+    "aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:inset-ring-border-danger",
     // Other
     "transition-[color,box-shadow] outline-none",
   ],

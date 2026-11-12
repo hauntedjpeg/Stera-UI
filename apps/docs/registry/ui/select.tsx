@@ -54,11 +54,11 @@ function SelectTrigger({
       data-size={size}
       className={cn(
         // Base
-        "flex h-9 rounded-xl border border-border bg-surface py-2.5 pr-2.5 pl-3 st-label-md outline-none",
+        "flex h-9 rounded-xl bg-surface py-2.5 pr-2.5 pl-3 st-label-md inset-ring inset-ring-border forced-focus forced-stroke outline-none",
         // Sizing
         "w-fit gap-1.5",
         // Animation
-        "transition-[color,box-shadow] focus-visible:border-border-brand focus-visible:ring-3 focus-visible:ring-ring-brand disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-border-danger aria-invalid:ring-3 aria-invalid:ring-ring-danger data-placeholder:text-ink-subtlest",
+        "transition-[color,box-shadow] focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:inset-ring-border-brand disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:inset-ring-border-danger data-placeholder:text-ink-subtlest",
         // SM
         "data-[size=sm]:h-8 data-[size=sm]:py-2 data-[size=sm]:pr-2 data-[size=sm]:pl-2.5",
         // LG
@@ -108,8 +108,8 @@ function SelectContent({
           data-slot="select-content"
           data-align-trigger={alignItemWithTrigger}
           className={cn(
-            // Base
-            "relative overflow-x-hidden overflow-y-auto rounded-xl border border-border bg-surface shadow-md",
+            // Base — an outer ring, so scrolled items never cover the stroke
+            "relative overflow-x-hidden overflow-y-auto rounded-xl bg-surface shadow-md ring-1 ring-border forced-stroke",
             // Position
             "origin-(--transform-origin)",
             // Sizing

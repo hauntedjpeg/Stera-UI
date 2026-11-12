@@ -60,7 +60,7 @@ function AlertDialogContent({
           // Group
           "group/alert-dialog-content",
           // Base
-          "fixed grid rounded-2xl border border-border bg-surface p-5 shadow-lg duration-100 outline-none",
+          "fixed grid rounded-2xl bg-surface p-5 shadow-lg inset-ring inset-ring-border forced-stroke duration-100 outline-none",
           // Position
           "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
           // Sizing

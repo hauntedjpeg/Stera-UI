@@ -49,6 +49,10 @@ A user-facing change to `packages/stera-ui` needs a changeset: run `pnpm changes
 ## Conventions
 
 - Use American English spelling in code, comments and docs (`color`, `initialize`, `organize`).
+- **Component strokes are `inset-ring`, not `border`.** They match Figma's inside stroke and never change layout, so a 1px → 1.5px state change doesn't shift anything. States swap the ring color (`focus-visible:inset-ring-border-brand`); a state on a stroke-less variant also sets the width (`focus-visible:inset-ring`). The `ring-3` focus halo is a separate box-shadow layer and composes with it.
+- **Floating panels that can scroll use an outer `ring-1 ring-border`.** Inset shadows paint under children, so scrolled content would cover an inset ring.
+- **Keep `border` for structure:** dividers (`border-t`/`border-b`), tables, dashed strokes, and containers whose children run to the edge (Card, Input Number).
+- **Add `forced-stroke` to anything with a stroke and `forced-focus` to focusable controls** (defined in `registry/styles/ui/base.css`). Forced-colors mode removes box-shadows, and these put an outline in their place.
 
 ## Component architecture
 

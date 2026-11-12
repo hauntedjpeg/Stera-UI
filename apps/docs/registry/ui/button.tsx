@@ -12,25 +12,25 @@ const buttonVariants = cva(
     // Group
     "group/button",
     // Base
-    "inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent transition outline-none select-none",
+    "inline-flex shrink-0 items-center justify-center rounded-xl transition outline-none select-none",
     // Text
     "st-label-md-medium whitespace-nowrap",
     // Focus
-    "focus-visible:ring-3 focus-visible:ring-ring",
+    "forced-focus focus-visible:ring-3 focus-visible:ring-ring",
     // Disabled
     "data-disabled:pointer-events-none data-disabled:opacity-50",
     // Invalid
     "aria-invalid:ring-3 aria-invalid:ring-ring-danger",
     // Other
-    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    "forced-stroke [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   ],
   {
     variants: {
       variant: {
         outline: [
-          "border-border bg-surface text-ink",
+          "bg-surface text-ink inset-ring inset-ring-border",
           "hover:bg-surface-hover active:bg-surface-pressed aria-expanded:bg-surface-hover",
-          "focus-visible:border-border-bold aria-invalid:border-border-danger",
+          "focus-visible:inset-ring-border-bold aria-invalid:inset-ring-border-danger",
         ],
         brand: [
           "bg-surface-brand text-ink-onbrand",

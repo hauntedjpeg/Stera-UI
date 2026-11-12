@@ -9,20 +9,20 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
       data-slot="checkbox"
       className={cn(
         // Base
-        "relative flex items-center justify-center rounded-[5px] border border-border-subtle transition-shadow outline-none",
+        "relative flex items-center justify-center rounded-[5px] inset-ring inset-ring-border-subtle forced-focus forced-stroke transition-shadow outline-none",
         // Position
         "after:absolute after:-inset-x-3 after:-inset-y-2",
         // Sizing
         "size-4 shrink-0",
         //Focus
-        "focus-visible:border-border-brand focus-visible:ring-3 focus-visible:ring-ring-brand",
+        "focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:inset-ring-border-brand",
         // Disabled
         "disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:bg-surface-disabled",
         // Invalid
-        "aria-invalid:border-border-danger aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:aria-checked:border-surface-brand",
+        "aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:inset-ring-border-danger aria-invalid:aria-checked:inset-ring-surface-brand",
         // Checked / Indeterminate
-        "data-checked:border-surface-brand data-checked:bg-surface-brand data-checked:text-ink-onbrand",
-        "data-indeterminate:border-surface-brand data-indeterminate:bg-surface-brand data-indeterminate:text-ink-onbrand",
+        "data-checked:bg-surface-brand data-checked:text-ink-onbrand data-checked:inset-ring-surface-brand",
+        "data-indeterminate:bg-surface-brand data-indeterminate:text-ink-onbrand data-indeterminate:inset-ring-surface-brand",
         // Variants
         "data-disabled:text-ink-disabled",
         // Other

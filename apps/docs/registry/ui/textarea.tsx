@@ -11,15 +11,15 @@ function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
       data-slot="textarea"
       className={cn(
         // Base
-        "flex rounded-xl border border-border bg-transparent px-3 py-2.5 st-body-md",
+        "flex rounded-xl bg-transparent px-3 py-2.5 st-body-md inset-ring inset-ring-border forced-focus forced-stroke",
         // Sizing
         "min-h-16 w-full",
         // Focus
-        "focus-visible:border-border-brand focus-visible:ring-3 focus-visible:ring-ring-brand",
+        "focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:inset-ring-border-brand",
         // Disabled
-        "disabled:cursor-not-allowed disabled:border-border-subtle disabled:bg-surface-disabled disabled:text-ink-subtlest",
+        "disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:text-ink-subtlest disabled:inset-ring-border-subtle",
         // Invalid
-        "aria-invalid:border-border-danger aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+        "aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:inset-ring-border-danger",
         // Other
         "field-sizing-content transition-[color,box-shadow] outline-none placeholder:text-ink-subtlest",
         className

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 const calloutVariants = cva(
   [
     // Base
-    "flex items-start rounded-xl border border-border p-4 text-left",
+    "flex items-start rounded-xl p-4 text-left inset-ring inset-ring-border forced-stroke",
     // Sizing
     "w-full gap-x-3",
     // Icon
@@ -17,15 +17,15 @@ const calloutVariants = cva(
       variant: {
         default: "bg-surface text-ink [&>svg]:text-current",
         brand:
-          "border-border-brand bg-surface-brand-subtle [&>svg]:text-ink-brand",
+          "bg-surface-brand-subtle inset-ring-border-brand [&>svg]:text-ink-brand",
         accent:
-          "border-border-accent bg-surface-accent-subtle [&>svg]:text-ink-accent",
+          "bg-surface-accent-subtle inset-ring-border-accent [&>svg]:text-ink-accent",
         danger:
-          "border-border-danger bg-surface-danger-subtle [&>svg]:text-ink-danger",
+          "bg-surface-danger-subtle inset-ring-border-danger [&>svg]:text-ink-danger",
         success:
-          "border-border-success bg-surface-success-subtle [&>svg]:text-ink-success",
+          "bg-surface-success-subtle inset-ring-border-success [&>svg]:text-ink-success",
         warning:
-          "border-border-warning bg-surface-warning-subtle [&>svg]:text-ink-warning-subtle",
+          "bg-surface-warning-subtle inset-ring-border-warning [&>svg]:text-ink-warning-subtle",
       },
     },
     defaultVariants: {

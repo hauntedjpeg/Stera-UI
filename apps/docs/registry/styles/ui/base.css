@@ -8,3 +8,46 @@
     @apply bg-surface-app text-ink antialiased;
   }
 }
+
+/*
+ * Component strokes are inset rings and focus halos are rings, both drawn with
+ * box-shadow, which forced-colors mode removes. These put an outline in their
+ * place there. Outlines never touch layout, so nothing shifts.
+ *
+ * They're !important so they beat the `outline-none` every control carries.
+ * Thicken a stroke for a state with `[--forced-stroke-width:2px]`; turn both
+ * off on a control whose wrapper draws them with `forced-none`. The widths
+ * don't inherit, so a wrapper's state never leaks into the controls inside it.
+ */
+@property --forced-stroke-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 1px;
+}
+
+@property --forced-focus-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 2px;
+}
+
+@utility forced-stroke {
+  @media (forced-colors: active) {
+    outline: var(--forced-stroke-width) solid CanvasText !important;
+    outline-offset: calc(var(--forced-stroke-width) * -1) !important;
+  }
+}
+
+@utility forced-focus {
+  @media (forced-colors: active) {
+    &:focus-visible {
+      outline: var(--forced-focus-width) solid Highlight !important;
+      outline-offset: 2px !important;
+    }
+  }
+}
+
+@utility forced-none {
+  --forced-stroke-width: 0px;
+  --forced-focus-width: 0px;
+}

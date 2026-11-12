@@ -48,7 +48,7 @@ function ItemSeparator({
 const itemVariants = cva(
   [
     // Base
-    "rounded-xl border transition-colors duration-100 outline-none focus-visible:border-border-brand focus-visible:ring-3 focus-visible:ring-ring-brand",
+    "rounded-xl forced-focus forced-stroke transition-[color,background-color,box-shadow] duration-100 outline-none focus-visible:ring-3 focus-visible:inset-ring focus-visible:ring-ring-brand focus-visible:inset-ring-border-brand",
     // Sizing
     "w-full",
     // Other
@@ -57,9 +57,9 @@ const itemVariants = cva(
   {
     variants: {
       variant: {
-        outline: "border-border",
-        subtle: "border-transparent bg-surface-subtle",
-        ghost: "border-transparent",
+        outline: "inset-ring inset-ring-border",
+        subtle: "bg-surface-subtle",
+        ghost: "",
       },
       size: {
         sm: "in-data-[slot=dropdown-menu-content]:rounded-lg in-data-[slot=dropdown-menu-content]:p-0",

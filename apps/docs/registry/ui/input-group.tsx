@@ -15,15 +15,15 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
         // Group
         "group/input-group",
         // Base
-        "relative flex items-center rounded-xl border border-border bg-surface shadow-xs transition-[color,box-shadow,border-color] outline-none",
+        "relative flex items-center rounded-xl bg-surface shadow-xs inset-ring inset-ring-border forced-stroke transition-[color,box-shadow] outline-none",
         // Sizing (driven by InputGroupInput's data-size; block layouts size to content)
         "h-9 w-full min-w-0 has-[[data-slot=input-group-control][data-size=lg]]:not-has-[>[data-align^=block]]:h-11 has-[[data-slot=input-group-control][data-size=sm]]:not-has-[>[data-align^=block]]:h-8",
         // Focus
-        "has-[[data-slot=input-group-control]:focus-visible]:border-border-brand has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring-brand",
+        "has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring-brand has-[[data-slot=input-group-control]:focus-visible]:inset-ring-border-brand has-[[data-slot=input-group-control]:focus-visible]:[--forced-stroke-width:2px]",
         // Disabled
-        "has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed has-[[data-slot=input-group-control]:disabled]:border-border-subtle has-[[data-slot=input-group-control]:disabled]:bg-surface-disabled has-[[data-slot=input-group-control]:disabled]:text-ink-subtlest",
+        "has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed has-[[data-slot=input-group-control]:disabled]:bg-surface-disabled has-[[data-slot=input-group-control]:disabled]:text-ink-subtlest has-[[data-slot=input-group-control]:disabled]:inset-ring-border-subtle",
         // Invalid
-        "has-[[data-slot][aria-invalid=true]]:border-border-danger has-[[data-slot][aria-invalid=true]]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-ring-danger",
+        "has-[[data-slot][aria-invalid=true]]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-ring-danger has-[[data-slot][aria-invalid=true]]:inset-ring-border-danger",
         // Variants
         "has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pr-2 has-[>[data-align=inline-start]]:[&>input]:pl-2",
         className
@@ -139,8 +139,8 @@ function InputGroupInput({
       data-size={size}
       size={size}
       className={cn(
-        // Base
-        "rounded-none border-0 bg-transparent shadow-none ring-0 focus-visible:ring-0 disabled:bg-transparent aria-invalid:ring-0",
+        // Base — the group draws the stroke, focus and forced-colors outline
+        "rounded-none bg-transparent shadow-none ring-0 inset-ring-0 forced-none focus-visible:ring-0 disabled:bg-transparent aria-invalid:ring-0",
         // Sizing
         "flex-1",
         className
@@ -158,8 +158,8 @@ function InputGroupTextarea({
     <Textarea
       data-slot="input-group-control"
       className={cn(
-        // Base
-        "resize-none rounded-none border-0 bg-transparent py-2 shadow-none ring-0 focus-visible:ring-0 aria-invalid:ring-0",
+        // Base — the group draws the stroke, focus and forced-colors outline
+        "resize-none rounded-none bg-transparent py-2 shadow-none ring-0 inset-ring-0 forced-none focus-visible:ring-0 aria-invalid:ring-0",
         // Sizing
         "flex-1",
         className

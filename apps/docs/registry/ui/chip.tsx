@@ -8,25 +8,25 @@ const chipVariants = cva(
     // Group
     "group/chip",
     // Base
-    "inline-flex shrink-0 items-center justify-center rounded-full border border-transparent transition-all outline-none select-none",
+    "inline-flex shrink-0 items-center justify-center rounded-full transition-all outline-none select-none",
     // Text
     "st-label-md-medium whitespace-nowrap",
-    // Focus
-    "focus-visible:border-border-bold focus-visible:ring-3 focus-visible:ring-ring",
+    // Focus — an active chip keeps its 1.5px stroke
+    "forced-focus focus-visible:ring-3 focus-visible:ring-ring focus-visible:inset-ring-border-bold focus-visible:not-data-active:inset-ring",
     // Disabled
     "disabled:pointer-events-none disabled:opacity-50",
     // Icons
     "gap-1 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
     // Other
-    "overflow-hidden",
+    "overflow-hidden forced-stroke",
   ],
   {
     variants: {
       variant: {
         subtle:
-          "bg-surface-muted text-ink hover:bg-surface-muted-hover data-[active]:border-[1.5px] data-[active]:border-border-bold data-[active]:bg-surface-muted",
+          "bg-surface-muted text-ink hover:bg-surface-muted-hover data-[active]:bg-surface-muted data-[active]:inset-ring-[1.5px] data-[active]:inset-ring-border-bold",
         outline:
-          "border-border bg-surface text-ink hover:bg-surface-hover data-[active]:border-[1.5px] data-[active]:border-border-bold data-[active]:bg-surface-subtle",
+          "bg-surface text-ink inset-ring inset-ring-border hover:bg-surface-hover data-[active]:bg-surface-subtle data-[active]:inset-ring-[1.5px] data-[active]:inset-ring-border-bold",
       },
       size: {
         xs: "h-6 px-2 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1",
