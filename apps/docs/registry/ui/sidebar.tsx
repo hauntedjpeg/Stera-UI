@@ -472,7 +472,7 @@ function SidebarContent({ className, ...props }: React.ComponentProps<"div">) {
       data-sidebar="content"
       className={cn(
         // Base
-        "no-scrollbar flex min-h-0 flex-1 flex-col overflow-auto",
+        "flex min-h-0 flex-1 scrollbar-hide flex-col overflow-auto",
         // Sizing
         "gap-2",
         // Variants
