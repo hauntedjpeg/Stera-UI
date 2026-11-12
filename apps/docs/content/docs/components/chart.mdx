@@ -1,0 +1,345 @@
+---
+title: Chart
+description: Bar, line, area and pie charts built on Recharts, themed with Stera UI tokens.
+---
+
+<ComponentPreview name="chart-demo" />
+
+## Installation
+
+<InstallSnippet slug="chart" hideHeading />
+
+Chart needs Recharts 3.
+
+## Composition
+
+Use the following composition to build a chart:
+
+```text
+ChartContainer
+└── <Recharts chart> (BarChart, LineChart, AreaChart, PieChart, …)
+    ├── <Recharts parts> (Bar, Line, XAxis, CartesianGrid, …)
+    ├── ChartTooltip
+    │   └── ChartTooltipContent
+    └── ChartLegend
+        └── ChartLegendContent
+```
+
+Chart doesn't wrap Recharts. You build charts with Recharts components as they are and use `ChartContainer`, `ChartTooltipContent` and `ChartLegendContent` where you want Stera UI's sizing, theming, tooltip and legend. When Recharts ships a new version, follow its upgrade guide. There's no Stera UI layer to update.
+
+```tsx
+import { Bar, BarChart } from "recharts"
+
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
+
+export function MyChart() {
+  return (
+    <ChartContainer config={chartConfig} className="min-h-50 w-full">
+      <BarChart data={data}>
+        <Bar dataKey="value" fill="var(--color-value)" radius={4} />
+        <ChartTooltip content={<ChartTooltipContent />} />
+      </BarChart>
+    </ChartContainer>
+  )
+}
+```
+
+## Your first chart
+
+This section builds a bar chart one piece at a time: grid, axis, tooltip, legend.
+
+### Define the data
+
+Your data can have any shape. Use the `dataKey` prop on Recharts components to pick the field each one reads. This chart plots desktop and mobile visitors by month:
+
+```tsx
+const chartData = [
+  { month: "January", desktop: 172, mobile: 94 },
+  { month: "February", desktop: 281, mobile: 168 },
+  { month: "March", desktop: 246, mobile: 131 },
+  { month: "April", desktop: 98, mobile: 176 },
+  { month: "May", desktop: 224, mobile: 142 },
+  { month: "June", desktop: 239, mobile: 157 },
+]
+```
+
+### Define the config
+
+The chart config names and colors each series. Its keys match the data keys:
+
+```tsx
+import { type ChartConfig } from "@/components/ui/chart"
+
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "var(--chart-1)",
+  },
+  mobile: {
+    label: "Mobile",
+    color: "var(--chart-3)",
+  },
+} satisfies ChartConfig
+```
+
+### Build the chart
+
+Put a Recharts chart inside `ChartContainer` and pass it the config. Each series gets a `--color-<key>` variable, so the bars use `var(--color-desktop)` and `var(--color-mobile)`.
+
+`ChartContainer` sizes the chart from its own box, so it needs a height: a `min-h-*`, `h-*` or `aspect-*` class. It defaults to `aspect-video`.
+
+<ComponentPreview name="chart-bar-basic" />
+
+### Add a grid
+
+Add `CartesianGrid`. `vertical={false}` keeps only the horizontal lines.
+
+<ComponentPreview name="chart-bar-grid" />
+
+### Add an axis
+
+Add `XAxis` on the `month` key. `tickFormatter` shortens each month to three letters.
+
+<ComponentPreview name="chart-bar-axis" />
+
+### Add a tooltip
+
+Add `ChartTooltip` with `ChartTooltipContent` as its content. The tooltip takes each series' label and color from the config.
+
+<ComponentPreview name="chart-bar-tooltip" />
+
+### Add a legend
+
+Add `ChartLegend` with `ChartLegendContent` as its content.
+
+<ComponentPreview name="chart-bar-legend" />
+
+## Chart config
+
+The config holds what the data doesn't: each series' label, icon and color. It's kept apart from the data, so several charts can share the same config, and the data can come straight from an API without reshaping.
+
+```tsx
+import { SiDeviceDesktop } from "stera-icons"
+
+import { type ChartConfig } from "@/components/ui/chart"
+
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    icon: SiDeviceDesktop,
+    // A single color for both themes…
+    color: "var(--chart-1)",
+    // …or one per theme. Use either `color` or `theme`, not both.
+    // theme: { light: "#2b59c3", dark: "#7b9fe8" },
+  },
+} satisfies ChartConfig
+```
+
+- `label` names the series in the tooltip and the legend. Without one, they fall back to the series name.
+- `icon` replaces the color swatch in the tooltip and the legend.
+- `color` or `theme` sets the series color. `ChartContainer` turns it into a `--color-<key>` variable scoped to that chart.
+
+Config keys become CSS variable names, so they can only contain letters, numbers, `_` and `-`. Keys with other characters get no color variable.
+
+## Theming
+
+Stera UI ships four series tokens, `--chart-1` to `--chart-4`, with light and dark values. They're the recommended colors, since they follow your theme. Any CSS color works too:
+
+```tsx
+const chartConfig = {
+  desktop: { label: "Desktop", color: "var(--chart-1)" },
+  mobile: { label: "Mobile", color: "#2b59c3" },
+  tablet: { label: "Tablet", color: "oklch(0.62 0.17 255)" },
+  watch: {
+    label: "Watch",
+    theme: { light: "var(--brand-300)", dark: "var(--brand-dark-300)" },
+  },
+} satisfies ChartConfig
+```
+
+Refer to a series color as `var(--color-<key>)` wherever you need it.
+
+In a component prop:
+
+```tsx
+<Bar dataKey="desktop" fill="var(--color-desktop)" />
+```
+
+In a data row, which is how pie slices get their colors:
+
+```tsx
+const chartData = [
+  { browser: "chrome", visitors: 412, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 268, fill: "var(--color-safari)" },
+]
+```
+
+In a Tailwind class:
+
+```tsx
+<LabelList className="fill-(--color-desktop)" />
+```
+
+`ChartContainer` also maps Recharts' default grid, cursor and axis colors to Stera UI's `border`, `surface` and `ink` tokens, so plain Recharts parts match your theme without extra props.
+
+## Examples
+
+### Line
+
+<ComponentPreview name="chart-line" />
+
+### Area
+
+A stacked area chart with gradient fills.
+
+<ComponentPreview name="chart-area" />
+
+### Pie
+
+Each slice reads its color from its data row. `nameKey` tells the legend which field names a slice.
+
+<ComponentPreview name="chart-pie" />
+
+### Tooltip indicators
+
+`ChartTooltipContent` marks each series with a `dot`, `line` or `dashed` indicator. `hideLabel` drops the heading row.
+
+<ComponentPreview name="chart-tooltip-indicators" />
+
+## Tooltip
+
+`ChartTooltipContent` shows a heading and one row per series, each with an indicator, a name and a value. Values of `0` show like any other value.
+
+It reads names and colors from the config. To look them up by a field in the data instead, use `labelKey` for the heading and `nameKey` for the rows:
+
+```tsx
+const chartData = [
+  { browser: "chrome", visitors: 412, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 268, fill: "var(--color-safari)" },
+]
+
+const chartConfig = {
+  visitors: { label: "Total visitors" },
+  chrome: { label: "Chrome", color: "var(--chart-1)" },
+  safari: { label: "Safari", color: "var(--chart-2)" },
+} satisfies ChartConfig
+
+<ChartTooltip
+  content={<ChartTooltipContent labelKey="visitors" nameKey="browser" />}
+/>
+```
+
+This shows "Total visitors" as the heading, and "Chrome" and "Safari" as the row names.
+
+## Legend
+
+`ChartLegendContent` shows one item per series, with the swatch or icon and the label from the config. Pass `nameKey` to name items by a field in the data, as the pie chart does:
+
+```tsx
+<ChartLegend content={<ChartLegendContent nameKey="browser" />} />
+```
+
+Recharts 3 sorts legend items by name. Pass `itemSorter={null}` to `ChartLegend` to keep them in the order of your data.
+
+## Accessibility
+
+Recharts 3 turns on `accessibilityLayer` by default. A chart can take keyboard focus, the arrow keys move the tooltip between data points, and screen readers get the chart's structure. The examples on this page set it explicitly, to make that visible.
+
+`ChartContainer` shows a focus ring when the chart has keyboard focus. Pass `accessibilityLayer={false}` to the chart only if the same data is available elsewhere on the page, such as in a [Table](/components/table).
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Showing how values change over time.
+- Comparing a handful of categories with each other.
+- Showing how parts make up a whole, when there are only a few parts.
+
+### When not to use
+
+- When users need exact values to read, compare or copy. Use a [Table](/components/table).
+- Showing a single number. Show it as text, inside a [Card](/components/card) if it needs a container.
+- Showing progress toward a goal. Use a [Progress](/components/progress).
+
+### Guidelines
+
+- Keep a chart to four series or fewer. Past that, split it into several charts or use a [Table](/components/table).
+- Give every series a label, so the tooltip and the legend never fall back to raw data keys.
+- Give a chart a title that says what it measures, and say the time range or unit when the axes don't.
+- Show a legend whenever a chart has more than one series and nothing else on the page names them.
+- Your call: how values are formatted (abbreviations, decimals, units) and how many axis ticks a chart shows. Pick one and use it consistently.
+
+See also: [Theming](/design/theming).
+
+</DesignGuidelines>
+
+## API Reference
+
+Chart is a thin layer over [Recharts](https://recharts.github.io/en-US/api). Everything inside `ChartContainer` is plain Recharts, so its API reference applies.
+
+### ChartContainer
+
+Sizes the chart to its own box, sets up the config, and maps Recharts' default colors to Stera UI tokens. Accepts all `div` props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `config` | `ChartConfig` | — |
+| `initialDimension` | `{ width: number; height: number }` | `{ width: 320, height: 200 }` |
+| `id` | `string` | Generated |
+
+`initialDimension` is the size Recharts draws the first frame at, before it has measured the container.
+
+### ChartTooltip
+
+Recharts' [`Tooltip`](https://recharts.github.io/en-US/api/Tooltip), re-exported. Pass `ChartTooltipContent` as its `content`.
+
+### ChartTooltipContent
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `indicator` | `"dot" \| "line" \| "dashed"` | `"dot"` |
+| `hideLabel` | `boolean` | `false` |
+| `hideIndicator` | `boolean` | `false` |
+| `labelKey` | `string` | — |
+| `nameKey` | `string` | — |
+| `labelFormatter` | `(label, payload) => ReactNode` | — |
+| `formatter` | `(value, name, item, index, payload) => ReactNode` | — |
+| `color` | `string` | — |
+| `labelClassName` | `string` | — |
+
+`color` overrides every indicator's color. `formatter` replaces a row's content entirely.
+
+### ChartLegend
+
+Recharts' [`Legend`](https://recharts.github.io/en-US/api/Legend), re-exported. Pass `ChartLegendContent` as its `content`.
+
+### ChartLegendContent
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `nameKey` | `string` | — |
+| `hideIcon` | `boolean` | `false` |
+
+### ChartStyle
+
+Writes the config's `--color-<key>` variables, scoped to one chart's `data-chart` id. `ChartContainer` renders it for you, so you rarely need it yourself.
+
+### ChartConfig
+
+```ts
+type ChartConfig = {
+  [key: string]: {
+    label?: React.ReactNode
+    icon?: React.ComponentType
+  } & (
+    | { color?: string; theme?: never }
+    | { color?: never; theme: Record<"light" | "dark", string> }
+  )
+}
+```

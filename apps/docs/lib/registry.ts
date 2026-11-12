@@ -255,6 +255,46 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/card-sizes")),
     slug: "card",
   },
+  "chart-demo": {
+    component: dynamic(() => import("@/examples/chart-demo")),
+    slug: "chart",
+  },
+  "chart-bar-basic": {
+    component: dynamic(() => import("@/examples/chart-bar-basic")),
+    slug: "chart",
+  },
+  "chart-bar-grid": {
+    component: dynamic(() => import("@/examples/chart-bar-grid")),
+    slug: "chart",
+  },
+  "chart-bar-axis": {
+    component: dynamic(() => import("@/examples/chart-bar-axis")),
+    slug: "chart",
+  },
+  "chart-bar-tooltip": {
+    component: dynamic(() => import("@/examples/chart-bar-tooltip")),
+    slug: "chart",
+  },
+  "chart-bar-legend": {
+    component: dynamic(() => import("@/examples/chart-bar-legend")),
+    slug: "chart",
+  },
+  "chart-line": {
+    component: dynamic(() => import("@/examples/chart-line")),
+    slug: "chart",
+  },
+  "chart-area": {
+    component: dynamic(() => import("@/examples/chart-area")),
+    slug: "chart",
+  },
+  "chart-pie": {
+    component: dynamic(() => import("@/examples/chart-pie")),
+    slug: "chart",
+  },
+  "chart-tooltip-indicators": {
+    component: dynamic(() => import("@/examples/chart-tooltip-indicators")),
+    slug: "chart",
+  },
   "callout-demo": {
     component: dynamic(() => import("@/examples/callout-demo")),
     slug: "callout",

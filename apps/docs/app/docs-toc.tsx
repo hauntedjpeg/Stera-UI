@@ -49,11 +49,33 @@ export function DocsToc({ toc }: { toc: TableOfContents }) {
     }
   }, [items])
 
+  // Keep the active link visible when the outline is taller than the screen.
+  // Scrolls only the outline's own viewport, never the page.
+  const navRef = React.useRef<HTMLElement>(null)
+  React.useEffect(() => {
+    const viewport = navRef.current?.querySelector<HTMLElement>(
+      "[data-slot=scroll-area-viewport]"
+    )
+    const link = viewport?.querySelector<HTMLElement>("[aria-current]")
+    if (!viewport || !link) return
+
+    const margin = 32
+    const top = link.offsetTop - viewport.offsetTop
+    const bottom = top + link.offsetHeight
+    if (top - margin < viewport.scrollTop) {
+      viewport.scrollTo({ top: top - margin })
+    } else if (bottom + margin > viewport.scrollTop + viewport.clientHeight) {
+      viewport.scrollTo({ top: bottom + margin - viewport.clientHeight })
+    }
+  }, [activeId])
+
   if (items.length === 0) return null
 
   return (
-    <nav aria-label="Content outline" className="text-ink-subtler">
-      <ScrollArea className="max-h-[calc(100vh-var(--header-height)-4rem)]">
+    <nav ref={navRef} aria-label="Content outline" className="text-ink-subtler">
+      {/* The viewport inherits the root's max height. Without it, the
+          viewport's size-full has no definite height and never scrolls. */}
+      <ScrollArea className="max-h-[calc(100dvh-var(--header-height)-4rem)] *:data-[slot=scroll-area-viewport]:max-h-[inherit]">
         <ul className="space-y-1.5">
           {items.map((item) => {
             const id = item.url.replace(/^#/, "")
@@ -62,6 +84,7 @@ export function DocsToc({ toc }: { toc: TableOfContents }) {
               <li key={item.url}>
                 <a
                   href={item.url}
+                  aria-current={isActive ? "location" : undefined}
                   className={cn(
                     "block st-label-md transition-colors hover:text-ink",
                     item.depth === 3 && "pl-4",
