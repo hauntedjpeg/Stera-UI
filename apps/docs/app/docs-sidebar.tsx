@@ -62,7 +62,7 @@ export function DocsSidebar({ tree }: { tree: PageTreeRoot }) {
     // Transparent and full height, so the list scrolls under the header and its
     // gradient fades the top edge, like the Stera Icons category sidebar
     <Sidebar className="bg-transparent group-data-[side=left]:border-r-0">
-      <SidebarContent className="scroll-fade-b pt-4 pb-12 scrollbar-hide md:scroll-pt-(--header-height) md:pt-(--header-height)">
+      <SidebarContent className="scroll-fade-b scrollbar-hide pt-4 pb-12 md:scroll-pt-(--header-height) md:pt-(--header-height)">
         <TreeNodes nodes={tree.children} pathname={pathname} />
       </SidebarContent>
     </Sidebar>

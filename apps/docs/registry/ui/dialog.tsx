@@ -52,7 +52,7 @@ const dialogPopupVariants = cva([], {
       top: "top-[20vh] left-1/2 -translate-x-1/2",
     },
     scroll: {
-      true: "max-h-[80vh] overflow-y-auto scrollbar-hide",
+      true: "max-h-[80vh] scrollbar-hide overflow-y-auto",
       content: "flex max-h-[80vh] flex-col overflow-hidden",
       false: "",
     },
@@ -117,7 +117,7 @@ function DialogPopup({
 const dialogContentVariants = cva([], {
   variants: {
     scroll: {
-      true: "min-h-0 flex-1 overflow-y-auto scrollbar-hide",
+      true: "min-h-0 flex-1 scrollbar-hide overflow-y-auto",
       false: "",
     },
   },
