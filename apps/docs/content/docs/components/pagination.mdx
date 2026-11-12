@@ -38,6 +38,30 @@ Pagination
 
 Combine with `NativeSelect` to let users control how many rows are shown per page.
 
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A list or table of results too long to show at once, such as search results or records in a [Table](/components/table).
+
+### When not to use
+
+- Results that fit comfortably on one page. Show them all in a scrollable [Table](/components/table).
+- Switching between sections of one page. Use [Tabs](/components/tabs).
+
+### Guidelines
+
+- Pair it with a count, such as "Showing 1–20 of 184 results," so users know how many results there are and where they are in them.
+- When there are too many pages to show, collapse the middle ones behind an ellipsis. Keep the first, the last and the current page.
+- Use Previous and Next alone when the page number doesn't matter, such as in a compact table footer.
+- **Rows per page:** offer a small set of options, such as 10, 20 and 50.
+
+See also: [Menus and navigation](/guidelines/choosing-components#menus-and-navigation) and [Theming](/guidelines/theming).
+
+</DesignGuidelines>
+
 ## API Reference
 
 ### PaginationLink

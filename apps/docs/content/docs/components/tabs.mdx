@@ -35,6 +35,31 @@ description: A set of layered content panels that are displayed one at a time vi
 
 <ComponentPreview name="tabs-with-icons" />
 
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Switching between sections of related content in one page, where users need only one section at a time, such as Profile, Notifications and Security on a settings page.
+
+### When not to use
+
+- Changing how the same content is shown, such as a grid or a table layout. Use a [Toggle Group](/components/toggle-group).
+- The product's primary navigation between top-level sections. Use a [Sidebar](/components/sidebar).
+- Moving through a long set of results a page at a time. Use a [Pagination](/components/pagination).
+
+### Guidelines
+
+- Label each tab with one or two words that name its content.
+- Give every tab in a set the same kind of label: all text, or all an icon with text.
+- Disable a tab only when its content is unavailable for now. If the user can never open it, leave it out.
+- Your call: the `default` or `line` variant, and whether tabs run across or down the page. Pick one for each kind of view and use it consistently.
+
+See also: [Menus and navigation](/guidelines/choosing-components#menus-and-navigation) and [Theming](/guidelines/theming).
+
+</DesignGuidelines>
+
 ## API Reference
 
 Built on Base UI's [Tabs](https://base-ui.com/react/components/tabs#api-reference) primitive — see the full API reference there.

@@ -31,21 +31,23 @@ Watch `warning-outline`: it uses the lighter `ink-warning-subtle`.
 
 Before you change a token, check it still reads as different from the tokens next to it, in every component listed.
 
-| Token                                                     | Keep distinct from                             | Where it shows                                                          |
-| --------------------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------- |
-| `surface-brand`                                           | `surface-muted`                                | Progress, Switch and Slider: done or on, against the track              |
-| `surface-brand`                                           | `surface-brand-subtle`, `surface-muted`        | Calendar: the selected date, against today and a range                  |
-| `surface-subtle`                                          | `surface-hover`, `ring`                        | Toggle, Toggle Group, Table, Sidebar: selected, against hover and focus |
-| `surface-brand-subtle`                                    | `surface-hover`                                | Sidebar: the active sub-item, against hover                             |
-| `surface-hover`                                           | `surface`                                      | `ghost` Button and Command: hover and highlight, against rest           |
-| `surface-subtle-hover`                                    | `surface-subtle`                               | `subtle` Button: hover, against rest                                    |
-| `border-bold`                                             | `surface-muted-hover`, `surface-hover`, `ring` | Chip: active, against hover and focus                                   |
-| `surface-accent`                                          | `surface-brand`, `surface-danger`              | Button: a strong action never looks like a destructive one              |
-| `surface-danger`, `-success`, `-warning` (and `-subtle`)  | each other, `brand`, `accent`                  | Badge and Icon Tile: tone reads as meaning                              |
-| `ink-success`, `ink-warning`, `ink-danger`, `ink-subtler` | each other, `ink`                              | Toast: the type icon reads as meaning                                   |
-| `chart-1` to `chart-4`                                    | each other, `surface`                          | Chart: every series reads on its own                                    |
+| Token                                                     | Keep distinct from                             | Where it shows                                                               |
+| --------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------- |
+| `surface-brand`                                           | `surface-muted`                                | Progress, Switch and Slider: done or on, against the track                   |
+| `surface-brand`                                           | `surface-brand-subtle`, `surface-muted`        | Calendar: the selected date, against today and a range                       |
+| `surface-subtle`                                          | `surface-hover`, `ring`                        | Toggle, Toggle Group, Table, Sidebar: selected, against hover and focus      |
+| `surface-brand-subtle`                                    | `surface-hover`                                | Sidebar: the active sub-item, against hover                                  |
+| `surface-hover`                                           | `surface`                                      | `ghost` Button, Command and Menubar: hover, highlight and open, against rest |
+| `surface`                                                 | `surface-muted`                                | Tabs `default`: the active tab, against the rest of the list                 |
+| `border`                                                  | `surface-hover`                                | Pagination: the current page, against hover                                  |
+| `surface-subtle-hover`                                    | `surface-subtle`                               | `subtle` Button: hover, against rest                                         |
+| `border-bold`                                             | `surface-muted-hover`, `surface-hover`, `ring` | Chip: active, against hover and focus                                        |
+| `surface-accent`                                          | `surface-brand`, `surface-danger`              | Button: a strong action never looks like a destructive one                   |
+| `surface-danger`, `-success`, `-warning` (and `-subtle`)  | each other, `brand`, `accent`                  | Badge and Icon Tile: tone reads as meaning                                   |
+| `ink-success`, `ink-warning`, `ink-danger`, `ink-subtler` | each other, `ink`                              | Toast: the type icon reads as meaning                                        |
+| `chart-1` to `chart-4`                                    | each other, `surface`                          | Chart: every series reads on its own                                         |
 
-A `subtle` Chip keeps its resting fill when active, so the `border-bold` stroke alone shows it's selected. The chart tokens are steps of one ramp by default, so the gaps between those steps carry the whole difference.
+A `subtle` Chip keeps its resting fill when active, so the `border-bold` stroke alone shows it's selected. Hovering a tab changes only its label, so the active tab's `surface` fill alone sets it apart. That leaves `surface-muted` with two jobs: quiet enough for a Skeleton, but still visible against `surface`. The chart tokens are steps of one ramp by default, so the gaps between those steps carry the whole difference.
 
 ## Keep these quiet
 

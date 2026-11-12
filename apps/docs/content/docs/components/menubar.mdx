@@ -51,6 +51,33 @@ Pass `disabled` to a `MenubarMenu` to disable a single menu, or to the `Menubar`
 
 <ComponentPreview name="menubar-disabled-menu" />
 
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- An app with enough commands to sort into categories that stay in view, such as File, Edit and View in an editor.
+
+### When not to use
+
+- A few actions tied to one item, such as Edit and Delete on a row. Use a [Dropdown Menu](/components/dropdown-menu).
+- Moving between pages or sections. Use a [Sidebar](/components/sidebar) or [Tabs](/components/tabs).
+- Finding a command by name. Use a [Command](/components/command), which can sit alongside a Menubar.
+
+### Guidelines
+
+- Name each menu with one word for its category, such as File, Edit or View.
+- Items follow the [Dropdown Menu](/components/dropdown-menu) rules: short labels, the `danger` variant for destructive items, and an [Alert Dialog](/components/alert-dialog) to confirm them.
+- Show the keyboard shortcut beside every command that has one.
+- Disable a command that's unavailable for now instead of removing it, so each menu keeps the same items.
+- **Checkbox and radio items:** for settings that stay on or off, such as Show Toolbar, or one choice from a few, such as a panel's position. They hold state, not commands.
+- **Submenus:** keep them to one level.
+
+See also: [Menus and navigation](/guidelines/choosing-components#menus-and-navigation) and [Theming](/guidelines/theming).
+
+</DesignGuidelines>
+
 ## API Reference
 
 Built on Base UI's [Menubar](https://base-ui.com/react/components/menubar#api-reference) and [Menu](https://base-ui.com/react/components/menu#api-reference) primitives — see the full API references there.

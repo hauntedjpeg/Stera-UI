@@ -7,16 +7,17 @@ Each section compares components that do a similar job. To pick one, work down i
 
 ## Forms
 
-| Use                                      | For                                                    | Entered by                  |
-| ---------------------------------------- | ------------------------------------------------------ | --------------------------- |
-| [Input](/components/input)               | Short, freeform text                                   | Typing                      |
-| [Input Group](/components/input-group)   | Text with a prefix, a suffix or an action on its value | Typing                      |
-| [Input Number](/components/input-number) | An exact number                                        | Typing or stepping          |
-| [Input OTP](/components/input-otp)       | A fixed-length code sent to the user                   | Typing, pasting or autofill |
-| [Textarea](/components/textarea)         | Longer text over several lines                         | Typing                      |
-| [Select](/components/select)             | A value from a known list                              | Picking from a list         |
-| [Combobox](/components/combobox)         | A value from a list too long to scan                   | Typing to filter a list     |
-| [Slider](/components/slider)             | A number or range where the position matters most      | Dragging                    |
+| Use                                        | For                                                     | Entered by                  |
+| ------------------------------------------ | ------------------------------------------------------- | --------------------------- |
+| [Input](/components/input)                 | Short, freeform text                                    | Typing                      |
+| [Input Group](/components/input-group)     | Text with a prefix, a suffix or an action on its value  | Typing                      |
+| [Input Number](/components/input-number)   | An exact number                                         | Typing or stepping          |
+| [Input OTP](/components/input-otp)         | A fixed-length code sent to the user                    | Typing, pasting or autofill |
+| [Textarea](/components/textarea)           | Longer text over several lines                          | Typing                      |
+| [Select](/components/select)               | A value from a known list                               | Picking from a list         |
+| [Native Select](/components/native-select) | A value from a known list, in the platform's own picker | Picking from a list         |
+| [Combobox](/components/combobox)           | A value from a list too long to scan                    | Typing to filter a list     |
+| [Slider](/components/slider)               | A number or range where the position matters most       | Dragging                    |
 
 ### Deciding
 
@@ -24,11 +25,12 @@ Each section compares components that do a similar job. To pick one, work down i
 2. Is it a number in a range, where the position matters more than the exact value? Use a Slider.
 3. Is it an exact number, such as a quantity or a measurement? Use an Input Number.
 4. Is it a value from a known list long enough that users need to search it? Use a Combobox.
-5. Is it a value from a known list? Use a Select.
-6. Is it a fixed-length code sent to the user, such as a one-time password? Use an Input OTP.
-7. Might it run over several lines? Use a Textarea.
-8. Does it need a prefix, a suffix or an action tied to the value? Use an Input Group.
-9. Otherwise, use an Input.
+5. Is it a value from a known list of plain-text options, where the device's own picker serves users better, as on a form used mostly on phones? Use a Native Select.
+6. Is it a value from a known list? Use a Select.
+7. Is it a fixed-length code sent to the user, such as a one-time password? Use an Input OTP.
+8. Might it run over several lines? Use a Textarea.
+9. Does it need a prefix, a suffix or an action tied to the value? Use an Input Group.
+10. Otherwise, use an Input.
 
 ### Shared rules
 
@@ -91,19 +93,25 @@ Feedback after an action, like "Changes saved", isn't an overlay. Use a [Toast](
 
 ## Menus and navigation
 
-| Use                                        | For                                                         | Holds                    |
-| ------------------------------------------ | ----------------------------------------------------------- | ------------------------ |
-| [Dropdown Menu](/components/dropdown-menu) | Related actions behind one trigger, often for one item      | Actions or options       |
-| [Command](/components/command)             | Searching for anything in the product from the keyboard     | Actions and destinations |
-| [Sidebar](/components/sidebar)             | The product's primary navigation between top-level sections | Destinations             |
-| [Breadcrumb](/components/breadcrumb)       | Showing where a nested page sits, and going back up         | Parent destinations      |
+| Use                                        | For                                                                | Holds                     |
+| ------------------------------------------ | ------------------------------------------------------------------ | ------------------------- |
+| [Dropdown Menu](/components/dropdown-menu) | Related actions behind one trigger, often for one item             | Actions or options        |
+| [Menubar](/components/menubar)             | An app's full set of commands, sorted into menus that stay in view | Actions and options       |
+| [Command](/components/command)             | Searching for anything in the product from the keyboard            | Actions and destinations  |
+| [Sidebar](/components/sidebar)             | The product's primary navigation between top-level sections        | Destinations              |
+| [Tabs](/components/tabs)                   | Switching between sections of one page, one at a time              | Sections of the page      |
+| [Breadcrumb](/components/breadcrumb)       | Showing where a nested page sits, and going back up                | Parent destinations       |
+| [Pagination](/components/pagination)       | Moving through a long set of results split into pages              | Pages of the same results |
 
 ### Deciding
 
-1. Is it a set of actions tied to one item or area, such as Edit and Delete on a row? Use a Dropdown Menu.
-2. Is it a way to search for any action or destination across the product? Use a Command.
-3. Is it the product's primary navigation between top-level sections? Use a Sidebar.
-4. Is the page nested, with users who need to see where they are and get back to its parents? Use a Breadcrumb.
+1. Is it an app's full set of commands, sorted into menus such as File, Edit and View that stay in view? Use a Menubar.
+2. Is it a set of actions tied to one item or area, such as Edit and Delete on a row? Use a Dropdown Menu.
+3. Is it a way to search for any action or destination across the product? Use a Command.
+4. Is it the product's primary navigation between top-level sections? Use a Sidebar.
+5. Is it switching between sections of related content within one page, such as Profile and Security on a settings page? Use Tabs.
+6. Is it moving through a long list or table of results, a page at a time? Use a Pagination.
+7. Is the page nested, with users who need to see where they are and get back to its parents? Use a Breadcrumb.
 
 A choice that's part of a form isn't a menu. See [Forms](#forms).
 
@@ -111,7 +119,7 @@ A choice that's part of a form isn't a menu. See [Forms](#forms).
 
 - **Group headings are short labels.** One or two words in sentence case, such as Settings or Recent, in a Command or a Sidebar.
 - **No single-item groups.** Fold the item into a neighboring group, or drop the heading.
-- **Destinations and actions stay apart.** Sidebar items go somewhere; actions belong in a Dropdown Menu or a [Button](/components/button). A Command can hold both.
+- **Destinations and actions stay apart.** Sidebar items go somewhere; actions belong in a Dropdown Menu, a Menubar or a [Button](/components/button). A Command can hold both.
 
 ## Loading and empty states
 

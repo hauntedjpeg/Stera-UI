@@ -69,6 +69,32 @@ Use `NativeSelectOptGroup` to group related options with a label.
 
 <ComponentPreview name="native-select-disabled" />
 
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Choosing one value from a known list of plain-text options, such as a country or a quantity.
+- When the device's own picker serves users better than a custom list, as on forms used mostly on phones.
+
+### When not to use
+
+- Options that need more than a line of text, such as an icon beside each label. Use a [Select](/components/select).
+- Lists long enough that users need to search them. Use a [Combobox](/components/combobox).
+- A few options the user should see at once. Use a [Radio Group](/components/radio-group).
+
+### Guidelines
+
+- Start the list with an empty option, such as "Select a fruit," so it's clear nothing has been chosen yet.
+- Keep option labels short and consistently formatted. Don't mix sentence case and title case in one list.
+- **Option groups:** use them when the options fall into clear categories, such as countries by region, and give each one a label.
+- Your call: Native Select or [Select](/components/select) when either would work. Pick one and use it consistently, so the same kind of choice behaves the same way across the product.
+
+See also: [Forms](/guidelines/choosing-components#forms).
+
+</DesignGuidelines>
+
 ## API Reference
 
 ### NativeSelect
