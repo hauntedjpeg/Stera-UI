@@ -175,6 +175,8 @@ function CommandSeparator({
       className={cn(
         // Base
         "-mx-2 bg-border",
+        // Forced colors force background-color, which would erase the line
+        "forced-colors:bg-[CanvasText] forced-colors:forced-color-adjust-none",
         // Sizing
         "h-px w-auto",
         className

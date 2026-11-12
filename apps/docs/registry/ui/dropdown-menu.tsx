@@ -336,6 +336,8 @@ function DropdownMenuSeparator({
       className={cn(
         // Base
         "h-px bg-border",
+        // Forced colors force background-color, which would erase the line
+        "forced-colors:bg-[CanvasText] forced-colors:forced-color-adjust-none",
         // Other
         "-mx-1 my-1",
         className

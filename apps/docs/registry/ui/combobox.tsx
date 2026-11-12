@@ -229,7 +229,12 @@ function ComboboxSeparator({
   return (
     <ComboboxPrimitive.Separator
       data-slot="combobox-separator"
-      className={cn("-mx-1 my-1 h-px bg-border", className)}
+      className={cn(
+        "-mx-1 my-1 h-px bg-border",
+        // Forced colors force background-color, which would erase the line
+        "forced-colors:bg-[CanvasText] forced-colors:forced-color-adjust-none",
+        className
+      )}
       {...props}
     />
   )
