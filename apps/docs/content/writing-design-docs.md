@@ -9,8 +9,8 @@ Only components in the registry. Figma docs for components that don't exist in c
 ## Where they go
 
 - **One component:** a `<DesignGuidelines>` block under `## Design`, right before `## API Reference`. It renders like any other section; the tag is there so `apps/docs/lib/llms.ts` can find the block, serve it on its own at `/components/<name>/design.md` and list it in `/llms.txt`.
-- **Choosing between similar components, or rules they share:** a group page in `content/docs/design/`, such as [Overlays](docs/design/overlays.mdx). Component blocks link to it instead of repeating it.
-- **Color token rules** (contrast, keeping roles distinct, visible states): [Theming](docs/design/theming.mdx). Whoever places a component can't change these; whoever edits the tokens can.
+- **Choosing between similar components, or rules they share:** a group section on [Choosing components](docs/guidelines/choosing-components.mdx), such as Overlays. Component blocks link to its anchor instead of repeating it.
+- **Color token rules** (contrast, tokens that must stay distinct, tokens that must stay quiet): [Theming](docs/guidelines/theming.mdx). Whoever places a component can't change these; whoever edits the tokens can. Its tables are keyed by token, so add the component to an existing row when the token pair is already there.
 - **The summary** is the page's frontmatter `description`: one sentence saying what the component is.
 
 ## Component block
@@ -32,7 +32,7 @@ Only components in the registry. Figma docs for components that don't exist in c
 
 - …
 
-See also: [Group page](/design/group).
+See also: [Group](/guidelines/choosing-components#group).
 
 </DesignGuidelines>
 ```
@@ -40,15 +40,15 @@ See also: [Group page](/design/group).
 - Leave out a heading with nothing under it.
 - **Variants:** a component with variants adds a `### Variants` table before Guidelines, with the columns Variant, Emphasis, Use for and Not for.
 - **Parts:** guidance for a part (a command group, a sidebar header) goes in the parent's Guidelines as a bullet that starts with the part's name in bold, such as "**Groups:** …". Parts never get their own block.
-- **See also:** end with one `See also:` line linking the component's group page, and [Theming](docs/design/theming.mdx) if it has token rules.
+- **See also:** end with one `See also:` line linking the component's group section, and [Theming](docs/guidelines/theming.mdx) if it has token rules.
 
-## Group page
+## Group section
 
-A group page is worth making when three or more components compete for the same job or share rules. It has three parts:
+A group section on Choosing components is worth adding when three or more components compete for the same job or share rules. It's an `##` heading with three parts:
 
 1. **A table:** Use, For (a short phrase), and one column for what tells the options apart, like Overlays' "Interactive content."
-2. **Deciding:** an ordered list of questions where the first yes wins.
-3. **Shared rules:** rules that apply to several components in the group, written once here instead of on each page.
+2. **Deciding** (`###`): an ordered list of questions where the first yes wins.
+3. **Shared rules** (`###`): rules that apply to several components in the group, written once here instead of on each page.
 
 ## Rules
 
@@ -69,10 +69,10 @@ Figma docs use Usage and Guidance. The "Use…" bullets in Usage become When to 
 | ---------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A rule about intent                                        | Guidelines                                                      | Toggle Group: "Keep the group small, ideally two to five items."                                                                                     |
 | An open choice                                             | Guidelines, as "Your call: … Pick one and use it consistently." | Toast: "Anchor toasts to the same position everywhere."                                                                                              |
-| A rule about tokens                                        | [Theming](docs/design/theming.mdx)                              | Toggle: "The pressed state must be clearly distinct from hover and focus."                                                                           |
+| A rule about tokens                                        | [Theming](docs/guidelines/theming.mdx)                          | Toggle: "The pressed state must be clearly distinct from hover and focus."                                                                           |
 | Presentation, built-in behavior, or what the preview shows | Cut                                                             | Toggle Group Item: "Only the outer edges of the group carry rounded corners." Dropdown Menu: "Ensure focus returns to the trigger element on close." |
 
-Group pages pick up whatever several Figma docs repeat. The form docs, for example, each say they share the field component's label, description and error treatment. That's one shared rule on a forms group page.
+Group sections pick up whatever several Figma docs repeat. The form docs, for example, each say they share the field component's label, description and error treatment. That's one shared rule in the Forms section.
 
 ## Names
 

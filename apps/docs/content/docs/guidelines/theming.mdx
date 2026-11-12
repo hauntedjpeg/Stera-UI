@@ -1,0 +1,55 @@
+---
+title: Theming
+description: Color token rules to keep when you change Stera UI's theme.
+---
+
+Stera UI is a starting point, so you'll change its colors. The component guidelines assume these rules still hold after you do. Check each one in both light and dark.
+
+## Contrast
+
+Text needs 4.5:1 against its background (WCAG AA). Strokes and icons need 3:1.
+
+| Component                | Foreground     | Background              |
+| ------------------------ | -------------- | ----------------------- |
+| Button `brand`           | `ink-onbrand`  | `surface-brand`         |
+| Button `accent`          | `ink-onaccent` | `surface-accent`        |
+| Button `subtle`          | `ink`          | `surface-subtle`        |
+| Button `danger`          | `ink-danger`   | `surface-danger-subtle` |
+| Button `outline`, stroke | `border`       | `surface`               |
+
+Badge labels and Icon Tile icons use the same pairs, in every tone (`brand`, `accent`, `danger`, `success` and `warning`):
+
+| Form                            | Foreground        | Background              |
+| ------------------------------- | ----------------- | ----------------------- |
+| Plain, like `success`           | `ink-<tone>-bold` | `surface-<tone>-subtle` |
+| Solid, like `success-solid`     | `ink-on<tone>`    | `surface-<tone>`        |
+| Outline, like `success-outline` | `ink-<tone>`      | `surface`               |
+
+Watch `warning-outline`: it uses the lighter `ink-warning-subtle`.
+
+## Keep these apart
+
+Before you change a token, check it still reads as different from the tokens next to it, in every component listed.
+
+| Token                                                     | Keep distinct from                             | Where it shows                                                          |
+| --------------------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------- |
+| `surface-brand`                                           | `surface-muted`                                | Progress, Switch and Slider: done or on, against the track              |
+| `surface-brand`                                           | `surface-brand-subtle`, `surface-muted`        | Calendar: the selected date, against today and a range                  |
+| `surface-subtle`                                          | `surface-hover`, `ring`                        | Toggle, Toggle Group, Table, Sidebar: selected, against hover and focus |
+| `surface-brand-subtle`                                    | `surface-hover`                                | Sidebar: the active sub-item, against hover                             |
+| `surface-hover`                                           | `surface`                                      | `ghost` Button and Command: hover and highlight, against rest           |
+| `surface-subtle-hover`                                    | `surface-subtle`                               | `subtle` Button: hover, against rest                                    |
+| `border-bold`                                             | `surface-muted-hover`, `surface-hover`, `ring` | Chip: active, against hover and focus                                   |
+| `surface-accent`                                          | `surface-brand`, `surface-danger`              | Button: a strong action never looks like a destructive one              |
+| `surface-danger`, `-success`, `-warning` (and `-subtle`)  | each other, `brand`, `accent`                  | Badge and Icon Tile: tone reads as meaning                              |
+| `ink-success`, `ink-warning`, `ink-danger`, `ink-subtler` | each other, `ink`                              | Toast: the type icon reads as meaning                                   |
+| `chart-1` to `chart-4`                                    | each other, `surface`                          | Chart: every series reads on its own                                    |
+
+A `subtle` Chip keeps its resting fill when active, so the `border-bold` stroke alone shows it's selected. The chart tokens are steps of one ramp by default, so the gaps between those steps carry the whole difference.
+
+## Keep these quiet
+
+| Token            | Rule                                                                     | Where it shows  |
+| ---------------- | ------------------------------------------------------------------------ | --------------- |
+| `surface-muted`  | Low contrast against `surface`, so placeholders don't draw attention     | Skeleton        |
+| `surface-subtle` | Quieter than `surface-brand`, but distinct enough to read as interactive | `subtle` Button |

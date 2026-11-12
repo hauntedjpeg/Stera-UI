@@ -1,0 +1,134 @@
+---
+title: Choosing components
+description: Which component to use when several do the same job, and the rules they share.
+---
+
+Each section compares components that do a similar job. To pick one, work down its Deciding list and stop at the first yes.
+
+## Forms
+
+| Use                                      | For                                                    | Entered by                  |
+| ---------------------------------------- | ------------------------------------------------------ | --------------------------- |
+| [Input](/components/input)               | Short, freeform text                                   | Typing                      |
+| [Input Group](/components/input-group)   | Text with a prefix, a suffix or an action on its value | Typing                      |
+| [Input Number](/components/input-number) | An exact number                                        | Typing or stepping          |
+| [Input OTP](/components/input-otp)       | A fixed-length code sent to the user                   | Typing, pasting or autofill |
+| [Textarea](/components/textarea)         | Longer text over several lines                         | Typing                      |
+| [Select](/components/select)             | A value from a known list                              | Picking from a list         |
+| [Combobox](/components/combobox)         | A value from a list too long to scan                   | Typing to filter a list     |
+| [Slider](/components/slider)             | A number or range where the position matters most      | Dragging                    |
+
+### Deciding
+
+1. Is it a yes-or-no choice, or one of a few options shown at once? See [Selection](#selection).
+2. Is it a number in a range, where the position matters more than the exact value? Use a Slider.
+3. Is it an exact number, such as a quantity or a measurement? Use an Input Number.
+4. Is it a value from a known list long enough that users need to search it? Use a Combobox.
+5. Is it a value from a known list? Use a Select.
+6. Is it a fixed-length code sent to the user, such as a one-time password? Use an Input OTP.
+7. Might it run over several lines? Use a Textarea.
+8. Does it need a prefix, a suffix or an action tied to the value? Use an Input Group.
+9. Otherwise, use an Input.
+
+### Shared rules
+
+- **Always a visible label.** A placeholder isn't a label: it disappears as soon as the user starts typing.
+- **One treatment for labels, descriptions and errors.** Every form control, including Checkbox, Radio Group and Switch, takes its label, description and error message from [Field](/components/field). Apply them the same way across a form.
+
+## Selection
+
+| Use                                      | For                                              | Selected at once   |
+| ---------------------------------------- | ------------------------------------------------ | ------------------ |
+| [Checkbox](/components/checkbox)         | A yes-or-no choice, or picking items from a list | Any number         |
+| [Radio Group](/components/radio-group)   | One option from a small set, all shown at once   | Exactly one        |
+| [Switch](/components/switch)             | A setting that takes effect immediately          | On or off          |
+| [Toggle](/components/toggle)             | Turning something on or off in the current view  | On or off          |
+| [Toggle Group](/components/toggle-group) | A few related view or formatting options         | One, or any number |
+
+### Deciding
+
+1. Is it a set of related options that change the current view or content, such as layout or text formatting? Use a Toggle Group.
+2. Is it a single on/off control for the current view, such as bold or mute? Use a Toggle.
+3. Is it a setting that takes effect the moment it changes? Use a Switch.
+4. Must the user pick exactly one option from a small set? Use a Radio Group.
+5. Otherwise, use a Checkbox: a single yes-or-no choice, or any number of items from a list.
+
+Moving between destinations or sections isn't selection. Use [Tabs](/components/tabs). For one option from a long list, use a [Select](/components/select).
+
+### Shared rules
+
+- **Label the set, too.** Every control gets its own visible label, as in [Forms](#forms). A Radio Group, a Toggle Group and a group of checkboxes also get a label for the whole set.
+- **Toggle and Toggle Group hold state, not commands.** For an action, use a [Button](/components/button).
+
+## Overlays
+
+| Use                                      | For                                             | Interactive content    |
+| ---------------------------------------- | ----------------------------------------------- | ---------------------- |
+| [Alert Dialog](/components/alert-dialog) | Explicit confirmation before an action          | Confirm or cancel only |
+| [Dialog](/components/dialog)             | A short, self-contained task                    | Yes                    |
+| [Drawer](/components/drawer)             | A longer task or detail view beside the content | Yes                    |
+| [Popover](/components/popover)           | Light content or actions tied to one element    | Yes                    |
+| [Preview Card](/components/preview-card) | A hover preview of what a link points to        | No                     |
+| [Tooltip](/components/tooltip)           | A short label or keyboard shortcut              | No                     |
+| A dedicated page                         | Content too long or complex for any of these    | Yes                    |
+
+### Deciding
+
+1. Does the user need to explicitly confirm before an action goes ahead? Use an Alert Dialog.
+2. Is it a short label or keyboard shortcut for one element? Use a Tooltip.
+3. Is it a read-only preview of something a link points to? Use a Preview Card.
+4. Is it light, interactive content tied to one element, like filters or a short form? Use a Popover.
+5. Is it longer than a dialog comfortably holds, or easier to follow with the underlying content still in view? Use a Drawer.
+6. Is it a short, self-contained task? Use a Dialog.
+7. Otherwise, give it its own page.
+
+Feedback after an action, like "Changes saved", isn't an overlay. Use a [Toast](/components/toast).
+
+### Shared rules
+
+- **Dialog and Drawer:** always show a title and a visible close control.
+- **Preview Card and Tooltip hold nothing interactive.** When the content needs a response, use a Popover.
+
+## Menus and navigation
+
+| Use                                        | For                                                         | Holds                    |
+| ------------------------------------------ | ----------------------------------------------------------- | ------------------------ |
+| [Dropdown Menu](/components/dropdown-menu) | Related actions behind one trigger, often for one item      | Actions or options       |
+| [Command](/components/command)             | Searching for anything in the product from the keyboard     | Actions and destinations |
+| [Sidebar](/components/sidebar)             | The product's primary navigation between top-level sections | Destinations             |
+| [Breadcrumb](/components/breadcrumb)       | Showing where a nested page sits, and going back up         | Parent destinations      |
+
+### Deciding
+
+1. Is it a set of actions tied to one item or area, such as Edit and Delete on a row? Use a Dropdown Menu.
+2. Is it a way to search for any action or destination across the product? Use a Command.
+3. Is it the product's primary navigation between top-level sections? Use a Sidebar.
+4. Is the page nested, with users who need to see where they are and get back to its parents? Use a Breadcrumb.
+
+A choice that's part of a form isn't a menu. See [Forms](#forms).
+
+### Shared rules
+
+- **Group headings are short labels.** One or two words in sentence case, such as Settings or Recent, in a Command or a Sidebar.
+- **No single-item groups.** Fold the item into a neighboring group, or drop the heading.
+- **Destinations and actions stay apart.** Sidebar items go somewhere; actions belong in a Dropdown Menu or a [Button](/components/button). A Command can hold both.
+
+## Loading and empty states
+
+| Use                              | For                                               | What you know                       |
+| -------------------------------- | ------------------------------------------------- | ----------------------------------- |
+| [Progress](/components/progress) | A process you can measure, such as an upload      | How far along it is                 |
+| [Skeleton](/components/skeleton) | Content that's loading                            | The layout of what's coming         |
+| [Spinner](/components/spinner)   | A wait with no predictable end or layout          | Only that something is happening    |
+| [Empty](/components/empty)       | A surface with nothing to show once it has loaded | That there's nothing there, and why |
+
+### Deciding
+
+1. Has it finished loading, with nothing to show? Use an Empty.
+2. Can you measure how far along it is? Use a Progress.
+3. Do you know the layout of the content that's coming? Use a Skeleton.
+4. Otherwise, use a Spinner.
+
+### Shared rules
+
+- **Never leave a surface blank.** Show a Progress, Skeleton or Spinner while it loads, and replace it with the content, or an Empty, as soon as it arrives.

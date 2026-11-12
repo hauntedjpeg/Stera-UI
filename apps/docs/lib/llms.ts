@@ -115,7 +115,7 @@ export async function getLLMText(page: Page): Promise<string> {
 }
 
 const SECTIONS: { title: string; match: (page: Page) => boolean }[] = [
-  { title: "Design", match: (page) => page.slugs[0] === "design" },
+  { title: "Guidelines", match: (page) => page.slugs[0] === "guidelines" },
   { title: "Components", match: (page) => page.slugs[0] === "components" },
   { title: "Utilities", match: (page) => page.slugs[0] === "utilities" },
   { title: "Getting started", match: () => true },
@@ -128,7 +128,7 @@ export async function getLLMIndex(): Promise<string> {
     groups.get(section.title)!.push(page)
   }
 
-  const order = ["Getting started", "Design", "Components", "Utilities"]
+  const order = ["Getting started", "Guidelines", "Components", "Utilities"]
   const sections = order.map((title) => {
     const links = groups
       .get(title)!
@@ -151,7 +151,7 @@ export async function getLLMIndex(): Promise<string> {
     })
     .join("\n")
   sections.splice(
-    order.indexOf("Design") + 1,
+    order.indexOf("Guidelines") + 1,
     0,
     `## Component design guidelines\n\nWhen to use each component, when not to, and how. Design decisions only, no code.\n\n${designLinks}`
   )
@@ -164,7 +164,7 @@ Stera UI is a copy-paste component registry, not an installable package. \`npx s
 
 Every page below is plain markdown. The full set is at ${SITE_URL}/llms-full.txt.
 
-To decide which component to use and how, read the Design pages and the component design guidelines. Those carry no code; the component pages carry the code and API.
+To decide which component to use and how, read the Guidelines pages and the component design guidelines. Those carry no code; the component pages carry the code and API.
 
 ${sections.join("\n\n")}
 `

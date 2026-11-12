@@ -47,6 +47,38 @@ const nextConfig: NextConfig = {
         destination: "/components/toast.md",
         permanent: true,
       },
+      // The Design section became Guidelines, and its five group pages
+      // merged into Choosing components.
+      {
+        source: "/design/theming",
+        destination: "/guidelines/theming",
+        permanent: true,
+      },
+      {
+        source: "/design/theming.md",
+        destination: "/guidelines/theming.md",
+        permanent: true,
+      },
+      ...(
+        [
+          ["forms", "forms"],
+          ["selection", "selection"],
+          ["overlays", "overlays"],
+          ["navigation", "menus-and-navigation"],
+          ["loading", "loading-and-empty-states"],
+        ] as const
+      ).flatMap(([page, anchor]) => [
+        {
+          source: `/design/${page}`,
+          destination: `/guidelines/choosing-components#${anchor}`,
+          permanent: true,
+        },
+        {
+          source: `/design/${page}.md`,
+          destination: "/guidelines/choosing-components.md",
+          permanent: true,
+        },
+      ]),
     ]
   },
 }
