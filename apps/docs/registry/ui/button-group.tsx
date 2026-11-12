@@ -10,19 +10,19 @@ const buttonGroupVariants = cva(
     // Base
     "flex items-stretch has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-xl",
     // Position
-    "*:focus-visible:relative",
+    "*:focus-visible:relative *:has-focus-visible:relative",
     // Sizing
     "w-fit has-[>[data-slot=button-group]]:gap-2 [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1",
     // Other
-    "*:focus-visible:z-10",
+    "*:focus-visible:z-10 *:has-focus-visible:z-10",
   ],
   {
     variants: {
       orientation: {
         horizontal:
-          "[&>[data-slot]:has(+[data-slot='button-group-separator'])]:border-r-0 [&>[data-slot]:has(~[data-slot])]:rounded-r-none [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0",
+          "[&>[data-slot]:has(~[data-slot])]:rounded-r-none [&>[data-slot]:not([data-slot=button-group-separator])+[data-slot]:not([data-slot=button-group-separator]):not([data-slot=button-group])]:-ms-px [&>[data-slot]~[data-slot]]:rounded-l-none",
         vertical:
-          "flex-col [&>[data-slot]:has(+[data-slot='button-group-separator'])]:border-b-0 [&>[data-slot]:has(~[data-slot])]:rounded-b-none [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0",
+          "flex-col [&>[data-slot]:has(~[data-slot])]:rounded-b-none [&>[data-slot]:not([data-slot=button-group-separator])+[data-slot]:not([data-slot=button-group-separator]):not([data-slot=button-group])]:-mt-px [&>[data-slot]~[data-slot]]:rounded-t-none",
       },
     },
     defaultVariants: {
@@ -57,7 +57,7 @@ function ButtonGroupText({
     props: mergeProps<"div">(
       {
         className: cn(
-          "flex items-center gap-2 rounded-md border bg-surface-subtle px-2.5 text-sm font-medium shadow-xs [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+          "flex items-center gap-2 rounded-md bg-surface-subtle px-2.5 text-sm font-medium shadow-xs inset-ring inset-ring-border forced-stroke [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
           className
         ),
       },
