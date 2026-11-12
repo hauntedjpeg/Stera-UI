@@ -51,10 +51,9 @@ export default async function Page(props: {
           <MDX components={useMDXComponents({})} />
         </article>
       </div>
-      <aside className="hidden w-64 shrink-0 px-4 py-10 lg:block">
-        <div className="sticky top-[calc(var(--header-height)+3rem)]">
-          <DocsToc toc={toc} />
-        </div>
+      {/* Pulled up under the header so the outline can scroll beneath it */}
+      <aside className="-mt-(--header-height) hidden w-64 shrink-0 px-4 lg:block">
+        <DocsToc toc={toc} />
       </aside>
     </div>
   )
