@@ -3,17 +3,10 @@ import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 
 import { cn } from "@/lib/utils"
-import { SiChevronRight, SiMoreBold } from "stera-icons"
+import { SiChevronRight, SiMore } from "stera-icons"
 
-function Breadcrumb({ className, ...props }: React.ComponentProps<"nav">) {
-  return (
-    <nav
-      aria-label="breadcrumb"
-      data-slot="breadcrumb"
-      className={cn(className)}
-      {...props}
-    />
-  )
+function Breadcrumb(props: React.ComponentProps<"nav">) {
+  return <nav aria-label="Breadcrumb" data-slot="breadcrumb" {...props} />
 }
 
 function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
@@ -21,7 +14,7 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
     <ol
       data-slot="breadcrumb-list"
       className={cn(
-        "flex flex-wrap items-center gap-1 st-body-lg wrap-break-word text-ink-subtler",
+        "flex flex-wrap items-center gap-1 st-label-md wrap-break-word text-ink-subtler",
         className
       )}
       {...props}
@@ -34,7 +27,7 @@ function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
     <li
       data-slot="breadcrumb-item"
       className={cn(
-        "inline-flex h-8 items-center gap-1.5 px-2 has-data-[slot=breadcrumb-ellipsis]:px-0 has-[a]:px-0",
+        "inline-flex min-h-8 items-center gap-1.5 px-2 has-data-[slot=breadcrumb-ellipsis]:px-0 has-data-[slot=breadcrumb-link]:px-0",
         className
       )}
       {...props}
@@ -52,7 +45,9 @@ function BreadcrumbLink({
     props: mergeProps<"a">(
       {
         className: cn(
-          "inline-flex h-8 items-center rounded-lg px-2 transition-colors hover:bg-surface-hover hover:text-ink",
+          "inline-flex min-h-8 items-center rounded-lg px-2 transition outline-none",
+          "hover:bg-surface-hover hover:text-ink active:bg-surface-pressed aria-expanded:bg-surface-hover aria-expanded:text-ink",
+          "forced-focus focus-visible:ring-3 focus-visible:ring-ring",
           className
         ),
       },
@@ -69,10 +64,8 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       data-slot="breadcrumb-page"
-      role="link"
-      aria-disabled="true"
       aria-current="page"
-      className={cn("st-body-lg text-ink", className)}
+      className={cn("text-ink", className)}
       {...props}
     />
   )
@@ -88,7 +81,10 @@ function BreadcrumbSeparator({
       data-slot="breadcrumb-separator"
       role="presentation"
       aria-hidden="true"
-      className={cn("text-ink-subtlest [&>svg]:size-4", className)}
+      className={cn(
+        "text-ink-subtlest [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
       {...props}
     >
       {children ?? <SiChevronRight />}
@@ -106,13 +102,12 @@ function BreadcrumbEllipsis({
       role="presentation"
       aria-hidden="true"
       className={cn(
-        "flex size-8 items-center justify-center [&>svg]:size-4",
+        "flex size-8 items-center justify-center [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
     >
-      <SiMoreBold />
-      <span className="sr-only">More</span>
+      <SiMore />
     </span>
   )
 }

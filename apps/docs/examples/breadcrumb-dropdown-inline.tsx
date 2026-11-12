@@ -28,7 +28,12 @@ export default function BreadcrumbDropdownInline() {
         <BreadcrumbItem>
           <DropdownMenu>
             <DropdownMenuTrigger
-              render={<button className="flex items-center gap-1" />}
+              render={
+                <BreadcrumbLink
+                  render={<button type="button" />}
+                  className="gap-1"
+                />
+              }
             >
               Components
               <SiChevronDown className="size-3.5" />

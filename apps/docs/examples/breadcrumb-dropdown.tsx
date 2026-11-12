@@ -7,7 +7,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,12 +26,15 @@ export default function BreadcrumbDropdown() {
           <DropdownMenu>
             <DropdownMenuTrigger
               render={
-                <Button size="icon-sm" variant="ghost">
-                  <BreadcrumbEllipsis />
-                  <span className="sr-only">Toggle menu</span>
-                </Button>
+                <BreadcrumbLink
+                  render={<button type="button" />}
+                  aria-label="Show hidden pages"
+                  className="px-0"
+                />
               }
-            />
+            >
+              <BreadcrumbEllipsis />
+            </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
               <DropdownMenuItem>Documentation</DropdownMenuItem>
               <DropdownMenuItem>Themes</DropdownMenuItem>
