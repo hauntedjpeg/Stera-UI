@@ -1,6 +1,6 @@
 ---
 title: Separator
-description: A visual divider between content sections, supporting horizontal and vertical orientations.
+description: A line that separates content, horizontally or vertically.
 ---
 
 <ComponentPreview name="separator-demo" />
@@ -9,24 +9,68 @@ description: A visual divider between content sections, supporting horizontal an
 
 <InstallSnippet slug="separator" hideHeading />
 
+## Accessibility
+
+- The `Separator` component renders a `<div>` with `role="separator"` and an `aria-orientation` that matches its `orientation`.
+- Screen readers announce it as a break between sections. When the line is only decorative, hide it with `aria-hidden`.
+
+```tsx
+<Separator aria-hidden />
+```
+
 ## Examples
-
-### Horizontal
-
-The default orientation. Renders as a full-width horizontal rule.
-
-<ComponentPreview name="separator-demo" />
 
 ### Vertical
 
-Use `orientation="vertical"` to render a vertical divider. Works best inside a flex container with a fixed height.
+Set `orientation="vertical"` for a vertical separator. It stretches to the height of its flex container.
 
 <ComponentPreview name="separator-vertical" />
 
+### Menu
+
+Vertical separators between items that each have a title and a description.
+
+<ComponentPreview name="separator-menu" />
+
+### List
+
+Horizontal separators between the rows of a list.
+
+<ComponentPreview name="separator-list" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Breaking a surface into groups when spacing alone doesn't make the break clear.
+- Dividing a row of inline items, such as links or metadata.
+
+### When not to use
+
+- Between items in a menu or list of options. [Dropdown Menu](/components/dropdown-menu), [Select](/components/select) and [Command](/components/command) have their own separators.
+- Between the buttons of a [Button Group](/components/button-group), which has its own separator.
+- An "or" break between form options. Use [Field](/components/field)'s separator.
+- Setting a group apart from everything around it. Use a [Card](/components/card).
+
+### Guidelines
+
+- Try spacing first. Add a separator only where spacing doesn't make the break clear.
+- Don't put a separator against another edge that already divides, such as the edge of a container.
+- Your call: spacing or separators between sections. Pick one and use it consistently.
+
+</DesignGuidelines>
+
 ## API Reference
 
-Extends Base UI's `Separator` primitive and accepts all its props.
+Extends Base UI's `Separator` and accepts all its props, including `render`. See the [Base UI Separator](https://base-ui.com/react/components/separator#api-reference) docs.
 
-| Prop | Type | Default |
-| --- | --- | --- |
+| Prop          | Type                         | Default        |
+| ------------- | ---------------------------- | -------------- |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
+
+```tsx
+<Separator />
+<Separator orientation="vertical" />
+```

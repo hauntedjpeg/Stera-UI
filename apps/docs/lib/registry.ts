@@ -55,6 +55,14 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/separator-vertical")),
     slug: "separator",
   },
+  "separator-menu": {
+    component: dynamic(() => import("@/examples/separator-menu")),
+    slug: "separator",
+  },
+  "separator-list": {
+    component: dynamic(() => import("@/examples/separator-list")),
+    slug: "separator",
+  },
   "code-demo": {
     component: dynamic(() => import("@/examples/code-demo")),
     slug: "code",
