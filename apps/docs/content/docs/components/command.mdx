@@ -27,19 +27,34 @@ Command
         └── CommandItem
 ```
 
+To open it in a modal, wrap it in `CommandDialogPopup`:
+
+```text
+CommandDialog
+├── CommandDialogTrigger
+└── CommandDialogPopup
+    └── Command
+```
+
 ## Examples
 
 ### Command Dialog
 
 <ComponentPreview name="command-dialog-example" />
 
-Use `CommandDialog` and `CommandDialogTrigger` to open the command palette in a modal overlay.
+Use `CommandDialog`, `CommandDialogTrigger` and `CommandDialogPopup` to open the command palette in a modal overlay. The popup's `title` and `description` are hidden visually but read by screen readers. To open it from a keyboard shortcut instead, control it with `open` and `onOpenChange`.
 
 ### Title & Description
 
 <ComponentPreview name="command-title-description" />
 
 Use `CommandItemContent`, `CommandItemTitle`, and `CommandItemDescription` for richer item layouts.
+
+### Checked
+
+<ComponentPreview name="command-checked" />
+
+Set `checked` on items that reflect a current setting. A checked item shows a check, and every item with `checked` set announces its state to screen readers.
 
 ## Design
 
@@ -58,6 +73,7 @@ Use `CommandItemContent`, `CommandItemTitle`, and `CommandItemDescription` for r
 
 - Show the shortcut that opens it, such as ⌘K, on its trigger so users learn it, and make it work from every screen.
 - Write a message for when nothing matches the search, such as "No results found," rather than leaving the list empty.
+- Show a check on items that reflect a current setting, such as the active theme, so users see the state before changing it.
 - **Groups:** cluster related items under a heading, such as Navigation, Settings or Recent, once the list runs past six to eight items. Keep headings to one or two words in sentence case. Don't make a group for a single item: fold it into a neighboring group, or drop the heading.
 
 See also: [Menus and navigation](/design/navigation) and [Theming](/design/theming).
@@ -68,27 +84,37 @@ See also: [Menus and navigation](/design/navigation) and [Theming](/design/themi
 
 ### CommandItem
 
-| Prop | Type | Default |
-| --- | --- | --- |
+| Prop       | Type      | Default |
+| ---------- | --------- | ------- |
 | `disabled` | `boolean` | `false` |
+| `checked`  | `boolean` | —       |
 
 ### CommandGroup
 
-| Prop | Type | Description |
-| --- | --- | --- |
+| Prop      | Type     | Description                         |
+| --------- | -------- | ----------------------------------- |
 | `heading` | `string` | Section label shown above the group |
+
+### CommandDialogPopup
+
+| Prop              | Type      | Default                         |
+| ----------------- | --------- | ------------------------------- |
+| `title`           | `string`  | `"Command palette"`             |
+| `description`     | `string`  | `"Search for a command to run"` |
+| `showCloseButton` | `boolean` | `false`                         |
 
 ### Subcomponents
 
-| Component | Description |
-| --- | --- |
-| `CommandInput` | Search/filter text input |
-| `CommandList` | Scrollable list container |
-| `CommandEmpty` | Shown when no items match the query |
-| `CommandSeparator` | Horizontal divider between groups |
-| `CommandShortcut` | Right-aligned keyboard shortcut label |
-| `CommandItemContent` | Column container for title + description |
-| `CommandItemTitle` | Primary text inside `CommandItemContent` |
+| Component                | Description                                |
+| ------------------------ | ------------------------------------------ |
+| `CommandInput`           | Search/filter text input                   |
+| `CommandList`            | Scrollable list container                  |
+| `CommandEmpty`           | Shown when no items match the query        |
+| `CommandSeparator`       | Horizontal divider between groups          |
+| `CommandShortcut`        | Right-aligned keyboard shortcut label      |
+| `CommandItemContent`     | Column container for title + description   |
+| `CommandItemTitle`       | Primary text inside `CommandItemContent`   |
 | `CommandItemDescription` | Secondary text inside `CommandItemContent` |
-| `CommandDialog` | Modal wrapper for the command palette |
-| `CommandDialogTrigger` | Trigger that opens the `CommandDialog` |
+| `CommandDialog`          | Root that holds the dialog's open state    |
+| `CommandDialogTrigger`   | Trigger that opens the `CommandDialog`     |
+| `CommandDialogPopup`     | Modal panel that holds the `Command`       |

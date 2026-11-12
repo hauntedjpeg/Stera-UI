@@ -6,6 +6,7 @@ import { Button } from "@/registry/ui/button"
 import {
   Command,
   CommandDialog,
+  CommandDialogPopup,
   CommandEmpty,
   CommandGroup,
   CommandInput,
@@ -114,36 +115,39 @@ export function DocsSearch({ tree }: { tree: PageTree }) {
           ⌘K
         </kbd>
       </Button>
-      <CommandDialog
-        open={open}
-        onOpenChange={setOpen}
-        title="Search docs"
-        description="Find pages in the documentation"
-        className="rounded-3xl glass **:data-[slot='command-input-wrapper']:pb-2 [&_.group\/input-group]:border-none [&_.group\/input-group]:bg-transparent"
-      >
-        <Command>
-          <CommandInput placeholder="Search docs" />
-          <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
-            {groups.map(([section, items]) => (
-              <CommandGroup key={section} heading={section}>
-                {items.map((it) => (
-                  <CommandItem
-                    key={it.url}
-                    value={`${section} ${it.label}`}
-                    onSelect={() => {
-                      setOpen(false)
-                      router.push(it.url)
-                    }}
-                  >
-                    {section === "Components" && <SiComponentFill />}
-                    <span>{it.label}</span>
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            ))}
-          </CommandList>
-        </Command>
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandDialogPopup
+          title="Search docs"
+          description="Find pages in the documentation"
+          className="rounded-3xl glass"
+        >
+          <Command>
+            <CommandInput
+              placeholder="Search docs"
+              className="mb-2 bg-transparent inset-ring-0"
+            />
+            <CommandList>
+              <CommandEmpty>No results found.</CommandEmpty>
+              {groups.map(([section, items]) => (
+                <CommandGroup key={section} heading={section}>
+                  {items.map((it) => (
+                    <CommandItem
+                      key={it.url}
+                      value={`${section} ${it.label}`}
+                      onSelect={() => {
+                        setOpen(false)
+                        router.push(it.url)
+                      }}
+                    >
+                      {section === "Components" && <SiComponentFill />}
+                      <span>{it.label}</span>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              ))}
+            </CommandList>
+          </Command>
+        </CommandDialogPopup>
       </CommandDialog>
     </>
   )

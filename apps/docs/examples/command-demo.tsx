@@ -21,7 +21,7 @@ import {
 
 export default function CommandDemo() {
   return (
-    <Command className="max-w-sm rounded-lg border bg-surface">
+    <Command className="max-w-sm rounded-xl bg-surface ring-1 ring-border forced-stroke">
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>

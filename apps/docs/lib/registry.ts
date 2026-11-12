@@ -947,6 +947,10 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/command-title-description")),
     slug: "command",
   },
+  "command-checked": {
+    component: dynamic(() => import("@/examples/command-checked")),
+    slug: "command",
+  },
   "combobox-demo": {
     component: dynamic(() => import("@/examples/combobox-demo")),
     slug: "combobox",

@@ -5,18 +5,17 @@ import { cn } from "@/lib/utils"
 import {
   Dialog,
   DialogDescription,
-  DialogHeader,
   DialogPopup,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { InputGroup, InputGroupAddon } from "@/components/ui/input-group"
-import { SiSearch, SiCheck } from "stera-icons"
 import {
-  DropdownMenuItemContent as CommandItemContent,
-  DropdownMenuItemTitle as CommandItemTitle,
-  DropdownMenuItemDescription as CommandItemDescription,
+  DropdownMenuItemContent,
+  DropdownMenuItemDescription,
+  DropdownMenuItemTitle,
 } from "@/components/ui/dropdown-menu"
+import { InputGroup, InputGroupAddon } from "@/components/ui/input-group"
+import { SiCheck, SiSearch } from "stera-icons"
 
 function Command({
   className,
@@ -37,46 +36,44 @@ function Command({
   )
 }
 
-function CommandDialog({
-  title = "Command Palette",
-  description = "Search for a command to run...",
-  children,
-  className,
-  showCloseButton = false,
+function CommandDialog({ ...props }: React.ComponentProps<typeof Dialog>) {
+  return <Dialog data-slot="command-dialog" {...props} />
+}
+
+function CommandDialogTrigger({
   ...props
-}: Omit<React.ComponentProps<typeof Dialog>, "children"> & {
+}: React.ComponentProps<typeof DialogTrigger>) {
+  return <DialogTrigger data-slot="command-dialog-trigger" {...props} />
+}
+
+function CommandDialogPopup({
+  title = "Command palette",
+  description = "Search for a command to run",
+  showCloseButton = false,
+  className,
+  children,
+  ...props
+}: Omit<React.ComponentProps<typeof DialogPopup>, "title"> & {
   title?: string
   description?: string
-  className?: string
-  showCloseButton?: boolean
-  children: React.ReactNode
 }) {
-  const childArray = React.Children.toArray(children)
-  const trigger = childArray.find(
-    (child) => React.isValidElement(child) && child.type === DialogTrigger
-  )
-  const rest = childArray.filter((child) => child !== trigger)
-
   return (
-    <Dialog {...props}>
-      {trigger}
-      <DialogPopup
-        position="top"
-        scroll={false}
-        className={cn(
-          // Base
-          "overflow-hidden p-0",
-          className
-        )}
-        showCloseButton={showCloseButton}
-      >
-        <DialogHeader className="sr-only">
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
-        </DialogHeader>
-        {rest}
-      </DialogPopup>
-    </Dialog>
+    <DialogPopup
+      data-slot="command-dialog-popup"
+      position="top"
+      scroll={false}
+      showCloseButton={showCloseButton}
+      className={cn(
+        // Base
+        "overflow-hidden p-0",
+        className
+      )}
+      {...props}
+    >
+      <DialogTitle className="sr-only">{title}</DialogTitle>
+      <DialogDescription className="sr-only">{description}</DialogDescription>
+      {children}
+    </DialogPopup>
   )
 }
 
@@ -85,26 +82,38 @@ function CommandInput({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
-    <div data-slot="command-input-wrapper" className="p-2 pb-0">
-      <InputGroup className="h-8! rounded-lg! bg-surface-subtle shadow-none! inset-ring-border *:data-[slot=input-group-addon]:pl-2!">
-        <CommandPrimitive.Input
-          data-slot="command-input"
-          className={cn(
-            // Base
-            "st-label-md outline-hidden",
-            // Sizing
-            "w-full",
-            // Other
-            "disabled:cursor-not-allowed disabled:bg-surface-disabled",
-            className
-          )}
-          {...props}
-        />
-        <InputGroupAddon>
-          <SiSearch className="size-4 shrink-0 opacity-50" />
-        </InputGroupAddon>
-      </InputGroup>
-    </div>
+    // The input isn't the group's control, so the group draws no focus stroke:
+    // the input keeps focus the whole time the list is open.
+    <InputGroup
+      className={cn(
+        // Base
+        "rounded-lg bg-surface-subtle",
+        // Sizing
+        "m-2 mb-0 h-8 w-auto",
+        className
+      )}
+    >
+      <InputGroupAddon
+        className="pl-2"
+        onClick={(e) =>
+          e.currentTarget.parentElement
+            ?.querySelector<HTMLElement>("[data-slot=command-input]")
+            ?.focus()
+        }
+      >
+        <SiSearch />
+      </InputGroupAddon>
+      <CommandPrimitive.Input
+        data-slot="command-input"
+        className={cn(
+          // Base
+          "bg-transparent st-body-md outline-hidden placeholder:text-ink-subtlest",
+          // Sizing
+          "h-full flex-1 pr-2.5"
+        )}
+        {...props}
+      />
+    </InputGroup>
   )
 }
 
@@ -117,11 +126,11 @@ function CommandList({
       data-slot="command-list"
       className={cn(
         // Base
-        "overflow-x-hidden overflow-y-auto outline-none",
+        "overflow-x-hidden overflow-y-auto overscroll-contain",
         // Sizing
         "max-h-72 scroll-py-1",
         // Other
-        "no-scrollbar",
+        "scrollbar-hide",
         className
       )}
       {...props}
@@ -138,7 +147,7 @@ function CommandEmpty({
       data-slot="command-empty"
       className={cn(
         // Base
-        "py-6 text-center st-body-md",
+        "py-6 text-center st-body-md text-ink-subtler",
         className
       )}
       {...props}
@@ -155,9 +164,9 @@ function CommandGroup({
       data-slot="command-group"
       className={cn(
         // Base
-        "overflow-hidden p-2 text-ink",
-        // Other
-        "**:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-ink-subtler",
+        "p-2",
+        // Heading
+        "**:[[cmdk-group-heading]]:p-2 **:[[cmdk-group-heading]]:st-body-sm **:[[cmdk-group-heading]]:text-ink-subtler",
         className
       )}
       {...props}
@@ -174,11 +183,11 @@ function CommandSeparator({
       data-slot="command-separator"
       className={cn(
         // Base
-        "-mx-2 bg-border",
+        "h-px bg-border",
         // Forced colors force background-color, which would erase the line
         "forced-colors:bg-[CanvasText] forced-colors:forced-color-adjust-none",
-        // Sizing
-        "h-px w-auto",
+        // Inside a group, run to the group's edges
+        "in-data-[slot=command-group]:-mx-2 in-data-[slot=command-group]:my-1",
         className
       )}
       {...props}
@@ -189,18 +198,23 @@ function CommandSeparator({
 function CommandItem({
   className,
   children,
+  checked,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.Item>) {
+}: React.ComponentProps<typeof CommandPrimitive.Item> & {
+  checked?: boolean
+}) {
   return (
     <CommandPrimitive.Item
       data-slot="command-item"
+      data-checked={checked}
+      aria-checked={checked}
       className={cn(
         // Group
         "group/command-item",
         // Base
-        "relative flex cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 st-label-md text-ink outline-hidden select-none",
+        "flex cursor-default items-start gap-2 overflow-hidden rounded-lg p-2 st-label-md text-ink outline-hidden select-none",
         // Selected
-        "data-[selected=true]:bg-surface-hover data-[selected=true]:text-ink data-[selected=true]:**:text-ink",
+        "data-[selected=true]:bg-surface-hover data-[selected=true]:**:text-ink",
         // Disabled
         "data-[disabled=true]:pointer-events-none data-[disabled=true]:text-ink-subtlest",
         // Other
@@ -210,8 +224,33 @@ function CommandItem({
       {...props}
     >
       {children}
-      <SiCheck className="ml-auto opacity-0 group-has-data-[slot=command-shortcut]/command-item:hidden group-data-[checked=true]/command-item:opacity-100" />
+      {checked && (
+        <SiCheck data-slot="command-item-indicator" className="ml-auto" />
+      )}
     </CommandPrimitive.Item>
+  )
+}
+
+function CommandItemContent({
+  ...props
+}: React.ComponentProps<typeof DropdownMenuItemContent>) {
+  return <DropdownMenuItemContent data-slot="command-item-content" {...props} />
+}
+
+function CommandItemTitle({
+  ...props
+}: React.ComponentProps<typeof DropdownMenuItemTitle>) {
+  return <DropdownMenuItemTitle data-slot="command-item-title" {...props} />
+}
+
+function CommandItemDescription({
+  ...props
+}: React.ComponentProps<typeof DropdownMenuItemDescription>) {
+  return (
+    <DropdownMenuItemDescription
+      data-slot="command-item-description"
+      {...props}
+    />
   )
 }
 
@@ -237,15 +276,16 @@ function CommandShortcut({
 export {
   Command,
   CommandDialog,
-  DialogTrigger as CommandDialogTrigger,
+  CommandDialogTrigger,
+  CommandDialogPopup,
   CommandInput,
   CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandSeparator,
   CommandItem,
   CommandItemContent,
   CommandItemTitle,
   CommandItemDescription,
   CommandShortcut,
-  CommandSeparator,
 }

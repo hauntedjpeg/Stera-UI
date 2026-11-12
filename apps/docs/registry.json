@@ -253,8 +253,13 @@
     {
       "name": "command",
       "type": "registry:ui",
-      "dependencies": ["cmdk", "@base-ui/react", "stera-icons"],
-      "registryDependencies": ["utils", "dialog", "input-group"],
+      "dependencies": ["cmdk", "stera-icons"],
+      "registryDependencies": [
+        "utils",
+        "dialog",
+        "dropdown-menu",
+        "input-group"
+      ],
       "files": [{ "path": "registry/ui/command.tsx", "type": "registry:ui" }]
     },
     {
