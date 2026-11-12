@@ -15,7 +15,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
         // Group
         "group/input-group",
         // Base
-        "relative flex items-center rounded-xl bg-surface shadow-xs inset-ring inset-ring-border forced-stroke transition-[color,box-shadow] outline-none",
+        "relative flex items-center rounded-xl bg-surface inset-ring inset-ring-border forced-stroke transition-[color,box-shadow] outline-none",
         // Sizing (driven by InputGroupInput's data-size; block layouts size to content)
         "h-9 w-full min-w-0 has-[[data-slot=input-group-control][data-size=lg]]:not-has-[>[data-align^=block]]:h-11 has-[[data-slot=input-group-control][data-size=sm]]:not-has-[>[data-align^=block]]:h-8",
         // Focus

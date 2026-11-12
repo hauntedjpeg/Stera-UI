@@ -33,11 +33,6 @@ ButtonGroup
 </ButtonGroup>
 ```
 
-## ButtonGroup vs ToggleGroup
-
-- Use the `ButtonGroup` component when you want to group buttons that perform an action.
-- Use the `ToggleGroup` component when you want to group buttons that toggle a state.
-
 ## Examples
 
 ### Orientation
@@ -68,7 +63,7 @@ Buttons with variant `outline` do not need a separator since they have a border.
 
 ### Split
 
-Create a split button group by adding two buttons separated by a `ButtonGroupSeparator`.
+Create a split button by adding two buttons separated by a `ButtonGroupSeparator`.
 
 <ComponentPreview name="button-group-split" />
 
@@ -101,6 +96,33 @@ Pair with a `Select` component.
 Use with a [`Popover`](/components/popover) component.
 
 <ComponentPreview name="button-group-popover" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A few related actions on the same thing, such as Archive, Report and Snooze on a message.
+- A main action with related options, as a split button: the action itself, plus a menu or panel of alternatives.
+- An input paired with the action that acts on it, such as a search field and its button, or an amount and its currency.
+
+### When not to use
+
+- Options that hold state, such as text formatting or a view switch. Use a [Toggle Group](/components/toggle-group).
+- Moving between sections or destinations. Use [Tabs](/components/tabs).
+- Unrelated actions that only happen to sit side by side. Use separate [Buttons](/components/button).
+
+### Guidelines
+
+- Keep groups small and give each one a visible or accessible label, so the shared purpose of its actions is clear.
+- Give every item in a group the same emphasis. An action that matters more than the rest belongs outside the group, or as the main action of a split button.
+- Use an icon-only item only when its icon is widely recognized, and give it an accessible label.
+- **Split buttons:** make the main part the action people reach for most, and keep the second part to options or variations of that same action.
+- **Nested groups:** nest groups to set apart sets of actions with different subjects, such as navigation next to message actions.
+- **Text:** use it for a fixed, non-interactive label or unit next to an input, never for an action.
+
+</DesignGuidelines>
 
 ## API Reference
 

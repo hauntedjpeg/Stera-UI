@@ -1,40 +1,44 @@
+import { SiPlus } from "stera-icons"
 import { Button } from "@/components/ui/button"
 import { ButtonGroup } from "@/components/ui/button-group"
 
 export default function ButtonGroupSize() {
   return (
-    <div className="flex flex-col items-start gap-4">
+    <div className="flex flex-col items-start gap-8">
       <ButtonGroup>
         <Button variant="outline" size="sm">
-          Reply
+          Small
         </Button>
         <Button variant="outline" size="sm">
-          Forward
+          Button
         </Button>
         <Button variant="outline" size="sm">
-          Archive
+          Group
+        </Button>
+        <Button variant="outline" size="icon-sm" aria-label="Add">
+          <SiPlus />
         </Button>
       </ButtonGroup>
       <ButtonGroup>
-        <Button variant="outline" size="md">
-          Reply
-        </Button>
-        <Button variant="outline" size="md">
-          Forward
-        </Button>
-        <Button variant="outline" size="md">
-          Archive
+        <Button variant="outline">Default</Button>
+        <Button variant="outline">Button</Button>
+        <Button variant="outline">Group</Button>
+        <Button variant="outline" size="icon" aria-label="Add">
+          <SiPlus />
         </Button>
       </ButtonGroup>
       <ButtonGroup>
         <Button variant="outline" size="lg">
-          Reply
+          Large
         </Button>
         <Button variant="outline" size="lg">
-          Forward
+          Button
         </Button>
         <Button variant="outline" size="lg">
-          Archive
+          Group
+        </Button>
+        <Button variant="outline" size="icon-lg" aria-label="Add">
+          <SiPlus />
         </Button>
       </ButtonGroup>
     </div>

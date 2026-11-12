@@ -1,33 +1,56 @@
 "use client"
 
-import { SiPlus } from "stera-icons"
+import * as React from "react"
+import { SiArrowRight } from "stera-icons"
 import { Button } from "@/components/ui/button"
 import { ButtonGroup } from "@/components/ui/button-group"
+import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select"
 
+const CURRENCIES = [
+  { label: "US Dollar", value: "$" },
+  { label: "Euro", value: "€" },
+  { label: "British Pound", value: "£" },
+]
+
 export default function ButtonGroupSelect() {
+  const [currency, setCurrency] = React.useState("$")
+
   return (
     <ButtonGroup>
-      <Button variant="outline">
-        <SiPlus data-icon="inline-start" />
-        New
-      </Button>
-      <Select defaultValue="public">
-        <SelectTrigger className="w-32">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="public">Public</SelectItem>
-          <SelectItem value="private">Private</SelectItem>
-          <SelectItem value="draft">Draft</SelectItem>
-        </SelectContent>
-      </Select>
+      <ButtonGroup>
+        <Select
+          items={CURRENCIES}
+          value={currency}
+          onValueChange={(value) => setCurrency(value as string)}
+        >
+          <SelectTrigger className="font-mono" aria-label="Currency">
+            {currency}
+          </SelectTrigger>
+          <SelectContent alignItemWithTrigger={false} align="start">
+            <SelectGroup>
+              {CURRENCIES.map((item) => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.value}{" "}
+                  <span className="text-ink-subtler">{item.label}</span>
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        <Input placeholder="10.00" pattern="[0-9]*" aria-label="Amount" />
+      </ButtonGroup>
+      <ButtonGroup>
+        <Button variant="outline" size="icon" aria-label="Send">
+          <SiArrowRight />
+        </Button>
+      </ButtonGroup>
     </ButtonGroup>
   )
 }

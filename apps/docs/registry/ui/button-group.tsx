@@ -20,9 +20,9 @@ const buttonGroupVariants = cva(
     variants: {
       orientation: {
         horizontal:
-          "[&>[data-slot]:has(~[data-slot])]:rounded-r-none [&>[data-slot]:not([data-slot=button-group-separator])+[data-slot]:not([data-slot=button-group-separator]):not([data-slot=button-group])]:-ms-px [&>[data-slot]~[data-slot]]:rounded-l-none",
+          "[&>[data-slot]:has(~[data-slot])]:rounded-r-none [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]:not([data-slot=button-group-separator]):not([data-slot=button-group-separator]+*):not([data-slot=button-group])]:-ms-px",
         vertical:
-          "flex-col [&>[data-slot]:has(~[data-slot])]:rounded-b-none [&>[data-slot]:not([data-slot=button-group-separator])+[data-slot]:not([data-slot=button-group-separator]):not([data-slot=button-group])]:-mt-px [&>[data-slot]~[data-slot]]:rounded-t-none",
+          "flex-col [&>[data-slot]:has(~[data-slot])]:rounded-b-none [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]:not([data-slot=button-group-separator]):not([data-slot=button-group-separator]+*):not([data-slot=button-group])]:-mt-px",
       },
     },
     defaultVariants: {
@@ -57,7 +57,7 @@ function ButtonGroupText({
     props: mergeProps<"div">(
       {
         className: cn(
-          "flex items-center gap-2 rounded-md bg-surface-subtle px-2.5 text-sm font-medium shadow-xs inset-ring inset-ring-border forced-stroke [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+          "flex items-center gap-2 rounded-xl bg-surface-subtle px-2.5 st-label-md-medium inset-ring inset-ring-border forced-stroke [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
           className
         ),
       },
