@@ -58,7 +58,7 @@ function SelectTrigger({
         // Sizing
         "w-fit gap-1.5",
         // Animation
-        "transition-[color,box-shadow] focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:inset-ring-border-brand disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:inset-ring-border-danger data-placeholder:text-ink-subtlest",
+        "transition-[color,box-shadow] focus-visible:inset-ring-[1.5px] focus-visible:inset-ring-border-brand-bold disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:inset-ring-border-danger-bold data-placeholder:text-ink-subtlest",
         // SM
         "data-[size=sm]:h-8 data-[size=sm]:py-2 data-[size=sm]:pr-2 data-[size=sm]:pl-2.5",
         // LG

@@ -15,11 +15,11 @@ function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
         // Sizing
         "min-h-16 w-full",
         // Focus
-        "focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:inset-ring-border-brand",
+        "focus-visible:inset-ring-[1.5px] focus-visible:inset-ring-border-brand-bold",
         // Disabled
         "disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:text-ink-subtlest disabled:inset-ring-border-subtle",
         // Invalid
-        "aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:inset-ring-border-danger",
+        "aria-invalid:inset-ring-border-danger-bold",
         // Other
         "field-sizing-content transition-[color,box-shadow] outline-none placeholder:text-ink-subtlest",
         className

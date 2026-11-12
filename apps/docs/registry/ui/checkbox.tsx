@@ -14,12 +14,12 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         "after:absolute after:-inset-x-3 after:-inset-y-2",
         // Sizing
         "size-4 shrink-0",
-        //Focus
-        "focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:inset-ring-border-brand",
+        // Focus
+        "focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:inset-ring-border-brand-bold",
         // Disabled
         "disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:bg-surface-disabled",
         // Invalid
-        "aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:inset-ring-border-danger aria-invalid:aria-checked:inset-ring-surface-brand",
+        "aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:inset-ring-border-danger-bold aria-invalid:aria-checked:inset-ring-surface-brand",
         // Checked / Indeterminate
         "data-checked:bg-surface-brand data-checked:text-ink-onbrand data-checked:inset-ring-surface-brand",
         "data-indeterminate:bg-surface-brand data-indeterminate:text-ink-onbrand data-indeterminate:inset-ring-surface-brand",

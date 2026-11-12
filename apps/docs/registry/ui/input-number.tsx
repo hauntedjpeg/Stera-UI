@@ -45,12 +45,12 @@ const inputNumberControlVariants = cva(
     "w-full min-w-0 flex-1",
     // Without a stepper beside it, follow the group's inner corner so the inset ring isn't clipped
     "first:rounded-l-[calc(var(--radius-xl)-1px)] last:rounded-r-[calc(var(--radius-xl)-1px)]",
-    // Focus: a 1px border with the ring inside it, kept within the editable area
-    "focus-visible:inset-shadow-[0_0_0_1px_var(--color-border-brand)] focus-visible:inset-ring-4 focus-visible:inset-ring-ring-brand",
+    // Focus: the stroke sits inside the group's border, kept within the editable area
+    "focus-visible:inset-ring-[1.5px] focus-visible:inset-ring-border-brand-bold",
     // Disabled
     "disabled:cursor-not-allowed",
     // Invalid
-    "aria-invalid:inset-shadow-[0_0_0_1px_var(--color-border-danger)] aria-invalid:inset-ring-4 aria-invalid:inset-ring-ring-danger",
+    "aria-invalid:inset-ring aria-invalid:inset-ring-border-danger-bold aria-invalid:focus-visible:inset-ring-[1.5px]",
     // Other
     "transition-[box-shadow] outline-none",
   ],

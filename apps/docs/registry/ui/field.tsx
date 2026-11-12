@@ -146,7 +146,7 @@ function FieldLabel({
     // Choice card: checked
     "has-[>[data-slot=field]]:has-data-checked:bg-surface-brand-subtle has-[>[data-slot=field]]:has-data-checked:inset-ring-border-brand-subtle",
     // Choice card: focus
-    "has-[>[data-slot=field]]:has-focus-visible:ring-3 has-[>[data-slot=field]]:has-focus-visible:ring-ring-brand has-[>[data-slot=field]]:has-focus-visible:inset-ring-border-brand has-[>[data-slot=field]]:has-focus-visible:[--forced-stroke-width:2px]",
+    "has-[>[data-slot=field]]:has-focus-visible:inset-ring-[1.5px] has-[>[data-slot=field]]:has-focus-visible:inset-ring-border-brand-bold has-[>[data-slot=field]]:has-focus-visible:[--forced-stroke-width:2px] has-[>[data-slot=field]]:has-data-checked:has-focus-visible:inset-ring-border-brand-bold",
     // Choice card: disabled
     "has-[>[data-slot=field][data-disabled]]:cursor-not-allowed has-[>[data-slot=field][data-disabled]]:bg-surface-disabled has-[>[data-slot=field][data-disabled]]:inset-ring-border-subtle",
     className

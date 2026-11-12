@@ -7,15 +7,15 @@ import { cn } from "@/lib/utils"
 const inputVariants = cva(
   [
     // Base
-    "rounded-xl bg-surface px-3 py-1 st-body-md inset-ring inset-ring-border forced-focus forced-stroke file:border-0 file:bg-transparent aria-invalid:inset-ring-border-danger",
+    "rounded-xl bg-surface px-3 py-1 st-body-md inset-ring inset-ring-border forced-focus forced-stroke file:border-0 file:bg-transparent",
     // Sizing
     "w-full min-w-0",
     // Focus
-    "focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:inset-ring-border-brand",
+    "focus-visible:inset-ring-[1.5px] focus-visible:inset-ring-border-brand-bold",
     // Disabled
     "disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:text-ink-subtlest disabled:inset-ring-border-subtle",
     // Invalid
-    "aria-invalid:ring-3 aria-invalid:ring-ring-danger",
+    "aria-invalid:inset-ring-border-danger-bold",
     // Other
     "transition-[color,box-shadow] outline-none file:inline-flex file:font-medium file:text-ink placeholder:text-ink-subtlest",
   ],

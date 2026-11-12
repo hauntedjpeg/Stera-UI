@@ -15,9 +15,9 @@ const switchVariants = cva(
     // State
     "data-checked:bg-surface-brand",
     // Focus
-    "focus-visible:border-border-brand focus-visible:ring-3 focus-visible:ring-ring-brand",
+    "focus-visible:border-border-brand-bold focus-visible:ring-3 focus-visible:ring-ring-brand",
     // Invalid
-    "data-invalid:border-border-danger data-invalid:ring-3 data-invalid:ring-ring-danger",
+    "data-invalid:border-border-danger-bold data-invalid:ring-3 data-invalid:ring-ring-danger",
     // Disabled / Read-only
     "data-disabled:cursor-not-allowed data-disabled:opacity-50 data-readonly:cursor-default",
   ],

@@ -74,9 +74,9 @@ function Slider<Value extends number | readonly number[]>({
               "data-dragging:border-alpha-3 data-dragging:bg-alpha-5",
               "data-dragging:data-[orientation=horizontal]:h-5 data-dragging:data-[orientation=horizontal]:w-8 data-dragging:data-[orientation=vertical]:h-8 data-dragging:data-[orientation=vertical]:w-5",
               // Focus — keyboard focus lands on the nested <input>
-              "has-focus-visible:border-border-brand has-focus-visible:ring-3 has-focus-visible:ring-ring-brand",
+              "has-focus-visible:border-border-brand-bold has-focus-visible:ring-3 has-focus-visible:ring-ring-brand",
               // Invalid
-              "data-invalid:border-border-danger data-invalid:ring-3 data-invalid:ring-ring-danger"
+              "data-invalid:border-border-danger-bold data-invalid:ring-3 data-invalid:ring-ring-danger"
             )}
           />
         ))}

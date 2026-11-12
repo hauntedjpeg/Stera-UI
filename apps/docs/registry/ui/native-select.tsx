@@ -10,11 +10,11 @@ const nativeSelectVariants = cva(
     // Base
     "w-full min-w-0 appearance-none rounded-xl bg-surface inset-ring inset-ring-border forced-focus forced-stroke transition-[color,box-shadow] outline-none select-none",
     // Focus
-    "focus-visible:ring-3 focus-visible:ring-ring-brand focus-visible:inset-ring-border-brand",
+    "focus-visible:inset-ring-[1.5px] focus-visible:inset-ring-border-brand-bold",
     // Disabled
     "disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:text-ink-subtlest disabled:inset-ring-border-subtle",
     // Invalid
-    "aria-invalid:ring-3 aria-invalid:ring-ring-danger aria-invalid:inset-ring-border-danger",
+    "aria-invalid:inset-ring-border-danger-bold",
   ],
   {
     variants: {
