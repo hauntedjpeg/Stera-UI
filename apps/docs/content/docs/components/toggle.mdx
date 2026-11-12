@@ -15,8 +15,8 @@ description: A two-state button that stays pressed while its state is active, fo
 
 | Variant | Description |
 | --- | --- |
-| `default` | No border, background appears on hover/press |
-| `outline` | Bordered with a surface background |
+| `ghost` | No fill until hovered or pressed |
+| `outline` | Surface fill with a stroke |
 
 ## With Text
 
@@ -70,9 +70,9 @@ Built on Base UI's [Toggle](https://base-ui.com/react/components/toggle#api-refe
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `variant` | `"default" \| "outline"` | `"default"` |
+| `variant` | `"ghost" \| "outline"` | `"ghost"` |
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"md"` |
 | `pressed` | `boolean` | — |
 | `defaultPressed` | `boolean` | — |
-| `onPressedChange` | `(pressed: boolean) => void` | — |
+| `onPressedChange` | `(pressed: boolean, eventDetails) => void` | — |
 | `disabled` | `boolean` | `false` |

@@ -4,7 +4,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 export default function ToggleGroupSizes() {
   return (
     <div className="flex flex-col items-center gap-4">
-      <ToggleGroup size="sm" multiple>
+      <ToggleGroup size="icon-sm" multiple>
         <ToggleGroupItem value="bold" aria-label="Toggle bold">
           <SiTextBold />
         </ToggleGroupItem>
@@ -15,7 +15,7 @@ export default function ToggleGroupSizes() {
           <SiTextUnderline />
         </ToggleGroupItem>
       </ToggleGroup>
-      <ToggleGroup size="md" multiple>
+      <ToggleGroup size="icon" multiple>
         <ToggleGroupItem value="bold" aria-label="Toggle bold">
           <SiTextBold />
         </ToggleGroupItem>
@@ -26,7 +26,7 @@ export default function ToggleGroupSizes() {
           <SiTextUnderline />
         </ToggleGroupItem>
       </ToggleGroup>
-      <ToggleGroup size="lg" multiple>
+      <ToggleGroup size="icon-lg" multiple>
         <ToggleGroupItem value="bold" aria-label="Toggle bold">
           <SiTextBold />
         </ToggleGroupItem>

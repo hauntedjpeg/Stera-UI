@@ -3,7 +3,7 @@ import { Toggle } from "@/components/ui/toggle"
 
 export default function ToggleOutline() {
   return (
-    <Toggle variant="outline" aria-label="Toggle bold">
+    <Toggle variant="outline" size="icon" aria-label="Toggle bold">
       <SiTextBold />
     </Toggle>
   )

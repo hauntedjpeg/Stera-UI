@@ -3,7 +3,7 @@ import { Toggle } from "@/components/ui/toggle"
 
 export default function ToggleDisabled() {
   return (
-    <Toggle disabled aria-label="Toggle underline">
+    <Toggle size="icon" disabled aria-label="Toggle underline">
       <SiTextUnderline />
     </Toggle>
   )

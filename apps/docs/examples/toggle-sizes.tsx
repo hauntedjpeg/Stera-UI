@@ -4,13 +4,16 @@ import { Toggle } from "@/components/ui/toggle"
 export default function ToggleSizes() {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <Toggle size="sm" aria-label="Toggle bold">
+      <Toggle size="icon-xs" aria-label="Toggle bold">
         <SiTextBold />
       </Toggle>
-      <Toggle size="md" aria-label="Toggle bold">
+      <Toggle size="icon-sm" aria-label="Toggle bold">
         <SiTextBold />
       </Toggle>
-      <Toggle size="lg" aria-label="Toggle bold">
+      <Toggle size="icon" aria-label="Toggle bold">
+        <SiTextBold />
+      </Toggle>
+      <Toggle size="icon-lg" aria-label="Toggle bold">
         <SiTextBold />
       </Toggle>
     </div>

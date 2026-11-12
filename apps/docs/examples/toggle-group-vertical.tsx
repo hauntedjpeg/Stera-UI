@@ -3,7 +3,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 export default function ToggleGroupVertical() {
   return (
-    <ToggleGroup orientation="vertical" multiple>
+    <ToggleGroup size="icon" orientation="vertical" multiple>
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
         <SiTextBold />
       </ToggleGroupItem>

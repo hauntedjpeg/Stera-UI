@@ -3,55 +3,61 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+const defaults = { variant: "ghost", size: "md" } as const
+
 const toggleVariants = cva(
   [
     // Base
-    "inline-flex shrink-0 items-center justify-center rounded-xl text-sm font-medium whitespace-nowrap transition-all outline-none select-none",
-    // Focus
-    "forced-focus focus-visible:ring-3 focus-visible:inset-ring focus-visible:ring-ring focus-visible:inset-ring-border-bold",
+    "inline-flex shrink-0 items-center justify-center rounded-xl text-ink transition outline-none select-none",
+    // Text
+    "st-label-md-medium whitespace-nowrap",
+    // Focus — halo only; the outline variant recolors its own stroke
+    "forced-focus focus-visible:ring-3 focus-visible:ring-ring",
     // Disabled
-    "disabled:pointer-events-none disabled:opacity-50",
-    // Invalid
-    "aria-invalid:ring-3 aria-invalid:inset-ring aria-invalid:ring-ring-danger aria-invalid:inset-ring-border-danger",
+    "data-disabled:pointer-events-none data-disabled:opacity-50",
     // Other
-    "group/toggle forced-stroke active:translate-y-px [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    "forced-stroke [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   ],
   {
     variants: {
       variant: {
-        default:
-          "hover:bg-surface-hover hover:text-ink aria-pressed:bg-surface-subtle",
-        outline:
-          "bg-surface inset-ring inset-ring-border hover:bg-surface-hover aria-pressed:bg-surface-subtle",
+        ghost: [
+          "hover:bg-surface-hover active:bg-surface-pressed",
+          "data-pressed:bg-surface-muted data-pressed:hover:bg-surface-muted-hover data-pressed:active:bg-surface-muted-pressed",
+        ],
+        outline: [
+          "bg-surface inset-ring inset-ring-border focus-visible:inset-ring-border-bold",
+          "hover:bg-surface-hover active:bg-surface-pressed",
+          "data-pressed:bg-surface-muted data-pressed:hover:bg-surface-muted-hover data-pressed:active:bg-surface-muted-pressed",
+        ],
       },
       size: {
-        xs: "h-6 gap-1.5 rounded-lg px-2 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-8 gap-2 px-3 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+        xs: "h-6 gap-1.5 rounded-lg px-2 st-label-sm-medium has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-8 gap-2 px-3 st-label-sm-medium has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         md: "h-9 gap-2 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
-        lg: "h-11 gap-3 px-5 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
-        icon: "size-9 [&_svg:not([class*='size-'])]:size-4",
+        lg: "h-11 gap-2 px-5 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
+        icon: "size-9",
         "icon-xs": "size-6 rounded-lg [&_svg:not([class*='size-'])]:size-3",
         "icon-sm": "size-8",
-        "icon-lg": "size-11 [&_svg:not([class*='size-'])]:size-6",
+        "icon-lg": "size-11 [&_svg:not([class*='size-'])]:size-5",
       },
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
-    },
+    defaultVariants: defaults,
   }
 )
 
 function Toggle({
   className,
-  variant = "default",
-  size = "md",
+  variant = defaults.variant,
+  size = defaults.size,
   ...props
 }: TogglePrimitive.Props & VariantProps<typeof toggleVariants>) {
   return (
     <TogglePrimitive
-      data-slot="toggle"
       className={cn(toggleVariants({ variant, size, className }))}
+      data-slot="toggle"
+      data-variant={variant}
+      data-size={size}
       {...props}
     />
   )

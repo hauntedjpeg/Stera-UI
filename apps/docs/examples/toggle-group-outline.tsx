@@ -3,7 +3,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 export default function ToggleGroupOutline() {
   return (
-    <ToggleGroup variant="outline" multiple>
+    <ToggleGroup variant="outline" size="icon" multiple>
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
         <SiTextBold />
       </ToggleGroupItem>
