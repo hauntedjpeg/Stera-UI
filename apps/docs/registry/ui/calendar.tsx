@@ -86,7 +86,6 @@ function Calendar({
             : "pointer-events-none flex items-center gap-1.5 [&>svg]:size-4",
           defaultClassNames.caption_label
         ),
-        table: "w-full border-collapse",
         weekdays: cn("flex", defaultClassNames.weekdays),
         weekday: cn(
           "min-w-(--cell-size) flex-1 rounded-(--cell-radius) st-label-md-medium text-ink-subtler select-none",
