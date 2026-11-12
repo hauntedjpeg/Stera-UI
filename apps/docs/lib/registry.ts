@@ -115,6 +115,34 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/skeleton-text")),
     slug: "skeleton",
   },
+  "spinner-demo": {
+    component: dynamic(() => import("@/examples/spinner-demo")),
+    slug: "spinner",
+  },
+  "spinner-sizes": {
+    component: dynamic(() => import("@/examples/spinner-sizes")),
+    slug: "spinner",
+  },
+  "spinner-custom-icon": {
+    component: dynamic(() => import("@/examples/spinner-custom-icon")),
+    slug: "spinner",
+  },
+  "spinner-button": {
+    component: dynamic(() => import("@/examples/spinner-button")),
+    slug: "spinner",
+  },
+  "spinner-badge": {
+    component: dynamic(() => import("@/examples/spinner-badge")),
+    slug: "spinner",
+  },
+  "spinner-input-group": {
+    component: dynamic(() => import("@/examples/spinner-input-group")),
+    slug: "spinner",
+  },
+  "spinner-empty": {
+    component: dynamic(() => import("@/examples/spinner-empty")),
+    slug: "spinner",
+  },
   "progress-demo": {
     component: dynamic(() => import("@/examples/progress-demo")),
     slug: "progress",

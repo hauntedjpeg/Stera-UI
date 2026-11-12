@@ -5,12 +5,12 @@ export default function BadgeWithSpinner() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-2">
       <Badge>
-        <Spinner data-icon="inline-start" />
+        <Spinner data-icon="inline-start" aria-hidden />
         Processing
       </Badge>
       <Badge>
         Thinking
-        <Spinner data-icon="inline-end" />
+        <Spinner data-icon="inline-end" aria-hidden />
       </Badge>
     </div>
   )

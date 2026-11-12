@@ -1,0 +1,98 @@
+---
+title: Spinner
+description: An indicator that something is happening, for waits with no predictable end.
+---
+
+<ComponentPreview name="spinner-demo" />
+
+## Installation
+
+<InstallSnippet slug="spinner" hideHeading />
+
+## Accessibility
+
+- The `Spinner` component renders an `<svg>` with `role="status"` and `aria-label="Loading"`. Pass a more specific label when there is one.
+- When visible text next to it already says what's happening, hide the spinner with `aria-hidden` so screen readers don't read both.
+- With reduced motion turned on, it spins more slowly instead of stopping.
+
+```tsx
+<Spinner aria-label="Saving" />
+<Spinner aria-hidden />
+```
+
+## Examples
+
+### Size
+
+It's 16px on its own. Use a `size-*` class to change it. Inside a Button, Badge, Item or Input Group it takes the size of that control's icons.
+
+<ComponentPreview name="spinner-sizes" />
+
+### Custom icon
+
+Pass any icon component to `icon`. To change the icon everywhere, change the default in `spinner.tsx`.
+
+<ComponentPreview name="spinner-custom-icon" />
+
+### Button
+
+Add `data-icon="inline-start"` or `data-icon="inline-end"` to the spinner so the button adjusts its padding.
+
+<ComponentPreview name="spinner-button" />
+
+### Badge
+
+The same `data-icon` props work in a Badge.
+
+<ComponentPreview name="spinner-badge" />
+
+### Input Group
+
+A spinner in an addon, next to text that says what's being checked.
+
+<ComponentPreview name="spinner-input-group" />
+
+### Empty
+
+A spinner in place of the empty state's icon, for a wait that fills the surface.
+
+<ComponentPreview name="spinner-empty" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- A wait with no predictable end, where you don't know the layout of what's coming.
+- An action that's in progress, such as a save or a sync.
+
+### When not to use
+
+- A process you can measure, such as an upload. Use a [Progress](/components/progress).
+- Content whose layout you know. Use a [Skeleton](/components/skeleton).
+- A surface that has finished loading with nothing to show. Use an [Empty](/components/empty).
+
+### Guidelines
+
+- Say what's happening when the context doesn't, such as "Saving" next to the spinner.
+- Show the spinner where the wait is. A wait for one control shouldn't block the whole page.
+- A custom icon has to read correctly while it rotates.
+- Your call: one spinner icon or several. Pick one and use it consistently.
+
+See also: [Loading and empty states](/design/loading).
+
+</DesignGuidelines>
+
+## API Reference
+
+Renders the icon's `<svg>` and accepts all `<svg>` props. Use `className` to change its size or color.
+
+| Prop   | Type                                             | Default         |
+| ------ | ------------------------------------------------ | --------------- |
+| `icon` | `React.ComponentType<React.ComponentProps<"svg">>` | `SiCircleNotch` |
+
+```tsx
+<Spinner />
+<Spinner icon={SiSpinner} className="size-6" />
+```
