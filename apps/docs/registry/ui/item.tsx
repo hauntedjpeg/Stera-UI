@@ -34,9 +34,8 @@ function ItemSeparator({
   return (
     <Separator
       data-slot="item-separator"
-      orientation="horizontal"
       className={cn(
-        // Margin
+        // Sizing
         "basis-full",
         className
       )}

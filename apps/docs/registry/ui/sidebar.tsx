@@ -453,8 +453,6 @@ function SidebarSeparator({
       data-slot="sidebar-separator"
       data-sidebar="separator"
       className={cn(
-        // Base
-        "bg-border",
         // Sizing
         "w-auto",
         // Position

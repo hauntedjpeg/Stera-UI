@@ -2,17 +2,19 @@ import { Separator as SeparatorPrimitive } from "@base-ui/react/separator"
 
 import { cn } from "@/lib/utils"
 
-function Separator({
-  className,
-  orientation = "horizontal",
-  ...props
-}: SeparatorPrimitive.Props) {
+function Separator({ className, ...props }: SeparatorPrimitive.Props) {
   return (
     <SeparatorPrimitive
       data-slot="separator"
-      orientation={orientation}
       className={cn(
-        "shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px data-[orientation=vertical]:self-stretch",
+        // Base
+        "shrink-0 bg-border",
+        // Forced colors force background-color, which would erase the line
+        "forced-colors:bg-[CanvasText]! forced-colors:forced-color-adjust-none",
+        // Horizontal
+        "data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full",
+        // Vertical
+        "data-[orientation=vertical]:w-px data-[orientation=vertical]:self-stretch",
         className
       )}
       {...props}

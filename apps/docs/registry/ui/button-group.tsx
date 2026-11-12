@@ -80,7 +80,7 @@ function ButtonGroupSeparator({
       data-slot="button-group-separator"
       orientation={orientation}
       className={cn(
-        "relative self-stretch bg-border data-[orientation=horizontal]:mx-px data-[orientation=horizontal]:w-auto data-[orientation=vertical]:h-auto",
+        "relative self-stretch data-[orientation=horizontal]:mx-px data-[orientation=horizontal]:w-auto",
         // Brand
         "[[data-variant=brand]+&]:bg-border-brand-bold",
         // Subtle
