@@ -1,4 +1,4 @@
-import { SiSpinner, SiSpinnerDuotone } from "stera-icons"
+import { SiSpinner, SiCircleNotchDuotone } from "stera-icons"
 import { Spinner } from "@/components/ui/spinner"
 
 export default function SpinnerCustomIcon() {
@@ -6,7 +6,7 @@ export default function SpinnerCustomIcon() {
     <div className="flex items-center gap-6">
       <Spinner className="size-6" />
       <Spinner icon={SiSpinner} className="size-6" />
-      <Spinner icon={SiSpinnerDuotone} className="size-6" />
+      <Spinner icon={SiCircleNotchDuotone} className="size-6" />
     </div>
   )
 }
