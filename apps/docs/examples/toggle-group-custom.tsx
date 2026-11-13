@@ -2,7 +2,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 export default function ToggleGroupCustom() {
   return (
-    <ToggleGroup variant="outline" spacing={1}>
+    <ToggleGroup spacing={1}>
       <ToggleGroupItem value="light" className="font-light">
         Light
       </ToggleGroupItem>

@@ -235,8 +235,8 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/toggle-demo")),
     slug: "toggle",
   },
-  "toggle-outline": {
-    component: dynamic(() => import("@/examples/toggle-outline")),
+  "toggle-ghost": {
+    component: dynamic(() => import("@/examples/toggle-ghost")),
     slug: "toggle",
   },
   "toggle-with-text": {
@@ -465,8 +465,8 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/toggle-group-demo")),
     slug: "toggle-group",
   },
-  "toggle-group-outline": {
-    component: dynamic(() => import("@/examples/toggle-group-outline")),
+  "toggle-group-ghost": {
+    component: dynamic(() => import("@/examples/toggle-group-ghost")),
     slug: "toggle-group",
   },
   "toggle-group-sizes": {

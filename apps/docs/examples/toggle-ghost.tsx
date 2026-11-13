@@ -1,9 +1,9 @@
 import { SiTextBold } from "stera-icons"
 import { Toggle } from "@/components/ui/toggle"
 
-export default function ToggleOutline() {
+export default function ToggleGhost() {
   return (
-    <Toggle variant="outline" size="icon" aria-label="Toggle bold">
+    <Toggle variant="ghost" size="icon" aria-label="Toggle bold">
       <SiTextBold />
     </Toggle>
   )

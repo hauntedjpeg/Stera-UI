@@ -3,10 +3,12 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-const defaults = { variant: "ghost", size: "md" } as const
+const defaults = { variant: "outline", size: "md" } as const
 
 const toggleVariants = cva(
   [
+    // Group — lets children style themselves with group-data-pressed/toggle
+    "group/toggle",
     // Base
     "inline-flex shrink-0 items-center justify-center rounded-xl text-ink transition outline-none select-none",
     // Text
