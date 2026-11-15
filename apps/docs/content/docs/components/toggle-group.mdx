@@ -9,6 +9,21 @@ description: A set of toggles with a shared state, presented as one control, whe
 
 <InstallSnippet slug="toggle-group" hideHeading />
 
+## Keep One Selected
+
+In single selection, pressing the active item releases it and leaves nothing selected. When one option must always be active, such as a theme or a layout, control the value and ignore the change that would clear it. The demo and the single-selection examples on this page work this way.
+
+```tsx
+const [value, setValue] = React.useState(["system"])
+
+<ToggleGroup
+  value={value}
+  onValueChange={(next) => next.length > 0 && setValue(next)}
+>
+  …
+</ToggleGroup>
+```
+
 ## Multiple Selection
 
 <ComponentPreview name="toggle-group-multiple" />
