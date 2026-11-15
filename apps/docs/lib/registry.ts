@@ -465,8 +465,12 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/toggle-group-demo")),
     slug: "toggle-group",
   },
-  "toggle-group-ghost": {
-    component: dynamic(() => import("@/examples/toggle-group-ghost")),
+  "toggle-group-multiple": {
+    component: dynamic(() => import("@/examples/toggle-group-multiple")),
+    slug: "toggle-group",
+  },
+  "toggle-group-text": {
+    component: dynamic(() => import("@/examples/toggle-group-text")),
     slug: "toggle-group",
   },
   "toggle-group-sizes": {
@@ -479,10 +483,6 @@ const examples: Record<string, RegistryEntry> = {
   },
   "toggle-group-disabled": {
     component: dynamic(() => import("@/examples/toggle-group-disabled")),
-    slug: "toggle-group",
-  },
-  "toggle-group-custom": {
-    component: dynamic(() => import("@/examples/toggle-group-custom")),
     slug: "toggle-group",
   },
   "table-demo": {

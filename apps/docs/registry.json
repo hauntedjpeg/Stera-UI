@@ -529,7 +529,7 @@
       "name": "toggle-group",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["utils", "toggle"],
+      "registryDependencies": ["utils"],
       "files": [
         { "path": "registry/ui/toggle-group.tsx", "type": "registry:ui" }
       ]

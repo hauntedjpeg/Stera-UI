@@ -9,9 +9,13 @@ description: A set of toggles with a shared state, presented as one control, whe
 
 <InstallSnippet slug="toggle-group" hideHeading />
 
-## Ghost Variant
+## Multiple Selection
 
-<ComponentPreview name="toggle-group-ghost" />
+<ComponentPreview name="toggle-group-multiple" />
+
+## Text
+
+<ComponentPreview name="toggle-group-text" />
 
 ## Sizes
 
@@ -24,10 +28,6 @@ description: A set of toggles with a shared state, presented as one control, whe
 ## Disabled
 
 <ComponentPreview name="toggle-group-disabled" />
-
-## Custom
-
-<ComponentPreview name="toggle-group-custom" />
 
 ## Design
 
@@ -59,20 +59,17 @@ Built on Base UI's [Toggle Group](https://base-ui.com/react/components/toggle-gr
 
 ### ToggleGroup
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `variant` | `"outline" \| "ghost"` | `"outline"` |
-| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"md"` |
-| `multiple` | `boolean` | `false` |
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
-| `spacing` | `number` | `0` |
-| `disabled` | `boolean` | `false` |
+| Prop          | Type                                                                            | Default        |
+| ------------- | ------------------------------------------------------------------------------- | -------------- |
+| `size`        | `"xs" \| "sm" \| "md" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"md"`         |
+| `multiple`    | `boolean`                                                                       | `false`        |
+| `orientation` | `"horizontal" \| "vertical"`                                                    | `"horizontal"` |
+| `disabled`    | `boolean`                                                                       | `false`        |
 
 ### ToggleGroupItem
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `value` | `string` | — |
-| `variant` | `"outline" \| "ghost"` | The group's |
-| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | The group's |
-| `disabled` | `boolean` | `false` |
+| Prop       | Type                                                                            | Default     |
+| ---------- | ------------------------------------------------------------------------------- | ----------- |
+| `value`    | `string`                                                                        | —           |
+| `size`     | `"xs" \| "sm" \| "md" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | The group's |
+| `disabled` | `boolean`                                                                       | `false`     |

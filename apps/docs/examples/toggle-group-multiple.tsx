@@ -1,9 +1,9 @@
 import { SiTextBold, SiTextItalic, SiTextUnderline } from "stera-icons"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
-export default function ToggleGroupGhost() {
+export default function ToggleGroupMultiple() {
   return (
-    <ToggleGroup variant="ghost" size="icon" multiple>
+    <ToggleGroup size="icon" multiple aria-label="Text formatting">
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
         <SiTextBold />
       </ToggleGroupItem>
