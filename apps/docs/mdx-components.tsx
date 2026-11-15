@@ -59,7 +59,7 @@ const mdxDefaults: MDXComponents = {
       return (
         <Link
           href={href}
-          className="text-ink-accent underline underline-offset-4 hover:text-ink-accent"
+          className="text-ink underline underline-offset-4 hover:text-ink-subtler"
           {...props}
         />
       )
