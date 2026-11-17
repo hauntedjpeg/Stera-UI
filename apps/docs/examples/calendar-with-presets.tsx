@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { addDays } from "date-fns"
+import { addDays, isSameDay } from "date-fns"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 
@@ -16,11 +16,11 @@ const PRESETS = [
 export default function CalendarWithPresets() {
   const [date, setDate] = React.useState<Date | undefined>(new Date())
   return (
-    <div className="flex gap-2 rounded-lg border p-3">
+    <div className="flex gap-2 rounded-xl p-3 inset-ring inset-ring-border">
       <div className="flex flex-col gap-1 border-r pr-3">
         {PRESETS.map(({ label, days }) => {
           const preset = addDays(new Date(), days)
-          const isSelected = date?.toDateString() === preset.toDateString()
+          const isSelected = date ? isSameDay(date, preset) : false
           return (
             <Button
               key={label}

@@ -11,7 +11,7 @@ export default function CalendarWeekNumbers() {
       showWeekNumber
       selected={date}
       onSelect={setDate}
-      className="rounded-lg border"
+      className="rounded-xl inset-ring inset-ring-border"
     />
   )
 }

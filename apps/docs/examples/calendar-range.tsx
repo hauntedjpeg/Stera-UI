@@ -15,7 +15,7 @@ export default function CalendarRange() {
       mode="range"
       selected={range}
       onSelect={setRange}
-      className="rounded-lg border"
+      className="rounded-xl inset-ring inset-ring-border"
     />
   )
 }

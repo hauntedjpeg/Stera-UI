@@ -10,7 +10,7 @@ export default function CalendarDemo() {
       mode="single"
       selected={date}
       onSelect={setDate}
-      className="rounded-lg border"
+      className="rounded-xl inset-ring inset-ring-border"
     />
   )
 }

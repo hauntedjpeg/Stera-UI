@@ -9,21 +9,35 @@ description: Lets users pick a single date or a date range from a month grid the
 
 <InstallSnippet slug="calendar" hideHeading />
 
-## Date Picker
-
-You can use the `<Calendar>` component to build a date picker. See the [Date Picker](/components/date-picker) page for more information.
-
 ## Examples
+
+### Date Picker
+
+<ComponentPreview name="calendar-date-picker" />
+
+Put a Calendar inside a [Popover](/components/popover) to pick a date from a button.
 
 ### Date Range
 
 <ComponentPreview name="calendar-range" />
 
+### Multiple Months
+
+<ComponentPreview name="calendar-multiple-months" />
+
+Turn off `showOutsideDays` when showing more than one month, or the days that spill into the next month show up in both grids.
+
+### Disabled Dates
+
+<ComponentPreview name="calendar-disabled" />
+
+Pass `disabled` any [matcher](https://daypicker.dev/selections/modifiers#matchers): a date, a range, `before`/`after` or days of the week. This example disables past dates and weekends.
+
 ### Month/Year Dropdown
 
 <ComponentPreview name="calendar-dropdown" />
 
-Pass `captionLayout="dropdown"` to replace the navigation arrows with month/year select dropdowns.
+Pass `captionLayout="dropdown"` to replace the month label with month and year dropdowns. Set `startMonth` and `endMonth` to limit the years.
 
 ### With Presets
 
@@ -47,19 +61,30 @@ Pass `captionLayout="dropdown"` to replace the navigation arrows with month/year
 - When the date is likely to be far from today, such as a birth date, offer a faster way to jump to a month and year than stepping through months one at a time.
 - Disable the dates users can't pick.
 
-See also: [Theming](/guidelines/theming).
+See also: [Forms](/guidelines/choosing-components#forms), [Theming](/guidelines/theming).
 
 </DesignGuidelines>
 
 ## API Reference
 
-`Calendar` extends all props from [react-day-picker](https://daypicker.dev/).
+`Calendar` takes every [react-day-picker](https://daypicker.dev/) prop. These are the ones you'll reach for most, plus the props Stera UI adds or changes.
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| `mode` | `"single" \| "range" \| "multiple"` | `"single"` |
-| `selected` | `Date \| DateRange \| Date[]` | — |
-| `onSelect` | `(value) => void` | — |
-| `disabled` | `Date[] \| Matcher` | — |
-| `captionLayout` | `"label" \| "dropdown"` | `"label"` |
-| `showWeekNumber` | `boolean` | `false` |
+| Prop              | Type                                                             | Default   |
+| ----------------- | ---------------------------------------------------------------- | --------- |
+| `mode`            | `"single" \| "multiple" \| "range"`                              | —         |
+| `selected`        | `Date \| Date[] \| DateRange`                                    | —         |
+| `onSelect`        | `(value) => void`                                                | —         |
+| `required`        | `boolean`                                                        | `false`   |
+| `disabled`        | `Matcher \| Matcher[]`                                           | —         |
+| `numberOfMonths`  | `number`                                                         | `1`       |
+| `captionLayout`   | `"label" \| "dropdown" \| "dropdown-months" \| "dropdown-years"` | `"label"` |
+| `showOutsideDays` | `boolean`                                                        | `true`    |
+| `showWeekNumber`  | `boolean`                                                        | `false`   |
+| `buttonVariant`   | Button `variant`                                                 | `"ghost"` |
+| `classNames`      | `Partial<ClassNames>`                                            | —         |
+
+- Without `mode`, the calendar only displays dates. In `single` mode, clicking the selected date clears it unless `required` is set.
+- `showOutsideDays` defaults to `true`, unlike react-day-picker.
+- `buttonVariant` styles the previous and next month buttons.
+- `classNames` is merged with the Stera UI classes slot by slot, so `classNames={{ day: "…" }}` adds to the day cell's styles instead of replacing them.
+- For custom day content, pass `components={{ DayButton }}` and render `CalendarDayButton`, which the file also exports.

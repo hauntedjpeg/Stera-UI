@@ -1035,6 +1035,18 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/calendar-week-numbers")),
     slug: "calendar",
   },
+  "calendar-multiple-months": {
+    component: dynamic(() => import("@/examples/calendar-multiple-months")),
+    slug: "calendar",
+  },
+  "calendar-disabled": {
+    component: dynamic(() => import("@/examples/calendar-disabled")),
+    slug: "calendar",
+  },
+  "calendar-date-picker": {
+    component: dynamic(() => import("@/examples/calendar-date-picker")),
+    slug: "calendar",
+  },
   "sidebar-demo": {
     component: dynamic(() => import("@/examples/sidebar-demo")),
     slug: "sidebar",
