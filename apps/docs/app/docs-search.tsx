@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/registry/ui/button"
+import { Kbd } from "@/registry/ui/kbd"
 import {
   Command,
   CommandDialog,
@@ -111,9 +112,7 @@ export function DocsSearch({ tree }: { tree: PageTree }) {
         <span className="min-w-0 flex-1 truncate text-left st-body-md text-ink-subtlest">
           Search docs
         </span>
-        <kbd className="hidden pr-4 text-xs/4 tracking-wide text-ink-subtlest md:inline">
-          ⌘K
-        </kbd>
+        <Kbd className="mr-4 hidden bg-surface md:inline-flex">⌘K</Kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandDialogPopup
