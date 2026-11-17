@@ -43,10 +43,7 @@ const chartConfig = {
 
 export default function ChartPie() {
   return (
-    <ChartContainer
-      config={chartConfig}
-      className="mx-auto aspect-square max-h-80 w-full"
-    >
+    <ChartContainer config={chartConfig} className="h-80 w-full">
       <PieChart accessibilityLayer>
         <ChartTooltip content={<ChartTooltipContent hideLabel />} />
         <Pie
