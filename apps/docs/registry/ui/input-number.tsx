@@ -52,7 +52,7 @@ const inputNumberControlVariants = cva(
     // Invalid
     "aria-invalid:inset-ring aria-invalid:inset-ring-border-danger-bold aria-invalid:focus-visible:inset-ring-[1.5px]",
     // Other
-    "transition-[box-shadow] outline-none",
+    "transition-shadow outline-none",
   ],
   {
     variants: {

@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function TabsWithIcons() {
   return (
-    <Tabs defaultValue="music" className="w-[400px]">
+    <Tabs defaultValue="music" className="w-100">
       <TabsList>
         <TabsTrigger value="music">
           <SiMusic />

@@ -9,7 +9,8 @@
     "build:registry": "tsx scripts/build-registry.mts",
     "audit:tokens": "tsx scripts/audit-color-tokens.mts",
     "postinstall": "fumadocs-mdx",
-    "lint": "eslint",
+    "lint": "eslint && pnpm lint:classes",
+    "lint:classes": "tsx scripts/check-tailwind-classes.mts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.7",
+    "@tailwindcss/node": "^4.3.5",
     "@tailwindcss/postcss": "^4.3.5",
     "@types/mdx": "^2.0.14",
     "@types/node": "^26.6.6",

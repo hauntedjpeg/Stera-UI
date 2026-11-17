@@ -252,7 +252,7 @@ function ChartTooltipContent({
                         <div
                           className={cn(
                             // Base
-                            "rounded-xs border-(--color-border) bg-(--color-bg)",
+                            "rounded-xs border-(--indicator-color) bg-(--indicator-color)",
                             // Other
                             "shrink-0",
                             {
@@ -265,8 +265,7 @@ function ChartTooltipContent({
                           )}
                           style={
                             {
-                              "--color-bg": indicatorColor,
-                              "--color-border": indicatorColor,
+                              "--indicator-color": indicatorColor,
                             } as React.CSSProperties
                           }
                         />

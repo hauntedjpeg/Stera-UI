@@ -24,9 +24,9 @@ const chipVariants = cva(
     variants: {
       variant: {
         subtle:
-          "bg-surface-muted text-ink hover:bg-surface-muted-hover data-[active]:bg-surface-muted data-[active]:inset-ring-[1.5px] data-[active]:inset-ring-border-bold",
+          "bg-surface-muted text-ink hover:bg-surface-muted-hover data-active:bg-surface-muted data-active:inset-ring-[1.5px] data-active:inset-ring-border-bold",
         outline:
-          "bg-surface text-ink inset-ring inset-ring-border hover:bg-surface-hover data-[active]:bg-surface-subtle data-[active]:inset-ring-[1.5px] data-[active]:inset-ring-border-bold",
+          "bg-surface text-ink inset-ring inset-ring-border hover:bg-surface-hover data-active:bg-surface-subtle data-active:inset-ring-[1.5px] data-active:inset-ring-border-bold",
       },
       size: {
         xs: "h-6 px-2 st-label-sm-medium has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1",

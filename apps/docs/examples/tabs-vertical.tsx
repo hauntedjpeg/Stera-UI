@@ -2,7 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function TabsVertical() {
   return (
-    <Tabs defaultValue="account" orientation="vertical" className="w-[400px]">
+    <Tabs defaultValue="account" orientation="vertical" className="w-100">
       <TabsList>
         <TabsTrigger value="account">Account</TabsTrigger>
         <TabsTrigger value="password">Password</TabsTrigger>

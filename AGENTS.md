@@ -39,7 +39,7 @@ Workspace-scoped:
 
 CI runs `pnpm turbo run build lint typecheck test format:check` on every PR. Before calling a change done, run the parts that apply:
 
-- `pnpm typecheck` and `pnpm lint`
+- `pnpm typecheck` and `pnpm lint`. In `apps/docs`, lint also runs `lint:classes`, which fails on Tailwind classes that have a canonical spelling. `pnpm --filter docs lint:classes --fix` rewrites them.
 - `pnpm format:check` (or `pnpm format` to fix). Prettier covers `ts`, `tsx`, `mjs`, `json`, `css` and `md`.
 - `pnpm test` if you touched `apps/figma-bridge`, `apps/figma-colors` or `packages/stera-ui`
 - `pnpm --filter docs build:registry` if you touched `apps/docs/registry/` or `apps/docs/registry.json`
@@ -54,6 +54,8 @@ A user-facing change to `packages/stera-ui` needs a changeset: run `pnpm changes
 - **Floating panels that can scroll use an outer `ring-1 ring-border`.** Inset shadows paint under children, so scrolled content would cover an inset ring.
 - **Keep `border` for structure:** dividers (`border-t`/`border-b`), tables, dashed strokes, and containers whose children run to the edge (Card, Input Number).
 - **Add `forced-stroke` to anything with a stroke and `forced-focus` to focusable controls** (defined in `registry/styles/ui/base.css`). Forced-colors mode removes box-shadows, and these put an outline in their place.
+- **Write Tailwind 4's canonical class names:** `has-[[role=checkbox]]:pr-0`, not `[&:has([role=checkbox])]:pr-0`; `data-active:`, not `data-[active]:`; `h-100`, not `h-[400px]`; `-left-(--x)`, not `left-[calc(var(--x)*-1)]`. `lint:classes` checks this with Tailwind's own canonicalizer.
+- **Don't name a component's local CSS variables after theme variables** (`--color-*`, `--radius-*`, …). Tokens are `@theme inline`, so `border-border` compiles to `var(--border)` and ignores a `--color-border` set on the element. The canonicalizer can't see that override and would rewrite `border-(--color-border)` to `border-border`. Use a name like `--indicator-color`.
 
 ## Component architecture
 

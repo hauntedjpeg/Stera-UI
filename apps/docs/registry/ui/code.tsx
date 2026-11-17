@@ -7,7 +7,7 @@ const codeVariants = cva(
     // Base
     "bg-surface-muted st-mono-sm text-ink",
     // Other
-    "box-decoration-clone break-words",
+    "box-decoration-clone wrap-break-word",
   ],
   {
     variants: {
