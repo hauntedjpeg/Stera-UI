@@ -49,10 +49,11 @@ function Calendar({
       "flex h-(--cell-size) w-full items-center justify-center px-(--cell-size) st-label-sm-medium",
     dropdowns:
       "flex h-(--cell-size) w-full items-center justify-center gap-1.5 st-label-sm-medium",
-    dropdown_root: cn(
-      buttonVariants({ variant: "outline", size: "sm" }),
-      "relative pr-2 has-focus-visible:inset-ring-[1.5px] has-focus-visible:inset-ring-border-brand-bold"
-    ),
+    // Not built on buttonVariants: DayPicker always sets data-disabled on this
+    // wrapper ("false" when enabled), and Button's data-disabled: styles match
+    // the attribute whether it's true or false.
+    dropdown_root:
+      "relative inline-flex h-8 items-center rounded-xl bg-surface pr-2 pl-3 st-label-sm-medium text-ink inset-ring inset-ring-border forced-stroke transition select-none hover:bg-surface-hover has-focus-visible:inset-ring-[1.5px] has-focus-visible:inset-ring-border-brand-bold data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
     dropdown: "absolute inset-0 bg-surface opacity-0",
     caption_label: cn(
       "select-none",
