@@ -1,0 +1,116 @@
+---
+title: Date Picker
+description: A form field that opens a calendar to pick a date or a range of dates.
+---
+
+<ComponentPreview name="date-picker-demo" />
+
+## Installation
+
+<InstallSnippet slug="date-picker" hideHeading />
+
+## Composition
+
+Use the following composition to build a `DatePicker`:
+
+```text
+DatePicker
+├── DatePickerTrigger
+└── DatePickerContent
+```
+
+`DatePickerContent` renders a [Calendar](/components/calendar) in a [Popover](/components/popover). The value lives on `DatePicker`, so the trigger and the calendar always agree.
+
+## Examples
+
+### Date Range
+
+<ComponentPreview name="date-picker-range" />
+
+Set `mode="range"`. The popover stays open after the first pick and closes after the second.
+
+### Date of Birth
+
+<ComponentPreview name="date-picker-dob" />
+
+`DatePickerContent` passes Calendar props through, such as `captionLayout`, `endMonth` and `disabled`. Give the trigger an `id` and point the label's `htmlFor` at it.
+
+### Sizes
+
+<ComponentPreview name="date-picker-sizes" />
+
+| Size | Description      |
+| ---- | ---------------- |
+| `sm` | Small            |
+| `md` | Medium (default) |
+| `lg` | Large            |
+
+### Invalid
+
+<ComponentPreview name="date-picker-invalid" />
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Picking a date as part of a form, such as a due date, a start date or a date of birth.
+- Picking a start and end date in a form, such as a booking window or a reporting period.
+
+### When not to use
+
+- The dates should stay on the page, such as a booking view or a scheduling sidebar. Use a [Calendar](/components/calendar).
+
+### Guidelines
+
+- Always show a placeholder, such as "Pick a date," so it's clear nothing has been chosen yet.
+- When the date is likely to be far from today, such as a birth date, offer a faster way to jump to a month and year than stepping through months one at a time.
+- Disable the dates users can't pick.
+
+See also: [Forms](/guidelines/choosing-components#forms).
+
+</DesignGuidelines>
+
+## API Reference
+
+Built from [Calendar](/components/calendar) and [Popover](/components/popover).
+
+### DatePicker
+
+| Prop            | Type                      | Default    |
+| --------------- | ------------------------- | ---------- |
+| `mode`          | `"single" \| "range"`     | `"single"` |
+| `value`         | `Date \| DateRange`       | —          |
+| `defaultValue`  | `Date \| DateRange`       | —          |
+| `onValueChange` | `(value) => void`         | —          |
+| `open`          | `boolean`                 | —          |
+| `defaultOpen`   | `boolean`                 | `false`    |
+| `onOpenChange`  | `(open: boolean) => void` | —          |
+| `disabled`      | `boolean`                 | `false`    |
+| `locale`        | `DayPickerLocale`         | —          |
+
+`value` is a `Date` in `single` mode and a `DateRange` in `range` mode. Import locales from `react-day-picker/locale`; the locale sets both the calendar and the trigger's text.
+
+### DatePickerTrigger
+
+| Prop          | Type                                      | Default         |
+| ------------- | ----------------------------------------- | --------------- |
+| `size`        | `"sm" \| "md" \| "lg"`                    | `"md"`          |
+| `placeholder` | `string`                                  | `"Pick a date"` |
+| `formatValue` | `(value: Date \| DateRange) => ReactNode` | —               |
+
+By default the trigger shows dates like "Nov 17, 2026" and ranges like "Nov 17 – Nov 23, 2026".
+
+### DatePickerContent
+
+Accepts every [Calendar](/components/calendar#api-reference) prop except `mode`, `selected`, `onSelect` and `required`, plus these:
+
+| Prop         | Type                                     | Default    |
+| ------------ | ---------------------------------------- | ---------- |
+| `align`      | `"start" \| "center" \| "end"`           | `"start"`  |
+| `side`       | `"top" \| "bottom" \| "left" \| "right"` | `"bottom"` |
+| `sideOffset` | `number`                                 | `4`        |
+| `className`  | `string`                                 | —          |
+
+`className` styles the popover. To style the calendar, use `classNames`.

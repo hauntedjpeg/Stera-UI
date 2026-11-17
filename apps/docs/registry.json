@@ -281,6 +281,15 @@
       "files": [{ "path": "registry/ui/data-table.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "dependencies": ["react-day-picker", "stera-icons"],
+      "registryDependencies": ["utils", "calendar", "popover"],
+      "files": [
+        { "path": "registry/ui/date-picker.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
       "name": "dialog",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "stera-icons"],
