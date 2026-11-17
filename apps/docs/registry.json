@@ -263,6 +263,24 @@
       "files": [{ "path": "registry/ui/command.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "data-table",
+      "type": "registry:ui",
+      "dependencies": ["@tanstack/react-table", "stera-icons"],
+      "registryDependencies": [
+        "utils",
+        "badge",
+        "button",
+        "checkbox",
+        "dropdown-menu",
+        "empty",
+        "input-group",
+        "native-select",
+        "skeleton",
+        "table"
+      ],
+      "files": [{ "path": "registry/ui/data-table.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "dialog",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "stera-icons"],

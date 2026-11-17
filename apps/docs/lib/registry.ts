@@ -951,6 +951,42 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/command-checked")),
     slug: "command",
   },
+  "data-table-demo": {
+    component: dynamic(() => import("@/examples/data-table-demo")),
+    slug: "data-table",
+  },
+  "data-table-basic": {
+    component: dynamic(() => import("@/examples/data-table-basic")),
+    slug: "data-table",
+  },
+  "data-table-sorting": {
+    component: dynamic(() => import("@/examples/data-table-sorting")),
+    slug: "data-table",
+  },
+  "data-table-filtering": {
+    component: dynamic(() => import("@/examples/data-table-filtering")),
+    slug: "data-table",
+  },
+  "data-table-selection": {
+    component: dynamic(() => import("@/examples/data-table-selection")),
+    slug: "data-table",
+  },
+  "data-table-column-visibility": {
+    component: dynamic(() => import("@/examples/data-table-column-visibility")),
+    slug: "data-table",
+  },
+  "data-table-row-actions": {
+    component: dynamic(() => import("@/examples/data-table-row-actions")),
+    slug: "data-table",
+  },
+  "data-table-empty": {
+    component: dynamic(() => import("@/examples/data-table-empty")),
+    slug: "data-table",
+  },
+  "data-table-server": {
+    component: dynamic(() => import("@/examples/data-table-server")),
+    slug: "data-table",
+  },
   "combobox-demo": {
     component: dynamic(() => import("@/examples/combobox-demo")),
     slug: "combobox",

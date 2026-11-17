@@ -1,0 +1,294 @@
+---
+title: Data Table
+description: A table users can sort, search, filter, page through and select rows from, built on TanStack Table.
+---
+
+<ComponentPreview name="data-table-demo" />
+
+## Installation
+
+<InstallSnippet slug="data-table" hideHeading />
+
+Requires TanStack Table 9 (`@tanstack/react-table`).
+
+## Composition
+
+```text
+useDataTable
+├── DataTableToolbar
+│   ├── DataTableSearch
+│   ├── DataTableFacetedFilter
+│   ├── DataTableResetFilters
+│   ├── DataTableBulkActions
+│   └── DataTableViewOptions
+├── DataTable
+└── DataTablePagination
+```
+
+`useDataTable` returns a TanStack table, and every part takes it as `table`. Use the parts you need and any TanStack API.
+
+## Usage
+
+### Columns
+
+```tsx
+"use client"
+
+import {
+  createDataTableColumnHelper,
+  DataTableColumnHeader,
+} from "@/components/ui/data-table"
+
+type Payment = {
+  id: string
+  email: string
+  status: "paid" | "pending" | "failed"
+  amount: number
+}
+
+const columnHelper = createDataTableColumnHelper<Payment>()
+
+export const columns = columnHelper.columns([
+  columnHelper.accessor("email", {
+    header: ({ column }) => <DataTableColumnHeader column={column} />,
+    meta: { label: "Email" },
+  }),
+  columnHelper.accessor("status", {
+    header: "Status",
+    filterFn: "arrHas",
+  }),
+  columnHelper.accessor("amount", {
+    header: ({ column }) => <DataTableColumnHeader column={column} />,
+    meta: { label: "Amount", align: "end" },
+  }),
+])
+```
+
+`meta` takes a `label` for menus and filters, `align: "end"` for numbers, and a `className` for every cell in the column.
+
+### Table
+
+```tsx
+"use client"
+
+import {
+  DataTable,
+  DataTablePagination,
+  useDataTable,
+} from "@/components/ui/data-table"
+
+import { columns, type Payment } from "./columns"
+
+export function PaymentsTable({ data }: { data: Payment[] }) {
+  const table = useDataTable({
+    data,
+    columns,
+    getRowId: (payment) => payment.id,
+  })
+
+  return (
+    <div className="flex flex-col gap-4">
+      <DataTable table={table} />
+      <DataTablePagination table={table} />
+    </div>
+  )
+}
+```
+
+- `getRowId` is required, so selection follows rows as they sort and reload.
+- Pages hold 10 rows. Change it with `initialState.pagination.pageSize`.
+- The table is a client component. Fetch data in a server component and pass it in.
+
+<ComponentPreview name="data-table-basic" />
+
+## Sorting
+
+`DataTableColumnHeader` sorts on click. Shift-click sorts by a second column. Set a starting sort with `initialState.sorting`, and `sortDescFirst` to choose which direction comes first.
+
+<ComponentPreview name="data-table-sorting" />
+
+## Filtering
+
+- `DataTableSearch` searches every column, or one with `column`.
+- `DataTableFacetedFilter` needs `filterFn: "arrHas"` on its column, or `"arrIncludesSome"` for array values such as tags.
+- `DataTableResetFilters` clears both.
+
+<ComponentPreview name="data-table-filtering" />
+
+## Row selection
+
+Add a checkbox column with `createSelectColumn({ getRowLabel })`. `getRowLabel` names each checkbox, such as "Select Sarah Chen".
+
+Selection lasts through sorting, filtering and paging. `DataTableBulkActions` counts selected rows the filters hide. In an action, `table.getSelectedRowIds()` includes hidden rows, and `table.getFilteredSelectedRowModel().rows` doesn't.
+
+<ComponentPreview name="data-table-selection" />
+
+## Column visibility
+
+`DataTableViewOptions` shows and hides columns. Keep one visible with `enableHiding: false`, and hide some from the start with `initialState.columnVisibility`.
+
+<ComponentPreview name="data-table-column-visibility" />
+
+## Row actions
+
+Put a row's actions in `DataTableRowActions`, with a `label` naming the row. Confirm destructive actions with an [Alert Dialog](/components/alert-dialog).
+
+<ComponentPreview name="data-table-row-actions" />
+
+## Empty states
+
+An empty table says there's nothing yet, or that nothing matches the filters. Replace them with `empty` and `noMatches`.
+
+<ComponentPreview name="data-table-empty" />
+
+## Server-side data
+
+Set `manualPagination`, `manualSorting` and `manualFiltering`, control the state, and pass back the page as `data` and the total as `rowCount`.
+
+```tsx
+const table = useDataTable({
+  data: page?.rows ?? noRows, // a constant, not a new []
+  columns,
+  getRowId: (user) => user.id,
+  rowCount: page?.total,
+  manualPagination: true,
+  manualSorting: true,
+  manualFiltering: true,
+  state: { pagination, sorting, columnFilters, globalFilter },
+  onPaginationChange: setPagination,
+  onSortingChange: setSorting,
+  onColumnFiltersChange: setColumnFilters,
+  onGlobalFilterChange: setGlobalFilter,
+})
+```
+
+- Pass `loading` to `DataTable` during a request.
+- Raise `DataTableSearch`'s `delay`.
+- Pass the server's counts to `DataTableFacetedFilter` as `counts`.
+- With no known total, pass `pageCount: -1` instead of `rowCount`.
+
+<ComponentPreview name="data-table-server" />
+
+## Performance
+
+- The component calling `useDataTable` doesn't re-render when table state changes. To read state there, pass a selector: `useDataTable(options, (state) => state.sorting)`.
+- Rows re-render only when their data, selection or columns change. A cell that reads other table state should use `table.Subscribe`.
+- Keep `data` and `columns` stable, at module scope or in `useMemo`.
+
+## Customizing features
+
+`dataTableFeatures` lists the TanStack features the parts use. Add one there, such as grouping or expanding, with its row model.
+
+```tsx
+const dataTableFeatures = tableFeatures({
+  // …the features already there
+  rowExpandingFeature,
+  expandedRowModel: createExpandedRowModel(),
+})
+```
+
+## Design
+
+<DesignGuidelines>
+
+### When to use
+
+- Users need to find, sort, filter or act on records in a set too large to take in at a glance, such as payments, users or orders.
+
+### When not to use
+
+- A few rows to read, with nothing to sort or filter. Use a [Table](/components/table).
+- Records that are a title and a description. Use an [Item](/components/item).
+
+### Guidelines
+
+- **Search:** for a record users can name, such as a person or an id.
+- **Filters:** for a column with a small, fixed set of values, such as status or plan.
+- **Sorting:** where order helps users find something. Your call: the starting sort. Pick one and use it consistently.
+- **Column visibility:** when columns outnumber the space. Keep the identifying column visible.
+- Pagination, selection, row actions and empty states follow the [Table guidelines](/components/table#guidelines).
+
+See also: [Theming](/guidelines/theming).
+
+</DesignGuidelines>
+
+## API Reference
+
+### useDataTable
+
+TanStack's `useTable` options, except `features`. An optional selector is the second argument.
+
+TanStack: [Tables](https://tanstack.com/table/v9/docs/guide/tables), [Column definitions](https://tanstack.com/table/v9/docs/guide/column-defs), [State](https://tanstack.com/table/v9/docs/framework/react/guide/table-state), [Client vs. server](https://tanstack.com/table/v9/docs/guide/client-side-vs-server-side)
+
+| Option         | Type                     | Description                                            |
+| -------------- | ------------------------ | ------------------------------------------------------ |
+| `data`         | `TData[]`                | The rows. Keep it stable.                              |
+| `columns`      | `ColumnDef[]`            | The columns. Keep it stable.                           |
+| `getRowId`     | `(row: TData) => string` | Required.                                              |
+| `initialState` | `Partial<TableState>`    | Starting sort, filters, page and visible columns.      |
+| `state`        | `Partial<TableState>`    | Controlled state, with its `on*Change` callbacks.      |
+| `manual*`      | `boolean`                | Hands pagination, sorting or filtering to your server. |
+| `rowCount`     | `number`                 | The server's total, with `manualPagination`.           |
+
+### DataTable
+
+Also takes [Table](/components/table) props.
+
+| Prop        | Type                | Default | Description                                 |
+| ----------- | ------------------- | ------- | ------------------------------------------- |
+| `table`     | `DataTableInstance` |         |                                             |
+| `loading`   | `boolean`           | `false` | Placeholder rows, or dims the current ones. |
+| `empty`     | `ReactNode`         |         | Shown when there's no data.                 |
+| `noMatches` | `ReactNode`         |         | Shown when the filters match nothing.       |
+
+### DataTableColumnHeader
+
+TanStack: [Sorting](https://tanstack.com/table/v9/docs/framework/react/guide/sorting)
+
+| Prop     | Type        | Default      |
+| -------- | ----------- | ------------ |
+| `column` | `Column`    |              |
+| `title`  | `ReactNode` | `meta.label` |
+
+### DataTableSearch
+
+Also takes input props. TanStack: [Global filtering](https://tanstack.com/table/v9/docs/framework/react/guide/global-filtering), [Column filtering](https://tanstack.com/table/v9/docs/framework/react/guide/column-filtering)
+
+| Prop     | Type                | Default | Description                      |
+| -------- | ------------------- | ------- | -------------------------------- |
+| `table`  | `DataTableInstance` |         |                                  |
+| `column` | `string`            |         | Searches one column.             |
+| `delay`  | `number`            | `150`   | Milliseconds after typing stops. |
+
+### DataTableFacetedFilter
+
+TanStack: [Column faceting](https://tanstack.com/table/v9/docs/framework/react/guide/column-faceting), [Column filtering](https://tanstack.com/table/v9/docs/framework/react/guide/column-filtering)
+
+| Prop      | Type                        | Default      | Description                        |
+| --------- | --------------------------- | ------------ | ---------------------------------- |
+| `table`   | `DataTableInstance`         |              |                                    |
+| `column`  | `string`                    |              | Needs `filterFn: "arrHas"`.        |
+| `options` | `{ label, value, icon? }[]` |              |                                    |
+| `title`   | `string`                    | `meta.label` |                                    |
+| `counts`  | `Record<string, number>`    |              | Server counts. Omit to count rows. |
+
+### createSelectColumn
+
+TanStack: [Row selection](https://tanstack.com/table/v9/docs/framework/react/guide/row-selection)
+
+| Option        | Type                     | Description                |
+| ------------- | ------------------------ | -------------------------- |
+| `getRowLabel` | `(row: TData) => string` | Names each row's checkbox. |
+
+### DataTableRowActions
+
+| Prop       | Type        | Description          |
+| ---------- | ----------- | -------------------- |
+| `label`    | `string`    | Names the row.       |
+| `children` | `ReactNode` | Dropdown Menu items. |
+
+### Other parts
+
+All take `table`. `DataTablePagination` takes `pageSizeOptions` (`[10, 20, 50]`), `DataTableBulkActions` takes your actions as `children`, and `DataTableToolbar` takes `div` props.
+
+TanStack: [Pagination](https://tanstack.com/table/v9/docs/framework/react/guide/pagination), [Column visibility](https://tanstack.com/table/v9/docs/framework/react/guide/column-visibility), [Row selection](https://tanstack.com/table/v9/docs/framework/react/guide/row-selection)
