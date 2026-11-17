@@ -48,7 +48,7 @@ interface PageTreeFolder {
 // Full-width pill rows as on the Stera Icons site: hover only brightens the text, the
 // current page gets a subtle fill. The bg-* overrides replace the registry hovers.
 const rowClassName =
-  "h-8 w-full gap-3 rounded-full p-3 st-label-md text-ink-subtle hover:bg-surface-hover hover:text-ink active:bg-transparent active:text-ink data-active:bg-surface-pressed data-active:st-label-md data-active:text-ink"
+  "h-8 w-full gap-3 rounded-full p-3 st-label-md text-ink-subtle hover:bg-surface-hover hover:text-ink active:bg-transparent active:text-ink data-active:bg-surface-pressed data-active:st-label-md data-active:text-ink data-active:hover:bg-surface-pressed data-active:active:bg-surface-pressed"
 
 export function DocsSidebar({ tree }: { tree: PageTreeRoot }) {
   const pathname = usePathname()

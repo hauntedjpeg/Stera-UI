@@ -1,6 +1,6 @@
 "use client"
 
-import { SiBell, SiCode, SiHome, SiUser } from "stera-icons"
+import { SiBell, SiHome, SiMessageCircle, SiUser } from "stera-icons"
 import {
   Sidebar,
   SidebarContent,
@@ -17,8 +17,8 @@ import {
 
 export default function SidebarWithBadge() {
   return (
-    <div className="flex h-[400px] transform-[translateZ(0)] overflow-hidden rounded-lg border">
-      <SidebarProvider>
+    <div className="flex h-100 w-full transform-[translateZ(0)] overflow-hidden rounded-lg border">
+      <SidebarProvider className="min-h-0">
         <Sidebar>
           <SidebarContent>
             <SidebarGroup>
@@ -39,7 +39,7 @@ export default function SidebarWithBadge() {
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton render={<a href="#" />}>
-                    <SiCode />
+                    <SiMessageCircle />
                     <span>Messages</span>
                   </SidebarMenuButton>
                   <SidebarMenuBadge>3</SidebarMenuBadge>
@@ -58,7 +58,7 @@ export default function SidebarWithBadge() {
           <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1" />
           </header>
-          <div className="flex flex-1 items-center justify-center p-8 text-ink-subtler">
+          <div className="flex flex-1 items-center justify-center p-8 st-body-md text-ink-subtler">
             Main content area
           </div>
         </SidebarInset>

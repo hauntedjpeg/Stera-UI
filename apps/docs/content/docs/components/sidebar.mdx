@@ -14,16 +14,19 @@ description: A persistent navigation panel for moving between a product's top-le
 Wrap your layout with `SidebarProvider` and use `SidebarInset` for the main content area.
 
 ```tsx
+import { SiHome } from "stera-icons"
+
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
+  SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarProvider,
   SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 ```
@@ -34,14 +37,16 @@ import {
     <SidebarContent>
       <SidebarGroup>
         <SidebarGroupLabel>Application</SidebarGroupLabel>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton isActive render={<a href="/" />}>
-              <SiHome />
-              <span>Home</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton isActive render={<a href="/" />}>
+                <SiHome />
+                <span>Home</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
       </SidebarGroup>
     </SidebarContent>
   </Sidebar>
@@ -54,6 +59,8 @@ import {
 </SidebarProvider>
 ```
 
+Below 768px the sidebar opens in a [Drawer](/components/drawer) instead, and `SidebarTrigger` opens and closes it. ⌘B (Ctrl+B on Windows and Linux) toggles the sidebar anywhere outside a text field.
+
 ## Composition
 
 Use the following composition to build a `Sidebar` layout:
@@ -62,45 +69,135 @@ Use the following composition to build a `Sidebar` layout:
 SidebarProvider
 ├── Sidebar
 │   ├── SidebarHeader
-│   │   ├── SidebarMenuItem
-│   │   ├── SidebarMenuButton
-│   │   └── SidebarMenuBadge
+│   │   ├── SidebarInput
+│   │   └── SidebarMenu
+│   │       └── SidebarMenuItem
+│   │           └── SidebarMenuButton
+│   ├── SidebarSeparator
 │   ├── SidebarContent
-│   │   ├── SidebarGroup
-│   │   │   ├── SidebarGroupLabel
-│   │   │   ├── SidebarGroupAction
-│   │   │   ├── SidebarGroupContent
-│   │   │   └── SidebarMenu
-│   │   │       ├── SidebarMenuItem
-│   │   │       │   ├── SidebarMenuButton
-│   │   │       │   ├── SidebarMenuAction
-│   │   │       │   └── SidebarMenuBadge
-│   │   │       └── SidebarMenuItem
-│   │   │           ├── SidebarMenuButton
-│   │   │           └── SidebarMenuSub
-│   │   │               ├── SidebarMenuSubItem
-│   │   │               └── SidebarMenuSubItem
 │   │   └── SidebarGroup
-│   │       └── SidebarMenu
-│   │           ├── SidebarMenuItem
-│   │           └── SidebarMenuItem
+│   │       ├── SidebarGroupLabel
+│   │       ├── SidebarGroupAction
+│   │       └── SidebarGroupContent
+│   │           └── SidebarMenu
+│   │               ├── SidebarMenuItem
+│   │               │   ├── SidebarMenuButton
+│   │               │   ├── SidebarMenuAction
+│   │               │   └── SidebarMenuBadge
+│   │               ├── SidebarMenuItem
+│   │               │   ├── SidebarMenuButton
+│   │               │   └── SidebarMenuSub
+│   │               │       └── SidebarMenuSubItem
+│   │               │           └── SidebarMenuSubButton
+│   │               └── SidebarMenuItem
+│   │                   └── SidebarMenuSkeleton
 │   ├── SidebarFooter
 │   └── SidebarRail
-├── SidebarInset
-└── SidebarTrigger
+└── SidebarInset
+    └── SidebarTrigger
 ```
 
-## With Badge
+`SidebarMenuAction` and `SidebarMenuBadge` go after the `SidebarMenuButton` they belong to, since they follow its size.
+
+## Examples
+
+### Collapse to icons
+
+<ComponentPreview name="sidebar-icon" />
+
+`collapsible="icon"` shrinks the sidebar to its icons instead of hiding it. Give each `SidebarMenuButton` a `tooltip`, which shows only while the labels are hidden. `SidebarRail` adds a strip along the edge that toggles the sidebar on click.
+
+### Floating
+
+<ComponentPreview name="sidebar-floating" />
+
+`variant="floating"` detaches the sidebar from the window's edge as a panel of its own.
+
+### Inset
+
+<ComponentPreview name="sidebar-inset" />
+
+`variant="inset"` turns `SidebarInset` into a card next to the sidebar.
+
+### Submenu
+
+<ComponentPreview name="sidebar-submenu" />
+
+Nest a `SidebarMenuSub` inside a `SidebarMenuItem` for child pages. `SidebarMenuSubButton` renders a link by default.
+
+### Actions
+
+<ComponentPreview name="sidebar-actions" />
+
+`SidebarGroupAction` pins a button to a group's label, and `SidebarMenuAction` pins one to a menu item. Set `showOnHover` to reveal the menu action only on hover or focus. It stays visible on touch screens and while its menu is open.
+
+### Badge
 
 <ComponentPreview name="sidebar-with-badge" />
 
 Use `SidebarMenuBadge` to display a count or status indicator next to a menu item.
 
-## Variants
+### Loading
 
-<ComponentPreview name="sidebar-variants" />
+<ComponentPreview name="sidebar-skeleton" />
 
-The `variant` prop controls the sidebar's visual style. Use `"floating"` for a detached sidebar with rounded corners and a shadow.
+Render `SidebarMenuSkeleton` in place of menu items while they load.
+
+### Controlled
+
+`SidebarProvider` manages its own open state. Pass `open` and `onOpenChange` to control it.
+
+```tsx
+const [open, setOpen] = React.useState(false)
+
+return (
+  <SidebarProvider open={open} onOpenChange={setOpen}>
+    <Sidebar />
+  </SidebarProvider>
+)
+```
+
+Inside the provider, `useSidebar` reads and changes the same state, such as closing the mobile drawer after navigating.
+
+```tsx
+const { isMobile, setOpenMobile } = useSidebar()
+```
+
+### Persist the open state
+
+Every toggle writes the open state to a `sidebar_state` cookie. Read it on the server and pass it as `defaultOpen`, so a reload keeps the sidebar the way the user left it. In a Next.js layout:
+
+```tsx
+import { cookies } from "next/headers"
+
+import { SidebarProvider } from "@/components/ui/sidebar"
+
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const cookieStore = await cookies()
+  const defaultOpen = cookieStore.get("sidebar_state")?.value !== "false"
+
+  return <SidebarProvider defaultOpen={defaultOpen}>{children}</SidebarProvider>
+}
+```
+
+### Width
+
+Set `--sidebar-width` and `--sidebar-width-icon` on `SidebarProvider` to change the expanded and icon widths.
+
+```tsx
+<SidebarProvider
+  style={
+    {
+      "--sidebar-width": "20rem",
+      "--sidebar-width-icon": "3.5rem",
+    } as React.CSSProperties
+  }
+>
+```
 
 ## Design
 
@@ -108,22 +205,31 @@ The `variant` prop controls the sidebar's visual style. Use `"floating"` for a d
 
 ### When to use
 
-- The primary navigation in an application layout where users move between several top-level sections, such as a dashboard, an admin panel or a tool.
-- Products with enough navigation depth to need a persistent structure, rather than a top navigation bar or inline links.
+- The primary navigation of a product with several top-level sections, such as a dashboard, an admin panel or a tool.
 
 ### When not to use
 
-- A secondary panel for actions tied to specific content. Use a [Drawer](/components/drawer).
+- A panel of actions for specific content. Use a [Drawer](/components/drawer).
+
+### Variants
+
+| Variant | Emphasis | Use for | Not for |
+| --- | --- | --- | --- |
+| `sidebar` | Medium | Most products. | — |
+| `floating` | High | Navigation that stands apart from the content. | Dense tools that need every bit of width. |
+| `inset` | Low | Keeping the focus on the content. | Content that's already a set of cards. |
 
 ### Guidelines
 
-- Keep the same structure in every view: the header for identity and context, the content for navigation, the footer for account and utility controls.
-- Your call: whether the sidebar collapses to icons, hides entirely, or stays open. Pick one and use it consistently. If it collapses to icons, give every item a meaningful icon.
-- **Header:** the product's logo, or a workspace or account switcher when users move between organizations. Not navigation items. A switcher opens a [Popover](/components/popover) or [Dropdown Menu](/components/dropdown-menu) instead of navigating away.
-- **Groups:** gather related destinations under a short label, such as Workspace, Settings or Reports, once the list is long enough to be hard to scan. Keep labels to one or two words in sentence case. Don't make a group for a single item: fold it into a neighboring group, or drop the label. Keep the order of groups the same in every view.
-- **Menu items:** one per destination, with an icon and a label of one to three words. If a destination needs a longer label, revisit the information architecture. Mark the user's current location as active, one item at a time. Nest a sub-menu when a destination has child pages worth reaching directly. Menu items aren't for actions such as New project or Invite member: put those in the header, the footer, or a [Button](/components/button) in the relevant view.
-- **Footer:** the signed-in user and account actions, such as profile settings or sign out, plus global controls people rarely need, such as help. Not primary navigation. Account actions open a [Dropdown Menu](/components/dropdown-menu) or [Popover](/components/popover) instead of navigating away.
-- **Trigger:** always keep a visible way to collapse and expand the sidebar. Your call: where the trigger sits. Pick one and keep it in the same place on every screen.
+- Keep the same structure in every view: identity in the header, navigation in the content, account and utilities in the footer.
+- Your call: whether the sidebar collapses to icons, hides, or stays open. Pick one and use it consistently. Collapsing to icons needs a clear icon on every item.
+- **Header:** the logo, or a workspace switcher that opens a [Dropdown Menu](/components/dropdown-menu). No navigation items.
+- **Groups:** add a label once the list gets hard to scan. Keep groups in the same order in every view.
+- **Menu items:** one per destination, with an icon and a label of one to three words. Only the current page is active. Nest a sub-menu for child pages worth reaching directly.
+- **Item actions:** actions on one item, such as rename or delete, go behind a single [Dropdown Menu](/components/dropdown-menu).
+- **Badges:** only for counts or status that need attention, such as unread messages.
+- **Footer:** the signed-in user, account actions and rarely used controls such as help.
+- **Trigger:** always keep one visible. Your call: where it sits. Keep it in the same place on every screen.
 
 See also: [Menus and navigation](/guidelines/choosing-components#menus-and-navigation) and [Theming](/guidelines/theming).
 
@@ -131,30 +237,74 @@ See also: [Menus and navigation](/guidelines/choosing-components#menus-and-navig
 
 ## API Reference
 
-### Sidebar
-
-| Prop | Type | Default |
-| --- | --- | --- |
-| `variant` | `"sidebar" \| "floating" \| "inset"` | `"sidebar"` |
-| `collapsible` | `"offcanvas" \| "icon" \| "none"` | `"offcanvas"` |
-| `side` | `"left" \| "right"` | `"left"` |
+Below 768px, `Sidebar` renders in a [Drawer](/components/drawer). Menu button tooltips use [Tooltip](/components/tooltip).
 
 ### SidebarProvider
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `open` | `boolean` | — |
 | `defaultOpen` | `boolean` | `true` |
+| `open` | `boolean` | — |
 | `onOpenChange` | `(open: boolean) => void` | — |
+| `style` | `CSSProperties` | Sets `--sidebar-width` (`16rem`) and `--sidebar-width-icon` (`3rem`) |
+
+### Sidebar
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `side` | `"left" \| "right"` | `"left"` |
+| `variant` | `"sidebar" \| "floating" \| "inset"` | `"sidebar"` |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"` | `"offcanvas"` |
+| `className` | `string` | — (applied to the panel) |
 
 ### SidebarMenuButton
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `variant` | `"ghost" \| "outline"` | `"ghost"` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
 | `isActive` | `boolean` | `false` |
-| `size` | `"default" \| "sm" \| "lg"` | `"default"` |
-| `tooltip` | `string` | — |
-| `render` | `ReactElement` | — |
+| `tooltip` | `string \| TooltipContent props` | — |
+| `render` | `ReactElement` | `<button>` |
+
+### SidebarMenuAction
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `showOnHover` | `boolean` | `false` |
+| `render` | `ReactElement` | `<button>` |
+
+### SidebarMenuSubButton
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `"sm" \| "md"` | `"md"` |
+| `isActive` | `boolean` | `false` |
+| `render` | `ReactElement` | `<a>` |
+
+### SidebarMenuSkeleton
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `showIcon` | `boolean` | `false` |
+
+### SidebarGroupLabel and SidebarGroupAction
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `render` | `ReactElement` | `<div>` and `<button>` |
+
+### useSidebar
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `state` | `"expanded" \| "collapsed"` | The desktop sidebar's state |
+| `open` | `boolean` | Whether the desktop sidebar is open |
+| `setOpen` | `(open: boolean) => void` | Opens or closes the desktop sidebar |
+| `openMobile` | `boolean` | Whether the mobile drawer is open |
+| `setOpenMobile` | `(open: boolean) => void` | Opens or closes the mobile drawer |
+| `isMobile` | `boolean` | Whether the viewport is below 768px |
+| `toggleSidebar` | `() => void` | Toggles whichever of the two is showing |
 
 ### Subcomponents
 
@@ -163,16 +313,20 @@ See also: [Menus and navigation](/guidelines/choosing-components#menus-and-navig
 | `SidebarHeader` | Top section of the sidebar |
 | `SidebarContent` | Scrollable middle section |
 | `SidebarFooter` | Bottom section of the sidebar |
+| `SidebarSeparator` | Divider between sections |
+| `SidebarInput` | Small input, such as a search field |
 | `SidebarGroup` | Logical section within `SidebarContent` |
 | `SidebarGroupLabel` | Label for a sidebar group |
+| `SidebarGroupAction` | Button pinned to a group's label |
+| `SidebarGroupContent` | Body of a group, holds its `SidebarMenu` |
 | `SidebarMenu` | List of menu items |
 | `SidebarMenuItem` | Single menu item wrapper |
-| `SidebarMenuBadge` | Count/status badge on a menu item |
-| `SidebarMenuAction` | Action button shown on hover |
+| `SidebarMenuBadge` | Count or status on a menu item |
+| `SidebarMenuAction` | Button pinned to a menu item |
 | `SidebarMenuSub` | Nested sub-menu container |
 | `SidebarMenuSubItem` | Item within a sub-menu |
-| `SidebarMenuSubButton` | Button for a sub-menu item |
+| `SidebarMenuSubButton` | Link for a sub-menu item |
 | `SidebarMenuSkeleton` | Loading placeholder for a menu item |
-| `SidebarRail` | Thin rail for collapse-to-icon mode |
-| `SidebarTrigger` | Button to toggle the sidebar open/closed |
-| `SidebarInset` | Main content area paired with the sidebar |
+| `SidebarRail` | Strip along the sidebar's edge that toggles it on click |
+| `SidebarTrigger` | Button that toggles the sidebar |
+| `SidebarInset` | Main content area next to the sidebar |

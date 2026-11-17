@@ -1043,8 +1043,28 @@ const examples: Record<string, RegistryEntry> = {
     component: dynamic(() => import("@/examples/sidebar-with-badge")),
     slug: "sidebar",
   },
-  "sidebar-variants": {
-    component: dynamic(() => import("@/examples/sidebar-variants")),
+  "sidebar-icon": {
+    component: dynamic(() => import("@/examples/sidebar-icon")),
+    slug: "sidebar",
+  },
+  "sidebar-floating": {
+    component: dynamic(() => import("@/examples/sidebar-floating")),
+    slug: "sidebar",
+  },
+  "sidebar-inset": {
+    component: dynamic(() => import("@/examples/sidebar-inset")),
+    slug: "sidebar",
+  },
+  "sidebar-submenu": {
+    component: dynamic(() => import("@/examples/sidebar-submenu")),
+    slug: "sidebar",
+  },
+  "sidebar-actions": {
+    component: dynamic(() => import("@/examples/sidebar-actions")),
+    slug: "sidebar",
+  },
+  "sidebar-skeleton": {
+    component: dynamic(() => import("@/examples/sidebar-skeleton")),
     slug: "sidebar",
   },
   "popover-demo": {
